@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Shop All Products | The Apple Store Pune</title>
+<meta name="description" content="Browse genuine Apple products in Pune — iPhone, Mac, iPad, Watch, AirPods and Accessories with best prices and No-Cost EMI.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<section class="category-hero">
+  <div class="container">
+    <h1 id="catTitle">Shop All</h1>
+    <p id="catTagline">Explore our full range of genuine Apple products.</p>
+  </div>
+</section>
+
+<main class="container">
+  <div class="category-layout">
+
+    <aside class="filters-panel">
+      <h4>Category</h4>
+      <div class="filter-group" id="categoryFilters"></div>
+
+      <h4>Price Range</h4>
+      <div class="filter-group" id="priceFilters">
+        <label class="filter-option"><input type="radio" name="price" value="all" checked> All Prices</label>
+        <label class="filter-option"><input type="radio" name="price" value="0-30000"> Under ₹30,000</label>
+        <label class="filter-option"><input type="radio" name="price" value="30000-70000"> ₹30,000 – ₹70,000</label>
+        <label class="filter-option"><input type="radio" name="price" value="70000-150000"> ₹70,000 – ₹1,50,000</label>
+        <label class="filter-option"><input type="radio" name="price" value="150000-999999"> Above ₹1,50,000</label>
+      </div>
+
+      <h4>Availability</h4>
+      <div class="filter-group">
+        <label class="filter-option"><input type="checkbox" id="badgeSale"> On Sale</label>
+        <label class="filter-option"><input type="checkbox" id="badgeNew"> New Arrivals</label>
+        <label class="filter-option"><input type="checkbox" id="badgeBest"> Best Sellers</label>
+      </div>
+
+      <button class="btn btn-outline btn-block" id="clearFilters">Clear Filters</button>
+    </aside>
+
+    <div class="results">
+      <div class="toolbar">
+        <span class="result-count" id="resultCount">0 products</span>
+        <select class="sort-select" id="sortSelect">
+          <option value="featured">Sort: Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Customer Rating</option>
+          <option value="discount">Biggest Discount</option>
+        </select>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <h3>No products match your filters</h3>
+        <p>Try adjusting or clearing your filters.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div id="site-footer"></div>
+<div id="whatsapp-float"></div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const initialCat = getQueryParam("cat") || "all";
+  const initialQuery = getQueryParam("q") || "";
+
+  renderHeader(initialCat !== "all" ? initialCat : "home");
+  renderFooter();
+  renderWhatsAppFloat("Hi, I'm browsing your store and have a question about a product.");
+
+  const state = {
+    category: initialCat,
+    price: "all",
+    badges: { sale: false, new: false, best: false },
+    sort: "featured",
+    query: initialQuery
+  };
+
+  function renderCategoryFilters() {
+    const wrap = document.getElementById("categoryFilters");
+    let html = '<label class="filter-option"><input type="radio" name="cat" value="all" ' + (state.category === "all" ? "checked" : "") + '> All Products</label>';
+    CATEGORIES.forEach(function (c) {
+      html += '<label class="filter-option"><input type="radio" name="cat" value="' + c.id + '" ' + (state.category === c.id ? "checked" : "") + '> ' + c.name + '</label>';
+    });
+    wrap.innerHTML = html;
+    wrap.querySelectorAll("input[name=cat]").forEach(function (input) {
+      input.addEventListener("change", function () {
+        state.category = input.value;
+        state.query = "";
+        renderPageHead();
+        renderProducts();
+      });
+    });
+  }
+
+  function renderPageHead() {
+    const cat = getCategoryById(state.category);
+    const titleEl = document.getElementById("catTitle");
+    const tagEl = document.getElementById("catTagline");
+    if (state.query) {
+      titleEl.textContent = 'Results for "' + state.query + '"';
+      tagEl.textContent = "Showing products matching your search.";
+      document.title = 'Search: ' + state.query + ' | The Apple Store Pune';
+    } else if (cat) {
+      titleEl.textContent = cat.name;
+      tagEl.textContent = cat.tagline;
+      document.title = cat.name + " | The Apple Store Pune";
+    } else {
+      titleEl.textContent = "Shop All";
+      tagEl.textContent = "Explore our full range of genuine Apple products.";
+      document.title = "Shop All Products | The Apple Store Pune";
+    }
+  }
+
+  function productCardHtml(p) {
+    const discount = p.mrp > p.price ? Math.round((1 - p.price / p.mrp) * 100) : 0;
+    const badgeClass = p.badge === "New" ? "badge-new" : p.badge === "Sale" ? "badge-sale" : p.badge === "Best Seller" ? "badge-best-seller" : "";
+    return (
+      '<div class="product-card">' +
+        (p.badge ? '<span class="product-badge ' + badgeClass + '">' + p.badge + '</span>' : '') +
+        '<a href="product.html?id=' + p.id + '" class="pc-image"><img src="' + p.images[0] + '" alt="' + p.name + '"></a>' +
+        '<div class="pc-cat">' + p.category + '</div>' +
+        '<a href="product.html?id=' + p.id + '"><h4>' + p.name + '</h4></a>' +
+        '<p class="pc-short">' + p.short + '</p>' +
+        '<div class="pc-rating"><span class="stars">★★★★★</span> ' + p.rating + ' (' + p.reviews + ')</div>' +
+        '<div class="pc-price-row">' +
+          '<span class="pc-price">' + formatINR(p.price) + '</span>' +
+          (discount ? '<span class="pc-mrp">' + formatINR(p.mrp) + '</span><span class="pc-discount">' + discount + '% off</span>' : '') +
+        '</div>' +
+        '<div class="pc-emi">From <strong>' + formatINR(getEmi(p.price, 12)) + '/mo</strong> for 12 months</div>' +
+        '<div class="pc-actions">' +
+          '<button class="btn btn-outline" onclick="quickAdd(\'' + p.id + '\')">Add to Bag</button>' +
+          '<a href="product.html?id=' + p.id + '" class="btn btn-dark">Buy Now</a>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function quickAdd(id) {
+    const p = getProductById(id);
+    if (!p) return;
+    addToCart(p, {});
+    showToast(p.name + " added to your bag");
+  }
+
+  function renderProducts() {
+    let list = state.query ? searchProducts(state.query) : getProductsByCategory(state.category);
+
+    if (state.price !== "all") {
+      const parts = state.price.split("-").map(Number);
+      list = list.filter(function (p) { return p.price >= parts[0] && p.price <= parts[1]; });
+    }
+    if (state.badges.sale) list = list.filter(function (p) { return p.badge === "Sale"; });
+    if (state.badges.new) list = list.filter(function (p) { return p.badge === "New"; });
+    if (state.badges.best) list = list.filter(function (p) { return p.badge === "Best Seller"; });
+
+    switch (state.sort) {
+      case "price-asc": list.sort(function (a, b) { return a.price - b.price; }); break;
+      case "price-desc": list.sort(function (a, b) { return b.price - a.price; }); break;
+      case "rating": list.sort(function (a, b) { return b.rating - a.rating; }); break;
+      case "discount": list.sort(function (a, b) { return (b.mrp - b.price) - (a.mrp - a.price); }); break;
+      default: break;
+    }
+
+    document.getElementById("resultCount").textContent = list.length + (list.length === 1 ? " product" : " products");
+    document.getElementById("productGrid").innerHTML = list.map(productCardHtml).join("");
+    document.getElementById("emptyState").style.display = list.length === 0 ? "block" : "none";
+  }
+
+  document.querySelectorAll('input[name=price]').forEach(function (input) {
+    input.addEventListener("change", function () { state.price = input.value; renderProducts(); });
+  });
+  document.getElementById("badgeSale").addEventListener("change", function (e) { state.badges.sale = e.target.checked; renderProducts(); });
+  document.getElementById("badgeNew").addEventListener("change", function (e) { state.badges.new = e.target.checked; renderProducts(); });
+  document.getElementById("badgeBest").addEventListener("change", function (e) { state.badges.best = e.target.checked; renderProducts(); });
+  document.getElementById("sortSelect").addEventListener("change", function (e) { state.sort = e.target.value; renderProducts(); });
+  document.getElementById("clearFilters").addEventListener("click", function () {
+    state.price = "all";
+    state.badges = { sale: false, new: false, best: false };
+    state.sort = "featured";
+    document.querySelector('input[name=price][value="all"]').checked = true;
+    document.getElementById("badgeSale").checked = false;
+    document.getElementById("badgeNew").checked = false;
+    document.getElementById("badgeBest").checked = false;
+    document.getElementById("sortSelect").value = "featured";
+    renderProducts();
+  });
+
+  renderCategoryFilters();
+  renderPageHead();
+  renderProducts();
+</script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | The Apple Store Pune</title>
+<meta name="description" content="Secure checkout — Contact info, shipping and payment for The Apple Store Pune.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="container" id="checkoutMain">
+
+  <div class="checkout-steps" id="checkoutSteps"></div>
+
+  <div class="checkout-layout" id="checkoutLayout">
+    <div class="checkout-content">
+
+      <!-- Step 1: Contact -->
+      <div class="checkout-panel" id="step1">
+        <h3>1. Contact Information</h3>
+        <div class="form-row">
+          <div class="form-field" id="f-fullName">
+            <label>Full Name *</label>
+            <input type="text" id="fullName" placeholder="e.g. Rohan Sharma">
+            <div class="error-text">Please enter your full name.</div>
+          </div>
+          <div class="form-field" id="f-phone">
+            <label>Mobile Number *</label>
+            <input type="tel" id="phone" placeholder="10-digit mobile number" maxlength="10">
+            <div class="error-text">Please enter a valid 10-digit mobile number.</div>
+          </div>
+        </div>
+        <div class="form-field" id="f-email">
+          <label>Email Address *</label>
+          <input type="email" id="email" placeholder="you@example.com">
+          <div class="error-text">Please enter a valid email address.</div>
+        </div>
+        <div class="checkout-nav-btns">
+          <a href="cart.html" class="btn btn-outline">Back to Bag</a>
+          <button class="btn btn-primary" id="toStep2">Continue to Shipping</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Shipping -->
+      <div class="checkout-panel" id="step2" style="display:none;">
+        <h3>2. Shipping Address</h3>
+        <div class="form-field" id="f-address">
+          <label>Address (House No, Street, Area) *</label>
+          <textarea id="address" rows="3" placeholder="e.g. 401, Sunshine Apartments, FC Road"></textarea>
+          <div class="error-text">Please enter your shipping address.</div>
+        </div>
+        <div class="form-row">
+          <div class="form-field" id="f-city">
+            <label>City *</label>
+            <input type="text" id="city" placeholder="e.g. Pune" value="Pune">
+            <div class="error-text">Please enter your city.</div>
+          </div>
+          <div class="form-field" id="f-state">
+            <label>State *</label>
+            <select id="state">
+              <option value="">Select State</option>
+              <option value="Maharashtra" selected>Maharashtra</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+              <option value="Other">Other</option>
+            </select>
+            <div class="error-text">Please select your state.</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field" id="f-pincode">
+            <label>Pincode *</label>
+            <input type="text" id="pincode" placeholder="e.g. 411001" maxlength="6">
+            <div class="error-text">Please enter a valid 6-digit pincode.</div>
+          </div>
+          <div class="form-field">
+            <label>Landmark (optional)</label>
+            <input type="text" id="landmark" placeholder="e.g. Near FC Road signal">
+          </div>
+        </div>
+        <div class="checkout-nav-btns">
+          <button class="btn btn-outline" id="toStep1">Back</button>
+          <button class="btn btn-primary" id="toStep3">Continue to Payment</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Payment -->
+      <div class="checkout-panel" id="step3" style="display:none;">
+        <h3>3. Payment</h3>
+        <div class="payment-options" id="paymentOptions">
+
+          <div>
+            <label class="payment-option active" data-method="upi">
+              <input type="radio" name="payMethod" value="upi" checked>
+              <span class="po-icon">📱</span>
+              <span class="po-info"><h5>UPI</h5><p>Pay via Google Pay, PhonePe, Paytm &amp; more</p></span>
+            </label>
+            <div class="payment-detail">
+              <div class="form-field"><label>UPI ID</label><input type="text" placeholder="yourname@upi"></div>
+            </div>
+          </div>
+
+          <div>
+            <label class="payment-option" data-method="card">
+              <input type="radio" name="payMethod" value="card">
+              <span class="po-icon">💳</span>
+              <span class="po-info"><h5>Credit / Debit Card</h5><p>Visa, Mastercard, RuPay &amp; more</p></span>
+            </label>
+            <div class="payment-detail">
+              <div class="form-field"><label>Card Number</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19"></div>
+              <div class="form-row">
+                <div class="form-field"><label>Expiry</label><input type="text" placeholder="MM/YY" maxlength="5"></div>
+                <div class="form-field"><label>CVV</label><input type="text" placeholder="123" maxlength="3"></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="payment-option" data-method="emi">
+              <input type="radio" name="payMethod" value="emi">
+              <span class="po-icon">🏦</span>
+              <span class="po-info"><h5>No-Cost EMI</h5><p>3 to 24 months on major banks &amp; cards</p></span>
+            </label>
+            <div class="payment-detail">
+              <div class="emi-plan-list" id="checkoutEmiPlans"></div>
+            </div>
+          </div>
+
+          <div>
+            <label class="payment-option" data-method="cod">
+              <input type="radio" name="payMethod" value="cod">
+              <span class="po-icon">💵</span>
+              <span class="po-info"><h5>Cash on Delivery</h5><p>Pay when your order arrives</p></span>
+            </label>
+            <div class="payment-detail"></div>
+          </div>
+
+        </div>
+
+        <p style="font-size:12.5px; color:var(--gray-text); margin-bottom: 8px;">Payments are securely processed via our payment partners.</p>
+        <div class="gateway-badges">
+          <span>Razorpay</span><span>Cashfree</span><span>DotPe Payments</span><span>256-bit SSL Secured</span>
+        </div>
+
+        <div class="checkout-nav-btns">
+          <button class="btn btn-outline" id="toStep2b">Back</button>
+          <button class="btn btn-primary btn-lg" id="placeOrderBtn">Place Order</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="order-summary" id="orderSummary"></div>
+  </div>
+
+</main>
+
+<div id="site-footer"></div>
+<div id="whatsapp-float"></div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/main.js"></script>
+<script>
+  renderHeader("home");
+  renderFooter();
+  renderWhatsAppFloat("Hi, I need help with my order checkout.");
+
+  const cart = getCart();
+  if (cart.length === 0) {
+    window.location.href = "cart.html";
+  }
+
+  const SHIPPING_THRESHOLD = 50000;
+  const SHIPPING_FEE = 199;
+  let currentStep = 1;
+
+  const steps = [
+    { key: "contact", label: "Contact" },
+    { key: "shipping", label: "Shipping" },
+    { key: "payment", label: "Payment" }
+  ];
+
+  function renderSteps() {
+    const el = document.getElementById("checkoutSteps");
+    el.innerHTML = steps.map(function (s, i) {
+      const n = i + 1;
+      const cls = n === currentStep ? "active" : n < currentStep ? "done" : "";
+      const sep = i < steps.length - 1 ? '<div class="checkout-step-sep"></div>' : "";
+      return '<div class="checkout-step ' + cls + '"><span class="num">' + (n < currentStep ? "✓" : n) + '</span>' + s.label + '</div>' + sep;
+    }).join("");
+  }
+
+  function goToStep(n) {
+    currentStep = n;
+    document.getElementById("step1").style.display = n === 1 ? "block" : "none";
+    document.getElementById("step2").style.display = n === 2 ? "block" : "none";
+    document.getElementById("step3").style.display = n === 3 ? "block" : "none";
+    renderSteps();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function renderOrderSummary() {
+    const cart = getCart();
+    const subtotal = cartSubtotal();
+    const shipping = subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+    const total = subtotal + shipping;
+    document.getElementById("orderSummary").innerHTML =
+      '<h3>Order Summary</h3>' +
+      cart.map(function (item) {
+        return '<div class="order-review-item"><span class="name">' + item.name + ' <span class="qty">&times;' + item.qty + '</span></span><span>' + formatINR(item.price * item.qty) + '</span></div>';
+      }).join("") +
+      '<div class="summary-row" style="margin-top:14px; border-top:1px solid var(--gray-border); padding-top: 12px;"><span>Subtotal</span><span class="val">' + formatINR(subtotal) + '</span></div>' +
+      '<div class="summary-row"><span>Shipping</span><span class="val">' + (shipping === 0 ? "FREE" : formatINR(shipping)) + '</span></div>' +
+      '<div class="summary-row total"><span>Total</span><span>' + formatINR(total) + '</span></div>';
+  }
+
+  function validateField(id, condition) {
+    const wrap = document.getElementById("f-" + id);
+    if (!condition) { wrap.classList.add("error"); return false; }
+    wrap.classList.remove("error");
+    return true;
+  }
+
+  document.getElementById("toStep2").addEventListener("click", function () {
+    const name = document.getElementById("fullName").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const validName = validateField("fullName", name.length >= 3);
+    const validPhone = validateField("phone", /^[6-9]\d{9}$/.test(phone));
+    const validEmail = validateField("email", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+    if (validName && validPhone && validEmail) goToStep(2);
+  });
+
+  document.getElementById("toStep1").addEventListener("click", function () { goToStep(1); });
+
+  document.getElementById("toStep3").addEventListener("click", function () {
+    const address = document.getElementById("address").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const state = document.getElementById("state").value;
+    const pincode = document.getElementById("pincode").value.trim();
+    const validAddress = validateField("address", address.length >= 6);
+    const validCity = validateField("city", city.length >= 2);
+    const validState = validateField("state", !!state);
+    const validPincode = validateField("pincode", /^\d{6}$/.test(pincode));
+    if (validAddress && validCity && validState && validPincode) goToStep(3);
+  });
+
+  document.getElementById("toStep2b").addEventListener("click", function () { goToStep(2); });
+
+  document.querySelectorAll(".payment-option").forEach(function (opt) {
+    opt.addEventListener("click", function () {
+      document.querySelectorAll(".payment-option").forEach(function (o) { o.classList.remove("active"); });
+      opt.classList.add("active");
+      opt.querySelector("input").checked = true;
+    });
+  });
+
+  const emiUnitTotal = cartSubtotal();
+  document.getElementById("checkoutEmiPlans").innerHTML = [3, 6, 9, 12, 18, 24].map(function (m) {
+    return '<div class="emi-plan"><span>' + m + ' months (No-Cost EMI)</span><span>' + formatINR(getEmi(emiUnitTotal, m)) + '/mo</span></div>';
+  }).join("");
+
+  document.getElementById("placeOrderBtn").addEventListener("click", function () {
+    const btn = this;
+    btn.disabled = true;
+    btn.textContent = "Processing Payment...";
+    setTimeout(function () {
+      const orderId = "TASP" + Date.now().toString().slice(-8);
+      const method = document.querySelector('input[name=payMethod]:checked').value;
+      showOrderSuccess(orderId, method);
+    }, 1600);
+  });
+
+  function showOrderSuccess(orderId, method) {
+    const subtotal = cartSubtotal();
+    const shipping = subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+    const total = subtotal + shipping;
+    const methodLabel = { upi: "UPI", card: "Credit/Debit Card", emi: "No-Cost EMI", cod: "Cash on Delivery" }[method] || method;
+
+    document.getElementById("checkoutMain").innerHTML =
+      '<div class="success-screen">' +
+        '<div class="check-mark">✓</div>' +
+        '<h1>Order Placed Successfully!</h1>' +
+        '<p>Thank you for shopping with The Apple Store Pune. A confirmation has been sent to your email.</p>' +
+        '<div class="order-id-box">' +
+          '<div class="summary-row"><span>Order ID</span><span class="val">' + orderId + '</span></div>' +
+          '<div class="summary-row"><span>Payment Method</span><span class="val">' + methodLabel + '</span></div>' +
+          '<div class="summary-row total"><span>Amount Paid</span><span>' + formatINR(total) + '</span></div>' +
+        '</div>' +
+        '<p>Estimated delivery: <strong>3-5 business days</strong> across Pune &amp; India.</p>' +
+        '<div class="success-actions">' +
+          '<a href="index.html" class="btn btn-primary btn-lg">Continue Shopping</a>' +
+          '<a href="' + whatsappLink("Hi, I just placed order " + orderId + " on The Apple Store Pune. I'd like to confirm delivery details.") + '" target="_blank" rel="noopener" class="btn btn-outline btn-lg">Share on WhatsApp</a>' +
+        '</div>' +
+      '</div>';
+    clearCart();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  renderSteps();
+  renderOrderSummary();
+</script>
+</body>
+</html>

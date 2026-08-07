@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Bag | The Apple Store Pune</title>
+<meta name="description" content="Review the items in your shopping bag before checkout.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="container">
+  <h1 class="cart-title">My Bag</h1>
+  <div id="cartContainer"></div>
+</main>
+
+<div id="site-footer"></div>
+<div id="whatsapp-float"></div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/main.js"></script>
+<script>
+  renderHeader("home");
+  renderFooter();
+  renderWhatsAppFloat("Hi, I need help completing my order on The Apple Store Pune.");
+
+  const SHIPPING_THRESHOLD = 50000;
+  const SHIPPING_FEE = 199;
+
+  function renderCart() {
+    const cart = getCart();
+    const container = document.getElementById("cartContainer");
+
+    if (cart.length === 0) {
+      container.innerHTML =
+        '<div class="empty-cart">' +
+          '<div class="icon">🛍️</div>' +
+          '<h2>Your bag is empty</h2>' +
+          '<p>Looks like you haven\'t added anything yet.</p>' +
+          '<a href="category.html" class="btn btn-primary btn-lg">Start Shopping</a>' +
+        '</div>';
+      return;
+    }
+
+    const subtotal = cartSubtotal();
+    const shipping = subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+    const total = subtotal + shipping;
+
+    container.innerHTML =
+      '<div class="cart-layout">' +
+        '<div class="cart-items">' +
+          cart.map(cartItemHtml).join("") +
+        '</div>' +
+        '<div class="order-summary">' +
+          '<h3>Order Summary</h3>' +
+          '<div class="summary-row"><span>Subtotal (' + cartCount() + ' items)</span><span class="val">' + formatINR(subtotal) + '</span></div>' +
+          '<div class="summary-row"><span>Shipping</span><span class="val">' + (shipping === 0 ? "FREE" : formatINR(shipping)) + '</span></div>' +
+          (shipping > 0 ? '<div class="summary-row"><span colspan="2" style="color:#1d8a3e;">Add ' + formatINR(SHIPPING_THRESHOLD - subtotal) + ' more for free shipping</span></div>' : '') +
+          '<div class="summary-row total"><span>Total</span><span>' + formatINR(total) + '</span></div>' +
+          '<div class="promo-row">' +
+            '<input type="text" placeholder="Promo code">' +
+            '<button class="btn btn-outline" id="applyPromoBtn">Apply</button>' +
+          '</div>' +
+          '<a href="checkout.html" class="btn btn-primary btn-lg btn-block">Proceed to Checkout</a>' +
+          '<a href="category.html" class="btn btn-outline btn-block" style="margin-top:10px;">Continue Shopping</a>' +
+        '</div>' +
+      '</div>';
+
+    container.querySelectorAll(".qty-selector button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const lineId = btn.closest(".cart-item").dataset.lineId;
+        const item = getCart().find(function (i) { return i.lineId === lineId; });
+        if (!item) return;
+        const newQty = btn.dataset.action === "inc" ? item.qty + 1 : item.qty - 1;
+        updateCartQty(lineId, newQty);
+        renderCart();
+      });
+    });
+
+    container.querySelectorAll(".remove-link").forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const lineId = link.closest(".cart-item").dataset.lineId;
+        removeFromCart(lineId);
+        showToast("Item removed from bag");
+        renderCart();
+      });
+    });
+
+    const promoBtn = document.getElementById("applyPromoBtn");
+    if (promoBtn) {
+      promoBtn.addEventListener("click", function () {
+        showToast("Promo code is invalid or expired");
+      });
+    }
+  }
+
+  function cartItemHtml(item) {
+    return (
+      '<div class="cart-item" data-line-id="' + item.lineId + '">' +
+        '<div class="ci-image"><img src="' + item.image + '" alt="' + item.name + '"></div>' +
+        '<div class="ci-info">' +
+          '<h4>' + item.name + '</h4>' +
+          '<div class="ci-variant">' + [item.color, item.storage].filter(Boolean).join(" · ") + '</div>' +
+          '<div class="ci-price">' + formatINR(item.price) + '</div>' +
+          '<div class="ci-controls">' +
+            '<div class="qty-selector">' +
+              '<button data-action="dec">&minus;</button><span>' + item.qty + '</span><button data-action="inc">+</button>' +
+            '</div>' +
+            '<a href="#" class="remove-link">Remove</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  renderCart();
+</script>
+</body>
+</html>

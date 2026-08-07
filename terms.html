@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms &amp; Conditions | The Apple Store Pune</title>
+<meta name="description" content="Terms and conditions, privacy policy, shipping and returns policy for The Apple Store Pune.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Terms &amp; Conditions</h1>
+    <p>Please read these terms carefully before using The Apple Store Pune.</p>
+  </div>
+</section>
+
+<section class="content-block">
+  <div class="container two-col" style="grid-template-columns: 220px 1fr;">
+
+    <nav class="terms-nav" id="termsNav">
+      <a href="#terms">General Terms</a>
+      <a href="#pricing">Pricing &amp; EMI</a>
+      <a href="#privacy">Privacy Policy</a>
+      <a href="#shipping">Shipping Policy</a>
+      <a href="#returns">Returns &amp; Warranty</a>
+      <a href="#payments">Payments</a>
+    </nav>
+
+    <div>
+      <div class="terms-section" id="terms">
+        <h3>1. General Terms</h3>
+        <p>Welcome to The Apple Store Pune ("we", "our", "us"). By accessing or using our website, you agree to be bound by these Terms &amp; Conditions. This is a demonstration storefront and is not affiliated with, endorsed by, or sponsored by Apple Inc.</p>
+        <p>We reserve the right to update these terms at any time. Continued use of the site after changes constitutes acceptance of the revised terms.</p>
+      </div>
+
+      <div class="terms-section" id="pricing">
+        <h3>2. Pricing &amp; EMI</h3>
+        <p>All prices are listed in Indian Rupees (INR) and are inclusive of applicable taxes unless stated otherwise. EMI figures shown on product and checkout pages are indicative, calculated as an approximate equal monthly split of the product price over the selected tenure, for illustration purposes only.</p>
+        <ul>
+          <li>Actual No-Cost EMI eligibility, tenure and processing fees depend on your bank/card issuer.</li>
+          <li>Prices, offers and stock are subject to change without prior notice.</li>
+        </ul>
+      </div>
+
+      <div class="terms-section" id="privacy">
+        <h3>3. Privacy Policy</h3>
+        <p>We collect only the information necessary to process your orders — name, contact number, email and shipping address. We do not sell or share your personal data with third parties except payment gateways (Razorpay, Cashfree, DotPe) required to process transactions securely.</p>
+        <p>Your data is stored securely and used solely to fulfil orders, provide customer support, and improve our services.</p>
+      </div>
+
+      <div class="terms-section" id="shipping">
+        <h3>4. Shipping Policy</h3>
+        <p>Orders within Pune are typically dispatched the same day and delivered within 1-2 business days. Orders across India are delivered within 3-5 business days. Free shipping applies on orders above ₹50,000; a flat fee of ₹199 applies below this threshold.</p>
+        <p>You will receive tracking details via SMS/email once your order is shipped.</p>
+      </div>
+
+      <div class="terms-section" id="returns">
+        <h3>5. Returns &amp; Warranty</h3>
+        <p>We offer a 7-day replacement guarantee on manufacturing defects from the date of delivery. All products come with the standard manufacturer warranty (typically 1 year), honoured at authorized service centers.</p>
+        <ul>
+          <li>Products must be returned unused, in original packaging, with all accessories and invoice.</li>
+          <li>Refunds are processed to the original payment method within 5-7 business days of approval.</li>
+        </ul>
+      </div>
+
+      <div class="terms-section" id="payments">
+        <h3>6. Payments</h3>
+        <p>We support UPI, Credit/Debit Cards, Net Banking, No-Cost EMI and Cash on Delivery (select pincodes only), processed securely via Razorpay, Cashfree and DotPe Payments. We do not store your card details on our servers.</p>
+        <p>For any payment-related concerns, please contact our support team via <a href="contact.html" style="color:var(--blue);">Contact Us</a> or WhatsApp.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<div id="whatsapp-float"></div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/main.js"></script>
+<script>
+  renderHeader("home");
+  renderFooter();
+  renderWhatsAppFloat("Hi, I have a question about your terms or policies.");
+
+  const navLinks = document.querySelectorAll("#termsNav a");
+  const sections = document.querySelectorAll(".terms-section");
+  window.addEventListener("scroll", function () {
+    let current = "";
+    sections.forEach(function (sec) {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+    });
+    navLinks.forEach(function (a) {
+      a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Product | The Apple Store Pune</title>
+<meta id="pageDesc" name="description" content="Buy genuine Apple products in Pune with best prices and No-Cost EMI.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="container">
+  <nav class="breadcrumb" id="breadcrumb"></nav>
+
+  <div id="pdpContent"></div>
+
+  <section class="related-section">
+    <div class="section-head" style="text-align:left; margin-bottom:24px;">
+      <h2 style="font-size:26px;">You may also like</h2>
+    </div>
+    <div class="product-grid" id="relatedGrid"></div>
+  </section>
+</main>
+
+<div class="sticky-atc" id="stickyAtc"></div>
+
+<div id="site-footer"></div>
+<div id="whatsapp-float"></div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const productId = getQueryParam("id");
+  const product = getProductById(productId) || PRODUCTS[0];
+
+  renderHeader(product.category);
+  renderFooter();
+
+  document.title = product.name + " | The Apple Store Pune";
+  document.getElementById("pageDesc").setAttribute("content", product.short + " Buy now in Pune with best price and No-Cost EMI.");
+
+  const cat = getCategoryById(product.category);
+  document.getElementById("breadcrumb").innerHTML =
+    '<a href="index.html">Store</a><span>/</span>' +
+    '<a href="category.html?cat=' + product.category + '">' + (cat ? cat.name : product.category) + '</a><span>/</span>' +
+    '<span>' + product.name + '</span>';
+
+  const selection = {
+    color: product.colors[0] ? product.colors[0].name : "",
+    storage: product.storageOptions[0] ? product.storageOptions[0].label : "",
+    qty: 1
+  };
+
+  function currentImage() {
+    const colorObj = product.colors.find(function (c) { return c.name === selection.color; });
+    return (colorObj && colorObj.image) || product.images[0];
+  }
+
+  function currentUnitPrice() {
+    const opt = product.storageOptions.find(function (o) { return o.label === selection.storage; });
+    return product.price + (opt ? opt.extra : 0);
+  }
+
+  function renderPdp() {
+    const discount = product.mrp > product.price ? Math.round((1 - product.price / product.mrp) * 100) : 0;
+    const unitPrice = currentUnitPrice();
+    const emi12 = getEmi(unitPrice, 12);
+    const emi24 = getEmi(unitPrice, 24);
+    const galleryImages = product.images.length > 1 ? product.images : [currentImage()];
+
+    document.getElementById("pdpContent").innerHTML =
+      '<div class="pdp-layout">' +
+        '<div class="pdp-gallery">' +
+          '<div class="pdp-gallery-main"><img id="mainImage" src="' + currentImage() + '" alt="' + product.name + '"></div>' +
+          (galleryImages.length > 1 ?
+            '<div class="pdp-thumbs" id="pdpThumbs">' +
+              galleryImages.map(function (img, i) {
+                return '<div class="pdp-thumb' + (i === 0 ? " active" : "") + '" data-img="' + img + '"><img src="' + img + '" alt="thumb"></div>';
+              }).join("") +
+            '</div>' : ''
+          ) +
+        '</div>' +
+        '<div class="pdp-info">' +
+          '<div class="pc-cat">' + product.category + ' · ' + product.brand + '</div>' +
+          '<h1>' + product.name + '</h1>' +
+          '<div class="pdp-rating"><span class="stars">★★★★★</span> ' + product.rating + ' &middot; ' + product.reviews + ' ratings</div>' +
+
+          '<div class="pdp-price-block">' +
+            '<div class="pdp-price-row">' +
+              '<span class="pdp-price" id="pdpPrice">' + formatINR(unitPrice) + '</span>' +
+              (discount ? '<span class="pdp-mrp">' + formatINR(product.mrp) + '</span><span class="pdp-discount">' + discount + '% OFF</span>' : '') +
+            '</div>' +
+            '<div class="pdp-emi-line">Starting from <strong id="pdpEmi">' + formatINR(emi12) + '/mo</strong> for 12 months, or ' + formatINR(emi24) + '/mo for 24 months.' +
+              '<a href="#" id="emiToggle">View EMI plans</a>' +
+            '</div>' +
+            '<div id="emiPlans" style="display:none; margin-top:12px;">' +
+              '<div class="emi-plan-list">' +
+                [3, 6, 9, 12, 18, 24].map(function (m) {
+                  return '<div class="emi-plan"><span>' + m + ' months</span><span>' + formatINR(getEmi(unitPrice, m)) + '/mo</span></div>';
+                }).join("") +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+
+          (product.colors.length > 1 ? colorPickerHtml() : '') +
+          (product.storageOptions.length > 0 ? storagePickerHtml() : '') +
+
+          '<div class="qty-row">' +
+            '<div class="qty-selector">' +
+              '<button id="qtyMinus">&minus;</button><span id="qtyVal">' + selection.qty + '</span><button id="qtyPlus">+</button>' +
+            '</div>' +
+            '<span class="stock-info' + (product.stock < 10 ? ' low' : '') + '">' +
+              (product.stock < 10 ? 'Only ' + product.stock + ' left in stock' : 'In stock &middot; Ready to ship') +
+            '</span>' +
+          '</div>' +
+
+          '<div class="pdp-actions">' +
+            '<button class="btn btn-outline btn-lg" id="addToCartBtn">Add to Cart</button>' +
+            '<button class="btn btn-primary btn-lg" id="buyNowBtn">Buy Now</button>' +
+          '</div>' +
+
+          '<a class="whatsapp-inline-btn" id="waInquiry" href="#" target="_blank" rel="noopener">' +
+            '<span>&#128241;</span> Inquire on WhatsApp' +
+          '</a>' +
+
+          '<div class="trust-mini">' +
+            '<div><span class="icon">🔒</span>Secure Payment</div>' +
+            '<div><span class="icon">🚚</span>Fast Shipping</div>' +
+            '<div><span class="icon">✅</span>100% Genuine</div>' +
+          '</div>' +
+
+          '<div class="pdp-tabs">' +
+            '<h3>Overview</h3>' +
+            '<p class="pdp-desc">' + product.description + '</p>' +
+          '</div>' +
+          '<div class="pdp-tabs">' +
+            '<h3>Technical Specifications</h3>' +
+            '<table class="spec-table">' +
+              Object.keys(product.specs).map(function (k) {
+                return '<tr><td>' + k + '</td><td>' + product.specs[k] + '</td></tr>';
+              }).join("") +
+            '</table>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    wirePdpInteractions(unitPrice, emi12);
+  }
+
+  function colorPickerHtml() {
+    return '<div class="option-group">' +
+      '<label class="title">Color: <span class="sel-value" id="selColorLabel">' + selection.color + '</span></label>' +
+      '<div class="swatches">' +
+        product.colors.map(function (c) {
+          return '<button class="swatch' + (c.name === selection.color ? ' active' : '') + '" style="background:' + c.hex + '" data-color="' + c.name + '" title="' + c.name + '"></button>';
+        }).join("") +
+      '</div>' +
+    '</div>';
+  }
+
+  function storagePickerHtml() {
+    return '<div class="option-group">' +
+      '<label class="title">Storage: <span class="sel-value" id="selStorageLabel">' + selection.storage + '</span></label>' +
+      '<div class="storage-options">' +
+        product.storageOptions.map(function (o) {
+          return '<button class="storage-opt' + (o.label === selection.storage ? ' active' : '') + '" data-storage="' + o.label + '">' + o.label + (o.extra ? ' (+' + formatINR(o.extra) + ')' : '') + '</button>';
+        }).join("") +
+      '</div>' +
+    '</div>';
+  }
+
+  function wirePdpInteractions(unitPrice, emi12) {
+    document.querySelectorAll(".swatch").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        selection.color = btn.dataset.color;
+        document.querySelectorAll(".swatch").forEach(function (s) { s.classList.remove("active"); });
+        btn.classList.add("active");
+        document.getElementById("selColorLabel").textContent = selection.color;
+        document.getElementById("mainImage").src = currentImage();
+        updateStickyAtc();
+      });
+    });
+
+    document.querySelectorAll(".storage-opt").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        selection.storage = btn.dataset.storage;
+        document.querySelectorAll(".storage-opt").forEach(function (s) { s.classList.remove("active"); });
+        btn.classList.add("active");
+        document.getElementById("selStorageLabel").textContent = selection.storage;
+        renderPdp();
+        updateStickyAtc();
+      });
+    });
+
+    const thumbs = document.querySelectorAll(".pdp-thumb");
+    thumbs.forEach(function (t) {
+      t.addEventListener("click", function () {
+        document.getElementById("mainImage").src = t.dataset.img;
+        thumbs.forEach(function (x) { x.classList.remove("active"); });
+        t.classList.add("active");
+      });
+    });
+
+    const qtyVal = document.getElementById("qtyVal");
+    document.getElementById("qtyMinus").addEventListener("click", function () {
+      selection.qty = Math.max(1, selection.qty - 1);
+      qtyVal.textContent = selection.qty;
+      updateStickyAtc();
+    });
+    document.getElementById("qtyPlus").addEventListener("click", function () {
+      selection.qty = Math.min(product.stock, selection.qty + 1);
+      qtyVal.textContent = selection.qty;
+      updateStickyAtc();
+    });
+
+    document.getElementById("addToCartBtn").addEventListener("click", function () { handleAddToCart(); });
+    document.getElementById("buyNowBtn").addEventListener("click", function () { handleBuyNow(); });
+
+    const emiToggle = document.getElementById("emiToggle");
+    emiToggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      const panel = document.getElementById("emiPlans");
+      panel.style.display = panel.style.display === "none" ? "block" : "none";
+    });
+
+    const waMsg = "Hi, I'm interested in the " + product.name + " (" + selection.color + (selection.storage ? ", " + selection.storage : "") + ") listed at " + formatINR(unitPrice) + " on The Apple Store Pune. Could you share more details?";
+    document.getElementById("waInquiry").href = whatsappLink(waMsg);
+  }
+
+  function handleAddToCart() {
+    addToCart(product, {
+      color: selection.color,
+      storage: selection.storage,
+      qty: selection.qty,
+      unitPrice: currentUnitPrice(),
+      image: currentImage()
+    });
+    showToast(product.name + " added to your bag");
+  }
+
+  function handleBuyNow() {
+    addToCart(product, {
+      color: selection.color,
+      storage: selection.storage,
+      qty: selection.qty,
+      unitPrice: currentUnitPrice(),
+      image: currentImage()
+    });
+    window.location.href = "checkout.html";
+  }
+
+  function updateStickyAtc() {
+    const unitPrice = currentUnitPrice();
+    document.getElementById("stickyAtc").innerHTML =
+      '<div class="satc-price"><span class="price">' + formatINR(unitPrice) + '</span><span class="emi">From ' + formatINR(getEmi(unitPrice, 12)) + '/mo</span></div>' +
+      '<button class="btn btn-outline" onclick="handleAddToCart()">Add to Cart</button>' +
+      '<button class="btn btn-primary" onclick="handleBuyNow()">Buy Now</button>';
+  }
+
+  function relatedProductCard(p) {
+    const discount = p.mrp > p.price ? Math.round((1 - p.price / p.mrp) * 100) : 0;
+    const badgeClass = p.badge === "New" ? "badge-new" : p.badge === "Sale" ? "badge-sale" : p.badge === "Best Seller" ? "badge-best-seller" : "";
+    return (
+      '<div class="product-card">' +
+        (p.badge ? '<span class="product-badge ' + badgeClass + '">' + p.badge + '</span>' : '') +
+        '<a href="product.html?id=' + p.id + '" class="pc-image"><img src="' + p.images[0] + '" alt="' + p.name + '"></a>' +
+        '<div class="pc-cat">' + p.category + '</div>' +
+        '<a href="product.html?id=' + p.id + '"><h4>' + p.name + '</h4></a>' +
+        '<p class="pc-short">' + p.short + '</p>' +
+        '<div class="pc-price-row"><span class="pc-price">' + formatINR(p.price) + '</span>' +
+        (discount ? '<span class="pc-mrp">' + formatINR(p.mrp) + '</span>' : '') + '</div>' +
+        '<div class="pc-emi">From <strong>' + formatINR(getEmi(p.price, 12)) + '/mo</strong></div>' +
+        '<div class="pc-actions"><a href="product.html?id=' + p.id + '" class="btn btn-dark btn-block">View Details</a></div>' +
+      '</div>'
+    );
+  }
+
+  const related = PRODUCTS.filter(function (p) { return p.category === product.category && p.id !== product.id; }).slice(0, 4);
+  document.getElementById("relatedGrid").innerHTML = related.map(relatedProductCard).join("");
+
+  renderPdp();
+  updateStickyAtc();
+  document.body.classList.add("has-sticky-atc");
+</script>
+</body>
+</html>

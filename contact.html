@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | The Apple Store Pune</title>
+<meta name="description" content="Get in touch with The Apple Store Pune — call, email or WhatsApp our team for product queries, order support and store visits.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Contact Us</h1>
+    <p>Questions about a product, order or EMI plan? We're here to help.</p>
+  </div>
+</section>
+
+<section class="content-block">
+  <div class="container">
+    <div class="two-col">
+
+      <div class="contact-form-card">
+        <h3 style="margin:0 0 20px; font-size:20px;">Send us a message</h3>
+        <div id="contactSuccessMsg" style="display:none; background:#e8f7ec; color:#1d8a3e; padding:14px 16px; border-radius:10px; font-size:14px; margin-bottom:18px;">
+          ✅ Thanks! Your message has been received. Our Pune team will get back to you within 24 hours.
+        </div>
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-field" id="f-cName">
+              <label>Full Name *</label>
+              <input type="text" id="cName" placeholder="Your name">
+              <div class="error-text">Please enter your name.</div>
+            </div>
+            <div class="form-field" id="f-cPhone">
+              <label>Mobile Number *</label>
+              <input type="tel" id="cPhone" placeholder="10-digit mobile number" maxlength="10">
+              <div class="error-text">Please enter a valid 10-digit mobile number.</div>
+            </div>
+          </div>
+          <div class="form-field" id="f-cEmail">
+            <label>Email Address *</label>
+            <input type="email" id="cEmail" placeholder="you@example.com">
+            <div class="error-text">Please enter a valid email address.</div>
+          </div>
+          <div class="form-field">
+            <label>Subject</label>
+            <select id="cSubject">
+              <option>Product Inquiry</option>
+              <option>Order Support</option>
+              <option>EMI &amp; Payments</option>
+              <option>Returns &amp; Warranty</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-field" id="f-cMessage">
+            <label>Message *</label>
+            <textarea id="cMessage" rows="4" placeholder="How can we help you?"></textarea>
+            <div class="error-text">Please enter your message.</div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Send Message</button>
+        </form>
+      </div>
+
+      <div>
+        <div class="store-info-card">
+          <h3>Get in Touch</h3>
+          <div class="store-info-row">
+            <span class="icon">📍</span>
+            <div>
+              <p class="label">Store Address</p>
+              <p>2nd Floor, MG Road, Camp,<br>Pune, Maharashtra – 411001</p>
+            </div>
+          </div>
+          <div class="store-info-row">
+            <span class="icon">📞</span>
+            <div>
+              <p class="label">Phone / WhatsApp</p>
+              <p><a href="tel:+919999999999">+91 99999 99999</a></p>
+            </div>
+          </div>
+          <div class="store-info-row">
+            <span class="icon">✉️</span>
+            <div>
+              <p class="label">Email</p>
+              <p><a href="mailto:hello@theapplestorepune.in">hello@theapplestorepune.in</a></p>
+            </div>
+          </div>
+          <div class="store-info-row">
+            <span class="icon">🕒</span>
+            <div>
+              <p class="label">Hours</p>
+              <p>Mon – Sat: 10:30 AM – 9:00 PM<br>Sunday: 11:00 AM – 7:00 PM</p>
+            </div>
+          </div>
+          <a href="#" id="contactWaLink" target="_blank" rel="noopener" class="btn btn-primary btn-block" style="margin-top:6px;">Chat on WhatsApp</a>
+        </div>
+        <iframe class="map-frame" style="margin-top:20px;" loading="lazy"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=73.8503%2C18.5145%2C73.8603%2C18.5245&amp;layer=mapnik&amp;marker=18.5195%2C73.8553"
+          title="The Apple Store Pune location map"></iframe>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<div id="whatsapp-float"></div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/main.js"></script>
+<script>
+  renderHeader("contact");
+  renderFooter();
+  renderWhatsAppFloat("Hi, I have a question for The Apple Store Pune team.");
+  document.getElementById("contactWaLink").href = whatsappLink("Hi, I have a question for The Apple Store Pune team.");
+
+  function validateField(id, condition) {
+    const wrap = document.getElementById("f-" + id);
+    if (!condition) { wrap.classList.add("error"); return false; }
+    wrap.classList.remove("error");
+    return true;
+  }
+
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const name = document.getElementById("cName").value.trim();
+    const phone = document.getElementById("cPhone").value.trim();
+    const email = document.getElementById("cEmail").value.trim();
+    const message = document.getElementById("cMessage").value.trim();
+
+    const validName = validateField("cName", name.length >= 3);
+    const validPhone = validateField("cPhone", /^[6-9]\d{9}$/.test(phone));
+    const validEmail = validateField("cEmail", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+    const validMessage = validateField("cMessage", message.length >= 5);
+
+    if (validName && validPhone && validEmail && validMessage) {
+      document.getElementById("contactSuccessMsg").style.display = "block";
+      document.getElementById("contactForm").reset();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      showToast("Message sent! We'll be in touch shortly.");
+    }
+  });
+</script>
+</body>
+</html>
