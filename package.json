@@ -1,0 +1,27 @@
+{
+  "name": "apple_landing_page",
+  "version": "1.0.0",
+  "description": "An Apple-style e-commerce storefront for iPhone, Mac, iPad, Apple Watch, AirPods and accessories, built for the Indian market (UPI, No-Cost EMI, WhatsApp support, Pune store details).",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "node test/regression-test.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Koushik27042001/apple_landing_page.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Koushik27042001/apple_landing_page/issues"
+  },
+  "homepage": "https://github.com/Koushik27042001/apple_landing_page#readme"
+}

@@ -282,3 +282,18 @@ function updateCompareBadgeIfPresent() {
   const badge = document.querySelector(".compare-nav-count");
   if (badge) badge.textContent = getCompareList().length;
 }
+
+/* ---------- Icon hydration for static markup ----------
+   Lets plain HTML declare <span data-icon="lock" data-icon-size="18"></span>
+   and have it filled with the real inline SVG once icons.js/main.js load,
+   without needing every page to hand-build strings via icon(). */
+function hydrateIcons(root) {
+  const scope = root || document;
+  scope.querySelectorAll("[data-icon]").forEach(function (el) {
+    const name = el.getAttribute("data-icon");
+    const size = Number(el.getAttribute("data-icon-size")) || 20;
+    el.innerHTML = icon(name, { size: size });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function () { hydrateIcons(document); });

@@ -531,3 +531,20 @@ function searchProducts(query) {
       p.short.toLowerCase().indexOf(query) !== -1;
   });
 }
+
+/* Isomorphic export: makes this catalog the single source of truth for
+   both the browser storefront and the Node.js backend (server/), so
+   product prices/stock never drift out of sync between the two. This
+   block is a no-op in browsers (module is undefined there). */
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    CATEGORIES: CATEGORIES,
+    PRODUCTS: PRODUCTS,
+    formatINR: formatINR,
+    getEmi: getEmi,
+    getProductById: getProductById,
+    getProductsByCategory: getProductsByCategory,
+    getCategoryById: getCategoryById,
+    searchProducts: searchProducts
+  };
+}

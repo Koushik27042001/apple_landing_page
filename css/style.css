@@ -1208,6 +1208,24 @@ button { font-family: inherit; cursor: pointer; }
 .emi-plan-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
 .emi-plan { display: flex; justify-content: space-between; font-size: 13px; padding: 8px 12px; background: var(--gray-bg); border-radius: 8px; }
 
+.payment-mode-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--gray-text);
+  background: var(--gray-bg);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin: 14px 0;
+}
+.payment-mode-notice code {
+  background: rgba(0,0,0,0.06);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 11.5px;
+}
+
 .gateway-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
 .gateway-badges span {
   font-size: 11.5px;
