@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "node test/regression-test.js"
+    "test": "node test/regression-test.js && node test/catalog-test.js"
   },
   "devDependencies": {
     "playwright": "^1.62.1"

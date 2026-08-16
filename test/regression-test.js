@@ -62,7 +62,7 @@ const { chromium } = require("playwright");
     log("Success screen checkmark renders as SVG", checkIconInSuccess === 1);
 
     // Now test again with UPI selected while backend is down -> should fall back to demo
-    await page.evaluate(() => localStorage.setItem("tasp_cart_v1", JSON.stringify([{ lineId: "x::y::z", id: "iphone-14", name: "iPhone 14", image: "images/products/iphone-14-blue.png", price: 55900, color: "Blue", storage: "128GB", qty: 1, category: "iphone" }])));
+    await page.evaluate(() => localStorage.setItem("tasp_cart_v1", JSON.stringify([{ lineId: "x::y::z", id: "iphone-17", name: "iPhone 17", image: "images/products/iphone-17-lavender.png", price: 82900, color: "Lavender", storage: "256GB", qty: 1, category: "iphone" }])));
     await page.goto(base + "checkout.html", { waitUntil: "networkidle" });
     await page.fill("#fullName", "Priya Mehta");
     await page.fill("#phone", "9988776655");

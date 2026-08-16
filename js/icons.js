@@ -43,7 +43,9 @@ const ICON_PATHS = {
   gauge: '<path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l3.5-4.5"/><circle cx="12" cy="15" r="1.2" fill="currentColor" stroke="none"/>',
   boltShield: '<path d="M12 3l7 3v5.5c0 4.6-3 7.9-7 9.5-4-1.6-7-4.9-7-9.5V6l7-3Z"/><path d="M13 8l-3.3 4.6H12l-1 3.9 3.3-4.7H12l1-3.8Z" fill="currentColor" stroke="none"/>',
   upload: '<path d="M12 15V4"/><path d="M7 8.5L12 4l5 4.5"/><path d="M4 15v3.5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V15"/>',
-  refresh: '<path d="M20 11a8 8 0 1 0-2.3 6.2"/><path d="M20 5v6h-6"/>'
+  refresh: '<path d="M20 11a8 8 0 1 0-2.3 6.2"/><path d="M20 5v6h-6"/>',
+  store: '<path d="M3.5 9.5l1-5h15l1 5"/><path d="M4 9.5V20h16V9.5"/><path d="M9.5 20v-6h5v6"/><path d="M3.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/>',
+  bagShopping: '<path d="M6 8h12l-1 12.5a1.5 1.5 0 0 1-1.5 1.5h-7a1.5 1.5 0 0 1-1.5-1.5L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/><path d="M9.5 11.5v2M14.5 11.5v2"/>'
 };
 
 function icon(name, opts) {

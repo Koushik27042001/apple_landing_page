@@ -9,7 +9,7 @@ const { chromium } = require("playwright");
 
   try {
     await page.goto(base + "cart.html", { waitUntil: "networkidle" });
-    await page.evaluate(() => localStorage.setItem("tasp_cart_v1", JSON.stringify([{ lineId: "x::y::z", id: "iphone-14", name: "iPhone 14", image: "images/products/iphone-14-blue.png", price: 55900, color: "Blue", storage: "128GB", qty: 1, category: "iphone" }])));
+    await page.evaluate(() => localStorage.setItem("tasp_cart_v1", JSON.stringify([{ lineId: "x::y::z", id: "iphone-17", name: "iPhone 17", image: "images/products/iphone-17-lavender.png", price: 82900, color: "Lavender", storage: "256GB", qty: 1, category: "iphone" }])));
     await page.goto(base + "checkout.html", { waitUntil: "networkidle" });
     await page.fill("#fullName", "Priya Mehta");
     await page.fill("#phone", "9988776655");
