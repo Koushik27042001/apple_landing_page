@@ -15,7 +15,11 @@ const { chromium } = require("playwright");
     // Icons render as real SVGs, not raw emoji/boxes
     await page.goto(base + "index.html", { waitUntil: "networkidle" });
     const headerSvgCount = await page.locator("#site-header svg.icon-svg").count();
-    log("Header renders SVG icons (search/cart/warranty/menu)", headerSvgCount >= 3, "count=" + headerSvgCount);
+    log("Header renders SVG icons (search/cart/menu)", headerSvgCount >= 3, "count=" + headerSvgCount);
+
+    const navLinkTexts = await page.locator(".main-nav a").allTextContents();
+    const expectedNav = ["Store", "Mac", "iPad", "iPhone", "Watch", "Vision", "AirPods", "TV & Home", "Entertainment", "Accessories", "Support"];
+    log("Main nav shows the correct items in the correct order", JSON.stringify(navLinkTexts) === JSON.stringify(expectedNav), "got=" + JSON.stringify(navLinkTexts));
 
     const footerSvgCount = await page.locator("#site-footer svg.icon-svg").count();
     log("Footer trust badges render SVG icons", footerSvgCount >= 4, "count=" + footerSvgCount);
@@ -24,7 +28,7 @@ const { chromium } = require("playwright");
     log("WhatsApp float button renders SVG icon", waSvg === 1);
 
     const logoText = await page.locator(".logo").first().textContent();
-    log("Logo text renders correctly (no broken glyph)", logoText.includes("The Apple Store"), "text=" + logoText.trim());
+    log("Logo text renders correctly (no broken glyph)", logoText.includes("Iswift Gadgets"), "text=" + logoText.trim());
 
     // Add product to cart, go to checkout, verify demo-mode notice
     await page.waitForSelector("#bestPricesGrid .product-card", { timeout: 5000 });

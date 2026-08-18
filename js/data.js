@@ -6,11 +6,13 @@
    ============================================================ */
 
 const CATEGORIES = [
-  { id: "iphone", name: "iPhone", tagline: "The ultimate iPhone lineup.", image: "images/hero/hero-iphone.png" },
   { id: "mac", name: "Mac", tagline: "Supercharged for pros and creators.", image: "images/hero/hero-macbook.png" },
   { id: "ipad", name: "iPad", tagline: "Your next computer isn't a computer.", image: "images/hero/hero-ipad.png" },
+  { id: "iphone", name: "iPhone", tagline: "The ultimate iPhone lineup.", image: "images/hero/hero-iphone.png" },
   { id: "watch", name: "Watch", tagline: "A healthy leap ahead.", image: "images/products/watch-ultra3-titanium.png" },
+  { id: "vision", name: "Vision", tagline: "Welcome to the era of spatial computing.", image: "images/products/apple-vision-pro.png" },
   { id: "airpods", name: "AirPods", tagline: "Immerse yourself.", image: "images/products/airpods-pro.png" },
+  { id: "tvhome", name: "TV & Home", tagline: "Entertainment and smart home, elevated.", image: "images/products/apple-tv-4k.png" },
   { id: "accessories", name: "Accessories", tagline: "Essentials, cases &amp; AppleCare+.", image: "images/hero/hero-accessories.png" }
 ];
 
@@ -750,6 +752,134 @@ const PRODUCTS = [
       "Water Resistance": "100 meters, EN13319 dive rated",
       "Connectivity": "GPS + Cellular + Satellite, Wi-Fi, Bluetooth 5.3",
       "OS": "watchOS 12"
+    }
+  },
+
+  /* =============================== Vision =============================== */
+
+  {
+    id: "apple-vision-pro",
+    name: "Apple Vision Pro",
+    category: "vision",
+    brand: "Apple",
+    price: 349900,
+    mrp: 349900,
+    badge: "New",
+    rating: 4.7,
+    reviews: 29,
+    stock: 6,
+    images: ["images/products/apple-vision-pro.png"],
+    colors: [
+      { name: "Space Black", hex: "#1c1c1e", image: "images/products/apple-vision-pro.png" }
+    ],
+    storageOptions: [
+      { label: "256GB", extra: 0 },
+      { label: "512GB", extra: 40000 },
+      { label: "1TB", extra: 80000 }
+    ],
+    short: "Welcome to the era of spatial computing.",
+    description: "Apple Vision Pro seamlessly blends digital content with the physical world, powered by the M2 chip and the all-new R1 chip for real-time sensor processing, with an ultra-high-resolution micro-OLED display system.",
+    specs: {
+      "Display": "Micro-OLED dual displays, more pixels than a 4K TV per eye",
+      "Chip": "Apple M2 chip + R1 chip",
+      "Input": "Eyes, hands, and voice \u2014 no controllers needed",
+      "Battery": "Up to 2 hours with external battery pack (included)",
+      "Storage": "256GB / 512GB / 1TB",
+      "Audio": "Spatial Audio with dynamic head tracking",
+      "Connectivity": "Wi-Fi 6, Bluetooth 5.3",
+      "OS": "visionOS 2"
+    }
+  },
+
+  /* =============================== TV & Home =============================== */
+
+  {
+    id: "apple-tv-4k",
+    name: "Apple TV 4K",
+    category: "tvhome",
+    brand: "Apple",
+    price: 14900,
+    mrp: 14900,
+    badge: "New",
+    rating: 4.7,
+    reviews: 112,
+    stock: 45,
+    images: ["images/products/apple-tv-4k.png"],
+    colors: [
+      { name: "Black", hex: "#1c1c1e", image: "images/products/apple-tv-4k.png" }
+    ],
+    storageOptions: [
+      { label: "64GB \u00b7 Wi-Fi", extra: 0 },
+      { label: "128GB \u00b7 Wi-Fi + Ethernet", extra: 4000 }
+    ],
+    short: "Whole new ways to experience your favorite entertainment.",
+    description: "Apple TV 4K brings the ultimate home entertainment experience with the A15 Bionic chip, stunning 4K HDR with Dolby Vision, and the redesigned Siri Remote.",
+    specs: {
+      "Chip": "A15 Bionic",
+      "Video": "4K HDR with Dolby Vision, HDR10+",
+      "Audio": "Dolby Atmos",
+      "Storage": "64GB / 128GB",
+      "Remote": "Siri Remote (USB-C)",
+      "Connectivity": "Wi-Fi 6, Gigabit Ethernet (128GB), Thread, Bluetooth 5.0",
+      "OS": "tvOS 18"
+    }
+  },
+  {
+    id: "homepod-2nd-gen",
+    name: "HomePod (2nd generation)",
+    category: "tvhome",
+    brand: "Apple",
+    price: 32900,
+    mrp: 32900,
+    badge: "New",
+    rating: 4.6,
+    reviews: 54,
+    stock: 20,
+    images: ["images/products/homepod-2nd-gen.png"],
+    colors: [
+      { name: "Midnight", hex: "#1e2129", image: "images/products/homepod-2nd-gen.png" },
+      { name: "White", hex: "#f5f5f0", image: "images/products/homepod-2nd-gen.png" }
+    ],
+    storageOptions: [],
+    short: "Deep bass. Room-filling sound. A smarter home.",
+    description: "HomePod delivers immersive, room-filling sound with computational audio, a high-excursion woofer and five tweeters, plus built-in temperature and humidity sensing for the smart home.",
+    specs: {
+      "Audio": "High-excursion woofer + 5 tweeter array",
+      "Chip": "Apple S7 chip",
+      "Sensors": "Temperature and humidity sensor",
+      "Smart Home": "Apple Home hub, Matter support",
+      "Connectivity": "Wi-Fi, Bluetooth 5.0, Thread",
+      "Voice": "Hey Siri"
+    }
+  },
+  {
+    id: "homepod-mini",
+    name: "HomePod mini",
+    category: "tvhome",
+    brand: "Apple",
+    price: 10900,
+    mrp: 10900,
+    badge: "Best Seller",
+    rating: 4.7,
+    reviews: 187,
+    stock: 60,
+    images: ["images/products/homepod-mini.png"],
+    colors: [
+      { name: "Space Grey", hex: "#6e6e73", image: "images/products/homepod-mini.png" },
+      { name: "White", hex: "#f5f5f0", image: "images/products/homepod-mini.png" },
+      { name: "Yellow", hex: "#f2d675", image: "images/products/homepod-mini.png" },
+      { name: "Orange", hex: "#d9713c", image: "images/products/homepod-mini.png" },
+      { name: "Blue", hex: "#7fa8d9", image: "images/products/homepod-mini.png" }
+    ],
+    storageOptions: [],
+    short: "Big sound. Tiny package.",
+    description: "HomePod mini fills the room with rich 360-degree audio, works as an intercom and smart home hub, and pairs two together for stereo sound.",
+    specs: {
+      "Audio": "Full-range driver + dual passive radiators, 360\u00b0 sound",
+      "Chip": "Apple S5 chip",
+      "Smart Home": "Apple Home hub, Matter support",
+      "Connectivity": "Wi-Fi, Bluetooth 5.0, Thread, U1 chip",
+      "Voice": "Hey Siri"
     }
   },
 

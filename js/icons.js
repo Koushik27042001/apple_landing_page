@@ -45,7 +45,11 @@ const ICON_PATHS = {
   upload: '<path d="M12 15V4"/><path d="M7 8.5L12 4l5 4.5"/><path d="M4 15v3.5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V15"/>',
   refresh: '<path d="M20 11a8 8 0 1 0-2.3 6.2"/><path d="M20 5v6h-6"/>',
   store: '<path d="M3.5 9.5l1-5h15l1 5"/><path d="M4 9.5V20h16V9.5"/><path d="M9.5 20v-6h5v6"/><path d="M3.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/>',
-  bagShopping: '<path d="M6 8h12l-1 12.5a1.5 1.5 0 0 1-1.5 1.5h-7a1.5 1.5 0 0 1-1.5-1.5L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/><path d="M9.5 11.5v2M14.5 11.5v2"/>'
+  bagShopping: '<path d="M6 8h12l-1 12.5a1.5 1.5 0 0 1-1.5 1.5h-7a1.5 1.5 0 0 1-1.5-1.5L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/><path d="M9.5 11.5v2M14.5 11.5v2"/>',
+  musicNote: '<path d="M9 18V5.5l10-2v12.5"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="15.5" r="2.5"/>',
+  gameController: '<rect x="2.5" y="8" width="19" height="10" rx="5"/><path d="M7 11v4M5 13h4"/><circle cx="15.5" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="14.5" r="1" fill="currentColor" stroke="none"/>',
+  newspaper: '<rect x="2.5" y="5" width="14" height="15" rx="1.5"/><path d="M16.5 8.5H20a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5H6"/><path d="M5.5 8.5h8M5.5 11.5h8M5.5 14.5h5"/>',
+  heartPulse: '<path d="M12 20.5s-7.5-4.6-9.5-9.4C1.2 7.6 3.4 4.5 6.7 4.5c1.9 0 3.4 1 4.3 2.3.9-1.3 2.4-2.3 4.3-2.3 3.3 0 5.5 3.1 4.2 6.6-2 4.8-9.5 9.4-9.5 9.4Z"/><path d="M6.5 12h2.5l1.5-3 2 6 1.5-3H16"/>'
 };
 
 function icon(name, opts) {

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entertainment | Iswift Gadgets Private Limited</title>
+<meta name="description" content="Explore Apple's entertainment services — Apple TV+, Apple Music, Apple Arcade, Apple News+ and Apple Fitness+ — available on every Apple device.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Entertainment, elevated.</h1>
+    <p>Every Apple device unlocks a world of shows, music, games, news and fitness — all in one ecosystem.</p>
+  </div>
+</section>
+
+<section class="content-block">
+  <div class="container">
+    <div class="collections-grid" style="grid-template-columns: repeat(2, 1fr);">
+
+      <div class="collection-card reveal reveal-delay-1" style="cursor:default;">
+        <div class="cc-text">
+          <span class="cc-badge">Streaming</span>
+          <h3><span data-icon="play" data-icon-size="18" style="vertical-align:-3px; display:inline-block; margin-right:6px;"></span>Apple TV+</h3>
+          <p>Award-winning original series, films and documentaries — ad-free, with new releases every month.</p>
+          <a href="https://tv.apple.com" target="_blank" rel="noopener" class="cc-link">Learn more</a>
+        </div>
+        <img src="images/products/apple-tv-4k.png" alt="Apple TV+">
+      </div>
+
+      <div class="collection-card reveal reveal-delay-2" style="cursor:default;">
+        <div class="cc-text">
+          <span class="cc-badge">Music</span>
+          <h3><span data-icon="musicNote" data-icon-size="18" style="vertical-align:-3px; display:inline-block; margin-right:6px;"></span>Apple Music</h3>
+          <p>100 million songs, lossless audio and Spatial Audio with Dolby Atmos — on every device you own.</p>
+          <a href="https://music.apple.com" target="_blank" rel="noopener" class="cc-link">Learn more</a>
+        </div>
+        <img src="images/products/homepod-mini.png" alt="Apple Music">
+      </div>
+
+      <div class="collection-card reveal reveal-delay-3" style="cursor:default;">
+        <div class="cc-text">
+          <span class="cc-badge">Gaming</span>
+          <h3><span data-icon="gameController" data-icon-size="18" style="vertical-align:-3px; display:inline-block; margin-right:6px;"></span>Apple Arcade</h3>
+          <p>Unlimited access to 200+ premium games with no ads and no in-app purchases, across iPhone, iPad, Mac and Apple TV.</p>
+          <a href="https://apps.apple.com/story/id1538632801" target="_blank" rel="noopener" class="cc-link">Learn more</a>
+        </div>
+        <img src="images/products/ipad-pro-silver.png" alt="Apple Arcade">
+      </div>
+
+      <div class="collection-card reveal reveal-delay-1" style="cursor:default;">
+        <div class="cc-text">
+          <span class="cc-badge">News</span>
+          <h3><span data-icon="newspaper" data-icon-size="18" style="vertical-align:-3px; display:inline-block; margin-right:6px;"></span>Apple News+</h3>
+          <p>Hundreds of magazines and premium newspapers, curated by editors and available offline, in one app.</p>
+          <a href="https://www.apple.com/apple-news/" target="_blank" rel="noopener" class="cc-link">Learn more</a>
+        </div>
+        <img src="images/products/ipad-air-blue.png" alt="Apple News+">
+      </div>
+
+      <div class="collection-card reveal reveal-delay-2" style="cursor:default;">
+        <div class="cc-text">
+          <span class="cc-badge">Fitness</span>
+          <h3><span data-icon="heartPulse" data-icon-size="18" style="vertical-align:-3px; display:inline-block; margin-right:6px;"></span>Apple Fitness+</h3>
+          <p>Studio-style workouts and meditations led by expert trainers, with real-time stats from your Apple Watch.</p>
+          <a href="https://www.apple.com/apple-fitness-plus/" target="_blank" rel="noopener" class="cc-link">Learn more</a>
+        </div>
+        <img src="images/products/watch-series9-black.png" alt="Apple Fitness+">
+      </div>
+
+      <div class="collection-card reveal reveal-delay-3" style="cursor:default;">
+        <div class="cc-text">
+          <span class="cc-badge">Bundle &amp; Save</span>
+          <h3><span data-icon="sparkle" data-icon-size="18" style="vertical-align:-3px; display:inline-block; margin-right:6px;"></span>Apple One</h3>
+          <p>Bundle up to six Apple services — TV+, Music, Arcade, iCloud+ and more — into one simple monthly plan.</p>
+          <a href="https://www.apple.com/apple-one/" target="_blank" rel="noopener" class="cc-link">Learn more</a>
+        </div>
+        <img src="images/products/homepod-2nd-gen.png" alt="Apple One">
+      </div>
+
+    </div>
+
+    <div style="text-align:center; margin-top:40px;">
+      <p style="color:var(--gray-text); margin-bottom:16px;">Have a question about setting up a subscription on your new Apple device?</p>
+      <a href="#" id="entWaLink" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Ask us on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<div id="whatsapp-float"></div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/main.js"></script>
+<script>
+  renderHeader("entertainment");
+  renderFooter();
+  renderWhatsAppFloat("Hi, I have a question about Apple's entertainment services.");
+  document.getElementById("entWaLink").href = whatsappLink("Hi, I have a question about setting up Apple TV+, Music, Arcade or another subscription.");
+</script>
+</body>
+</html>

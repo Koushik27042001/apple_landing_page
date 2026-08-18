@@ -5,7 +5,7 @@
    ============================================================ */
 
 const WHATSAPP_NUMBER = "919999999999"; // Replace with real store WhatsApp number
-const STORE_NAME = "The Apple Store Pune";
+const STORE_NAME = "Iswift Gadgets Private Limited";
 
 function whatsappLink(message) {
   return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
@@ -18,18 +18,19 @@ function renderHeader(active) {
     '<header class="site-header" id="siteHeaderEl">' +
       '<div class="header-inner">' +
         '<button class="menu-toggle" id="menuToggleBtn" aria-label="Menu">' + icon("menu", { size: 22 }) + '</button>' +
-        '<a href="index.html" class="logo"><span class="logo-mark">' + icon("sparkle", { size: 18 }) + '</span> The Apple Store <span class="store-tag">Pune</span></a>' +
+        '<a href="index.html" class="logo"><span class="logo-mark">' + icon("sparkle", { size: 18 }) + '</span> Iswift Gadgets <span class="store-tag">Private Limited</span></a>' +
         '<nav class="main-nav">' +
           navLink("index.html", "Store", active === "home") +
-          navLink("category.html?cat=iphone", "iPhone", active === "iphone") +
           navLink("category.html?cat=mac", "Mac", active === "mac") +
           navLink("category.html?cat=ipad", "iPad", active === "ipad") +
+          navLink("category.html?cat=iphone", "iPhone", active === "iphone") +
           navLink("category.html?cat=watch", "Watch", active === "watch") +
+          navLink("category.html?cat=vision", "Vision", active === "vision") +
           navLink("category.html?cat=airpods", "AirPods", active === "airpods") +
+          navLink("category.html?cat=tvhome", "TV &amp; Home", active === "tvhome") +
+          navLink("entertainment.html", "Entertainment", active === "entertainment") +
           navLink("category.html?cat=accessories", "Accessories", active === "accessories") +
-          navLink("compare.html", "Compare", active === "compare") +
-          navLink("about.html", "About", active === "about") +
-          navLink("contact.html", "Contact", active === "contact") +
+          navLink("support.html", "Support", active === "support") +
         '</nav>' +
         '<div class="header-actions">' +
           '<div class="search-wrap">' +
@@ -37,7 +38,6 @@ function renderHeader(active) {
             '<input type="text" class="search-input" id="headerSearch" placeholder="Search iPhone, Mac, iPad..." autocomplete="off">' +
             '<div class="search-suggestions" id="searchSuggestions"></div>' +
           '</div>' +
-          '<a href="warranty-check.html" class="icon-btn" aria-label="Warranty Check" title="Check Warranty">' + icon("shieldCheck", { size: 20 }) + '</a>' +
           '<a href="cart.html" class="icon-btn" aria-label="Cart" title="My Bag">' + icon("bag", { size: 20 }) + '<span class="cart-count">0</span></a>' +
         '</div>' +
       '</div>' +
@@ -54,14 +54,17 @@ function renderHeader(active) {
         '</div>' +
       '</div>' +
       '<a href="index.html">Store</a>' +
-      '<a href="category.html?cat=iphone">iPhone</a>' +
       '<a href="category.html?cat=mac">Mac</a>' +
       '<a href="category.html?cat=ipad">iPad</a>' +
+      '<a href="category.html?cat=iphone">iPhone</a>' +
       '<a href="category.html?cat=watch">Watch</a>' +
+      '<a href="category.html?cat=vision">Vision</a>' +
       '<a href="category.html?cat=airpods">AirPods</a>' +
+      '<a href="category.html?cat=tvhome">TV &amp; Home</a>' +
+      '<a href="entertainment.html">Entertainment</a>' +
       '<a href="category.html?cat=accessories">Accessories</a>' +
-      '<a href="compare.html">Compare Models</a>' +
-      '<a href="warranty-check.html">Warranty Check</a>' +
+      '<a href="support.html">Support</a>' +
+      '<div class="mobile-nav-divider"></div>' +
       '<a href="cart.html">Bag</a>' +
       '<a href="about.html">About Us</a>' +
       '<a href="contact.html">Contact Us</a>' +
@@ -175,23 +178,26 @@ function renderFooter() {
         '</div>' +
         '<div class="footer-grid">' +
           '<div class="footer-col footer-brand">' +
-            '<span class="logo"><span class="logo-mark">' + icon("sparkle", { size: 18 }) + '</span> The Apple Store Pune</span>' +
+            '<span class="logo"><span class="logo-mark">' + icon("sparkle", { size: 18 }) + '</span> Iswift Gadgets Private Limited</span>' +
             '<p>Pune\u2019s trusted destination for iPhone, Mac, iPad, Watch &amp; AirPods \u2014 genuine products with the best prices and No-Cost EMI.</p>' +
             '<div class="payment-icons">' +
               '<span>UPI</span><span>Visa</span><span>Mastercard</span><span>Razorpay</span><span>Cashfree</span><span>No-Cost EMI</span>' +
             '</div>' +
           '</div>' +
           '<div class="footer-col"><h5>Shop</h5><ul>' +
-            '<li><a href="category.html?cat=iphone">iPhone</a></li>' +
             '<li><a href="category.html?cat=mac">Mac</a></li>' +
             '<li><a href="category.html?cat=ipad">iPad</a></li>' +
+            '<li><a href="category.html?cat=iphone">iPhone</a></li>' +
             '<li><a href="category.html?cat=watch">Watch</a></li>' +
+            '<li><a href="category.html?cat=vision">Vision</a></li>' +
             '<li><a href="category.html?cat=airpods">AirPods</a></li>' +
+            '<li><a href="category.html?cat=tvhome">TV &amp; Home</a></li>' +
             '<li><a href="category.html?cat=accessories">Accessories</a></li>' +
           '</ul></div>' +
           '<div class="footer-col"><h5>Tools</h5><ul>' +
-            '<li><a href="compare.html">Compare Models</a></li>' +
-            '<li><a href="warranty-check.html">Warranty Check</a></li>' +
+            '<li><a href="entertainment.html">Entertainment</a></li>' +
+            '<li><a href="support.html">Support</a></li>' +
+            '<li><a href="support.html#warranty">Warranty Check</a></li>' +
             '<li><a href="cart.html">My Bag</a></li>' +
             '<li><a href="checkout.html">Checkout</a></li>' +
           '</ul></div>' +
@@ -205,11 +211,11 @@ function renderFooter() {
             '<li>Camp, Pune, Maharashtra</li>' +
             '<li><a href="tel:+919999999999">+91 99999 99999</a></li>' +
             '<li><a href="mailto:hello@theapplestorepune.in">hello@theapplestorepune.in</a></li>' +
-            '<li><a href="' + whatsappLink("Hi, I have a query about a product on The Apple Store Pune.") + '" target="_blank" rel="noopener">Chat on WhatsApp</a></li>' +
+            '<li><a href="' + whatsappLink("Hi, I have a query about a product on Iswift Gadgets Private Limited.") + '" target="_blank" rel="noopener">Chat on WhatsApp</a></li>' +
           '</ul></div>' +
         '</div>' +
         '<div class="footer-bottom">' +
-          '<div>&copy; ' + year + ' The Apple Store Pune. Not affiliated with Apple Inc. Demo storefront.</div>' +
+          '<div>&copy; ' + year + ' Iswift Gadgets Private Limited. Not affiliated with Apple Inc. Demo storefront.</div>' +
           '<div class="legal-links">' +
             '<a href="terms.html">Terms</a>' +
             '<a href="terms.html#privacy">Privacy</a>' +
@@ -228,7 +234,7 @@ function trustBadge(iconName, title, desc) {
 function renderWhatsAppFloat(message) {
   const el = document.getElementById("whatsapp-float");
   if (!el) return;
-  el.innerHTML = '<a class="whatsapp-float" href="' + whatsappLink(message || "Hi, I\u2019m interested in your products on The Apple Store Pune.") + '" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">' + icon("whatsapp", { size: 28 }) + '</a>';
+  el.innerHTML = '<a class="whatsapp-float" href="' + whatsappLink(message || "Hi, I\u2019m interested in your products on Iswift Gadgets Private Limited.") + '" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">' + icon("whatsapp", { size: 28 }) + '</a>';
 }
 
 let toastTimeout;

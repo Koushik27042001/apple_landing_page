@@ -32,6 +32,14 @@ const { chromium } = require("playwright");
     const accCount = await page.locator(".product-card").count();
     log("Accessories category shows 14 items (4 originals + 10 AppleCare)", accCount === 14, "count=" + accCount);
 
+    await page.goto(base + "category.html?cat=vision", { waitUntil: "networkidle" });
+    const visionCount = await page.locator(".product-card").count();
+    log("Vision category shows Apple Vision Pro", visionCount === 1, "count=" + visionCount);
+
+    await page.goto(base + "category.html?cat=tvhome", { waitUntil: "networkidle" });
+    const tvhomeCount = await page.locator(".product-card").count();
+    log("TV & Home category shows Apple TV 4K + HomePod + HomePod mini", tvhomeCount === 3, "count=" + tvhomeCount);
+
     // Product detail page works for a new flagship product, shows price/EMI/storage/color selectors
     await page.goto(base + "product.html?id=iphone-17-pro-max", { waitUntil: "networkidle" });
     const title = await page.locator("h1").first().textContent();

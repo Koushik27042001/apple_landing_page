@@ -161,7 +161,7 @@ A minimal working version of the backend (Test-mode Razorpay, JSON-file storage)
 
 ---
 
-## 8. Handover Checklist (For Go-Live Day)
+### 8. Handover Checklist (For Go-Live Day)
 
 - [ ] Domain DNS pointed to hosting provider
 - [ ] Live Razorpay/Cashfree keys added to backend environment variables
