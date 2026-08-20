@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="pageTitle">Shop All Products | The Apple Store Pune</title>
-<meta name="description" content="Browse genuine Apple products in Pune — iPhone, Mac, iPad, Watch, AirPods and Accessories with best prices and No-Cost EMI.">
+<meta name="description" content="Browse genuine Apple products in Pune â€” iPhone, Mac, iPad, Watch, AirPods and Accessories with best prices and No-Cost EMI.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -29,10 +29,10 @@
       <h4>Price Range</h4>
       <div class="filter-group" id="priceFilters">
         <label class="filter-option"><input type="radio" name="price" value="all" checked> All Prices</label>
-        <label class="filter-option"><input type="radio" name="price" value="0-30000"> Under ₹30,000</label>
-        <label class="filter-option"><input type="radio" name="price" value="30000-70000"> ₹30,000 – ₹70,000</label>
-        <label class="filter-option"><input type="radio" name="price" value="70000-150000"> ₹70,000 – ₹1,50,000</label>
-        <label class="filter-option"><input type="radio" name="price" value="150000-999999"> Above ₹1,50,000</label>
+        <label class="filter-option"><input type="radio" name="price" value="0-30000"> Under â‚¹30,000</label>
+        <label class="filter-option"><input type="radio" name="price" value="30000-70000"> â‚¹30,000 â€“ â‚¹70,000</label>
+        <label class="filter-option"><input type="radio" name="price" value="70000-150000"> â‚¹70,000 â€“ â‚¹1,50,000</label>
+        <label class="filter-option"><input type="radio" name="price" value="150000-999999"> Above â‚¹1,50,000</label>
       </div>
 
       <h4>Availability</h4>
@@ -73,6 +73,7 @@
 <script src="js/cart.js"></script>
 <script src="js/icons.js"></script>
 <script src="js/main.js"></script>
+<script src="js/animations.js" defer></script>
 <script>
   const initialCat = getQueryParam("cat") || "all";
   const initialQuery = getQueryParam("q") || "";
@@ -135,7 +136,7 @@
         '<div class="pc-cat">' + p.category + '</div>' +
         '<a href="product.html?id=' + p.id + '"><h4>' + p.name + '</h4></a>' +
         '<p class="pc-short">' + p.short + '</p>' +
-        '<div class="pc-rating"><span class="stars">★★★★★</span> ' + p.rating + ' (' + p.reviews + ')</div>' +
+        '<div class="pc-rating"><span class="stars">â˜…â˜…â˜…â˜…â˜…</span> ' + p.rating + ' (' + p.reviews + ')</div>' +
         '<div class="pc-price-row">' +
           '<span class="pc-price">' + formatINR(p.price) + '</span>' +
           (discount ? '<span class="pc-mrp">' + formatINR(p.mrp) + '</span><span class="pc-discount">' + discount + '% off</span>' : '') +
@@ -205,3 +206,5 @@
 </script>
 </body>
 </html>
+
+

@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout | The Apple Store Pune</title>
-<meta name="description" content="Secure checkout — Contact info, shipping and payment for The Apple Store Pune.">
+<meta name="description" content="Secure checkout â€” Contact info, shipping and payment for The Apple Store Pune.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -113,7 +113,7 @@
               <span class="po-info"><h5>Credit / Debit Card</h5><p>Visa, Mastercard, RuPay &amp; more</p></span>
             </label>
             <div class="payment-detail">
-              <p style="font-size:12.5px; color:var(--gray-text); margin:0;">Card details are entered securely inside the Razorpay window — we never see or store your card number.</p>
+              <p style="font-size:12.5px; color:var(--gray-text); margin:0;">Card details are entered securely inside the Razorpay window â€” we never see or store your card number.</p>
             </div>
           </div>
 
@@ -167,6 +167,7 @@
 <script src="js/cart.js"></script>
 <script src="js/icons.js"></script>
 <script src="js/main.js"></script>
+<script src="js/animations.js" defer></script>
 <script>
   renderHeader("home");
   renderFooter();
@@ -192,7 +193,7 @@
         notice.style.display = "block";
         notice.innerHTML = backendAvailable
           ? icon("checkCircle", { size: 14 }) + " Live payment gateway connected."
-          : icon("info", { size: 14 }) + " Demo mode — no backend detected at " + APPLE_STORE_API_BASE + ". Orders will be simulated. See <code>server/README.md</code> to enable real payments.";
+          : icon("info", { size: 14 }) + " Demo mode â€” no backend detected at " + APPLE_STORE_API_BASE + ". Orders will be simulated. See <code>server/README.md</code> to enable real payments.";
       }
     });
 
@@ -212,7 +213,7 @@
       const n = i + 1;
       const cls = n === currentStep ? "active" : n < currentStep ? "done" : "";
       const sep = i < steps.length - 1 ? '<div class="checkout-step-sep"></div>' : "";
-      return '<div class="checkout-step ' + cls + '"><span class="num">' + (n < currentStep ? "✓" : n) + '</span>' + s.label + '</div>' + sep;
+      return '<div class="checkout-step ' + cls + '"><span class="num">' + (n < currentStep ? "âœ“" : n) + '</span>' + s.label + '</div>' + sep;
     }).join("");
   }
 
@@ -436,3 +437,5 @@
 </script>
 </body>
 </html>
+
+

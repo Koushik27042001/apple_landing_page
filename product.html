@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -34,6 +34,7 @@
 <script src="js/cart.js"></script>
 <script src="js/icons.js"></script>
 <script src="js/main.js"></script>
+<script src="js/animations.js" defer></script>
 <script>
   const productId = getQueryParam("id");
   const product = getProductById(productId) || PRODUCTS[0];
@@ -86,9 +87,9 @@
           ) +
         '</div>' +
         '<div class="pdp-info">' +
-          '<div class="pc-cat">' + product.category + ' · ' + product.brand + '</div>' +
+          '<div class="pc-cat">' + product.category + ' Â· ' + product.brand + '</div>' +
           '<h1>' + product.name + '</h1>' +
-          '<div class="pdp-rating"><span class="stars">★★★★★</span> ' + product.rating + ' &middot; ' + product.reviews + ' ratings</div>' +
+          '<div class="pdp-rating"><span class="stars">â˜…â˜…â˜…â˜…â˜…</span> ' + product.rating + ' &middot; ' + product.reviews + ' ratings</div>' +
 
           '<div class="pdp-price-block">' +
             '<div class="pdp-price-row">' +
@@ -289,3 +290,5 @@
 </script>
 </body>
 </html>
+
+

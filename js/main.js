@@ -4,11 +4,44 @@
    Include after data.js, cart.js and icons.js on every page.
    ============================================================ */
 
-const WHATSAPP_NUMBER = "919999999999"; // Replace with real store WhatsApp number
+const WHATSAPP_NUMBER = "917975627008";
 const STORE_NAME = "Iswift Gadgets Private Limited";
+const STORE_PHONE_LANDLINE = "08041492709";
+const STORE_PHONE_MOBILE = "919972612530";
+const STORE_PHONE_ALT = "917980128631";
+const STORE_EMAIL = "info@axion.co.in";
+const STORE_ADDRESS_LINES = [
+  "#L-176, Ground Floor, 5th Main,",
+  "HSR Layout, Sector 6,",
+  "Bengaluru, 560102"
+];
+const STORE_MAP_LINK = "https://share.google/xm1mcXn94xCpgRc7I";
+const STORE_MAP_EMBED =
+  "https://www.google.com/maps?q=Axion+Computers+(Head+Office),+L-176,+5th+Main,+HSR+Layout,+Sector+6,+Bengaluru,+560102&hl=en&z=16&output=embed";
 
 function whatsappLink(message) {
   return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+}
+
+function formatPhoneDisplay(digits) {
+  const d = String(digits || "").replace(/\D/g, "");
+  if (d.length === 12 && d.startsWith("91")) {
+    return "+91 " + d.slice(2, 7) + " " + d.slice(7);
+  }
+  if (d.length === 11 && d.startsWith("080")) {
+    return "080-" + d.slice(3, 7) + " " + d.slice(7);
+  }
+  if (d.length === 10) {
+    return "+91 " + d.slice(0, 5) + " " + d.slice(5);
+  }
+  return digits;
+}
+
+function telHref(digits) {
+  let d = String(digits || "").replace(/\D/g, "");
+  if (d.startsWith("0")) d = "91" + d.slice(1);
+  if (!d.startsWith("91") && d.length === 10) d = "91" + d;
+  return "tel:+" + d;
 }
 
 function renderHeader(active) {
@@ -179,7 +212,7 @@ function renderFooter() {
         '<div class="footer-grid">' +
           '<div class="footer-col footer-brand">' +
             '<span class="logo"><span class="logo-mark">' + icon("sparkle", { size: 18 }) + '</span> Iswift Gadgets Private Limited</span>' +
-            '<p>Pune\u2019s trusted destination for iPhone, Mac, iPad, Watch &amp; AirPods \u2014 genuine products with the best prices and No-Cost EMI.</p>' +
+            '<p>Trusted destination for iPhone, Mac, iPad, Watch &amp; AirPods \u2014 genuine products with the best prices and No-Cost EMI. Head office in HSR Layout, Bengaluru.</p>' +
             '<div class="payment-icons">' +
               '<span>UPI</span><span>Visa</span><span>Mastercard</span><span>Razorpay</span><span>Cashfree</span><span>No-Cost EMI</span>' +
             '</div>' +
@@ -207,12 +240,37 @@ function renderFooter() {
             '<li><a href="terms.html">Terms &amp; Conditions</a></li>' +
             '<li><a href="terms.html#privacy">Privacy Policy</a></li>' +
           '</ul></div>' +
-          '<div class="footer-col"><h5>Get in touch</h5><ul>' +
-            '<li>Camp, Pune, Maharashtra</li>' +
-            '<li><a href="tel:+919999999999">+91 99999 99999</a></li>' +
-            '<li><a href="mailto:hello@theapplestorepune.in">hello@theapplestorepune.in</a></li>' +
+          '<div class="footer-col footer-contact"><h5>Get in touch</h5><ul>' +
+            '<li class="footer-address">' +
+              '<span class="footer-label">Head Office</span>' +
+              STORE_ADDRESS_LINES.join("<br>") +
+            '</li>' +
+            '<li class="footer-phones">' +
+              '<span class="footer-label">Phone</span>' +
+              '<a href="' + telHref(STORE_PHONE_LANDLINE) + '">' + formatPhoneDisplay(STORE_PHONE_LANDLINE) + '</a>' +
+              '<a href="' + telHref(STORE_PHONE_MOBILE) + '">' + formatPhoneDisplay(STORE_PHONE_MOBILE) + '</a>' +
+              '<a href="' + telHref(WHATSAPP_NUMBER) + '">' + formatPhoneDisplay(WHATSAPP_NUMBER) + '</a>' +
+              '<a href="' + telHref(STORE_PHONE_ALT) + '">' + formatPhoneDisplay(STORE_PHONE_ALT) + '</a>' +
+            '</li>' +
+            '<li>' +
+              '<span class="footer-label">Email</span>' +
+              '<a href="mailto:' + STORE_EMAIL + '">' + STORE_EMAIL + '</a>' +
+            '</li>' +
             '<li><a href="' + whatsappLink("Hi, I have a query about a product on Iswift Gadgets Private Limited.") + '" target="_blank" rel="noopener">Chat on WhatsApp</a></li>' +
           '</ul></div>' +
+        '</div>' +
+        '<div class="footer-map-block">' +
+          '<div class="footer-map-head">' +
+            '<div>' +
+              '<h5>Visit our head office</h5>' +
+              '<p>HSR Layout, Sector 6, Bengaluru</p>' +
+            '</div>' +
+            '<a class="btn btn-outline" href="' + STORE_MAP_LINK + '" target="_blank" rel="noopener">Open in Google Maps</a>' +
+          '</div>' +
+          '<iframe class="footer-map-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ' +
+            'src="' + STORE_MAP_EMBED + '" ' +
+            'title="Iswift Gadgets / Axion Head Office map \u2014 HSR Layout, Bengaluru" ' +
+            'allowfullscreen></iframe>' +
         '</div>' +
         '<div class="footer-bottom">' +
           '<div>&copy; ' + year + ' Iswift Gadgets Private Limited. Not affiliated with Apple Inc. Demo storefront.</div>' +

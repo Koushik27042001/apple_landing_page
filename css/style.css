@@ -1470,6 +1470,54 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--gray-text);
 }
 
+.footer-contact ul li { margin-bottom: 14px; font-size: 13.5px; color: var(--gray-dark); line-height: 1.55; }
+.footer-contact .footer-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin-bottom: 4px;
+}
+.footer-contact .footer-phones a {
+  display: block;
+  margin-bottom: 2px;
+}
+.footer-contact .footer-address { max-width: 220px; }
+
+.footer-map-block {
+  padding: 8px 0 36px;
+  border-top: 1px solid var(--gray-border);
+}
+.footer-map-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 28px 0 16px;
+  flex-wrap: wrap;
+}
+.footer-map-head h5 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  color: var(--black);
+}
+.footer-map-head p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--gray-text);
+}
+.footer-map-frame {
+  width: 100%;
+  height: 280px;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+}
+
 .footer-bottom {
   border-top: 1px solid var(--gray-border);
   padding: 20px 0;
@@ -1578,6 +1626,7 @@ button { font-family: inherit; cursor: pointer; }
   .checkout-layout { grid-template-columns: 1fr; }
   .two-col { grid-template-columns: 1fr; gap: 30px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-map-frame { height: 240px; }
   .trust-badges { grid-template-columns: repeat(2, 1fr); }
   .value-grid { grid-template-columns: 1fr; }
 }
@@ -1608,4 +1657,346 @@ button { font-family: inherit; cursor: pointer; }
   .product-card .pc-image { height: 130px; }
   .header-inner { gap: 10px; }
   .form-row { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   PREMIUM ANIMATION SYSTEM — Apple Store Pune
+   Spinning, zoom-in/out, float, breathe, particles, spotlight
+   ============================================================ */
+
+/* ── Keyframes ── */
+
+/* Hero slide content entrance */
+@keyframes heroContentIn {
+  0%   { opacity: 0; transform: translateY(40px) scale(0.97); }
+  60%  { opacity: 1; transform: translateY(-4px) scale(1.01); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Product image float (up-down bob) */
+@keyframes productFloat {
+  0%, 100% { transform: scale(1.07) translateY(-6px); }
+  50%       { transform: scale(1.07) translateY(-18px); }
+}
+
+/* Float exit */
+@keyframes productFloatOut {
+  from { transform: scale(1.07) translateY(-12px); }
+  to   { transform: scale(1) translateY(0); }
+}
+
+/* Single spin on click */
+@keyframes spinOnce {
+  0%   { transform: rotateY(0deg) scale(1); }
+  50%  { transform: rotateY(180deg) scale(1.1); }
+  100% { transform: rotateY(360deg) scale(1); }
+}
+
+/* Hero background breathing zoom */
+@keyframes heroBreathe {
+  0%, 100% { transform: scale(1.06) translateY(0px); }
+  50%       { transform: scale(1.12) translateY(-6px); }
+}
+
+/* Particle burst */
+@keyframes particleBurst {
+  0%   { transform: translate(0,0) rotate(0deg) scale(1); opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) rotate(var(--r)) scale(0); opacity: 0; }
+}
+
+/* WhatsApp pulse ring */
+@keyframes waPulse {
+  0%   { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Section head reveal */
+@keyframes headSlideIn {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Reveal from left */
+@keyframes revealLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Reveal from right */
+@keyframes revealRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Zoom-in reveal */
+@keyframes revealZoom {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Badge shine sweep */
+@keyframes badgeShine {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Icon bounce on promo hover */
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0) scale(1.12) rotate(-5deg); }
+  50%       { transform: translateY(-6px) scale(1.18) rotate(5deg); }
+}
+
+/* Eyebrow glow pulse */
+@keyframes eyebrowGlow {
+  0%, 100% { text-shadow: 0 0 0 transparent; letter-spacing: 0.1em; }
+  50%       { text-shadow: 0 0 12px rgba(0,102,204,0.45); letter-spacing: 0.13em; }
+}
+
+/* Hero arrow pulse */
+@keyframes arrowPulse {
+  0%, 100% { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+  50%       { box-shadow: 0 4px 24px rgba(0,102,204,0.3); }
+}
+
+/* Logo spin on hover */
+@keyframes logoSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Collection card entrance stagger */
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(36px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Hero content animation class ── */
+.hero-slide--active .inner.hero-content-in {
+  animation: heroContentIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Hero BG breathing zoom ── */
+.hero-bg-breathe {
+  animation: heroBreathe 8s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+/* Override parallax conflict — disable breathe when parallax active */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-bg-breathe {
+    animation: heroBreathe 8s ease-in-out infinite;
+  }
+}
+
+/* ── Product image float ── */
+.collection-card img.img-floating {
+  animation: productFloat 2s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+.collection-card img.img-float-out {
+  animation: productFloatOut 0.5s var(--ease-premium) forwards;
+}
+
+/* ── Product image spin on click ── */
+.img-spin-once {
+  animation: spinOnce 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Particle burst ── */
+.cart-particle {
+  position: fixed;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  animation: particleBurst 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* ── WhatsApp pulse ring ── */
+.wa-pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.45);
+  animation: waPulse 2s ease-out infinite;
+  pointer-events: none;
+}
+
+/* ── Cursor spotlight on hero ── */
+.hero-spotlight {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 65%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 3;
+  mix-blend-mode: overlay;
+}
+
+/* ── Reveal variants ── */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s var(--ease-premium), transform 0.7s var(--ease-premium);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s var(--ease-premium), transform 0.7s var(--ease-premium);
+}
+.reveal-zoom {
+  opacity: 0;
+  transform: scale(0.88);
+  transition: opacity 0.65s var(--ease-premium), transform 0.65s var(--ease-premium);
+}
+.reveal-left.visible,
+.reveal-right.visible,
+.reveal-zoom.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Fix existing reveal.visible vs reveal.in-view naming — support both */
+.reveal.visible,
+.reveal-scale.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Section head animated ── */
+.section-head h2,
+.section-head p,
+.section-head .eyebrow {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s var(--ease-premium), transform 0.7s var(--ease-premium);
+}
+.section-head .eyebrow { transition-delay: 0s; }
+.section-head h2       { transition-delay: 0.12s; }
+.section-head p        { transition-delay: 0.22s; }
+
+.section-head.head-visible .eyebrow,
+.section-head.head-visible h2,
+.section-head.head-visible p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Eyebrow glow ── */
+.eyebrow {
+  animation: eyebrowGlow 3.5s ease-in-out infinite !important;
+}
+
+/* ── Hero arrow subtle pulse ── */
+.hero-arrow {
+  animation: arrowPulse 2.5s ease-in-out infinite;
+}
+.hero-arrow:hover {
+  animation: none;
+}
+
+/* ── Logo mark spin on hover ── */
+.logo:hover .logo-mark {
+  display: inline-block;
+  animation: logoSpin 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Product badge shimmer ── */
+.product-badge {
+  background-size: 200% auto;
+  animation: badgeShine 3s linear infinite;
+}
+.badge-new {
+  background-image: linear-gradient(90deg, #e8f3ff 0%, #c8e3ff 40%, #e8f3ff 60%, #c8e3ff 100%);
+}
+.badge-sale {
+  background-image: linear-gradient(90deg, #fde8e8 0%, #ffc8c8 40%, #fde8e8 60%, #ffc8c8 100%);
+}
+.badge-best-seller {
+  background-image: linear-gradient(90deg, #fff4d9 0%, #ffdfa0 40%, #fff4d9 60%, #ffdfa0 100%);
+}
+
+/* ── Promo icon bounce on hover ── */
+.promo-item:hover .icon {
+  animation: iconBounce 0.6s ease-in-out;
+}
+
+/* ── Product card hover glow ring ── */
+.product-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--radius-lg);
+  border: 2px solid transparent;
+  background: linear-gradient(135deg, #0066cc22, #5856d622, #ff2d5522) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.product-card:hover::after {
+  opacity: 1;
+}
+
+/* ── Collection card stagger entrance (when section scrolls in) ── */
+.collections-grid .collection-card {
+  opacity: 0;
+  transform: translateY(36px) scale(0.95);
+  transition:
+    opacity 0.65s var(--ease-premium),
+    transform 0.65s var(--ease-premium),
+    box-shadow 0.4s ease,
+    border-color 0.3s ease;
+}
+.collections-grid.grid-visible .collection-card:nth-child(1) { transition-delay: 0.05s; }
+.collections-grid.grid-visible .collection-card:nth-child(2) { transition-delay: 0.15s; }
+.collections-grid.grid-visible .collection-card:nth-child(3) { transition-delay: 0.25s; }
+.collections-grid.grid-visible .collection-card:nth-child(4) { transition-delay: 0.35s; }
+.collections-grid.grid-visible .collection-card:nth-child(5) { transition-delay: 0.45s; }
+.collections-grid.grid-visible .collection-card:nth-child(6) { transition-delay: 0.55s; }
+
+.collections-grid.grid-visible .collection-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ── Product grid stagger ── */
+.product-grid .product-card {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.55s var(--ease-premium),
+    transform 0.55s var(--ease-premium),
+    box-shadow 0.35s var(--ease-premium),
+    border-color 0.35s ease;
+}
+.product-grid.grid-visible .product-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+.product-grid.grid-visible .product-card:nth-child(1) { transition-delay: 0.04s; }
+.product-grid.grid-visible .product-card:nth-child(2) { transition-delay: 0.10s; }
+.product-grid.grid-visible .product-card:nth-child(3) { transition-delay: 0.16s; }
+.product-grid.grid-visible .product-card:nth-child(4) { transition-delay: 0.22s; }
+.product-grid.grid-visible .product-card:nth-child(5) { transition-delay: 0.28s; }
+.product-grid.grid-visible .product-card:nth-child(6) { transition-delay: 0.34s; }
+.product-grid.grid-visible .product-card:nth-child(7) { transition-delay: 0.40s; }
+.product-grid.grid-visible .product-card:nth-child(8) { transition-delay: 0.46s; }
+
+/* ── Mobile hero — reduce motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-breathe,
+  .img-floating,
+  .wa-pulse-ring,
+  .eyebrow,
+  .hero-arrow {
+    animation: none !important;
+  }
 }

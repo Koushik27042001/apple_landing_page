@@ -188,12 +188,13 @@
 <script src="js/cart.js"></script>
 <script src="js/icons.js"></script>
 <script src="js/main.js"></script>
+<script src="js/animations.js" defer></script>
 <script>
-  /* ---- Scroll Reveal ---- */
+  /* ---- Scroll Reveal (handled by animations.js) ---- */
   (function () {
-    const revealEls = document.querySelectorAll('.reveal, .reveal-scale');
+    var revealEls = document.querySelectorAll('.reveal, .reveal-scale');
     if (!revealEls.length) return;
-    const io = new IntersectionObserver(function (entries) {
+    var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
