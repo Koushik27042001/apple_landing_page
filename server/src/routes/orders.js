@@ -3,6 +3,7 @@ const { nanoid } = require("nanoid");
 const { priceCart } = require("../lib/catalog");
 const { razorpay, keyId } = require("../lib/razorpay");
 const store = require("../lib/store");
+const couponsStore = require("../lib/couponsStore");
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ function isValidPincode(v) { return /^\d{6}$/.test(v || ""); }
 // order record awaiting payment confirmation.
 router.post("/", async function (req, res) {
   try {
-    const { items, customer, shipping } = req.body || {};
+    const { items, customer, shipping, couponCode } = req.body || {};
 
     if (!customer || !isValidEmail(customer.email) || !isValidPhone(customer.phone) || !customer.name || customer.name.trim().length < 3) {
       return res.status(400).json({ error: "Please provide a valid name, 10-digit phone number and email address." });
@@ -24,7 +25,7 @@ router.post("/", async function (req, res) {
       return res.status(400).json({ error: "Please provide a complete shipping address with a valid 6-digit pincode." });
     }
 
-    const pricing = priceCart(items);
+    const pricing = priceCart(items, couponCode);
 
     if (!razorpay) {
       return res.status(503).json({
@@ -48,6 +49,8 @@ router.post("/", async function (req, res) {
       status: "created", // created -> paid -> failed / refunded
       items: pricing.lines,
       subtotal: pricing.subtotal,
+      discount: pricing.discount || 0,
+      coupon: pricing.coupon || null,
       shipping: pricing.shipping,
       total: pricing.total,
       currency: razorpayOrder.currency,
@@ -57,13 +60,23 @@ router.post("/", async function (req, res) {
     };
     store.createOrder(order);
 
+    if (pricing.coupon && pricing.coupon.code) {
+      couponsStore.incrementUsage(pricing.coupon.code);
+    }
+
     res.json({
       orderId: internalId,
       razorpayOrderId: razorpayOrder.id,
       amount: amountPaise,
       currency: razorpayOrder.currency,
       keyId: keyId,
-      totals: { subtotal: pricing.subtotal, shipping: pricing.shipping, total: pricing.total }
+      totals: {
+        subtotal: pricing.subtotal,
+        discount: pricing.discount || 0,
+        shipping: pricing.shipping,
+        total: pricing.total,
+        coupon: pricing.coupon
+      }
     });
   } catch (err) {
     console.error("[orders] create failed:", err.message);

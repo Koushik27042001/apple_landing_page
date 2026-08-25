@@ -185,6 +185,7 @@
 <div id="whatsapp-float"></div>
 
 <script src="js/data.js"></script>
+<script src="js/catalog-sync.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/icons.js"></script>
 <script src="js/main.js"></script>
@@ -277,13 +278,17 @@
     showToast(p.name + " added to your bag");
   }
 
-  const bestPrices = PRODUCTS.filter(function (p) { return p.mrp > p.price; })
-    .sort(function (a, b) { return (b.mrp - b.price) / b.mrp - (a.mrp - a.price) / a.mrp; })
-    .slice(0, 8);
-  document.getElementById("bestPricesGrid").innerHTML = bestPrices.map(productCardHtml).join("");
+  function renderHomeGrids() {
+    const bestPrices = PRODUCTS.filter(function (p) { return p.mrp > p.price; })
+      .sort(function (a, b) { return (b.mrp - b.price) / b.mrp - (a.mrp - a.price) / a.mrp; })
+      .slice(0, 8);
+    document.getElementById("bestPricesGrid").innerHTML = bestPrices.map(productCardHtml).join("");
 
-  const newArrivals = PRODUCTS.filter(function (p) { return p.badge === "New" || p.badge === "Best Seller"; }).slice(0, 4);
-  document.getElementById("newArrivalsGrid").innerHTML = newArrivals.map(productCardHtml).join("");
+    const newArrivals = PRODUCTS.filter(function (p) { return p.badge === "New" || p.badge === "Best Seller"; }).slice(0, 4);
+    document.getElementById("newArrivalsGrid").innerHTML = newArrivals.map(productCardHtml).join("");
+  }
+  renderHomeGrids();
+  document.addEventListener("catalog:updated", renderHomeGrids);
 </script>
 </body>
 </html>

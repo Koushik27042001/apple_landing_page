@@ -4,3 +4,7 @@ server/.env
 .env
 npm-debug.log
 *.log
+server/data/products.json
+server/data/coupons.json
+server/data/settings.json
+server/data/admin-sessions.json

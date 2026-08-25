@@ -1,10 +1,22 @@
-/* Loads the shared product catalog from js/data.js (single source of
-   truth also used by the frontend). Prices are always recomputed
-   server-side from this file — the client is never trusted to send
-   the correct amount for a payment. */
+/* Authoritative catalog + pricing. Reads from the editable products
+   store (seeded from js/data.js) so admin panel changes apply to
+   checkout totals. */
 
-const path = require("path");
-const { PRODUCTS, CATEGORIES, getProductById } = require(path.join(__dirname, "../../../js/data.js"));
+const productsStore = require("./productsStore");
+const couponsStore = require("./couponsStore");
+const settingsStore = require("./settingsStore");
+
+function getProducts() {
+  return productsStore.getProducts();
+}
+
+function getCategories() {
+  return productsStore.getCategories();
+}
+
+function getProductById(id) {
+  return productsStore.getById(id);
+}
 
 function getUnitPrice(productId, storageLabel) {
   const product = getProductById(productId);
@@ -14,11 +26,10 @@ function getUnitPrice(productId, storageLabel) {
 }
 
 /**
- * Recomputes an authoritative order total from a list of
- * { id, storage, qty } line items, ignoring any price the client sent.
- * Throws if a product/quantity is invalid so bad requests fail loudly.
+ * Recomputes an authoritative order total from cart line items.
+ * Optional couponCode is validated and applied server-side.
  */
-function priceCart(items) {
+function priceCart(items, couponCode) {
   if (!Array.isArray(items) || items.length === 0) {
     throw new Error("Cart is empty.");
   }
@@ -43,12 +54,36 @@ function priceCart(items) {
     };
   });
 
-  const SHIPPING_THRESHOLD = 50000;
-  const SHIPPING_FEE = 199;
+  const settings = settingsStore.get();
+  const SHIPPING_THRESHOLD = settings.shippingThreshold != null ? settings.shippingThreshold : 50000;
+  const SHIPPING_FEE = settings.shippingFee != null ? settings.shippingFee : 199;
   const shipping = subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
-  const total = subtotal + shipping;
 
-  return { lines: lines, subtotal: subtotal, shipping: shipping, total: total };
+  let discount = 0;
+  let coupon = null;
+  if (couponCode) {
+    const applied = couponsStore.applyCoupon(couponCode, subtotal);
+    if (!applied.ok) throw new Error(applied.error);
+    discount = applied.discount;
+    coupon = applied.coupon;
+  }
+
+  const total = Math.max(0, subtotal - discount) + shipping;
+
+  return {
+    lines: lines,
+    subtotal: subtotal,
+    discount: discount,
+    coupon: coupon,
+    shipping: shipping,
+    total: total
+  };
 }
 
-module.exports = { PRODUCTS, CATEGORIES, getUnitPrice, priceCart };
+module.exports = {
+  get PRODUCTS() { return getProducts(); },
+  get CATEGORIES() { return getCategories(); },
+  getProductById,
+  getUnitPrice,
+  priceCart
+};

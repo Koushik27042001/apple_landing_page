@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -21,6 +21,7 @@
 <div id="whatsapp-float"></div>
 
 <script src="js/data.js"></script>
+<script src="js/catalog-sync.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/icons.js"></script>
 <script src="js/main.js"></script>
@@ -107,7 +108,7 @@
         '<div class="ci-image"><img src="' + item.image + '" alt="' + item.name + '"></div>' +
         '<div class="ci-info">' +
           '<h4>' + item.name + '</h4>' +
-          '<div class="ci-variant">' + [item.color, item.storage].filter(Boolean).join(" Â· ") + '</div>' +
+          '<div class="ci-variant">' + [item.color, item.storage].filter(Boolean).join(" · ") + '</div>' +
           '<div class="ci-price">' + formatINR(item.price) + '</div>' +
           '<div class="ci-controls">' +
             '<div class="qty-selector">' +
