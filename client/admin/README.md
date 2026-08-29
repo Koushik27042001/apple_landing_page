@@ -37,7 +37,7 @@ Change it by setting `ADMIN_PASSWORD` in `server/.env`.
 
 Editable data is saved as JSON under `server/data/`:
 
-- `products.json` — catalog (seeded from `js/data.js` on first run)
+- `products.json` — catalog (seeded from `client/js/data.js` on first run)
 - `coupons.json` — coupon codes
 - `settings.json` — store contact & shipping settings
 - `orders.json` — customer orders

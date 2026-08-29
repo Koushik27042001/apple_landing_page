@@ -1,12 +1,16 @@
 {
   "name": "apple_landing_page",
   "version": "1.0.0",
-  "description": "An Apple-style e-commerce storefront for iPhone, Mac, iPad, Apple Watch, AirPods and accessories, built for the Indian market (UPI, No-Cost EMI, WhatsApp support, Pune store details).",
-  "main": "index.js",
+  "description": "Iswift Gadgets storefront — client (HTML/CSS/JS) + server (Express/Razorpay).",
+  "main": "server/server.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
+    "start": "npm --prefix server start",
+    "start:server": "npm --prefix server start",
+    "dev:server": "npm --prefix server run dev",
+    "serve:client": "npx --yes serve client -l 8080",
     "test": "node test/regression-test.js && node test/catalog-test.js"
   },
   "devDependencies": {

@@ -99,10 +99,28 @@
             <label class="payment-option active" data-method="upi">
               <input type="radio" name="payMethod" value="upi" checked>
               <span class="po-icon" data-icon="upi" data-icon-size="22"></span>
-              <span class="po-info"><h5>UPI</h5><p>Pay via Google Pay, PhonePe, Paytm &amp; more</p></span>
+              <span class="po-info"><h5>UPI / Scan &amp; Pay</h5><p>Google Pay, PhonePe, Paytm — scan QR or open Razorpay</p></span>
             </label>
             <div class="payment-detail">
-              <p style="font-size:12.5px; color:var(--gray-text); margin:0;">You'll enter your UPI ID / scan a QR code in the secure Razorpay window that opens after you click Place Order.</p>
+              <div class="pay-amount-lock" id="payAmountLock">
+                <span class="pay-amount-label">Amount to pay</span>
+                <span class="pay-amount-value" id="payAmountValue">—</span>
+              </div>
+              <div class="pay-qr-panel">
+                <div class="pay-qr-dynamic-wrap">
+                  <img class="pay-qr-img" id="dynamicPayQr" src="" alt="Scan to pay exact order amount on Razorpay" width="220" height="220" loading="lazy">
+                  <p class="pay-qr-caption">Scan to pay <span id="payAmountInQr">exact total</span></p>
+                </div>
+                <div class="pay-qr-copy">
+                  <p>This QR and the Razorpay button open with your <strong>cart total already set</strong>. Do not change the amount.</p>
+                  <p class="pay-qr-merchant">Iswift Gadgets Private Limited</p>
+                  <a class="btn btn-primary" id="openPaymentLinkBtn" href="https://razorpay.me/@iswiftgadgetsprivatelimit3022" target="_blank" rel="noopener">Pay exact amount on Razorpay</a>
+                  <details class="pay-alt-qr">
+                    <summary>Store UPI flyer (enter amount manually if needed)</summary>
+                    <img class="pay-qr-img pay-qr-img--alt" src="images/payment_QR.jpeg" alt="Iswift Gadgets store UPI QR flyer" width="180" height="230" loading="lazy">
+                  </details>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -110,10 +128,11 @@
             <label class="payment-option" data-method="card">
               <input type="radio" name="payMethod" value="card">
               <span class="po-icon" data-icon="card" data-icon-size="22"></span>
-              <span class="po-info"><h5>Credit / Debit Card</h5><p>Visa, Mastercard, RuPay &amp; more</p></span>
+              <span class="po-info"><h5>Credit / Debit Card</h5><p>Visa, Mastercard, RuPay via Razorpay</p></span>
             </label>
             <div class="payment-detail">
-              <p style="font-size:12.5px; color:var(--gray-text); margin:0;">Card details are entered securely inside the Razorpay window â€” we never see or store your card number.</p>
+              <p style="font-size:12.5px; color:var(--gray-text); margin:0 0 10px;">Card payment opens Razorpay with your <strong>order total pre-filled</strong>.</p>
+              <a class="btn btn-outline" id="openCardPaymentLinkBtn" href="https://razorpay.me/@iswiftgadgetsprivatelimit3022" target="_blank" rel="noopener">Pay exact amount on Razorpay</a>
             </div>
           </div>
 
@@ -125,6 +144,7 @@
             </label>
             <div class="payment-detail">
               <div class="emi-plan-list" id="checkoutEmiPlans"></div>
+              <p style="font-size:12.5px; color:var(--gray-text); margin:10px 0 0;">After placing the order, Razorpay opens with the <strong>full order amount locked</strong>.</p>
             </div>
           </div>
 
@@ -139,9 +159,9 @@
 
         </div>
 
-        <p style="font-size:12.5px; color:var(--gray-text); margin-bottom: 8px;">Payments are securely processed via our payment partners.</p>
+        <p style="font-size:12.5px; color:var(--gray-text); margin-bottom: 8px;">Payments are securely processed via Razorpay / UPI.</p>
         <div class="gateway-badges">
-          <span>Razorpay</span><span>Cashfree</span><span>DotPe Payments</span><span>256-bit SSL Secured</span>
+          <span>Razorpay</span><span>UPI</span><span>BHIM</span><span>256-bit SSL Secured</span>
         </div>
         <div id="paymentModeNotice" class="payment-mode-notice" style="display:none;"></div>
 
@@ -200,12 +220,41 @@
     .finally(function () {
       const notice = document.getElementById("paymentModeNotice");
       if (notice) {
-        notice.style.display = "block";
+        notice.style.display = "flex";
         notice.innerHTML = backendAvailable
-          ? icon("checkCircle", { size: 14 }) + " Live payment gateway connected."
-          : icon("info", { size: 14 }) + " Demo mode â€” no backend detected at " + APPLE_STORE_API_BASE + ". Orders will be simulated. See <code>server/README.md</code> to enable real payments.";
+          ? icon("checkCircle", { size: 14 }) + " Orders sync to the store. Pay via UPI QR or the Razorpay link."
+          : icon("info", { size: 14 }) + " Offline mode — pay via UPI QR / Razorpay, then confirm on WhatsApp.";
       }
+      syncPaymentLinkHref();
     });
+
+  function syncPaymentLinkHref() {
+    const total = getCheckoutTotals().total;
+    const href = buildPaymentLink(total);
+    const amountText = formatINR(total);
+
+    const amountEl = document.getElementById("payAmountValue");
+    if (amountEl) amountEl.textContent = amountText;
+    const qrAmountEl = document.getElementById("payAmountInQr");
+    if (qrAmountEl) qrAmountEl.textContent = amountText;
+
+    const btn = document.getElementById("openPaymentLinkBtn");
+    if (btn) {
+      btn.href = href;
+      btn.textContent = "Pay " + amountText + " on Razorpay";
+    }
+    const cardBtn = document.getElementById("openCardPaymentLinkBtn");
+    if (cardBtn) {
+      cardBtn.href = href;
+      cardBtn.textContent = "Pay " + amountText + " on Razorpay";
+    }
+
+    const dynQr = document.getElementById("dynamicPayQr");
+    if (dynQr && total > 0) {
+      dynQr.src = buildPaymentQrImageUrl(total, null, 240);
+      dynQr.alt = "Scan to pay " + amountText + " on Razorpay";
+    }
+  }
 
   const SHIPPING_THRESHOLD = 50000;
   const SHIPPING_FEE = 199;
@@ -233,6 +282,7 @@
     document.getElementById("step2").style.display = n === 2 ? "block" : "none";
     document.getElementById("step3").style.display = n === 3 ? "block" : "none";
     renderSteps();
+    if (n === 3) syncPaymentLinkHref();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -258,6 +308,7 @@
       (t.discount ? '<div class="summary-row"><span>Coupon (' + (appliedCoupon && appliedCoupon.code) + ')</span><span class="val" style="color:#1d8a3e;">−' + formatINR(t.discount) + '</span></div>' : '') +
       '<div class="summary-row"><span>Shipping</span><span class="val">' + (t.shipping === 0 ? "FREE" : formatINR(t.shipping)) + '</span></div>' +
       '<div class="summary-row total"><span>Total</span><span>' + formatINR(t.total) + '</span></div>';
+    if (typeof syncPaymentLinkHref === "function") syncPaymentLinkHref();
   }
 
   document.getElementById("applyCouponBtn").addEventListener("click", function () {
@@ -384,26 +435,71 @@
     btn.disabled = true;
     btn.textContent = "Processing...";
 
-    // Cash on Delivery never touches a payment gateway, so it's
-    // confirmed immediately regardless of backend availability.
     if (method === "cod") {
       setTimeout(function () {
-        showOrderSuccess({ orderId: "TASP" + Date.now().toString().slice(-8), method: method, total: getCheckoutTotals().total });
+        showOrderSuccess({ orderId: "ISW" + Date.now().toString().slice(-8), method: method, total: getCheckoutTotals().total });
       }, 900);
       return;
     }
 
+    // UPI / card / EMI → Razorpay.me with cart total locked on the link + QR
+    const usePaymentLink = method === "upi" || method === "card" || method === "emi";
+
+    if (usePaymentLink) {
+      const totals = getCheckoutTotals();
+
+      function finishLinkOrder(orderId, total, paymentHref) {
+        const amount = payableAmountInr(total);
+        const link = paymentHref || buildPaymentLink(amount, orderId);
+        window.open(link, "_blank", "noopener");
+        showPaymentPending({
+          orderId: orderId,
+          method: method,
+          total: amount,
+          paymentLink: link
+        });
+      }
+
+      if (!backendAvailable) {
+        finishLinkOrder("ISW" + Date.now().toString().slice(-8), totals.total, buildPaymentLink(totals.total));
+        return;
+      }
+
+      fetch(APPLE_STORE_API_BASE + "/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: cartAsLineItems(),
+          customer: getCustomerInfo(),
+          shipping: getShippingInfo(),
+          couponCode: appliedCoupon ? appliedCoupon.code : undefined,
+          paymentMode: "link"
+        })
+      })
+        .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.data.error || "Could not create order.");
+          const serverTotal = res.data.totals && res.data.totals.total != null
+            ? res.data.totals.total
+            : totals.total;
+          const link = res.data.paymentLink || buildPaymentLink(serverTotal, res.data.orderId);
+          finishLinkOrder(res.data.orderId, serverTotal, link);
+        })
+        .catch(function (err) {
+          showToast(err.message || "Something went wrong. Please try again.", { icon: "info" });
+          btn.disabled = false;
+          btn.textContent = "Place Order";
+        });
+      return;
+    }
+
     if (!backendAvailable) {
-      // Demo mode fallback: no backend deployed, simulate the gateway.
       setTimeout(function () {
-        showOrderSuccess({ orderId: "TASP" + Date.now().toString().slice(-8), method: method, total: getCheckoutTotals().total, demo: true });
+        showOrderSuccess({ orderId: "ISW" + Date.now().toString().slice(-8), method: method, total: getCheckoutTotals().total, demo: true });
       }, 1600);
       return;
     }
 
-    // Real flow: create an order on the backend (which creates a
-    // matching Razorpay order with a server-verified amount), then
-    // open the actual Razorpay Checkout widget.
     fetch(APPLE_STORE_API_BASE + "/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -417,6 +513,17 @@
       .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
       .then(function (res) {
         if (!res.ok) throw new Error(res.data.error || "Could not create order.");
+        if (res.data.paymentMode === "link") {
+          const link = res.data.paymentLink || buildPaymentLink(res.data.totals.total);
+          window.open(link, "_blank", "noopener");
+          showPaymentPending({
+            orderId: res.data.orderId,
+            method: method,
+            total: res.data.totals.total,
+            paymentLink: link
+          });
+          return;
+        }
         openRazorpayCheckout(res.data, method);
       })
       .catch(function (err) {
@@ -435,9 +542,9 @@
       amount: order.amount,
       currency: order.currency,
       order_id: order.razorpayOrderId,
-      name: "The Apple Store Pune",
+      name: "Iswift Gadgets",
       description: "Order " + order.orderId,
-      image: "images/products/iphone-17-pro-silver.png",
+      image: typeof PAYMENT_QR_IMAGE !== "undefined" ? PAYMENT_QR_IMAGE : "images/payment_QR.jpeg",
       method: { upi: method === "upi", card: method === "card", emi: method === "emi", netbanking: false, wallet: false },
       prefill: { name: customer.name, email: customer.email, contact: customer.phone },
       theme: { color: "#0066cc" },
@@ -478,24 +585,64 @@
     rzp.open();
   }
 
+  function showPaymentPending(info) {
+    const methodLabel = { upi: "UPI / Scan & Pay", card: "Credit/Debit Card", emi: "No-Cost EMI" }[info.method] || info.method;
+    const amount = payableAmountInr(info.total);
+    const payHref = info.paymentLink || buildPaymentLink(amount, info.orderId);
+    const dynQr = buildPaymentQrImageUrl(amount, info.orderId, 260);
+    const waMsg = "Hi, I placed order " + info.orderId + " for " + formatINR(amount) + " (" + methodLabel + "). I paid / will pay the exact amount via Razorpay. Please confirm.";
+
+    document.getElementById("checkoutMain").innerHTML =
+      '<div class="success-screen">' +
+        '<div class="check-mark" data-icon="checkCircle" data-icon-size="40"></div>' +
+        '<h1>Complete Your Payment</h1>' +
+        '<p>Order <strong>' + info.orderId + '</strong> is reserved. Amount is locked at <strong>' + formatINR(amount) + '</strong>.</p>' +
+        '<div class="pay-amount-lock pay-amount-lock--lg">' +
+          '<span class="pay-amount-label">Pay exactly</span>' +
+          '<span class="pay-amount-value">' + formatINR(amount) + '</span>' +
+        '</div>' +
+        '<img class="pay-pending-qr" src="' + dynQr + '" alt="Scan to pay ' + formatINR(amount) + '">' +
+        '<p style="font-size:13px;color:var(--gray-text);">Scan this QR — it opens Razorpay with <strong>' + formatINR(amount) + '</strong> already set.</p>' +
+        '<div class="order-id-box">' +
+          '<div class="summary-row"><span>Order ID</span><span class="val">' + info.orderId + '</span></div>' +
+          '<div class="summary-row"><span>Payment Method</span><span class="val">' + methodLabel + '</span></div>' +
+          '<div class="summary-row total"><span>Amount locked</span><span>' + formatINR(amount) + '</span></div>' +
+        '</div>' +
+        '<div class="pay-pending-actions">' +
+          '<a href="' + payHref + '" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Pay ' + formatINR(amount) + ' on Razorpay</a>' +
+          '<a href="' + whatsappLink(waMsg) + '" target="_blank" rel="noopener" class="btn btn-outline btn-lg">Confirm on WhatsApp</a>' +
+          '<a href="index.html" class="btn btn-outline">Continue Shopping</a>' +
+        '</div>' +
+        '<details class="pay-alt-qr" style="margin-top:18px;text-align:left;max-width:280px;margin-left:auto;margin-right:auto;">' +
+          '<summary>Store UPI flyer (manual amount)</summary>' +
+          '<img class="pay-pending-qr" src="' + PAYMENT_QR_IMAGE + '" alt="Store UPI QR flyer">' +
+          '<p style="font-size:12px;color:var(--gray-text);">If you use this flyer, enter <strong>' + formatINR(amount) + '</strong> exactly.</p>' +
+        '</details>' +
+        '<p style="margin-top:16px;font-size:13px;color:var(--gray-text);">After paying, send your Order ID on WhatsApp so we can confirm and ship.</p>' +
+      '</div>';
+    hydrateIcons(document);
+    clearCart();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   function showOrderSuccess(info) {
-    const methodLabel = { upi: "UPI", card: "Credit/Debit Card", emi: "No-Cost EMI", cod: "Cash on Delivery" }[info.method] || info.method;
+    const methodLabel = { upi: "UPI / Scan & Pay", card: "Credit/Debit Card", emi: "No-Cost EMI", cod: "Cash on Delivery" }[info.method] || info.method;
 
     document.getElementById("checkoutMain").innerHTML =
       '<div class="success-screen">' +
         '<div class="check-mark" data-icon="checkCircle" data-icon-size="40"></div>' +
         '<h1>Order Placed Successfully!</h1>' +
-        '<p>Thank you for shopping with The Apple Store Pune. A confirmation has been sent to your email.</p>' +
-        (info.demo ? '<p style="color:#b45309; font-size:13px;">Demo mode: no real payment was processed. Connect the backend in <code>/server</code> for live transactions.</p>' : '') +
+        '<p>Thank you for shopping with Iswift Gadgets. A confirmation has been sent to your email.</p>' +
+        (info.demo ? '<p style="color:#b45309; font-size:13px;">Demo mode: no real payment was processed.</p>' : '') +
         '<div class="order-id-box">' +
           '<div class="summary-row"><span>Order ID</span><span class="val">' + info.orderId + '</span></div>' +
           '<div class="summary-row"><span>Payment Method</span><span class="val">' + methodLabel + '</span></div>' +
           '<div class="summary-row total"><span>Amount Paid</span><span>' + formatINR(info.total) + '</span></div>' +
         '</div>' +
-        '<p>Estimated delivery: <strong>3-5 business days</strong> across Pune &amp; India.</p>' +
+        '<p>Estimated delivery: <strong>3-5 business days</strong> across India.</p>' +
         '<div class="success-actions">' +
           '<a href="index.html" class="btn btn-primary btn-lg">Continue Shopping</a>' +
-          '<a href="' + whatsappLink("Hi, I just placed order " + info.orderId + " on The Apple Store Pune. I'd like to confirm delivery details.") + '" target="_blank" rel="noopener" class="btn btn-outline btn-lg">Share on WhatsApp</a>' +
+          '<a href="' + whatsappLink("Hi, I just placed order " + info.orderId + " on Iswift Gadgets. I'd like to confirm delivery details.") + '" target="_blank" rel="noopener" class="btn btn-outline btn-lg">Share on WhatsApp</a>' +
         '</div>' +
       '</div>';
     hydrateIcons(document);

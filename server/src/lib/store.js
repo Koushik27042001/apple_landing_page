@@ -1,49 +1,79 @@
-/* Minimal JSON-file-backed data store for orders.
-   Good enough for a low-traffic launch / demo. For real production
-   traffic, swap this module out for PostgreSQL/MongoDB — the rest of
-   the codebase only talks to the functions exported here, so that
-   swap does not require touching any route files. */
-
-const fs = require("fs");
-const path = require("path");
-
-const DB_FILE = path.join(__dirname, "../../data/orders.json");
-
-function readAll() {
-  try {
-    const raw = fs.readFileSync(DB_FILE, "utf8");
-    return JSON.parse(raw || "[]");
-  } catch (e) {
-    return [];
-  }
-}
-
-function writeAll(orders) {
-  fs.writeFileSync(DB_FILE, JSON.stringify(orders, null, 2), "utf8");
-}
-
-function createOrder(order) {
-  const orders = readAll();
-  orders.push(order);
-  writeAll(orders);
-  return order;
-}
-
-function getOrder(id) {
-  return readAll().find(function (o) { return o.id === id; });
-}
-
-function updateOrder(id, patch) {
-  const orders = readAll();
-  const idx = orders.findIndex(function (o) { return o.id === id; });
-  if (idx === -1) return null;
-  orders[idx] = Object.assign({}, orders[idx], patch, { updatedAt: new Date().toISOString() });
-  writeAll(orders);
-  return orders[idx];
-}
-
-function findByRazorpayOrderId(razorpayOrderId) {
-  return readAll().find(function (o) { return o.razorpayOrderId === razorpayOrderId; });
-}
-
-module.exports = { readAll, createOrder, getOrder, updateOrder, findByRazorpayOrderId };
+/* Order store — MongoDB when connected, otherwise JSON files. */
+
+const { readJson, writeJson } = require("./jsonDb");
+const { isConnected } = require("./mongo");
+const { Order } = require("../models");
+
+const FILE = "orders.json";
+
+function strip(doc) {
+  if (!doc) return null;
+  const obj = typeof doc.toObject === "function" ? doc.toObject() : Object.assign({}, doc);
+  delete obj._id;
+  delete obj.__v;
+  return obj;
+}
+
+function readFileOrders() {
+  const data = readJson(FILE, { orders: [] });
+  return Array.isArray(data.orders) ? data.orders : [];
+}
+
+function writeFileOrders(orders) {
+  writeJson(FILE, { orders: orders, updatedAt: new Date().toISOString() });
+}
+
+async function readAll() {
+  if (isConnected()) {
+    const orders = await Order.find({}).lean();
+    return orders.map(strip);
+  }
+  return readFileOrders();
+}
+
+async function createOrder(order) {
+  if (isConnected()) {
+    const created = await Order.create(order);
+    return strip(created);
+  }
+  const orders = readFileOrders();
+  orders.push(order);
+  writeFileOrders(orders);
+  return order;
+}
+
+async function getOrder(id) {
+  if (isConnected()) {
+    const order = await Order.findOne({ id: id }).lean();
+    return strip(order);
+  }
+  return readFileOrders().find(function (o) { return o.id === id; }) || null;
+}
+
+async function updateOrder(id, patch) {
+  if (isConnected()) {
+    const updated = await Order.findOneAndUpdate(
+      { id: id },
+      { $set: Object.assign({}, patch, { updatedAt: new Date().toISOString() }) },
+      { new: true }
+    ).lean();
+    return strip(updated);
+  }
+  const orders = readFileOrders();
+  const idx = orders.findIndex(function (o) { return o.id === id; });
+  if (idx < 0) return null;
+  orders[idx] = Object.assign({}, orders[idx], patch, { updatedAt: new Date().toISOString() });
+  writeFileOrders(orders);
+  return orders[idx];
+}
+
+async function findByRazorpayOrderId(razorpayOrderId) {
+  if (isConnected()) {
+    const order = await Order.findOne({ razorpayOrderId: razorpayOrderId }).lean();
+    return strip(order);
+  }
+  return readFileOrders().find(function (o) { return o.razorpayOrderId === razorpayOrderId; }) || null;
+}
+
+module.exports = { readAll, createOrder, getOrder, updateOrder, findByRazorpayOrderId };
+

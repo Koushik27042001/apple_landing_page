@@ -1,61 +1,71 @@
-# The Apple Store Pune
+# Iswift Gadgets — Storefront
 
-An Apple-style e-commerce storefront for iPhone, Mac, iPad, Apple Watch, AirPods and accessories, built for the Indian market (UPI, No-Cost EMI, WhatsApp support, Pune store details).
+Separated frontend (`client/`) and backend (`server/`) for an Apple-style e-commerce storefront.
 
-- **Frontend:** Plain HTML, CSS and JavaScript (no framework, no build step) — see `/index.html` and friends.
-- **Backend:** Node.js + Express API with real Razorpay payment integration — see `/server`.
-- **Docs:** Client-facing project documentation and requirements checklist — see `/docs`.
+- **Client:** Plain HTML, CSS and JavaScript (no framework, no build step) — see `/client`
+- **Server:** Node.js + Express API, admin panel APIs, Razorpay payments — see `/server`
+- **Docs:** Client-facing documentation — see `/docs`
 
-## Quick Start (frontend only, demo mode)
+## Project structure
 
-No backend needed to browse the store, add to cart, and click through checkout in simulated "demo mode":
+```
+apple_landing_page/
+├── client/                 # Frontend (storefront + admin UI)
+│   ├── index.html, …       # Store pages
+│   ├── css/, js/, images/
+│   └── admin/              # Control panel UI
+├── server/                 # Backend API
+│   ├── server.js
+│   ├── src/
+│   └── data/               # JSON stores (products, coupons, orders, …)
+├── docs/
+└── test/
+```
+
+## Quick start — frontend only (demo mode)
 
 ```bash
+cd client
 python -m http.server 8080
 ```
 
 Open `http://localhost:8080`.
 
-## Quick Start (full stack, real payments)
+## Quick start — full stack
 
-1. Start the backend (see `server/README.md` for full details):
+1. Backend:
 
    ```bash
    cd server
    npm install
-   cp .env.example .env   # then add your Razorpay TEST keys
+   cp .env.example .env   # set ADMIN_PASSWORD + Razorpay keys
    npm start
    ```
 
-2. In another terminal, serve the frontend from the project root:
+   This serves **both** the API and the client:
+
+   - Store: http://localhost:4000/
+   - Admin: http://localhost:4000/admin/  (password `admin123` by default)
+   - API:   http://localhost:4000/api/health
+
+2. Or run the client separately on port 8080 (pointed at the API via `client/js/config.js`):
 
    ```bash
+   cd client
    python -m http.server 8080
    ```
 
-3. Open `http://localhost:8080/checkout.html` and place a test order — with the backend running and test keys configured, this opens a real Razorpay test-mode payment window.
+## Scripts (repo root)
 
-## Project Structure
-
-```
-apple_landing_page/
-├── index.html, category.html, product.html, cart.html, checkout.html,
-│   about.html, contact.html, terms.html      # Storefront pages
-├── css/style.css                              # Design system
-├── js/
-│   ├── data.js        # Product catalog — single source of truth (frontend + backend)
-│   ├── cart.js         # localStorage-backed shopping cart
-│   ├── icons.js         # Inline SVG icon library
-│   ├── main.js          # Shared header/footer, search, toasts, reveal animations
-│   └── config.js         # Backend API base URL
-├── images/               # Product photos & hero banners
-├── server/                # Node.js/Express backend + Razorpay integration (see server/README.md)
-└── docs/
-    ├── PROJECT_DOCUMENTATION.md   # What's built, what's needed to go live, architecture
-    └── CLIENT_CHECKLIST.md         # Fillable questionnaire to collect business/payment/product info
+```bash
+npm run start:server   # start API + serve client from /client
+npm run serve:client   # static client only on :8080
+npm test               # Playwright regression + catalog tests
 ```
 
-## Where to Go Next
+## Where to go next
 
-- **If you're the client:** read `docs/PROJECT_DOCUMENTATION.md` first, then fill in `docs/CLIENT_CHECKLIST.md`.
-- **If you're continuing development:** read `server/README.md` to wire up real payments, and `js/data.js` to manage the product catalog.
+- Admin panel guide: `client/admin/README.md`
+- Backend / payments: `server/README.md`
+- Product seed catalog: `client/js/data.js`
+- Client handover docs: `docs/PROJECT_DOCUMENTATION.md`

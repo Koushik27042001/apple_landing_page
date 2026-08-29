@@ -90,6 +90,7 @@
         '<div class="pdp-info">' +
           '<div class="pc-cat">' + product.category + ' · ' + product.brand + '</div>' +
           '<h1>' + product.name + '</h1>' +
+          '<p class="pdp-short">' + product.short + '</p>' +
           '<div class="pdp-rating"><span class="stars">★★★★★</span> ' + product.rating + ' &middot; ' + product.reviews + ' ratings</div>' +
 
           '<div class="pdp-price-block">' +
@@ -109,7 +110,7 @@
             '</div>' +
           '</div>' +
 
-          (product.colors.length > 1 ? colorPickerHtml() : '') +
+          (product.colors.length ? colorPickerHtml() : '') +
           (product.storageOptions.length > 0 ? storagePickerHtml() : '') +
 
           '<div class="qty-row">' +
@@ -127,7 +128,7 @@
           '</div>' +
 
           '<a class="whatsapp-inline-btn" id="waInquiry" href="#" target="_blank" rel="noopener">' +
-            '<span>&#128241;</span> Inquire on WhatsApp' +
+            icon("whatsapp", { size: 18 }) + ' Inquire on WhatsApp' +
           '</a>' +
 
           '<div class="trust-mini">' +
@@ -135,12 +136,21 @@
             '<div><span class="icon">' + icon("truck", { size: 16 }) + '</span>Fast Shipping</div>' +
             '<div><span class="icon">' + icon("checkCircle", { size: 16 }) + '</span>100% Genuine</div>' +
           '</div>' +
+        '</div>' +
+      '</div>' +
 
-          '<div class="pdp-tabs">' +
+      '<section class="pdp-details">' +
+        '<div class="pdp-details-grid">' +
+          '<div class="pdp-details-block">' +
             '<h3>Overview</h3>' +
             '<p class="pdp-desc">' + product.description + '</p>' +
+            '<ul class="pdp-highlights">' +
+              Object.keys(product.specs).slice(0, 4).map(function (k) {
+                return '<li><strong>' + k + ':</strong> ' + product.specs[k] + '</li>';
+              }).join("") +
+            '</ul>' +
           '</div>' +
-          '<div class="pdp-tabs">' +
+          '<div class="pdp-details-block">' +
             '<h3>Technical Specifications</h3>' +
             '<table class="spec-table">' +
               Object.keys(product.specs).map(function (k) {
@@ -149,7 +159,7 @@
             '</table>' +
           '</div>' +
         '</div>' +
-      '</div>';
+      '</section>';
 
     wirePdpInteractions(unitPrice, emi12);
   }

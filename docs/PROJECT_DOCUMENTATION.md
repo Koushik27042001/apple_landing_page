@@ -21,7 +21,7 @@
 
 | Area | Status | Notes |
 |---|---|---|
-| Homepage (hero banners, collections, best prices) | ✅ Done | Static content, editable in `js/data.js` |
+| Homepage (hero banners, collections, best prices) | ✅ Done | Static content, editable in `client/js/data.js` |
 | Category pages with filters & sorting | ✅ Done | Filters by price, category, badges |
 | Product detail pages (gallery, EMI display, specs) | ✅ Done | 16 sample products included |
 | Shopping cart | ✅ Done (browser-only) | Uses `localStorage`, not a database |

@@ -1,6 +1,6 @@
 /* Loads the live catalog from the backend when available so admin
    panel product edits appear on the storefront. Falls back silently
-   to the bundled js/data.js catalog if the API is offline. */
+   to the bundled client/js/data.js catalog if the API is offline. */
 (function () {
   if (typeof PRODUCTS === "undefined" || typeof CATEGORIES === "undefined") return;
   const base = (typeof APPLE_STORE_API_BASE !== "undefined" && APPLE_STORE_API_BASE)

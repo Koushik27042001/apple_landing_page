@@ -1,12 +1,14 @@
 # The Apple Store Pune — Backend API
 
-A small Node.js/Express server that gives the static storefront in the
-parent folder real, working payments via **Razorpay** — order creation,
-signature verification, and a webhook for reliable payment confirmation.
+A small Node.js/Express server that powers the storefront in
+`../client` with real payments via **Razorpay**, plus the admin
+control panel APIs (products, coupons, orders, settings).
 
-It shares the exact same product catalog as the frontend
-(`../js/data.js`), so prices can never drift or be tampered with from
-the browser: every order total is recomputed here, server-side.
+It seeds the product catalog from the frontend source of truth
+(`../client/js/data.js`) into **MongoDB Atlas**, then persists
+products, coupons, orders, settings, and admin sessions there.
+Every order total is recomputed server-side so prices cannot be
+tampered with from the browser.
 
 ## 1. Install
 
@@ -25,11 +27,13 @@ Then edit `.env`:
 
 | Variable | Where to get it |
 |---|---|
-| `RAZORPAY_KEY_ID` / `RAZORPAY_KEY_SECRET` | [Razorpay Dashboard → Settings → API Keys](https://dashboard.razorpay.com/app/keys). Use **Test Mode** keys (`rzp_test_...`) while developing — they let you simulate full payments with no real money. |
-| `RAZORPAY_WEBHOOK_SECRET` | Any string you choose. Enter the same string in the Razorpay Dashboard under **Settings → Webhooks** when you register the webhook URL (see step 5). |
-| `CORS_ORIGIN` | The origin(s) your frontend is served from, comma-separated. For local development with the frontend on `http://localhost:8080`, the default in `.env.example` already works. |
+| `MONGODB_URI` | [MongoDB Atlas](https://cloud.mongodb.com) → Connect → Drivers. Use a DB user with read/write on `apple_store_database`. Also allow your IP under Network Access. |
+| `RAZORPAY_KEY_ID` / `RAZORPAY_KEY_SECRET` | [Razorpay Dashboard → Settings → API Keys](https://dashboard.razorpay.com/app/keys). Use **Test Mode** keys (`rzp_test_...`) while developing. |
+| `RAZORPAY_WEBHOOK_SECRET` | Any string you choose. Enter the same string in the Razorpay Dashboard under **Settings → Webhooks**. |
+| `CORS_ORIGIN` | Frontend origin(s), comma-separated. Defaults include `http://localhost:8080` for a separately served client. |
+| `ADMIN_PASSWORD` | Password for http://localhost:4000/admin/ |
 
-Without real keys, the server still starts and `/api/products` works, but order/payment endpoints will return a clear "not configured" error instead of crashing.
+`MONGODB_URI` is required — the server will not start without a working Atlas connection. Without real Razorpay keys, catalog/admin still work once Mongo is connected; live payment endpoints return a clear "not configured" error.
 
 ## 3. Run it
 
@@ -38,6 +42,22 @@ npm start
 ```
 
 You should see:
+
+```
+Storefront:     http://localhost:4000/
+Control panel:  http://localhost:4000/admin/
+Health check:   http://localhost:4000/api/health
+```
+
+The Express app serves `../client` as static files, so you do **not** need a separate frontend server for local full-stack use.
+
+To run the client alone (demo mode):
+
+```bash
+cd ../client
+python -m http.server 8080
+```
+
 
 ```
 The Apple Store Pune API running on http://localhost:4000
@@ -73,7 +93,7 @@ standalone, even with zero setup.
    at least `payment.captured`, `payment.failed`, and `refund.processed`.
    Use the same secret you put in `RAZORPAY_WEBHOOK_SECRET`.
 4. Update `CORS_ORIGIN` in `.env` to your real frontend domain.
-5. Update `APPLE_STORE_API_BASE` in `../js/config.js` to your backend's
+5. Update `APPLE_STORE_API_BASE` in `../client/js/config.js` to your backend's
    public URL (or serve both from the same origin behind a reverse
    proxy and set it to `/api`).
 6. Replace the JSON-file order store (`data/orders.json`) with a real
@@ -88,26 +108,38 @@ standalone, even with zero setup.
 | GET | `/api/health` | Uptime/connectivity check used by the frontend |
 | GET | `/api/products` | Full product + category catalog |
 | GET | `/api/products/:id` | Single product |
+| POST | `/api/coupons/validate` | Validate a coupon against a cart subtotal |
 | POST | `/api/orders` | Validates cart + customer + shipping info, recomputes price, creates a Razorpay order, stores a `created` order |
 | GET | `/api/orders/:id` | Order status lookup |
 | POST | `/api/payments/verify` | Verifies the Razorpay signature after checkout and marks the order `paid` |
 | POST | `/api/payments/webhook` | Razorpay server-to-server event notifications (source of truth for order status) |
+| * | `/api/admin/*` | Password-protected control panel APIs |
 
 ## Folder Structure
 
 ```
 server/
-├── server.js               # Express app entry point
+├── server.js               # Express app entry point (also serves ../client)
 ├── .env.example             # Copy to .env and fill in real values
 ├── data/
-│   └── orders.json          # JSON-file order storage (swap for a real DB later)
+│   ├── orders.json
+│   ├── products.json        # Created on first run from client/js/data.js
+│   ├── coupons.json
+│   ├── settings.json
+│   └── admin-sessions.json
 └── src/
     ├── lib/
-    │   ├── catalog.js        # Reads ../../js/data.js, prices carts server-side
-    │   ├── razorpay.js       # Razorpay SDK client
+    │   ├── catalog.js        # Prices carts from productsStore
+    │   ├── productsStore.js  # Seeds from ../../client/js/data.js
+    │   ├── couponsStore.js
+    │   ├── settingsStore.js
+    │   ├── adminAuth.js
+    │   ├── razorpay.js
     │   └── store.js          # Order persistence helpers
     └── routes/
         ├── products.js
         ├── orders.js
-        └── payments.js
+        ├── payments.js
+        ├── coupons.js
+        └── admin.js
 ```
