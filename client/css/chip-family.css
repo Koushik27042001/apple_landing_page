@@ -1,0 +1,129 @@
+/* Apple Silicon / M5 chip family + professional icon polish */
+
+.chip-family-section {
+  background: linear-gradient(180deg, #0f0f10 0%, #1c1c1e 55%, #2c2c2e 100%);
+  color: #f5f5f7;
+  padding: 80px 0;
+}
+.chip-family-section .eyebrow {
+  color: #a1a1a6;
+}
+.chip-family-copy > p {
+  color: #a1a1a6;
+  font-size: 17px;
+  line-height: 1.55;
+  margin: 0 0 28px;
+  max-width: 480px;
+}
+.chip-family-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(300px, 1.15fr);
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+}
+.chip-family-copy h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.08;
+  margin: 0 0 16px;
+  color: #f5f5f7;
+  letter-spacing: -0.03em;
+}
+.chip-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.chip-feature-list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.chip-feature-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #3a3a3c, #2c2c2e);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e8e8ed;
+  flex-shrink: 0;
+}
+.chip-feature-list strong {
+  display: block;
+  font-size: 15px;
+  color: #f5f5f7;
+  margin-bottom: 2px;
+}
+.chip-feature-list span {
+  display: block;
+  font-size: 13.5px;
+  color: #a1a1a6;
+  line-height: 1.45;
+}
+.chip-family-visual {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  background: #000;
+}
+.chip-family-visual img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.chip-family-section .btn-primary {
+  background: #f5f5f7;
+  color: #1d1d1f;
+}
+.chip-family-section .btn-primary:hover {
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.18);
+}
+.chip-family-section .btn-outline {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #f5f5f7;
+}
+.chip-family-section .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.why-card-icon,
+.feature-icon,
+.icon-core {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #3a3a3c;
+}
+.why-card-icon .icon-svg,
+.feature-icon .icon-svg,
+.icon-core .icon-svg {
+  display: block;
+}
+.stats-infographic .icon-core {
+  color: #1d1d1f;
+}
+.product-showcase-3d .feature-icon {
+  color: #e8e8ed;
+}
+
+@media (max-width: 900px) {
+  .chip-family-grid {
+    grid-template-columns: 1fr;
+  }
+  .chip-family-copy > p {
+    max-width: none;
+  }
+}
+

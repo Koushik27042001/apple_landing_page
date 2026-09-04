@@ -8,7 +8,7 @@
 const CATEGORIES = [
   { id: "mac", name: "Mac", tagline: "Supercharged for pros and creators.", image: "images/hero/hero-macbook.png" },
   { id: "ipad", name: "iPad", tagline: "Your next computer isn't a computer.", image: "images/hero/hero-ipad.png" },
-  { id: "iphone", name: "iPhone", tagline: "The ultimate iPhone lineup.", image: "images/hero/hero-iphone.png" },
+  { id: "iphone", name: "iPhone", tagline: "The ultimate iPhone lineup.", image: "images/products/iphone-17-pro-orange.jpeg" },
   { id: "watch", name: "Watch", tagline: "A healthy leap ahead.", image: "images/products/watch-ultra3-titanium.png" },
   { id: "vision", name: "Vision", tagline: "Welcome to the era of spatial computing.", image: "images/products/apple-vision-pro.png" },
   { id: "airpods", name: "AirPods", tagline: "Immerse yourself.", image: "images/products/airpods-pro.png" },
@@ -140,10 +140,13 @@ const PRODUCTS = [
     rating: 4.9,
     reviews: 210,
     stock: 22,
-    images: ["images/products/iphone-17-pro-silver.png"],
+    images: [
+      "images/products/iphone-17-pro-orange.jpeg",
+      "images/products/iphone-17-pro-silver.png"
+    ],
     colors: [
+      { name: "Cosmic Orange", hex: "#e36414", image: "images/products/iphone-17-pro-orange.jpeg" },
       { name: "Silver", hex: "#e3e4e6", image: "images/products/iphone-17-pro-silver.png" },
-      { name: "Cosmic Orange", hex: "#d9713c", image: "images/products/iphone-17-pro-silver.png" },
       { name: "Deep Blue", hex: "#35507a", image: "images/products/iphone-17-pro-silver.png" }
     ],
     storageOptions: [
@@ -176,10 +179,13 @@ const PRODUCTS = [
     rating: 4.9,
     reviews: 356,
     stock: 16,
-    images: ["images/products/iphone-17-pro-silver.png"],
+    images: [
+      "images/products/iphone-17-pro-orange.jpeg",
+      "images/products/iphone-17-pro-silver.png"
+    ],
     colors: [
+      { name: "Cosmic Orange", hex: "#e36414", image: "images/products/iphone-17-pro-orange.jpeg" },
       { name: "Silver", hex: "#e3e4e6", image: "images/products/iphone-17-pro-silver.png" },
-      { name: "Cosmic Orange", hex: "#d9713c", image: "images/products/iphone-17-pro-silver.png" },
       { name: "Deep Blue", hex: "#35507a", image: "images/products/iphone-17-pro-silver.png" }
     ],
     storageOptions: [

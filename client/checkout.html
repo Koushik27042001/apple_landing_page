@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -56,7 +56,7 @@
         <div class="form-row">
           <div class="form-field" id="f-city">
             <label>City *</label>
-            <input type="text" id="city" placeholder="e.g. Pune" value="Pune">
+            <input type="text" id="city" placeholder="e.g. Bengaluru" value="Bengaluru">
             <div class="error-text">Please enter your city.</div>
           </div>
           <div class="form-field" id="f-state">
@@ -213,20 +213,19 @@
   // can run a genuine Razorpay payment or must fall back to the
   // built-in simulated "demo mode" flow (e.g. when the site is opened
   // as plain static files with no server running).
-  let backendAvailable = false;
-  fetch(APPLE_STORE_API_BASE + "/health", { method: "GET" })
-    .then(function (r) { backendAvailable = r.ok; })
-    .catch(function () { backendAvailable = false; })
-    .finally(function () {
-      const notice = document.getElementById("paymentModeNotice");
-      if (notice) {
-        notice.style.display = "flex";
-        notice.innerHTML = backendAvailable
-          ? icon("checkCircle", { size: 14 }) + " Orders sync to the store. Pay via UPI QR or the Razorpay link."
-          : icon("info", { size: 14 }) + " Offline mode — pay via UPI QR / Razorpay, then confirm on WhatsApp.";
-      }
-      syncPaymentLinkHref();
-    });
+  // --- Constants & shared state (declared first so syncPaymentLinkHref can use them) ---
+  const SHIPPING_THRESHOLD = 50000;
+  const SHIPPING_FEE = 199;
+  let currentStep = 1;
+  let appliedCoupon = null; // { code, discount }
+
+  function getCheckoutTotals() {
+    const subtotal = cartSubtotal();
+    const shipping = subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+    const discount = appliedCoupon ? (appliedCoupon.discount || 0) : 0;
+    const total = Math.max(0, subtotal - discount) + shipping;
+    return { subtotal: subtotal, shipping: shipping, discount: discount, total: total };
+  }
 
   function syncPaymentLinkHref() {
     const total = getCheckoutTotals().total;
@@ -256,9 +255,24 @@
     }
   }
 
-  const SHIPPING_THRESHOLD = 50000;
-  const SHIPPING_FEE = 199;
-  let currentStep = 1;
+  // Show the correct cart total immediately — don't wait for the backend ping.
+  syncPaymentLinkHref();
+
+  let backendAvailable = false;
+  fetch(APPLE_STORE_API_BASE + "/health", { method: "GET" })
+    .then(function (r) { backendAvailable = r.ok; })
+    .catch(function () { backendAvailable = false; })
+    .finally(function () {
+      const notice = document.getElementById("paymentModeNotice");
+      if (notice) {
+        notice.style.display = "flex";
+        notice.innerHTML = backendAvailable
+          ? icon("checkCircle", { size: 14 }) + " Orders sync to the store. Pay via UPI QR or the Razorpay link."
+          : icon("info", { size: 14 }) + " Offline mode — pay via UPI QR / Razorpay, then confirm on WhatsApp.";
+      }
+      // Re-sync after backend check in case totals changed.
+      syncPaymentLinkHref();
+    });
 
   const steps = [
     { key: "contact", label: "Contact" },
@@ -286,14 +300,15 @@
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  let appliedCoupon = null; // { code, discount }
 
-  function getCheckoutTotals() {
-    const subtotal = cartSubtotal();
-    const shipping = subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
-    const discount = appliedCoupon ? (appliedCoupon.discount || 0) : 0;
-    const total = Math.max(0, subtotal - discount) + shipping;
-    return { subtotal: subtotal, shipping: shipping, discount: discount, total: total };
+  // Sync the amount display badge (shown at the top of the payment panel)
+  // every time the cart total may have changed.
+  function refreshPaymentAmountBadge() {
+    const t = getCheckoutTotals();
+    const amountEl = document.getElementById("payAmountValue");
+    if (amountEl) amountEl.textContent = formatINR(t.total);
+    const qrAmountEl = document.getElementById("payAmountInQr");
+    if (qrAmountEl) qrAmountEl.textContent = formatINR(t.total);
   }
 
   function renderOrderSummary() {
@@ -308,7 +323,9 @@
       (t.discount ? '<div class="summary-row"><span>Coupon (' + (appliedCoupon && appliedCoupon.code) + ')</span><span class="val" style="color:#1d8a3e;">−' + formatINR(t.discount) + '</span></div>' : '') +
       '<div class="summary-row"><span>Shipping</span><span class="val">' + (t.shipping === 0 ? "FREE" : formatINR(t.shipping)) + '</span></div>' +
       '<div class="summary-row total"><span>Total</span><span>' + formatINR(t.total) + '</span></div>';
-    if (typeof syncPaymentLinkHref === "function") syncPaymentLinkHref();
+    // Keep the payment amount badge and links in sync after every summary update.
+    syncPaymentLinkHref();
+    refreshPaymentAmountBadge();
   }
 
   document.getElementById("applyCouponBtn").addEventListener("click", function () {

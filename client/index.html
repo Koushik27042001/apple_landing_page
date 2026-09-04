@@ -8,6 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/enhancements.css">
+<link rel="stylesheet" href="css/chip-family.css">
 </head>
 <body>
 
@@ -19,13 +20,13 @@
   <section class="hero-carousel" id="heroCarousel">
     <div class="hero-slides" id="heroSlides">
 
-      <div class="hero-slide light-text">
-        <img src="images/hero/hero-iphone.png" alt="iPhone 17 Pro" class="hero-slide-bg">
+      <div class="hero-slide light-text hero-slide--pro-orange">
+        <img src="images/hero/hero-iphone-17-pro.jpeg" alt="iPhone 17 Pro Cosmic Orange" class="hero-slide-bg">
         <div class="hero-slide-content">
           <div class="inner">
-            <span class="eyebrow-light">iPhone 17 Pro</span>
-            <h1>Forged in aluminium.<br>Powered by A19 Pro.</h1>
-            <p class="desc">Starting from <strong>₹5,621/mo</strong> for 24 months.</p>
+            <span class="eyebrow-light">New · Cosmic Orange</span>
+            <h1>iPhone 17 Pro</h1>
+            <p class="desc">Forged in aluminium. Powered by A19 Pro.<br>Starting from <strong>₹5,621/mo</strong> for 24 months.</p>
             <div class="hero-cta">
               <a href="product.html?id=iphone-17-pro" class="btn btn-primary btn-lg">Buy Now</a>
               <a href="category.html?cat=iphone" class="btn btn-light btn-lg">Explore iPhone</a>
@@ -34,17 +35,27 @@
         </div>
       </div>
 
-      <div class="hero-slide dark-text">
-        <img src="images/hero/hero-macbook.png" alt="MacBook Pro M5" class="hero-slide-bg">
-        <div class="hero-slide-content">
+      <div class="hero-slide dark-text hero-slide--mac">
+        <div class="hero-mac-bg" aria-hidden="true"></div>
+        <div class="hero-slide-content hero-mac-layout">
           <div class="inner">
-            <span class="eyebrow">MacBook Pro 14″</span>
-            <h1>Mind-blowing.<br>Head-turning.</h1>
-            <p class="desc">The M5 chip. Now starting from <strong>₹19,992/mo.</strong></p>
+            <span class="eyebrow">MacBook</span>
+            <h1>Air &amp; Pro.<br>Supercharged by M5.</h1>
+            <p class="desc">Thin and light, or pro power — both powered by Apple M5.</p>
             <div class="hero-cta">
-              <a href="product.html?id=macbook-pro-14-m5" class="btn btn-primary btn-lg">Buy Now</a>
-              <a href="category.html?cat=mac" class="btn btn-outline btn-lg">Explore Mac</a>
+              <a href="product.html?id=macbook-air-13-m5" class="btn btn-primary btn-lg">Shop MacBook Air</a>
+              <a href="product.html?id=macbook-pro-14-m5" class="btn btn-dark btn-lg">Shop MacBook Pro</a>
             </div>
+          </div>
+          <div class="hero-mac-pair">
+            <figure class="hero-mac-item">
+              <img src="images/products/macbook-air-silver.png" alt="MacBook Air M5">
+              <figcaption>MacBook Air</figcaption>
+            </figure>
+            <figure class="hero-mac-item">
+              <img src="images/products/macbook-pro-black.png" alt="MacBook Pro M5">
+              <figcaption>MacBook Pro</figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -88,14 +99,14 @@
   <!-- Marquee Trust Strip -->
   <div class="marquee-strip">
     <div class="marquee-inner">
-      <div class="marquee-item"><span class="mq-icon">✅</span> Genuine Apple Products</div>
-      <div class="marquee-item"><span class="mq-icon">🚚</span> Free Delivery Pan-India</div>
-      <div class="marquee-item"><span class="mq-icon">💳</span> No-Cost EMI up to 24 Months</div>
-      <div class="marquee-item"><span class="mq-icon">🛡️</span> Official Apple Warranty</div>
-      <div class="marquee-item"><span class="mq-icon">💬</span> WhatsApp Support 24/7</div>
-      <div class="marquee-item"><span class="mq-icon">🔐</span> 100% Secure Checkout</div>
-      <div class="marquee-item"><span class="mq-icon">⭐</span> 4.9 Star Rated Store</div>
-      <div class="marquee-item"><span class="mq-icon">🎁</span> Gift Wrapping Available</div>
+      <div class="marquee-item"><span class="mq-icon" data-icon="checkCircle" data-icon-size="18"></span> Genuine Apple Products</div>
+      <div class="marquee-item"><span class="mq-icon" data-icon="truck" data-icon-size="18"></span> Free Delivery Pan-India</div>
+      <div class="marquee-item"><span class="mq-icon" data-icon="card" data-icon-size="18"></span> No-Cost EMI up to 24 Months</div>
+      <div class="marquee-item"><span class="mq-icon" data-icon="shieldCheck" data-icon-size="18"></span> Official Apple Warranty</div>
+      <div class="marquee-item"><span class="mq-icon" data-icon="whatsapp" data-icon-size="18"></span> WhatsApp Support 24/7</div>
+      <div class="marquee-item"><span class="mq-icon" data-icon="lock" data-icon-size="18"></span> 100% Secure Checkout</div>
+      <div class="marquee-item"><span class="mq-icon" data-icon="star" data-icon-size="18"></span> 4.9 Star Rated Store</div>
+      <div class="marquee-item"><span class="mq-icon" data-icon="gift" data-icon-size="18"></span> Gift Wrapping Available</div>
     </div>
   </div>
 
@@ -105,7 +116,7 @@
       <div class="section-head reveal">
         <span class="eyebrow">Shop by Category</span>
         <h2>Featured Collections</h2>
-        <p>Explore the full Apple lineup, curated for Pune shoppers.</p>
+        <p>Explore the full Apple lineup, curated for Bengaluru shoppers.</p>
       </div>
       <div class="collections-grid">
         <a href="category.html?cat=iphone" class="collection-card reveal reveal-delay-1">
@@ -115,7 +126,7 @@
             <p>17 Pro, 17, Air, 17e &amp; more</p>
             <span class="cc-link">Shop iPhone</span>
           </div>
-          <img src="images/products/iphone-17-pro-silver.png" alt="iPhone">
+          <img src="images/products/iphone-17-pro-orange.jpeg" alt="iPhone 17 Pro">
         </a>
         <a href="category.html?cat=mac" class="collection-card reveal reveal-delay-2">
           <div class="cc-text">
@@ -124,7 +135,10 @@
             <p>MacBook Air &amp; Pro</p>
             <span class="cc-link">Shop Mac</span>
           </div>
-          <img src="images/products/macbook-air-silver.png" alt="Mac">
+          <div class="cc-mac-pair">
+            <img src="images/products/macbook-air-silver.png" alt="MacBook Air">
+            <img src="images/products/macbook-pro-black.png" alt="MacBook Pro">
+          </div>
         </a>
         <a href="category.html?cat=accessories" class="collection-card reveal reveal-delay-3">
           <div class="cc-text">
@@ -135,6 +149,49 @@
           </div>
           <img src="images/products/magsafe-charger.png" alt="Accessories">
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Apple Silicon — M5 family -->
+  <section class="section chip-family-section">
+    <div class="container">
+      <div class="chip-family-grid">
+        <div class="chip-family-copy reveal">
+          <span class="eyebrow">Apple Silicon</span>
+          <h2>M5, M5 Pro &amp; M5 Max.<br>One powerful family.</h2>
+          <p>From everyday MacBook Air to the most demanding MacBook Pro workflows — the M5 chip family delivers speed, efficiency, and pro-grade performance.</p>
+          <ul class="chip-feature-list">
+            <li>
+              <span class="chip-feature-icon" data-icon="cpu" data-icon-size="22"></span>
+              <div>
+                <strong>M5</strong>
+                <span>Everyday performance in a remarkably efficient design.</span>
+              </div>
+            </li>
+            <li>
+              <span class="chip-feature-icon" data-icon="gauge" data-icon-size="22"></span>
+              <div>
+                <strong>M5 Pro</strong>
+                <span>Built for creators who need serious multi-core power.</span>
+              </div>
+            </li>
+            <li>
+              <span class="chip-feature-icon" data-icon="layers" data-icon-size="22"></span>
+              <div>
+                <strong>M5 Max</strong>
+                <span>Maximum GPU and memory bandwidth for pro workflows.</span>
+              </div>
+            </li>
+          </ul>
+          <div class="hero-cta" style="margin-top:28px;">
+            <a href="category.html?cat=mac" class="btn btn-primary btn-lg">Explore Mac with M5</a>
+            <a href="product.html?id=macbook-pro-14-m5" class="btn btn-outline btn-lg">Shop MacBook Pro</a>
+          </div>
+        </div>
+        <div class="chip-family-visual reveal">
+          <img src="images/products/m5-chip-family.jpeg" alt="M5, M5 Pro and M5 Max — one powerful Apple silicon family" width="960" height="540" loading="lazy">
+        </div>
       </div>
     </div>
   </section>
@@ -154,20 +211,20 @@
     </div>
   </section>
 
-  <!-- Stats Infographic Dark Section -->
+  <!-- Stats Infographic -->
   <section class="stats-infographic">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">By the Numbers</span>
-        <h2>Why Pune Trusts Us</h2>
-        <p>Over a decade of delivering genuine Apple experiences to Pune.</p>
+        <h2>Why Bengaluru Trusts Us</h2>
+        <p>Over a decade of delivering genuine Apple experiences from our HSR Layout, Bengaluru storefront.</p>
       </div>
       <div class="stats-grid">
         <div class="stat-item reveal">
           <div class="stat-icon-3d">
             <div class="icon-ring"></div>
             <div class="icon-ring"></div>
-            <div class="icon-core">📱</div>
+            <div class="icon-core" data-icon="users" data-icon-size="28"></div>
           </div>
           <span class="stat-number" data-target="15000" data-suffix="+">0+</span>
           <span class="stat-label">Happy Customers</span>
@@ -176,16 +233,16 @@
           <div class="stat-icon-3d">
             <div class="icon-ring"></div>
             <div class="icon-ring"></div>
-            <div class="icon-core">⭐</div>
+            <div class="icon-core" data-icon="star" data-icon-size="28"></div>
           </div>
-          <span class="stat-number" data-target="4.9" data-suffix="★">0★</span>
+          <span class="stat-number" data-target="4.9" data-suffix="">0</span>
           <span class="stat-label">Average Rating</span>
         </div>
         <div class="stat-item reveal">
           <div class="stat-icon-3d">
             <div class="icon-ring"></div>
             <div class="icon-ring"></div>
-            <div class="icon-core">🏆</div>
+            <div class="icon-core" data-icon="award" data-icon-size="28"></div>
           </div>
           <span class="stat-number" data-target="10" data-suffix="+yr">0+yr</span>
           <span class="stat-label">In Business</span>
@@ -194,7 +251,7 @@
           <div class="stat-icon-3d">
             <div class="icon-ring"></div>
             <div class="icon-ring"></div>
-            <div class="icon-core">🚚</div>
+            <div class="icon-core" data-icon="truck" data-icon-size="28"></div>
           </div>
           <span class="stat-number" data-target="24" data-suffix="hr">0hr</span>
           <span class="stat-label">Avg Delivery</span>
@@ -220,25 +277,25 @@
         </div>
         <div class="showcase-text reveal-right">
           <span class="eyebrow">Premium Experience</span>
-          <h2>The Complete Apple Ecosystem — In Pune</h2>
+          <h2>The Complete Apple Ecosystem — In Bengaluru</h2>
           <p>Every Apple product, every accessory, delivered with genuine care and expert support.</p>
           <div class="feature-list">
             <div class="feature-item">
-              <div class="feature-icon">✅</div>
+              <div class="feature-icon" data-icon="checkCircle" data-icon-size="22"></div>
               <div class="feature-text">
                 <h4>100% Genuine Products</h4>
                 <p>Direct sourced, serial-verified Apple devices with official Indian warranty.</p>
               </div>
             </div>
             <div class="feature-item">
-              <div class="feature-icon">💳</div>
+              <div class="feature-icon" data-icon="card" data-icon-size="22"></div>
               <div class="feature-text">
                 <h4>No-Cost EMI on All Cards</h4>
                 <p>Split payments across 6–24 months with zero interest on all major banks.</p>
               </div>
             </div>
             <div class="feature-item">
-              <div class="feature-icon">🤝</div>
+              <div class="feature-icon" data-icon="handshake" data-icon-size="22"></div>
               <div class="feature-text">
                 <h4>Expert Consultation</h4>
                 <p>Our Apple-certified team helps you choose the perfect device for your needs.</p>
@@ -256,7 +313,7 @@
       <div class="section-head">
         <span class="eyebrow">Just Launched</span>
         <h2>New Arrivals</h2>
-        <p>The latest from Apple, now available in Pune.</p>
+        <p>The latest from Apple, now available in Bengaluru.</p>
       </div>
       <div class="product-grid" id="newArrivalsGrid"></div>
     </div>
@@ -267,38 +324,38 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Why Choose Us</span>
-        <h2>The Apple Pune Difference</h2>
-        <p>Experience Apple the way it's meant to be — genuine, supported, and delivered with care.</p>
+        <h2>The Iswift Gadgets Difference</h2>
+        <p>Experience Apple the way it's meant to be — genuine, supported, and delivered with care from Bengaluru.</p>
       </div>
       <div class="why-cards-grid">
         <div class="why-card">
-          <div class="why-card-icon">🏅</div>
+          <div class="why-card-icon" data-icon="award" data-icon-size="28"></div>
           <h4>Certified Reseller</h4>
           <p>Official Apple Authorised Reseller. Every product is original, with valid Indian warranty.</p>
         </div>
         <div class="why-card">
-          <div class="why-card-icon">💰</div>
+          <div class="why-card-icon" data-icon="sparkle" data-icon-size="28"></div>
           <h4>Best Price Guarantee</h4>
           <p>We match or beat any genuine Apple dealer price. No hidden costs, ever.</p>
         </div>
         <div class="why-card">
-          <div class="why-card-icon">🛡️</div>
+          <div class="why-card-icon" data-icon="shieldCheck" data-icon-size="28"></div>
           <h4>Extended Protection</h4>
-          <p>Optional AppleCare+ and local service support through our Pune service network.</p>
+          <p>Optional AppleCare+ and local service support through our service network.</p>
         </div>
         <div class="why-card">
-          <div class="why-card-icon">🚀</div>
+          <div class="why-card-icon" data-icon="truck" data-icon-size="28"></div>
           <h4>Same-Day Delivery</h4>
-          <p>Order by 2 PM and receive your Apple product the same evening in Pune city.</p>
+          <p>Order by 2 PM and receive your Apple product the same evening in select cities.</p>
         </div>
         <div class="why-card">
-          <div class="why-card-icon">💬</div>
+          <div class="why-card-icon" data-icon="whatsapp" data-icon-size="28"></div>
           <h4>24/7 WhatsApp Support</h4>
-          <p>Real humans. Instant answers. Our Pune team is always reachable on WhatsApp.</p>
+          <p>Real humans. Instant answers. Our team is always reachable on WhatsApp.</p>
         </div>
         <div class="why-card">
-          <div class="why-card-icon">🎁</div>
-          <h4>Gift & Bundling Options</h4>
+          <div class="why-card-icon" data-icon="gift" data-icon-size="28"></div>
+          <h4>Gift &amp; Bundling Options</h4>
           <p>Premium gifting, custom engraving, and accessory bundles at unbeatable prices.</p>
         </div>
       </div>
@@ -317,7 +374,7 @@
         <div class="promo-item reveal reveal-delay-2">
           <div class="icon" data-icon="truck" data-icon-size="26"></div>
           <h5>Free Delivery</h5>
-          <p>Free shipping across Pune &amp; India</p>
+          <p>Free shipping across Bengaluru &amp; India</p>
         </div>
         <div class="promo-item reveal reveal-delay-3">
           <div class="icon" data-icon="lock" data-icon-size="26"></div>
@@ -327,7 +384,7 @@
         <div class="promo-item reveal" style="transition-delay:0.4s">
           <div class="icon" data-icon="whatsapp" data-icon-size="26"></div>
           <h5>WhatsApp Support</h5>
-          <p>Instant answers from our Pune team</p>
+          <p>Instant answers from our Bengaluru team</p>
         </div>
       </div>
     </div>
