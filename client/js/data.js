@@ -56,6 +56,19 @@ const MAC_OFFICIAL_IMAGES = {
   shop: "images/hero/mac/nav_shop_mac_0f8893308.png"
 };
 
+const IPAD_OFFICIAL_IMAGES = {
+  pro: "images/hero/ipad/ipad_pro_8c6c9576c.png",
+  air: "images/hero/ipad/ipad_air_a25153037.png",
+  ipad: "images/hero/ipad/ipad_9308ca47a.png",
+  mini: "images/hero/ipad/ipad_mini_6884caafc.png",
+  pencil: "images/hero/ipad/apple_pencil_6c8408c54.png",
+  keyboards: "images/hero/ipad/keyboards_c8202d7ef.png",
+  compare: "images/hero/ipad/compare_b74d7a1e3.png",
+  accessories: "images/hero/ipad/accessories_d7234e26e.png",
+  shop: "images/hero/ipad/shop_ipad_fad2a5a84.png",
+  ipados: "images/hero/ipad/ipados_14bbae36a.png"
+};
+
 const PRODUCTS = [
 
 

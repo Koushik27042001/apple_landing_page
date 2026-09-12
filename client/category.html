@@ -29,6 +29,7 @@
     <div class="iphone-hero-lineup" id="iphoneHeroLineup" hidden></div>
     <div class="watch-hero-lineup" id="watchHeroLineup" hidden></div>
     <div class="mac-hero-lineup" id="macHeroLineup" hidden></div>
+    <div class="ipad-hero-lineup" id="ipadHeroLineup" hidden></div>
   </div>
 </section>
 
@@ -81,6 +82,7 @@
   <div class="iphone-compare-section" id="iphoneCompareSection" hidden></div>
   <div class="watch-compare-section" id="watchCompareSection" hidden></div>
   <div class="mac-compare-section" id="macCompareSection" hidden></div>
+  <div class="ipad-compare-section" id="ipadCompareSection" hidden></div>
 </main>
 
 <div id="site-footer"></div>
@@ -142,6 +144,8 @@
     const watchCompareEl = document.getElementById("watchCompareSection");
     const macLineupEl = document.getElementById("macHeroLineup");
     const macCompareEl = document.getElementById("macCompareSection");
+    const ipadLineupEl = document.getElementById("ipadHeroLineup");
+    const ipadCompareEl = document.getElementById("ipadCompareSection");
     heroEl.classList.remove("category-hero--mac", "category-hero--ipad", "category-hero--iphone", "category-hero--watch");
     actionsEl.hidden = true;
     mediaEl.hidden = true;
@@ -151,6 +155,8 @@
     if (watchCompareEl) watchCompareEl.hidden = true;
     if (macLineupEl) macLineupEl.hidden = true;
     if (macCompareEl) macCompareEl.hidden = true;
+    if (ipadLineupEl) ipadLineupEl.hidden = true;
+    if (ipadCompareEl) ipadCompareEl.hidden = true;
     eyebrowEl.hidden = false;
     tagEl.hidden = false;
     eyebrowEl.textContent = "Shop";
@@ -173,16 +179,16 @@
         renderMacCompareSection();
       } else if (cat.id === "ipad") {
         heroEl.classList.add("category-hero--ipad");
-        eyebrowEl.textContent = "iPad Pro";
-        titleEl.innerHTML = "Unbelievably thin.<br>Impossibly capable.";
-        tagEl.textContent = "The latest iPad Pro with M5 is built for creative work, notes, games, and everything in between.";
-        imageEl.src = "images/hero/hero-ipad.png";
-        imageEl.alt = "iPad Pro M5";
-        primaryCtaEl.href = "product.html?id=ipad-pro-11-m5";
-        primaryCtaEl.textContent = "Shop iPad Pro";
-        secondaryCtaEl.textContent = "View iPad Lineup";
-        actionsEl.hidden = false;
-        mediaEl.hidden = false;
+        eyebrowEl.hidden = true;
+        tagEl.hidden = true;
+        titleEl.textContent = "iPad";
+        actionsEl.hidden = true;
+        mediaEl.hidden = true;
+        if (ipadLineupEl) {
+          ipadLineupEl.innerHTML = renderIpadHeroLineup();
+          ipadLineupEl.hidden = false;
+        }
+        renderIpadCompareSection();
       } else if (cat.id === "iphone") {
         heroEl.classList.add("category-hero--iphone");
         eyebrowEl.hidden = true;
@@ -445,6 +451,71 @@
         '<div class="compare-spec-row"><strong>Chip</strong><span>' + item.chip + '</span></div>' +
         '<div class="compare-spec-row"><strong>Memory</strong><span>' + item.memory + '</span></div>' +
         '<div class="compare-spec-row"><strong>Power & Battery</strong><span>' + item.battery + '</span></div>' +
+      '</div>';
+    });
+    html += '</div>';
+    compareEl.innerHTML = html;
+    compareEl.hidden = false;
+  }
+
+  const IPAD_CHAPTER_ITEMS = [
+    { title: "iPad Pro", image: IPAD_OFFICIAL_IMAGES.pro, href: "product.html?id=ipad-pro-11-m5" },
+    { title: "iPad Air", image: IPAD_OFFICIAL_IMAGES.air, href: "product.html?id=ipad-air-11-m3" },
+    { title: "iPad", image: IPAD_OFFICIAL_IMAGES.ipad, href: "product.html?id=ipad-10th-gen" },
+    { title: "iPad mini", image: IPAD_OFFICIAL_IMAGES.mini, href: "product.html?id=ipad-mini-a17-pro" },
+    { title: "Apple Pencil", image: IPAD_OFFICIAL_IMAGES.pencil, href: "category.html?cat=accessories" },
+    { title: "Keyboards", image: IPAD_OFFICIAL_IMAGES.keyboards, href: "category.html?cat=accessories" },
+    { title: "Compare", image: IPAD_OFFICIAL_IMAGES.compare, href: "#ipadCompareSection" },
+    { title: "Accessories", image: IPAD_OFFICIAL_IMAGES.accessories, href: "category.html?cat=accessories" },
+    { title: "Shop iPad", image: IPAD_OFFICIAL_IMAGES.shop, href: "#productGrid" },
+    { title: "iPadOS 18", image: IPAD_OFFICIAL_IMAGES.ipados, href: "entertainment.html" }
+  ];
+
+  function renderIpadHeroLineup() {
+    return '<button class="chapter-nav-arrow chapter-nav-arrow--left" onclick="scrollIpadChapterNav(-260)" aria-label="Scroll left">&lsaquo;</button>' +
+    '<div class="chapter-nav-track" id="ipadChapterNavTrack">' +
+      IPAD_CHAPTER_ITEMS.map(function (item) {
+        return '<a href="' + item.href + '" class="chapter-nav-item">' +
+          '<div class="chapter-nav-icon">' +
+            '<img src="' + item.image + '" alt="" aria-hidden="true">' +
+          '</div>' +
+          '<span class="chapter-nav-label">' + item.title + '</span>' +
+          (item.badge ? '<span class="chapter-nav-new-badge">' + item.badge + '</span>' : '') +
+        '</a>';
+      }).join("") +
+    '</div>' +
+    '<button class="chapter-nav-arrow chapter-nav-arrow--right" onclick="scrollIpadChapterNav(260)" aria-label="Scroll right">&rsaquo;</button>';
+  }
+
+  function scrollIpadChapterNav(dir) {
+    const track = document.getElementById("ipadChapterNavTrack");
+    if (track) track.scrollBy({ left: dir, behavior: 'smooth' });
+  }
+
+  function renderIpadCompareSection() {
+    const compareEl = document.getElementById("ipadCompareSection");
+    if (!compareEl) return;
+    const compareItems = [
+      { id: "ipad-pro-13-m5", name: "iPad Pro 13″", image: IPAD_OFFICIAL_IMAGES.pro, price: "₹1,29,900", display: "13″ Ultra Retina XDR Tandem OLED", chip: "Apple M5 chip", camera: "12MP Wide + LiDAR Scanner", battery: "Up to 10 hours" },
+      { id: "ipad-pro-11-m5", name: "iPad Pro 11″", image: IPAD_OFFICIAL_IMAGES.pro, price: "₹99,900", display: "11″ Ultra Retina XDR Tandem OLED", chip: "Apple M5 chip", camera: "12MP Wide + LiDAR Scanner", battery: "Up to 10 hours" },
+      { id: "ipad-air-13-m3", name: "iPad Air 13″", image: IPAD_OFFICIAL_IMAGES.air, price: "₹79,900", display: "13″ Liquid Retina display", chip: "Apple M3 chip", camera: "12MP Wide camera", battery: "Up to 10 hours" },
+      { id: "ipad-air-11-m3", name: "iPad Air 11″", image: IPAD_OFFICIAL_IMAGES.air, price: "₹59,900", display: "11″ Liquid Retina display", chip: "Apple M3 chip", camera: "12MP Wide camera", battery: "Up to 10 hours" },
+      { id: "ipad-10th-gen", name: "iPad (10th Gen)", image: IPAD_OFFICIAL_IMAGES.ipad, price: "₹34,900", display: "10.9″ Liquid Retina display", chip: "A14 Bionic chip", camera: "12MP Wide camera", battery: "Up to 10 hours" },
+      { id: "ipad-mini-a17-pro", name: "iPad mini", image: IPAD_OFFICIAL_IMAGES.mini, price: "₹49,900", display: "8.3″ Liquid Retina display", chip: "A17 Pro chip", camera: "12MP Wide camera", battery: "Up to 10 hours" }
+    ];
+
+    let html = '<div class="compare-section-header"><h2>Compare iPad Models</h2><p>Find the right iPad for taking notes, creating, and working.</p></div>' +
+      '<div class="compare-section-grid">';
+    compareItems.forEach(function (item) {
+      html += '<div class="compare-card">' +
+        '<div class="compare-card-media"><img src="' + item.image + '" alt="" aria-hidden="true"></div>' +
+        '<h4>' + item.name + '</h4>' +
+        '<div class="compare-card-price">From ' + item.price + '</div>' +
+        '<a href="product.html?id=' + item.id + '" class="btn btn-primary btn-sm btn-block">Buy Now</a>' +
+        '<div class="compare-spec-row"><strong>Display</strong><span>' + item.display + '</span></div>' +
+        '<div class="compare-spec-row"><strong>Chip</strong><span>' + item.chip + '</span></div>' +
+        '<div class="compare-spec-row"><strong>Camera</strong><span>' + item.camera + '</span></div>' +
+        '<div class="compare-spec-row"><strong>Battery Life</strong><span>' + item.battery + '</span></div>' +
       '</div>';
     });
     html += '</div>';

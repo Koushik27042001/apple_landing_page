@@ -1134,55 +1134,29 @@ button { font-family: inherit; cursor: pointer; }
 .category-hero-actions[hidden] {
   display: none;
 }
-.category-hero--ipad {
-  min-height: 520px;
-  padding: 68px 0;
-  text-align: left;
-  overflow: hidden;
-  background:
-    radial-gradient(ellipse 46% 58% at 76% 52%, rgba(0,0,0,0.12), transparent 68%),
-    linear-gradient(135deg, #fbfbfd 0%, #f4f8ff 50%, #edf2f8 100%);
-}
-.category-hero--ipad .container {
-  display: grid;
-  grid-template-columns: minmax(280px, 500px) minmax(260px, 1fr);
-  align-items: center;
-  gap: clamp(28px, 6vw, 80px);
-}
-.category-hero--ipad h1 {
-  font-size: clamp(36px, 5.5vw, 70px);
-  line-height: 1.02;
-  margin-bottom: 16px;
-}
-.category-hero--ipad p {
-  max-width: 420px;
-  color: var(--gray-text);
-  font-size: clamp(18px, 2vw, 22px);
-  line-height: 1.45;
-}
-.category-hero--ipad .category-hero-actions {
-  justify-content: flex-start;
-}
-
 .category-hero--mac,
+.category-hero--ipad,
 .category-hero--watch,
 .category-hero--iphone {
   background: #ffffff !important;
-  padding: 44px 0 24px;
+  padding: 48px 0 24px;
   border-bottom: none;
   min-height: auto !important;
 }
 .category-hero--mac .container,
+.category-hero--ipad .container,
 .category-hero--watch .container,
 .category-hero--iphone .container {
   display: block !important;
 }
-.category-hero--mac .category-hero-copy {
+.category-hero--mac .category-hero-copy,
+.category-hero--ipad .category-hero-copy {
   max-width: 100%;
   text-align: left;
   margin-bottom: 28px;
 }
-.category-hero--mac h1 {
+.category-hero--mac h1,
+.category-hero--ipad h1 {
   font-size: clamp(52px, 6.5vw, 80px);
   font-weight: 700;
   letter-spacing: -0.04em;
@@ -1209,13 +1183,15 @@ button { font-family: inherit; cursor: pointer; }
 }
 .iphone-hero-lineup,
 .watch-hero-lineup,
-.mac-hero-lineup {
+.mac-hero-lineup,
+.ipad-hero-lineup {
   display: flex !important;
   align-items: center;
   position: relative;
   width: 100%;
   margin-top: 12px;
 }
+.ipad-hero-lineup .chapter-nav-track,
 .mac-hero-lineup .chapter-nav-track {
   justify-content: flex-start;
   gap: 36px;
@@ -1230,10 +1206,12 @@ button { font-family: inherit; cursor: pointer; }
 }
 .iphone-hero-lineup[hidden],
 .watch-hero-lineup[hidden],
-.mac-hero-lineup[hidden] {
+.mac-hero-lineup[hidden],
+.ipad-hero-lineup[hidden] {
   display: none !important;
 }
 
+.ipad-compare-section,
 .mac-compare-section,
 .watch-compare-section,
 .iphone-compare-section {
@@ -1242,6 +1220,7 @@ button { font-family: inherit; cursor: pointer; }
   border-top: 1px solid var(--silver);
   margin-top: 40px;
 }
+.ipad-compare-section[hidden],
 .mac-compare-section[hidden],
 .watch-compare-section[hidden],
 .iphone-compare-section[hidden] {
