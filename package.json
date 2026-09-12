@@ -10,7 +10,7 @@
     "start": "npm --prefix server start",
     "start:server": "npm --prefix server start",
     "dev:server": "npm --prefix server run dev",
-    "serve:client": "npx --yes serve client -l 8080",
+    "serve:client": "npx --yes serve client -l 8080 -c serve.json",
     "test": "node test/regression-test.js && node test/catalog-test.js"
   },
   "devDependencies": {

@@ -14,8 +14,21 @@
 
 <section class="category-hero">
   <div class="container">
-    <h1 id="catTitle">Shop All</h1>
-    <p id="catTagline">Explore our full range of genuine Apple products.</p>
+    <div class="category-hero-copy">
+      <span class="eyebrow" id="catEyebrow">Shop</span>
+      <h1 id="catTitle">Shop All</h1>
+      <p id="catTagline">Explore our full range of genuine Apple products.</p>
+      <div class="category-hero-actions" id="catHeroActions" hidden>
+        <a href="product.html?id=macbook-air-13-m5" class="btn btn-primary btn-lg" id="catHeroPrimary">Shop MacBook Air</a>
+        <a href="#productGrid" class="btn btn-dark btn-lg" id="catHeroSecondary">View Mac Lineup</a>
+      </div>
+    </div>
+    <div class="category-hero-media" id="catHeroMedia" hidden>
+      <img id="catHeroImage" src="" alt="">
+    </div>
+    <div class="iphone-hero-lineup" id="iphoneHeroLineup" hidden></div>
+    <div class="watch-hero-lineup" id="watchHeroLineup" hidden></div>
+    <div class="mac-hero-lineup" id="macHeroLineup" hidden></div>
   </div>
 </section>
 
@@ -64,6 +77,10 @@
     </div>
 
   </div>
+
+  <div class="iphone-compare-section" id="iphoneCompareSection" hidden></div>
+  <div class="watch-compare-section" id="watchCompareSection" hidden></div>
+  <div class="mac-compare-section" id="macCompareSection" hidden></div>
 </main>
 
 <div id="site-footer"></div>
@@ -110,21 +127,138 @@
 
   function renderPageHead() {
     const cat = getCategoryById(state.category);
+    const heroEl = document.querySelector(".category-hero");
     const titleEl = document.getElementById("catTitle");
     const tagEl = document.getElementById("catTagline");
+    const eyebrowEl = document.getElementById("catEyebrow");
+    const actionsEl = document.getElementById("catHeroActions");
+    const primaryCtaEl = document.getElementById("catHeroPrimary");
+    const secondaryCtaEl = document.getElementById("catHeroSecondary");
+    const mediaEl = document.getElementById("catHeroMedia");
+    const imageEl = document.getElementById("catHeroImage");
+    const iphoneLineupEl = document.getElementById("iphoneHeroLineup");
+    const iphoneCompareEl = document.getElementById("iphoneCompareSection");
+    const watchLineupEl = document.getElementById("watchHeroLineup");
+    const watchCompareEl = document.getElementById("watchCompareSection");
+    const macLineupEl = document.getElementById("macHeroLineup");
+    const macCompareEl = document.getElementById("macCompareSection");
+    heroEl.classList.remove("category-hero--mac", "category-hero--ipad", "category-hero--iphone", "category-hero--watch");
+    actionsEl.hidden = true;
+    mediaEl.hidden = true;
+    iphoneLineupEl.hidden = true;
+    if (iphoneCompareEl) iphoneCompareEl.hidden = true;
+    if (watchLineupEl) watchLineupEl.hidden = true;
+    if (watchCompareEl) watchCompareEl.hidden = true;
+    if (macLineupEl) macLineupEl.hidden = true;
+    if (macCompareEl) macCompareEl.hidden = true;
+    eyebrowEl.hidden = false;
+    tagEl.hidden = false;
+    eyebrowEl.textContent = "Shop";
     if (state.query) {
       titleEl.textContent = 'Results for "' + state.query + '"';
       tagEl.textContent = "Showing products matching your search.";
       document.title = 'Search: ' + state.query + ' | The Apple Store Pune';
     } else if (cat) {
-      titleEl.textContent = cat.name;
-      tagEl.textContent = cat.tagline;
+      if (cat.id === "mac") {
+        heroEl.classList.add("category-hero--mac");
+        eyebrowEl.hidden = true;
+        tagEl.hidden = true;
+        titleEl.textContent = "Mac";
+        actionsEl.hidden = true;
+        mediaEl.hidden = true;
+        if (macLineupEl) {
+          macLineupEl.innerHTML = renderMacHeroLineup();
+          macLineupEl.hidden = false;
+        }
+        renderMacCompareSection();
+      } else if (cat.id === "ipad") {
+        heroEl.classList.add("category-hero--ipad");
+        eyebrowEl.textContent = "iPad Pro";
+        titleEl.innerHTML = "Unbelievably thin.<br>Impossibly capable.";
+        tagEl.textContent = "The latest iPad Pro with M5 is built for creative work, notes, games, and everything in between.";
+        imageEl.src = "images/hero/hero-ipad.png";
+        imageEl.alt = "iPad Pro M5";
+        primaryCtaEl.href = "product.html?id=ipad-pro-11-m5";
+        primaryCtaEl.textContent = "Shop iPad Pro";
+        secondaryCtaEl.textContent = "View iPad Lineup";
+        actionsEl.hidden = false;
+        mediaEl.hidden = false;
+      } else if (cat.id === "iphone") {
+        heroEl.classList.add("category-hero--iphone");
+        eyebrowEl.hidden = true;
+        tagEl.hidden = true;
+        titleEl.textContent = "iPhone";
+        actionsEl.hidden = true;
+        mediaEl.hidden = true;
+        iphoneLineupEl.innerHTML = renderIphoneHeroLineup();
+        iphoneLineupEl.hidden = false;
+        renderIphoneCompareSection();
+      } else if (cat.id === "watch") {
+        heroEl.classList.add("category-hero--watch");
+        eyebrowEl.hidden = true;
+        tagEl.hidden = true;
+        titleEl.textContent = "Apple Watch";
+        actionsEl.hidden = true;
+        mediaEl.hidden = true;
+        if (watchLineupEl) {
+          watchLineupEl.innerHTML = renderWatchHeroLineup();
+          watchLineupEl.hidden = false;
+        }
+        renderWatchCompareSection();
+      } else {
+        titleEl.textContent = cat.name;
+        tagEl.textContent = cat.tagline;
+      }
       document.title = cat.name + " | The Apple Store Pune";
     } else {
       titleEl.textContent = "Shop All";
       tagEl.textContent = "Explore our full range of genuine Apple products.";
       document.title = "Shop All Products | The Apple Store Pune";
     }
+  }
+
+  const IPHONE_CHAPTER_ITEMS = [
+    { title: "iPhone Duo", image: IPHONE_OFFICIAL_IMAGES.duo, href: "product.html?id=iphone-duo" },
+    { title: "iPhone 18 Pro", image: IPHONE_OFFICIAL_IMAGES.pro18, href: "product.html?id=iphone-18-pro" },
+    { title: "iPhone Air", image: IPHONE_OFFICIAL_IMAGES.air, href: "product.html?id=iphone-air" },
+    { title: "iPhone 17", image: IPHONE_OFFICIAL_IMAGES.iphone17, href: "product.html?id=iphone-17" },
+    { title: "iPhone 17e", image: IPHONE_OFFICIAL_IMAGES.iphone17e, href: "product.html?id=iphone-17e" },
+    { title: "iPhone 16", image: IPHONE_OFFICIAL_IMAGES.iphone16, href: "product.html?id=iphone-16" },
+    { title: "Compare", image: IPHONE_OFFICIAL_IMAGES.compare, href: "#iphoneCompareSection" },
+    { title: "Accessories", image: IPHONE_OFFICIAL_IMAGES.accessories, href: "category.html?cat=accessories" },
+    { title: "Shop iPhone", image: IPHONE_OFFICIAL_IMAGES.shop, href: "#productGrid" },
+    { title: "iOS 27", image: IPHONE_OFFICIAL_IMAGES.ios, href: "entertainment.html" }
+  ];
+
+  const IPHONE_FEATURED_ORDER = [
+    "iphone-duo",
+    "iphone-18-pro",
+    "iphone-air",
+    "iphone-17",
+    "iphone-17e",
+    "iphone-16",
+    "iphone-17-pro",
+    "iphone-17-pro-max"
+  ];
+
+  function renderIphoneHeroLineup() {
+    return '<button class="chapter-nav-arrow chapter-nav-arrow--left" onclick="scrollChapterNav(-260)" aria-label="Scroll left">&lsaquo;</button>' +
+    '<div class="chapter-nav-track" id="chapterNavTrack">' +
+      IPHONE_CHAPTER_ITEMS.map(function (item) {
+        return '<a href="' + item.href + '" class="chapter-nav-item">' +
+          '<div class="chapter-nav-icon">' +
+            '<img src="' + item.image + '" alt="" aria-hidden="true">' +
+          '</div>' +
+          '<span class="chapter-nav-label">' + item.title + '</span>' +
+        '</a>';
+      }).join("") +
+    '</div>' +
+    '<button class="chapter-nav-arrow chapter-nav-arrow--right" onclick="scrollChapterNav(260)" aria-label="Scroll right">&rsaquo;</button>';
+  }
+
+  function scrollChapterNav(dir) {
+    const track = document.getElementById("chapterNavTrack");
+    if (track) track.scrollBy({ left: dir, behavior: 'smooth' });
   }
 
   function productCardHtml(p) {
@@ -158,6 +292,166 @@
     showToast(p.name + " added to your bag");
   }
 
+  function renderIphoneCompareSection() {
+    const compareEl = document.getElementById("iphoneCompareSection");
+    if (!compareEl) return;
+    const compareItems = [
+      { id: "iphone-duo", name: "iPhone Duo", image: IPHONE_OFFICIAL_IMAGES.duo, price: "₹2,99,900", display: "7.6″ Folding Super Retina XDR", chip: "A20 Pro chip", camera: "48MP Dual Fusion", battery: "Up to 44 hours" },
+      { id: "iphone-18-pro", name: "iPhone 18 Pro", image: IPHONE_OFFICIAL_IMAGES.pro18, price: "₹1,64,900", display: "6.3″ or 6.9″ ProMotion 120Hz", chip: "A20 Pro chip", camera: "48MP Pro Fusion, Variable Aperture", battery: "Up to 43 hours" },
+      { id: "iphone-air", name: "iPhone Air", image: IPHONE_OFFICIAL_IMAGES.air, price: "₹1,49,900", display: "6.5″ ProMotion 120Hz", chip: "A19 Pro chip", camera: "48MP Fusion Camera", battery: "Up to 27 hours" },
+      { id: "iphone-17", name: "iPhone 17", image: IPHONE_OFFICIAL_IMAGES.iphone17, price: "₹99,900", display: "6.3″ ProMotion 120Hz", chip: "A19 chip", camera: "48MP Dual Fusion", battery: "Up to 30 hours" },
+      { id: "iphone-17e", name: "iPhone 17e", image: IPHONE_OFFICIAL_IMAGES.iphone17e, price: "₹79,900", display: "6.1″ Super Retina XDR", chip: "Apple A18 chip", camera: "48MP Fusion Camera", battery: "Up to 26 hours" },
+      { id: "iphone-16", name: "iPhone 16", image: IPHONE_OFFICIAL_IMAGES.iphone16, price: "₹89,900", display: "6.1″ Super Retina XDR", chip: "Apple A18 chip", camera: "48MP Fusion Camera", battery: "Up to 22 hours" }
+    ];
+
+    let html = '<div class="compare-section-header"><h2>Compare iPhone Models</h2><p>Find the perfect iPhone for your needs directly on our store.</p></div>' +
+      '<div class="compare-section-grid">';
+    compareItems.forEach(function (item) {
+      html += '<div class="compare-card">' +
+        '<div class="compare-card-media"><img src="' + item.image + '" alt="" aria-hidden="true"></div>' +
+        '<h4>' + item.name + '</h4>' +
+        '<div class="compare-card-price">From ' + item.price + '</div>' +
+        '<a href="product.html?id=' + item.id + '" class="btn btn-primary btn-sm btn-block">Buy Now</a>' +
+        '<div class="compare-spec-row"><strong>Display</strong><span>' + item.display + '</span></div>' +
+        '<div class="compare-spec-row"><strong>Chip</strong><span>' + item.chip + '</span></div>' +
+        '<div class="compare-spec-row"><strong>Camera</strong><span>' + item.camera + '</span></div>' +
+        '<div class="compare-spec-row"><strong>Battery</strong><span>' + item.battery + '</span></div>' +
+      '</div>';
+    });
+    html += '</div>';
+    compareEl.innerHTML = html;
+    compareEl.hidden = false;
+  }
+
+  const WATCH_CHAPTER_ITEMS = [
+    { title: "Apple Watch Series 12", image: WATCH_OFFICIAL_IMAGES.s12, href: "product.html?id=apple-watch-series-12" },
+    { title: "Apple Watch Ultra 4", image: WATCH_OFFICIAL_IMAGES.ultra4, href: "product.html?id=apple-watch-ultra-4" },
+    { title: "Apple Watch SE 3", image: WATCH_OFFICIAL_IMAGES.se3, href: "product.html?id=apple-watch-se-3" },
+    { title: "Apple Watch Nike", image: WATCH_OFFICIAL_IMAGES.nike, href: "#productGrid" },
+    { title: "Bands", image: WATCH_OFFICIAL_IMAGES.bands, href: "#productGrid" },
+    { title: "Compare", image: WATCH_OFFICIAL_IMAGES.compare, href: "#watchCompareSection" },
+    { title: "Accessories", image: WATCH_OFFICIAL_IMAGES.accessories, href: "category.html?cat=accessories" },
+    { title: "Fitness+", image: WATCH_OFFICIAL_IMAGES.fitness, href: "entertainment.html" },
+    { title: "watchOS 12", image: WATCH_OFFICIAL_IMAGES.os, href: "entertainment.html" },
+    { title: "Shop Watch", image: WATCH_OFFICIAL_IMAGES.shop, href: "#productGrid" }
+  ];
+
+  function renderWatchHeroLineup() {
+    return '<button class="chapter-nav-arrow chapter-nav-arrow--left" onclick="scrollWatchChapterNav(-260)" aria-label="Scroll left">&lsaquo;</button>' +
+    '<div class="chapter-nav-track" id="watchChapterNavTrack">' +
+      WATCH_CHAPTER_ITEMS.map(function (item) {
+        return '<a href="' + item.href + '" class="chapter-nav-item">' +
+          '<div class="chapter-nav-icon">' +
+            '<img src="' + item.image + '" alt="" aria-hidden="true">' +
+          '</div>' +
+          '<span class="chapter-nav-label">' + item.title + '</span>' +
+        '</a>';
+      }).join("") +
+    '</div>' +
+    '<button class="chapter-nav-arrow chapter-nav-arrow--right" onclick="scrollWatchChapterNav(260)" aria-label="Scroll right">&rsaquo;</button>';
+  }
+
+  function scrollWatchChapterNav(dir) {
+    const track = document.getElementById("watchChapterNavTrack");
+    if (track) track.scrollBy({ left: dir, behavior: 'smooth' });
+  }
+
+  function renderWatchCompareSection() {
+    const compareEl = document.getElementById("watchCompareSection");
+    if (!compareEl) return;
+    const compareItems = [
+      { id: "apple-watch-series-12", name: "Apple Watch Series 12", image: WATCH_OFFICIAL_IMAGES.s12, price: "₹46,900", display: "Always-On Retina display, up to 3000 nits", chip: "S10 SiP with 64-bit dual-core processor", health: "Blood Oxygen, ECG, Hypertension Alert, Sleep Apnea", battery: "Up to 36 hours in Low Power Mode" },
+      { id: "apple-watch-ultra-4", name: "Apple Watch Ultra 4", image: WATCH_OFFICIAL_IMAGES.ultra4, price: "₹89,900", display: "49mm Titanium case, Sapphire crystal, 3500 nits", chip: "S10 SiP with precision dual-frequency GPS", health: "Blood Oxygen, ECG, Depth gauge, Water temp, Siren", battery: "Up to 72 hours in Low Power Mode" },
+      { id: "apple-watch-se-3", name: "Apple Watch SE 3", image: WATCH_OFFICIAL_IMAGES.se3, price: "₹29,900", display: "Retina display, up to 1000 nits", chip: "S9 SiP with 64-bit dual-core processor", health: "High and low heart rate notifications, Irregular rhythm", battery: "Up to 18 hours" }
+    ];
+
+    let html = '<div class="compare-section-header"><h2>Compare Watch Models</h2><p>Find the ideal Apple Watch tailored for your health, fitness, and lifestyle.</p></div>' +
+      '<div class="compare-section-grid">';
+    compareItems.forEach(function (item) {
+      html += '<div class="compare-card">' +
+        '<div class="compare-card-media"><img src="' + item.image + '" alt="" aria-hidden="true"></div>' +
+        '<h4>' + item.name + '</h4>' +
+        '<div class="compare-card-price">From ' + item.price + '</div>' +
+        '<a href="product.html?id=' + item.id + '" class="btn btn-primary btn-sm btn-block">Buy Now</a>' +
+        '<div class="compare-spec-row"><strong>Display</strong><span>' + item.display + '</span></div>' +
+        '<div class="compare-spec-row"><strong>Chip & Features</strong><span>' + item.chip + '</span></div>' +
+        '<div class="compare-spec-row"><strong>Health Sensors</strong><span>' + item.health + '</span></div>' +
+        '<div class="compare-spec-row"><strong>Battery Life</strong><span>' + item.battery + '</span></div>' +
+      '</div>';
+    });
+    html += '</div>';
+    compareEl.innerHTML = html;
+    compareEl.hidden = false;
+  }
+
+  const MAC_CHAPTER_ITEMS = [
+    { title: "MacBook Neo", image: MAC_OFFICIAL_IMAGES.macbook, href: "product.html?id=macbook-a18-pro" },
+    { title: "MacBook Air", image: MAC_OFFICIAL_IMAGES.mba, href: "product.html?id=macbook-air-13-m5" },
+    { title: "MacBook Pro", image: MAC_OFFICIAL_IMAGES.mbp, href: "product.html?id=macbook-pro-14-m5-pro" },
+    { title: "iMac", image: MAC_OFFICIAL_IMAGES.imac, href: "product.html?id=imac-24-m5" },
+    { title: "Mac mini", image: MAC_OFFICIAL_IMAGES.macMini, badge: "New", href: "product.html?id=mac-mini-m5" },
+    { title: "Mac Studio", image: MAC_OFFICIAL_IMAGES.macStudio, badge: "New", href: "product.html?id=mac-studio-m4-max" },
+    { title: "Compare", image: MAC_OFFICIAL_IMAGES.compare, href: "#macCompareSection" },
+    { title: "Displays", image: MAC_OFFICIAL_IMAGES.displays, href: "category.html?cat=accessories" },
+    { title: "Accessories", image: MAC_OFFICIAL_IMAGES.accessories, href: "category.html?cat=accessories" },
+    { title: "Shop Mac", image: MAC_OFFICIAL_IMAGES.shop, href: "#productGrid" },
+    { title: "macOS Sequoia", image: MAC_OFFICIAL_IMAGES.macos, href: "entertainment.html" }
+  ];
+
+  function renderMacHeroLineup() {
+    return '<button class="chapter-nav-arrow chapter-nav-arrow--left" onclick="scrollMacChapterNav(-260)" aria-label="Scroll left">&lsaquo;</button>' +
+    '<div class="chapter-nav-track" id="macChapterNavTrack">' +
+      MAC_CHAPTER_ITEMS.map(function (item) {
+        return '<a href="' + item.href + '" class="chapter-nav-item">' +
+          '<div class="chapter-nav-icon">' +
+            '<img src="' + item.image + '" alt="" aria-hidden="true">' +
+          '</div>' +
+          '<span class="chapter-nav-label">' + item.title + '</span>' +
+          (item.badge ? '<span class="chapter-nav-new-badge">' + item.badge + '</span>' : '') +
+        '</a>';
+      }).join("") +
+    '</div>' +
+    '<button class="chapter-nav-arrow chapter-nav-arrow--right" onclick="scrollMacChapterNav(260)" aria-label="Scroll right">&rsaquo;</button>';
+  }
+
+  function scrollMacChapterNav(dir) {
+    const track = document.getElementById("macChapterNavTrack");
+    if (track) track.scrollBy({ left: dir, behavior: 'smooth' });
+  }
+
+  function renderMacCompareSection() {
+    const compareEl = document.getElementById("macCompareSection");
+    if (!compareEl) return;
+    const compareItems = [
+      { id: "macbook-air-13-m5", name: "MacBook Air 13″", image: MAC_OFFICIAL_IMAGES.mba, price: "₹1,14,900", display: "13.6″ Liquid Retina display", chip: "Apple M5 chip", memory: "Up to 32GB unified memory", battery: "Up to 18 hours" },
+      { id: "macbook-air-15-m5", name: "MacBook Air 15″", image: MAC_OFFICIAL_IMAGES.mba, price: "₹1,34,900", display: "15.3″ Liquid Retina display", chip: "Apple M5 chip", memory: "Up to 32GB unified memory", battery: "Up to 18 hours" },
+      { id: "macbook-pro-14-m5-pro", name: "MacBook Pro 14″", image: MAC_OFFICIAL_IMAGES.mbp, price: "₹1,99,900", display: "14.2″ Liquid Retina XDR", chip: "Apple M5 Pro chip", memory: "Up to 64GB unified memory", battery: "Up to 24 hours" },
+      { id: "macbook-pro-16-m5-max", name: "MacBook Pro 16″", image: MAC_OFFICIAL_IMAGES.mbp, price: "₹2,49,900", display: "16.2″ Liquid Retina XDR", chip: "Apple M5 Max chip", memory: "Up to 128GB unified memory", battery: "Up to 22 hours" },
+      { id: "imac-24-m5", name: "iMac 24″", image: MAC_OFFICIAL_IMAGES.imac, price: "₹1,34,900", display: "24″ 4.5K Retina display", chip: "Apple M5 chip", memory: "Up to 32GB unified memory", battery: "Desktop power" },
+      { id: "mac-mini-m5", name: "Mac mini", image: MAC_OFFICIAL_IMAGES.macMini, price: "₹59,900", display: "Supports up to 3 displays", chip: "Apple M5 or M5 Pro", memory: "Up to 64GB unified memory", battery: "Compact Desktop" },
+      { id: "mac-studio-m4-max", name: "Mac Studio", image: MAC_OFFICIAL_IMAGES.macStudio, price: "₹2,09,900", display: "Supports up to 8 displays", chip: "M4 Max or M4 Ultra", memory: "Up to 192GB unified memory", battery: "Pro Desktop" },
+      { id: "macbook-a18-pro", name: "MacBook", image: MAC_OFFICIAL_IMAGES.macbook, price: "₹79,900", display: "12″ Super Retina XDR", chip: "Apple A18 Pro chip", memory: "16GB unified memory", battery: "Up to 20 hours" }
+    ];
+
+    let html = '<div class="compare-section-header"><h2>Compare Mac Models</h2><p>Find the right Mac laptop or desktop for your workload.</p></div>' +
+      '<div class="compare-section-grid">';
+    compareItems.forEach(function (item) {
+      html += '<div class="compare-card">' +
+        '<div class="compare-card-media"><img src="' + item.image + '" alt="" aria-hidden="true"></div>' +
+        '<h4>' + item.name + '</h4>' +
+        '<div class="compare-card-price">From ' + item.price + '</div>' +
+        '<a href="product.html?id=' + item.id + '" class="btn btn-primary btn-sm btn-block">Buy Now</a>' +
+        '<div class="compare-spec-row"><strong>Display</strong><span>' + item.display + '</span></div>' +
+        '<div class="compare-spec-row"><strong>Chip</strong><span>' + item.chip + '</span></div>' +
+        '<div class="compare-spec-row"><strong>Memory</strong><span>' + item.memory + '</span></div>' +
+        '<div class="compare-spec-row"><strong>Power & Battery</strong><span>' + item.battery + '</span></div>' +
+      '</div>';
+    });
+    html += '</div>';
+    compareEl.innerHTML = html;
+    compareEl.hidden = false;
+  }
+
   function renderProducts() {
     let list = state.query ? searchProducts(state.query) : getProductsByCategory(state.category);
 
@@ -175,6 +469,16 @@
       case "rating": list.sort(function (a, b) { return b.rating - a.rating; }); break;
       case "discount": list.sort(function (a, b) { return (b.mrp - b.price) - (a.mrp - a.price); }); break;
       default: break;
+    }
+
+    if (state.category === "iphone" && state.sort === "featured") {
+      list.sort(function (a, b) {
+        const ai = IPHONE_FEATURED_ORDER.indexOf(a.id);
+        const bi = IPHONE_FEATURED_ORDER.indexOf(b.id);
+        const ar = ai === -1 ? 999 : ai;
+        const br = bi === -1 ? 999 : bi;
+        return ar - br;
+      });
     }
 
     document.getElementById("resultCount").textContent = list.length + (list.length === 1 ? " product" : " products");

@@ -6,7 +6,7 @@
    ============================================================ */
 
 const CATEGORIES = [
-  { id: "mac", name: "Mac", tagline: "Supercharged for pros and creators.", image: "images/hero/hero-macbook.png" },
+  { id: "mac", name: "Mac", tagline: "Supercharged for pros and creators.", image: "images/hero/images.jpeg" },
   { id: "ipad", name: "iPad", tagline: "Your next computer isn't a computer.", image: "images/hero/hero-ipad.png" },
   { id: "iphone", name: "iPhone", tagline: "The ultimate iPhone lineup.", image: "images/products/iphone-17-pro-orange.jpeg" },
   { id: "watch", name: "Watch", tagline: "A healthy leap ahead.", image: "images/products/watch-ultra3-titanium.png" },
@@ -16,26 +16,138 @@ const CATEGORIES = [
   { id: "accessories", name: "Accessories", tagline: "Essentials, cases &amp; AppleCare+.", image: "images/hero/hero-accessories.png" }
 ];
 
+const IPHONE_OFFICIAL_IMAGES = {
+  duo: "images/hero/iphone_duo__hefmlegzwbmi_large_2x.png",
+  pro18: "images/hero/iphone_18_pro__dj48ysc0yagm_large_2x.png",
+  air: "images/hero/iphone_air__b5qmgl05ojyq_large_2x.png",
+  iphone17: "images/hero/iphone_17__fb1277oq3eaa_large_2x.png",
+  iphone17e: "images/hero/iphone_17e__cq5ygzct314y_large_2x.png",
+  iphone16: "images/hero/iphone_16__b6tkv86m2gc2_large_2x.png",
+  shop: "images/hero/shop__dmmu8wcl1iie_large_2x.png",
+  ios: "images/hero/ios__8z58j1o80yqi_large_2x.png",
+  accessories: "images/hero/accessories__ghgqo4vsxcqe_large_2x.png",
+  compare: "images/hero/compare__e479gubocjau_large_2x.png"
+};
+
+const WATCH_OFFICIAL_IMAGES = {
+  s12: "images/hero/watch/nav_s12_f44b9543e.png",
+  ultra4: "images/hero/watch/nav_ultra4_9058c8c8d.png",
+  se3: "images/hero/watch/nav_se3_67e2d8619.png",
+  nike: "images/hero/watch/nav_nike_54b594efc.png",
+  bands: "images/hero/watch/nav_bands_1f41ae96b.png",
+  compare: "images/hero/watch/nav_compare_49d773718.png",
+  accessories: "images/hero/watch/nav_accessories_dd24224d8_small.png",
+  fitness: "images/hero/watch/nav_fitness_d3886b6a7.png",
+  os: "images/hero/watch/nav_os_da52c9155.png",
+  shop: "images/hero/watch/nav_shop_130ff8980.png"
+};
+
+const MAC_OFFICIAL_IMAGES = {
+  mbp: "images/hero/mac/nav_mbp_bfa749034.png",
+  mba: "images/hero/mac/nav_mba_ea12e0d5b.png",
+  imac: "images/hero/mac/nav_imac_24_832584093.png",
+  macMini: "images/hero/mac/nav_mac_mini_bff82a643.png",
+  macStudio: "images/hero/mac/nav_mac_studio_f2f3212ea.png",
+  macbook: "images/hero/mac/nav_mbn_1fa302e95.png",
+  displays: "images/hero/mac/nav_displays_7c0628398.png",
+  compare: "images/hero/mac/nav_compare_cacd858a8.png",
+  accessories: "images/hero/mac/nav_accessories_2a4e78f16.png",
+  macos: "images/hero/mac/nav_macos_889578ffc.png",
+  shop: "images/hero/mac/nav_shop_mac_0f8893308.png"
+};
+
 const PRODUCTS = [
 
-  /* ============================= iPhone ============================= */
 
+
+  {
+    id: "iphone-duo",
+    name: "iPhone Duo",
+    category: "iphone",
+    brand: "Apple",
+    price: 299900,
+    mrp: 299900,
+    badge: "New",
+    rating: 4.9,
+    reviews: 18,
+    stock: 6,
+    images: [IPHONE_OFFICIAL_IMAGES.duo],
+    colors: [
+      { name: "Night Sky", hex: "#2f3a49", image: IPHONE_OFFICIAL_IMAGES.duo },
+      { name: "Star White", hex: "#f4f2ee", image: IPHONE_OFFICIAL_IMAGES.duo }
+    ],
+    storageOptions: [
+      { label: "256GB", extra: 0 },
+      { label: "512GB", extra: 24000 },
+      { label: "1TB", extra: 74000 },
+      { label: "2TB", extra: 150000 }
+    ],
+    short: "The largest iPhone display ever. Foldable. Poseable. Durable.",
+    description: "iPhone Duo brings a foldable titanium design, a 7.6-inch inner display, a 5.4-inch outer display, A20 Pro, and reimagined iOS 27 experiences.",
+    specs: {
+      "Display": "7.6-inch folding Super Retina XDR inner display + 5.4-inch outer display",
+      "Chip": "A20 Pro chip",
+      "Camera": "48MP Dual Fusion camera system",
+      "Battery": "Up to 44 hours video playback on the outer display",
+      "Storage": "256GB / 512GB / 1TB / 2TB",
+      "Body": "Titanium foldable design",
+      "Connectivity": "5G, Wi-Fi 7, Bluetooth 6, eSIM",
+      "OS": "iOS 27"
+    }
+  },
+  {
+    id: "iphone-18-pro",
+    name: "iPhone 18 Pro",
+    category: "iphone",
+    brand: "Apple",
+    price: 164900,
+    mrp: 164900,
+    badge: "New",
+    rating: 4.9,
+    reviews: 42,
+    stock: 12,
+    images: [IPHONE_OFFICIAL_IMAGES.pro18],
+    colors: [
+      { name: "Burgundy", hex: "#4d2028", image: IPHONE_OFFICIAL_IMAGES.pro18 },
+      { name: "Glacier", hex: "#dce7ee", image: IPHONE_OFFICIAL_IMAGES.pro18 },
+      { name: "Silver", hex: "#e3e4e6", image: IPHONE_OFFICIAL_IMAGES.pro18 },
+      { name: "Black", hex: "#1c1c1e", image: IPHONE_OFFICIAL_IMAGES.pro18 }
+    ],
+    storageOptions: [
+      { label: "256GB", extra: 0 },
+      { label: "512GB", extra: 25000 },
+      { label: "1TB", extra: 75000 },
+      { label: "2TB", extra: 150000 }
+    ],
+    short: "A big leap in battery life, performance, and camera.",
+    description: "iPhone 18 Pro features A20 Pro, a vapour chamber, a 48MP Pro Fusion camera system with variable aperture, and up to 43 hours of video playback on Pro Max.",
+    specs: {
+      "Display": "6.3-inch or 6.9-inch Super Retina XDR, ProMotion 120Hz",
+      "Chip": "A20 Pro chip",
+      "Camera": "48MP Pro Fusion camera system with variable aperture",
+      "Battery": "Up to 43 hours video playback on iPhone 18 Pro Max",
+      "Storage": "256GB / 512GB / 1TB / 2TB",
+      "Body": "Aluminium unibody",
+      "Connectivity": "5G, Wi-Fi 7, Bluetooth 6",
+      "OS": "iOS 27"
+    }
+  },
   {
     id: "iphone-17e",
     name: "iPhone 17e",
     category: "iphone",
     brand: "Apple",
-    price: 64900,
-    mrp: 64900,
+    price: 79900,
+    mrp: 79900,
     badge: "New",
     rating: 4.6,
     reviews: 128,
     stock: 24,
-    images: ["images/products/iphone-15-pink.png"],
+    images: [IPHONE_OFFICIAL_IMAGES.iphone17e],
     colors: [
-      { name: "Black", hex: "#1c1c1e", image: "images/products/iphone-15-pink.png" },
-      { name: "White", hex: "#f5f5f0", image: "images/products/iphone-15-pink.png" },
-      { name: "Soft Pink", hex: "#f2c6cf", image: "images/products/iphone-15-pink.png" }
+      { name: "Black", hex: "#1c1c1e", image: IPHONE_OFFICIAL_IMAGES.iphone17e },
+      { name: "White", hex: "#f5f5f0", image: IPHONE_OFFICIAL_IMAGES.iphone17e },
+      { name: "Soft Pink", hex: "#f2c6cf", image: IPHONE_OFFICIAL_IMAGES.iphone17e }
     ],
     storageOptions: [
       { label: "256GB", extra: 0 },
@@ -52,7 +164,7 @@ const PRODUCTS = [
       "Storage": "256GB / 512GB",
       "Body": "Aluminium, Ceramic Shield front and back",
       "Connectivity": "5G, USB-C, Wi-Fi 6, Bluetooth 5.3",
-      "OS": "iOS 19"
+      "OS": "iOS 27"
     }
   },
   {
@@ -60,19 +172,19 @@ const PRODUCTS = [
     name: "iPhone 17",
     category: "iphone",
     brand: "Apple",
-    price: 82900,
-    mrp: 82900,
+    price: 99900,
+    mrp: 99900,
     badge: "New",
     rating: 4.8,
     reviews: 96,
     stock: 30,
-    images: ["images/products/iphone-17-lavender.png"],
+    images: [IPHONE_OFFICIAL_IMAGES.iphone17],
     colors: [
-      { name: "Black", hex: "#1c1c1e", image: "images/products/iphone-17-lavender.png" },
-      { name: "White", hex: "#f5f5f5", image: "images/products/iphone-17-lavender.png" },
-      { name: "Mist Blue", hex: "#a9c4d9", image: "images/products/iphone-17-lavender.png" },
-      { name: "Lavender", hex: "#c9b8e0", image: "images/products/iphone-17-lavender.png" },
-      { name: "Sage", hex: "#b7c4ab", image: "images/products/iphone-17-lavender.png" }
+      { name: "Black", hex: "#1c1c1e", image: IPHONE_OFFICIAL_IMAGES.iphone17 },
+      { name: "White", hex: "#f5f5f5", image: IPHONE_OFFICIAL_IMAGES.iphone17 },
+      { name: "Mist Blue", hex: "#a9c4d9", image: IPHONE_OFFICIAL_IMAGES.iphone17 },
+      { name: "Lavender", hex: "#c9b8e0", image: IPHONE_OFFICIAL_IMAGES.iphone17 },
+      { name: "Sage", hex: "#b7c4ab", image: IPHONE_OFFICIAL_IMAGES.iphone17 }
     ],
     storageOptions: [
       { label: "256GB", extra: 0 },
@@ -89,7 +201,7 @@ const PRODUCTS = [
       "Storage": "256GB / 512GB",
       "Body": "Aluminium, Ceramic Shield 2 front and back",
       "Connectivity": "5G, USB-C, Wi-Fi 7, Bluetooth 6",
-      "OS": "iOS 19"
+      "OS": "iOS 27"
     }
   },
   {
@@ -97,18 +209,18 @@ const PRODUCTS = [
     name: "iPhone Air",
     category: "iphone",
     brand: "Apple",
-    price: 119900,
-    mrp: 119900,
+    price: 149900,
+    mrp: 149900,
     badge: "New",
     rating: 4.7,
     reviews: 64,
     stock: 18,
-    images: ["images/products/iphone-air-skyblue.png"],
+    images: [IPHONE_OFFICIAL_IMAGES.air],
     colors: [
-      { name: "Space Black", hex: "#1c1c1e", image: "images/products/iphone-air-skyblue.png" },
-      { name: "Cloud White", hex: "#f5f5f0", image: "images/products/iphone-air-skyblue.png" },
-      { name: "Light Gold", hex: "#e6d2a8", image: "images/products/iphone-air-skyblue.png" },
-      { name: "Sky Blue", hex: "#b9d9ef", image: "images/products/iphone-air-skyblue.png" }
+      { name: "Space Black", hex: "#1c1c1e", image: IPHONE_OFFICIAL_IMAGES.air },
+      { name: "Cloud White", hex: "#f5f5f0", image: IPHONE_OFFICIAL_IMAGES.air },
+      { name: "Light Gold", hex: "#e6d2a8", image: IPHONE_OFFICIAL_IMAGES.air },
+      { name: "Sky Blue", hex: "#b9d9ef", image: IPHONE_OFFICIAL_IMAGES.air }
     ],
     storageOptions: [
       { label: "256GB", extra: 0 },
@@ -126,7 +238,7 @@ const PRODUCTS = [
       "Storage": "256GB / 512GB / 1TB",
       "Body": "Titanium frame, Ceramic Shield 2 front and back",
       "Connectivity": "5G (eSIM only), USB-C, Wi-Fi 7, Bluetooth 6",
-      "OS": "iOS 19"
+      "OS": "iOS 27"
     }
   },
   {
@@ -206,6 +318,43 @@ const PRODUCTS = [
       "Body": "Forged aluminium unibody, Ceramic Shield 2 front and back",
       "Connectivity": "5G, USB-C 3, Wi-Fi 7, Bluetooth 6",
       "OS": "iOS 19"
+    }
+  },
+  {
+    id: "iphone-16",
+    name: "iPhone 16",
+    category: "iphone",
+    brand: "Apple",
+    price: 89900,
+    mrp: 89900,
+    badge: null,
+    rating: 4.7,
+    reviews: 118,
+    stock: 20,
+    images: [IPHONE_OFFICIAL_IMAGES.iphone16],
+    colors: [
+      { name: "Ultramarine", hex: "#8aa7e8", image: IPHONE_OFFICIAL_IMAGES.iphone16 },
+      { name: "Teal", hex: "#8fc4bd", image: IPHONE_OFFICIAL_IMAGES.iphone16 },
+      { name: "Pink", hex: "#f1b8c8", image: IPHONE_OFFICIAL_IMAGES.iphone16 },
+      { name: "White", hex: "#f5f5f0", image: IPHONE_OFFICIAL_IMAGES.iphone16 },
+      { name: "Black", hex: "#1c1c1e", image: IPHONE_OFFICIAL_IMAGES.iphone16 }
+    ],
+    storageOptions: [
+      { label: "128GB", extra: 0 },
+      { label: "256GB", extra: 10000 },
+      { label: "512GB", extra: 30000 }
+    ],
+    short: "Built for Apple Intelligence with the A18 chip.",
+    description: "iPhone 16 features the A18 chip, Camera Control, Action button, and a 48MP Fusion camera in a durable aluminium design.",
+    specs: {
+      "Display": "6.1-inch Super Retina XDR",
+      "Chip": "A18 chip",
+      "Camera": "48MP Fusion camera",
+      "Battery": "Up to 22 hours video playback",
+      "Storage": "128GB / 256GB / 512GB",
+      "Body": "Aluminium frame, Ceramic Shield front",
+      "Connectivity": "5G, USB-C, Wi-Fi 7, Bluetooth 5.3",
+      "OS": "iOS 27 compatible"
     }
   },
 
