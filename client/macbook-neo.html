@@ -13,13 +13,14 @@
 /* MacBook Neo Custom Page Styles */
 .neo-subnav {
   position: sticky;
-  top: 50px;
-  z-index: 900;
+  top: var(--header-h, 52px);
+  z-index: 490;
   background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid rgba(0,0,0,0.1);
   padding: 12px 0;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .neo-subnav-inner {
   display: flex;
@@ -43,6 +44,28 @@
 .neo-subnav-price strong {
   color: var(--text-dark, #1d1d1f);
   font-size: 16px;
+}
+
+@media (max-width: 600px) {
+  .neo-subnav {
+    padding: 10px 0;
+  }
+  .neo-subnav-title {
+    font-size: 16px;
+  }
+  .neo-subnav-right {
+    gap: 10px;
+  }
+  .neo-subnav-price {
+    font-size: 12px;
+  }
+  .neo-subnav-price strong {
+    font-size: 13px;
+  }
+  .neo-subnav .btn {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
 }
 .neo-hero-section {
   padding: 70px 20px 40px;
@@ -233,8 +256,15 @@
         Starting at ₹69,900* | HDFC & ICICI Bank Instant Cashback up to ₹5,000 | EMI from ₹5,825/mo
       </div>
 
+      <div class="neo-hero-actions" style="margin: 20px 0 32px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+        <button type="button" class="btn btn-pill-dark" onclick="document.getElementById('buy-section').scrollIntoView({behavior:'smooth'})">Buy Now</button>
+        <a href="product.html?id=macbook-neo" class="btn btn-pill-outline">View Product Details &rarr;</a>
+      </div>
+
       <div class="neo-showcase-stage">
-        <img id="heroShowcaseImg" src="images/products/macbook-neo-citrus.png" alt="MacBook Neo" class="neo-showcase-img">
+        <a href="product.html?id=macbook-neo" title="View MacBook Neo Details">
+          <img id="heroShowcaseImg" src="images/products/macbook-neo-citrus.png" alt="MacBook Neo" class="neo-showcase-img" style="cursor: pointer;">
+        </a>
       </div>
     </div>
   </section>
