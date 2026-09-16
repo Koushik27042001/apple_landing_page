@@ -7,11 +7,13 @@ const { connectMongo, getDbMode } = require("./src/lib/mongo");
 const productsStore = require("./src/lib/productsStore");
 const couponsStore = require("./src/lib/couponsStore");
 const settingsStore = require("./src/lib/settingsStore");
+const bannersStore = require("./src/lib/bannersStore");
 
 const productsRoute = require("./src/routes/products");
 const ordersRoute = require("./src/routes/orders");
 const paymentsRoute = require("./src/routes/payments");
 const couponsRoute = require("./src/routes/coupons");
+const bannersRoute = require("./src/routes/banners");
 const adminRoute = require("./src/routes/admin");
 
 const app = express();
@@ -21,7 +23,7 @@ const allowedOrigins = (process.env.CORS_ORIGIN || "*").split(",").map(function 
 app.use(cors({ origin: allowedOrigins.includes("*") ? true : allowedOrigins }));
 
 app.use("/api/payments/webhook", express.raw({ type: "application/json" }));
-app.use(express.json({ limit: "2mb" }));
+app.use(express.json({ limit: "10mb" }));
 
 app.get("/api/health", function (req, res) {
   res.json({
@@ -55,6 +57,7 @@ app.use("/api/products", productsRoute);
 app.use("/api/orders", ordersRoute);
 app.use("/api/payments", paymentsRoute);
 app.use("/api/coupons", couponsRoute);
+app.use("/api/banners", bannersRoute);
 app.use("/api/admin", adminRoute);
 
 const clientDir = path.join(__dirname, "../client");
@@ -75,6 +78,7 @@ async function start() {
   await connectMongo();
   await productsStore.seedIfNeeded();
   await couponsStore.seedIfNeeded();
+  await bannersStore.seedIfNeeded();
   await settingsStore.get();
 
   app.listen(PORT, function () {

@@ -102,6 +102,23 @@ const adminSessionSchema = new mongoose.Schema(
 
 adminSessionSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
+const bannerSchema = new mongoose.Schema(
+  {
+    id: { type: String, required: true, unique: true, index: true },
+    title: { type: String, required: true },
+    subtitle: { type: String, default: "" },
+    badge: { type: String, default: null },
+    image: { type: String, default: "" },
+    link: { type: String, default: "#" },
+    btnText: { type: String, default: "Learn More" },
+    placement: { type: String, default: "hero" },
+    category: { type: String, default: "all" },
+    active: { type: Boolean, default: true },
+    sortOrder: { type: Number, default: 0 }
+  },
+  { timestamps: true, versionKey: false }
+);
+
 function toPlain(doc) {
   if (!doc) return null;
   const obj = typeof doc.toObject === "function" ? doc.toObject() : doc;
@@ -118,6 +135,7 @@ const Coupon = mongoose.models.Coupon || mongoose.model("Coupon", couponSchema);
 const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
 const Settings = mongoose.models.Settings || mongoose.model("Settings", settingsSchema);
 const AdminSession = mongoose.models.AdminSession || mongoose.model("AdminSession", adminSessionSchema);
+const Banner = mongoose.models.Banner || mongoose.model("Banner", bannerSchema);
 
 module.exports = {
   Product,
@@ -126,5 +144,7 @@ module.exports = {
   Order,
   Settings,
   AdminSession,
+  Banner,
   toPlain
 };
+

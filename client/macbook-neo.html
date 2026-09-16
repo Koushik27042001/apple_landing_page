@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MacBook Neo - Apple (IN) | Buy MacBook Neo Online</title>
+<meta name="description" content="Introducing MacBook Neo. Stunning colours, durable aluminium design, 13-inch Liquid Retina display, all-day battery life, A18 Pro chip and Apple Intelligence.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/enhancements.css">
+<link rel="stylesheet" href="css/chip-family.css">
+<style>
+/* MacBook Neo Custom Page Styles */
+.neo-subnav {
+  position: sticky;
+  top: 50px;
+  z-index: 900;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding: 12px 0;
+}
+.neo-subnav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.neo-subnav-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark, #1d1d1f);
+}
+.neo-subnav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.neo-subnav-price {
+  font-size: 14px;
+  color: var(--text-muted, #86868b);
+}
+.neo-subnav-price strong {
+  color: var(--text-dark, #1d1d1f);
+  font-size: 16px;
+}
+.neo-hero-section {
+  padding: 70px 20px 40px;
+  text-align: center;
+  background: radial-gradient(circle at 50% 30%, rgba(229, 188, 53, 0.12) 0%, rgba(255, 255, 255, 0) 70%), #fafafa;
+  overflow: hidden;
+  position: relative;
+}
+.neo-eyebrow {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #d99b00;
+  margin-bottom: 10px;
+}
+.neo-hero-title {
+  font-size: clamp(38px, 6vw, 68px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  color: #1d1d1f;
+  margin-bottom: 16px;
+  line-height: 1.08;
+}
+.neo-hero-desc {
+  font-size: 20px;
+  color: #515154;
+  max-width: 780px;
+  margin: 0 auto 28px;
+  line-height: 1.5;
+}
+.neo-hero-price-badge {
+  display: inline-block;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 36px;
+}
+.neo-color-switcher-section {
+  padding: 60px 20px;
+  background: #ffffff;
+  text-align: center;
+}
+.color-picker-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #1d1d1f;
+}
+.color-picker-subtitle {
+  font-size: 16px;
+  color: #86868b;
+  margin-bottom: 30px;
+}
+.color-swatches {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+.color-swatch-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  padding: 3px;
+  cursor: pointer;
+  background: transparent;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.color-swatch-btn.active {
+  border-color: #0071e3;
+  transform: scale(1.1);
+}
+.color-swatch-dot {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
+.neo-showcase-stage {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+.neo-showcase-img {
+  width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.neo-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+.neo-feature-card {
+  background: #f5f5f7;
+  border-radius: 24px;
+  padding: 36px 28px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.neo-feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+}
+.neo-feature-card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 10px;
+}
+.neo-feature-card p {
+  font-size: 15px;
+  color: #6e6e73;
+  line-height: 1.6;
+}
+.neo-card-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #0071e3;
+  margin-bottom: 12px;
+}
+.specs-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.specs-matrix-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e5e7;
+  font-size: 15px;
+}
+.specs-matrix-table td:first-child {
+  font-weight: 600;
+  color: #1d1d1f;
+  width: 30%;
+}
+.specs-matrix-table td:last-child {
+  color: #515154;
+}
+.neo-buy-section {
+  background: linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%);
+  padding: 80px 20px;
+  text-align: center;
+  border-top: 1px solid #e5e5e7;
+}
+</style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<!-- MacBook Neo Local Subnav -->
+<div class="neo-subnav">
+  <div class="container neo-subnav-inner">
+    <div class="neo-subnav-title">MacBook Neo</div>
+    <div class="neo-subnav-right">
+      <div class="neo-subnav-price">From <strong>₹69,900</strong></div>
+      <button class="btn btn-pill-dark" id="subnavBuyBtn">Buy Now</button>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- Hero Section -->
+  <section class="neo-hero-section">
+    <div class="container">
+      <div class="neo-eyebrow">All-New MacBook Lineup</div>
+      <h1 class="neo-hero-title">MacBook Neo.<br>Fresh. Powerful. Colorfully You.</h1>
+      <p class="neo-hero-desc">Stunning colours. Durable aluminium design. 13-inch Liquid Retina display. All-day 18-hour battery life. Powered by Apple A18 Pro chip and Apple Intelligence.</p>
+      
+      <div class="neo-hero-price-badge">
+        Starting at ₹69,900* | HDFC & ICICI Bank Instant Cashback up to ₹5,000 | EMI from ₹5,825/mo
+      </div>
+
+      <div class="neo-showcase-stage">
+        <img id="heroShowcaseImg" src="images/products/macbook-neo-citrus.png" alt="MacBook Neo" class="neo-showcase-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Color Switcher Section -->
+  <section class="neo-color-switcher-section">
+    <div class="container">
+      <h2 class="color-picker-title">Four vivid finishes. One durable design.</h2>
+      <p class="color-picker-subtitle" id="selectedColorLabel">Selected finish: <strong>Citrus</strong></p>
+      
+      <div class="color-swatches">
+        <button type="button" class="color-swatch-btn active" data-color="Citrus" data-img="images/products/macbook-neo-citrus.png" title="Citrus">
+          <div class="color-swatch-dot" style="background:#e5bc35;"></div>
+        </button>
+        <button type="button" class="color-swatch-btn" data-color="Indigo" data-img="images/products/macbook-neo-indigo.png" title="Indigo">
+          <div class="color-swatch-dot" style="background:#394b68;"></div>
+        </button>
+        <button type="button" class="color-swatch-btn" data-color="Blush" data-img="images/products/macbook-neo-citrus.png" title="Blush">
+          <div class="color-swatch-dot" style="background:#e6b3b8;"></div>
+        </button>
+        <button type="button" class="color-swatch-btn" data-color="Silver" data-img="images/products/macbook-neo-citrus.png" title="Silver">
+          <div class="color-swatch-dot" style="background:#e3e4e6;"></div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Cards Grid -->
+  <section class="container">
+    <div class="section-head text-center reveal" style="margin-top:40px;">
+      <span class="eyebrow">Packed with Innovation</span>
+      <h2>Designed for everything you do.</h2>
+    </div>
+
+    <div class="neo-features-grid">
+      
+      <div class="neo-feature-card">
+        <span class="neo-card-tag">Performance</span>
+        <h3>Apple A18 Pro Chip</h3>
+        <p>Built on second-generation 3-nanometer technology. 6-core CPU, 5-core GPU, and 16-core Neural Engine deliver incredible speed for multitasking, creative editing, and gaming with hardware-accelerated ray tracing.</p>
+      </div>
+
+      <div class="neo-feature-card">
+        <span class="neo-card-tag">Battery Life</span>
+        <h3>Up to 18 Hours Battery</h3>
+        <p>Go from morning lectures to night work without plugging in. Energy-efficient Apple Silicon gives you extraordinary battery life so you can leave the power adapter behind.</p>
+      </div>
+
+      <div class="neo-feature-card">
+        <span class="neo-card-tag">Display</span>
+        <h3>13-inch Liquid Retina</h3>
+        <p>Supports 1 billion colours and 500 nits of brightness. Photos and videos burst with vibrant detail and contrast, while True Tone technology automatically adjusts color temperature for natural viewing.</p>
+      </div>
+
+      <div class="neo-feature-card">
+        <span class="neo-card-tag">Camera & Video</span>
+        <h3>12MP Center Stage Camera</h3>
+        <p>Center Stage automatically keeps you in frame as you move around during FaceTime calls and Zoom meetings. Supports Desk View to share your workspace setup live.</p>
+      </div>
+
+      <div class="neo-feature-card">
+        <span class="neo-card-tag">Audio</span>
+        <h3>Spatial Audio & 4 Speakers</h3>
+        <p>Four-speaker sound system supports Spatial Audio with Dolby Atmos for wide soundstages. Studio-quality three-mic array isolates your voice so you come through loud and clear.</p>
+      </div>
+
+      <div class="neo-feature-card">
+        <span class="neo-card-tag">Security & Keyboard</span>
+        <h3>Magic Keyboard & Touch ID</h3>
+        <p>Color-coordinated Magic Keyboard provides a quiet, comfortable typing experience. Touch ID gives you fast, easy, and secure authentication to unlock your Mac and sign into apps.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Tech Specs Summary Section -->
+  <section class="container" style="max-width:1000px;margin:60px auto;">
+    <div class="section-head text-center">
+      <h2>Tech Specs Overview</h2>
+      <p>Everything you need to know about MacBook Neo.</p>
+    </div>
+    
+    <table class="specs-matrix-table">
+      <tbody>
+        <tr>
+          <td>Display</td>
+          <td>13-inch Liquid Retina display, 500 nits brightness, P3 wide color gamut, True Tone</td>
+        </tr>
+        <tr>
+          <td>Processor</td>
+          <td>Apple A18 Pro chip (6-core CPU, 5-core GPU, 16-core Neural Engine)</td>
+        </tr>
+        <tr>
+          <td>Unified Memory</td>
+          <td>8GB or 16GB unified memory</td>
+        </tr>
+        <tr>
+          <td>Storage Tiers</td>
+          <td>128GB / 256GB / 512GB SSD options</td>
+        </tr>
+        <tr>
+          <td>Camera</td>
+          <td>12MP Center Stage camera with 1080p HD video & Desk View support</td>
+        </tr>
+        <tr>
+          <td>Audio</td>
+          <td>4-speaker Spatial Audio system with Dolby Atmos, 3-mic studio array</td>
+        </tr>
+        <tr>
+          <td>Ports</td>
+          <td>2x Thunderbolt / USB 4 ports, 3.5 mm headphone jack</td>
+        </tr>
+        <tr>
+          <td>Wireless</td>
+          <td>Wi-Fi 6E (802.11ax) + Bluetooth 5.3</td>
+        </tr>
+        <tr>
+          <td>Weight</td>
+          <td>1.22 kg (2.7 pounds) ultra-lightweight aluminium unibody</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Buy & Checkout Section -->
+  <section class="neo-buy-section" id="buy-section">
+    <div class="container" style="max-width:700px;">
+      <h2 style="font-size:36px;font-weight:700;margin-bottom:12px;color:#1d1d1f;">Buy MacBook Neo</h2>
+      <p style="font-size:18px;color:#86868b;margin-bottom:30px;">Choose your configuration and get free delivery across India.</p>
+
+      <div style="background:#ffffff;border-radius:20px;padding:30px;box-shadow:0 8px 30px rgba(0,0,0,0.06);text-align:left;margin-bottom:30px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <div>
+            <h3 style="font-size:22px;font-weight:700;margin:0;">MacBook Neo (13-inch)</h3>
+            <span style="font-size:14px;color:#86868b;">Apple A18 Pro Chip · 8GB Memory · 128GB SSD</span>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:24px;font-weight:700;color:#1d1d1f;">₹69,900</div>
+            <span style="font-size:12px;color:#34c759;font-weight:600;">Includes ₹5,000 Bank Cashback</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="font-weight:600;display:block;margin-bottom:8px;font-size:14px;">Select Storage Tier:</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+            <button class="btn btn-outline storage-opt-btn active" data-extra="0" data-label="128GB SSD" style="border-radius:12px;padding:12px 8px;font-size:14px;text-align:center;">128GB SSD<br><small>Base</small></button>
+            <button class="btn btn-outline storage-opt-btn" data-extra="10000" data-label="256GB SSD" style="border-radius:12px;padding:12px 8px;font-size:14px;text-align:center;">256GB SSD<br><small>+₹10,000</small></button>
+            <button class="btn btn-outline storage-opt-btn" data-extra="25000" data-label="512GB SSD" style="border-radius:12px;padding:12px 8px;font-size:14px;text-align:center;">512GB SSD<br><small>+₹25,000</small></button>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:24px;">
+          <button class="btn btn-primary btn-block" id="addToBagBtn" style="padding:14px;font-size:16px;font-weight:600;">Add to Bag — <span id="finalPriceDisplay">₹69,900</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+<div id="whatsapp-float"></div>
+
+<script src="js/data.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script src="js/catalog-sync.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  if (typeof renderHeader === "function") renderHeader("macbook-neo");
+  if (typeof renderFooter === "function") renderFooter();
+  if (typeof renderWhatsappFloat === "function") renderWhatsappFloat();
+
+  let selectedColor = "Citrus";
+  let basePrice = 69900;
+  let selectedStorageExtra = 0;
+
+  // Swatch switcher logic
+  const swatches = document.querySelectorAll(".color-swatch-btn");
+  const heroImg = document.getElementById("heroShowcaseImg");
+  const colorLabel = document.getElementById("selectedColorLabel");
+
+  swatches.forEach(btn => {
+    btn.addEventListener("click", function () {
+      swatches.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      selectedColor = btn.getAttribute("data-color");
+      const imgPath = btn.getAttribute("data-img");
+      if (heroImg && imgPath) {
+        heroImg.style.opacity = "0.3";
+        setTimeout(() => {
+          heroImg.src = imgPath;
+          heroImg.style.opacity = "1";
+        }, 150);
+      }
+      if (colorLabel) {
+        colorLabel.innerHTML = "Selected finish: <strong>" + selectedColor + "</strong>";
+      }
+    });
+  });
+
+  // Storage selection logic
+  const storageBtns = document.querySelectorAll(".storage-opt-btn");
+  const finalPriceDisplay = document.getElementById("finalPriceDisplay");
+
+  storageBtns.forEach(btn => {
+    btn.addEventListener("click", function () {
+      storageBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      selectedStorageExtra = Number(btn.getAttribute("data-extra") || 0);
+      const total = basePrice + selectedStorageExtra;
+      if (finalPriceDisplay) {
+        finalPriceDisplay.textContent = "₹" + total.toLocaleString("en-IN");
+      }
+    });
+  });
+
+  // Scroll to buy section
+  document.getElementById("subnavBuyBtn").addEventListener("click", function () {
+    const buySec = document.getElementById("buy-section");
+    if (buySec) buySec.scrollIntoView({ behavior: "smooth" });
+  });
+
+  // Add to bag logic
+  document.getElementById("addToBagBtn").addEventListener("click", function () {
+    if (typeof Cart !== "undefined" && typeof Cart.add === "function") {
+      const activeStorage = document.querySelector(".storage-opt-btn.active");
+      const storageLabel = activeStorage ? activeStorage.getAttribute("data-label") : "128GB SSD";
+      
+      Cart.add({
+        id: "macbook-neo",
+        name: "MacBook Neo (" + selectedColor + ", " + storageLabel + ")",
+        price: basePrice + selectedStorageExtra,
+        image: "images/products/macbook-neo-citrus.png"
+      });
+      if (typeof Cart.open === "function") Cart.open();
+    } else {
+      alert("Added MacBook Neo to Bag!");
+    }
+  });
+});
+</script>
+</body>
+</html>

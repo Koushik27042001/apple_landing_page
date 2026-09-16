@@ -7,6 +7,7 @@
     view: "dashboard",
     products: [],
     categories: [],
+    banners: [],
     coupons: [],
     orders: [],
     settings: null,
@@ -114,7 +115,78 @@
     });
 
     $("#productForm").addEventListener("submit", saveProduct);
+    $("#bannerForm").addEventListener("submit", saveBanner);
     $("#couponForm").addEventListener("submit", saveCoupon);
+
+    wireFileUpload("#p_image_file", "#p_image", "#p_image_preview_wrap", "#p_image_preview", "#p_image_status", "product");
+    wireFileUpload("#b_image_file", "#b_image", "#b_image_preview_wrap", "#b_image_preview", "#b_image_status", "banner");
+  }
+
+  function wireFileUpload(fileInputId, urlInputId, previewWrapId, previewImgId, statusId, defaultFilename) {
+    const fileInput = $(fileInputId);
+    const urlInput = $(urlInputId);
+    const wrap = $(previewWrapId);
+    const img = $(previewImgId);
+    const status = $(statusId);
+    if (!fileInput || !urlInput) return;
+
+    urlInput.addEventListener("input", function () {
+      updatePreview(urlInput.value);
+    });
+
+    fileInput.addEventListener("change", function () {
+      const file = fileInput.files[0];
+      if (!file) return;
+
+      if (status) status.textContent = "Uploading image...";
+      if (wrap) wrap.style.display = "flex";
+
+      const reader = new FileReader();
+      reader.onload = async function (e) {
+        const base64 = e.target.result;
+        if (img) {
+          img.src = base64;
+          img.style.display = "block";
+        }
+        try {
+          const res = await api("/admin/upload", {
+            method: "POST",
+            body: JSON.stringify({ image: base64, filename: defaultFilename || "upload" })
+          });
+          if (res && res.url) {
+            urlInput.value = res.url;
+            if (status) status.textContent = "✓ Image uploaded successfully";
+            toast("Image file uploaded successfully");
+          }
+        } catch (err) {
+          if (status) status.textContent = "❌ Upload failed: " + err.message;
+          toast("Upload error: " + err.message);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function updateImagePreview(urlVal, previewWrapId, previewImgId, statusId) {
+    const wrap = $(previewWrapId);
+    const img = $(previewImgId);
+    const status = $(statusId);
+    if (urlVal && urlVal.trim()) {
+      let src = urlVal.trim();
+      if (!src.startsWith("http") && !src.startsWith("data:") && !src.startsWith("/")) {
+        src = "../" + src;
+      }
+      if (img) {
+        img.src = src;
+        img.style.display = "block";
+      }
+      if (wrap) wrap.style.display = "flex";
+      if (status) status.textContent = "";
+    } else {
+      if (img) img.style.display = "none";
+      if (wrap) wrap.style.display = "none";
+      if (status) status.textContent = "";
+    }
   }
 
   function navigate(view) {
@@ -125,6 +197,7 @@
     const titles = {
       dashboard: "Dashboard",
       products: "Products",
+      banners: "Banners & Advertisements",
       coupons: "Coupons",
       orders: "Orders",
       settings: "Settings"
@@ -135,6 +208,10 @@
     if (view === "products") {
       actions.innerHTML = '<button class="btn btn-primary" id="addProductBtn">Add product</button>';
       $("#addProductBtn").onclick = function () { openProductModal(); };
+    }
+    if (view === "banners") {
+      actions.innerHTML = '<button class="btn btn-primary" id="addBannerBtn">Add Banner / Ad</button>';
+      $("#addBannerBtn").onclick = function () { openBannerModal(); };
     }
     if (view === "coupons") {
       actions.innerHTML = '<button class="btn btn-primary" id="addCouponBtn">Add coupon</button>';
@@ -149,6 +226,7 @@
     try {
       if (state.view === "dashboard") await renderDashboard(content);
       if (state.view === "products") await renderProducts(content);
+      if (state.view === "banners") await renderBanners(content);
       if (state.view === "coupons") await renderCoupons(content);
       if (state.view === "orders") await renderOrders(content);
       if (state.view === "settings") await renderSettings(content);
@@ -162,6 +240,7 @@
     el.innerHTML =
       '<div class="stats">' +
         statCard("Products", stats.products) +
+        statCard("Active Banners", (stats.activeBanners || 0) + " / " + (stats.banners || 0)) +
         statCard("Active coupons", stats.activeCoupons + " / " + stats.coupons) +
         statCard("Orders", stats.orders) +
         statCard("Paid revenue", formatINR(stats.revenue)) +
@@ -200,13 +279,19 @@
           '<div class="toolbar"><input id="productSearch" placeholder="Search products…" value="' + escapeAttr(state.productQuery) + '"></div>' +
         "</div>" +
         (list.length
-          ? '<table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Badge</th><th></th></tr></thead><tbody>' +
+          ? '<table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Badge</th><th>Actions</th></tr></thead><tbody>' +
             list.map(function (p) {
+              const imgPath = p.images && p.images[0] ? (p.images[0].startsWith("http") || p.images[0].startsWith("data:") ? p.images[0] : "../" + p.images[0]) : "";
+              const thumb = imgPath ? '<img src="' + escapeAttr(imgPath) + '" style="width:40px;height:40px;object-fit:cover;border-radius:6px;margin-right:10px;vertical-align:middle;background:#f5f5f7;" onerror="this.style.display=\'none\'">' : '';
+              const stockBadge = Number(p.stock) <= 5
+                ? '<span class="badge badge-amber">' + p.stock + ' (Low)</span>'
+                : '<span class="badge badge-green">' + p.stock + '</span>';
+
               return "<tr>" +
-                "<td><strong>" + escapeHtml(p.name) + "</strong><div class='muted'>" + escapeHtml(p.id) + "</div></td>" +
-                "<td>" + escapeHtml(p.category) + "</td>" +
-                "<td>" + formatINR(p.price) + "</td>" +
-                "<td>" + (Number(p.stock) <= 5 ? '<span class="badge badge-amber">' + p.stock + "</span>" : p.stock) + "</td>" +
+                "<td><div style='display:flex;align-items:center;'>" + thumb + "<div><strong>" + escapeHtml(p.name) + "</strong><div class='muted'>" + escapeHtml(p.id) + "</div></div></div></td>" +
+                "<td><span class='badge badge-blue'>" + escapeHtml(p.category) + "</span></td>" +
+                "<td><strong>" + formatINR(p.price) + "</strong>" + (p.mrp && p.mrp > p.price ? " <span class='muted' style='text-decoration:line-through;font-size:12px;'>" + formatINR(p.mrp) + "</span>" : "") + "</td>" +
+                "<td>" + stockBadge + "</td>" +
                 "<td>" + (p.badge ? '<span class="badge badge-blue">' + escapeHtml(p.badge) + "</span>" : "—") + "</td>" +
                 '<td class="actions">' +
                   '<button class="btn btn-sm btn-ghost" data-edit-product="' + escapeAttr(p.id) + '">Edit</button>' +
@@ -244,26 +329,34 @@
   }
 
   function openProductModal(product) {
-    $("#productModalTitle").textContent = product ? "Edit product" : "Add product";
+    product = product || null;
+    $("#productModalTitle").textContent = product ? "Edit Product: " + product.name : "Add New Product";
     $("#p_id_existing").value = product ? product.id : "";
     $("#p_id").value = product ? product.id : "";
-    $("#p_id").disabled = !!product;
+    $("#p_id").disabled = Boolean(product);
     $("#p_name").value = product ? product.name : "";
     $("#p_category").value = product ? product.category : "accessories";
     $("#p_badge").value = product && product.badge ? product.badge : "";
     $("#p_price").value = product ? product.price : "";
-    $("#p_mrp").value = product ? product.mrp : "";
-    $("#p_stock").value = product ? product.stock : 10;
+    $("#p_mrp").value = product && product.mrp != null ? product.mrp : "";
+    $("#p_stock").value = product && product.stock != null ? product.stock : 10;
     $("#p_brand").value = product ? product.brand : "Apple";
-    $("#p_image").value = product && product.images && product.images[0] ? product.images[0] : "";
-    $("#p_short").value = product ? product.short : "";
-    $("#p_description").value = product ? product.description : "";
+
+    const imageUrl = product && product.images && product.images[0] ? product.images[0] : "";
+    $("#p_image").value = imageUrl;
+    if ($("#p_image_file")) $("#p_image_file").value = "";
+    updateImagePreview(imageUrl, "#p_image_preview_wrap", "#p_image_preview", "#p_image_status");
+
+    $("#p_short").value = product ? product.short || "" : "";
+    $("#p_description").value = product ? product.description || "" : "";
     $("#productModal").showModal();
   }
 
   async function saveProduct(e) {
     e.preventDefault();
     const existingId = $("#p_id_existing").value;
+    const imgVal = $("#p_image").value.trim();
+
     const payload = {
       id: $("#p_id").value.trim() || undefined,
       name: $("#p_name").value.trim(),
@@ -273,13 +366,16 @@
       mrp: $("#p_mrp").value === "" ? undefined : Number($("#p_mrp").value),
       stock: Number($("#p_stock").value),
       brand: $("#p_brand").value.trim() || "Apple",
-      images: $("#p_image").value.trim() ? [$("#p_image").value.trim()] : [],
+      images: imgVal ? [imgVal] : [],
       short: $("#p_short").value.trim(),
       description: $("#p_description").value.trim(),
       colors: [],
       storageOptions: [],
       specs: {}
     };
+
+    const btn = $("#productSaveBtn");
+    btn.disabled = true;
     try {
       if (existingId) {
         const existing = state.products.find(function (p) { return p.id === existingId; }) || {};
@@ -291,15 +387,152 @@
           method: "PUT",
           body: JSON.stringify(payload)
         });
-        toast("Product updated");
+        toast("Product updated successfully");
       } else {
         await api("/admin/products", { method: "POST", body: JSON.stringify(payload) });
-        toast("Product created");
+        toast("Product created successfully");
       }
       $("#productModal").close();
-      if (state.view === "products") renderView();
+      if (state.view === "products") renderProducts($("#content"));
     } catch (ex) {
       toast(ex.message);
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  async function renderBanners(el) {
+    const data = await api("/admin/banners");
+    state.banners = data.banners || [];
+    el.innerHTML =
+      '<div class="panel">' +
+        '<div class="panel-head">' +
+          "<h3>" + state.banners.length + " Banners & Advertisements</h3>" +
+          '<span class="muted">Active on storefront: ' + state.banners.filter(function (b) { return b.active; }).length + "</span>" +
+        "</div>" +
+        (state.banners.length
+          ? '<table><thead><tr><th>Banner</th><th>Placement</th><th>Target Category</th><th>CTA Button</th><th>Status</th><th>Order</th><th>Actions</th></tr></thead><tbody>' +
+            state.banners.map(function (b) {
+              const activeBadge = b.active
+                ? '<span class="badge badge-green">Active</span>'
+                : '<span class="badge badge-amber">Inactive</span>';
+              const thumb = b.image ? '<img src="../' + escapeAttr(b.image) + '" style="width:36px;height:36px;object-fit:cover;border-radius:4px;margin-right:10px;vertical-align:middle;background:#eee;" onerror="this.style.display=\'none\'">' : '';
+              return "<tr>" +
+                "<td><div style='display:flex;align-items:center;'>" + thumb + "<div><strong>" + escapeHtml(b.title) + "</strong>" +
+                  (b.badge ? " <span class='badge badge-blue'>" + escapeHtml(b.badge) + "</span>" : "") +
+                  "<div class='muted'>" + escapeHtml(b.subtitle || b.id) + "</div></div></div></td>" +
+                "<td><span class='badge badge-blue'>" + escapeHtml(b.placement || "hero") + "</span></td>" +
+                "<td>" + escapeHtml(b.category || "all") + "</td>" +
+                "<td><a href='../" + escapeAttr(b.link || "#") + "' target='_blank' style='text-decoration:none;color:var(--accent,#0071e3);font-weight:500;'>" + escapeHtml(b.btnText || "Learn More") + " →</a></td>" +
+                "<td>" + activeBadge + "</td>" +
+                "<td>" + (b.sortOrder || 0) + "</td>" +
+                "<td class='actions'>" +
+                  '<button class="btn btn-ghost btn-sm b-edit" data-id="' + escapeAttr(b.id) + '">Edit</button>' +
+                  '<button class="btn btn-ghost btn-sm b-toggle" data-id="' + escapeAttr(b.id) + '">' + (b.active ? "Deactivate" : "Activate") + '</button>' +
+                  '<button class="btn btn-danger btn-sm b-del" data-id="' + escapeAttr(b.id) + '">Delete</button>' +
+                "</td>" +
+              "</tr>";
+            }).join("") +
+            "</tbody></table>"
+          : '<div class="empty">No banners or advertisements created yet. Click "Add Banner / Ad" to create one.</div>') +
+      "</div>";
+
+    el.querySelectorAll(".b-edit").forEach(function (btn) {
+      btn.onclick = function () {
+        const id = btn.getAttribute("data-id");
+        const b = state.banners.find(function (x) { return x.id === id; });
+        if (b) openBannerModal(b);
+      };
+    });
+
+    el.querySelectorAll(".b-toggle").forEach(function (btn) {
+      btn.onclick = async function () {
+        const id = btn.getAttribute("data-id");
+        const b = state.banners.find(function (x) { return x.id === id; });
+        if (!b) return;
+        try {
+          await api("/admin/banners/" + encodeURIComponent(id), {
+            method: "PUT",
+            body: JSON.stringify({ active: !b.active })
+          });
+          toast("Banner " + (b.active ? "deactivated" : "activated"));
+          renderBanners(el);
+        } catch (ex) { toast(ex.message); }
+      };
+    });
+
+    el.querySelectorAll(".b-del").forEach(function (btn) {
+      btn.onclick = async function () {
+        const id = btn.getAttribute("data-id");
+        if (!confirm("Are you sure you want to delete this banner advertisement?")) return;
+        try {
+          await api("/admin/banners/" + encodeURIComponent(id), { method: "DELETE" });
+          toast("Banner deleted");
+          renderBanners(el);
+        } catch (ex) { toast(ex.message); }
+      };
+    });
+  }
+
+  function openBannerModal(b) {
+    b = b || {};
+    $("#bannerModalTitle").textContent = b.id ? "Edit Banner / Advertisement" : "Add Banner / Advertisement";
+    $("#b_id_existing").value = b.id || "";
+    $("#b_title").value = b.title || "";
+    $("#b_id").value = b.id || "";
+    $("#b_id").disabled = Boolean(b.id);
+    $("#b_placement").value = b.placement || "hero";
+    $("#b_category").value = b.category || "all";
+    $("#b_badge").value = b.badge || "";
+    $("#b_btnText").value = b.btnText || "Learn More";
+
+    const imageUrl = b.image || "";
+    $("#b_image").value = imageUrl;
+    if ($("#b_image_file")) $("#b_image_file").value = "";
+    updateImagePreview(imageUrl, "#b_image_preview_wrap", "#b_image_preview", "#b_image_status");
+
+    $("#b_link").value = b.link || "";
+    $("#b_subtitle").value = b.subtitle || "";
+    $("#b_sortOrder").value = b.sortOrder != null ? b.sortOrder : 1;
+    $("#b_active").checked = b.active !== false;
+    $("#bannerModal").showModal();
+  }
+
+  async function saveBanner(e) {
+    e.preventDefault();
+    const existingId = $("#b_id_existing").value;
+    const title = $("#b_title").value.trim();
+    if (!title) return toast("Title is required");
+
+    const payload = {
+      id: existingId || $("#b_id").value.trim(),
+      title: title,
+      placement: $("#b_placement").value,
+      category: $("#b_category").value,
+      badge: $("#b_badge").value.trim() || null,
+      btnText: $("#b_btnText").value.trim() || "Learn More",
+      image: $("#b_image").value.trim(),
+      link: $("#b_link").value.trim() || "#",
+      subtitle: $("#b_subtitle").value.trim(),
+      sortOrder: Number($("#b_sortOrder").value) || 0,
+      active: $("#b_active").checked
+    };
+
+    const isEdit = Boolean(existingId);
+    const url = isEdit ? "/admin/banners/" + encodeURIComponent(existingId) : "/admin/banners";
+    const method = isEdit ? "PUT" : "POST";
+
+    const btn = $("#bannerSaveBtn");
+    btn.disabled = true;
+    try {
+      await api(url, { method: method, body: JSON.stringify(payload) });
+      toast(isEdit ? "Banner updated successfully" : "Banner created successfully");
+      $("#bannerModal").close();
+      if (state.view === "banners") renderBanners($("#content"));
+    } catch (ex) {
+      toast(ex.message);
+    } finally {
+      btn.disabled = false;
     }
   }
 

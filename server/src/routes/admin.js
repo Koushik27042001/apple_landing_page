@@ -1,8 +1,11 @@
+const fs = require("fs");
+const path = require("path");
 const express = require("express");
 const store = require("../lib/store");
 const productsStore = require("../lib/productsStore");
 const couponsStore = require("../lib/couponsStore");
 const settingsStore = require("../lib/settingsStore");
+const bannersStore = require("../lib/bannersStore");
 const { login, logout, requireAdmin } = require("../lib/adminAuth");
 
 const router = express.Router();
@@ -39,12 +42,15 @@ router.get("/stats", requireAdmin, async function (req, res, next) {
     const orders = await store.readAll();
     const products = await productsStore.getProducts();
     const coupons = await couponsStore.getAll();
+    const banners = await bannersStore.getAll();
     const paid = orders.filter(function (o) { return o.status === "paid"; });
     const revenue = paid.reduce(function (sum, o) { return sum + (Number(o.total) || 0); }, 0);
     res.json({
       products: products.length,
       coupons: coupons.length,
       activeCoupons: coupons.filter(function (c) { return c.active; }).length,
+      banners: banners.length,
+      activeBanners: banners.filter(function (b) { return b.active; }).length,
       orders: orders.length,
       paidOrders: paid.length,
       revenue: revenue,
@@ -229,4 +235,82 @@ router.put("/settings", requireAdmin, async function (req, res, next) {
   }
 });
 
+/* ---------- Banners / Advertisements ---------- */
+
+router.get("/banners", requireAdmin, async function (req, res, next) {
+  try {
+    res.json({ banners: await bannersStore.getAll() });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/banners", requireAdmin, async function (req, res, next) {
+  try {
+    const body = req.body || {};
+    const title = String(body.title || "").trim();
+    if (!title) return res.status(400).json({ error: "Banner title is required." });
+    const id = body.id ? String(body.id).trim() : await bannersStore.uniqueId(title);
+    const updated = await bannersStore.upsert(Object.assign({}, body, { id: id, title: title }));
+    res.status(201).json({ banners: updated });
+  } catch (err) {
+    res.status(400).json({ error: err.message || "Could not save banner." });
+  }
+});
+
+router.put("/banners/:id", requireAdmin, async function (req, res, next) {
+  try {
+    const existing = await bannersStore.getById(req.params.id);
+    if (!existing) return res.status(404).json({ error: "Banner not found." });
+    const updated = await bannersStore.upsert(Object.assign({}, existing, req.body || {}, { id: existing.id }));
+    res.json({ banners: updated });
+  } catch (err) {
+    res.status(400).json({ error: err.message || "Could not update banner." });
+  }
+});
+
+router.delete("/banners/:id", requireAdmin, async function (req, res, next) {
+  try {
+    const ok = await bannersStore.remove(req.params.id);
+    if (!ok) return res.status(404).json({ error: "Banner not found." });
+    res.json({ ok: true, banners: ok });
+  } catch (err) {
+    next(err);
+  }
+});
+
+/* ---------- File Upload ---------- */
+
+router.post("/upload", requireAdmin, async function (req, res, next) {
+  try {
+    const { image, filename } = req.body || {};
+    if (!image) return res.status(400).json({ error: "No image payload provided." });
+
+    const matches = image.match(/^data:image\/([a-zA-Z0-9+\-]+);base64,(.+)$/);
+    if (!matches) return res.status(400).json({ error: "Invalid image format. Expected base64 data URL." });
+
+    let ext = matches[1].toLowerCase();
+    if (ext === "jpeg") ext = "jpg";
+    if (ext === "svg+xml") ext = "svg";
+    const base64Data = matches[2];
+
+    const uploadsDir = path.join(__dirname, "../../../client/images/uploads");
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+
+    const prefix = String(filename || "upload").toLowerCase().replace(/[^a-z0-9]/g, "_").slice(0, 24);
+    const safeName = (prefix || "img") + "_" + Date.now() + "." + ext;
+    const filePath = path.join(uploadsDir, safeName);
+    fs.writeFileSync(filePath, Buffer.from(base64Data, "base64"));
+
+    const publicUrl = "images/uploads/" + safeName;
+    res.json({ ok: true, url: publicUrl });
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
+
+

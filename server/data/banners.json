@@ -1,0 +1,44 @@
+{
+  "banners": [
+    {
+      "id": "iphone-duo-launch",
+      "title": "iPhone Duo",
+      "subtitle": "The largest iPhone display ever. Foldable, posable, standable. Featuring unique iOS experiences for ultimate versatility.",
+      "badge": "Pre-order starting at 5:30 PM IST on 16 October",
+      "image": "images/hero/iphone_duo__hefmlegzwbmi_large_2x.png",
+      "link": "category.html?cat=iphone",
+      "btnText": "Pre-order Now",
+      "placement": "hero",
+      "category": "iphone",
+      "active": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "festive-apple-sale",
+      "title": "Festive Season Offers",
+      "subtitle": "Get instant cashback up to ₹10,000 on eligible cards plus up to 12 months No Cost EMI.",
+      "badge": "Special Offer",
+      "image": "images/hero/shop__dmmu8wcl1iie_large_2x.png",
+      "link": "category.html?cat=mac",
+      "btnText": "Shop Offers",
+      "placement": "top_strip",
+      "category": "all",
+      "active": true,
+      "sortOrder": 2
+    },
+    {
+      "id": "applecare-plus-promo",
+      "title": "AppleCare+ Peace of Mind",
+      "subtitle": "Unlimited repairs for accidental damage protection with genuine Apple parts and expert support.",
+      "badge": "Protection Plan",
+      "image": "images/hero/ipad/accessories_d7234e26e.png",
+      "link": "category.html?cat=accessories",
+      "btnText": "Explore Plans",
+      "placement": "category_hero",
+      "category": "all",
+      "active": true,
+      "sortOrder": 3
+    }
+  ],
+  "updatedAt": "2026-09-15T17:53:05.209Z"
+}

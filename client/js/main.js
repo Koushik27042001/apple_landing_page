@@ -54,6 +54,7 @@ function renderHeader(active) {
         '<a href="index.html" class="logo"><span class="logo-mark">' + icon("sparkle", { size: 18 }) + '</span> Iswift Gadgets <span class="store-tag">Private Limited</span></a>' +
         '<nav class="main-nav">' +
           navLink("index.html", "Store", active === "home") +
+          navLink("macbook-neo.html", "MacBook Neo", active === "macbook-neo") +
           navLink("category.html?cat=mac", "Mac", active === "mac") +
           navLink("category.html?cat=ipad", "iPad", active === "ipad") +
           navLink("category.html?cat=iphone", "iPhone", active === "iphone") +
@@ -87,6 +88,7 @@ function renderHeader(active) {
         '</div>' +
       '</div>' +
       '<a href="index.html">Store</a>' +
+      '<a href="macbook-neo.html" style="font-weight:700;color:var(--accent,#0071e3);">MacBook Neo 🔥</a>' +
       '<a href="category.html?cat=mac">Mac</a>' +
       '<a href="category.html?cat=ipad">iPad</a>' +
       '<a href="category.html?cat=iphone">iPhone</a>' +

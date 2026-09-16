@@ -410,6 +410,42 @@ const PRODUCTS = [
     }
   },
   {
+    id: "macbook-neo",
+    name: "MacBook Neo",
+    category: "mac",
+    brand: "Apple",
+    price: 69900,
+    mrp: 74900,
+    badge: "New Release",
+    rating: 4.9,
+    reviews: 128,
+    stock: 25,
+    images: ["images/products/macbook-neo-citrus.png", "images/products/macbook-neo-indigo.png"],
+    colors: [
+      { name: "Citrus", hex: "#e5bc35", image: "images/products/macbook-neo-citrus.png" },
+      { name: "Indigo", hex: "#394b68", image: "images/products/macbook-neo-indigo.png" },
+      { name: "Blush", hex: "#e6b3b8", image: "images/products/macbook-neo-citrus.png" },
+      { name: "Silver", hex: "#e3e4e6", image: "images/products/macbook-neo-citrus.png" }
+    ],
+    storageOptions: [
+      { label: "8GB / 128GB SSD", extra: 0 },
+      { label: "8GB / 256GB SSD", extra: 10000 },
+      { label: "16GB / 512GB SSD", extra: 25000 }
+    ],
+    short: "Stunning colours. Durable aluminium design. Liquid Retina display. All-day battery life. Powered by A18 Pro.",
+    description: "Introducing MacBook Neo. Lightweight aluminium design, 13-inch Liquid Retina display, all-day 18-hour battery life, 12MP Center Stage camera, and powerful Apple Intelligence.",
+    specs: {
+      "Display": "13-inch Liquid Retina display, 500 nits, P3 wide colour",
+      "Chip": "Apple A18 Pro chip with 6-core CPU, 5-core GPU, 16-core Neural Engine",
+      "Memory": "8GB / 16GB unified memory",
+      "Battery": "Up to 18 hours battery life",
+      "Camera": "12MP Center Stage camera with Desk View support",
+      "Audio": "4-speaker Spatial Audio system with Dolby Atmos & Studio 3-mic array",
+      "Keyboard": "Color-coordinated Magic Keyboard with Touch ID",
+      "Ports": "2x Thunderbolt / USB 4 ports, 3.5 mm headphone jack"
+    }
+  },
+  {
     id: "macbook-air-13-m5",
     name: "MacBook Air 13\u2033 M5",
     category: "mac",
