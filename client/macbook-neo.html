@@ -12,11 +12,21 @@
 <style>
 /* MacBook Neo Custom Page Styles */
 .neo-subnav {
-  position: relative;
-  z-index: 10;
-  background: rgba(255, 255, 255, 0.95);
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  position: sticky;
+  top: var(--header-h, 52px);
+  z-index: 490;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
   padding: 12px 0;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform, opacity;
+}
+.neo-subnav.subnav-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
 }
 .neo-subnav-inner {
   display: flex;
@@ -434,6 +444,20 @@ document.addEventListener("DOMContentLoaded", function () {
   if (typeof renderHeader === "function") renderHeader("macbook-neo");
   if (typeof renderFooter === "function") renderFooter();
   if (typeof renderWhatsappFloat === "function") renderWhatsappFloat();
+
+  // Dynamic Scroll Subnav: disappears when scrolling down, pops up when scrolling up
+  let lastScrollY = window.scrollY;
+  const subnav = document.querySelector(".neo-subnav");
+
+  window.addEventListener("scroll", function () {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > 120 && currentScrollY > lastScrollY) {
+      if (subnav) subnav.classList.add("subnav-hidden");
+    } else {
+      if (subnav) subnav.classList.remove("subnav-hidden");
+    }
+    lastScrollY = currentScrollY;
+  }, { passive: true });
 
   let selectedColor = "Citrus";
   let basePrice = 69900;

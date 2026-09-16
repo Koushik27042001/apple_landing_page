@@ -118,6 +118,16 @@
     $("#bannerForm").addEventListener("submit", saveBanner);
     $("#couponForm").addEventListener("submit", saveCoupon);
 
+    const addColorBtn = $("#p_add_color_btn");
+    if (addColorBtn) {
+      addColorBtn.addEventListener("click", function () {
+        if (!state.modalColors) state.modalColors = [];
+        const mainImg = $("#p_image") ? $("#p_image").value.trim() : "";
+        state.modalColors.push({ name: "", hex: "#0071e3", image: mainImg });
+        renderProductColorRows();
+      });
+    }
+
     wireFileUpload("#p_image_file", "#p_image", "#p_image_preview_wrap", "#p_image_preview", "#p_image_status", "product");
     wireFileUpload("#b_image_file", "#b_image", "#b_image_preview_wrap", "#b_image_preview", "#b_image_status", "banner");
   }
@@ -287,8 +297,17 @@
                 ? '<span class="badge badge-amber">' + p.stock + ' (Low)</span>'
                 : '<span class="badge badge-green">' + p.stock + '</span>';
 
+              const colorsBadge = (p.colors && p.colors.length)
+                ? '<div style="display:flex;gap:3px;margin-top:4px;align-items:center;" title="' + escapeAttr(p.colors.map(function(c){return c.name;}).join(', ')) + '">' +
+                    p.colors.map(function (c) {
+                      return '<span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:' + escapeAttr(c.hex || '#ccc') + ';border:1px solid rgba(0,0,0,0.15);" title="' + escapeAttr(c.name) + '"></span>';
+                    }).join("") +
+                    '<span class="muted" style="font-size:11px;margin-left:3px;">(' + p.colors.length + ' colors)</span>' +
+                  '</div>'
+                : '';
+
               return "<tr>" +
-                "<td><div style='display:flex;align-items:center;'>" + thumb + "<div><strong>" + escapeHtml(p.name) + "</strong><div class='muted'>" + escapeHtml(p.id) + "</div></div></div></td>" +
+                "<td><div style='display:flex;align-items:center;'>" + thumb + "<div><strong>" + escapeHtml(p.name) + "</strong><div class='muted'>" + escapeHtml(p.id) + "</div>" + colorsBadge + "</div></div></td>" +
                 "<td><span class='badge badge-blue'>" + escapeHtml(p.category) + "</span></td>" +
                 "<td><strong>" + formatINR(p.price) + "</strong>" + (p.mrp && p.mrp > p.price ? " <span class='muted' style='text-decoration:line-through;font-size:12px;'>" + formatINR(p.mrp) + "</span>" : "") + "</td>" +
                 "<td>" + stockBadge + "</td>" +
@@ -349,13 +368,123 @@
 
     $("#p_short").value = product ? product.short || "" : "";
     $("#p_description").value = product ? product.description || "" : "";
+
+    state.modalColors = (product && Array.isArray(product.colors))
+      ? JSON.parse(JSON.stringify(product.colors))
+      : [];
+    renderProductColorRows();
+
     $("#productModal").showModal();
+  }
+
+  function renderProductColorRows() {
+    const list = $("#p_colors_list");
+    if (!list) return;
+
+    if (!state.modalColors || !state.modalColors.length) {
+      list.innerHTML = '<div class="muted" style="font-size:13px;padding:10px;background:#fff;border:1px dashed #ddd;border-radius:6px;text-align:center;">No color variants added yet. Click "+ Add Color" above to add color choices.</div>';
+      return;
+    }
+
+    list.innerHTML = state.modalColors.map(function (c, idx) {
+      const hex = c.hex || "#0071e3";
+      const name = c.name || "";
+      const img = c.image || "";
+      return '<div class="color-variant-row" style="display:flex;gap:8px;align-items:center;background:#ffffff;padding:8px 10px;border-radius:8px;border:1px solid #e2e8f0;flex-wrap:wrap;">' +
+        '<input type="color" class="color-hex-picker" data-color-idx="' + idx + '" value="' + escapeAttr(hex.startsWith("#") && hex.length === 7 ? hex : "#0071e3") + '" style="width:34px;height:34px;border:none;background:none;cursor:pointer;padding:0;" title="Pick Color Swatch">' +
+        '<input type="text" class="color-name-input" data-color-idx="' + idx + '" placeholder="Color Name (e.g. Citrus)" value="' + escapeAttr(name) + '" style="width:140px;padding:6px 10px;font-size:13px;border:1px solid #ccc;border-radius:6px;">' +
+        '<input type="text" class="color-hex-text" data-color-idx="' + idx + '" placeholder="#Hex Code" value="' + escapeAttr(hex) + '" style="width:85px;padding:6px 8px;font-size:13px;border:1px solid #ccc;border-radius:6px;">' +
+        '<input type="text" class="color-img-input" data-color-idx="' + idx + '" placeholder="Image URL (images/products/...)" value="' + escapeAttr(img) + '" style="flex:1;min-width:160px;padding:6px 10px;font-size:13px;border:1px solid #ccc;border-radius:6px;">' +
+        '<label class="btn btn-ghost btn-sm" style="margin:0;cursor:pointer;background:#f5f5f7;border:1px solid #ccc;font-size:12px;padding:6px 8px;" title="Upload Image">' +
+          '📷 <input type="file" class="color-file-input" data-color-idx="' + idx + '" accept="image/*" style="display:none;">' +
+        '</label>' +
+        '<button type="button" class="btn btn-ghost btn-sm color-del-btn" data-color-idx="' + idx + '" style="color:#d9381e;padding:4px 8px;font-weight:700;" title="Remove Color">✕</button>' +
+      '</div>';
+    }).join("");
+
+    $$(".color-hex-picker").forEach(function (inp) {
+      inp.addEventListener("input", function () {
+        const i = Number(inp.dataset.colorIdx);
+        if (state.modalColors[i]) {
+          state.modalColors[i].hex = inp.value;
+          const hexText = list.querySelector('.color-hex-text[data-color-idx="' + i + '"]');
+          if (hexText) hexText.value = inp.value;
+        }
+      });
+    });
+
+    $$(".color-hex-text").forEach(function (inp) {
+      inp.addEventListener("input", function () {
+        const i = Number(inp.dataset.colorIdx);
+        if (state.modalColors[i]) {
+          state.modalColors[i].hex = inp.value;
+          const hexPicker = list.querySelector('.color-hex-picker[data-color-idx="' + i + '"]');
+          if (hexPicker && inp.value.startsWith("#") && inp.value.length === 7) {
+            hexPicker.value = inp.value;
+          }
+        }
+      });
+    });
+
+    $$(".color-name-input").forEach(function (inp) {
+      inp.addEventListener("input", function () {
+        const i = Number(inp.dataset.colorIdx);
+        if (state.modalColors[i]) state.modalColors[i].name = inp.value;
+      });
+    });
+
+    $$(".color-img-input").forEach(function (inp) {
+      inp.addEventListener("input", function () {
+        const i = Number(inp.dataset.colorIdx);
+        if (state.modalColors[i]) state.modalColors[i].image = inp.value;
+      });
+    });
+
+    $$(".color-file-input").forEach(function (inp) {
+      inp.addEventListener("change", async function () {
+        const i = Number(inp.dataset.colorIdx);
+        const file = inp.files && inp.files[0];
+        if (!file || !state.modalColors[i]) return;
+        try {
+          const res = await uploadFile(file);
+          if (res && res.url) {
+            state.modalColors[i].image = res.url;
+            renderProductColorRows();
+            toast("Color variant image uploaded");
+          }
+        } catch (e) { toast("Upload failed: " + e.message); }
+      });
+    });
+
+    $$(".color-del-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const i = Number(btn.dataset.colorIdx);
+        state.modalColors.splice(i, 1);
+        renderProductColorRows();
+      });
+    });
   }
 
   async function saveProduct(e) {
     e.preventDefault();
     const existingId = $("#p_id_existing").value;
     const imgVal = $("#p_image").value.trim();
+
+    const formattedColors = (state.modalColors || [])
+      .filter(function (c) { return c && c.name && c.name.trim(); })
+      .map(function (c) {
+        return {
+          name: c.name.trim(),
+          hex: c.hex ? c.hex.trim() : "#0071e3",
+          image: c.image ? c.image.trim() : imgVal
+        };
+      });
+
+    let imagesList = imgVal ? [imgVal] : [];
+    const colorImages = formattedColors.map(function (c) { return c.image; }).filter(Boolean);
+    if (colorImages.length) {
+      imagesList = Array.from(new Set(imagesList.concat(colorImages)));
+    }
 
     const payload = {
       id: $("#p_id").value.trim() || undefined,
@@ -366,10 +495,10 @@
       mrp: $("#p_mrp").value === "" ? undefined : Number($("#p_mrp").value),
       stock: Number($("#p_stock").value),
       brand: $("#p_brand").value.trim() || "Apple",
-      images: imgVal ? [imgVal] : [],
+      images: imagesList,
+      colors: formattedColors,
       short: $("#p_short").value.trim(),
       description: $("#p_description").value.trim(),
-      colors: [],
       storageOptions: [],
       specs: {}
     };
@@ -379,7 +508,6 @@
     try {
       if (existingId) {
         const existing = state.products.find(function (p) { return p.id === existingId; }) || {};
-        payload.colors = existing.colors || [];
         payload.storageOptions = existing.storageOptions || [];
         payload.specs = existing.specs || {};
         if (!payload.images.length && existing.images) payload.images = existing.images;

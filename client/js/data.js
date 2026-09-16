@@ -1445,7 +1445,58 @@ function getEmi(price, months) {
 }
 
 function getProductById(id) {
-  return PRODUCTS.find(function (p) { return p.id === id; });
+  if (!id) return null;
+  const rawId = String(id).trim();
+  const cleanId = rawId.toLowerCase();
+
+  // 1. Direct exact match
+  let found = PRODUCTS.find(function (p) { return p.id === rawId || p.id.toLowerCase() === cleanId; });
+  if (found) return found;
+
+  // 2. Known alias & legacy URL ID mappings
+  const aliases = {
+    "apple-watch-series-12": "watch-series-11",
+    "watch-series-12": "watch-series-11",
+    "apple-watch-ultra-4": "watch-ultra-3",
+    "watch-ultra-4": "watch-ultra-3",
+    "apple-watch-se-3": "watch-se-3",
+    "macbook-pro-14-m5-pro": "macbook-pro-14-m5",
+    "macbook-pro-16-m5-max": "macbook-pro-16-m5",
+    "imac-24-m5": "imac-24-m4",
+    "mac-mini-m5": "mac-mini-m4",
+    "mac-studio-m4-max": "macbook-pro-16-m5",
+    "ipad-air-11-m3": "ipad-air-11-m4",
+    "ipad-air-13-m3": "ipad-air-13-m4",
+    "ipad-10th-gen": "ipad-11-gen",
+    "ipad-mini-a17-pro": "ipad-11-gen",
+    "macbook-a18-pro": "macbook-neo"
+  };
+
+  if (aliases[cleanId]) {
+    found = PRODUCTS.find(function (p) { return p.id === aliases[cleanId]; });
+    if (found) return found;
+  }
+
+  // 3. Fallback: normalize "apple-" prefix and generation suffixes
+  const normalized = cleanId
+    .replace(/^apple-/, "")
+    .replace(/-m5$/, "-m4")
+    .replace(/-m3$/, "-m4")
+    .replace(/-pro$/, "");
+
+  found = PRODUCTS.find(function (p) {
+    const pid = p.id.toLowerCase();
+    return pid === normalized || pid.indexOf(normalized) !== -1 || normalized.indexOf(pid) !== -1;
+  });
+  if (found) return found;
+
+  // 4. Fuzzy search by product name
+  const query = cleanId.replace(/-/g, " ");
+  found = PRODUCTS.find(function (p) {
+    return p.name.toLowerCase().indexOf(query) !== -1 || query.indexOf(p.name.toLowerCase()) !== -1;
+  });
+
+  return found || null;
 }
 
 function getProductsByCategory(catId) {

@@ -92,7 +92,7 @@
       <label>Stock<input id="p_stock" type="number" min="0" step="1" value="10"></label>
       <label>Brand<input id="p_brand" value="Apple"></label>
       <div class="span-2" style="background:#f8f9fa;padding:12px;border-radius:8px;border:1px dashed #ccc;">
-        <label style="font-weight:600;margin-bottom:4px;display:block;">Product Image</label>
+        <label style="font-weight:600;margin-bottom:4px;display:block;">Main Product Image</label>
         <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
           <input id="p_image" placeholder="images/products/example.png" style="flex:1;">
           <label class="btn btn-ghost btn-sm" style="margin:0;cursor:pointer;background:#fff;border:1px solid #ccc;">
@@ -102,6 +102,20 @@
         <div id="p_image_preview_wrap" style="margin-top:8px;display:none;align-items:center;">
           <img id="p_image_preview" src="" style="max-height:90px;border-radius:6px;border:1px solid #ddd;object-fit:cover;">
           <span class="muted" style="font-size:12px;margin-left:8px;" id="p_image_status"></span>
+        </div>
+      </div>
+      <!-- Color Variants Section -->
+      <div class="span-2" style="background:#f8f9fa;padding:14px;border-radius:10px;border:1px solid #e0e0e0;margin-top:4px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <div>
+            <strong style="font-size:14px;color:#1d1d1f;display:block;">Product Color Variants</strong>
+            <span class="muted" style="font-size:12px;">Add different colors for this product (name, color swatch, and image).</span>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm" id="p_add_color_btn" style="background:#fff;border:1px solid #ccc;font-weight:600;">+ Add Color</button>
+        </div>
+        
+        <div id="p_colors_list" style="display:flex;flex-direction:column;gap:10px;">
+          <!-- Dynamically populated color rows -->
         </div>
       </div>
       <label class="span-2">Short description<textarea id="p_short" rows="2"></textarea></label>

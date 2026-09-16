@@ -38,7 +38,12 @@
 <script src="js/animations.js" defer></script>
 <script>
   const productId = getQueryParam("id");
-  const product = getProductById(productId) || PRODUCTS[0];
+  let product = getProductById(productId);
+  if (!product && productId) {
+    const searchMatches = searchProducts(productId);
+    if (searchMatches && searchMatches.length) product = searchMatches[0];
+  }
+  if (!product) product = PRODUCTS[0];
 
   renderHeader(product.category);
   renderFooter();
