@@ -449,6 +449,7 @@
   (function () {
     const slidesEl = document.getElementById("heroSlides");
     const dotsEl = document.getElementById("heroDots");
+    if (!slidesEl || !dotsEl) return;
     const slides = slidesEl.children;
     let current = 0;
     let timer;

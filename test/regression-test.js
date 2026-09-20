@@ -7,7 +7,7 @@ const { chromium } = require("playwright");
   page.on("pageerror", (err) => errors.push("[pageerror] " + err.message));
   page.on("console", (msg) => { if (msg.type() === "error") errors.push("[console] " + msg.text()); });
 
-  const base = "http://localhost:8080/";
+  const base = process.env.TEST_BASE_URL || "http://localhost:4000/";
   const results = [];
   function log(step, ok, extra) { results.push({ step, ok, extra: extra || "" }); }
 
@@ -18,7 +18,7 @@ const { chromium } = require("playwright");
     log("Header renders SVG icons (search/cart/menu)", headerSvgCount >= 3, "count=" + headerSvgCount);
 
     const navLinkTexts = await page.locator(".main-nav a").allTextContents();
-    const expectedNav = ["Store", "Mac", "iPad", "iPhone", "Watch", "Vision", "AirPods", "TV & Home", "Entertainment", "Accessories", "Support"];
+    const expectedNav = ["Store", "MacBook Neo", "Mac", "iPad", "iPhone", "Watch", "Vision", "AirPods", "TV & Home", "Entertainment", "Accessories", "Support"];
     log("Main nav shows the correct items in the correct order", JSON.stringify(navLinkTexts) === JSON.stringify(expectedNav), "got=" + JSON.stringify(navLinkTexts));
 
     const footerSvgCount = await page.locator("#site-footer svg.icon-svg").count();

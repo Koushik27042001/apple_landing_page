@@ -12,21 +12,7 @@
 <style>
 /* MacBook Neo Custom Page Styles */
 .neo-subnav {
-  position: sticky;
-  top: var(--header-h, 52px);
-  z-index: 490;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-  padding: 12px 0;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-  will-change: transform, opacity;
-}
-.neo-subnav.subnav-hidden {
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
+  display: none !important;
 }
 .neo-subnav-inner {
   display: flex;
@@ -238,16 +224,7 @@
 
 <div id="site-header"></div>
 
-<!-- MacBook Neo Local Subnav -->
-<div class="neo-subnav">
-  <div class="container neo-subnav-inner">
-    <div class="neo-subnav-title">MacBook Neo</div>
-    <div class="neo-subnav-right">
-      <div class="neo-subnav-price">From <strong>₹69,900</strong></div>
-      <button class="btn btn-pill-dark" id="subnavBuyBtn">Buy Now</button>
-    </div>
-  </div>
-</div>
+<!-- MacBook Neo Local Subnav Removed -->
 
 <main>
 
@@ -416,9 +393,9 @@
         <div style="margin-bottom:20px;">
           <label style="font-weight:600;display:block;margin-bottom:8px;font-size:14px;">Select Storage Tier:</label>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
-            <button class="btn btn-outline storage-opt-btn active" data-extra="0" data-label="128GB SSD" style="border-radius:12px;padding:12px 8px;font-size:14px;text-align:center;">128GB SSD<br><small>Base</small></button>
-            <button class="btn btn-outline storage-opt-btn" data-extra="10000" data-label="256GB SSD" style="border-radius:12px;padding:12px 8px;font-size:14px;text-align:center;">256GB SSD<br><small>+₹10,000</small></button>
-            <button class="btn btn-outline storage-opt-btn" data-extra="25000" data-label="512GB SSD" style="border-radius:12px;padding:12px 8px;font-size:14px;text-align:center;">512GB SSD<br><small>+₹25,000</small></button>
+            <button class="btn btn-outline storage-opt-btn active" data-extra="0" data-label="128GB SSD" style="border-radius:2px;padding:12px 8px;font-size:14px;text-align:center;">128GB SSD<br><small>Base</small></button>
+            <button class="btn btn-outline storage-opt-btn" data-extra="10000" data-label="256GB SSD" style="border-radius:2px;padding:12px 8px;font-size:14px;text-align:center;">256GB SSD<br><small>+₹10,000</small></button>
+            <button class="btn btn-outline storage-opt-btn" data-extra="25000" data-label="512GB SSD" style="border-radius:2px;padding:12px 8px;font-size:14px;text-align:center;">512GB SSD<br><small>+₹25,000</small></button>
           </div>
         </div>
 
@@ -445,25 +422,13 @@ document.addEventListener("DOMContentLoaded", function () {
   if (typeof renderFooter === "function") renderFooter();
   if (typeof renderWhatsappFloat === "function") renderWhatsappFloat();
 
-  // Dynamic Scroll Subnav: disappears when scrolling down, pops up when scrolling up
-  let lastScrollY = window.scrollY;
-  const subnav = document.querySelector(".neo-subnav");
-
-  window.addEventListener("scroll", function () {
-    const currentScrollY = window.scrollY;
-    if (currentScrollY > 120 && currentScrollY > lastScrollY) {
-      if (subnav) subnav.classList.add("subnav-hidden");
-    } else {
-      if (subnav) subnav.classList.remove("subnav-hidden");
-    }
-    lastScrollY = currentScrollY;
-  }, { passive: true });
+  // Dynamic Scroll Subnav Removed
 
   let selectedColor = "Citrus";
   let basePrice = 69900;
   let selectedStorageExtra = 0;
 
-  // Swatch switcher logic
+  // Swatch switcher logic with 3D Morph Animation
   const swatches = document.querySelectorAll(".color-swatch-btn");
   const heroImg = document.getElementById("heroShowcaseImg");
   const colorLabel = document.getElementById("selectedColorLabel");
@@ -474,18 +439,57 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.classList.add("active");
       selectedColor = btn.getAttribute("data-color");
       const imgPath = btn.getAttribute("data-img");
+      
       if (heroImg && imgPath) {
-        heroImg.style.opacity = "0.3";
+        heroImg.classList.add("morphing");
         setTimeout(() => {
           heroImg.src = imgPath;
-          heroImg.style.opacity = "1";
-        }, 150);
+        }, 300);
+        setTimeout(() => {
+          heroImg.classList.remove("morphing");
+        }, 650);
       }
       if (colorLabel) {
         colorLabel.innerHTML = "Selected finish: <strong>" + selectedColor + "</strong>";
       }
     });
   });
+
+  // Apple Hero 3D Mouse Parallax Tilt Animation
+  const heroSection = document.querySelector(".neo-hero-section");
+  const showcaseStage = document.querySelector(".neo-showcase-stage");
+  
+  if (heroSection && heroImg) {
+    heroSection.addEventListener("mousemove", function (e) {
+      const rect = heroSection.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) / (rect.width / 2);
+      const dy = (e.clientY - cy) / (rect.height / 2);
+      
+      const rx = (dy * -12).toFixed(2);
+      const ry = (dx * 16).toFixed(2);
+      
+      heroImg.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.03) translateZ(10px)`;
+    });
+
+    heroSection.addEventListener("mouseleave", function () {
+      heroImg.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1) translateZ(0px)";
+    });
+  }
+
+  // Scroll-driven Unfold Parallax Zoom
+  window.addEventListener("scroll", function () {
+    if (!heroImg) return;
+    const sy = window.scrollY;
+    if (sy < 700) {
+      const scaleVal = (1 + (sy / 2000)).toFixed(3);
+      const translateY = (sy * -0.08).toFixed(1);
+      if (!heroImg.classList.contains("morphing")) {
+        heroImg.style.transform = `perspective(1200px) translateY(${translateY}px) scale(${scaleVal})`;
+      }
+    }
+  }, { passive: true });
 
   // Storage selection logic
   const storageBtns = document.querySelectorAll(".storage-opt-btn");
@@ -504,28 +508,34 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Scroll to buy section
-  document.getElementById("subnavBuyBtn").addEventListener("click", function () {
-    const buySec = document.getElementById("buy-section");
-    if (buySec) buySec.scrollIntoView({ behavior: "smooth" });
-  });
+  const subnavBuyBtn = document.getElementById("subnavBuyBtn");
+  if (subnavBuyBtn) {
+    subnavBuyBtn.addEventListener("click", function () {
+      const buySec = document.getElementById("buy-section");
+      if (buySec) buySec.scrollIntoView({ behavior: "smooth" });
+    });
+  }
 
   // Add to bag logic
-  document.getElementById("addToBagBtn").addEventListener("click", function () {
-    if (typeof Cart !== "undefined" && typeof Cart.add === "function") {
-      const activeStorage = document.querySelector(".storage-opt-btn.active");
-      const storageLabel = activeStorage ? activeStorage.getAttribute("data-label") : "128GB SSD";
-      
-      Cart.add({
-        id: "macbook-neo",
-        name: "MacBook Neo (" + selectedColor + ", " + storageLabel + ")",
-        price: basePrice + selectedStorageExtra,
-        image: "images/products/macbook-neo-citrus.png"
-      });
-      if (typeof Cart.open === "function") Cart.open();
-    } else {
-      alert("Added MacBook Neo to Bag!");
-    }
-  });
+  const addToBagBtn = document.getElementById("addToBagBtn");
+  if (addToBagBtn) {
+    addToBagBtn.addEventListener("click", function () {
+      if (typeof Cart !== "undefined" && typeof Cart.add === "function") {
+        const activeStorage = document.querySelector(".storage-opt-btn.active");
+        const storageLabel = activeStorage ? activeStorage.getAttribute("data-label") : "128GB SSD";
+        
+        Cart.add({
+          id: "macbook-neo",
+          name: "MacBook Neo (" + selectedColor + ", " + storageLabel + ")",
+          price: basePrice + selectedStorageExtra,
+          image: "images/products/macbook-neo-citrus.png"
+        });
+        if (typeof Cart.open === "function") Cart.open();
+      } else {
+        alert("Added MacBook Neo to Bag!");
+      }
+    });
+  }
 });
 </script>
 </body>

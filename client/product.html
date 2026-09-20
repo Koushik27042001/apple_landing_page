@@ -18,8 +18,8 @@
   <div id="pdpContent"></div>
 
   <section class="related-section">
-    <div class="section-head" style="text-align:left; margin-bottom:24px;">
-      <h2 style="font-size:26px;">You may also like</h2>
+    <div class="section-head text-center" style="text-align:center; margin-bottom:24px;">
+      <h2 style="font-size:28px; text-align:center;">You may also like</h2>
     </div>
     <div class="product-grid" id="relatedGrid"></div>
   </section>
@@ -81,9 +81,23 @@
     const galleryImages = product.images.length > 1 ? product.images : [currentImage()];
 
     document.getElementById("pdpContent").innerHTML =
-      '<div class="pdp-layout">' +
-        '<div class="pdp-gallery">' +
-          '<div class="pdp-gallery-main"><img id="mainImage" src="' + currentImage() + '" alt="' + product.name + '"></div>' +
+      '<div class="pdp-showcase-wrapper">' +
+
+        '<!-- 1. Header Section Above Product Image -->' +
+        '<div class="pdp-top-header text-center">' +
+          '<div class="pc-cat">' + product.category + ' &middot; ' + product.brand + '</div>' +
+          '<h1>' + product.name + '</h1>' +
+          '<p class="pdp-short">' + product.short + '</p>' +
+          '<div class="pdp-rating"><span class="stars">★★★★★</span> ' + product.rating + ' &middot; ' + product.reviews + ' ratings</div>' +
+        '</div>' +
+
+        '<!-- 2. Product Image Gallery (Top-Aligned) -->' +
+        '<div class="pdp-gallery-hero">' +
+          '<div class="pdp-gallery-main pdp-top-aligned" id="pdpGalleryMain">' +
+            '<div class="pdp-3d-stage" id="pdp3dStage">' +
+              '<img id="mainImage" src="' + currentImage() + '" alt="' + product.name + '">' +
+            '</div>' +
+          '</div>' +
           (galleryImages.length > 1 ?
             '<div class="pdp-thumbs" id="pdpThumbs">' +
               galleryImages.map(function (img, i) {
@@ -92,58 +106,63 @@
             '</div>' : ''
           ) +
         '</div>' +
-        '<div class="pdp-info">' +
-          '<div class="pc-cat">' + product.category + ' · ' + product.brand + '</div>' +
-          '<h1>' + product.name + '</h1>' +
-          '<p class="pdp-short">' + product.short + '</p>' +
-          '<div class="pdp-rating"><span class="stars">★★★★★</span> ' + product.rating + ' &middot; ' + product.reviews + ' ratings</div>' +
 
-          '<div class="pdp-price-block">' +
-            '<div class="pdp-price-row">' +
-              '<span class="pdp-price" id="pdpPrice">' + formatINR(unitPrice) + '</span>' +
-              (discount ? '<span class="pdp-mrp">' + formatINR(product.mrp) + '</span><span class="pdp-discount">' + discount + '% OFF</span>' : '') +
-            '</div>' +
-            '<div class="pdp-emi-line">Starting from <strong id="pdpEmi">' + formatINR(emi12) + '/mo</strong> for 12 months, or ' + formatINR(emi24) + '/mo for 24 months.' +
-              '<a href="#" id="emiToggle">View EMI plans</a>' +
-            '</div>' +
-            '<div id="emiPlans" style="display:none; margin-top:12px;">' +
-              '<div class="emi-plan-list">' +
-                [3, 6, 9, 12, 18, 24].map(function (m) {
-                  return '<div class="emi-plan"><span>' + m + ' months</span><span>' + formatINR(getEmi(unitPrice, m)) + '/mo</span></div>';
-                }).join("") +
+        '<!-- 3. Pricing, Configurator & Purchase Controls Below Image -->' +
+        '<div class="pdp-purchase-container">' +
+          '<!-- Left Column: Price, EMI, Colors, Storage, Qty & Stock (Left Aligned) -->' +
+          '<div class="pdp-purchase-left">' +
+            '<div class="pdp-price-block">' +
+              '<div class="pdp-price-row">' +
+                '<span class="pdp-price" id="pdpPrice">' + formatINR(unitPrice) + '</span>' +
+                (discount ? '<span class="pdp-mrp">' + formatINR(product.mrp) + '</span><span class="pdp-discount">' + discount + '% OFF</span>' : '') +
+              '</div>' +
+              '<div class="pdp-emi-line">Starting from <strong id="pdpEmi">' + formatINR(emi12) + '/mo</strong> for 12 months, or ' + formatINR(emi24) + '/mo for 24 months.' +
+                '<a href="#" id="emiToggle">View EMI plans</a>' +
+              '</div>' +
+              '<div id="emiPlans" style="display:none; margin-top:12px;">' +
+                '<div class="emi-plan-list">' +
+                  [3, 6, 9, 12, 18, 24].map(function (m) {
+                    return '<div class="emi-plan"><span>' + m + ' months</span><span>' + formatINR(getEmi(unitPrice, m)) + '/mo</span></div>';
+                  }).join("") +
+                '</div>' +
               '</div>' +
             '</div>' +
-          '</div>' +
 
-          (product.colors.length ? colorPickerHtml() : '') +
-          (product.storageOptions.length > 0 ? storagePickerHtml() : '') +
+            (product.colors.length ? colorPickerHtml() : '') +
+            (product.storageOptions.length > 0 ? storagePickerHtml() : '') +
 
-          '<div class="qty-row">' +
-            '<div class="qty-selector">' +
-              '<button id="qtyMinus">&minus;</button><span id="qtyVal">' + selection.qty + '</span><button id="qtyPlus">+</button>' +
+            '<div class="qty-row">' +
+              '<div class="qty-selector">' +
+                '<button id="qtyMinus">&minus;</button><span id="qtyVal">' + selection.qty + '</span><button id="qtyPlus">+</button>' +
+              '</div>' +
+              '<span class="stock-info' + (product.stock < 10 ? ' low' : '') + '">' +
+                (product.stock < 10 ? 'Only ' + product.stock + ' left in stock' : 'In stock &middot; Ready to ship') +
+              '</span>' +
             '</div>' +
-            '<span class="stock-info' + (product.stock < 10 ? ' low' : '') + '">' +
-              (product.stock < 10 ? 'Only ' + product.stock + ' left in stock' : 'In stock &middot; Ready to ship') +
-            '</span>' +
           '</div>' +
 
-          '<div class="pdp-actions">' +
-            '<button class="btn btn-outline btn-lg" id="addToCartBtn">Add to Cart</button>' +
-            '<button class="btn btn-primary btn-lg" id="buyNowBtn">Buy Now</button>' +
-          '</div>' +
+          '<!-- Right Column: Action Buttons & Trust Badges (Right Aligned) -->' +
+          '<div class="pdp-purchase-right">' +
+            '<div class="pdp-actions">' +
+              '<button class="btn btn-outline btn-lg" id="addToCartBtn">Add to Cart</button>' +
+              '<button class="btn btn-primary btn-lg" id="buyNowBtn">Buy Now</button>' +
+            '</div>' +
 
-          '<a class="whatsapp-inline-btn" id="waInquiry" href="#" target="_blank" rel="noopener">' +
-            icon("whatsapp", { size: 18 }) + ' Inquire on WhatsApp' +
-          '</a>' +
+            '<a class="whatsapp-inline-btn" id="waInquiry" href="#" target="_blank" rel="noopener">' +
+              icon("whatsapp", { size: 18 }) + ' Inquire on WhatsApp' +
+            '</a>' +
 
-          '<div class="trust-mini">' +
-            '<div><span class="icon">' + icon("lock", { size: 16 }) + '</span>Secure Payment</div>' +
-            '<div><span class="icon">' + icon("truck", { size: 16 }) + '</span>Fast Shipping</div>' +
-            '<div><span class="icon">' + icon("checkCircle", { size: 16 }) + '</span>100% Genuine</div>' +
+            '<div class="trust-mini">' +
+              '<div><span class="icon">' + icon("lock", { size: 16 }) + '</span>Secure Payment</div>' +
+              '<div><span class="icon">' + icon("truck", { size: 16 }) + '</span>Fast Shipping</div>' +
+              '<div><span class="icon">' + icon("checkCircle", { size: 16 }) + '</span>100% Genuine</div>' +
+            '</div>' +
           '</div>' +
         '</div>' +
+
       '</div>' +
 
+      '<!-- 4. Product Description & Specifications Section -->' +
       '<section class="pdp-details">' +
         '<div class="pdp-details-grid">' +
           '<div class="pdp-details-block">' +
@@ -192,13 +211,26 @@
   }
 
   function wirePdpInteractions(unitPrice, emi12) {
+    const galleryMain = document.getElementById("pdpGalleryMain");
+    const mainImg = document.getElementById("mainImage");
+
+    function changeProductImage(newSrc) {
+      if (!mainImg || !newSrc) return;
+      if (mainImg.getAttribute("src") === newSrc) return;
+      mainImg.style.opacity = "0.3";
+      setTimeout(function () {
+        mainImg.src = newSrc;
+        mainImg.style.opacity = "1";
+      }, 150);
+    }
+
     document.querySelectorAll(".swatch").forEach(function (btn) {
       btn.addEventListener("click", function () {
         selection.color = btn.dataset.color;
         document.querySelectorAll(".swatch").forEach(function (s) { s.classList.remove("active"); });
         btn.classList.add("active");
         document.getElementById("selColorLabel").textContent = selection.color;
-        document.getElementById("mainImage").src = currentImage();
+        changeProductImage(currentImage());
         updateStickyAtc();
       });
     });
@@ -217,7 +249,7 @@
     const thumbs = document.querySelectorAll(".pdp-thumb");
     thumbs.forEach(function (t) {
       t.addEventListener("click", function () {
-        document.getElementById("mainImage").src = t.dataset.img;
+        changeProductImage(t.dataset.img);
         thumbs.forEach(function (x) { x.classList.remove("active"); });
         t.classList.add("active");
       });

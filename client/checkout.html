@@ -268,7 +268,7 @@
         notice.style.display = "flex";
         notice.innerHTML = backendAvailable
           ? icon("checkCircle", { size: 14 }) + " Orders sync to the store. Pay via UPI QR or the Razorpay link."
-          : icon("info", { size: 14 }) + " Offline mode — pay via UPI QR / Razorpay, then confirm on WhatsApp.";
+          : icon("info", { size: 14 }) + " Offline Demo mode — pay via UPI QR / Razorpay, then confirm on WhatsApp.";
       }
       // Re-sync after backend check in case totals changed.
       syncPaymentLinkHref();
@@ -453,9 +453,34 @@
     btn.textContent = "Processing...";
 
     if (method === "cod") {
-      setTimeout(function () {
-        showOrderSuccess({ orderId: "ISW" + Date.now().toString().slice(-8), method: method, total: getCheckoutTotals().total });
-      }, 900);
+      const totals = getCheckoutTotals();
+      if (!backendAvailable) {
+        setTimeout(function () {
+          showOrderSuccess({ orderId: "ISW" + Date.now().toString().slice(-8), method: method, total: totals.total, demo: true });
+        }, 900);
+        return;
+      }
+      fetch(APPLE_STORE_API_BASE + "/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: cartAsLineItems(),
+          customer: getCustomerInfo(),
+          shipping: getShippingInfo(),
+          couponCode: appliedCoupon ? appliedCoupon.code : undefined,
+          paymentMode: "cod"
+        })
+      })
+        .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.data.error || "Could not create order.");
+          showOrderSuccess({ orderId: res.data.orderId, method: "cod", total: res.data.totals.total });
+        })
+        .catch(function (err) {
+          showToast(err.message || "Something went wrong. Please try again.", { icon: "info" });
+          btn.disabled = false;
+          btn.textContent = "Place Order";
+        });
       return;
     }
 
@@ -635,7 +660,7 @@
           '<img class="pay-pending-qr" src="' + PAYMENT_QR_IMAGE + '" alt="Store UPI QR flyer">' +
           '<p style="font-size:12px;color:var(--gray-text);">If you use this flyer, enter <strong>' + formatINR(amount) + '</strong> exactly.</p>' +
         '</details>' +
-        '<p style="margin-top:16px;font-size:13px;color:var(--gray-text);">After paying, send your Order ID on WhatsApp so we can confirm and ship.</p>' +
+        '<p style="margin-top:16px;font-size:13px;color:var(--gray-text);">After paying, send your Order ID on WhatsApp so we can confirm and ship. (Demo mode)</p>' +
       '</div>';
     hydrateIcons(document);
     clearCart();

@@ -19,7 +19,8 @@ function log(step, ok, extra) {
     let catalogOk = false;
     try {
       const store = require("../server/src/lib/productsStore");
-      catalogOk = store.getProducts().length >= 40;
+      const prods = await store.getProducts();
+      catalogOk = Array.isArray(prods) && prods.length >= 40;
     } catch (e) {
       console.log("catalog error:", e.message);
     }

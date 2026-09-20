@@ -1,5 +1,6 @@
-require("dotenv").config();
 const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
+require("dotenv").config({ path: path.join(__dirname, "../.env") });
 const express = require("express");
 const cors = require("cors");
 
@@ -81,13 +82,21 @@ async function start() {
   await bannersStore.seedIfNeeded();
   await settingsStore.get();
 
-  app.listen(PORT, function () {
+  const server = app.listen(PORT, function () {
     console.log("Iswift Gadgets API running on http://localhost:" + PORT);
     console.log("Storefront:     http://localhost:" + PORT + "/");
     console.log("Control panel:  http://localhost:" + PORT + "/admin/");
     console.log("Health check:   http://localhost:" + PORT + "/api/health");
     console.log("Database:       " + getDbMode());
     console.log("Admin password: " + (process.env.ADMIN_PASSWORD ? "(from .env ADMIN_PASSWORD)" : "admin123 (default — change in .env)"));
+  });
+
+  server.on("error", function (err) {
+    if (err.code === "EADDRINUSE") {
+      console.error("\n[server error] Port " + PORT + " is already in use by another running server instance.");
+      console.error("Please stop the existing process listening on port " + PORT + " or set a different PORT in server/.env.\n");
+      process.exit(1);
+    }
   });
 }
 

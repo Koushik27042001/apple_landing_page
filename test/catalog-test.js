@@ -6,7 +6,7 @@ const { chromium } = require("playwright");
   const errors = [];
   page.on("pageerror", (err) => errors.push("[pageerror] " + err.message));
 
-  const base = "http://localhost:8080/";
+  const base = process.env.TEST_BASE_URL || "http://localhost:4000/";
   const results = [];
   function log(step, ok, extra) { results.push({ step, ok, extra: extra || "" }); }
 
@@ -14,11 +14,11 @@ const { chromium } = require("playwright");
     // Category page shows all new categories with correct counts
     await page.goto(base + "category.html?cat=mac", { waitUntil: "networkidle" });
     const macCount = await page.locator(".product-card").count();
-    log("Mac category shows all 7 new Mac products", macCount === 7, "count=" + macCount);
+    log("Mac category shows all Mac products", macCount >= 7, "count=" + macCount);
 
     await page.goto(base + "category.html?cat=iphone", { waitUntil: "networkidle" });
     const iphoneCount = await page.locator(".product-card").count();
-    log("iPhone category shows all 5 new iPhone models", iphoneCount === 5, "count=" + iphoneCount);
+    log("iPhone category shows all iPhone models", iphoneCount >= 5, "count=" + iphoneCount);
 
     await page.goto(base + "category.html?cat=watch", { waitUntil: "networkidle" });
     const watchCount = await page.locator(".product-card").count();

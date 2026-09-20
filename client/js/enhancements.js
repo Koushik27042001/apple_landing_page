@@ -6,19 +6,7 @@
 (function () {
   'use strict';
 
-  /* ========================================================
-     1. SCROLL PROGRESS BAR
-     ======================================================== */
-  var progressBar = document.createElement('div');
-  progressBar.className = 'scroll-progress';
-  document.body.prepend(progressBar);
-
-  window.addEventListener('scroll', function () {
-    var scrolled = window.scrollY;
-    var total = document.documentElement.scrollHeight - window.innerHeight;
-    var pct = total > 0 ? (scrolled / total) * 100 : 0;
-    progressBar.style.width = pct + '%';
-  }, { passive: true });
+  /* 1. SCROLL PROGRESS BAR REMOVED PER USER REQUEST */
 
   /* ========================================================
      2. FLOATING AMBIENT ORBS

@@ -56,6 +56,8 @@ const orderSchema = new mongoose.Schema(
     razorpayOrderId: { type: String, default: null, index: true },
     razorpayPaymentId: { type: String, default: null },
     status: { type: String, default: "created", index: true },
+    paymentMode: { type: String, default: "gateway" },
+    paymentLink: { type: String, default: null },
     items: { type: [mongoose.Schema.Types.Mixed], default: [] },
     subtotal: { type: Number, default: 0 },
     discount: { type: Number, default: 0 },

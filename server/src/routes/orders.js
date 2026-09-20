@@ -82,6 +82,45 @@ router.post("/", async function (req, res) {
       });
     }
 
+    if (paymentMode === "cod") {
+      const order = {
+        id: internalId,
+        razorpayOrderId: null,
+        status: "created",
+        paymentMode: "cod",
+        paymentLink: null,
+        items: pricing.lines,
+        subtotal: pricing.subtotal,
+        discount: pricing.discount || 0,
+        coupon: pricing.coupon || null,
+        shipping: pricing.shipping,
+        total: pricing.total,
+        currency: currency,
+        customer: { name: customer.name, email: customer.email, phone: customer.phone },
+        shippingAddress: shipping,
+        createdAt: new Date().toISOString()
+      };
+      await store.createOrder(order);
+
+      if (pricing.coupon && pricing.coupon.code) {
+        await couponsStore.incrementUsage(pricing.coupon.code);
+      }
+
+      return res.json({
+        orderId: internalId,
+        paymentMode: "cod",
+        amount: amountPaise,
+        currency: currency,
+        totals: {
+          subtotal: pricing.subtotal,
+          discount: pricing.discount || 0,
+          shipping: pricing.shipping,
+          total: pricing.total,
+          coupon: pricing.coupon
+        }
+      });
+    }
+
     if (!razorpay) {
       return res.status(503).json({
         error: "Payment gateway API keys are not configured. Choose UPI / Scan & Pay, or add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET to server/.env."

@@ -3,7 +3,7 @@ const { chromium } = require("playwright");
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
-  const base = "http://localhost:8080/";
+  const base = process.env.TEST_BASE_URL || "http://localhost:4000/";
   const results = [];
   function log(step, ok, extra) { results.push({ step, ok, extra: extra || "" }); }
 

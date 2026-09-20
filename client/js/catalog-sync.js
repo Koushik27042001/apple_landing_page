@@ -34,6 +34,36 @@
     })
     .catch(function () { /* keep static banners */ });
 
+  // 3. Fetch public store settings dynamically
+  fetch(base + "/settings/public", { method: "GET" })
+    .then(function (res) { return res.ok ? res.json() : null; })
+    .then(function (settings) {
+      if (!settings) return;
+      window.STORE_SETTINGS = settings;
+      document.dispatchEvent(new CustomEvent("settings:updated", { detail: settings }));
+      if (settings.announcement && !document.getElementById("admin-top-promo-strip")) {
+        renderAnnouncementStrip(settings.announcement);
+      }
+    })
+    .catch(function () { /* keep defaults */ });
+
+  function renderAnnouncementStrip(text) {
+    if (!text || !text.trim()) return;
+    let strip = document.getElementById("admin-top-promo-strip");
+    if (!strip) {
+      strip = document.createElement("div");
+      strip.id = "admin-top-promo-strip";
+      strip.className = "top-promo-strip";
+      const header = document.getElementById("site-header");
+      if (header) header.parentNode.insertBefore(strip, header);
+      else document.body.insertBefore(strip, document.body.firstChild);
+    }
+    strip.innerHTML =
+      '<div class="top-promo-content"><strong>Announcement</strong>: ' +
+      escapeHtml(text) +
+      '</div>';
+  }
+
   function renderStorefrontBanners(banners) {
     if (!Array.isArray(banners) || !banners.length) return;
 
