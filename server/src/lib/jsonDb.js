@@ -2,7 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const DATA_DIR = path.join(__dirname, "../../data");
+const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, "../../data");
 
 function ensureDir() {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -23,13 +23,16 @@ function readJson(name, fallback) {
     const raw = fs.readFileSync(fp, "utf8");
     return JSON.parse(raw || "null") ?? fallback;
   } catch (e) {
-    return JSON.parse(JSON.stringify(fallback));
+    throw new Error("Unable to read persistent store: " + name, { cause: e });
   }
 }
 
 function writeJson(name, data) {
   ensureDir();
-  fs.writeFileSync(filePath(name), JSON.stringify(data, null, 2), "utf8");
+  const target = filePath(name);
+  const temporary = target + ".tmp";
+  fs.writeFileSync(temporary, JSON.stringify(data, null, 2), "utf8");
+  fs.renameSync(temporary, target);
 }
 
 module.exports = { DATA_DIR, readJson, writeJson, filePath };

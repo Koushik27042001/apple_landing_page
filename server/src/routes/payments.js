@@ -1,12 +1,22 @@
 const express = require("express");
 const crypto = require("crypto");
 const store = require("../lib/store");
+const { razorpay } = require("../lib/razorpay");
+
+function validSignature(expected, supplied) {
+  return typeof supplied === "string" && /^[a-f0-9]{64}$/i.test(supplied) &&
+    crypto.timingSafeEqual(Buffer.from(expected, "hex"), Buffer.from(supplied, "hex"));
+}
 
 const router = express.Router();
 
 router.post("/verify", express.json(), async function (req, res, next) {
   try {
     const { orderId, razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body || {};
+    if (![orderId, razorpay_order_id, razorpay_payment_id, razorpay_signature].every(value => typeof value === "string" && value.length > 0)) {
+      return res.status(400).json({ error: "Missing payment verification fields" });
+    }
+    if (!razorpay) return res.status(503).json({ error: "Payment verification unavailable" });
     const order = await store.getOrder(orderId);
 
     if (!order) return res.status(404).json({ error: "Order not found" });
@@ -20,10 +30,16 @@ router.post("/verify", express.json(), async function (req, res, next) {
       .update(razorpay_order_id + "|" + razorpay_payment_id)
       .digest("hex");
 
-    if (expectedSignature !== razorpay_signature) {
-      await store.updateOrder(orderId, { status: "failed", failureReason: "Signature mismatch" });
+    if (!validSignature(expectedSignature, razorpay_signature)) {
       return res.status(400).json({ error: "Payment verification failed. Please contact support." });
     }
+
+    const payment = await razorpay.payments.fetch(razorpay_payment_id);
+    if (payment.status !== "captured" || payment.order_id !== order.razorpayOrderId ||
+        payment.amount !== Math.round(order.total * 100) || payment.currency !== order.currency) {
+      return res.status(409).json({ error: "Payment has not been captured for this order" });
+    }
+    if (order.status === "refunded") return res.status(409).json({ error: "Order already refunded" });
 
     const updated = await store.updateOrder(orderId, {
       status: "paid",
@@ -49,7 +65,7 @@ router.post("/webhook", async function (req, res) {
     }
 
     const expected = crypto.createHmac("sha256", secret).update(rawBody).digest("hex");
-    if (expected !== signature) {
+    if (!validSignature(expected, signature)) {
       return res.status(400).send("Invalid webhook signature");
     }
 
@@ -66,9 +82,11 @@ router.post("/webhook", async function (req, res) {
     const order = razorpayOrderId ? await store.findByRazorpayOrderId(razorpayOrderId) : null;
 
     if (order) {
-      if (event.event === "payment.captured") {
+      const payment = event.payload.payment.entity;
+      if (event.event === "payment.captured" && order.status !== "refunded" &&
+          payment.amount === Math.round(order.total * 100) && payment.currency === order.currency) {
         await store.updateOrder(order.id, { status: "paid", webhookConfirmedAt: new Date().toISOString() });
-      } else if (event.event === "payment.failed") {
+      } else if (event.event === "payment.failed" && !["paid", "refunded"].includes(order.status)) {
         await store.updateOrder(order.id, { status: "failed" });
       } else if (event.event === "refund.processed") {
         await store.updateOrder(order.id, { status: "refunded" });

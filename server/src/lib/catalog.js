@@ -21,7 +21,7 @@ async function getUnitPrice(productId, storageLabel) {
  * Optional couponCode is validated and applied server-side.
  */
 async function priceCart(items, couponCode) {
-  if (!Array.isArray(items) || items.length === 0) {
+  if (!Array.isArray(items) || items.length === 0 || items.length > 100) {
     throw new Error("Cart is empty.");
   }
   let subtotal = 0;
@@ -30,7 +30,7 @@ async function priceCart(items, couponCode) {
     const product = await getProductById(item.id);
     if (!product) throw new Error("Unknown product id: " + item.id);
     const qty = Number(item.qty) || 0;
-    if (qty < 1 || qty > 20) throw new Error("Invalid quantity for " + item.id);
+    if (!Number.isInteger(qty) || qty < 1 || qty > 20) throw new Error("Invalid quantity for " + item.id);
     const unitPrice = await getUnitPrice(item.id, item.storage);
     if (unitPrice == null) throw new Error("Invalid storage option for " + item.id);
     const lineTotal = unitPrice * qty;

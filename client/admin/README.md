@@ -2,6 +2,21 @@
 
 Manage products, coupons, orders and store settings for the Iswift Gadgets storefront.
 
+## Public static demo
+
+Open `admin/index.html?demo=1` relative to your hosted storefront, or click
+**Explore admin demo** on the admin login page. No password or backend is needed.
+For example, when serving `client/` locally, open
+`http://localhost:8080/admin/index.html?demo=1`.
+
+Visitors can explore the dashboard, edit sample products, banners and coupons,
+change sample order statuses, upload small images, and edit store settings.
+Changes persist only in this browser's demo storage. The live storefront, real
+orders and admin session are unaffected. **Reset demo** restores the sample data;
+**Exit demo** returns to the normal login screen. Images are limited to 500 KB
+for browser storage. Host the entire `client/` folder so catalog and image paths
+remain available, including on GitHub Pages under a project subdirectory.
+
 ## Quick start
 
 ```bash
@@ -14,8 +29,8 @@ Then open:
 
 **http://localhost:4000/admin/**
 
-Default password: `admin123`  
-Change it by setting `ADMIN_PASSWORD` in `server/.env`.
+Use `ADMIN_PASSWORD` from `server/.env` locally, or from Render's Environment
+settings for the deployed service. This is separate from the public demo.
 
 ## What you can do
 

@@ -1,0 +1,28 @@
+# Frontend and API share one HTTPS origin. Disk requires a paid service.
+services:
+  - type: web
+    name: iswift-gadgets
+    runtime: node
+    plan: starter
+    buildCommand: npm ci --prefix server --omit=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    disk:
+      name: store-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 22.18.0
+      - key: ADMIN_PASSWORD
+        generateValue: true
+      - key: DATA_DIR
+        value: /var/data/store
+      - key: UPLOAD_DIR
+        value: /var/data/uploads
+      - key: CURRENCY
+        value: INR
+      - key: RAZORPAY_PAYMENT_LINK
+        value: https://razorpay.me/@iswiftgadgetsprivatelimit3022

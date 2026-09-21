@@ -4,7 +4,7 @@
 (function () {
   const base = (typeof APPLE_STORE_API_BASE !== "undefined" && APPLE_STORE_API_BASE)
     ? APPLE_STORE_API_BASE
-    : "http://localhost:4000/api";
+    : "/api";
 
   // 1. Fetch products & categories
   if (typeof PRODUCTS !== "undefined" && typeof CATEGORIES !== "undefined") {

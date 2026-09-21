@@ -291,10 +291,10 @@ router.post("/upload", requireAdmin, async function (req, res, next) {
 
     let ext = matches[1].toLowerCase();
     if (ext === "jpeg") ext = "jpg";
-    if (ext === "svg+xml") ext = "svg";
+    if (!["jpg", "png", "webp", "gif"].includes(ext)) return res.status(400).json({ error: "Use PNG, JPEG, WebP or GIF images." });
     const base64Data = matches[2];
 
-    const uploadsDir = path.join(__dirname, "../../../client/images/uploads");
+    const uploadsDir = process.env.UPLOAD_DIR || path.join(__dirname, "../../../client/images/uploads");
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true });
     }

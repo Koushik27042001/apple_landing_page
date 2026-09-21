@@ -177,7 +177,7 @@ router.post("/", async function (req, res) {
   }
 });
 
-router.get("/:id", async function (req, res, next) {
+router.get("/:id", require("../lib/adminAuth").requireAdmin, async function (req, res, next) {
   try {
     const order = await store.getOrder(req.params.id);
     if (!order) return res.status(404).json({ error: "Order not found" });

@@ -2,9 +2,16 @@ node_modules/
 server/node_modules/
 server/.env
 .env
+.env.*
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.production.example
+client/images/uploads/
 npm-debug.log
 *.log
 server/data/products.json
 server/data/coupons.json
 server/data/settings.json
 server/data/admin-sessions.json
+server/data/orders.json

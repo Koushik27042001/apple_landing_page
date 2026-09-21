@@ -1,7 +1,7 @@
 {
   "name": "apple_landing_page",
   "version": "1.0.0",
-  "description": "Iswift Gadgets storefront — client (HTML/CSS/JS) + server (Express/Razorpay).",
+  "description": "Iswift Gadgets storefront \u2014 client (HTML/CSS/JS) + server (Express/Razorpay).",
   "main": "server/server.js",
   "directories": {
     "doc": "docs"
@@ -11,7 +11,10 @@
     "start:server": "npm --prefix server start",
     "dev:server": "npm --prefix server run dev",
     "serve:client": "npx --yes serve client -l 8080 -c serve.json",
-    "test": "node test/regression-test.js && node test/catalog-test.js"
+    "test": "npm run test:production && node --test test/admin-demo.test.js",
+    "build": "node scripts/build.js",
+    "test:production": "node --test test/production.test.js",
+    "test:browser": "node test/regression-test.js && node test/catalog-test.js"
   },
   "devDependencies": {
     "playwright": "^1.62.1"
@@ -27,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/Koushik27042001/apple_landing_page/issues"
   },
-  "homepage": "https://github.com/Koushik27042001/apple_landing_page#readme"
+  "homepage": "https://github.com/Koushik27042001/apple_landing_page#readme",
+  "engines": {
+    "node": ">=22 <23"
+  }
 }

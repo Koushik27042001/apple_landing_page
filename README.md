@@ -6,6 +6,11 @@ Separated frontend (`client/`) and backend (`server/`) for an Apple-style e-comm
 - **Server:** Node.js + Express API, admin panel APIs, Razorpay payments — see `/server`
 - **Docs:** Client-facing documentation — see `/docs`
 
+## Render deployment
+
+See [the Render deployment guide](docs/RENDER_DEPLOYMENT.md). The included
+`render.yaml` serves frontend and backend together with persistent storage.
+
 ## Project structure
 
 ```
@@ -45,7 +50,7 @@ Open `http://localhost:8080`.
    This serves **both** the API and the client:
 
    - Store: http://localhost:4000/
-   - Admin: http://localhost:4000/admin/  (password `admin123` by default)
+   - Admin: http://localhost:4000/admin/  (password from `server/.env`)
    - API:   http://localhost:4000/api/health
 
 2. Or run the client separately on port 8080 (pointed at the API via `client/js/config.js`):
@@ -60,7 +65,9 @@ Open `http://localhost:8080`.
 ```bash
 npm run start:server   # start API + serve client from /client
 npm run serve:client   # static client only on :8080
-npm test               # Playwright regression + catalog tests
+npm run build          # validate frontend and backend JavaScript
+npm test               # isolated production HTTP and persistence checks
+npm run test:browser   # legacy browser suite; requires Playwright and a running site
 ```
 
 ## Where to go next

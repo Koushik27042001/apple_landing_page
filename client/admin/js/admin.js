@@ -1,9 +1,11 @@
 (function () {
-  const API = (window.ADMIN_API_BASE || (location.port === "4000" ? "/api" : "http://localhost:4000/api"));
+  const API = (window.ADMIN_API_BASE || "/api");
   const TOKEN_KEY = "iswift_admin_token";
+  const isDemo = new URLSearchParams(location.search).get("demo") === "1";
+  const demoStore = isDemo ? window.createAdminDemoStore(localStorage, { PRODUCTS: PRODUCTS, CATEGORIES: CATEGORIES }) : null;
 
   const state = {
-    token: localStorage.getItem(TOKEN_KEY) || "",
+    token: isDemo ? "" : (localStorage.getItem(TOKEN_KEY) || ""),
     view: "dashboard",
     products: [],
     categories: [],
@@ -31,6 +33,7 @@
   }
 
   async function api(path, options) {
+    if (isDemo) return demoStore.request(path, options);
     options = options || {};
     const headers = Object.assign({ "Content-Type": "application/json" }, options.headers || {});
     if (state.token) headers.Authorization = "Bearer " + state.token;
@@ -56,6 +59,10 @@
   }
 
   function logout(silent) {
+    if (isDemo) {
+      location.href = location.pathname;
+      return;
+    }
     const token = state.token;
     state.token = "";
     localStorage.removeItem(TOKEN_KEY);
@@ -70,6 +77,13 @@
 
   async function boot() {
     wireGlobal();
+    if (isDemo) {
+      $("#demoNotice").hidden = false;
+      $("#logoutBtn").textContent = "Exit demo";
+      showShell();
+      navigate("dashboard");
+      return;
+    }
     if (!state.token) return showLogin();
     try {
       await api("/admin/me");
@@ -81,6 +95,11 @@
   }
 
   function wireGlobal() {
+    $("#resetDemoBtn").addEventListener("click", function () {
+      if (!confirm("Reset all demo changes to the sample data?")) return;
+      try { demoStore.reset(); navigate(state.view); toast("Demo reset"); }
+      catch (error) { toast(error.message); }
+    });
     $("#loginForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const err = $("#loginError");
@@ -141,7 +160,7 @@
     if (!fileInput || !urlInput) return;
 
     urlInput.addEventListener("input", function () {
-      updatePreview(urlInput.value);
+      updateImagePreview(urlInput.value, previewWrapId, previewImgId, statusId);
     });
 
     fileInput.addEventListener("change", function () {
@@ -172,6 +191,17 @@
           if (status) status.textContent = "❌ Upload failed: " + err.message;
           toast("Upload error: " + err.message);
         }
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function uploadFile(file) {
+    return new Promise(function (resolve, reject) {
+      const reader = new FileReader();
+      reader.onerror = function () { reject(new Error("Could not read this image.")); };
+      reader.onload = function () {
+        api("/admin/upload", { method: "POST", body: JSON.stringify({ image: reader.result, filename: file.name }) }).then(resolve, reject);
       };
       reader.readAsDataURL(file);
     });
@@ -544,7 +574,8 @@
               const activeBadge = b.active
                 ? '<span class="badge badge-green">Active</span>'
                 : '<span class="badge badge-amber">Inactive</span>';
-              const thumb = b.image ? '<img src="../' + escapeAttr(b.image) + '" style="width:36px;height:36px;object-fit:cover;border-radius:4px;margin-right:10px;vertical-align:middle;background:#eee;" onerror="this.style.display=\'none\'">' : '';
+              const imagePath = b.image && (/^(https?:|data:|\/)/.test(b.image) ? b.image : "../" + b.image);
+              const thumb = imagePath ? '<img src="' + escapeAttr(imagePath) + '" style="width:36px;height:36px;object-fit:cover;border-radius:4px;margin-right:10px;vertical-align:middle;background:#eee;" onerror="this.style.display=\'none\'">' : '';
               return "<tr>" +
                 "<td><div style='display:flex;align-items:center;'>" + thumb + "<div><strong>" + escapeHtml(b.title) + "</strong>" +
                   (b.badge ? " <span class='badge badge-blue'>" + escapeHtml(b.badge) + "</span>" : "") +
