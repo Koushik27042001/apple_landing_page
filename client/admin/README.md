@@ -9,6 +9,11 @@ Open `admin/index.html?demo=1` relative to your hosted storefront, or click
 For example, when serving `client/` locally, open
 `http://localhost:8080/admin/index.html?demo=1`.
 
+The regular login page checks whether the live API is available. On static
+hosting or during an outage, it shows **Open demo panel** without requesting a
+password. **Retry live connection** restores normal sign-in when the backend is
+reachable. Invalid live passwords never grant access or open the demo.
+
 Visitors can explore the dashboard, edit sample products, banners and coupons,
 change sample order statuses, upload small images, and edit store settings.
 Changes persist only in this browser's demo storage. The live storefront, real

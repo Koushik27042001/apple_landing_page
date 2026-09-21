@@ -3,6 +3,7 @@
   const TOKEN_KEY = "iswift_admin_token";
   const isDemo = new URLSearchParams(location.search).get("demo") === "1";
   const demoStore = isDemo ? window.createAdminDemoStore(localStorage, { PRODUCTS: PRODUCTS, CATEGORIES: CATEGORIES }) : null;
+  let liveAvailable = false;
 
   const state = {
     token: isDemo ? "" : (localStorage.getItem(TOKEN_KEY) || ""),
@@ -37,15 +38,52 @@
     options = options || {};
     const headers = Object.assign({ "Content-Type": "application/json" }, options.headers || {});
     if (state.token) headers.Authorization = "Bearer " + state.token;
-    const res = await fetch(API + path, Object.assign({}, options, { headers: headers }));
+    let res;
+    try {
+      res = await fetch(API + path, Object.assign({ signal: AbortSignal.timeout(10000) }, options, { headers: headers }));
+    } catch (_) {
+      const error = new Error("Cannot connect to the live admin server. Retry the connection or explore the sample demo.");
+      error.connectionUnavailable = true;
+      throw error;
+    }
     let data = null;
     try { data = await res.json(); } catch (e) { data = null; }
     if (res.status === 401) {
       logout(true);
       throw new Error((data && data.error) || "Unauthorized");
     }
-    if (!res.ok) throw new Error((data && data.error) || ("Request failed (" + res.status + ")"));
+    if (!res.ok || !data) {
+      const error = new Error((data && data.error) || "The admin API is unavailable on this site. Retry the connection or explore the sample demo.");
+      error.connectionUnavailable = !data || res.status >= 500 || res.status === 404;
+      throw error;
+    }
     return data;
+  }
+
+  function updateLoginConnection(available) {
+    liveAvailable = available;
+    $("#loginPassword").hidden = !available;
+    $("#loginPassword").required = available;
+    $("#loginPasswordLabel").hidden = !available;
+    $("#loginSubmit").disabled = false;
+    $("#loginSubmit").textContent = available ? "Sign in" : "Open demo panel";
+    $("#retryConnection").hidden = available;
+    $("#connectionNotice").textContent = available ? "" : "Live admin is unavailable on this site. You can explore the demo with sample data. No password is needed.";
+  }
+
+  async function checkConnection() {
+    $("#loginSubmit").disabled = true;
+    $("#loginSubmit").textContent = "Checking connection...";
+    $("#retryConnection").disabled = true;
+    let available = false;
+    try {
+      const response = await fetch(API + "/health", { cache: "no-store", signal: AbortSignal.timeout(5000) });
+      const health = response.ok ? await response.json() : null;
+      available = !!(health && health.ok === true && health.service === "iswift-gadgets-api");
+    } catch (_) { /* A static site has no API. Keep its sample demo accessible. */ }
+    updateLoginConnection(available);
+    $("#retryConnection").disabled = false;
+    return available;
   }
 
   function showLogin() {
@@ -84,7 +122,7 @@
       navigate("dashboard");
       return;
     }
-    if (!state.token) return showLogin();
+    if (!(await checkConnection()) || !state.token) return showLogin();
     try {
       await api("/admin/me");
       showShell();
@@ -95,6 +133,10 @@
   }
 
   function wireGlobal() {
+    $("#retryConnection").addEventListener("click", function () {
+      $("#loginError").hidden = true;
+      checkConnection();
+    });
     $("#resetDemoBtn").addEventListener("click", function () {
       if (!confirm("Reset all demo changes to the sample data?")) return;
       try { demoStore.reset(); navigate(state.view); toast("Demo reset"); }
@@ -102,8 +144,15 @@
     });
     $("#loginForm").addEventListener("submit", async function (e) {
       e.preventDefault();
+      if (!liveAvailable) {
+        const demoUrl = new URL(location.href);
+        demoUrl.searchParams.set("demo", "1");
+        location.href = demoUrl.href;
+        return;
+      }
       const err = $("#loginError");
       err.hidden = true;
+      $("#loginSubmit").disabled = true;
       try {
         const data = await api("/admin/login", {
           method: "POST",
@@ -114,8 +163,11 @@
         showShell();
         navigate("dashboard");
       } catch (ex) {
+        if (ex.connectionUnavailable) updateLoginConnection(false);
         err.textContent = ex.message;
         err.hidden = false;
+      } finally {
+        $("#loginSubmit").disabled = false;
       }
     });
 

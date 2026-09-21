@@ -16,9 +16,11 @@
       <div class="login-brand">Iswift Gadgets</div>
       <h1>Control Panel</h1>
       <p class="muted">Sign in to manage products, coupons, orders and store settings.</p>
-      <label>Admin password</label>
+      <label id="loginPasswordLabel" for="loginPassword">Admin password</label>
       <input type="password" id="loginPassword" placeholder="Enter admin password" autocomplete="current-password" required>
-      <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+      <button type="submit" id="loginSubmit" class="btn btn-primary btn-block" disabled>Checking connection...</button>
+      <p class="hint" id="connectionNotice" role="status"></p>
+      <button type="button" id="retryConnection" class="btn btn-ghost btn-block" hidden>Retry live connection</button>
       <p class="error-msg" id="loginError" hidden></p>
       <a class="btn btn-ghost btn-block" href="?demo=1">Explore admin demo</a>
       <p class="hint">No password needed for the demo. Explore sample data without changing the live store.</p>
