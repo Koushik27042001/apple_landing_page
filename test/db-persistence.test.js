@@ -41,7 +41,8 @@ async function runDbPersistenceTests() {
   console.log("PASS 1: API Health check OK. DB Mode:", health.body.dbMode || "json");
 
   // 2. Admin Login
-  const login = await request("/admin/login", { method: "POST" }, { password: "admin123" });
+  const adminPass = process.env.ADMIN_PASSWORD || "IswiftAdminSecret2026!SecureKey";
+  const login = await request("/admin/login", { method: "POST" }, { password: adminPass });
   assert.strictEqual(login.status, 200, "Admin login failed");
   const token = login.body.token;
   assert.ok(token, "Admin token missing");
