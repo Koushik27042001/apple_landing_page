@@ -2,6 +2,13 @@ const path = require('path');
 
 function validateEnvironment(env = process.env) {
   if (env.NODE_ENV !== 'production') return;
+
+  // If running live server (process.env), auto-assign absolute fallback paths if not set
+  if (env === process.env) {
+    if (!env.DATA_DIR) env.DATA_DIR = path.resolve(__dirname, '../../data');
+    if (!env.UPLOAD_DIR) env.UPLOAD_DIR = path.resolve(__dirname, '../../../client/images/uploads');
+  }
+
   if (!env.ADMIN_PASSWORD || env.ADMIN_PASSWORD.length < 20 || /admin123|change.me|your.password/i.test(env.ADMIN_PASSWORD)) {
     throw new Error('Production requires a unique ADMIN_PASSWORD of at least 20 characters.');
   }

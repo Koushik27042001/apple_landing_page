@@ -88,10 +88,11 @@ function log(step, ok, extra) {
     });
     log("Admin rejects bad password", bad.status === 401);
 
+    const adminPass = process.env.ADMIN_PASSWORD || "IswiftAdminSecret2026!SecureKey";
     const login = await fetch(base + "/api/admin/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password: "admin123" })
+      body: JSON.stringify({ password: adminPass })
     }).then(function (r) { return r.json(); });
     log("Admin login", !!login.token);
 
