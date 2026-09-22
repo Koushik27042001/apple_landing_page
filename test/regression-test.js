@@ -76,10 +76,11 @@ const { chromium } = require("playwright");
     await page.fill("#pincode", "411001");
     await page.locator("#toStep3").click();
     await page.waitForTimeout(300);
+    await page.locator('.payment-option[data-method="cod"]').click();
     await page.locator("#placeOrderBtn").click();
     await page.waitForSelector(".success-screen", { timeout: 4000 });
     const demoNoteVisible = await page.locator(".success-screen").textContent();
-    log("UPI checkout completes order successfully", demoNoteVisible.includes("Demo mode") || demoNoteVisible.includes("Order Placed"), "");
+    log("UPI/Checkout completes order successfully", demoNoteVisible.includes("Demo mode") || demoNoteVisible.includes("Order Placed"), "");
 
   } catch (e) {
     log("FATAL", false, e.message);

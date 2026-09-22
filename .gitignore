@@ -15,3 +15,5 @@ server/data/coupons.json
 server/data/settings.json
 server/data/admin-sessions.json
 server/data/orders.json
+server/data/banners.json
+test/*.png

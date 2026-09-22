@@ -17,12 +17,7 @@ function payableAmountInr(amountInr) {
  * Optional orderId is added as description for reconciliation.
  */
 function buildPaymentLink(amountInr, orderId) {
-  const base = String(RAZORPAY_PAYMENT_LINK || "").replace(/[?#].*$/, "");
-  const amount = payableAmountInr(amountInr);
-  const params = [];
-  if (amount) params.push("amount=" + amount);
-  if (orderId) params.push("description=" + encodeURIComponent("Order " + orderId));
-  return params.length ? base + "?" + params.join("&") : base;
+  return String(RAZORPAY_PAYMENT_LINK || "https://razorpay.me/@iswiftgadgetsprivatelimit3022").replace(/[?#].*$/, "");
 }
 
 /** Image URL for a QR that encodes the amount-locked payment link. */

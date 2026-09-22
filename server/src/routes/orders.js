@@ -16,12 +16,7 @@ function isValidPhone(v) { return /^[6-9]\d{9}$/.test(v || ""); }
 function isValidPincode(v) { return /^\d{6}$/.test(v || ""); }
 
 function buildPaymentUrl(amountInr, orderId) {
-  const base = String(PAYMENT_LINK || "").replace(/[?#].*$/, "");
-  const amount = Math.round(Number(amountInr) || 0);
-  const params = [];
-  if (amount > 0) params.push("amount=" + amount);
-  if (orderId) params.push("description=" + encodeURIComponent("Order " + orderId));
-  return params.length ? base + "?" + params.join("&") : base;
+  return String(PAYMENT_LINK || "https://razorpay.me/@iswiftgadgetsprivatelimit3022").replace(/[?#].*$/, "");
 }
 
 router.post("/", async function (req, res) {

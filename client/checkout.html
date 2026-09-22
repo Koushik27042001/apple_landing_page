@@ -450,7 +450,6 @@
     }
 
     if (method === "cod") {
-      const totals = getCheckoutTotals();
       fetch(APPLE_STORE_API_BASE + "/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -475,54 +474,7 @@
       return;
     }
 
-    // UPI / card / EMI → Razorpay.me with cart total locked on the link + QR
-    const usePaymentLink = method === "upi" || method === "card" || method === "emi";
-
-    if (usePaymentLink) {
-      const totals = getCheckoutTotals();
-
-      function finishLinkOrder(orderId, total, paymentHref) {
-        const amount = payableAmountInr(total);
-        const link = paymentHref || buildPaymentLink(amount, orderId);
-        window.open(link, "_blank", "noopener");
-        showPaymentPending({
-          orderId: orderId,
-          method: method,
-          total: amount,
-          paymentLink: link
-        });
-      }
-
-
-      fetch(APPLE_STORE_API_BASE + "/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          items: cartAsLineItems(),
-          customer: getCustomerInfo(),
-          shipping: getShippingInfo(),
-          couponCode: appliedCoupon ? appliedCoupon.code : undefined,
-          paymentMode: "link"
-        })
-      })
-        .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
-        .then(function (res) {
-          if (!res.ok) throw new Error(res.data.error || "Could not create order.");
-          const serverTotal = res.data.totals && res.data.totals.total != null
-            ? res.data.totals.total
-            : totals.total;
-          const link = res.data.paymentLink || buildPaymentLink(serverTotal, res.data.orderId);
-          finishLinkOrder(res.data.orderId, serverTotal, link);
-        })
-        .catch(function (err) {
-          showToast(err.message || "Something went wrong. Please try again.", { icon: "info" });
-          btn.disabled = false;
-          btn.textContent = "Place Order";
-        });
-      return;
-    }
-
-
+    // Online payment: Gateway Popup Checkout if keys configured, else clean Razorpay link
     fetch(APPLE_STORE_API_BASE + "/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -530,19 +482,20 @@
         items: cartAsLineItems(),
         customer: getCustomerInfo(),
         shipping: getShippingInfo(),
-        couponCode: appliedCoupon ? appliedCoupon.code : undefined
+        couponCode: appliedCoupon ? appliedCoupon.code : undefined,
+        paymentMode: "gateway"
       })
     })
       .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
       .then(function (res) {
         if (!res.ok) throw new Error(res.data.error || "Could not create order.");
         if (res.data.paymentMode === "link") {
-          const link = res.data.paymentLink || buildPaymentLink(res.data.totals.total);
+          const link = res.data.paymentLink || buildPaymentLink(res.data.totals ? res.data.totals.total : 0, res.data.orderId);
           window.open(link, "_blank", "noopener");
           showPaymentPending({
             orderId: res.data.orderId,
             method: method,
-            total: res.data.totals.total,
+            total: res.data.totals ? res.data.totals.total : 0,
             paymentLink: link
           });
           return;
