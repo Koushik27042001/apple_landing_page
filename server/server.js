@@ -41,13 +41,14 @@ app.use(express.json({ limit: "10mb" }));
 
 app.get("/api/health", function (req, res) {
   const mongoose = require("./src/lib/mongo").mongoose;
-  if (process.env.MONGODB_URI && mongoose.connection.readyState !== 1) {
-    return res.status(503).json({ ok: false });
+  const dbMode = getDbMode();
+  if (dbMode === "mongo" && mongoose.connection.readyState !== 1) {
+    return res.status(503).json({ ok: false, db: dbMode });
   }
   res.json({
     ok: true,
     service: "iswift-gadgets-api",
-    db: getDbMode(),
+    db: dbMode,
     time: new Date().toISOString()
   });
 });

@@ -15,6 +15,9 @@
     orders: [],
     settings: null,
     productQuery: "",
+    productCategory: "all",
+    productPage: 1,
+    productPerPage: 10,
     orderFilter: "all"
   };
 
@@ -23,6 +26,12 @@
 
   function formatINR(n) {
     return "₹" + Number(n || 0).toLocaleString("en-IN");
+  }
+
+  function adminIcon(name, opts) {
+    if (typeof icon === "function") return icon(name, opts);
+    if (typeof window.icon === "function") return window.icon(name, opts);
+    return "";
   }
 
   function toast(msg) {
@@ -298,15 +307,15 @@
     const actions = $("#topbarActions");
     actions.innerHTML = "";
     if (view === "products") {
-      actions.innerHTML = '<button class="btn btn-primary" id="addProductBtn">Add product</button>';
+      actions.innerHTML = '<button class="btn btn-primary" id="addProductBtn">' + adminIcon("plus", { size: 16 }) + ' Add product</button>';
       $("#addProductBtn").onclick = function () { openProductModal(); };
     }
     if (view === "banners") {
-      actions.innerHTML = '<button class="btn btn-primary" id="addBannerBtn">Add Banner / Ad</button>';
+      actions.innerHTML = '<button class="btn btn-primary" id="addBannerBtn">' + adminIcon("plus", { size: 16 }) + ' Add Banner / Ad</button>';
       $("#addBannerBtn").onclick = function () { openBannerModal(); };
     }
     if (view === "coupons") {
-      actions.innerHTML = '<button class="btn btn-primary" id="addCouponBtn">Add coupon</button>';
+      actions.innerHTML = '<button class="btn btn-primary" id="addCouponBtn">' + adminIcon("plus", { size: 16 }) + ' Add coupon</button>';
       $("#addCouponBtn").onclick = function () { openCouponModal(); };
     }
     renderView();
@@ -331,11 +340,11 @@
     const stats = await api("/admin/stats");
     el.innerHTML =
       '<div class="stats">' +
-        statCard("Products", stats.products) +
-        statCard("Active Banners", (stats.activeBanners || 0) + " / " + (stats.banners || 0)) +
-        statCard("Active coupons", stats.activeCoupons + " / " + stats.coupons) +
-        statCard("Orders", stats.orders) +
-        statCard("Paid revenue", formatINR(stats.revenue)) +
+        statCard("Products", stats.products, "product") +
+        statCard("Active Banners", (stats.activeBanners || 0) + " / " + (stats.banners || 0), "banner") +
+        statCard("Active coupons", stats.activeCoupons + " / " + stats.coupons, "coupon") +
+        statCard("Orders", stats.orders, "truck") +
+        statCard("Paid revenue", formatINR(stats.revenue), "card") +
       "</div>" +
       '<div class="panel">' +
         '<div class="panel-head"><h3>Recent orders</h3><span class="muted">Low stock items: ' + stats.lowStock + "</span></div>" +
@@ -351,28 +360,99 @@
       "</div>";
   }
 
-  function statCard(label, value) {
-    return '<div class="stat-card"><div class="label">' + label + '</div><div class="value">' + value + "</div></div>";
+  function statCard(label, value, iconName) {
+    const iconSvg = iconName ? '<div class="stat-card-icon">' + adminIcon(iconName, { size: 20 }) + '</div>' : '';
+    return '<div class="stat-card"><div class="stat-card-top"><span class="label">' + label + '</span>' + iconSvg + '</div><div class="value">' + value + '</div></div>';
   }
 
   async function renderProducts(el) {
     const data = await api("/admin/products");
     state.products = data.products || [];
     state.categories = data.categories || [];
+    
     const q = state.productQuery.trim().toLowerCase();
-    const list = !q ? state.products : state.products.filter(function (p) {
-      return (p.name + " " + p.category + " " + p.id).toLowerCase().indexOf(q) !== -1;
+    const cat = (state.productCategory || "all").toLowerCase();
+
+    const filteredList = state.products.filter(function (p) {
+      const matchQ = !q || (p.name + " " + p.category + " " + p.id).toLowerCase().indexOf(q) !== -1;
+      const matchCat = cat === "all" || (p.category && p.category.toLowerCase() === cat);
+      return matchQ && matchCat;
     });
+
+    const perPageVal = state.productPerPage === "all" ? (filteredList.length || 1) : (Number(state.productPerPage) || 10);
+    const totalPages = Math.ceil(filteredList.length / perPageVal) || 1;
+    if (state.productPage > totalPages) state.productPage = totalPages;
+    if (state.productPage < 1) state.productPage = 1;
+
+    const startIdx = filteredList.length === 0 ? 0 : (state.productPage - 1) * perPageVal;
+    const pageItems = filteredList.slice(startIdx, startIdx + perPageVal);
+    const endIdx = Math.min(startIdx + pageItems.length, filteredList.length);
+
+    // Build Category Filter options
+    const catList = ["all", "iphone", "mac", "ipad", "watch", "vision", "airpods", "tvhome", "accessories"];
+    const catOptionsHtml = catList.map(function (c) {
+      const label = c === "all" ? "All Categories" : (c === "tvhome" ? "TV & Home" : c.charAt(0).toUpperCase() + c.slice(1));
+      const selected = cat === c ? ' selected' : '';
+      return '<option value="' + c + '"' + selected + '>' + escapeHtml(label) + '</option>';
+    }).join("");
+
+    // Build Per-Page options
+    const perPageOpts = [5, 10, 20, 50, "all"];
+    const perPageHtml = perPageOpts.map(function (opt) {
+      const val = String(opt);
+      const label = opt === "all" ? "All Items" : opt + " / page";
+      const selected = String(state.productPerPage) === val ? ' selected' : '';
+      return '<option value="' + val + '"' + selected + '>' + label + '</option>';
+    }).join("");
+
+    // Page numbers helper
+    function buildPageNumbers(current, total) {
+      if (total <= 7) {
+        const res = [];
+        for (let i = 1; i <= total; i++) res.push(i);
+        return res;
+      }
+      if (current <= 4) return [1, 2, 3, 4, 5, "...", total];
+      if (current >= total - 3) return [1, "...", total - 4, total - 3, total - 2, total - 1, total];
+      return [1, "...", current - 1, current, current + 1, "...", total];
+    }
+
+    const pagesRange = buildPageNumbers(state.productPage, totalPages);
+    const paginationControlsHtml =
+      '<div class="pagination">' +
+        '<button class="page-btn" id="prevPageBtn" ' + (state.productPage <= 1 ? 'disabled' : '') + ' title="Previous Page">‹</button>' +
+        pagesRange.map(function (p) {
+          if (p === "...") return '<span class="page-ellipsis">…</span>';
+          const isActive = p === state.productPage;
+          return '<button class="page-btn ' + (isActive ? 'active' : '') + '" data-goto-page="' + p + '">' + p + '</button>';
+        }).join("") +
+        '<button class="page-btn" id="nextPageBtn" ' + (state.productPage >= totalPages ? 'disabled' : '') + ' title="Next Page">›</button>' +
+      '</div>';
+
+    const infoText = filteredList.length === 0
+      ? 'No products found'
+      : 'Showing <strong>' + (startIdx + 1) + '–' + endIdx + '</strong> of <strong>' + filteredList.length + '</strong> products' +
+        (filteredList.length !== state.products.length ? ' <span class="muted">(filtered from ' + state.products.length + ' total)</span>' : '');
+
+    const panelFootHtml =
+      '<div class="panel-foot">' +
+        '<div>' + infoText + '</div>' +
+        (totalPages > 1 ? paginationControlsHtml : '') +
+      '</div>';
 
     el.innerHTML =
       '<div class="panel">' +
         '<div class="panel-head">' +
-          "<h3>" + list.length + " products</h3>" +
-          '<div class="toolbar"><input id="productSearch" placeholder="Search products…" value="' + escapeAttr(state.productQuery) + '"></div>' +
+          "<h3>Products (" + filteredList.length + ")</h3>" +
+          '<div class="toolbar">' +
+            '<input id="productSearch" placeholder="Search products…" value="' + escapeAttr(state.productQuery) + '">' +
+            '<select id="productCatFilter">' + catOptionsHtml + '</select>' +
+            '<select id="productPerPageSelect">' + perPageHtml + '</select>' +
+          '</div>' +
         "</div>" +
-        (list.length
+        (pageItems.length
           ? '<table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Badge</th><th>Actions</th></tr></thead><tbody>' +
-            list.map(function (p) {
+            pageItems.map(function (p) {
               const imgPath = p.images && p.images[0] ? (p.images[0].startsWith("http") || p.images[0].startsWith("data:") ? p.images[0] : "../" + p.images[0]) : "";
               const thumb = imgPath ? '<img src="' + escapeAttr(imgPath) + '" style="width:40px;height:40px;object-fit:cover;border-radius:6px;margin-right:10px;vertical-align:middle;background:#f5f5f7;" onerror="this.style.display=\'none\'">' : '';
               const stockBadge = Number(p.stock) <= 5
@@ -395,28 +475,80 @@
                 "<td>" + stockBadge + "</td>" +
                 "<td>" + (p.badge ? '<span class="badge badge-blue">' + escapeHtml(p.badge) + "</span>" : "—") + "</td>" +
                 '<td class="actions">' +
-                  '<button class="btn btn-sm btn-ghost" data-edit-product="' + escapeAttr(p.id) + '">Edit</button>' +
-                  '<button class="btn btn-sm btn-danger" data-del-product="' + escapeAttr(p.id) + '">Delete</button>' +
+                  '<button class="btn btn-sm btn-ghost" data-edit-product="' + escapeAttr(p.id) + '">' + adminIcon("edit", { size: 13 }) + ' Edit</button>' +
+                  '<button class="btn btn-sm btn-danger" data-del-product="' + escapeAttr(p.id) + '">' + adminIcon("trash", { size: 13 }) + ' Delete</button>' +
                 "</td></tr>";
             }).join("") +
             "</tbody></table>"
-          : '<div class="empty">No products match your search.</div>') +
+          : '<div class="empty">No products match your search or filters.</div>') +
+        panelFootHtml +
       "</div>";
 
     const search = $("#productSearch");
     if (search) {
       search.addEventListener("input", function () {
         state.productQuery = search.value;
+        state.productPage = 1;
         clearTimeout(search._t);
         search._t = setTimeout(function () { renderProducts(el); }, 180);
       });
     }
+
+    const catFilter = $("#productCatFilter");
+    if (catFilter) {
+      catFilter.addEventListener("change", function () {
+        state.productCategory = catFilter.value;
+        state.productPage = 1;
+        renderProducts(el);
+      });
+    }
+
+    const perPageSelect = $("#productPerPageSelect");
+    if (perPageSelect) {
+      perPageSelect.addEventListener("change", function () {
+        state.productPerPage = perPageSelect.value;
+        state.productPage = 1;
+        renderProducts(el);
+      });
+    }
+
+    const prevBtn = $("#prevPageBtn");
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        if (state.productPage > 1) {
+          state.productPage--;
+          renderProducts(el);
+        }
+      });
+    }
+
+    const nextBtn = $("#nextPageBtn");
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        if (state.productPage < totalPages) {
+          state.productPage++;
+          renderProducts(el);
+        }
+      });
+    }
+
+    $$("[data-goto-page]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const p = Number(btn.getAttribute("data-goto-page"));
+        if (p && p !== state.productPage) {
+          state.productPage = p;
+          renderProducts(el);
+        }
+      });
+    });
+
     $$("[data-edit-product]").forEach(function (btn) {
       btn.addEventListener("click", function () {
         const p = state.products.find(function (x) { return x.id === btn.getAttribute("data-edit-product"); });
         openProductModal(p);
       });
     });
+
     $$("[data-del-product]").forEach(function (btn) {
       btn.addEventListener("click", async function () {
         if (!confirm("Delete this product?")) return;
@@ -638,9 +770,9 @@
                 "<td>" + activeBadge + "</td>" +
                 "<td>" + (b.sortOrder || 0) + "</td>" +
                 "<td class='actions'>" +
-                  '<button class="btn btn-ghost btn-sm b-edit" data-id="' + escapeAttr(b.id) + '">Edit</button>' +
-                  '<button class="btn btn-ghost btn-sm b-toggle" data-id="' + escapeAttr(b.id) + '">' + (b.active ? "Deactivate" : "Activate") + '</button>' +
-                  '<button class="btn btn-danger btn-sm b-del" data-id="' + escapeAttr(b.id) + '">Delete</button>' +
+                  '<button class="btn btn-ghost btn-sm b-edit" data-id="' + escapeAttr(b.id) + '">' + adminIcon("edit", { size: 13 }) + ' Edit</button>' +
+                  '<button class="btn btn-ghost btn-sm b-toggle" data-id="' + escapeAttr(b.id) + '">' + adminIcon("refresh", { size: 13 }) + (b.active ? " Deactivate" : " Activate") + '</button>' +
+                  '<button class="btn btn-danger btn-sm b-del" data-id="' + escapeAttr(b.id) + '">' + adminIcon("trash", { size: 13 }) + ' Delete</button>' +
                 "</td>" +
               "</tr>";
             }).join("") +
@@ -769,8 +901,8 @@
                 "<td>" + (c.usedCount || 0) + (c.usageLimit != null ? " / " + c.usageLimit : "") + "</td>" +
                 "<td>" + (c.active ? '<span class="badge badge-green">Active</span>' : '<span class="badge badge-red">Off</span>') + "</td>" +
                 '<td class="actions">' +
-                  '<button class="btn btn-sm btn-ghost" data-edit-coupon="' + escapeAttr(c.id) + '">Edit</button>' +
-                  '<button class="btn btn-sm btn-danger" data-del-coupon="' + escapeAttr(c.id) + '">Delete</button>' +
+                  '<button class="btn btn-sm btn-ghost" data-edit-coupon="' + escapeAttr(c.id) + '">' + adminIcon("edit", { size: 13 }) + ' Edit</button>' +
+                  '<button class="btn btn-sm btn-danger" data-del-coupon="' + escapeAttr(c.id) + '">' + adminIcon("trash", { size: 13 }) + ' Delete</button>' +
                 "</td></tr>";
             }).join("") +
             "</tbody></table>"
@@ -915,7 +1047,7 @@
         '<label>Shipping fee (₹)<input id="s_shippingFee" type="number" value="' + escapeAttr(s.shippingFee) + '"></label>' +
         '<label>Free shipping above (₹)<input id="s_shippingThreshold" type="number" value="' + escapeAttr(s.shippingThreshold) + '"></label>' +
         '<label class="span-2">Homepage announcement<textarea id="s_announcement" rows="2">' + escapeHtml(s.announcement || "") + "</textarea></label>" +
-        '<div class="span-2" style="display:flex; justify-content:flex-end;"><button class="btn btn-primary" type="submit">Save settings</button></div>' +
+        '<div class="span-2" style="display:flex; justify-content:flex-end;"><button class="btn btn-primary" type="submit">' + adminIcon("shieldCheck", { size: 16 }) + ' Save settings</button></div>' +
       "</form>";
 
     $("#settingsForm").addEventListener("submit", async function (e) {

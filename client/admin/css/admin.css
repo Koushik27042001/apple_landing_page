@@ -144,12 +144,30 @@ a:hover { text-decoration: underline; }
   gap: 14px;
   margin-bottom: 22px;
 }
-.stat-card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 18px;
-  box-shadow: var(--shadow);
+.btn, .nav-btn, .sidebar-foot a, .panel-head, .actions .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.icon-svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.stat-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.stat-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .stat-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
 .stat-card .value { font-size: 28px; font-weight: 700; margin-top: 6px; letter-spacing: -0.03em; }
@@ -176,7 +194,59 @@ a:hover { text-decoration: underline; }
   border: 1px solid var(--line);
   border-radius: 10px;
   background: #fff;
-  min-width: 180px;
+  min-width: 140px;
+}
+
+.panel-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-top: 1px solid var(--line);
+  background: #fafafa;
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.page-btn {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 2px !important;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.page-btn:hover:not(:disabled) {
+  background: #f0f0f5;
+  border-color: #c7c7cc;
+}
+.page-btn.active {
+  background: var(--blue);
+  color: #ffffff;
+  border-color: var(--blue);
+  font-weight: 600;
+}
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.page-ellipsis {
+  padding: 0 4px;
+  color: var(--muted);
+  user-select: none;
 }
 
 table { width: 100%; border-collapse: collapse; }
