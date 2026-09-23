@@ -2561,10 +2561,26 @@ button { font-family: inherit; cursor: pointer; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 
-/* ============================================================
-   Responsive
-   ============================================================ */
+/* ==========================================================================
+   RESPONSIVE DESIGN & MOBILE BREAKPOINT SYSTEM — APPLE STORE PUNE
+   Standardized Media Queries for All Screen Sizes:
+   - Laptop / Tablet Landscape: max-width: 1024px
+   - Tablet Portrait & Large Phone: max-width: 980px
+   - Mobile Standard: max-width: 768px
+   - Compact Mobile: max-width: 600px
+   - Small Mobile Phone: max-width: 480px
+   - Micro Mobile Phone: max-width: 360px
+   ========================================================================== */
 
+/* ── 1. Tablet & Laptop Landscape (max-width: 1024px) ── */
+@media (max-width: 1024px) {
+  .container { padding-left: 20px; padding-right: 20px; }
+  .pdp-showcase-wrapper { padding: 32px 20px; }
+  .pdp-purchase-container { gap: 24px; padding: 28px 24px; }
+  .footer-grid { grid-template-columns: repeat(3, 1fr); gap: 32px 20px; }
+}
+
+/* ── 2. Tablet & Medium Screens (max-width: 980px) ── */
 @media (max-width: 980px) {
   .collections-grid { grid-template-columns: repeat(2, 1fr); }
   .product-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2612,6 +2628,7 @@ button { font-family: inherit; cursor: pointer; }
     padding: 0 22px 8px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
   }
   .iphone-hero-card {
     flex: 0 0 150px;
@@ -2637,7 +2654,8 @@ button { font-family: inherit; cursor: pointer; }
   .value-grid { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 700px) {
+/* ── 3. Mobile Standard (max-width: 768px) ── */
+@media (max-width: 768px) {
   .main-nav { display: none; }
   .search-wrap { display: none; }
   .menu-toggle { display: inline-flex; }
@@ -2645,24 +2663,60 @@ button { font-family: inherit; cursor: pointer; }
   .product-grid { grid-template-columns: repeat(2, 1fr); gap: 16px 12px; }
   .promo-strip { grid-template-columns: 1fr; }
   .pdp-actions { display: none; }
-  .sticky-atc { display: flex; }
-  body.has-sticky-atc { padding-bottom: 66px; }
+  .sticky-atc {
+    display: flex;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+  body.has-sticky-atc { padding-bottom: 74px; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px 16px; }
-  .footer-bottom { flex-direction: column; text-align: center; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 12px; }
   .footer-bottom .legal-links a { margin: 0 8px; }
   .hero-slide { min-height: 460px; }
-  .hero-slide-content .inner { max-width: 78%; }
+  .hero-slide-content .inner { max-width: 88%; }
   .hero-arrow { display: none; }
-  .whatsapp-float { width: 50px; height: 50px; font-size: 24px; bottom: 80px; }
-  .trust-mini { grid-template-columns: repeat(3, 1fr); }
+  .whatsapp-float {
+    width: 52px;
+    height: 52px;
+    font-size: 26px;
+    bottom: 84px;
+    right: 16px;
+  }
+  .trust-mini { grid-template-columns: repeat(2, 1fr); }
+  .apple-hero-feature { padding: 48px 16px 36px; }
+  .hero-feature-title { font-size: clamp(28px, 7vw, 44px); }
+  .hero-feature-desc { font-size: 15px; line-height: 1.45; }
+  .hero-feature-actions { flex-direction: column; gap: 10px; width: 100%; max-width: 320px; margin: 0 auto; }
+  .hero-feature-actions .btn { width: 100%; text-align: center; }
 }
 
+/* ── 4. Compact Mobile (max-width: 600px) ── */
+@media (max-width: 600px) {
+  .event-headline { font-size: clamp(20px, 5.5vw, 32px); line-height: 1.3; }
+  .event-cta { flex-direction: column; gap: 10px; }
+  .event-cta .btn { width: 100%; text-align: center; margin-left: 0 !important; }
+  .checkout-step-sep { display: none; }
+  .checkout-steps { flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .checkout-step { font-size: 13px; }
+}
+
+/* ── 5. Small Phone (max-width: 480px) ── */
 @media (max-width: 480px) {
-  .product-grid { gap: 14px 10px; }
-  .product-card { padding: 14px; }
-  .product-card .pc-image { height: 130px; }
-  .header-inner { gap: 10px; }
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px 8px; }
+  .product-card { padding: 12px 10px; }
+  .product-card .pc-image { height: 120px; }
+  .product-card h4 { font-size: 13px; min-height: 36px; }
+  .product-card .pc-price { font-size: 15px; }
+  .header-inner { gap: 10px; padding: 0 12px; }
   .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-contact { margin-top: 10px; }
+}
+
+/* ── 6. Micro Mobile (max-width: 360px) ── */
+@media (max-width: 360px) {
+  .product-grid { grid-template-columns: 1fr; }
+  .product-card .pc-image { height: 160px; }
+  .pdp-3d-stage { height: 220px; }
 }
 
 /* ============================================================

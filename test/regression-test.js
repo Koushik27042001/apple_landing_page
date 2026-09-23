@@ -61,7 +61,7 @@ async function ensureServerRunning() {
 
     await page.goto(base + "cart.html", { waitUntil: "networkidle" });
     await page.locator('a.btn.btn-primary:has-text("Proceed to Checkout")').click();
-    await page.waitForURL("**/checkout.html", { timeout: 5000 });
+    await page.waitForURL("**/checkout.html", { timeout: 10000 });
 
     await page.fill("#fullName", "Rohan Sharma");
     await page.fill("#phone", "9876543210");

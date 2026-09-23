@@ -350,12 +350,44 @@ tr:hover td { background: #fbfbfc; }
   font-size: 13.5px;
 }
 
+/* ==========================================================================
+   ADMIN PANEL RESPONSIVE BREAKPOINT SYSTEM
+   Breakpoints:
+   - Tablet & Small Screens: max-width: 980px
+   - Mobile Portrait: max-width: 600px
+   - Compact Phone: max-width: 480px
+   ========================================================================== */
+
+/* ── 1. Tablet / Small Laptop (max-width: 980px) ── */
 @media (max-width: 980px) {
   .shell { grid-template-columns: 1fr; }
-  .sidebar { flex-direction: row; flex-wrap: wrap; align-items: center; }
-  .sidebar-nav { flex-direction: row; flex-wrap: wrap; width: 100%; }
-  .stats { grid-template-columns: 1fr 1fr; }
+  .sidebar { flex-direction: row; flex-wrap: wrap; align-items: center; padding: 14px 16px; gap: 12px; }
+  .sidebar-nav { flex-direction: row; flex-wrap: wrap; width: 100%; gap: 6px; }
+  .nav-btn { flex: 1 1 auto; justify-content: center; padding: 9px 12px; font-size: 13px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
   .settings-form, .grid-2 { grid-template-columns: 1fr; }
   .content, .topbar { padding-left: 16px; padding-right: 16px; }
-  table { display: block; overflow-x: auto; }
+  .topbar { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; min-width: 640px; }
+  .modal { width: min(92vw, 680px); }
+}
+
+/* ── 2. Mobile Portrait (max-width: 600px) ── */
+@media (max-width: 600px) {
+  .stats { grid-template-columns: 1fr; }
+  .stat-card .value { font-size: 24px; }
+  .panel-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .toolbar { width: 100%; flex-direction: column; }
+  .toolbar input, .toolbar select { width: 100%; min-width: 100%; }
+  .actions { flex-direction: column; gap: 4px; }
+  .actions .btn { width: 100%; justify-content: center; }
+}
+
+/* ── 3. Compact Phone (max-width: 480px) ── */
+@media (max-width: 480px) {
+  .sidebar-brand strong { font-size: 16px; }
+  .sidebar-foot { width: 100%; flex-direction: row; flex-wrap: wrap; }
+  .modal-card header, .modal-card footer { padding: 12px 14px; }
+  .modal-body { padding: 14px; }
 }
