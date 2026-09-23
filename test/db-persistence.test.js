@@ -32,13 +32,39 @@ function request(path, options, payload) {
   });
 }
 
+const { fork } = require("child_process");
+const path = require("path");
+
+async function ensureServerRunning() {
+  try {
+    const res = await request("/health");
+    if (res.status === 200) return null;
+  } catch (_) {}
+
+  const serverProc = fork(path.join(__dirname, "../server/server.js"), [], {
+    cwd: path.join(__dirname, "../server"),
+    env: Object.assign({}, process.env, { PORT: "4000" }),
+    stdio: "ignore"
+  });
+
+  for (let i = 0; i < 30; i++) {
+    await new Promise((r) => setTimeout(r, 200));
+    try {
+      const res = await request("/health");
+      if (res.status === 200) return serverProc;
+    } catch (_) {}
+  }
+  return serverProc;
+}
+
 async function runDbPersistenceTests() {
   console.log("=== RUNNING DATABASE PERSISTENCE & MUTATION TESTS ===");
+  const spawnedProc = await ensureServerRunning();
 
   // 1. Health & DB mode check
   const health = await request("/health");
   assert.strictEqual(health.status, 200, "Health check failed");
-  console.log("PASS 1: API Health check OK. DB Mode:", health.body.dbMode || "json");
+  console.log("PASS 1: API Health check OK. DB Mode:", health.body.db || health.body.dbMode || "json");
 
   // 2. Admin Login
   const adminPass = process.env.ADMIN_PASSWORD || "IswiftAdminSecret2026!SecureKey";
@@ -194,6 +220,10 @@ async function runDbPersistenceTests() {
   console.log("\n==========================================");
   console.log("ALL 15 DATABASE PERSISTENCE TESTS PASSED CLEANLY!");
   console.log("==========================================");
+
+  if (spawnedProc) {
+    spawnedProc.kill();
+  }
 }
 
 runDbPersistenceTests().catch((err) => {

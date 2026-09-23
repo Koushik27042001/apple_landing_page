@@ -1,6 +1,30 @@
 const { chromium } = require("playwright");
 
+const { fork } = require("child_process");
+const http = require("http");
+const path = require("path");
+
+async function ensureServerRunning() {
+  const check = () => new Promise((resolve) => {
+    const req = http.get("http://localhost:4000/api/health", (res) => resolve(res.statusCode === 200));
+    req.on("error", () => resolve(false));
+    req.end();
+  });
+  if (await check()) return null;
+  const proc = fork(path.join(__dirname, "../server/server.js"), [], {
+    cwd: path.join(__dirname, "../server"),
+    env: Object.assign({}, process.env, { PORT: "4000" }),
+    stdio: "ignore"
+  });
+  for (let i = 0; i < 30; i++) {
+    await new Promise((r) => setTimeout(r, 200));
+    if (await check()) return proc;
+  }
+  return proc;
+}
+
 (async () => {
+  const serverProc = await ensureServerRunning();
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
   const errors = [];
@@ -103,5 +127,6 @@ const { chromium } = require("playwright");
   }
 
   await browser.close();
+  if (serverProc) serverProc.kill();
   process.exit(failCount > 0 || errors.length > 0 ? 1 : 0);
 })();

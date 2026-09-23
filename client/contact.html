@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -72,14 +72,14 @@
             <span class="icon" data-icon="pin" data-icon-size="18"></span>
             <div>
               <p class="label">Head Office</p>
-              <p>#L-176, Ground Floor, 5th Main,<br>HSR Layout, Sector 6,<br>Bengaluru, 560102</p>
+              <p id="contactAddress">#L-176, Ground Floor, 5th Main,<br>HSR Layout, Sector 6,<br>Bengaluru, 560102</p>
             </div>
           </div>
           <div class="store-info-row">
             <span class="icon" data-icon="phone" data-icon-size="18"></span>
             <div>
               <p class="label">Phone / WhatsApp</p>
-              <p>
+              <p id="contactPhones">
                 <a href="tel:+918041492709">080-4149 2709</a><br>
                 <a href="tel:+919972612530">+91 99726 12530</a><br>
                 <a href="tel:+917975627008">+91 79756 27008</a><br>
@@ -91,7 +91,7 @@
             <span class="icon" data-icon="mail" data-icon-size="18"></span>
             <div>
               <p class="label">Email</p>
-              <p><a href="mailto:info@axion.co.in">info@axion.co.in</a></p>
+              <p id="contactEmail"><a href="mailto:info@axion.co.in">info@axion.co.in</a></p>
             </div>
           </div>
           <div class="store-info-row">
@@ -103,11 +103,11 @@
           </div>
           <a href="#" id="contactWaLink" target="_blank" rel="noopener" class="btn btn-primary btn-block" style="margin-top:6px;">Chat on WhatsApp</a>
         </div>
-        <iframe class="map-frame" style="margin-top:20px;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        <iframe class="map-frame" id="contactMapFrame" style="margin-top:20px;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q=Axion+Computers+(Head+Office),+L-176,+5th+Main,+HSR+Layout,+Sector+6,+Bengaluru,+560102&amp;hl=en&amp;z=16&amp;output=embed"
           title="Head Office map — HSR Layout, Bengaluru" allowfullscreen></iframe>
         <p style="margin-top:10px; font-size:13px;">
-          <a href="https://share.google/xm1mcXn94xCpgRc7I" target="_blank" rel="noopener" style="color:var(--blue);">Open this location in Google Maps →</a>
+          <a href="https://share.google/xm1mcXn94xCpgRc7I" id="contactMapLink" target="_blank" rel="noopener" style="color:var(--blue);">Open this location in Google Maps →</a>
         </p>
       </div>
 
@@ -119,6 +119,7 @@
 <div id="whatsapp-float"></div>
 
 <script src="js/data.js"></script>
+<script src="js/catalog-sync.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/icons.js"></script>
 <script src="js/main.js"></script>
@@ -128,6 +129,29 @@
   renderFooter();
   renderWhatsAppFloat("Hi, I have a question for The Apple Store Pune team.");
   document.getElementById("contactWaLink").href = whatsappLink("Hi, I have a question for The Apple Store Pune team.");
+
+  function updateContactPageSettings() {
+    const waLink = document.getElementById("contactWaLink");
+    if (waLink) waLink.href = whatsappLink("Hi, I have a question for The Apple Store Pune team.");
+    const addr = document.getElementById("contactAddress");
+    if (addr && Array.isArray(STORE_ADDRESS_LINES) && STORE_ADDRESS_LINES.length) {
+      addr.innerHTML = STORE_ADDRESS_LINES.join("<br>");
+    }
+    const email = document.getElementById("contactEmail");
+    if (email) email.innerHTML = '<a href="mailto:' + STORE_EMAIL + '">' + STORE_EMAIL + '</a>';
+    const phones = document.getElementById("contactPhones");
+    if (phones) {
+      phones.innerHTML =
+        '<a href="' + telHref(STORE_PHONE_LANDLINE) + '">' + formatPhoneDisplay(STORE_PHONE_LANDLINE) + '</a><br>' +
+        '<a href="' + telHref(STORE_PHONE_MOBILE) + '">' + formatPhoneDisplay(STORE_PHONE_MOBILE) + '</a><br>' +
+        '<a href="' + telHref(WHATSAPP_NUMBER) + '">' + formatPhoneDisplay(WHATSAPP_NUMBER) + '</a><br>' +
+        '<a href="' + telHref(STORE_PHONE_ALT) + '">' + formatPhoneDisplay(STORE_PHONE_ALT) + '</a>';
+    }
+    const mapLnk = document.getElementById("contactMapLink");
+    if (mapLnk && STORE_MAP_LINK) mapLnk.href = STORE_MAP_LINK;
+  }
+  document.addEventListener("store_settings:applied", updateContactPageSettings);
+  updateContactPageSettings();
 
   function validateField(id, condition) {
     const wrap = document.getElementById("f-" + id);

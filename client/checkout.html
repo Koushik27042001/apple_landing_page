@@ -210,15 +210,21 @@
   }
 
   // Checkout always requires a persisted backend order.
-  // --- Constants & shared state (declared first so syncPaymentLinkHref can use them) ---
-  const SHIPPING_THRESHOLD = 50000;
-  const SHIPPING_FEE = 199;
   let currentStep = 1;
   let appliedCoupon = null; // { code, discount }
 
+  function getShippingSettings() {
+    const s = window.STORE_SETTINGS || {};
+    return {
+      threshold: typeof s.shippingThreshold === "number" ? s.shippingThreshold : 50000,
+      fee: typeof s.shippingFee === "number" ? s.shippingFee : 199
+    };
+  }
+
   function getCheckoutTotals() {
+    const settings = getShippingSettings();
     const subtotal = cartSubtotal();
-    const shipping = subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+    const shipping = subtotal >= settings.threshold ? 0 : settings.fee;
     const discount = appliedCoupon ? (appliedCoupon.discount || 0) : 0;
     const total = Math.max(0, subtotal - discount) + shipping;
     return { subtotal: subtotal, shipping: shipping, discount: discount, total: total };
@@ -324,6 +330,9 @@
     syncPaymentLinkHref();
     refreshPaymentAmountBadge();
   }
+
+  document.addEventListener("settings:updated", renderOrderSummary);
+  document.addEventListener("catalog:updated", renderOrderSummary);
 
   document.getElementById("applyCouponBtn").addEventListener("click", function () {
     const code = document.getElementById("couponCode").value.trim().toUpperCase();

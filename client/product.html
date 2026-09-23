@@ -329,12 +329,35 @@
     );
   }
 
+  function syncProductFromCatalog() {
+    let updatedP = getProductById(productId);
+    if (!updatedP && productId) {
+      const searchMatches = searchProducts(productId);
+      if (searchMatches && searchMatches.length) updatedP = searchMatches[0];
+    }
+    if (updatedP) {
+      product = updatedP;
+      document.title = product.name + " | The Apple Store Pune";
+      document.getElementById("pageDesc").setAttribute("content", product.short + " Buy now in Pune with best price and No-Cost EMI.");
+      const cat = getCategoryById(product.category);
+      document.getElementById("breadcrumb").innerHTML =
+        '<a href="index.html">Store</a><span>/</span>' +
+        '<a href="category.html?cat=' + product.category + '">' + (cat ? cat.name : product.category) + '</a><span>/</span>' +
+        '<span>' + product.name + '</span>';
+      renderPdp();
+      updateStickyAtc();
+      const related = PRODUCTS.filter(function (p) { return p.category === product.category && p.id !== product.id; }).slice(0, 4);
+      document.getElementById("relatedGrid").innerHTML = related.map(relatedProductCard).join("");
+    }
+  }
+
   const related = PRODUCTS.filter(function (p) { return p.category === product.category && p.id !== product.id; }).slice(0, 4);
   document.getElementById("relatedGrid").innerHTML = related.map(relatedProductCard).join("");
 
   renderPdp();
   updateStickyAtc();
   document.body.classList.add("has-sticky-atc");
+  document.addEventListener("catalog:updated", syncProductFromCatalog);
 </script>
 </body>
 </html>

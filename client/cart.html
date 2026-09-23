@@ -31,8 +31,13 @@
   renderFooter();
   renderWhatsAppFloat("Hi, I need help completing my order on The Apple Store Pune.");
 
-  const SHIPPING_THRESHOLD = 50000;
-  const SHIPPING_FEE = 199;
+  function getShippingSettings() {
+    const s = window.STORE_SETTINGS || {};
+    return {
+      threshold: typeof s.shippingThreshold === "number" ? s.shippingThreshold : 50000,
+      fee: typeof s.shippingFee === "number" ? s.shippingFee : 199
+    };
+  }
 
   function renderCart() {
     const cart = getCart();
@@ -49,9 +54,9 @@
       return;
     }
     
-
+    const settings = getShippingSettings();
     const subtotal = cartSubtotal();
-    const shipping = subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+    const shipping = subtotal >= settings.threshold ? 0 : settings.fee;
     const total = subtotal + shipping;
 
     container.innerHTML =
@@ -63,7 +68,7 @@
           '<h3>Order Summary</h3>' +
           '<div class="summary-row"><span>Subtotal (' + cartCount() + ' items)</span><span class="val">' + formatINR(subtotal) + '</span></div>' +
           '<div class="summary-row"><span>Shipping</span><span class="val">' + (shipping === 0 ? "FREE" : formatINR(shipping)) + '</span></div>' +
-          (shipping > 0 ? '<div class="summary-row"><span colspan="2" style="color:#1d8a3e;">Add ' + formatINR(SHIPPING_THRESHOLD - subtotal) + ' more for free shipping</span></div>' : '') +
+          (shipping > 0 ? '<div class="summary-row"><span colspan="2" style="color:#1d8a3e;">Add ' + formatINR(settings.threshold - subtotal) + ' more for free shipping</span></div>' : '') +
           '<div class="summary-row total"><span>Total</span><span>' + formatINR(total) + '</span></div>' +
           '<div class="promo-row">' +
             '<input type="text" placeholder="Promo code">' +
@@ -123,6 +128,8 @@
   }
 
   renderCart();
+  document.addEventListener("catalog:updated", renderCart);
+  document.addEventListener("settings:updated", renderCart);
 </script>
 </body>
 </html>

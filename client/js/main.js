@@ -4,19 +4,19 @@
    Include after data.js, cart.js and icons.js on every page.
    ============================================================ */
 
-const WHATSAPP_NUMBER = "917975627008";
-const STORE_NAME = "Iswift Gadgets Private Limited";
-const STORE_PHONE_LANDLINE = "08041492709";
-const STORE_PHONE_MOBILE = "919972612530";
-const STORE_PHONE_ALT = "917980128631";
-const STORE_EMAIL = "info@axion.co.in";
-const STORE_ADDRESS_LINES = [
+let WHATSAPP_NUMBER = "917975627008";
+let STORE_NAME = "Iswift Gadgets Private Limited";
+let STORE_PHONE_LANDLINE = "08041492709";
+let STORE_PHONE_MOBILE = "919972612530";
+let STORE_PHONE_ALT = "917980128631";
+let STORE_EMAIL = "info@axion.co.in";
+let STORE_ADDRESS_LINES = [
   "#L-176, Ground Floor, 5th Main,",
   "HSR Layout, Sector 6,",
   "Bengaluru, 560102"
 ];
-const STORE_MAP_LINK = "https://share.google/xm1mcXn94xCpgRc7I";
-const STORE_MAP_EMBED =
+let STORE_MAP_LINK = "https://share.google/xm1mcXn94xCpgRc7I";
+let STORE_MAP_EMBED =
   "https://www.google.com/maps?q=Axion+Computers+(Head+Office),+L-176,+5th+Main,+HSR+Layout,+Sector+6,+Bengaluru,+560102&hl=en&z=16&output=embed";
 
 function whatsappLink(message) {
@@ -45,6 +45,7 @@ function telHref(digits) {
 }
 
 function renderHeader(active) {
+  if (active) window.__ACTIVE_NAV__ = active;
   const el = document.getElementById("site-header");
   if (!el) return;
   el.innerHTML =
@@ -363,3 +364,36 @@ function hydrateIcons(root) {
 }
 
 document.addEventListener("DOMContentLoaded", function () { hydrateIcons(document); });
+
+/* ---------- Dynamic Admin Settings Listener ---------- */
+function applyStoreSettings(settings) {
+  if (!settings) return;
+  if (settings.storeName) STORE_NAME = settings.storeName;
+  if (settings.email) STORE_EMAIL = settings.email;
+  if (Array.isArray(settings.phones) && settings.phones.length) {
+    if (settings.phones[0]) STORE_PHONE_LANDLINE = settings.phones[0];
+    if (settings.phones[1]) STORE_PHONE_MOBILE = settings.phones[1];
+    if (settings.phones[2]) STORE_PHONE_ALT = settings.phones[2];
+  }
+  if (settings.whatsapp) WHATSAPP_NUMBER = settings.whatsapp;
+  if (settings.address) {
+    STORE_ADDRESS_LINES = String(settings.address).split("\n").map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+  if (settings.mapLink) STORE_MAP_LINK = settings.mapLink;
+
+  const active = window.__ACTIVE_NAV__ || "home";
+  if (document.getElementById("site-header")) renderHeader(active);
+  if (document.getElementById("site-footer")) renderFooter();
+  if (document.getElementById("whatsapp-float")) renderWhatsAppFloat();
+
+  document.dispatchEvent(new CustomEvent("store_settings:applied", { detail: settings }));
+}
+
+document.addEventListener("settings:updated", function (e) {
+  applyStoreSettings(e.detail);
+});
+
+if (typeof window.STORE_SETTINGS !== "undefined" && window.STORE_SETTINGS) {
+  applyStoreSettings(window.STORE_SETTINGS);
+}
+
