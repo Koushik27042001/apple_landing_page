@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tax Invoice — ISWIFT GADGETS PRIVATE LIMITED</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0066cc;
+      --dark: #1d1d1f;
+      --gray-light: #f5f5f7;
+      --gray-border: #e5e5ea;
+      --gray-text: #6e6e73;
+      --green-bg: #e6f4ea;
+      --green-text: #137333;
+      --amber-bg: #fef7e0;
+      --amber-text: #b45309;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+      background: #f0f2f5;
+      color: var(--dark);
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+    .invoice-toolbar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--gray-border);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+    .invoice-toolbar-title {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .invoice-toolbar-title .badge {
+      background: #0066cc;
+      color: #fff;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .toolbar-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-inv {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid var(--gray-border);
+      background: #fff;
+      color: var(--dark);
+    }
+    .btn-inv:hover {
+      background: #f5f5f7;
+    }
+    .btn-inv-primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .btn-inv-primary:hover {
+      background: #0052a3;
+    }
+    
+    .invoice-wrapper {
+      max-width: 850px;
+      margin: 24px auto;
+      background: #ffffff;
+      padding: 40px 48px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      border: 1px solid var(--gray-border);
+    }
+
+    /* Invoice Layout Header */
+    .inv-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--gray-border);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+    .inv-brand h1 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -0.5px;
+    }
+    .inv-brand p {
+      margin: 0;
+      color: var(--gray-text);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .inv-company-details {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #424245;
+      line-height: 1.4;
+    }
+    .inv-tax-badge {
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 4px;
+    }
+
+    .inv-meta-card {
+      text-align: right;
+    }
+    .inv-type-title {
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--dark);
+      margin: 0 0 10px;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .status-badge.paid { background: var(--green-bg); color: var(--green-text); }
+    .status-badge.pending { background: var(--amber-bg); color: var(--amber-text); }
+    .status-badge.cod { background: #e8f0fe; color: #1a73e8; }
+
+    .inv-meta-grid {
+      font-size: 12.5px;
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 4px 12px;
+      text-align: right;
+    }
+    .inv-meta-grid span.lbl { color: var(--gray-text); }
+    .inv-meta-grid span.val { font-weight: 600; color: var(--dark); }
+
+    /* Addresses Grid */
+    .inv-parties {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+      background: var(--gray-light);
+      padding: 16px 20px;
+      border-radius: 8px;
+    }
+    .party-box h3 {
+      margin: 0 0 6px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--gray-text);
+    }
+    .party-box p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--dark);
+    }
+    .party-name { font-weight: 700; font-size: 14px; margin-bottom: 2px !important; }
+
+    /* Table */
+    .inv-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 13px;
+    }
+    .inv-table th {
+      background: #f5f5f7;
+      text-align: left;
+      padding: 10px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--gray-text);
+      border-bottom: 1px solid var(--gray-border);
+    }
+    .inv-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--gray-border);
+      vertical-align: top;
+    }
+    .inv-table tr:last-child td { border-bottom: 2px solid var(--gray-border); }
+    .text-right { text-align: right; }
+    .text-center { text-align: center; }
+
+    /* Totals */
+    .inv-summary-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 30px;
+    }
+    .inv-words-box {
+      max-width: 45%;
+      font-size: 12px;
+      color: var(--gray-text);
+      background: #fafafa;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--gray-border);
+    }
+    .inv-words-box strong { color: var(--dark); display: block; margin-top: 4px; font-size: 12.5px; }
+
+    .inv-totals-table {
+      width: 320px;
+      font-size: 13px;
+    }
+    .inv-totals-table tr td {
+      padding: 6px 0;
+    }
+    .inv-totals-table tr td:last-child {
+      text-align: right;
+      font-weight: 600;
+    }
+    .inv-totals-table tr.grand-total {
+      border-top: 2px solid var(--dark);
+      border-bottom: 2px solid var(--dark);
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .inv-totals-table tr.grand-total td {
+      padding: 10px 0;
+      color: var(--dark);
+    }
+
+    /* Footer & Signatory */
+    .inv-footer {
+      border-top: 1px solid var(--gray-border);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 40px;
+    }
+    .inv-terms {
+      font-size: 11px;
+      color: var(--gray-text);
+      max-width: 450px;
+      line-height: 1.4;
+    }
+    .inv-terms h5 { margin: 0 0 4px; font-size: 11px; color: var(--dark); }
+    .inv-signatory {
+      text-align: center;
+      width: 200px;
+    }
+    .signatory-stamp {
+      height: 48px;
+      margin-bottom: 4px;
+      opacity: 0.85;
+    }
+    .signatory-line {
+      border-top: 1px solid var(--dark);
+      padding-top: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    @media print {
+      body { background: #fff; }
+      .invoice-toolbar { display: none; }
+      .invoice-wrapper {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="invoice-toolbar">
+  <div class="invoice-toolbar-title">
+    <span>ISWIFT GADGETS</span>
+    <span class="badge">Official GST Invoice</span>
+  </div>
+  <div class="toolbar-actions">
+    <a href="index.html" class="btn-inv">← Back to Store</a>
+    <button type="button" class="btn-inv btn-inv-primary" onclick="window.print()">🖨️ Print / Save PDF</button>
+  </div>
+</div>
+
+<div class="invoice-wrapper" id="invoiceRoot">
+  <div style="text-align:center; padding: 40px;" id="loadingState">
+    <p style="color:var(--gray-text); font-size: 15px;">Loading official Tax Invoice details...</p>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script>
+function formatINR(val) {
+  return "₹" + Number(val || 0).toLocaleString("en-IN", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+}
+
+function numberToWords(num) {
+  const a = ['', 'One ', 'Two ', 'Three ', 'Four ', 'Five ', 'Six ', 'Seven ', 'Eight ', 'Nine ', 'Ten ', 'Eleven ', 'Twelve ', 'Thirteen ', 'Fourteen ', 'Fifteen ', 'Sixteen ', 'Seventeen ', 'Eighteen ', 'Nineteen '];
+  const b = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+
+  function inWords(n) {
+    if ((n = n.toString()).length > 9) return 'overflow';
+    let n_array = ('000000000' + n).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    if (!n_array) return '';
+    let str = '';
+    str += (n_array[1] != 0) ? (a[Number(n_array[1])] || b[n_array[1][0]] + ' ' + a[n_array[1][1]]) + 'Crore ' : '';
+    str += (n_array[2] != 0) ? (a[Number(n_array[2])] || b[n_array[2][0]] + ' ' + a[n_array[2][1]]) + 'Lakh ' : '';
+    str += (n_array[3] != 0) ? (a[Number(n_array[3])] || b[n_array[3][0]] + ' ' + a[n_array[3][1]]) + 'Thousand ' : '';
+    str += (n_array[4] != 0) ? (a[Number(n_array[4])] || b[n_array[4][0]] + ' ' + a[n_array[4][1]]) + 'Hundred ' : '';
+    str += (n_array[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n_array[5])] || b[n_array[5][0]] + ' ' + a[n_array[5][1]]) + 'Rupees Only' : 'Rupees Only';
+    return str;
+  }
+  return inWords(Math.round(num));
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const params = new URLSearchParams(window.location.search);
+  const orderId = params.get("id");
+
+  let savedOrder = null;
+  if (orderId) {
+    try {
+      const cached = localStorage.getItem("order_" + orderId) || localStorage.getItem("lastOrder");
+      if (cached) savedOrder = JSON.parse(cached);
+    } catch (_) {}
+  } else {
+    try {
+      const cached = localStorage.getItem("lastOrder");
+      if (cached) savedOrder = JSON.parse(cached);
+    } catch (_) {}
+  }
+
+  if (orderId && typeof APPLE_STORE_API_BASE !== "undefined") {
+    fetch(APPLE_STORE_API_BASE + "/orders/" + orderId + "/public")
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data && data.invoice) {
+          renderInvoice(data.invoice);
+        } else if (savedOrder) {
+          renderInvoice(generateFallbackInvoice(savedOrder));
+        } else {
+          renderError("Invoice not found for Order ID: " + orderId);
+        }
+      })
+      .catch(() => {
+        if (savedOrder) {
+          renderInvoice(generateFallbackInvoice(savedOrder));
+        } else {
+          renderError("Could not load invoice. Please check your internet connection.");
+        }
+      });
+  } else if (savedOrder) {
+    renderInvoice(generateFallbackInvoice(savedOrder));
+  } else {
+    renderError("No valid order selected for invoice generation.");
+  }
+});
+
+function generateFallbackInvoice(order) {
+  const grandTotal = order.total || order.totals?.total || 0;
+  const taxableAmount = Math.round((grandTotal / 1.18) * 100) / 100;
+  const gstAmount = Math.round((grandTotal - taxableAmount) * 100) / 100;
+  const cgst = Math.round((gstAmount / 2) * 100) / 100;
+  const sgst = Math.round((gstAmount - cgst) * 100) / 100;
+
+  const items = (order.items || []).map((item, idx) => {
+    const itemTotal = item.total || (item.price * (item.qty || item.quantity || 1));
+    const itemTaxable = Math.round((itemTotal / 1.18) * 100) / 100;
+    const itemGst = Math.round((itemTotal - itemTaxable) * 100) / 100;
+    return {
+      id: item.id || ("ITM" + (idx+1)),
+      name: item.name || "Apple Product",
+      quantity: item.qty || item.quantity || 1,
+      unitPrice: item.price || itemTotal,
+      total: itemTotal,
+      taxableAmount: itemTaxable,
+      cgst: Math.round((itemGst / 2) * 100) / 100,
+      sgst: Math.round((itemGst / 2) * 100) / 100,
+      gstRate: "18%",
+      hsn: "84713010"
+    };
+  });
+
+  return {
+    invoiceNo: "INV-2026-" + (order.orderId || order.id || "LOCAL"),
+    invoiceDate: order.createdAt || new Date().toISOString(),
+    orderId: order.orderId || order.id || "LOCAL",
+    paymentStatus: order.method === "cod" ? "CONFIRMED (COD)" : "PAID",
+    paymentMode: (order.method || order.paymentMode || "ONLINE").toUpperCase(),
+    company: {
+      name: "ISWIFT GADGETS PRIVATE LIMITED",
+      tagline: "Apple Authorised Reseller & Retailer",
+      address: "104 FC Road, Shivaji Nagar, Pune, Maharashtra 411005",
+      gstin: "27AAACI1234F1Z8",
+      pan: "AAACI1234F",
+      cin: "U52100PN2024PTC192837",
+      email: "sales@iswiftgadgets.in",
+      phone: "+91 98765 43210",
+      website: "https://iswiftgadgets.in"
+    },
+    customer: order.customer || { name: "Customer", email: "customer@example.com", phone: "9876543210" },
+    shippingAddress: order.shippingAddress || order.shipping || { address: "Store Pickup / Delivered Address", city: "Pune", state: "Maharashtra", pincode: "411005" },
+    items: items,
+    pricing: {
+      subtotal: order.subtotal || grandTotal,
+      discount: order.discount || 0,
+      shipping: 0,
+      taxableAmount: taxableAmount,
+      cgst: cgst,
+      sgst: sgst,
+      totalGst: gstAmount,
+      grandTotal: grandTotal,
+      currency: "INR"
+    }
+  };
+}
+
+function renderError(msg) {
+  document.getElementById("invoiceRoot").innerHTML = `
+    <div style="text-align:center; padding: 40px 20px;">
+      <h2 style="color:var(--dark);">Invoice Error</h2>
+      <p style="color:var(--gray-text); font-size:14px; margin-bottom:20px;">${msg}</p>
+      <a href="index.html" class="btn-inv btn-inv-primary">Return to Store</a>
+    </div>
+  `;
+}
+
+function renderInvoice(inv) {
+  const dt = new Date(inv.invoiceDate || Date.now()).toLocaleDateString("en-IN", {
+    year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+  });
+
+  const statusClass = inv.paymentStatus.includes("PAID") ? "paid" : (inv.paymentStatus.includes("COD") ? "cod" : "pending");
+
+  let itemsHtml = inv.items.map((item, i) => `
+    <tr>
+      <td class="text-center">${i + 1}</td>
+      <td>
+        <strong>${item.name}</strong>
+        <div style="font-size:11px; color:var(--gray-text);">HSN/SAC: ${item.hsn}</div>
+      </td>
+      <td class="text-center">${item.quantity}</td>
+      <td class="text-right">${formatINR(item.unitPrice)}</td>
+      <td class="text-right">${formatINR(item.taxableAmount)}</td>
+      <td class="text-center">${item.gstRate}</td>
+      <td class="text-right">${formatINR(item.cgst + item.sgst)}</td>
+      <td class="text-right"><strong>${formatINR(item.total)}</strong></td>
+    </tr>
+  `).join("");
+
+  document.getElementById("invoiceRoot").innerHTML = `
+    <div class="inv-header">
+      <div class="inv-brand">
+        <h1>${inv.company.name}</h1>
+        <p class="inv-tax-badge">✓ ${inv.company.tagline}</p>
+        <div class="inv-company-details">
+          ${inv.company.address}<br>
+          <strong>GSTIN:</strong> ${inv.company.gstin} | <strong>PAN:</strong> ${inv.company.pan}<br>
+          <strong>Email:</strong> ${inv.company.email} | <strong>Phone:</strong> ${inv.company.phone}
+        </div>
+      </div>
+      <div class="inv-meta-card">
+        <div class="inv-type-title">TAX INVOICE</div>
+        <div class="status-badge ${statusClass}">${inv.paymentStatus}</div>
+        <div class="inv-meta-grid">
+          <span class="lbl">Invoice No:</span><span class="val">${inv.invoiceNo}</span>
+          <span class="lbl">Invoice Date:</span><span class="val">${dt}</span>
+          <span class="lbl">Order ID:</span><span class="val">${inv.orderId}</span>
+          <span class="lbl">Payment Mode:</span><span class="val">${inv.paymentMode}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="inv-parties">
+      <div class="party-box">
+        <h3>Billed &amp; Shipped To</h3>
+        <p class="party-name">${inv.customer?.name || 'Customer'}</p>
+        <p>${inv.shippingAddress?.address || ''}</p>
+        <p>${inv.shippingAddress?.city || ''}, ${inv.shippingAddress?.state || ''} - ${inv.shippingAddress?.pincode || ''}</p>
+        <p><strong>Phone:</strong> ${inv.customer?.phone || ''} | <strong>Email:</strong> ${inv.customer?.email || ''}</p>
+      </div>
+      <div class="party-box">
+        <h3>Place of Supply &amp; Dispatch</h3>
+        <p class="party-name">Pune, Maharashtra (State Code: 27)</p>
+        <p>Dispatched via Express Courier / Store Pickup</p>
+        <p><strong>Shipping Status:</strong> Pre-paid / Fast Dispatch</p>
+        <p><strong>GST Type:</strong> Intrastate CGST (9%) + SGST (9%)</p>
+      </div>
+    </div>
+
+    <table class="inv-table">
+      <thead>
+        <tr>
+          <th class="text-center" style="width: 40px;">#</th>
+          <th>Item Description</th>
+          <th class="text-center" style="width: 50px;">Qty</th>
+          <th class="text-right" style="width: 100px;">Unit Price</th>
+          <th class="text-right" style="width: 100px;">Taxable Val</th>
+          <th class="text-center" style="width: 60px;">GST %</th>
+          <th class="text-right" style="width: 90px;">GST Amt</th>
+          <th class="text-right" style="width: 110px;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${itemsHtml}
+      </tbody>
+    </table>
+
+    <div class="inv-summary-container">
+      <div class="inv-words-box">
+        Amount Payable in Words:
+        <strong>${numberToWords(inv.pricing.grandTotal)}</strong>
+      </div>
+      <table class="inv-totals-table">
+        <tr>
+          <td>Subtotal (Excl. GST):</td>
+          <td>${formatINR(inv.pricing.taxableAmount)}</td>
+        </tr>
+        <tr>
+          <td>CGST (9%):</td>
+          <td>${formatINR(inv.pricing.cgst)}</td>
+        </tr>
+        <tr>
+          <td>SGST (9%):</td>
+          <td>${formatINR(inv.pricing.sgst)}</td>
+        </tr>
+        ${inv.pricing.discount > 0 ? `
+          <tr>
+            <td>Discount Savings:</td>
+            <td style="color:#137333;">-${formatINR(inv.pricing.discount)}</td>
+          </tr>
+        ` : ''}
+        <tr>
+          <td>Shipping &amp; Handling:</td>
+          <td>${inv.pricing.shipping === 0 ? 'FREE' : formatINR(inv.pricing.shipping)}</td>
+        </tr>
+        <tr class="grand-total">
+          <td>Grand Total:</td>
+          <td>${formatINR(inv.pricing.grandTotal)}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="inv-footer">
+      <div class="inv-terms">
+        <h5>Terms &amp; Warranty Conditions:</h5>
+        1. All products carry 1-Year Official Apple Manufacturer Warranty from date of purchase.<br>
+        2. 7-Day replacement guarantee applies for hardware manufacturing defects.<br>
+        3. This is a computer-generated Tax Invoice and requires no physical signature.
+      </div>
+      <div class="inv-signatory">
+        <div style="font-size:11px; font-weight:700; color:var(--dark); margin-bottom:12px;">For ISWIFT GADGETS PVT LTD</div>
+        <div class="signatory-line">Authorised Signatory</div>
+      </div>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>

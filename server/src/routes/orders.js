@@ -172,6 +172,103 @@ router.post("/", async function (req, res) {
   }
 });
 
+function buildInvoiceData(order) {
+  const invoiceNo = "INV-2026-" + (order.id || "0000");
+  const subtotal = order.subtotal || order.total || 0;
+  const discount = order.discount || 0;
+  const grandTotal = order.total || 0;
+  
+  const taxableAmount = Math.round((grandTotal / 1.18) * 100) / 100;
+  const gstAmount = Math.round((grandTotal - taxableAmount) * 100) / 100;
+  const cgst = Math.round((gstAmount / 2) * 100) / 100;
+  const sgst = Math.round((gstAmount - cgst) * 100) / 100;
+
+  const hsnMap = {
+    mac: "84713010",
+    iphone: "85171300",
+    ipad: "84713090",
+    watch: "90318000",
+    airpods: "85183000",
+    accessories: "85044090",
+    vision: "90049090",
+    tvhome: "85287200"
+  };
+
+  const items = (order.items || []).map(function(item) {
+    const itemTotal = item.total || (item.price * item.quantity);
+    const itemTaxable = Math.round((itemTotal / 1.18) * 100) / 100;
+    const itemGst = Math.round((itemTotal - itemTaxable) * 100) / 100;
+    const category = (item.product && item.product.category) || "mac";
+    return {
+      id: item.id || item.productId,
+      name: item.name || (item.product ? item.product.name : "Apple Product"),
+      quantity: item.quantity || 1,
+      unitPrice: item.price,
+      total: itemTotal,
+      taxableAmount: itemTaxable,
+      cgst: Math.round((itemGst / 2) * 100) / 100,
+      sgst: Math.round((itemGst / 2) * 100) / 100,
+      gstRate: "18%",
+      hsn: hsnMap[category] || "84713010"
+    };
+  });
+
+  return {
+    invoiceNo: invoiceNo,
+    invoiceDate: order.createdAt || new Date().toISOString(),
+    orderId: order.id,
+    paymentStatus: order.status === "paid" ? "PAID" : (order.paymentMode === "cod" ? "CONFIRMED (COD)" : "PENDING PAYMENT"),
+    paymentMode: order.paymentMode ? order.paymentMode.toUpperCase() : "ONLINE",
+    company: {
+      name: "ISWIFT GADGETS PRIVATE LIMITED",
+      tagline: "Apple Authorised Reseller & Retailer",
+      address: "104 FC Road, Shivaji Nagar, Pune, Maharashtra 411005",
+      gstin: "27AAACI1234F1Z8",
+      pan: "AAACI1234F",
+      cin: "U52100PN2024PTC192837",
+      email: "sales@iswiftgadgets.in",
+      phone: "+91 98765 43210",
+      website: "https://iswiftgadgets.in"
+    },
+    customer: order.customer,
+    shippingAddress: order.shippingAddress,
+    items: items,
+    pricing: {
+      subtotal: subtotal,
+      discount: discount,
+      shipping: order.shipping || 0,
+      taxableAmount: taxableAmount,
+      cgst: cgst,
+      sgst: sgst,
+      totalGst: gstAmount,
+      grandTotal: grandTotal,
+      currency: order.currency || "INR"
+    }
+  };
+}
+
+router.get("/:id/public", async function (req, res, next) {
+  try {
+    const order = await store.getOrder(req.params.id);
+    if (!order) return res.status(404).json({ error: "Order not found" });
+    const invoice = buildInvoiceData(order);
+    res.json({ order: order, invoice: invoice });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/:id/invoice", async function (req, res, next) {
+  try {
+    const order = await store.getOrder(req.params.id);
+    if (!order) return res.status(404).json({ error: "Order not found" });
+    const invoice = buildInvoiceData(order);
+    res.json({ invoice: invoice });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get("/:id", require("../lib/adminAuth").requireAdmin, async function (req, res, next) {
   try {
     const order = await store.getOrder(req.params.id);
