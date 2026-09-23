@@ -397,3 +397,14 @@ if (typeof window.STORE_SETTINGS !== "undefined" && window.STORE_SETTINGS) {
   applyStoreSettings(window.STORE_SETTINGS);
 }
 
+/* ---------- Global Upload Image Fallback Handler ---------- */
+function handleImageError(img) {
+  if (img && !img.dataset.retried && img.src && img.src.includes("images/uploads/")) {
+    img.dataset.retried = "1";
+    const relativePath = img.src.replace(/^.*(?=images\/uploads\/)/, "");
+    img.src = "https://apple-landing-page-eut1.onrender.com/" + relativePath;
+    return;
+  }
+}
+
+

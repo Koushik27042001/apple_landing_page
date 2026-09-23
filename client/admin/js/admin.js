@@ -1,4 +1,14 @@
 (function () {
+  window.handleAdminImgError = function (img) {
+    if (img && !img.dataset.retried && img.src && img.src.includes("images/uploads/")) {
+      img.dataset.retried = "1";
+      const rel = img.src.replace(/^.*(?=images\/uploads\/)/, "");
+      img.src = "https://apple-landing-page-eut1.onrender.com/" + rel;
+      return;
+    }
+    if (img) img.style.display = "none";
+  };
+
   let activeApiBase = window.ADMIN_API_BASE || window.APPLE_STORE_API_BASE || "/api";
   const FALLBACK_RENDER_API = "https://apple-landing-page-eut1.onrender.com/api";
   const TOKEN_KEY = "iswift_admin_token";
@@ -460,7 +470,7 @@
           ? '<table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Badge</th><th>Actions</th></tr></thead><tbody>' +
             pageItems.map(function (p) {
               const imgPath = p.images && p.images[0] ? (p.images[0].startsWith("http") || p.images[0].startsWith("data:") ? p.images[0] : "../" + p.images[0]) : "";
-              const thumb = imgPath ? '<img src="' + escapeAttr(imgPath) + '" style="width:40px;height:40px;object-fit:cover;border-radius:6px;margin-right:10px;vertical-align:middle;background:#f5f5f7;" onerror="this.style.display=\'none\'">' : '';
+              const thumb = imgPath ? '<img src="' + escapeAttr(imgPath) + '" style="width:40px;height:40px;object-fit:cover;border-radius:6px;margin-right:10px;vertical-align:middle;background:#f5f5f7;" onerror="handleAdminImgError(this)">' : '';
               const stockBadge = Number(p.stock) <= 5
                 ? '<span class="badge badge-amber">' + p.stock + ' (Low)</span>'
                 : '<span class="badge badge-green">' + p.stock + '</span>';
@@ -765,7 +775,7 @@
                 ? '<span class="badge badge-green">Active</span>'
                 : '<span class="badge badge-amber">Inactive</span>';
               const imagePath = b.image && (/^(https?:|data:|\/)/.test(b.image) ? b.image : "../" + b.image);
-              const thumb = imagePath ? '<img src="' + escapeAttr(imagePath) + '" style="width:36px;height:36px;object-fit:cover;border-radius:4px;margin-right:10px;vertical-align:middle;background:#eee;" onerror="this.style.display=\'none\'">' : '';
+              const thumb = imagePath ? '<img src="' + escapeAttr(imagePath) + '" style="width:36px;height:36px;object-fit:cover;border-radius:4px;margin-right:10px;vertical-align:middle;background:#eee;" onerror="handleAdminImgError(this)">' : '';
               return "<tr>" +
                 "<td><div style='display:flex;align-items:center;'>" + thumb + "<div><strong>" + escapeHtml(b.title) + "</strong>" +
                   (b.badge ? " <span class='badge badge-blue'>" + escapeHtml(b.badge) + "</span>" : "") +

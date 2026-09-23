@@ -5,7 +5,7 @@ function request(path, options, payload) {
   return new Promise((resolve, reject) => {
     const opts = Object.assign(
       {
-        hostname: "localhost",
+        hostname: "127.0.0.1",
         port: 4000,
         path: "/api" + path,
         headers: { "Content-Type": "application/json" }

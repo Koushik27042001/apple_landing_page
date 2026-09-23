@@ -6,6 +6,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://apple-landing-page-eut1.onrender.com/api/:path*"
+    },
+    {
+      "source": "/images/uploads/:path*",
+      "destination": "https://apple-landing-page-eut1.onrender.com/images/uploads/:path*"
     }
   ]
 }

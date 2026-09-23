@@ -6,7 +6,7 @@ const path = require("path");
 
 async function ensureServerRunning() {
   const check = () => new Promise((resolve) => {
-    const req = http.get("http://localhost:4000/api/health", (res) => resolve(res.statusCode === 200));
+    const req = http.get("http://127.0.0.1:4000/api/health", (res) => resolve(res.statusCode === 200));
     req.on("error", () => resolve(false));
     req.end();
   });
@@ -31,7 +31,7 @@ async function ensureServerRunning() {
   page.on("pageerror", (err) => errors.push("[pageerror] " + err.message));
   page.on("console", (msg) => { if (msg.type() === "error") errors.push("[console] " + msg.text()); });
 
-  const base = process.env.TEST_BASE_URL || "http://localhost:4000/";
+  const base = process.env.TEST_BASE_URL || "http://127.0.0.1:4000/";
   const results = [];
   function log(step, ok, extra) { results.push({ step, ok, extra: extra || "" }); }
 
