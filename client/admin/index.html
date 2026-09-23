@@ -20,10 +20,8 @@
       <input type="password" id="loginPassword" placeholder="Enter admin password" autocomplete="current-password" required>
       <button type="submit" id="loginSubmit" class="btn btn-primary btn-block" disabled>Checking connection...</button>
       <p class="hint" id="connectionNotice" role="status"></p>
-      <button type="button" id="retryConnection" class="btn btn-ghost btn-block" hidden>Retry live connection</button>
+      <button type="button" id="retryConnection" class="btn btn-ghost btn-block" hidden>Retry connection</button>
       <p class="error-msg" id="loginError" hidden></p>
-      <a class="btn btn-ghost btn-block" href="?demo=1">Explore admin demo</a>
-      <p class="hint">No password needed for the demo. Explore sample data without changing the live store.</p>
     </form>
   </section>
 
@@ -74,13 +72,6 @@
     </aside>
 
     <main class="main">
-      <div id="demoNotice" class="demo-notice" hidden>
-        <div><strong>Admin demo</strong><br>Sample data only. Changes stay in this browser and do not update the storefront.</div>
-        <button type="button" id="resetDemoBtn" class="btn btn-ghost">
-          <svg class="icon-svg icon-refresh" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 6.2"/><path d="M20 5v6h-6"/></svg>
-          Reset demo
-        </button>
-      </div>
       <header class="topbar">
         <h2 id="pageTitle">Dashboard</h2>
         <div class="topbar-actions" id="topbarActions"></div>

@@ -52,7 +52,7 @@
     try {
       res = await fetch(activeApiBase + path, Object.assign({ signal: AbortSignal.timeout(30000) }, options, { headers: headers }));
     } catch (_) {
-      const error = new Error("Cannot connect to the live admin server. Retry the connection or explore the sample demo.");
+      const error = new Error("Cannot connect to the live admin server. Please verify backend service.");
       error.connectionUnavailable = true;
       throw error;
     }
@@ -63,7 +63,7 @@
       throw new Error((data && data.error) || "Unauthorized");
     }
     if (!res.ok || !data) {
-      const error = new Error((data && data.error) || "The admin API is unavailable on this site. Retry the connection or explore the sample demo.");
+      const error = new Error((data && data.error) || "The admin API is unavailable. Please verify backend service.");
       error.connectionUnavailable = !data || res.status >= 500 || res.status === 404;
       throw error;
     }
@@ -72,13 +72,13 @@
 
   function updateLoginConnection(available) {
     liveAvailable = available;
-    $("#loginPassword").hidden = !available;
-    $("#loginPassword").required = available;
-    $("#loginPasswordLabel").hidden = !available;
-    $("#loginSubmit").disabled = false;
-    $("#loginSubmit").textContent = available ? "Sign in" : "Open demo panel";
+    $("#loginPassword").hidden = false;
+    $("#loginPassword").required = true;
+    $("#loginPasswordLabel").hidden = false;
+    $("#loginSubmit").disabled = !available;
+    $("#loginSubmit").textContent = "Sign in";
     $("#retryConnection").hidden = available;
-    $("#connectionNotice").textContent = available ? "" : "Live admin is unavailable on this site. You can explore the demo with sample data. No password is needed.";
+    $("#connectionNotice").textContent = available ? "" : "Live admin server is currently offline or unreachable. Check your backend status and click Retry.";
   }
 
   async function checkConnection() {
@@ -144,13 +144,6 @@
 
   async function boot() {
     wireGlobal();
-    if (isDemo) {
-      $("#demoNotice").hidden = false;
-      $("#logoutBtn").textContent = "Exit demo";
-      showShell();
-      navigate("dashboard");
-      return;
-    }
     if (!(await checkConnection()) || !state.token) return showLogin();
     try {
       await api("/admin/me");
@@ -166,17 +159,10 @@
       $("#loginError").hidden = true;
       checkConnection();
     });
-    $("#resetDemoBtn").addEventListener("click", function () {
-      if (!confirm("Reset all demo changes to the sample data?")) return;
-      try { demoStore.reset(); navigate(state.view); toast("Demo reset"); }
-      catch (error) { toast(error.message); }
-    });
     $("#loginForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       if (!liveAvailable) {
-        const demoUrl = new URL(location.href);
-        demoUrl.searchParams.set("demo", "1");
-        location.href = demoUrl.href;
+        toast("Server is offline. Click 'Retry connection'.");
         return;
       }
       const err = $("#loginError");

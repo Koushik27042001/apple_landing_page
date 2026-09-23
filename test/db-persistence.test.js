@@ -36,6 +36,7 @@ const { fork } = require("child_process");
 const path = require("path");
 
 async function ensureServerRunning() {
+  await new Promise((r) => setTimeout(r, 400));
   try {
     const res = await request("/health");
     if (res.status === 200) return null;
@@ -47,8 +48,8 @@ async function ensureServerRunning() {
     stdio: "ignore"
   });
 
-  for (let i = 0; i < 30; i++) {
-    await new Promise((r) => setTimeout(r, 200));
+  for (let i = 0; i < 40; i++) {
+    await new Promise((r) => setTimeout(r, 300));
     try {
       const res = await request("/health");
       if (res.status === 200) return serverProc;
