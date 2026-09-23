@@ -28,7 +28,7 @@ app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false 
 const PORT = process.env.PORT || 4000;
 const allowedOrigins = (process.env.CORS_ORIGIN || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
 
-app.use(cors({ origin: allowedOrigins.includes("*") ? true : allowedOrigins }));
+app.use(cors({ origin: allowedOrigins.length === 0 || allowedOrigins.includes("*") ? true : allowedOrigins }));
 app.use("/api", function (req, res, next) {
   res.set("Cache-Control", "no-store");
   next();

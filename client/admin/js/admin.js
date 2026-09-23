@@ -1,5 +1,6 @@
 (function () {
-  const API = (window.ADMIN_API_BASE || "/api");
+  let activeApiBase = window.ADMIN_API_BASE || window.APPLE_STORE_API_BASE || "/api";
+  const FALLBACK_RENDER_API = "https://apple-landing-page-eut1.onrender.com/api";
   const TOKEN_KEY = "iswift_admin_token";
   const isDemo = new URLSearchParams(location.search).get("demo") === "1";
   const demoStore = isDemo ? window.createAdminDemoStore(localStorage, { PRODUCTS: PRODUCTS, CATEGORIES: CATEGORIES }) : null;
@@ -49,7 +50,7 @@
     if (state.token) headers.Authorization = "Bearer " + state.token;
     let res;
     try {
-      res = await fetch(API + path, Object.assign({ signal: AbortSignal.timeout(10000) }, options, { headers: headers }));
+      res = await fetch(activeApiBase + path, Object.assign({ signal: AbortSignal.timeout(30000) }, options, { headers: headers }));
     } catch (_) {
       const error = new Error("Cannot connect to the live admin server. Retry the connection or explore the sample demo.");
       error.connectionUnavailable = true;
@@ -82,14 +83,33 @@
 
   async function checkConnection() {
     $("#loginSubmit").disabled = true;
-    $("#loginSubmit").textContent = "Checking connection...";
+    $("#loginSubmit").textContent = "Connecting...";
     $("#retryConnection").disabled = true;
+    $("#connectionNotice").textContent = "Connecting to live admin backend...";
     let available = false;
+    
+    // 1. Try active / relative API base
     try {
-      const response = await fetch(API + "/health", { cache: "no-store", signal: AbortSignal.timeout(5000) });
+      const response = await fetch(activeApiBase + "/health", { cache: "no-store", signal: AbortSignal.timeout(25000) });
       const health = response.ok ? await response.json() : null;
-      available = !!(health && health.ok === true && health.service === "iswift-gadgets-api");
-    } catch (_) { /* A static site has no API. Keep its sample demo accessible. */ }
+      if (health && health.ok === true && health.service === "iswift-gadgets-api") {
+        available = true;
+      }
+    } catch (_) { }
+
+    // 2. Fallback to direct Render backend URL if relative endpoint failed
+    if (!available && activeApiBase !== FALLBACK_RENDER_API && !isDemo) {
+      try {
+        $("#connectionNotice").textContent = "Connecting to live Render server...";
+        const response = await fetch(FALLBACK_RENDER_API + "/health", { cache: "no-store", signal: AbortSignal.timeout(25000) });
+        const health = response.ok ? await response.json() : null;
+        if (health && health.ok === true && health.service === "iswift-gadgets-api") {
+          available = true;
+          activeApiBase = FALLBACK_RENDER_API;
+        }
+      } catch (_) { }
+    }
+
     updateLoginConnection(available);
     $("#retryConnection").disabled = false;
     return available;
