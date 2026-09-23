@@ -121,6 +121,15 @@ const bannerSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
+const uploadedImageSchema = new mongoose.Schema(
+  {
+    filename: { type: String, required: true, unique: true, index: true },
+    contentType: { type: String, required: true },
+    data: { type: String, required: true }
+  },
+  { timestamps: true, versionKey: false }
+);
+
 function toPlain(doc) {
   if (!doc) return null;
   const obj = typeof doc.toObject === "function" ? doc.toObject() : doc;
@@ -138,6 +147,7 @@ const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
 const Settings = mongoose.models.Settings || mongoose.model("Settings", settingsSchema);
 const AdminSession = mongoose.models.AdminSession || mongoose.model("AdminSession", adminSessionSchema);
 const Banner = mongoose.models.Banner || mongoose.model("Banner", bannerSchema);
+const UploadedImage = mongoose.models.UploadedImage || mongoose.model("UploadedImage", uploadedImageSchema);
 
 module.exports = {
   Product,
@@ -147,6 +157,8 @@ module.exports = {
   Settings,
   AdminSession,
   Banner,
+  UploadedImage,
   toPlain
 };
+
 

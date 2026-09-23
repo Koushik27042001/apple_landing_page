@@ -12,6 +12,7 @@ const productsStore = require("./src/lib/productsStore");
 const couponsStore = require("./src/lib/couponsStore");
 const settingsStore = require("./src/lib/settingsStore");
 const bannersStore = require("./src/lib/bannersStore");
+const uploadsStore = require("./src/lib/uploadsStore");
 
 const productsRoute = require("./src/routes/products");
 const ordersRoute = require("./src/routes/orders");
@@ -24,7 +25,11 @@ const app = express();
 app.disable("x-powered-by");
 app.set("trust proxy", 1);
 // Existing pages use inline scripts and third-party product/payment resources.
-app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false }));
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
 const PORT = process.env.PORT || 4000;
 const allowedOrigins = (process.env.CORS_ORIGIN || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
 
@@ -79,8 +84,37 @@ app.use("/api/coupons", couponsRoute);
 app.use("/api/banners", bannersRoute);
 app.use("/api/admin", adminRoute);
 
+const fs = require("fs");
 const clientDir = path.join(__dirname, "../client");
-app.use("/images/uploads", express.static(process.env.UPLOAD_DIR || path.join(clientDir, "images/uploads"), { dotfiles: "deny" }));
+const uploadsDir = process.env.UPLOAD_DIR || path.join(clientDir, "images/uploads");
+uploadsStore.ensureUploadsDir();
+
+app.use("/images/uploads", async function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+
+  const filename = path.basename(req.path);
+  if (!filename || filename === "/" || filename === ".") {
+    return next();
+  }
+
+  const filePath = path.join(uploadsDir, filename);
+  if (fs.existsSync(filePath)) {
+    return res.sendFile(filePath);
+  }
+
+  try {
+    const item = await uploadsStore.getUpload(filename);
+    if (item && item.buffer) {
+      res.contentType(item.contentType || "image/png");
+      return res.send(item.buffer);
+    }
+  } catch (err) {
+    console.error("Error retrieving upload:", err);
+  }
+
+  return res.status(404).json({ error: "Image not found" });
+});
 app.use("/admin", express.static(path.join(clientDir, "admin")));
 app.use(express.static(clientDir));
 

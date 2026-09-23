@@ -6,6 +6,7 @@ const productsStore = require("../lib/productsStore");
 const couponsStore = require("../lib/couponsStore");
 const settingsStore = require("../lib/settingsStore");
 const bannersStore = require("../lib/bannersStore");
+const uploadsStore = require("../lib/uploadsStore");
 const { login, logout, requireAdmin } = require("../lib/adminAuth");
 
 const router = express.Router();
@@ -294,15 +295,11 @@ router.post("/upload", requireAdmin, async function (req, res, next) {
     if (!["jpg", "png", "webp", "gif"].includes(ext)) return res.status(400).json({ error: "Use PNG, JPEG, WebP or GIF images." });
     const base64Data = matches[2];
 
-    const uploadsDir = process.env.UPLOAD_DIR || path.join(__dirname, "../../../client/images/uploads");
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true });
-    }
-
     const prefix = String(filename || "upload").toLowerCase().replace(/[^a-z0-9]/g, "_").slice(0, 24);
     const safeName = (prefix || "img") + "_" + Date.now() + "." + ext;
-    const filePath = path.join(uploadsDir, safeName);
-    fs.writeFileSync(filePath, Buffer.from(base64Data, "base64"));
+    const contentType = "image/" + (ext === "jpg" ? "jpeg" : ext);
+
+    await uploadsStore.saveUpload(safeName, contentType, base64Data);
 
     const publicUrl = "images/uploads/" + safeName;
     res.json({ ok: true, url: publicUrl });
