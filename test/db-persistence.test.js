@@ -36,26 +36,29 @@ const { fork } = require("child_process");
 const path = require("path");
 
 async function ensureServerRunning() {
-  await new Promise((r) => setTimeout(r, 400));
-  try {
-    const res = await request("/health");
-    if (res.status === 200) return null;
-  } catch (_) {}
-
-  const serverProc = fork(path.join(__dirname, "../server/server.js"), [], {
-    cwd: path.join(__dirname, "../server"),
-    env: Object.assign({}, process.env, { PORT: "4000" }),
-    stdio: "ignore"
-  });
-
-  for (let i = 0; i < 40; i++) {
-    await new Promise((r) => setTimeout(r, 300));
+  for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const res = await request("/health");
-      if (res.status === 200) return serverProc;
+      if (res.status === 200) return null;
     } catch (_) {}
+
+    const serverProc = fork(path.join(__dirname, "../server/server.js"), [], {
+      cwd: path.join(__dirname, "../server"),
+      env: Object.assign({}, process.env, { PORT: "4000" }),
+      stdio: "ignore"
+    });
+
+    for (let i = 0; i < 30; i++) {
+      await new Promise((r) => setTimeout(r, 300));
+      try {
+        const res = await request("/health");
+        if (res.status === 200) return serverProc;
+      } catch (_) {}
+    }
+    try { serverProc.kill(); } catch (_) {}
+    await new Promise((r) => setTimeout(r, 1000));
   }
-  return serverProc;
+  throw new Error("Could not connect to health endpoint on port 4000");
 }
 
 async function runDbPersistenceTests() {

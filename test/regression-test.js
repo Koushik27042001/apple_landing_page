@@ -16,7 +16,7 @@ async function ensureServerRunning() {
     env: Object.assign({}, process.env, { PORT: "4000" }),
     stdio: "ignore"
   });
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 75; i++) {
     await new Promise((r) => setTimeout(r, 200));
     if (await check()) return proc;
   }
@@ -37,7 +37,7 @@ async function ensureServerRunning() {
 
   try {
     // Icons render as real SVGs, not raw emoji/boxes
-    await page.goto(base + "index.html", { waitUntil: "networkidle" });
+    await page.goto(base + "index.html", { waitUntil: "domcontentloaded" });
     const headerSvgCount = await page.locator("#site-header svg.icon-svg").count();
     log("Header renders SVG icons (search/cart/menu)", headerSvgCount >= 3, "count=" + headerSvgCount);
 
@@ -59,9 +59,11 @@ async function ensureServerRunning() {
     await page.locator("#bestPricesGrid .product-card").first().locator("text=Add to Bag").click();
     await page.waitForSelector(".toast.show", { timeout: 3000 });
 
-    await page.goto(base + "cart.html", { waitUntil: "networkidle" });
+    await page.goto(base + "cart.html", { waitUntil: "domcontentloaded" });
+    await page.waitForSelector('a.btn.btn-primary:has-text("Proceed to Checkout")', { timeout: 5000 });
     await page.locator('a.btn.btn-primary:has-text("Proceed to Checkout")').click();
     await page.waitForURL("**/checkout.html", { timeout: 10000 });
+    await page.waitForSelector("#fullName", { timeout: 5000 });
 
     await page.fill("#fullName", "Rohan Sharma");
     await page.fill("#phone", "9876543210");
@@ -91,7 +93,7 @@ async function ensureServerRunning() {
 
     // Now test again with UPI selected while backend is down -> should fall back to demo
     await page.evaluate(() => localStorage.setItem("tasp_cart_v1", JSON.stringify([{ lineId: "x::y::z", id: "iphone-17", name: "iPhone 17", image: "images/products/iphone-17-lavender.png", price: 82900, color: "Lavender", storage: "256GB", qty: 1, category: "iphone" }])));
-    await page.goto(base + "checkout.html", { waitUntil: "networkidle" });
+    await page.goto(base + "checkout.html", { waitUntil: "domcontentloaded" });
     await page.fill("#fullName", "Priya Mehta");
     await page.fill("#phone", "9988776655");
     await page.fill("#email", "priya@example.com");

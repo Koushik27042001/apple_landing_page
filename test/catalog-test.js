@@ -16,7 +16,7 @@ async function ensureServerRunning() {
     env: Object.assign({}, process.env, { PORT: "4000" }),
     stdio: "ignore"
   });
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 75; i++) {
     await new Promise((r) => setTimeout(r, 200));
     if (await check()) return proc;
   }
@@ -36,36 +36,36 @@ async function ensureServerRunning() {
 
   try {
     // Category page shows all new categories with correct counts
-    await page.goto(base + "category.html?cat=mac", { waitUntil: "networkidle" });
+    await page.goto(base + "category.html?cat=mac", { waitUntil: "domcontentloaded" });
     const macCount = await page.locator(".product-card").count();
     log("Mac category shows all Mac products", macCount >= 7, "count=" + macCount);
 
-    await page.goto(base + "category.html?cat=iphone", { waitUntil: "networkidle" });
+    await page.goto(base + "category.html?cat=iphone", { waitUntil: "domcontentloaded" });
     const iphoneCount = await page.locator(".product-card").count();
     log("iPhone category shows all iPhone models", iphoneCount >= 5, "count=" + iphoneCount);
 
-    await page.goto(base + "category.html?cat=watch", { waitUntil: "networkidle" });
+    await page.goto(base + "category.html?cat=watch", { waitUntil: "domcontentloaded" });
     const watchCount = await page.locator(".product-card").count();
     log("Watch category shows all 3 new Watch models", watchCount === 3, "count=" + watchCount);
 
-    await page.goto(base + "category.html?cat=ipad", { waitUntil: "networkidle" });
+    await page.goto(base + "category.html?cat=ipad", { waitUntil: "domcontentloaded" });
     const ipadCount = await page.locator(".product-card").count();
     log("iPad category shows all 5 new iPad models", ipadCount === 5, "count=" + ipadCount);
 
-    await page.goto(base + "category.html?cat=accessories", { waitUntil: "networkidle" });
+    await page.goto(base + "category.html?cat=accessories", { waitUntil: "domcontentloaded" });
     const accCount = await page.locator(".product-card").count();
     log("Accessories category shows 14 items (4 originals + 10 AppleCare)", accCount === 14, "count=" + accCount);
 
-    await page.goto(base + "category.html?cat=vision", { waitUntil: "networkidle" });
+    await page.goto(base + "category.html?cat=vision", { waitUntil: "domcontentloaded" });
     const visionCount = await page.locator(".product-card").count();
     log("Vision category shows Apple Vision Pro", visionCount === 1, "count=" + visionCount);
 
-    await page.goto(base + "category.html?cat=tvhome", { waitUntil: "networkidle" });
+    await page.goto(base + "category.html?cat=tvhome", { waitUntil: "domcontentloaded" });
     const tvhomeCount = await page.locator(".product-card").count();
     log("TV & Home category shows Apple TV 4K + HomePod + HomePod mini", tvhomeCount === 3, "count=" + tvhomeCount);
 
     // Product detail page works for a new flagship product, shows price/EMI/storage/color selectors
-    await page.goto(base + "product.html?id=iphone-17-pro-max", { waitUntil: "networkidle" });
+    await page.goto(base + "product.html?id=iphone-17-pro-max", { waitUntil: "domcontentloaded" });
     const title = await page.locator("h1").first().textContent();
     log("PDP loads iPhone 17 Pro Max correctly", title.includes("iPhone 17 Pro Max"), title.trim());
 
@@ -80,13 +80,13 @@ async function ensureServerRunning() {
     log("PDP shows all storage tiers including 2TB", storageOptionVisible, "");
 
     // Add a new product to cart and verify checkout total is correct
-    await page.goto(base + "cart.html", { waitUntil: "networkidle" });
+    await page.goto(base + "cart.html", { waitUntil: "domcontentloaded" });
     await page.evaluate(() => localStorage.clear());
-    await page.goto(base + "product.html?id=macbook-neo-13", { waitUntil: "networkidle" });
+    await page.goto(base + "product.html?id=macbook-neo-13", { waitUntil: "domcontentloaded" });
     const addBtn = page.locator("button:has-text('Add to Bag'), button:has-text('Add to Cart')").first();
     await addBtn.click();
     await page.waitForTimeout(500);
-    await page.goto(base + "cart.html", { waitUntil: "networkidle" });
+    await page.goto(base + "cart.html", { waitUntil: "domcontentloaded" });
     const cartBodyText = await page.locator("body").textContent();
     log("Cart shows MacBook (A18 Pro) with correct price ₹79,900", cartBodyText.includes("MacBook") && cartBodyText.includes("79,900"), "");
 

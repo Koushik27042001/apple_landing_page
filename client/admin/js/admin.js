@@ -1,12 +1,14 @@
 (function () {
   window.handleAdminImgError = function (img) {
-    if (img && !img.dataset.retried && img.src && img.src.includes("images/uploads/")) {
+    if (!img) return;
+    if (!img.dataset.retried && img.src && img.src.includes("images/uploads/")) {
       img.dataset.retried = "1";
       const rel = img.src.replace(/^.*(?=images\/uploads\/)/, "");
       img.src = "https://apple-landing-page-eut1.onrender.com/" + rel;
       return;
     }
-    if (img) img.style.display = "none";
+    img.onerror = null;
+    img.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%23f5f5f7'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%2386868b' font-family='sans-serif' font-size='10'>No Image</text></svg>";
   };
 
   let activeApiBase = window.ADMIN_API_BASE || window.APPLE_STORE_API_BASE || "/api";

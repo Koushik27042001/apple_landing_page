@@ -399,12 +399,15 @@ if (typeof window.STORE_SETTINGS !== "undefined" && window.STORE_SETTINGS) {
 
 /* ---------- Global Upload Image Fallback Handler ---------- */
 function handleImageError(img) {
-  if (img && !img.dataset.retried && img.src && img.src.includes("images/uploads/")) {
+  if (!img) return;
+  if (!img.dataset.retried && img.src && img.src.includes("images/uploads/")) {
     img.dataset.retried = "1";
     const relativePath = img.src.replace(/^.*(?=images\/uploads\/)/, "");
     img.src = "https://apple-landing-page-eut1.onrender.com/" + relativePath;
     return;
   }
+  img.onerror = null;
+  img.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><rect width='100%' height='100%' fill='%23f5f5f7'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%2386868b' font-family='sans-serif' font-size='14'>Product Image</text></svg>";
 }
 
 
