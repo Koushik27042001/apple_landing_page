@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "outputDirectory": "client",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://apple-landing-page-eut1.onrender.com/api/:path*"
+    }
+  ]
+}

@@ -30,7 +30,7 @@ async function connectMongo() {
 
   connecting = mongoose
 
-    .connect(uri, { serverSelectionTimeoutMS: 15000 })
+    .connect(uri, { serverSelectionTimeoutMS: 3000 })
 
     .then(function (conn) {
 
