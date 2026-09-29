@@ -26,3 +26,6 @@ services:
         value: INR
       - key: RAZORPAY_PAYMENT_LINK
         value: https://razorpay.me/@iswiftgadgetsprivatelimit3022
+      - key: CLOUDINARY_URL
+        value: cloudinary://133769216652831:_2FG-c9MPQR9CfxfbVtnmgkunHw@m3kbkm9p
+

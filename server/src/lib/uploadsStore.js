@@ -3,14 +3,19 @@ const path = require("path");
 const { readJson, writeJson } = require("./jsonDb");
 const { isConnected } = require("./mongo");
 const { UploadedImage } = require("../models");
+const { uploadToCloudinary, isCloudinaryConfigured } = require("./cloudinary");
 
 const FILE = "uploads.json";
 const clientDir = path.join(__dirname, "../../../client");
 const uploadsDir = process.env.UPLOAD_DIR || path.join(clientDir, "images/uploads");
 
 function ensureUploadsDir() {
-  if (!fs.existsSync(uploadsDir)) {
-    fs.mkdirSync(uploadsDir, { recursive: true });
+  try {
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+  } catch (err) {
+    // ignore read-only disk error
   }
 }
 
@@ -24,23 +29,41 @@ function writeJsonUploads(map) {
 }
 
 async function saveUpload(filename, contentType, base64Data) {
-  ensureUploadsDir();
-  const filePath = path.join(uploadsDir, filename);
-  const buffer = Buffer.from(base64Data, "base64");
-  fs.writeFileSync(filePath, buffer);
+  // 1. Upload to Cloudinary when configured
+  let cloudinaryUrl = null;
+  if (isCloudinaryConfigured()) {
+    cloudinaryUrl = await uploadToCloudinary(base64Data, filename, contentType);
+  }
 
+  // 2. Local disk fallback
+  try {
+    ensureUploadsDir();
+    const filePath = path.join(uploadsDir, filename);
+    const buffer = Buffer.from(base64Data, "base64");
+    fs.writeFileSync(filePath, buffer);
+  } catch (err) {
+    // ignore read-only disk error
+  }
+
+  // 3. Database / JSON fallback storage
   if (isConnected()) {
     await UploadedImage.updateOne(
       { filename: filename },
-      { filename: filename, contentType: contentType, data: base64Data },
+      { filename: filename, contentType: contentType, data: base64Data, cloudinaryUrl: cloudinaryUrl },
       { upsert: true }
     );
-    return;
+  } else {
+    const map = readJsonUploads();
+    map[filename] = {
+      contentType: contentType,
+      data: base64Data,
+      cloudinaryUrl: cloudinaryUrl,
+      updatedAt: new Date().toISOString()
+    };
+    writeJsonUploads(map);
   }
 
-  const map = readJsonUploads();
-  map[filename] = { contentType: contentType, data: base64Data, updatedAt: new Date().toISOString() };
-  writeJsonUploads(map);
+  return cloudinaryUrl || ("images/uploads/" + filename);
 }
 
 async function getUpload(filename) {
@@ -65,7 +88,7 @@ async function getUpload(filename) {
       } catch (err) {
         // ignore disk write error on readonly environments
       }
-      return { contentType: doc.contentType || "image/png", buffer: buffer };
+      return { contentType: doc.contentType || "image/png", buffer: buffer, cloudinaryUrl: doc.cloudinaryUrl || null };
     }
     return null;
   }
@@ -79,7 +102,7 @@ async function getUpload(filename) {
     } catch (err) {
       // ignore
     }
-    return { contentType: item.contentType || "image/png", buffer: buffer };
+    return { contentType: item.contentType || "image/png", buffer: buffer, cloudinaryUrl: item.cloudinaryUrl || null };
   }
 
   return null;
