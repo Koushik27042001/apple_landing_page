@@ -230,6 +230,51 @@
     wireFileUpload("#b_image_file", "#b_image", "#b_image_preview_wrap", "#b_image_preview", "#b_image_status", "banner");
   }
 
+  function processImageFile(file) {
+    return new Promise(function (resolve, reject) {
+      if (!file) return reject(new Error("No file provided"));
+      const isSvg = file.type === "image/svg+xml" || (file.name && file.name.toLowerCase().endsWith(".svg"));
+      const reader = new FileReader();
+      reader.onerror = function () { reject(new Error("Could not read image file.")); };
+      reader.onload = function (e) {
+        const rawDataUrl = e.target.result;
+        if (isSvg || file.size <= 800 * 1024) {
+          return resolve(rawDataUrl);
+        }
+        const img = new Image();
+        img.onerror = function () { resolve(rawDataUrl); };
+        img.onload = function () {
+          try {
+            const maxDim = 2040;
+            let w = img.width;
+            let h = img.height;
+            if (w > maxDim || h > maxDim) {
+              if (w > h) {
+                h = Math.round((h * maxDim) / w);
+                w = maxDim;
+              } else {
+                w = Math.round((w * maxDim) / h);
+                h = maxDim;
+              }
+            }
+            const canvas = document.createElement("canvas");
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, w, h);
+            const mime = file.type === "image/png" ? "image/png" : "image/jpeg";
+            const compressed = canvas.toDataURL(mime, 0.88);
+            resolve(compressed);
+          } catch (_) {
+            resolve(rawDataUrl);
+          }
+        };
+        img.src = rawDataUrl;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
   function wireFileUpload(fileInputId, urlInputId, previewWrapId, previewImgId, statusId, defaultFilename) {
     const fileInput = $(fileInputId);
     const urlInput = $(urlInputId);
@@ -242,49 +287,44 @@
       updateImagePreview(urlInput.value, previewWrapId, previewImgId, statusId);
     });
 
-    fileInput.addEventListener("change", function () {
+    fileInput.addEventListener("change", async function () {
       const file = fileInput.files[0];
       if (!file) return;
 
-      if (status) status.textContent = "Uploading image...";
+      if (status) status.textContent = "Processing image...";
       if (wrap) wrap.style.display = "flex";
 
-      const reader = new FileReader();
-      reader.onload = async function (e) {
-        const base64 = e.target.result;
+      try {
+        const base64 = await processImageFile(file);
         if (img) {
           img.src = base64;
           img.style.display = "block";
         }
-        try {
-          const res = await api("/admin/upload", {
-            method: "POST",
-            body: JSON.stringify({ image: base64, filename: defaultFilename || "upload" })
-          });
-          if (res && res.url) {
-            urlInput.value = res.url;
-            if (status) status.textContent = "✓ Image uploaded successfully";
-            toast("Image file uploaded successfully");
-          }
-        } catch (err) {
-          if (status) status.textContent = "❌ Upload failed: " + err.message;
-          toast("Upload error: " + err.message);
+        if (status) status.textContent = "Uploading to Cloudinary storage...";
+        const res = await api("/admin/upload", {
+          method: "POST",
+          body: JSON.stringify({ image: base64, filename: defaultFilename || file.name || "upload" })
+        });
+        if (res && res.url) {
+          urlInput.value = res.url;
+          if (status) status.textContent = "✓ Image uploaded successfully to Cloudinary";
+          toast("Image uploaded successfully");
         }
-      };
-      reader.readAsDataURL(file);
+      } catch (err) {
+        if (status) status.textContent = "❌ Upload failed: " + (err.message || "Failed to upload image");
+        toast("Upload error: " + (err.message || "Failed to upload image"));
+      }
     });
   }
 
-  function uploadFile(file) {
-    return new Promise(function (resolve, reject) {
-      const reader = new FileReader();
-      reader.onerror = function () { reject(new Error("Could not read this image.")); };
-      reader.onload = function () {
-        api("/admin/upload", { method: "POST", body: JSON.stringify({ image: reader.result, filename: file.name }) }).then(resolve, reject);
-      };
-      reader.readAsDataURL(file);
+  async function uploadFile(file) {
+    const base64 = await processImageFile(file);
+    return api("/admin/upload", {
+      method: "POST",
+      body: JSON.stringify({ image: base64, filename: (file && file.name) || "upload" })
     });
   }
+
 
   function updateImagePreview(urlVal, previewWrapId, previewImgId, statusId) {
     const wrap = $(previewWrapId);

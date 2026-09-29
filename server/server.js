@@ -42,7 +42,8 @@ app.use("/api/admin/login", rateLimit({ windowMs: 15 * 60 * 1000, limit: 10, sta
 app.use("/api/orders", rateLimit({ windowMs: 60 * 1000, limit: 30, standardHeaders: "draft-8", legacyHeaders: false }));
 
 app.use("/api/payments/webhook", express.raw({ type: "application/json" }));
-app.use(express.json({ limit: "10mb" }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.get("/api/health", function (req, res) {
   const mongoose = require("./src/lib/mongo").mongoose;

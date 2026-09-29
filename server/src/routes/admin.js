@@ -299,14 +299,22 @@ router.post("/upload", requireAdmin, async function (req, res, next) {
     const safeName = (prefix || "img") + "_" + Date.now() + "." + ext;
     const contentType = "image/" + (ext === "jpg" ? "jpeg" : ext);
 
-    await uploadsStore.saveUpload(safeName, contentType, base64Data);
+    const publicUrl = await uploadsStore.saveUpload(safeName, contentType, base64Data);
+    const isCloudinary = publicUrl && (publicUrl.startsWith("http://") || publicUrl.startsWith("https://"));
 
-    const publicUrl = "images/uploads/" + safeName;
-    res.json({ ok: true, url: publicUrl });
+    res.json({
+      ok: true,
+      url: "images/uploads/" + safeName,
+      cloudinaryUrl: isCloudinary ? publicUrl : null,
+      filename: safeName
+    });
+
+
   } catch (err) {
     next(err);
   }
 });
+
 
 module.exports = router;
 
