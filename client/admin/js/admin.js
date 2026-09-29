@@ -770,36 +770,51 @@
       images: imagesList,
       colors: formattedColors,
       short: $("#p_short").value.trim(),
-      description: $("#p_description").value.trim(),
-      storageOptions: [],
-      specs: {}
+      description: $("#p_description").value.trim()
     };
 
     const btn = $("#productSaveBtn");
     btn.disabled = true;
     try {
+      let res;
       if (existingId) {
         const existing = state.products.find(function (p) { return p.id === existingId; }) || {};
-        payload.storageOptions = existing.storageOptions || [];
-        payload.specs = existing.specs || {};
-        if (!payload.images.length && existing.images) payload.images = existing.images;
-        await api("/admin/products/" + encodeURIComponent(existingId), {
+        if (existing.storageOptions && existing.storageOptions.length) {
+          payload.storageOptions = existing.storageOptions;
+        }
+        if (existing.specs && Object.keys(existing.specs).length) {
+          payload.specs = existing.specs;
+        }
+        if (existing.images && existing.images.length) {
+          const extra = existing.images.filter(function (i) { return i !== imgVal && !colorImages.includes(i); });
+          payload.images = Array.from(new Set(imagesList.concat(extra)));
+        }
+        res = await api("/admin/products/" + encodeURIComponent(existingId), {
           method: "PUT",
           body: JSON.stringify(payload)
         });
         toast("Product updated successfully");
       } else {
-        await api("/admin/products", { method: "POST", body: JSON.stringify(payload) });
+        res = await api("/admin/products", { method: "POST", body: JSON.stringify(payload) });
         toast("Product created successfully");
       }
+
+      if (res && res.product) {
+        const idx = state.products.findIndex(function (p) { return p.id === res.product.id; });
+        if (idx >= 0) state.products[idx] = res.product;
+        else state.products.push(res.product);
+      }
+
       $("#productModal").close();
       if (state.view === "products") renderProducts($("#content"));
+      else if (state.view === "dashboard") renderDashboard($("#content"));
     } catch (ex) {
       toast(ex.message);
     } finally {
       btn.disabled = false;
     }
   }
+
 
   async function renderBanners(el) {
     const data = await api("/admin/banners");

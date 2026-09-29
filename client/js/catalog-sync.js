@@ -1,51 +1,61 @@
 /* Loads the live catalog and active advertisement banners from the backend
    when available so admin panel product and advertisement edits appear dynamically
-   across the storefront. Falls back silently to the bundled client/js/data.js catalog. */
+   across the storefront. Uses no-cache requests so admin changes reflect immediately. */
 (function () {
   const base = (typeof APPLE_STORE_API_BASE !== "undefined" && APPLE_STORE_API_BASE)
     ? APPLE_STORE_API_BASE
     : "/api";
 
-  // 1. Fetch products & categories
-  if (typeof PRODUCTS !== "undefined" && typeof CATEGORIES !== "undefined") {
-    fetch(base + "/products", { method: "GET" })
+  function syncCatalog() {
+    const timestamp = Date.now();
+
+    // 1. Fetch products & categories with no-store cache
+    if (typeof PRODUCTS !== "undefined" && typeof CATEGORIES !== "undefined") {
+      fetch(base + "/products?_t=" + timestamp, { cache: "no-store" })
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (data) {
+          if (!data || !Array.isArray(data.products) || !data.products.length) return;
+          PRODUCTS.length = 0;
+          data.products.forEach(function (p) { PRODUCTS.push(p); });
+          if (Array.isArray(data.categories) && data.categories.length) {
+            CATEGORIES.length = 0;
+            data.categories.forEach(function (c) { CATEGORIES.push(c); });
+          }
+          document.dispatchEvent(new CustomEvent("catalog:updated", { detail: data }));
+        })
+        .catch(function () { /* keep bundled catalog */ });
+    }
+
+    // 2. Fetch advertisement banners dynamically
+    fetch(base + "/banners?_t=" + timestamp, { cache: "no-store" })
       .then(function (res) { return res.ok ? res.json() : null; })
       .then(function (data) {
-        if (!data || !Array.isArray(data.products) || !data.products.length) return;
-        PRODUCTS.length = 0;
-        data.products.forEach(function (p) { PRODUCTS.push(p); });
-        if (Array.isArray(data.categories) && data.categories.length) {
-          CATEGORIES.length = 0;
-          data.categories.forEach(function (c) { CATEGORIES.push(c); });
-        }
-        document.dispatchEvent(new CustomEvent("catalog:updated", { detail: data }));
+        if (!data || !Array.isArray(data.banners)) return;
+        window.BANNERS = data.banners;
+        document.dispatchEvent(new CustomEvent("banners:updated", { detail: data.banners }));
+        renderStorefrontBanners(data.banners);
       })
-      .catch(function () { /* keep bundled catalog */ });
+      .catch(function () { /* keep static banners */ });
+
+    // 3. Fetch public store settings dynamically
+    fetch(base + "/settings/public?_t=" + timestamp, { cache: "no-store" })
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (settings) {
+        if (!settings) return;
+        window.STORE_SETTINGS = settings;
+        document.dispatchEvent(new CustomEvent("settings:updated", { detail: settings }));
+        if (settings.announcement && !document.getElementById("admin-top-promo-strip")) {
+          renderAnnouncementStrip(settings.announcement);
+        }
+      })
+      .catch(function () { /* keep defaults */ });
   }
 
-  // 2. Fetch advertisement banners dynamically
-  fetch(base + "/banners", { method: "GET" })
-    .then(function (res) { return res.ok ? res.json() : null; })
-    .then(function (data) {
-      if (!data || !Array.isArray(data.banners)) return;
-      window.BANNERS = data.banners;
-      document.dispatchEvent(new CustomEvent("banners:updated", { detail: data.banners }));
-      renderStorefrontBanners(data.banners);
-    })
-    .catch(function () { /* keep static banners */ });
+  // Initial sync on page load
+  syncCatalog();
 
-  // 3. Fetch public store settings dynamically
-  fetch(base + "/settings/public", { method: "GET" })
-    .then(function (res) { return res.ok ? res.json() : null; })
-    .then(function (settings) {
-      if (!settings) return;
-      window.STORE_SETTINGS = settings;
-      document.dispatchEvent(new CustomEvent("settings:updated", { detail: settings }));
-      if (settings.announcement && !document.getElementById("admin-top-promo-strip")) {
-        renderAnnouncementStrip(settings.announcement);
-      }
-    })
-    .catch(function () { /* keep defaults */ });
+  // Re-sync catalog periodically every 30 seconds so live edits pop up
+  setInterval(syncCatalog, 30000);
 
   function renderAnnouncementStrip(text) {
     if (!text || !text.trim()) return;

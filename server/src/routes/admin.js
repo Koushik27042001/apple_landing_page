@@ -98,13 +98,34 @@ router.put("/products/:id", requireAdmin, async function (req, res, next) {
   try {
     const existing = await productsStore.getById(req.params.id);
     if (!existing) return res.status(404).json({ error: "Product not found." });
-    const product = normalizeProduct(Object.assign({}, existing, req.body || {}, { id: existing.id }));
+
+    const body = req.body || {};
+
+    if ((!Array.isArray(body.storageOptions) || !body.storageOptions.length) && Array.isArray(existing.storageOptions)) {
+      body.storageOptions = existing.storageOptions;
+    }
+
+    if ((!body.specs || !Object.keys(body.specs).length) && existing.specs) {
+      body.specs = existing.specs;
+    }
+
+    if (body.rating == null && existing.rating != null) body.rating = existing.rating;
+    if (body.reviews == null && existing.reviews != null) body.reviews = existing.reviews;
+
+    if (Array.isArray(body.images) && body.images.length && Array.isArray(existing.images) && existing.images.length) {
+      const mergedImages = Array.from(new Set(body.images.concat(existing.images.filter(Boolean))));
+      body.images = mergedImages;
+    }
+
+    const merged = Object.assign({}, existing, body, { id: existing.id });
+    const product = normalizeProduct(merged);
     await productsStore.upsert(product);
     res.json({ product: product });
   } catch (err) {
     res.status(400).json({ error: err.message || "Could not update product." });
   }
 });
+
 
 router.delete("/products/:id", requireAdmin, async function (req, res, next) {
   try {
