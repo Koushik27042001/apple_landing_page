@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="pageTitle">Shop All Products | The Apple Store Pune</title>
+<title id="pageTitle">Shop All Products | The Apple Store</title>
 <meta name="description" content="Browse genuine Apple products in Pune — iPhone, Mac, iPad, Watch, AirPods and Accessories with best prices and No-Cost EMI.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
 <link rel="stylesheet" href="css/style.css">
@@ -164,7 +164,7 @@
     if (state.query) {
       titleEl.textContent = 'Results for "' + state.query + '"';
       tagEl.textContent = "Showing products matching your search.";
-      document.title = 'Search: ' + state.query + ' | The Apple Store Pune';
+      document.title = 'Search: ' + state.query + ' | The Apple Store';
     } else if (cat) {
       if (cat.id === "mac") {
         heroEl.classList.add("category-hero--mac");
@@ -216,11 +216,11 @@
         titleEl.textContent = cat.name;
         tagEl.textContent = cat.tagline;
       }
-      document.title = cat.name + " | The Apple Store Pune";
+      document.title = cat.name + " | The Apple Store";
     } else {
       titleEl.textContent = "Shop All";
       tagEl.textContent = "Explore our full range of genuine Apple products.";
-      document.title = "Shop All Products | The Apple Store Pune";
+      document.title = "Shop All Products | The Apple Store";
     }
   }
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="pageTitle">Product | The Apple Store Pune</title>
+<title id="pageTitle">Product | The Apple Store</title>
 <meta id="pageDesc" name="description" content="Buy genuine Apple products in Pune with best prices and No-Cost EMI.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
 <link rel="stylesheet" href="css/style.css">
@@ -48,7 +48,7 @@
   renderHeader(product.category);
   renderFooter();
 
-  document.title = product.name + " | The Apple Store Pune";
+  document.title = product.name + " | The Apple Store";
   document.getElementById("pageDesc").setAttribute("content", product.short + " Buy now in Pune with best price and No-Cost EMI.");
 
   const cat = getCategoryById(product.category);
@@ -337,7 +337,7 @@
     }
     if (updatedP) {
       product = updatedP;
-      document.title = product.name + " | The Apple Store Pune";
+      document.title = product.name + " | The Apple Store";
       document.getElementById("pageDesc").setAttribute("content", product.short + " Buy now in Pune with best price and No-Cost EMI.");
       const cat = getCategoryById(product.category);
       document.getElementById("breadcrumb").innerHTML =
