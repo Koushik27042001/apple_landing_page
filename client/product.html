@@ -277,7 +277,7 @@
       panel.style.display = panel.style.display === "none" ? "block" : "none";
     });
 
-    const waMsg = "Hi, I'm interested in the " + product.name + " (" + selection.color + (selection.storage ? ", " + selection.storage : "") + ") listed at " + formatINR(unitPrice) + " on The Apple Store Pune. Could you share more details?";
+    const waMsg = "Hi, I'm interested in the " + product.name + " (" + selection.color + (selection.storage ? ", " + selection.storage : "") + ") listed at " + formatINR(unitPrice) + " on The Apple Store. Could you share more details?";
     document.getElementById("waInquiry").href = whatsappLink(waMsg);
   }
 
