@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f7f4" />
+    <title>Neo Citrus — Interactive Laptop</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="#home" class="brand">
+            <span class="brand-dot"></span>
+            neo<span class="brand-light">citrus</span>
+        </a>
+        <div class="nav-links">
+            <a href="#experience">Experience</a>
+            <a href="#details">Details</a>
+        </div>
+        <a href="#experience" class="nav-button">
+            Explore design <span>↗</span>
+        </a>
+    </nav>
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero" id="home">
+            <div class="grid-background"></div>
+            <div class="hero-copy">
+                <div class="eyebrow">
+                    <span class="eyebrow-line"></span>
+                    A CLOSER LOOK AT THE EVERYDAY
+                </div>
+                <h1>
+                    Meet your<br />
+                    <em>bright</em> side.
+                </h1>
+                <p class="hero-description">
+                    A little colour. A lot of character. Explore every angle
+                    of a laptop designed to make the ordinary feel extraordinary.
+                </p>
+                <a href="#experience" class="scroll-link">
+                    <span class="scroll-icon">↓</span>
+                    Scroll to explore
+                </a>
+            </div>
+            <div class="product-stage" id="productStage">
+                <div class="product-shadow"></div>
+                <div class="product-card" id="productCard">
+                    <img src="macbook-neo-citrus.png" alt="Citrus yellow laptop with a colourful display"
+                        class="product-image" draggable="false" />
+                </div>
+                <div class="floating-note note-top">
+                    <span class="note-symbol">✳</span>
+                    Made to stand out
+                </div>
+                <div class="floating-note note-bottom">
+                    <span class="status-dot"></span>
+                    Explore the details
+                </div>
+                <button class="reset-button" id="resetButton">↺ Reset view</button>
+            </div>
+            <div class="hero-footer">
+                <span>01 / THE OVERVIEW</span>
+                <span class="desktop-hint">MOVE YOUR CURSOR TO INTERACT ↗</span>
+            </div>
+        </section>
+        <!-- PRODUCT EXPLORATION -->
+        <section class="experience" id="experience">
+            <div class="section-label">DESIGNED TO BE DISCOVERED ✳</div>
+            <div class="experience-heading">
+                <h2>
+                    Not just a screen.<br />
+                    <em>A whole experience.</em>
+                </h2>
+                <p>
+                    Keep scrolling. Every detail has its own story.
+                    Select a marker and explore the design up close.
+                </p>
+            </div>
+            <div class="interaction-hint"><span>＋</span> Select a numbered marker to explore</div>
+            <div class="explore-stage">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <img src="macbook-neo-citrus.png" alt="Laptop product details" class="explore-image"
+                    draggable="false" />
+                <button class="hotspot hotspot-one" data-feature="display" aria-label="Explore display"
+                    aria-expanded="false">01</button>
+                <button class="hotspot hotspot-two" data-feature="keyboard" aria-label="Explore keyboard"
+                    aria-expanded="false">02</button>
+                <button class="hotspot hotspot-three" data-feature="trackpad" aria-label="Explore trackpad"
+                    aria-expanded="false">03</button>
+                <div class="feature-card" id="featureCard" aria-live="polite">
+                    <span class="feature-label" id="featureLabel">YOUR TURN</span>
+                    <h3 id="featureTitle">Go on, take a look.</h3>
+                    <p id="featureDescription">Tap any numbered marker to discover a detail.</p>
+                </div>
+            </div>
+        </section>
+        <!-- FINAL SECTION -->
+        <section class="details" id="details">
+            <div class="details-copy">
+                <div class="eyebrow"><span class="eyebrow-line"></span>SMALL DETAILS. BIG FEELING.</div>
+                <h2>
+                    Built to feel<br />
+                    <em>different.</em>
+                </h2>
+                <p>From the warm citrus finish to the bold colours on screen, this concept gives familiar technology a
+                    little more personality.</p>
+                <a href="#home" class="back-link">Back to the top ↗</a>
+            </div>
+            <div class="detail-list">
+                <div><span>01</span>
+                    <p>Warm citrus finish</p>
+                </div>
+                <div><span>02</span>
+                    <p>Colour-rich display</p>
+                </div>
+                <div><span>03</span>
+                    <p>Thoughtful details</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <a href="#home" class="brand">
+            <span class="brand-dot"></span>
+            neo<span class="brand-light">citrus</span>
+        </a>
+        <span>A concept interaction study</span>
+        <span>SCROLL. EXPLORE. REPEAT.</span>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
