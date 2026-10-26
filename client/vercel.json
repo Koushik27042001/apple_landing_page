@@ -9,6 +9,10 @@
     {
       "source": "/images/uploads/:path*",
       "destination": "https://apple-landing-page-eut1.onrender.com/images/uploads/:path*"
+    },
+    {
+      "source": "/",
+      "destination": "/index.html"
     }
   ]
 }
