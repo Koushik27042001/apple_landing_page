@@ -203,10 +203,17 @@ button { font-family: inherit; cursor: pointer; }
   flex-shrink: 0;
 }
 .logo .logo-mark { font-size: 20px; line-height: 1; }
+.logo-name { white-space: nowrap; }
+.apple-logo {
+  display: inline-block;
+  font-size: 22px;
+  line-height: 1;
+}
 .logo span.store-tag {
   font-weight: 400;
   color: var(--gray-text);
   font-size: 12px;
+  white-space: nowrap;
 }
 
 .main-nav {
@@ -223,6 +230,50 @@ button { font-family: inherit; cursor: pointer; }
 }
 .main-nav a:hover { color: var(--blue); }
 .main-nav a.active { color: var(--blue); font-weight: 600; }
+
+.products-menu {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+.products-menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  color: var(--gray-dark);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+.products-menu-toggle:hover,
+.products-menu.active .products-menu-toggle { color: var(--blue); }
+.products-menu-toggle .icon-svg { transition: transform 0.2s ease; }
+.products-menu.open .products-menu-toggle .icon-svg { transform: rotate(180deg); }
+.products-submenu {
+  position: absolute;
+  top: 100%;
+  left: -18px;
+  z-index: 700;
+  display: none;
+  min-width: 190px;
+  padding: 8px;
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+.products-menu:hover .products-submenu,
+.products-menu:focus-within .products-submenu,
+.products-menu.open .products-submenu { display: grid; }
+.main-nav .products-submenu a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 7px;
+}
+.main-nav .products-submenu a:hover { background: var(--gray-bg); }
 
 .header-actions {
   display: flex;
@@ -340,6 +391,7 @@ button { font-family: inherit; cursor: pointer; }
   display: none;
   flex-direction: column;
   padding: 20px;
+  overflow-y: auto;
 }
 .mobile-nav.open { display: flex; }
 .mobile-nav-head {
@@ -355,6 +407,20 @@ button { font-family: inherit; cursor: pointer; }
   border-bottom: 1px solid var(--gray-bg);
 }
 .mobile-nav-divider { height: 18px; }
+.mobile-products-label {
+  padding: 16px 4px 4px;
+  color: var(--gray-text);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 900px) {
+  .main-nav,
+  .header-actions .search-wrap { display: none; }
+  .menu-toggle { display: inline-flex; }
+}
 
 /* ---------------- Hero / carousel ---------------- */
 

@@ -48,23 +48,24 @@ function renderHeader(active) {
   if (active) window.__ACTIVE_NAV__ = active;
   const el = document.getElementById("site-header");
   if (!el) return;
+  const isProductActive = ["iphone", "ipad", "mac", "watch"].includes(active);
   el.innerHTML =
     '<header class="site-header" id="siteHeaderEl">' +
       '<div class="header-inner">' +
         '<button class="menu-toggle" id="menuToggleBtn" aria-label="Menu">' + icon("menu", { size: 22 }) + '</button>' +
-        '<a href="index.html" class="logo"><span class="logo-mark">' + icon("sparkle", { size: 18 }) + '</span> Iswift Gadgets <span class="store-tag">Private Limited</span></a>' +
+        '<a href="index.html" class="logo" aria-label="Iswift Test Business Partner home"><span class="logo-name">Iswift</span><span class="apple-logo" aria-hidden="true"></span><span class="store-tag">Test Business Partner</span></a>' +
         '<nav class="main-nav">' +
           navLink("index.html", "Store", active === "home") +
           navLink("macbook-neo.html", "MacBook Neo", active === "macbook-neo") +
-          navLink("category.html?cat=mac", "Mac", active === "mac") +
-          navLink("category.html?cat=ipad", "iPad", active === "ipad") +
-          navLink("category.html?cat=iphone", "iPhone", active === "iphone") +
-          navLink("category.html?cat=watch", "Watch", active === "watch") +
-          navLink("category.html?cat=vision", "Vision", active === "vision") +
-          navLink("category.html?cat=airpods", "AirPods", active === "airpods") +
-          navLink("category.html?cat=tvhome", "TV &amp; Home", active === "tvhome") +
-          navLink("entertainment.html", "Entertainment", active === "entertainment") +
-          navLink("category.html?cat=accessories", "Accessories", active === "accessories") +
+          '<div class="products-menu' + (isProductActive ? ' active' : '') + '">' +
+            '<button class="products-menu-toggle" id="productsMenuToggle" type="button" aria-expanded="false" aria-controls="productsSubmenu">Products ' + icon("chevronDown", { size: 14 }) + '</button>' +
+            '<div class="products-submenu" id="productsSubmenu" role="group" aria-label="Product categories">' +
+              navLink("category.html?cat=iphone", "iPhone", active === "iphone") +
+              navLink("category.html?cat=ipad", "iPad", active === "ipad") +
+              navLink("category.html?cat=mac", "Mac", active === "mac") +
+              navLink("category.html?cat=watch", "Apple Watch", active === "watch") +
+            '</div>' +
+          '</div>' +
           navLink("support.html", "Support", active === "support") +
         '</nav>' +
         '<div class="header-actions">' +
@@ -79,7 +80,7 @@ function renderHeader(active) {
     '</header>' +
     '<div class="mobile-nav" id="mobileNav">' +
       '<div class="mobile-nav-head">' +
-        '<span class="logo"><span class="logo-mark">' + icon("sparkle", { size: 18 }) + '</span> ' + STORE_NAME + '</span>' +
+        '<span class="logo"><span class="logo-name">Iswift</span><span class="apple-logo" aria-hidden="true"></span><span class="store-tag">Test Business Partner</span></span>' +
         '<button class="btn-icon" id="mobileNavClose" aria-label="Close menu">' + icon("close", { size: 22 }) + '</button>' +
       '</div>' +
       '<div style="margin-bottom:18px;">' +
@@ -90,10 +91,12 @@ function renderHeader(active) {
       '</div>' +
       '<a href="index.html">Store</a>' +
       '<a href="macbook-neo.html" style="font-weight:700;color:var(--accent,#0071e3);">MacBook Neo 🔥</a>' +
-      '<a href="category.html?cat=mac">Mac</a>' +
-      '<a href="category.html?cat=ipad">iPad</a>' +
+      '<div class="mobile-products-label">Products</div>' +
       '<a href="category.html?cat=iphone">iPhone</a>' +
-      '<a href="category.html?cat=watch">Watch</a>' +
+      '<a href="category.html?cat=ipad">iPad</a>' +
+      '<a href="category.html?cat=mac">Mac</a>' +
+      '<a href="category.html?cat=watch">Apple Watch</a>' +
+      '<div class="mobile-nav-divider"></div>' +
       '<a href="category.html?cat=vision">Vision</a>' +
       '<a href="category.html?cat=airpods">AirPods</a>' +
       '<a href="category.html?cat=tvhome">TV &amp; Home</a>' +
@@ -128,6 +131,28 @@ function wireHeaderInteractions() {
   mobileNav && mobileNav.querySelectorAll("a").forEach(function (a) {
     a.addEventListener("click", function () { mobileNav.classList.remove("open"); });
   });
+
+  const productsMenu = document.querySelector(".products-menu");
+  const productsToggle = document.getElementById("productsMenuToggle");
+  if (productsMenu && productsToggle) {
+    productsToggle.addEventListener("click", function () {
+      const isOpen = productsMenu.classList.toggle("open");
+      productsToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+    document.addEventListener("click", function (event) {
+      if (!productsMenu.contains(event.target)) {
+        productsMenu.classList.remove("open");
+        productsToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && productsMenu.classList.contains("open")) {
+        productsMenu.classList.remove("open");
+        productsToggle.setAttribute("aria-expanded", "false");
+        productsToggle.focus();
+      }
+    });
+  }
 
   wireSearch("headerSearch", "searchSuggestions");
 
@@ -409,5 +434,3 @@ function handleImageError(img) {
   img.onerror = null;
   img.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><rect width='100%' height='100%' fill='%23f5f5f7'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%2386868b' font-family='sans-serif' font-size='14'>Product Image</text></svg>";
 }
-
-

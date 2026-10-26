@@ -42,8 +42,13 @@ async function ensureServerRunning() {
     log("Header renders SVG icons (search/cart/menu)", headerSvgCount >= 3, "count=" + headerSvgCount);
 
     const navLinkTexts = await page.locator(".main-nav a").allTextContents();
-    const expectedNav = ["Store", "MacBook Neo", "Mac", "iPad", "iPhone", "Watch", "Vision", "AirPods", "TV & Home", "Entertainment", "Accessories", "Support"];
+    const expectedNav = ["Store", "MacBook Neo", "iPhone", "iPad", "Mac", "Apple Watch", "Support"];
     log("Main nav shows the correct items in the correct order", JSON.stringify(navLinkTexts) === JSON.stringify(expectedNav), "got=" + JSON.stringify(navLinkTexts));
+    const productsToggle = page.locator("#productsMenuToggle");
+    const productCategories = await page.locator("#productsSubmenu a").allTextContents();
+    log("Products dropdown contains the requested categories", JSON.stringify(productCategories) === JSON.stringify(["iPhone", "iPad", "Mac", "Apple Watch"]), "got=" + JSON.stringify(productCategories));
+    await productsToggle.click();
+    log("Products dropdown opens accessibly", await productsToggle.getAttribute("aria-expanded") === "true" && await page.locator("#productsSubmenu").isVisible());
 
     const footerSvgCount = await page.locator("#site-footer svg.icon-svg").count();
     log("Footer trust badges render SVG icons", footerSvgCount >= 4, "count=" + footerSvgCount);
@@ -52,7 +57,7 @@ async function ensureServerRunning() {
     log("WhatsApp float button renders SVG icon", waSvg === 1);
 
     const logoText = await page.locator(".logo").first().textContent();
-    log("Logo text renders correctly (no broken glyph)", logoText.includes("Iswift Gadgets"), "text=" + logoText.trim());
+    log("Logo shows Iswift and Test Business Partner", logoText.includes("Iswift") && logoText.includes("Test Business Partner"), "text=" + logoText.trim());
 
     // Add product to cart, go to checkout, verify demo-mode notice
     await page.waitForSelector("#bestPricesGrid .product-card", { timeout: 5000 });
