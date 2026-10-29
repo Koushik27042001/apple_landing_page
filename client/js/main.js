@@ -1,3 +1,12 @@
+function appleLogoHtml(size) {
+  const sz = size || 18;
+  if (typeof icon === "function") {
+    const ic = icon("apple", { size: sz, class: "apple-icon-svg" });
+    if (ic) return ic;
+  }
+  return '<svg class="icon-svg icon-apple apple-icon-svg" width="' + sz + '" height="' + sz + '" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.84c.64-.78 1.08-1.87.96-2.96-.93.04-2.05.62-2.71 1.4-.58.67-1.09 1.77-.95 2.83 1.04.08 2.06-.51 2.7-1.27z"/></svg>';
+}
+
 /* ============================================================
    Main Module — shared header/footer rendering, search,
    mobile nav, WhatsApp float, toast notifications.
@@ -49,11 +58,12 @@ function renderHeader(active) {
   const el = document.getElementById("site-header");
   if (!el) return;
   const isProductActive = ["iphone", "ipad", "mac", "watch"].includes(active);
+  const isDarkPage = document.body.classList.contains("dark-theme") || document.body.classList.contains("page-dark");
   el.innerHTML =
-    '<header class="site-header" id="siteHeaderEl">' +
+    '<header class="site-header' + (isDarkPage ? ' site-header--dark' : '') + '" id="siteHeaderEl">' +
       '<div class="header-inner">' +
         '<button class="menu-toggle" id="menuToggleBtn" aria-label="Menu">' + icon("menu", { size: 22 }) + '</button>' +
-        '<a href="index.html" class="logo" aria-label="Iswift Test Business Partner home"><span class="logo-name">Iswift</span><span class="apple-logo" aria-hidden="true"></span><span class="store-tag">Test Business Partner</span></a>' +
+        '<a href="index.html" class="logo" aria-label="Iswift Test Business Partner home"><span class="logo-name">Iswift</span><span class="apple-logo" aria-hidden="true">' + appleLogoHtml(18) + '</span><span class="store-tag">Test Business Partner</span></a>' +
         '<nav class="main-nav">' +
           navLink("index.html", "Store", active === "home") +
           navLink("macbook-neo.html", "MacBook Neo", active === "macbook-neo") +
@@ -80,7 +90,7 @@ function renderHeader(active) {
     '</header>' +
     '<div class="mobile-nav" id="mobileNav">' +
       '<div class="mobile-nav-head">' +
-        '<span class="logo"><span class="logo-name">Iswift</span><span class="apple-logo" aria-hidden="true"></span><span class="store-tag">Test Business Partner</span></span>' +
+        '<span class="logo"><span class="logo-name">Iswift</span><span class="apple-logo" aria-hidden="true">' + appleLogoHtml(18) + '</span><span class="store-tag">Test Business Partner</span></span>' +
         '<button class="btn-icon" id="mobileNavClose" aria-label="Close menu">' + icon("close", { size: 22 }) + '</button>' +
       '</div>' +
       '<div style="margin-bottom:18px;">' +
@@ -102,11 +112,13 @@ function renderHeader(active) {
       '<a href="category.html?cat=tvhome">TV &amp; Home</a>' +
       '<a href="entertainment.html">Entertainment</a>' +
       '<a href="category.html?cat=accessories">Accessories</a>' +
+      '<a href="category.html?cat=all">Shop All Products</a>' +
       '<a href="support.html">Support</a>' +
       '<div class="mobile-nav-divider"></div>' +
       '<a href="cart.html">Bag</a>' +
       '<a href="about.html">About Us</a>' +
       '<a href="contact.html">Contact Us</a>' +
+      '<a href="terms.html">Terms &amp; Policies</a>' +
     '</div>';
 
   wireHeaderInteractions();
@@ -228,8 +240,9 @@ function renderFooter() {
   const el = document.getElementById("site-footer");
   if (!el) return;
   const year = new Date().getFullYear();
+  const isDarkPage = document.body.classList.contains("dark-theme") || document.body.classList.contains("page-dark");
   el.innerHTML =
-    '<footer class="site-footer">' +
+    '<footer class="site-footer' + (isDarkPage ? ' site-footer--dark' : '') + '">' +
       '<div class="container">' +
         '<div class="trust-badges">' +
           trustBadge("lock", "Secure Payments", "100% secure UPI, card & EMI checkout") +
@@ -239,7 +252,7 @@ function renderFooter() {
         '</div>' +
         '<div class="footer-grid">' +
           '<div class="footer-col footer-brand">' +
-            '<span class="logo"><span class="logo-mark">' + icon("sparkle", { size: 18 }) + '</span> Iswift Gadgets Private Limited</span>' +
+            '<span class="logo"><span class="logo-name">Iswift</span><span class="apple-logo" aria-hidden="true">' + appleLogoHtml(18) + '</span><span class="store-tag">Gadgets Private Limited</span></span>' +
             '<p>Trusted destination for iPhone, Mac, iPad, Watch &amp; AirPods \u2014 genuine products with the best prices and No-Cost EMI. Head office in HSR Layout, Bengaluru.</p>' +
             '<div class="payment-icons">' +
               '<span>UPI</span><span>Visa</span><span>Mastercard</span><span>Razorpay</span><span>Cashfree</span><span>No-Cost EMI</span>' +

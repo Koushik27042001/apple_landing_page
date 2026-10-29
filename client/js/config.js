@@ -1,5 +1,26 @@
-/* Same-origin API works locally and on Render without public secrets. */
-const APPLE_STORE_API_BASE = window.APPLE_STORE_API_BASE || "/api";
+/**
+ * Dynamic API Base & Store Config
+ * 
+ * Works same-origin (/api) when running through Express or when deployed (e.g. Render/Vercel).
+ * Automatically resolves to the local Express backend (http://127.0.0.1:4000/api) when frontend
+ * is served via Live Server (5500), client static serve (8080), or file://.
+ */
+(function () {
+  function getApiBase() {
+    if (window.APPLE_STORE_API_BASE) return window.APPLE_STORE_API_BASE;
+    if (typeof location !== "undefined") {
+      const port = location.port;
+      const hostname = location.hostname;
+      const isLocal = hostname === "localhost" || hostname === "127.0.0.1" || hostname === "0.0.0.0";
+      if ((isLocal && port && port !== "4000") || location.protocol === "file:") {
+        return "http://127.0.0.1:4000/api";
+      }
+    }
+    return "/api";
+  }
+  window.APPLE_STORE_API_BASE = getApiBase();
+})();
+const APPLE_STORE_API_BASE = window.APPLE_STORE_API_BASE;
 
 /* Live payment page + merchant UPI QR flyer.
    Order total is always appended so Razorpay.me opens with amount locked. */
@@ -33,4 +54,3 @@ function buildPaymentQrImageUrl(amountInr, orderId, size) {
     encodeURIComponent(link)
   );
 }
-

@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { fork } = require("child_process");
 
 const base = "http://localhost:4000";
 const results = [];
@@ -10,6 +11,7 @@ function log(step, ok, extra) {
 }
 
 (async () => {
+  let serverProc = null;
   try {
     const root = path.join(__dirname, "..");
     log("client/ folder exists", fs.existsSync(path.join(root, "client", "index.html")));
@@ -26,7 +28,19 @@ function log(step, ok, extra) {
     }
     log("Catalog seed path resolvable", catalogOk);
 
-    const health = await fetch(base + "/api/health").then(function (r) { return r.json(); }).catch(function () { return null; });
+    let health = await fetch(base + "/api/health").then(function (r) { return r.json(); }).catch(function () { return null; });
+    if (!health || !health.ok) {
+      serverProc = fork(path.join(root, "server", "server.js"), [], {
+        cwd: path.join(root, "server"),
+        env: Object.assign({}, process.env, { PORT: "4000" }),
+        stdio: "ignore"
+      });
+      for (let i = 0; i < 40; i++) {
+        await new Promise((r) => setTimeout(r, 200));
+        health = await fetch(base + "/api/health").then(function (r) { return r.json(); }).catch(function () { return null; });
+        if (health && health.ok) break;
+      }
+    }
     log("API health", !!(health && health.ok), health && health.service);
 
     const pages = [
@@ -147,6 +161,10 @@ function log(step, ok, extra) {
     );
   } catch (e) {
     log("FATAL", false, e.message);
+  } finally {
+    if (serverProc) {
+      try { serverProc.kill(); } catch (_) {}
+    }
   }
 
   const failed = results.filter(function (r) { return !r.ok; }).length;

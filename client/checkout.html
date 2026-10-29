@@ -299,7 +299,7 @@
       if (notice) {
         notice.style.display = "flex";
         notice.innerHTML = backendAvailable
-          ? icon("checkCircle", { size: 14 }) + " Orders sync to the store. Pay via UPI QR or the Razorpay link."
+          ? icon("checkCircle", { size: 14 }) + " Live payment gateway connected. Orders sync to the store. Pay via UPI QR or the Razorpay link."
           : icon("info", { size: 14 }) + " Checkout is temporarily unavailable. Please retry shortly.";
       }
       // Re-sync after backend check in case totals changed.

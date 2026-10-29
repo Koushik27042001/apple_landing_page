@@ -118,7 +118,7 @@ router.post("/", async function (req, res) {
 
     if (!razorpay) {
       return res.status(503).json({
-        error: "Payment gateway API keys are not configured. Choose UPI / Scan & Pay, or add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET to server/.env."
+        error: "Payment gateway is not configured. Choose UPI / Scan & Pay, or add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET to server/.env."
       });
     }
 

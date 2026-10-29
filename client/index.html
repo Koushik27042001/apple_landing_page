@@ -1,144 +1,2364 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f7f7f4" />
-    <meta name="description" content="Premium interactive landing page showcasing the Neo Citrus laptop with immersive 3D hover effects and hotspot details." />
-    <title>Neo Citrus — Interactive Laptop</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>iPhone Pro &amp; Store | Iswift Gadgets Private Limited</title>
+<meta name="description" content="Explore iPhone Pro in titanium with high-resolution cinematic design showcase, best prices on genuine Mac, iPad, Watch, AirPods, and No-Cost EMI in Bengaluru.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/enhancements.css">
+<link rel="stylesheet" href="css/chip-family.css">
+<style>
+:root {
+  --bg: #000000;
+  --fg: #f5f5f7;
+  --mute: #86868b;
+  color-scheme: dark;
+  box-sizing: border-box;
+}
+* { box-sizing: inherit; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body.dark-theme {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid #2997ff; outline-offset: 3px; }
+
+
+/* Global Site Header Sticky & Dark Theme Visibility */
+#site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  width: 100%;
+}
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  width: 100%;
+  background: rgba(18, 18, 20, 0.88) !important;
+  backdrop-filter: saturate(180%) blur(24px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(24px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+.site-header.scrolled,
+.site-header--dark.scrolled {
+  background: rgba(12, 12, 14, 0.96) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.65) !important;
+}
+.site-header .logo,
+.site-header .logo-name,
+.site-header .apple-logo,
+.site-header--dark .logo,
+.site-header--dark .logo-name,
+.site-header--dark .apple-logo {
+  color: #ffffff !important;
+  display: inline-flex;
+  align-items: center;
+  margin: 0 4px 0 2px;
+  vertical-align: middle;
+}
+.site-header .apple-logo svg,
+.site-header--dark .apple-logo svg {
+  display: inline-block;
+  vertical-align: middle;
+  fill: #ffffff !important;
+}
+.site-header .logo span.store-tag,
+.site-header--dark .logo span.store-tag {
+  color: #a1a1a6 !important;
+}
+.site-header .main-nav a,
+.site-header--dark .main-nav a {
+  color: #e5e5ea !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+  transition: color 0.2s ease !important;
+}
+.site-header .main-nav a:hover,
+.site-header .main-nav a.active,
+.site-header--dark .main-nav a:hover,
+.site-header--dark .main-nav a.active {
+  color: #ffffff !important;
+}
+.site-header .products-menu-toggle,
+.site-header--dark .products-menu-toggle {
+  color: #e5e5ea !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+}
+.site-header .products-menu-toggle:hover,
+.site-header .products-menu.open .products-menu-toggle,
+.site-header .products-menu.active .products-menu-toggle,
+.site-header--dark .products-menu-toggle:hover,
+.site-header--dark .products-menu.open .products-menu-toggle,
+.site-header--dark .products-menu.active .products-menu-toggle {
+  color: #ffffff !important;
+}
+.site-header .products-submenu,
+.site-header--dark .products-submenu {
+  background: #1c1c1e !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75) !important;
+}
+.site-header .main-nav .products-submenu a,
+.site-header--dark .main-nav .products-submenu a {
+  color: #e5e5ea !important;
+}
+.site-header .main-nav .products-submenu a:hover,
+.site-header--dark .main-nav .products-submenu a:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+.site-header .search-input,
+.site-header--dark .search-input {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+}
+.site-header .search-input::placeholder,
+.site-header--dark .search-input::placeholder {
+  color: #86868b !important;
+}
+.site-header .search-icon,
+.site-header--dark .search-icon {
+  color: #86868b !important;
+}
+.site-header .icon-btn,
+.site-header--dark .icon-btn {
+  color: #e5e5ea !important;
+}
+.site-header .menu-toggle,
+.site-header--dark .menu-toggle {
+  color: #ffffff !important;
+}
+
+/* Ambient Orbs */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+.o1 { width: 44vw; height: 44vw; left: -10vw; top: 12vh; background: #0a84ff; }
+.o2 { width: 38vw; height: 38vw; right: -8vw; top: 38vh; background: #bf5af2; }
+.o3 { width: 32vw; height: 32vw; left: 32vw; top: 75vh; background: #ff375f; opacity: 0.2; }
+
+/* ==================== SECTION 1: HERO (THE NEW IPHONE 17 PRO MAX) ==================== */
+.hero {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px 60px;
+  position: relative;
+  overflow: visible;
+  z-index: 1;
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  align-items: center;
+  gap: 48px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* HERO CONTENT */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 650px;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Inter", "Segoe UI", sans-serif;
+  will-change: transform;
+}
+
+/* EYEBROW */
+.hero-content .eyebrow {
+  display: inline-block;
+  margin-bottom: 26px;
+  color: #ff9a5b;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+/* MAIN HEADING */
+.hero-content h1 {
+  max-width: 700px;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(52px, 7vw, 88px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -5px;
+  text-wrap: balance;
+}
+
+/* ACCENT WORD */
+.hero-content h1 span {
+  display: inline-block;
+  color: #ff792f;
+  background: linear-gradient(
+    100deg,
+    #ffd0a6 0%,
+    #ff873b 45%,
+    #ed4c13 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* DESCRIPTION */
+.hero-content > p {
+  max-width: 480px;
+  margin: 26px 0 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: -0.15px;
+}
+
+/* CTA CONTAINER */
+.hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+/* SHARED BUTTON */
+.hero-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 25px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    transform 250ms ease,
+    background 250ms ease,
+    border-color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+/* PRIMARY CTA */
+.hero-actions .btn-light {
+  color: #ffffff;
+  background: linear-gradient(110deg, #ff8a3d, #ed591c);
+  box-shadow: 0 8px 30px rgba(255, 100, 35, 0.18);
+}
+
+.hero-actions .btn-light:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(110deg, #ffa25e, #ff6a27);
+  box-shadow: 0 12px 34px rgba(255, 100, 35, 0.28);
+}
+
+/* SECONDARY CTA */
+.hero-actions .btn-outline {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+}
+
+.hero-actions .btn-outline:hover {
+  transform: translateY(-3px);
+  border-color: #ff9a5b;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+/* PRODUCT SUPPORTING TEXT */
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 38px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+.hero-meta .meta-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff8a3d;
+  box-shadow: 0 0 10px #ff8a3d;
+  flex-shrink: 0;
+}
+
+/* PRODUCT HIGHLIGHT CHIPS */
+.hero-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.highlight-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 980px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.highlight-chip:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 154, 91, 0.4);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.highlight-chip svg {
+  color: #ff9a5b;
+  flex-shrink: 0;
+}
+
+/* RIGHT COLUMN: CLEAN SEAMLESS ILLUSTRATOR VISUAL */
+.hero-visual {
+  perspective: 1400px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  will-change: transform;
+}
+.hero-device-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+  padding: 10px 0;
+}
+.hero-product-img {
+  width: 100%;
+  max-width: 840px;
+  max-height: 580px;
+  object-fit: contain;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.85));
+  user-select: none;
+  pointer-events: none;
+  display: block;
+  transform: translateZ(0);
+}
+
+/* Tablet & Mobile Breakpoints */
+@media (max-width: 1080px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+  .hero-content {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .hero-meta {
+    justify-content: center;
+  }
+  .hero-highlights {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero-content {
+    max-width: 100%;
+  }
+  .hero-content .eyebrow {
+    margin-bottom: 20px;
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+  .hero-content h1 {
+    font-size: clamp(46px, 12vw, 68px);
+    line-height: 1;
+    letter-spacing: -2.8px;
+  }
+  .hero-content > p {
+    max-width: 440px;
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+  .hero-actions {
+    gap: 10px;
+    margin-top: 26px;
+  }
+  .hero-actions .btn {
+    min-height: 47px;
+    padding: 0 19px;
+    font-size: 12px;
+  }
+  .hero-meta {
+    margin-top: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-actions .btn {
+    transition: none;
+  }
+}
+
+/* ==================== SECTION 2: GOLD SHOWCASE (DESERT GOLD TITANIUM DUO) ==================== */
+.gold-showcase {
+  min-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 80px 20px 60px;
+  position: relative;
+  overflow: visible;
+  z-index: 1;
+}
+.gold-copy {
+  max-width: 960px;
+  margin: 0 auto;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gold-eyebrow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 16px;
+  border-radius: 980px;
+  background: rgba(245, 197, 110, 0.08);
+  border: 1px solid rgba(245, 197, 110, 0.32);
+  color: #f5c56e;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 20px rgba(245, 197, 110, 0.12);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.gold-eyebrow-badge:hover {
+  transform: translateY(-2px);
+  border-color: rgba(245, 197, 110, 0.6);
+}
+.gold-eyebrow-badge .badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f5c56e;
+  box-shadow: 0 0 10px #f5c56e, 0 0 16px rgba(245, 197, 110, 0.6);
+  animation: badgePulse 2s infinite ease-in-out;
+}
+
+.gold-showcase h2 {
+  font-size: clamp(44px, 7.5vw, 96px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  color: #ffffff;
+}
+.gold-gradient {
+  background: linear-gradient(135deg, #fff3e0 0%, #f7cca0 30%, #e5b358 65%, #c89336 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+.gold-sub {
+  margin-top: 18px;
+  font-size: clamp(16px, 1.8vw, 22px);
+  color: var(--mute);
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+}
+.gold-btns {
+  display: flex;
+  gap: 14px;
+  margin: 26px 0 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.btn.pri.gold-btn {
+  background: linear-gradient(135deg, #f5c56e 0%, #d89f40 100%);
+  color: #12100b;
+  font-weight: 600;
+  box-shadow: 0 4px 22px rgba(216, 159, 64, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  gap: 8px;
+  padding: 14px 30px;
+  border-radius: 980px;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn.pri.gold-btn:hover {
+  background: linear-gradient(135deg, #ffd88a 0%, #e5a948 100%);
+  color: #000;
+  transform: scale(1.04);
+  box-shadow: 0 6px 30px rgba(216, 159, 64, 0.55);
+}
+.gold-pricing-note {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--mute);
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+  text-align: center;
+}
+.gold-pricing-note strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Gold Stage */
+.gold-stage {
+  perspective: 1400px;
+  width: 100%;
+  max-width: 1140px;
+  margin: 36px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.gold-device-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  padding: 10px 0 24px;
+}
+.gold-product-img {
+  width: 100%;
+  max-width: 920px;
+  max-height: 580px;
+  object-fit: contain;
+  filter: drop-shadow(0 35px 70px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 55px rgba(245, 197, 110, 0.3));
+  user-select: none;
+  pointer-events: none;
+  display: block;
+  transform: translateZ(0);
+}
+.gold-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 197, 110, 0.26) 0%, rgba(200, 147, 54, 0.12) 42%, transparent 70%);
+  filter: blur(65px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Gold Specs Ribbon */
+.gold-specs-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 32px;
+  padding: 16px 32px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(245, 197, 110, 0.2);
+  border-radius: 980px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  max-width: 880px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.gold-spec-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.gold-spec-val {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.gold-spec-lbl {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--mute);
+  margin-top: 2px;
+  letter-spacing: 0.01em;
+}
+.gold-spec-sep {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.12);
+}
+@media (max-width: 680px) {
+  .gold-specs-ribbon {
+    border-radius: 16px;
+    gap: 16px;
+    padding: 16px;
+  }
+  .gold-spec-sep {
+    display: none;
+  }
+  .gold-spec-item {
+    flex: 1 1 40%;
+  }
+}
+
+/* ---------------- SECTION 2: SLIDING SHOWCASE ---------------- */
+.show { height: 420vh; position: relative; z-index: 1; }
+.pin {
+  position: sticky;
+  top: 52px;
+  height: calc(100vh - 52px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px 20px 24px;
+  overflow: hidden;
+}
+.show-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 560px;
+  perspective: 1400px;
+}
+.show-glow {
+  position: absolute; top: 50%; left: 50%;
+  width: 60%; height: 70%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  background: rgba(10, 132, 255, 0.3);
+  transition: background 0.6s ease;
+}
+.show-slide {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.show-slide[data-slide="0"] { opacity: 1; }
+.show-slide img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,.9));
+  user-select: none; pointer-events: none; display: block;
+}
+.show-caps { position: relative; width: 100%; max-width: 640px; height: 185px; flex: none; text-align: center; }
+.cap {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .5s ease, transform .5s ease;
+  font-size: clamp(24px, 3.4vw, 40px);
+  font-weight: 700; letter-spacing: -0.035em; line-height: 1.1; color: #fff;
+}
+.cap.on { opacity: 1; transform: none; }
+.cap-eyebrow { display: block; font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #2997ff; margin-bottom: 8px; }
+.cap-desc { display: block; margin-top: 10px; font-size: clamp(14px, 1.4vw, 17px); font-weight: 400; color: var(--mute); letter-spacing: 0; line-height: 1.45; }
+.dots { display: flex; gap: 10px; flex: none; }
+.dots button {
+  width: 8px; height: 8px; padding: 0; border: 0; border-radius: 8px;
+  background: rgba(255,255,255,.3); cursor: pointer;
+  transition: width .3s, background .3s;
+}
+.dots button[aria-current="true"] { width: 26px; background: #fff; }
+
+/* ---------------- SECTION 3: FINISHES / COLORS (ILLUSTRATOR SHOWCASE) ---------------- */
+.colors {
+  min-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.colors-header {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.colors-eyebrow {
+  color: #ff6b00;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+.colors-header h2 {
+  font-size: clamp(34px, 5.5vw, 68px);
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  line-height: 1.05;
+  color: #fff;
+  margin-top: 6px;
+}
+#cname {
+  color: #ff9f43;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 8px;
+  min-height: 1.4em;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+.colors-subtitle {
+  color: var(--mute);
+  font-size: 16px;
+  margin-top: 8px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.45;
+}
+
+/* Colors Illustrator Layout */
+.colors-illustrator {
+  width: 100%;
+  max-width: 1260px;
+  margin: 10px auto 0;
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  gap: 24px;
+  align-items: center;
+}
+.color-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.side-left {
+  text-align: right;
+}
+.side-right {
+  text-align: left;
+}
+.color-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Annotation Cards */
+.color-annot-card {
+  background: rgba(22, 18, 14, 0.72);
+  border: 1px solid rgba(255, 107, 0, 0.22);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 20px rgba(255, 107, 0, 0.08);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+.color-annot-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 140, 40, 0.55);
+  background: rgba(30, 24, 18, 0.9);
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.7), 0 0 28px rgba(255, 107, 0, 0.22);
+}
+.side-left .annot-badge {
+  justify-content: flex-end;
+}
+.side-right .annot-badge {
+  justify-content: flex-start;
+}
+.annot-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ff9f43;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.annot-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff6b00;
+  box-shadow: 0 0 8px #ff6b00;
+}
+.annot-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.annot-desc {
+  font-size: 13px;
+  color: #a1a1a6;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  margin: 0;
+}
+
+/* Color Stage */
+.color-stage {
+  position: relative;
+  width: 100%;
+  max-width: 660px;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  margin: 0 auto;
+}
+.color-device-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.color-product-img {
+  width: 100%;
+  max-width: 600px;
+  max-height: 420px;
+  object-fit: contain;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 40px rgba(255, 107, 0, 0.3));
+  user-select: none;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.4s ease;
+  display: block;
+}
+.color-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 107, 0, 0.32) 0%, rgba(230, 92, 0, 0.12) 45%, transparent 70%);
+  filter: blur(55px);
+  pointer-events: none;
+  z-index: -1;
+  transition: background 0.5s ease;
+}
+
+.sw {
+  display: flex;
+  gap: 16px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.sw button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.sw button:hover {
+  transform: scale(1.15);
+}
+.sw button[aria-pressed=true] {
+  box-shadow: 0 0 0 3px #000, 0 0 0 5px #ff6b00;
+}
+
+.colors-specs-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 8px 18px;
+  border-radius: 980px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--mute);
+  font-size: 13px;
+  font-weight: 500;
+}
+.pill-divider {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1023px) {
+  .colors-illustrator {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+    gap: 30px;
+  }
+  .color-side {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .side-left, .side-right {
+    text-align: left;
+  }
+  .side-left .annot-badge {
+    justify-content: flex-start;
+  }
+}
+
+/* ---------------- NUMBERS THAT MATTER / STATS ---------------- */
+.stats {
+  padding: 100px 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.stats h2, .cta h2, .store-section h2, .store-hub h2 {
+  font-size: clamp(34px, 5.5vw, 68px);
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  line-height: 1.05;
+  color: #fff;
+}
+.stats .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 50px auto 0;
+}
+.stats .card {
+  border-radius: 26px;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: transform 0.35s ease, background 0.35s ease;
+}
+.stats .card:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.08);
+}
+.stats .card b {
+  display: block;
+  font-size: clamp(44px, 5.5vw, 76px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  background: linear-gradient(135deg, #fff, #0a84ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.stats .card p {
+  margin-top: 12px;
+  color: var(--mute);
+  font-size: 16px;
+}
+
+/* ---------------- STORE NAVIGATION & LINEUP HUB ---------------- */
+.store-hub {
+  padding: 80px 20px 40px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.category-pills {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  max-width: 1080px;
+  margin: 36px auto 0;
+}
+.cat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 980px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f5f5f7;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+.cat-pill:hover {
+  background: #0071e3;
+  border-color: #0071e3;
+  color: #fff;
+  transform: translateY(-2px);
+}
+.cat-pill.highlight {
+  border-color: #e5bc35;
+  background: rgba(229, 188, 53, 0.12);
+  color: #ffd60a;
+}
+.cat-pill.highlight:hover {
+  background: #e5bc35;
+  color: #000;
+}
+
+/* ---------------- STORE PRODUCTS GRIDS ---------------- */
+.store-section {
+  padding: 60px 20px;
+  position: relative;
+  z-index: 1;
+}
+.store-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.store-section-head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.store-section-head h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  margin-bottom: 10px;
+}
+.store-section-head p {
+  color: var(--mute);
+  font-size: 17px;
+}
+
+/* Product cards dark theme adaptation */
+body.dark-theme .product-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  color: #f5f5f7;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+body.dark-theme .product-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+}
+body.dark-theme .product-card h4 { color: #fff; }
+body.dark-theme .product-card .pc-short { color: #86868b; }
+body.dark-theme .product-card .pc-cat { color: #2997ff; }
+body.dark-theme .product-card .pc-image { background: rgba(255, 255, 255, 0.02); }
+body.dark-theme .product-card .pc-price { color: #fff; }
+body.dark-theme .product-card .pc-mrp { color: #6e6e73; }
+body.dark-theme .product-card .pc-emi {
+  color: #86868b;
+  border-top-color: rgba(255, 255, 255, 0.06);
+}
+body.dark-theme .product-card .pc-emi strong { color: #e5e5ea; }
+body.dark-theme .product-card .btn-outline {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+body.dark-theme .product-card .btn-outline:hover { background: rgba(255, 255, 255, 0.12); }
+body.dark-theme .product-card .btn-dark { background: #0071e3; color: #fff; }
+body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
+
+/* ---------------- CTA SECTION ---------------- */
+.cta {
+  padding: 100px 20px 80px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.cta p {
+  color: var(--mute);
+  margin: 16px 0 0;
+  font-size: 20px;
+}
+.cta .btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* ==================== COMPREHENSIVE MOBILE RESPONSIVENESS ==================== */
+
+/* Tablet (max-width: 1080px) */
+@media (max-width: 1080px) {
+  .hero {
+    min-height: auto;
+    padding: 48px 24px 60px;
+  }
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 36px;
+  }
+  .hero-content {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .hero-meta {
+    justify-content: center;
+  }
+  .hero-highlights {
+    justify-content: center;
+  }
+  .hero-visual {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .hero-product-img {
+    max-height: 440px;
+  }
+
+  .gold-showcase {
+    min-height: auto;
+    padding: 70px 24px 50px;
+  }
+  .gold-product-img {
+    max-height: 440px;
+  }
+}
+
+/* Mobile & Small Tablet (max-width: 960px) */
+@media (max-width: 960px) {
+  .colors {
+    padding: 60px 20px;
+    gap: 24px;
+  }
+  .colors-illustrator {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .color-center {
+    order: 1;
+    width: 100%;
+  }
+  .side-left {
+    order: 2;
+    width: 100%;
+    text-align: left;
+  }
+  .side-right {
+    order: 3;
+    width: 100%;
+    text-align: left;
+  }
+  .side-left .annot-badge,
+  .side-right .annot-badge {
+    justify-content: flex-start;
+  }
+  .color-side {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+}
+
+/* Standard Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Orbs optimization */
+  .orb {
+    opacity: 0.22;
+    filter: blur(50px);
+  }
+  .o1 { width: 70vw; height: 70vw; }
+  .o2 { width: 60vw; height: 60vw; }
+  .o3 { display: none; }
+
+  /* Header adjustments */
+  .site-header {
+    height: 48px;
+  }
+  .site-header .store-tag {
+    display: none;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 32px 18px 48px;
+  }
+  .hero-content .eyebrow {
+    margin-bottom: 16px;
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  .hero-content h1 {
+    font-size: clamp(38px, 10.5vw, 60px);
+    line-height: 1.02;
+    letter-spacing: -2px;
+  }
+  .hero-content > p {
+    font-size: 15px;
+    line-height: 1.65;
+    margin-top: 18px;
+    max-width: 500px;
+  }
+  .hero-actions {
+    gap: 12px;
+    margin-top: 26px;
+  }
+  .hero-actions .btn {
+    min-height: 48px;
+    padding: 0 22px;
+    font-size: 13px;
+  }
+  .hero-meta {
+    margin-top: 26px;
+    font-size: 12.5px;
+    text-align: center;
+  }
+  .hero-highlights {
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .highlight-chip {
+    font-size: 11.5px;
+    padding: 6px 12px;
+  }
+  .hero-product-img {
+    max-height: 360px;
+  }
+
+  /* Desert Gold Showcase */
+  .gold-showcase {
+    padding: 56px 18px 44px;
+  }
+  .gold-eyebrow-badge {
+    font-size: 12px;
+    padding: 5px 14px;
+    margin-bottom: 16px;
+  }
+  .gold-showcase h2 {
+    font-size: clamp(34px, 8.5vw, 54px);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+  }
+  .gold-sub {
+    font-size: 15px;
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+  .gold-btns {
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .btn.pri.gold-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+  .gold-pricing-note {
+    font-size: 13px;
+    margin-top: 14px;
+  }
+  .gold-stage {
+    margin-top: 24px;
+  }
+  .gold-product-img {
+    max-height: 340px;
+  }
+  .gold-specs-ribbon {
+    margin-top: 24px;
+    padding: 14px 18px;
+    border-radius: 18px;
+    gap: 14px;
+  }
+  .gold-spec-sep {
+    display: none;
+  }
+  .gold-spec-item {
+    flex: 1 1 42%;
+  }
+  .gold-spec-val {
+    font-size: 18px;
+  }
+  .gold-spec-lbl {
+    font-size: 10.5px;
+  }
+
+  /* Sliding Showcase (#show) */
+  .pin {
+    top: 48px;
+    height: calc(100svh - 48px);
+    padding: 12px 16px 18px;
+    gap: 12px;
+  }
+  .show-stage {
+    max-height: 320px;
+    min-height: 180px;
+  }
+  .show-caps {
+    height: 135px;
+    max-width: 95%;
+  }
+  .cap {
+    font-size: clamp(19px, 5.2vw, 25px);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+  .cap-eyebrow {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+  .cap-desc {
+    font-size: 13.5px;
+    margin-top: 6px;
+    line-height: 1.38;
+  }
+  .dots {
+    gap: 8px;
+  }
+  .dots button {
+    width: 7px;
+    height: 7px;
+  }
+  .dots button[aria-current="true"] {
+    width: 22px;
+  }
+
+  /* Finishes / Colors */
+  .colors {
+    padding: 50px 16px;
+    gap: 20px;
+  }
+  .colors-header h2 {
+    font-size: clamp(30px, 7vw, 46px);
+  }
+  #cname {
+    font-size: 18px;
+    margin-top: 6px;
+  }
+  .colors-subtitle {
+    font-size: 14.5px;
+  }
+  .color-stage {
+    min-height: 280px;
+  }
+  .color-product-img {
+    max-height: 320px;
+  }
+  .sw button {
+    width: 40px;
+    height: 40px;
+  }
+  .colors-specs-pill {
+    font-size: 12px;
+    padding: 6px 14px;
+  }
+
+  /* Stats Section */
+  .stats {
+    padding: 60px 18px;
+  }
+  .stats h2 {
+    font-size: clamp(28px, 6.5vw, 42px);
+  }
+  .stats .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .stats .card {
+    padding: 24px 14px;
+    border-radius: 20px;
+  }
+  .stats .card b {
+    font-size: clamp(34px, 7.5vw, 50px);
+  }
+  .stats .card p {
+    font-size: 13.5px;
+    margin-top: 6px;
+  }
+
+  /* Store Hub & Swipeable Category Pills */
+  .store-hub {
+    padding: 50px 16px 24px;
+  }
+  .store-hub h2 {
+    font-size: clamp(28px, 6.5vw, 40px);
+  }
+  .category-pills {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    padding: 8px 16px 14px;
+    margin: 22px -16px 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .category-pills::-webkit-scrollbar {
+    display: none;
+  }
+  .cat-pill {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  /* Store Sections & Product Grids */
+  .store-section {
+    padding: 44px 16px;
+  }
+  .store-section-head {
+    margin-bottom: 26px;
+  }
+  .store-section-head h2 {
+    font-size: clamp(24px, 5.5vw, 34px);
+  }
+  .store-section-head p {
+    font-size: 14.5px;
+  }
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px 10px !important;
+  }
+  .product-card {
+    padding: 12px 10px;
+    border-radius: 14px;
+  }
+  .product-card .pc-image {
+    height: 125px;
+  }
+  .product-card h4 {
+    font-size: 13.5px;
+    line-height: 1.25;
+    margin: 6px 0 3px;
+    min-height: 34px;
+  }
+  .product-card .pc-short {
+    font-size: 11.5px;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .product-card .pc-rating {
+    font-size: 11px;
+    margin-top: 4px;
+  }
+  .pc-price-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    margin-top: 6px;
+  }
+  .pc-price {
+    font-size: 15px;
+  }
+  .pc-mrp {
+    font-size: 12px;
+  }
+  .pc-discount {
+    font-size: 11px;
+  }
+  .pc-emi {
+    font-size: 11px;
+    padding-top: 6px;
+  }
+  .pc-actions {
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .pc-actions .btn {
+    width: 100%;
+    padding: 7px 10px;
+    font-size: 12px;
+    min-height: 34px;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* CTA Section */
+  .cta {
+    padding: 60px 18px 50px;
+  }
+  .cta h2 {
+    font-size: clamp(28px, 6.5vw, 42px);
+  }
+  .cta p {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  .cta .btns {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin: 22px auto 0;
+    gap: 10px;
+  }
+  .cta .btns .btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+}
+
+/* Small Smartphone (max-width: 480px) */
+@media (max-width: 480px) {
+  /* Hero */
+  .hero {
+    padding: 24px 14px 38px;
+  }
+  .hero-content h1 {
+    font-size: clamp(32px, 9.5vw, 44px);
+    letter-spacing: -1.4px;
+  }
+  .hero-content > p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 14px;
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 310px;
+    margin-top: 22px;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    min-height: 48px;
+    font-size: 13.5px;
+  }
+  .hero-meta {
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  .hero-product-img {
+    max-height: 260px;
+  }
+  .highlight-chip {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  /* Desert Gold Showcase */
+  .gold-showcase {
+    padding: 42px 14px 34px;
+  }
+  .gold-showcase h2 {
+    font-size: clamp(28px, 8.5vw, 38px);
+  }
+  .gold-sub {
+    font-size: 14px;
+    margin-top: 12px;
+  }
+  .gold-btns {
+    flex-direction: column;
+    width: 100%;
+    max-width: 310px;
+  }
+  .btn.pri.gold-btn,
+  .gold-btns .btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+  .gold-pricing-note {
+    font-size: 12px;
+  }
+  .gold-product-img {
+    max-height: 250px;
+  }
+  .gold-specs-ribbon {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 12px 10px;
+  }
+  .gold-spec-val {
+    font-size: 16px;
+  }
+  .gold-spec-lbl {
+    font-size: 10px;
+  }
+
+  /* Sliding Showcase */
+  .pin {
+    padding: 10px 12px 14px;
+    gap: 8px;
+  }
+  .show-stage {
+    max-height: 240px;
+  }
+  .show-caps {
+    height: 120px;
+  }
+  .cap {
+    font-size: clamp(18px, 5.2vw, 22px);
+  }
+  .cap-desc {
+    font-size: 12.5px;
+  }
+
+  /* Finishes / Colors */
+  .colors {
+    padding: 40px 14px;
+  }
+  .colors-header h2 {
+    font-size: clamp(26px, 7.5vw, 36px);
+  }
+  #cname {
+    font-size: 17px;
+  }
+  .colors-subtitle {
+    font-size: 13.5px;
+  }
+  .color-side {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .color-annot-card {
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+  .annot-title {
+    font-size: 14.5px;
+  }
+  .annot-desc {
+    font-size: 12px;
+  }
+  .color-stage {
+    min-height: 240px;
+  }
+  .color-product-img {
+    max-height: 250px;
+  }
+  .sw button {
+    width: 38px;
+    height: 38px;
+  }
+  .colors-specs-pill {
+    font-size: 11px;
+    padding: 6px 10px;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Product Cards on 480px */
+  .product-grid {
+    gap: 10px 8px !important;
+  }
+  .product-card {
+    padding: 10px 8px;
+  }
+  .product-card .pc-image {
+    height: 115px;
+  }
+}
+
+/* Extra Small Phones (max-width: 360px) */
+@media (max-width: 360px) {
+  .hero-content h1 {
+    font-size: 29px;
+    letter-spacing: -1px;
+  }
+  .gold-showcase h2 {
+    font-size: 27px;
+  }
+  .stats .grid {
+    grid-template-columns: 1fr;
+  }
+  .product-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .product-card .pc-image {
+    height: 150px;
+  }
+  .gold-specs-ribbon {
+    grid-template-columns: 1fr;
+  }
+}
+
+</style>
 </head>
+<body class="dark-theme">
 
-<body>
-    <a class="skip-link" href="#home">Skip to content</a>
-    <header class="site-header">
-      <nav class="navbar">
-        <a href="#home" class="brand">
-          <span class="brand-dot"></span>
-          neo<span class="brand-light">citrus</span>
-        </a>
-        <div class="nav-links">
-          <a href="#experience">Experience</a>
-          <a href="#details">Details</a>
+<!-- Ambient Orbs -->
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+<div class="orb o3"></div>
+
+<!-- Global Site Header -->
+<div id="site-header"></div>
+
+<main id="top">
+
+  <!-- ================= SECTION 1: HERO (THE NEW IPHONE 17 PRO MAX) ================= -->
+  <section class="hero" id="hero">
+    <div class="hero-container">
+
+      <!-- LEFT COLUMN: Headline & CTAs -->
+      <div class="hero-content">
+        <span class="eyebrow">THE NEW IPHONE 17 PRO MAX</span>
+        <h1 id="h1">Built for <span>Beyond.</span></h1>
+        <p>Powerful performance. Extraordinary camera capabilities. A bold new look. Discover a world where cutting-edge technology meets beautifully crafted design.</p>
+
+        <div class="hero-actions">
+          <a href="#buy" class="btn btn-light">Explore iPhone 17 Pro Max &nearr;</a>
+          <a href="#show" class="btn btn-outline">Discover the Experience</a>
         </div>
-        <a href="#experience" class="nav-button">
-          Explore design <span>↗</span>
-        </a>
-      </nav>
-    </header>
-    <main>
-        <!-- HERO SECTION -->
-        <section class="hero" id="home">
-            <div class="grid-background"></div>
-            <div class="hero-copy">
-                <div class="eyebrow">
-                    <span class="eyebrow-line"></span>
-                    A CLOSER LOOK AT THE EVERYDAY
-                </div>
-                <h1>
-                    Meet your<br />
-                    <em>bright</em> side.
-                </h1>
-                <p class="hero-description">
-                    A little colour. A lot of character. Explore every angle
-                    of a laptop designed to make the ordinary feel extraordinary.
-                </p>
-                <a href="#experience" class="scroll-link">
-                    <span class="scroll-icon">↓</span>
-                    Scroll to explore
-                </a>
-            </div>
-            <div class="product-stage" id="productStage">
-                <div class="product-shadow"></div>
-                <div class="product-card" id="productCard">
-                    <img src="macbook-neo-citrus.png" alt="Citrus yellow laptop with a colourful display"
-                        class="product-image" draggable="false" />
-                </div>
-                <div class="floating-note note-top">
-                    <span class="note-symbol">✳</span>
-                    Made to stand out
-                </div>
-                <div class="floating-note note-bottom">
-                    <span class="status-dot"></span>
-                    Explore the details
-                </div>
-                <button class="reset-button" id="resetButton">↺ Reset view</button>
-            </div>
-            <div class="hero-footer">
-                <span>01 / THE OVERVIEW</span>
-                <span class="desktop-hint">MOVE YOUR CURSOR TO INTERACT ↗</span>
-            </div>
-        </section>
-        <!-- PRODUCT EXPLORATION -->
-        <section class="experience" id="experience">
-            <div class="section-label">DESIGNED TO BE DISCOVERED ✳</div>
-            <div class="experience-heading">
-                <h2>
-                    Not just a screen.<br />
-                    <em>A whole experience.</em>
-                </h2>
-                <p>
-                    Keep scrolling. Every detail has its own story.
-                    Select a marker and explore the design up close.
-                </p>
-            </div>
-            <div class="interaction-hint"><span>＋</span> Select a numbered marker to explore</div>
-            <div class="explore-stage">
-                <div class="orbit orbit-one"></div>
-                <div class="orbit orbit-two"></div>
-                <img src="macbook-neo-citrus.png" alt="Laptop product details" class="explore-image"
-                    draggable="false" />
-                <button class="hotspot hotspot-one" data-feature="display" aria-label="Explore display"
-                    aria-expanded="false">01</button>
-                <button class="hotspot hotspot-two" data-feature="keyboard" aria-label="Explore keyboard"
-                    aria-expanded="false">02</button>
-                <button class="hotspot hotspot-three" data-feature="trackpad" aria-label="Explore trackpad"
-                    aria-expanded="false">03</button>
-                <div class="feature-card" id="featureCard" aria-live="polite">
-                    <span class="feature-label" id="featureLabel">YOUR TURN</span>
-                    <h3 id="featureTitle">Go on, take a look.</h3>
-                    <p id="featureDescription">Tap any numbered marker to discover a detail.</p>
-                </div>
-            </div>
-        </section>
-        <!-- FINAL SECTION -->
-        <section class="details" id="details">
-            <div class="details-copy">
-                <div class="eyebrow"><span class="eyebrow-line"></span>SMALL DETAILS. BIG FEELING.</div>
-                <h2>
-                    Built to feel<br />
-                    <em>different.</em>
-                </h2>
-                <p>From the warm citrus finish to the bold colours on screen, this concept gives familiar technology a
-                    little more personality.</p>
-                <a href="#home" class="back-link">Back to the top ↗</a>
-            </div>
-            <div class="detail-list">
-                <div><span>01</span>
-                    <p>Warm citrus finish</p>
-                </div>
-                <div><span>02</span>
-                    <p>Colour-rich display</p>
-                </div>
-                <div><span>03</span>
-                    <p>Thoughtful details</p>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <a href="#home" class="brand">
-            <span class="brand-dot"></span>
-            neo<span class="brand-light">citrus</span>
-        </a>
-        <span>A concept interaction study</span>
-        <span>SCROLL. EXPLORE. REPEAT.</span>
-    </footer>
-    <script src="script.js"></script>
-</body>
 
+        <div class="hero-meta">
+          <span class="meta-dot"></span>
+          <span>Precision in every detail. Power in every moment.</span>
+        </div>
+
+        <div class="hero-highlights">
+          <span class="highlight-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            Pro-level performance
+          </span>
+          <span class="highlight-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+            Advanced camera system
+          </span>
+          <span class="highlight-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>
+            Stunning display
+          </span>
+          <span class="highlight-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Standout finishes
+          </span>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Clean Illustrator Lineup Showcase (Aligned to Background) -->
+      <div class="hero-visual" id="stage">
+        <div class="hero-device-wrap" id="heroPhone">
+          <img src="images/products/Colourful iPhone-Style Pro Lineup.png" alt="The New iPhone 17 Pro Max Colourful Lineup" class="hero-product-img" id="heroImg" draggable="false">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+    <!-- ================= SECTION 2: GOLD SHOWCASE (DESERT GOLD TITANIUM DUO) ================= -->
+  <section class="gold-showcase" id="gold-showcase">
+    <div class="gold-copy">
+      <div class="gold-eyebrow-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">New Flagship &bull; Desert Gold Titanium</span>
+      </div>
+      <h2>
+        iPhone Pro.<br>
+        <span class="gold-gradient">Sculpted in Gold.</span>
+      </h2>
+      <p class="gold-sub">
+        Forged in aerospace-grade titanium with an all-new luminous Desert Gold finish. Powered by the breakthrough A18 Pro silicon, Apple Intelligence, and a cinema-grade 48MP triple-lens system.
+      </p>
+      <div class="gold-btns">
+        <a class="btn pri gold-btn" href="#buy">
+          <span>Buy iPhone Pro</span>
+          <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn sec" href="#show">Explore the Design &darr;</a>
+      </div>
+      <div class="gold-pricing-note">
+        From <strong>₹1,19,900*</strong> or <strong>₹9,992/mo.</strong> with No-Cost EMI &bull; Free Delivery Across Bengaluru
+      </div>
+    </div>
+
+    <!-- Gold Device Stage -->
+    <div class="gold-stage">
+      <div class="gold-device-wrap" id="goldPhone">
+        <div class="gold-glow"></div>
+        <img src="images/products/Premium Gold iPhone Duo Render.png" alt="iPhone Pro Desert Gold Titanium Duo Render" class="gold-product-img" draggable="false">
+      </div>
+
+      <!-- Quick Architecture Specs Ribbon -->
+      <div class="gold-specs-ribbon">
+        <div class="gold-spec-item">
+          <span class="gold-spec-val">Grade 5</span>
+          <span class="gold-spec-lbl">Titanium Alloy &bull; Desert Gold</span>
+        </div>
+        <div class="gold-spec-sep"></div>
+        <div class="gold-spec-item">
+          <span class="gold-spec-val">A18 Pro</span>
+          <span class="gold-spec-lbl">Second-Gen 3nm Architecture</span>
+        </div>
+        <div class="gold-spec-sep"></div>
+        <div class="gold-spec-item">
+          <span class="gold-spec-val">48MP</span>
+          <span class="gold-spec-lbl">Fusion System &bull; 5x Telephoto</span>
+        </div>
+        <div class="gold-spec-sep"></div>
+        <div class="gold-spec-item">
+          <span class="gold-spec-val">33 hrs</span>
+          <span class="gold-spec-lbl">All-Day Video Playback</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ================= SECTION 2: SLIDING SHOWCASE ================= -->
+  <section class="show" id="show">
+    <div class="pin" id="pin">
+
+      <div class="show-stage" id="showStage">
+        <div class="show-glow" id="showGlow"></div>
+        <div class="show-slide" data-slide="0">
+          <img src="images/products/iPhone 18 Pro Max_ Beyond What’s Next.png" alt="iPhone Pro in titanium" draggable="false">
+        </div>
+        <div class="show-slide" data-slide="1">
+          <img src="images/products/Burgundy iPhone-Style Showcase.png" alt="iPhone Pro camera system in burgundy" draggable="false">
+        </div>
+        <div class="show-slide" data-slide="2">
+          <img src="images/products/iphone-17-pro-orange.jpeg" alt="iPhone Pro in cosmic orange" draggable="false">
+        </div>
+        <div class="show-slide" data-slide="3">
+          <img src="images/products/Golden Laptop_ A Cinematic Product Collage-1.png" alt="Golden laptop product collage" draggable="false">
+        </div>
+      </div>
+
+      <div class="show-caps">
+        <div class="cap on">
+          <span class="cap-eyebrow">AEROSPACE-GRADE</span>
+          Forged in titanium.
+          <span class="cap-desc">Strong, light, and finished by hand to feel as good as it looks.</span>
+        </div>
+        <div class="cap">
+          <span class="cap-eyebrow">PRO CAMERA SYSTEM</span>
+          A camera that sees the whole story.
+          <span class="cap-desc">Three cinematic lenses built for zero compromise in low light.</span>
+        </div>
+        <div class="cap">
+          <span class="cap-eyebrow">A18 PRO SILICON</span>
+          Power that stays cool.
+          <span class="cap-desc">All-day battery life and performance for the things you do next.</span>
+        </div>
+        <div class="cap">
+          <span class="cap-eyebrow">THE WHOLE LINEUP</span>
+          Every device, in perfect sync.
+          <span class="cap-desc">From iPhone to Mac, shop genuine Apple products with No-Cost EMI.</span>
+        </div>
+      </div>
+
+      <div class="dots" id="showDots" role="group" aria-label="Showcase slides">
+        <button aria-label="Slide 1" aria-current="true"></button>
+        <button aria-label="Slide 2" aria-current="false"></button>
+        <button aria-label="Slide 3" aria-current="false"></button>
+        <button aria-label="Slide 4" aria-current="false"></button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SECTION 3: FINISHES / COLORS (ILLUSTRATOR SHOWCASE) ================= -->
+  <section class="colors" id="colors">
+    <div class="colors-header">
+      <span class="colors-eyebrow">AEROSPACE METALLURGY</span>
+      <h2>Pick your finish.</h2>
+      <p id="cname" aria-live="polite">Cosmic Orange Titanium</p>
+      <p class="colors-subtitle">Sculpted with physical vapor deposition to create deep, luminous metallic hues bonded into Grade 5 titanium.</p>
+    </div>
+
+    <!-- Illustrator Layout: Left Specs | Center Stage | Right Specs -->
+    <div class="colors-illustrator">
+      <!-- Left Side: Material & Finish Craftsmanship -->
+      <div class="color-side side-left">
+        <div class="color-annot-card">
+          <div class="annot-badge">
+            <span class="annot-dot"></span>
+            <span>PVD VAPOR DEPOSITION</span>
+          </div>
+          <h3 class="annot-title">Warm Copper Luster</h3>
+          <p class="annot-desc">Physical Vapor Deposition bonds a micro-layer of saturated copper tone into aerospace titanium for permanent radiant depth.</p>
+        </div>
+
+        <div class="color-annot-card">
+          <div class="annot-badge">
+            <span class="annot-dot"></span>
+            <span>SURFACE CRAFTSMANSHIP</span>
+          </div>
+          <h3 class="annot-title">Velvety Satin Feel</h3>
+          <p class="annot-desc">Microblasted with ultra-fine ceramic beads to produce a soft satin touch, reduced glare, and exceptional fingerprint resistance.</p>
+        </div>
+      </div>
+
+      <!-- Center Showcase: Product Image Stage & Color Swatches -->
+      <div class="color-center">
+        <div class="color-stage" id="colorStage">
+          <div class="color-glow" id="colorGlow"></div>
+          <div class="color-device-wrap" id="colorWrap">
+            <img id="colorImg" src="images/products/Copper iPhones in Cinematic Glow.png" alt="iPhone Pro Cosmic Orange Titanium" class="color-product-img" draggable="false">
+          </div>
+        </div>
+
+        <div class="sw" role="group" aria-label="Color Finishes">
+          <button aria-label="Cosmic Orange Titanium" data-n="Cosmic Orange Titanium" data-img="images/products/Copper iPhones in Cinematic Glow.png" data-glow="#ff6b00" aria-pressed="true" style="background: linear-gradient(135deg, #e65c00, #f9d423); box-shadow: 0 0 0 3px #000, 0 0 0 5px #ff6b00;"></button>
+          <button aria-label="Burgundy Titanium" data-n="Burgundy Titanium" data-img="images/products/Burgundy iPhone-Style Showcase.png" data-glow="#781d32" aria-pressed="false" style="background: linear-gradient(135deg, #5c1424, #942940);"></button>
+          <button aria-label="Space Titanium" data-n="Space Titanium" data-img="images/products/iPhone 18 Pro Max_ Beyond What’s Next.png" data-glow="#0a84ff" aria-pressed="false" style="background: linear-gradient(135deg, #2b2b2e, #141416);"></button>
+          <button aria-label="Golden Edition" data-n="Golden Pro Edition" data-img="images/products/Golden Laptop_ A Cinematic Product Collage-1.png" data-glow="#d4af37" aria-pressed="false" style="background: linear-gradient(135deg, #d4af37, #aa771c);"></button>
+          <button aria-label="Natural Silver Titanium" data-n="Natural Silver Titanium" data-img="images/products/iphone-17-pro-silver.png" data-glow="#8a8478" aria-pressed="false" style="background: linear-gradient(135deg, #c7c7cc, #8e8e93);"></button>
+        </div>
+
+        <div class="colors-specs-pill">
+          <span>Grade 5 Titanium</span>
+          <span class="pill-divider">&bull;</span>
+          <span>Color-Infused Back Glass</span>
+          <span class="pill-divider">&bull;</span>
+          <span>Ceramic Shield</span>
+        </div>
+      </div>
+
+      <!-- Right Side: Structural Architecture & Integration -->
+      <div class="color-side side-right">
+        <div class="color-annot-card">
+          <div class="annot-badge">
+            <span class="annot-dot"></span>
+            <span>DIFFUSION BONDING</span>
+          </div>
+          <h3 class="annot-title">Aluminum Substructure</h3>
+          <p class="annot-desc">Solid-state diffusion bonds the outer titanium band to an internal aluminum frame, maximizing heat dissipation and structural strength.</p>
+        </div>
+
+        <div class="color-annot-card">
+          <div class="annot-badge">
+            <span class="annot-dot"></span>
+            <span>SEAMLESS CONTOUR</span>
+          </div>
+          <h3 class="annot-title">Unified Camera Plateau</h3>
+          <p class="annot-desc">Precision-sculpted glass wraps smoothly into the triple-lens plateau, color-matched in high-saturation copper to match the frame.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NUMBERS THAT MATTER ================= -->
+  <section class="stats" id="stats">
+    <h2>Numbers that matter.</h2>
+    <div class="grid">
+      <div class="card"><b data-to="29" data-suf="h">0</b><p>Video playback</p></div>
+      <div class="card"><b data-to="48" data-suf="MP">0</b><p>Main camera</p></div>
+      <div class="card"><b data-to="120" data-suf="Hz">0</b><p>Adaptive display</p></div>
+      <div class="card"><b data-to="2000" data-suf=" nits">0</b><p>Peak brightness</p></div>
+    </div>
+  </section>
+
+  <!-- ================= STORE NAVIGATION & LINEUP HUB ================= -->
+  <section class="store-hub" id="store-lineup">
+    <h2>Explore the Apple Store</h2>
+    <p style="color:var(--mute); margin-top:10px; font-size:18px;">Browse genuine Apple products across all categories with No-Cost EMI.</p>
+    <div class="category-pills">
+      <a href="category.html?cat=iphone" class="cat-pill">iPhone</a>
+      <a href="category.html?cat=mac" class="cat-pill">Mac</a>
+      <a href="macbook-neo.html" class="cat-pill highlight">MacBook Neo 🔥</a>
+      <a href="category.html?cat=ipad" class="cat-pill">iPad</a>
+      <a href="category.html?cat=watch" class="cat-pill">Apple Watch</a>
+      <a href="category.html?cat=airpods" class="cat-pill">AirPods</a>
+      <a href="category.html?cat=vision" class="cat-pill">Vision Pro</a>
+      <a href="category.html?cat=tvhome" class="cat-pill">TV &amp; Home</a>
+      <a href="category.html?cat=accessories" class="cat-pill">Accessories</a>
+      <a href="entertainment.html" class="cat-pill">Entertainment</a>
+      <a href="category.html?cat=all" class="cat-pill">Shop All Products &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ================= BEST PRICES & OFFERS ================= -->
+  <section class="store-section" id="best-prices">
+    <div class="container">
+      <div class="store-section-head">
+        <h2>Featured Deals &amp; Best Prices</h2>
+        <p>Direct from authorized distributors with 100% manufacturer warranty.</p>
+      </div>
+      <div class="product-grid" id="bestPricesGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= NEW ARRIVALS ================= -->
+  <section class="store-section" id="new-arrivals" style="padding-top:20px;">
+    <div class="container">
+      <div class="store-section-head">
+        <h2>Latest Apple Lineup</h2>
+        <p>The newest innovations ready for immediate delivery across India.</p>
+      </div>
+      <div class="product-grid" id="newArrivalsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= READY WHEN YOU ARE / BUY CTA ================= -->
+  <section class="cta" id="buy">
+    <h2>Ready when you are.</h2>
+    <p>From &#8377;1,19,900 or &#8377;9,992/mo. with No-Cost EMI for 12 months.</p>
+    <div class="btns">
+      <a class="btn pri" href="product.html?id=iphone-17-pro">Buy iPhone 17 Pro</a>
+      <a class="btn pri" href="macbook-neo.html" style="background:#e5bc35; color:#000;">Explore MacBook Neo</a>
+      <a class="btn sec" href="category.html?cat=all">Shop All Products &rarr;</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Global Site Footer -->
+<div id="site-footer"></div>
+
+<!-- WhatsApp Floating Button -->
+<div id="whatsapp-float"></div>
+
+<!-- Global Scripts -->
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/catalog-sync.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/main.js"></script>
+<script src="js/animations.js" defer></script>
+
+<script>
+(function () {
+  // Render Site Header, Footer and WhatsApp float
+  if (typeof renderHeader === "function") renderHeader("home");
+  if (typeof renderFooter === "function") renderFooter();
+  if (typeof renderWhatsAppFloat === "function") {
+    renderWhatsAppFloat("Hi, I have a question about the iPhone Pro and the Apple lineup.");
+  }
+
+  var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (s) { return document.querySelector(s); };
+  var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+  var heroCopy = $('.hero-content') || $('.hero-copy'),
+      heroPhone = $('#heroPhone'),
+      show = $('#show'),
+      showGlow = $('#showGlow'),
+      slides = [].slice.call(document.querySelectorAll('.show-slide')),
+      caps = [].slice.call(document.querySelectorAll('.show-caps .cap')),
+      dots = [].slice.call(document.querySelectorAll('#showDots button')),
+      orbs = [].slice.call(document.querySelectorAll('.orb')),
+      glows = ['rgba(10,132,255,.32)', 'rgba(120,29,50,.45)', 'rgba(255,107,0,.34)', 'rgba(212,175,55,.32)'],
+      lastIdx = -1,
+      mx = 0, my = 0, ticking = false;
+
+  function smooth(x) { return x * x * (3 - 2 * x); }
+
+  function frame() {
+    ticking = false;
+    var y = window.scrollY, vh = window.innerHeight;
+
+    // 1. HERO: unified copy parallax without internal overlap
+    var p = clamp(y / vh, 0, 1);
+    if (heroCopy) heroCopy.style.transform = 'translate3d(0,' + (y * 0.08) + 'px,0)';
+    if (heroPhone) {
+      var tiltX = (8 - p * 8) + my * -7;
+      var tiltY = mx * 12;
+      heroPhone.style.transform = 'perspective(1200px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg) translate3d(0,' + (y * 0.05) + 'px,0) scale(' + (1 + p * 0.05) + ')';
+    }
+
+    // 2. ORBS
+    var orbY = -Math.min(90, y * 0.03);
+    orbs.forEach(function (o, i) {
+      o.style.transform = 'translate3d(' + (mx * 18 * (i + 1)) + 'px,' + (orbY * (1 + i * 0.35)) + 'px,0)';
+    });
+
+    // 3. SHOWCASE: continuous horizontal slider driven by scroll
+    if (show && slides.length) {
+      var r = show.getBoundingClientRect();
+      var range = Math.max(1, r.height - vh);
+      var t = clamp(-r.top / range, 0, 1);
+      var n = slides.length;
+      var pos = t * (n - 1);
+      var i = Math.min(n - 2, Math.floor(pos));
+      var f = pos - i;
+      // hold on each slide, then glide to the next
+      var cur = i + smooth(clamp((f - 0.2) / 0.6, 0, 1));
+
+      slides.forEach(function (s, k) {
+        var d = k - cur;
+        var ad = Math.min(Math.abs(d), 1);
+        s.style.transform = 'translate3d(' + (d * 70) + '%,0,0) rotateY(' + (-d * 25 + mx * 6) + 'deg) scale(' + (1 - 0.25 * ad) + ')';
+        s.style.opacity = String(1 - ad * 0.88);
+        s.style.zIndex = ad < 0.5 ? 2 : 1;
+        s.style.visibility = Math.abs(d) > 1.3 ? 'hidden' : 'visible';
+      });
+
+      var idx = Math.round(cur);
+      if (idx !== lastIdx) {
+        lastIdx = idx;
+        caps.forEach(function (c, k) { c.classList.toggle('on', k === idx); });
+        dots.forEach(function (d, k) { d.setAttribute('aria-current', k === idx ? 'true' : 'false'); });
+        if (showGlow) showGlow.style.background = glows[idx] || glows[0];
+      }
+    }
+  }
+
+  // Dots jump to a slide
+  dots.forEach(function (d, k) {
+    d.addEventListener('click', function () {
+      var r = show.getBoundingClientRect();
+      var range = Math.max(1, r.height - window.innerHeight);
+      var top = window.scrollY + r.top + (k / (slides.length - 1)) * range + 1;
+      window.scrollTo({ top: top, behavior: rm ? 'auto' : 'smooth' });
+    });
+  });
+
+
+  function req() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(frame);
+    }
+  }
+
+  window.addEventListener('scroll', req, { passive: true });
+  window.addEventListener('resize', req);
+  if (!rm) {
+    window.addEventListener('pointermove', function (e) {
+      if (e.pointerType === 'touch') return;
+      mx = e.clientX / window.innerWidth - 0.5;
+      my = e.clientY / window.innerHeight - 0.5;
+      req();
+    }, { passive: true });
+  }
+  frame();
+
+  // 3D Tilt tracking for Desert Gold Duo showcase
+  var goldPhone = $('#goldPhone');
+  var goldStage = $('.gold-stage');
+  if (goldPhone && goldStage) {
+    goldStage.addEventListener('pointermove', function (e) {
+      if (rm || e.pointerType === 'touch') return;
+      var rect = goldStage.getBoundingClientRect();
+      var dx = (e.clientX - rect.left - rect.width / 2) / rect.width;
+      var dy = (e.clientY - rect.top - rect.height / 2) / rect.height;
+      goldPhone.style.transform = 'perspective(1200px) rotateY(' + (dx * 14) + 'deg) rotateX(' + (-dy * 10) + 'deg)';
+    });
+    goldStage.addEventListener('pointerleave', function () {
+      if (rm) return;
+      goldPhone.style.transform = 'perspective(1200px) rotateY(0deg) rotateX(0deg)';
+    });
+  }
+
+
+  // Color picker with real product photo switcher
+  var colorWrap = $('#colorWrap');
+  var colorImg = $('#colorImg');
+  var colorGlow = $('#colorGlow');
+  var colorStage = $('#colorStage');
+  var colorBtns = [].slice.call(document.querySelectorAll('.sw button'));
+  var cname = $('#cname');
+  var isSwitchingColor = false;
+
+  colorBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (isSwitchingColor) return;
+      var finishName = btn.dataset.n;
+      var imgSrc = btn.dataset.img;
+      var glowColor = btn.dataset.glow || '#2997ff';
+
+      colorBtns.forEach(function (b) {
+        var isTarget = (b === btn);
+        b.setAttribute('aria-pressed', isTarget);
+        if (isTarget) {
+          b.style.boxShadow = '0 0 0 3px #000, 0 0 0 5px ' + glowColor;
+        } else {
+          b.style.boxShadow = '';
+        }
+      });
+
+      if (cname) {
+        cname.textContent = finishName;
+        cname.style.color = glowColor;
+      }
+      if (colorGlow) {
+        colorGlow.style.background = 'radial-gradient(circle, ' + glowColor + '40 0%, transparent 70%)';
+      }
+
+      if (colorImg) {
+        isSwitchingColor = true;
+        colorImg.style.transform = 'scale(0.94) rotateY(12deg)';
+        colorImg.style.opacity = '0.35';
+        setTimeout(function () {
+          colorImg.src = imgSrc;
+          colorImg.style.filter = 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 32px ' + glowColor + '50)';
+          colorImg.onload = function () {
+            colorImg.style.transform = 'scale(1) rotateY(0deg)';
+            colorImg.style.opacity = '1';
+            setTimeout(function () { isSwitchingColor = false; }, 250);
+          };
+          setTimeout(function () {
+            colorImg.style.transform = 'scale(1) rotateY(0deg)';
+            colorImg.style.opacity = '1';
+            isSwitchingColor = false;
+          }, 220);
+        }, 160);
+      }
+    });
+  });
+
+  // Mouse 3D tilt tracking for finishes section
+  if (colorStage && colorWrap) {
+    colorStage.addEventListener('pointermove', function (e) {
+      if (rm || isSwitchingColor || e.pointerType === 'touch') return;
+      var rect = colorStage.getBoundingClientRect();
+      var dx = (e.clientX - rect.left - rect.width / 2) / rect.width;
+      var dy = (e.clientY - rect.top - rect.height / 2) / rect.height;
+      colorWrap.style.transform = 'perspective(1200px) rotateY(' + (dx * 18) + 'deg) rotateX(' + (-dy * 12) + 'deg)';
+    });
+    colorStage.addEventListener('pointerleave', function () {
+      if (rm) return;
+      colorWrap.style.transform = 'perspective(1200px) rotateY(0deg) rotateX(0deg)';
+    });
+  }
+
+  // Counters
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      var el = e.target, to = +el.dataset.to, suf = el.dataset.suf || '', s = null;
+      function step(ts) {
+        s = s || ts;
+        var k = rm ? 1 : clamp((ts - s) / 1400, 0, 1);
+        var v = Math.round(to * (1 - Math.pow(1 - k, 3)));
+        el.textContent = v.toLocaleString('en-US') + suf;
+        if (k < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-to]').forEach(function (el) { io.observe(el); });
+
+  // Store Product Grid rendering
+  function productCardHtml(p) {
+    var discount = p.mrp > p.price ? Math.round((1 - p.price / p.mrp) * 100) : 0;
+    var badgeClass = p.badge === "New" ? "badge-new" : p.badge === "Sale" ? "badge-sale" : p.badge === "Best Seller" ? "badge-best-seller" : "";
+    return (
+      '<div class="product-card">' +
+        (p.badge ? '<span class="product-badge ' + badgeClass + '">' + p.badge + '</span>' : '') +
+        '<a href="product.html?id=' + p.id + '" class="pc-image"><img src="' + p.images[0] + '" alt="' + p.name + '" loading="lazy"></a>' +
+        '<div class="pc-cat">' + (p.category ? p.category.toUpperCase() : "APPLE") + '</div>' +
+        '<a href="product.html?id=' + p.id + '"><h4>' + p.name + '</h4></a>' +
+        '<p class="pc-short">' + (p.short || "") + '</p>' +
+        '<div class="pc-rating"><span class="stars">★★★★★</span> ' + p.rating + ' (' + p.reviews + ')</div>' +
+        '<div class="pc-price-row">' +
+          '<span class="pc-price">' + (typeof formatINR === "function" ? formatINR(p.price) : "₹" + p.price.toLocaleString("en-IN")) + '</span>' +
+          (discount ? '<span class="pc-mrp">' + (typeof formatINR === "function" ? formatINR(p.mrp) : "₹" + p.mrp.toLocaleString("en-IN")) + '</span><span class="pc-discount">' + discount + '% off</span>' : '') +
+        '</div>' +
+        '<div class="pc-emi">From <strong>' + (typeof formatINR === "function" && typeof getEmi === "function" ? formatINR(getEmi(p.price, 12)) : "₹" + Math.round(p.price / 12).toLocaleString("en-IN")) + '/mo</strong> for 12 months</div>' +
+        '<div class="pc-actions">' +
+          '<button class="btn btn-outline" onclick="quickAdd(\'' + p.id + '\')">Add to Bag</button>' +
+          '<a href="product.html?id=' + p.id + '" class="btn btn-dark">Buy Now</a>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  window.quickAdd = function (id) {
+    if (typeof getProductById !== "function" || typeof addToCart !== "function") return;
+    var p = getProductById(id);
+    if (!p) return;
+    addToCart(p, {});
+    if (typeof showToast === "function") {
+      showToast(p.name + " added to your bag", { icon: "bag" });
+    }
+  };
+
+  function renderHomeGrids() {
+    if (typeof PRODUCTS === "undefined" || !PRODUCTS.length) return;
+    var bestGrid = document.getElementById("bestPricesGrid");
+    if (bestGrid) {
+      var bestPrices = PRODUCTS.filter(function (p) { return p.mrp > p.price; })
+        .sort(function (a, b) { return (b.mrp - b.price) / b.mrp - (a.mrp - a.price) / a.mrp; })
+        .slice(0, 8);
+      bestGrid.innerHTML = (bestPrices.length ? bestPrices : PRODUCTS.slice(0, 8)).map(productCardHtml).join("");
+    }
+    var newGrid = document.getElementById("newArrivalsGrid");
+    if (newGrid) {
+      var newArrivals = PRODUCTS.filter(function (p) { return p.badge === "New" || p.badge === "Best Seller"; }).slice(0, 4);
+      newGrid.innerHTML = (newArrivals.length ? newArrivals : PRODUCTS.slice(4, 8)).map(productCardHtml).join("");
+    }
+  }
+
+  renderHomeGrids();
+  document.addEventListener("catalog:updated", renderHomeGrids);
+})();
+</script>
+</body>
 </html>

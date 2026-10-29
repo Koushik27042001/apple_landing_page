@@ -952,13 +952,13 @@ body {
    14. HEADER LIQUID GLASS ENHANCEMENT
    ============================================================ */
 
-.site-header {
+.site-header:not(.site-header--dark) {
   background: rgba(255, 255, 255, 0.72) !important;
   backdrop-filter: saturate(200%) blur(28px) !important;
   -webkit-backdrop-filter: saturate(200%) blur(28px) !important;
 }
 
-.site-header.scrolled {
+.site-header:not(.site-header--dark).scrolled {
   background: rgba(255, 255, 255, 0.88) !important;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8), 0 4px 24px rgba(0, 0, 0, 0.06) !important;
 }
