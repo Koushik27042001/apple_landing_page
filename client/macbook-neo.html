@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="css/enhancements.css">
 <link rel="stylesheet" href="css/chip-family.css">
 <style>
-/* MacBook Neo Custom Page Styles */
+/* MacBook Neo Premium Dark Apple Design */
 .neo-subnav {
   display: none !important;
 }
@@ -22,7 +22,7 @@
 .neo-subnav-title {
   font-size: 20px;
   font-weight: 700;
-  color: var(--text-dark, #1d1d1f);
+  color: #ffffff;
 }
 .neo-subnav-right {
   display: flex;
@@ -31,10 +31,10 @@
 }
 .neo-subnav-price {
   font-size: 14px;
-  color: var(--text-muted, #86868b);
+  color: #86868b;
 }
 .neo-subnav-price strong {
-  color: var(--text-dark, #1d1d1f);
+  color: #ffffff;
   font-size: 16px;
 }
 
@@ -59,58 +59,65 @@
     font-size: 13px;
   }
 }
+
+/* Hero Section */
 .neo-hero-section {
   padding: 70px 20px 40px;
   text-align: center;
-  background: radial-gradient(circle at 50% 30%, rgba(229, 188, 53, 0.12) 0%, rgba(255, 255, 255, 0) 70%), #fafafa;
+  background: radial-gradient(circle at 50% 25%, rgba(229, 188, 53, 0.16) 0%, rgba(0, 0, 0, 0.95) 70%), #000000;
   overflow: hidden;
   position: relative;
+  color: #ffffff;
 }
 .neo-eyebrow {
   font-size: 14px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #d99b00;
-  margin-bottom: 10px;
+  color: #ffd60a;
+  margin-bottom: 12px;
 }
 .neo-hero-title {
   font-size: clamp(38px, 6vw, 68px);
   font-weight: 800;
   letter-spacing: -1.5px;
-  color: #1d1d1f;
+  color: #ffffff;
   margin-bottom: 16px;
   line-height: 1.08;
 }
 .neo-hero-desc {
   font-size: 20px;
-  color: #515154;
+  color: rgba(255, 255, 255, 0.78);
   max-width: 780px;
   margin: 0 auto 28px;
   line-height: 1.5;
 }
 .neo-hero-price-badge {
   display: inline-block;
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.1);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   padding: 10px 22px;
   border-radius: 30px;
   font-size: 15px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: #ffffff;
   margin-bottom: 36px;
+  backdrop-filter: blur(12px);
 }
+
+/* Color Switcher Section */
 .neo-color-switcher-section {
   padding: 60px 20px;
-  background: #ffffff;
+  background: #000000;
   text-align: center;
+  color: #ffffff;
 }
 .color-picker-title {
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 8px;
-  color: #1d1d1f;
+  color: #ffffff;
 }
 .color-picker-subtitle {
   font-size: 16px;
@@ -134,14 +141,14 @@
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .color-swatch-btn.active {
-  border-color: #0071e3;
-  transform: scale(1.1);
+  border-color: #2997ff;
+  transform: scale(1.15);
 }
 .color-swatch-dot {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
 }
 .neo-showcase-stage {
   max-width: 900px;
@@ -153,7 +160,10 @@
   max-height: 480px;
   object-fit: contain;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
 }
+
+/* Feature Grid */
 .neo-features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -163,26 +173,30 @@
   padding: 0 20px;
 }
 .neo-feature-card {
-  background: #f5f5f7;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
   padding: 36px 28px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 .neo-feature-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
 }
 .neo-feature-card h3 {
   font-size: 24px;
   font-weight: 700;
-  color: #1d1d1f;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 .neo-feature-card p {
   font-size: 15px;
-  color: #6e6e73;
+  color: rgba(255, 255, 255, 0.74);
   line-height: 1.6;
 }
 .neo-card-tag {
@@ -191,9 +205,11 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #0071e3;
+  color: #2997ff;
   margin-bottom: 12px;
 }
+
+/* Specs Table */
 .specs-matrix-table {
   width: 100%;
   border-collapse: collapse;
@@ -201,34 +217,38 @@
 }
 .specs-matrix-table td {
   padding: 14px 16px;
-  border-bottom: 1px solid #e5e5e7;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 15px;
 }
 .specs-matrix-table td:first-child {
   font-weight: 600;
-  color: #1d1d1f;
+  color: #86868b;
   width: 30%;
 }
 .specs-matrix-table td:last-child {
-  color: #515154;
-}
-.neo-buy-section {
-  background: linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%);
-  padding: 80px 20px;
-  text-align: center;
-  border-top: 1px solid #e5e5e7;
+  color: #ffffff;
 }
 
-/* MacBook Neo Buy Box & Storage Tier Segment Buttons */
+/* Buy Section */
+.neo-buy-section {
+  background: #000000;
+  padding: 80px 20px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
 .neo-buy-card {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
   border-radius: 20px;
   padding: 30px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   text-align: left;
   margin-bottom: 30px;
   transition: all 0.3s ease;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .neo-buy-header {
@@ -263,9 +283,9 @@
   justify-content: center !important;
   padding: 14px 10px !important;
   border-radius: 12px !important;
-  border: 2px solid #e5e5e7 !important;
-  background: #ffffff !important;
-  color: #1d1d1f !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
   cursor: pointer !important;
   transition: all 0.2s ease-in-out !important;
   outline: none !important;
@@ -274,31 +294,33 @@
 }
 
 .storage-opt-btn:hover {
-  border-color: #0071e3 !important;
-  background: #fbfbfd !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
 }
 
 .storage-opt-btn.active {
   border-color: #0071e3 !important;
-  background: #eef6ff !important;
-  color: #0071e3 !important;
-  box-shadow: 0 4px 14px rgba(0, 113, 227, 0.15) !important;
+  background: rgba(0, 113, 227, 0.22) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(0, 113, 227, 0.35) !important;
 }
 
 .storage-opt-btn .storage-title {
   font-size: 15px;
   font-weight: 700;
   line-height: 1.2;
+  color: #ffffff !important;
 }
 
 .storage-opt-btn .storage-tag {
   font-size: 12px;
-  opacity: 0.85;
+  color: rgba(255, 255, 255, 0.65) !important;
   margin-top: 4px;
 }
 
 .storage-opt-btn.active .storage-tag {
-  color: #0071e3;
+  color: #2997ff !important;
   font-weight: 600;
 }
 
