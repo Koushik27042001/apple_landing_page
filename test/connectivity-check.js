@@ -30,7 +30,7 @@ function log(step, ok, extra) {
 
     let health = await fetch(base + "/api/health").then(function (r) { return r.json(); }).catch(function () { return null; });
     if (!health || !health.ok) {
-      serverProc = fork(path.join(root, "server", "server.js"), [], {
+      serverProc = fork("server.js", [], {
         cwd: path.join(root, "server"),
         env: Object.assign({}, process.env, { PORT: "4000" }),
         stdio: "ignore"
