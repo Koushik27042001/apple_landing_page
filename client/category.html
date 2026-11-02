@@ -292,10 +292,7 @@
           (discount ? '<span class="pc-mrp">' + formatINR(p.mrp) + '</span><span class="pc-discount">' + discount + '% off</span>' : '') +
         '</div>' +
         '<div class="pc-emi">From <strong>' + formatINR(getEmi(p.price, 12)) + '/mo</strong> for 12 months</div>' +
-        '<div class="pc-actions">' +
-          '<button class="btn btn-outline" onclick="quickAdd(\'' + p.id + '\')">Add to Bag</button>' +
-          '<a href="product.html?id=' + p.id + '" class="btn btn-dark">Buy Now</a>' +
-        '</div>' +
+        '<div class="pc-actions"><a href="product.html?id=' + p.id + '" class="btn btn-dark" style="width:100%;text-align:center;">Buy Now</a></div>' +
       '</div>'
     );
   }

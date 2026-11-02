@@ -39,7 +39,7 @@ async function ensureServerRunning() {
     // Icons render as real SVGs, not raw emoji/boxes
     await page.goto(base + "index.html", { waitUntil: "domcontentloaded" });
     const headerSvgCount = await page.locator("#site-header svg.icon-svg").count();
-    log("Header renders SVG icons (search/cart/menu)", headerSvgCount >= 3, "count=" + headerSvgCount);
+    log("Header renders SVG icons (search/menu)", headerSvgCount >= 2, "count=" + headerSvgCount);
 
     const navLinkTexts = await page.locator(".main-nav > a").allTextContents();
     log("Main nav Level 1 links loaded", navLinkTexts.includes("Home") && navLinkTexts.includes("Contact Us"), "got=" + JSON.stringify(navLinkTexts));
@@ -58,14 +58,10 @@ async function ensureServerRunning() {
     const logoText = await page.locator(".logo").first().textContent();
     log("Logo shows Iswift and Business Partner", logoText.includes("Iswift") && logoText.includes("Business") && logoText.includes("Partner"), "text=" + logoText.trim());
 
-    // Add product to cart, go to checkout, verify demo-mode notice
-    await page.waitForSelector("#bestPricesGrid .product-card", { timeout: 5000 });
-    await page.locator("#bestPricesGrid .product-card").first().locator("text=Add to Bag").click();
-    await page.waitForSelector(".toast.show", { timeout: 3000 });
-
-    await page.goto(base + "cart.html", { waitUntil: "domcontentloaded" });
-    await page.waitForSelector('a.btn.btn-primary:has-text("Proceed to Checkout")', { timeout: 5000 });
-    await page.locator('a.btn.btn-primary:has-text("Proceed to Checkout")').click();
+    // Go to product page, click Buy Now, proceed to checkout, verify demo-mode notice
+    await page.goto(base + "product.html?id=iphone-duo", { waitUntil: "domcontentloaded" });
+    await page.waitForSelector("#buyNowBtn", { timeout: 5000 });
+    await page.locator("#buyNowBtn").click();
     await page.waitForURL("**/checkout.html", { timeout: 10000 });
     await page.waitForSelector("#fullName", { timeout: 5000 });
 

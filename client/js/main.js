@@ -188,7 +188,6 @@ function renderHeader(active) {
             '<input type="text" class="search-input" id="headerSearch" placeholder="Search iPhone, Mac, iPad..." autocomplete="off">' +
             '<div class="search-suggestions" id="searchSuggestions"></div>' +
           '</div>' +
-          '<a href="cart.html" class="icon-btn" aria-label="Cart" title="My Bag">' + icon("bag", { size: 20 }) + '<span class="cart-count">0</span></a>' +
         '</div>' +
       '</div>' +
     '</header>' +
@@ -278,7 +277,6 @@ function renderHeader(active) {
       '<a href="contact.html">Contact Us</a>' +
       '<a href="support.html">Support</a>' +
       '<div class="mobile-nav-divider"></div>' +
-      '<a href="cart.html">Bag</a>' +
       '<a href="terms.html">Terms &amp; Policies</a>' +
     '</div>';
 

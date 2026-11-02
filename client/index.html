@@ -246,6 +246,52 @@ a { color: inherit; text-decoration: none; }
   color: #ffffff !important;
 }
 
+/* Middle-aligned navigation and right-shifted search */
+.site-header .header-inner,
+.site-header--dark .header-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+}
+
+@media (min-width: 901px) {
+  .site-header .logo,
+  .site-header--dark .logo {
+    min-width: 220px !important;
+    flex: 0 0 auto !important;
+  }
+  .site-header .header-actions,
+  .site-header--dark .header-actions {
+    min-width: 220px !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    margin-left: auto !important;
+    flex: 0 0 auto !important;
+  }
+}
+
+.site-header .main-nav,
+.site-header--dark .main-nav {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(10px, 1.25vw, 22px) !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.site-header .header-actions,
+.site-header--dark .header-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+}
+
 /* Ambient Orbs */
 .orb {
   position: fixed;
@@ -2457,8 +2503,7 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
         '</div>' +
         '<div class="pc-emi">From <strong>' + (typeof formatINR === "function" && typeof getEmi === "function" ? formatINR(getEmi(p.price, 12)) : "₹" + Math.round(p.price / 12).toLocaleString("en-IN")) + '/mo</strong> for 12 months</div>' +
         '<div class="pc-actions">' +
-          '<button class="btn btn-outline" onclick="quickAdd(\'' + p.id + '\')">Add to Bag</button>' +
-          '<a href="product.html?id=' + p.id + '" class="btn btn-dark">Buy Now</a>' +
+          '<a href="product.html?id=' + p.id + '" class="btn btn-dark" style="width:100%;text-align:center;">Buy Now</a>' +
         '</div>' +
       '</div>'
     );
