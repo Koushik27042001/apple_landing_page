@@ -184,9 +184,127 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
 .d-card b{display:block;font-size:clamp(40px,5.2vw,72px);letter-spacing:-.04em;line-height:1.05;background:linear-gradient(135deg,#fff,#0a84ff);-webkit-background-clip:text;background-clip:text;color:transparent}
 .d-card p{color:var(--mute);margin-top:6px;font-size:15px}
 
-/* battery */
-.d-batt{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;max-width:860px;margin:40px auto 0}
-.d-ring{width:150px;height:150px;margin:0 auto 12px;display:block}
+/* battery split showcase */
+.d-batt-layout {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 36px;
+  align-items: center;
+  max-width: 1040px;
+  margin: 36px auto 0;
+}
+
+.d-batt-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 400px;
+  perspective: 1200px;
+}
+
+.d-batt-glow {
+  position: absolute;
+  width: 82%;
+  height: 72%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(10, 132, 255, 0.38) 0%, rgba(48, 209, 88, 0.22) 50%, transparent 75%);
+  filter: blur(65px);
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.5s ease, opacity 0.5s ease;
+}
+
+.d-batt-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.d-batt-img {
+  position: absolute;
+  max-width: 96%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.88));
+  opacity: 0;
+  transform: scale(0.94) translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.d-batt-img.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+.d-batt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 6px 16px;
+  border-radius: 980px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #aeb5c0;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 2;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.d-batt-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #30d158;
+  box-shadow: 0 0 8px #30d158;
+  transition: background 0.3s ease;
+}
+
+.d-batt-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+.d-card-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  text-align: left;
+  padding: 22px 28px;
+}
+
+.d-card-ring .d-ring {
+  width: 100px;
+  height: 100px;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.d-card-ring .d-ring text {
+  font-size: 28px;
+}
+
+.d-ring{width:130px;height:130px;margin:0 auto 10px;display:block}
 .d-ring circle{fill:none;stroke-width:11;stroke-linecap:round}
 .d-ring .bg{stroke:rgba(255,255,255,.1)}
 .d-ring .fg{stroke:url(#dg);stroke-dasharray:440;stroke-dashoffset:440;transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1)}
@@ -285,6 +403,10 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
   .d-ios-hero img{max-height:260px}
   .d-wide img{max-height:250px}
   .d-glow{filter:blur(50px);opacity:.16!important}
+  .d-batt-layout{grid-template-columns:1fr;gap:26px;margin-top:24px}
+  .d-batt-stage{order:-1;min-height:280px}
+  .d-batt-img-wrap{height:270px}
+  .d-card-ring{padding:20px 22px;gap:18px}
 }
 
 @media(max-width:600px){
@@ -312,6 +434,10 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
   .d-seg{max-width:280px;height:48px;padding:4px;margin:14px auto 6px}
   .d-seg-indicator{top:4px;bottom:4px;left:4px;width:calc((100% - 8px) / 2)}
   .d-seg button,.seg-btn{font-size:13px}
+  .d-batt-stage{min-height:240px}
+  .d-batt-img-wrap{height:230px}
+  .d-card-ring{flex-direction:column;text-align:center;padding:22px 16px;gap:12px}
+  .d-card-ring .d-ring{margin:0 auto}
 }
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}}
@@ -416,28 +542,51 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
 
   <!-- 6. BATTERY -->
   <section class="d-sec" id="battery">
-    <div class="d-wrap">
+    <div class="d-glow" style="width:46vw;height:46vw;left:27vw;top:20%;background:#30d158;opacity:.15"></div>
+    <div class="d-wrap" style="position:relative;z-index:1">
       <h2 class="d-h2 rv">Dual-battery system. All&#8209;day power.</h2>
-      <div class="d-batt">
-        <div class="d-card rv">
-          <svg class="d-ring" id="ring" viewBox="0 0 160 160" aria-hidden="true">
-            <defs><linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#30d158"/><stop offset="1" stop-color="#0a84ff"/></linearGradient></defs>
-            <circle class="bg" cx="80" cy="80" r="70"/><circle class="fg" cx="80" cy="80" r="70"/>
-            <text x="80" y="90">50%</text>
-          </svg>
-          <small>Up to</small><b style="font-size:clamp(32px,4vw,50px)">50% charge</b>
-          <p>in 20 minutes with fast wired charging</p>
-        </div>
-        <div class="d-card rv d1">
-          <small>Up to</small>
-          <b><span id="hours" data-to="31">31</span> hours</b>
-          <p>of video playback when using the <span id="hoursWhich">inner</span> display</p>
-          <div class="d-seg" id="seg" role="group" aria-label="Display">
-            <div class="d-seg-indicator" id="segIndicator" aria-hidden="true"></div>
-            <button type="button" class="seg-btn active" aria-pressed="true" data-h="31" data-w="inner">Inner display</button>
-            <button type="button" class="seg-btn" aria-pressed="false" data-h="44" data-w="outer">Outer display</button>
+      <p class="d-p rv d1" style="margin:14px auto 0">Two high-density battery cells work in tandem across both halves of the titanium chassis.</p>
+
+      <div class="d-batt-layout">
+        <!-- Interactive Device Display Stage (Left) -->
+        <div class="d-batt-stage rv">
+          <div class="d-batt-glow" id="battGlow" aria-hidden="true"></div>
+          <div class="d-batt-img-wrap tilt" id="battImgWrap">
+            <img id="battImgInner" class="d-batt-img active" src="images/iphone_duo_assets/Foldable Phone with Blue Swirl Display.png" alt="iPhone Duo inner display — 31 hours video playback" draggable="false" loading="lazy">
+            <img id="battImgOuter" class="d-batt-img" src="images/iphone_duo_assets/Dual-View Foldable Smartphone Render.png" alt="iPhone Duo outer display — 44 hours video playback" draggable="false" loading="lazy">
           </div>
-          <p style="font-size:13px">31 hours inner &middot; 44 hours outer</p>
+          <div class="d-batt-badge" id="battBadge">
+            <span class="d-batt-dot"></span>
+            <span id="battBadgeText">Inner display &bull; 7.6″ unfolding screen</span>
+          </div>
+        </div>
+
+        <!-- Battery Stats Cards (Right) -->
+        <div class="d-batt-cards rv d1">
+          <div class="d-card d-card-ring">
+            <svg class="d-ring" id="ring" viewBox="0 0 160 160" aria-hidden="true">
+              <defs><linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#30d158"/><stop offset="1" stop-color="#0a84ff"/></linearGradient></defs>
+              <circle class="bg" cx="80" cy="80" r="70"/><circle class="fg" cx="80" cy="80" r="70"/>
+              <text x="80" y="90">50%</text>
+            </svg>
+            <div>
+              <small>Up to</small>
+              <b style="font-size:clamp(26px,3.2vw,40px);line-height:1.1;">50% charge</b>
+              <p style="margin:4px 0 0;">in 20 minutes with fast wired charging</p>
+            </div>
+          </div>
+
+          <div class="d-card">
+            <small>Up to</small>
+            <b><span id="hours" data-to="31">31</span> hours</b>
+            <p>of video playback when using the <span id="hoursWhich">inner</span> display</p>
+            <div class="d-seg" id="seg" role="group" aria-label="Display">
+              <div class="d-seg-indicator" id="segIndicator" aria-hidden="true"></div>
+              <button type="button" class="seg-btn active" aria-pressed="true" data-h="31" data-w="inner">Inner display</button>
+              <button type="button" class="seg-btn" aria-pressed="false" data-h="44" data-w="outer">Outer display</button>
+            </div>
+            <p style="font-size:13px;margin-top:8px;">31 hours inner &middot; 44 hours outer</p>
+          </div>
         </div>
       </div>
     </div>
@@ -614,9 +763,14 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
     $$('.d-stats [data-to]').forEach(function(el){el.dataset.cur=0;count(el,+el.dataset.to,+(el.dataset.dec||0),el.dataset.suf||'')});
   })});
 
-  // battery display toggle
+  // battery display toggle & device render crossfade
   var segs = $$('#seg button');
   var segInd = $('#segIndicator');
+  var battInner = $('#battImgInner');
+  var battOuter = $('#battImgOuter');
+  var battBadgeText = $('#battBadgeText');
+  var battGlow = $('#battGlow');
+
   function selectSeg(b, idx) {
     segs.forEach(function(x, i) {
       var on = i === idx;
@@ -626,14 +780,39 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
     if (segInd) {
       segInd.style.transform = 'translateX(' + (idx * 100) + '%)';
     }
-    $('#hoursWhich').textContent = b.dataset.w;
+    var which = b.dataset.w;
+    $('#hoursWhich').textContent = which;
     count(hrs, +b.dataset.h, 0, '');
+
+    var isInner = which === 'inner';
+    if (battInner) battInner.classList.toggle('active', isInner);
+    if (battOuter) battOuter.classList.toggle('active', !isInner);
+    if (battBadgeText) {
+      battBadgeText.textContent = isInner
+        ? 'Inner display \u2022 7.6″ unfolding screen'
+        : 'Outer display \u2022 6.3″ compact screen';
+    }
+    if (battGlow) {
+      battGlow.style.background = isInner
+        ? 'radial-gradient(circle, rgba(10, 132, 255, 0.38) 0%, rgba(48, 209, 88, 0.22) 50%, transparent 75%)'
+        : 'radial-gradient(circle, rgba(48, 209, 88, 0.40) 0%, rgba(10, 132, 255, 0.20) 50%, transparent 75%)';
+    }
   }
   segs.forEach(function(b, idx) {
     b.addEventListener('click', function() {
       selectSeg(b, idx);
     });
   });
+
+  var battStageWrap = $('#battImgWrap');
+  if (battStageWrap) {
+    battStageWrap.style.cursor = 'pointer';
+    battStageWrap.setAttribute('title', 'Click to toggle display mode');
+    battStageWrap.addEventListener('click', function() {
+      var nextIdx = segs[0] && segs[0].classList.contains('active') ? 1 : 0;
+      if (segs[nextIdx]) selectSeg(segs[nextIdx], nextIdx);
+    });
+  }
 })();
 </script>
 </body>
