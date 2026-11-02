@@ -120,7 +120,7 @@ function renderHeader(active) {
                 '<!-- iPhone -->' +
                 '<div class="cascade-prod-group" data-cat-group="iphone">' +
                   '<div class="cascade-group-title">iPhone Lineup</div>' +
-                  '<a href="product.html?id=iphone-duo" class="cascade-prod-item"><span class="cascade-prod-name">iPhone duo</span><span class="badge-new-red">New</span></a>' +
+                  '<a href="iphone-duo.html" class="cascade-prod-item"><span class="cascade-prod-name">iPhone duo</span><span class="badge-new-red">New</span></a>' +
                   '<a href="product.html?id=iphone-18-pro" class="cascade-prod-item"><span class="cascade-prod-name">iPhone 18 Pro</span><span class="badge-new-red">New</span></a>' +
                   '<a href="product.html?id=iphone-17e" class="cascade-prod-item"><span class="cascade-prod-name">iPhone 17e</span></a>' +
                   '<a href="product.html?id=iphone-17" class="cascade-prod-item"><span class="cascade-prod-name">iPhone 17</span></a>' +
@@ -215,7 +215,7 @@ function renderHeader(active) {
               '<div class="mobile-accordion-group" data-group="iphone">' +
                 '<button type="button" class="mobile-accordion-toggle" style="font-size:13.5px; padding:6px 0;"><span>iPhone</span><span class="toggle-icon">&rsaquo;</span></button>' +
                 '<div class="mobile-accordion-content">' +
-                  '<a href="product.html?id=iphone-duo" class="mobile-sub-link"><span>iPhone duo</span> <span class="badge-new-red">New</span></a>' +
+                  '<a href="iphone-duo.html" class="mobile-sub-link"><span>iPhone duo</span> <span class="badge-new-red">New</span></a>' +
                   '<a href="product.html?id=iphone-18-pro" class="mobile-sub-link"><span>iPhone 18 Pro</span> <span class="badge-new-red">New</span></a>' +
                   '<a href="product.html?id=iphone-17e" class="mobile-sub-link">iPhone 17e</a>' +
                   '<a href="product.html?id=iphone-17" class="mobile-sub-link">iPhone 17</a>' +

@@ -48,6 +48,8 @@ function log(step, ok, extra) {
       "/index.html",
       "/category.html?cat=ipad",
       "/product.html?id=ipad-air-11-m4",
+      "/iphone-duo.html",
+      "/iphone-duo",
       "/cart.html",
       "/checkout.html",
       "/about.html",

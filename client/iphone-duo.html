@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>iPhone Duo | Iswift Gadgets Private Limited</title>
+<meta name="description" content="iPhone Duo: the largest iPhone display ever in a thin, foldable design. 48MP Dual Fusion camera, vapor-cooled A20 Pro chip, dual-battery system and titanium frame.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/enhancements.css">
+<style>
+:root{--bg:#000;--fg:#f5f5f7;--mute:#86868b;--blue:#2997ff;--line:rgba(255,255,255,.12);color-scheme:dark}
+html{scroll-behavior:smooth}
+body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+.duo *{box-sizing:border-box}
+.duo a{color:inherit;text-decoration:none}
+.duo :focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.duo img{display:block;max-width:100%;user-select:none}
+.d-wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+.d-h2{font-size:clamp(32px,5.6vw,72px);font-weight:700;letter-spacing:-.04em;line-height:1.04}
+.d-grad{background:linear-gradient(180deg,#fff 35%,#7d7d82);-webkit-background-clip:text;background-clip:text;color:transparent}
+.d-p{color:var(--mute);font-size:clamp(17px,1.9vw,24px);line-height:1.4;font-weight:500;letter-spacing:-.01em;max-width:640px}
+.d-bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#0a84ff,#bf5af2,#ff375f);z-index:999}
+
+/* reveal: visible by default without JS */
+.js .rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+.js .rv.d1{transition-delay:.12s}.js .rv.d2{transition-delay:.24s}
+
+/* glow */
+.d-glow{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0}
+
+
+/* hero */
+.d-hero{position:relative;text-align:center;padding:70px 0 40px;overflow:hidden}
+.d-hero h1{font-size:clamp(56px,12vw,160px);letter-spacing:-.05em;line-height:.95;font-weight:700;position:relative;z-index:2}
+.d-hero .d-p{margin:20px auto 0;position:relative;z-index:2}
+.d-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:28px;position:relative;z-index:2}
+.d-btn{padding:12px 28px;border-radius:980px;font-size:16px;font-weight:500;transition:transform .25s,background .25s;display:inline-flex;align-items:center;justify-content:center}
+.d-btn.pri{background:#0071e3;color:#fff}.d-btn.pri:hover{background:#0a84ff;transform:scale(1.05)}
+.d-btn.sec{color:var(--blue)}.d-btn.sec:hover{text-decoration:underline}
+.d-stage{perspective:1400px;margin:34px auto 0;max-width:900px;position:relative;z-index:2}
+.d-stage img{width:100%;max-height:560px;object-fit:contain;filter:drop-shadow(0 40px 70px rgba(0,0,0,.9));transition:transform .2s cubic-bezier(.2,.8,.2,1);will-change:transform}
+
+/* display (sticky scale) */
+.d-disp{height:240vh;position:relative}
+.d-pin{position:sticky;top:var(--hdr,0px);height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;overflow:hidden;text-align:center;padding:0 22px}
+.d-disp img{width:min(900px,94vw);max-height:56vh;object-fit:contain;filter:drop-shadow(0 40px 80px rgba(0,0,0,.9));will-change:transform}
+
+/* sections */
+.d-sec{position:relative;padding:130px 0;text-align:center;overflow:hidden}
+.d-sec .d-p{margin:18px auto 0}
+
+/* tabs */
+.d-tabs{display:inline-flex;gap:6px;margin-top:34px;padding:5px;border-radius:980px;background:rgba(255,255,255,.08);border:1px solid var(--line)}
+.d-tabs button,.d-seg button,.d-pill{font:inherit;color:#d2d2d7;background:transparent;border:0;border-radius:980px;padding:10px 20px;font-size:15px;font-weight:500;cursor:pointer;transition:background .3s,color .3s}
+.d-tabs button[aria-selected=true],.d-seg button[aria-pressed=true]{background:#f5f5f7;color:#000}
+.d-panes{position:relative;margin:30px auto 0;max-width:980px;height:clamp(260px,50vw,560px)}
+.d-pane{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;opacity:0;transform:scale(.94) translateX(40px);transition:opacity .6s,transform .6s;pointer-events:none}
+.d-pane.on{opacity:1;transform:none;pointer-events:auto}
+.d-pane img{max-height:calc(100% - 40px);object-fit:contain;filter:drop-shadow(0 30px 60px rgba(0,0,0,.85))}
+.d-pane span{color:var(--mute);font-size:17px}
+
+/* split */
+.d-split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;text-align:left}
+.d-split.rev .d-media{order:-1}
+.d-split .d-p{margin:18px 0 0}
+.d-media{position:relative}
+.d-media img{width:100%;max-height:520px;object-fit:contain;filter:drop-shadow(0 30px 60px rgba(0,0,0,.85));transition:transform .2s;will-change:transform}
+@media(max-width:820px){.d-split{grid-template-columns:1fr;text-align:center}.d-split .d-p{margin-left:auto;margin-right:auto}.d-split.rev .d-media{order:0}}
+
+/* chip stats */
+.d-pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:30px auto 0;max-width:860px}
+.d-pill{border:1px solid var(--line);background:rgba(255,255,255,.05);padding:8px 16px;font-size:14px}
+.d-pill:hover{background:rgba(255,255,255,.12)}
+.d-pill[aria-pressed=true]{background:#fff;color:#000}
+.d-cmp{font-size:15px;color:var(--mute);margin-top:34px}
+.d-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:900px;margin:22px auto 0}
+.d-card{border-radius:30px;padding:42px 24px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px var(--line);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:transform .35s}
+.d-card:hover{transform:translateY(-8px)}
+.d-card small{display:block;color:var(--mute);font-size:16px}
+.d-card b{display:block;font-size:clamp(46px,6vw,84px);letter-spacing:-.04em;line-height:1.05;background:linear-gradient(135deg,#fff,#0a84ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.d-card p{color:var(--mute);margin-top:6px;font-size:16px}
+
+/* battery */
+.d-batt{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:960px;margin:50px auto 0}
+.d-ring{width:170px;height:170px;margin:0 auto 14px;display:block}
+.d-ring circle{fill:none;stroke-width:12;stroke-linecap:round}
+.d-ring .bg{stroke:rgba(255,255,255,.1)}
+.d-ring .fg{stroke:url(#dg);stroke-dasharray:440;stroke-dashoffset:440;transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1)}
+.d-ring.in .fg{stroke-dashoffset:220}
+.d-ring text{fill:#fff;font-size:34px;font-weight:700;text-anchor:middle;letter-spacing:-.03em}
+.d-seg{display:inline-flex;gap:4px;padding:4px;border-radius:980px;background:rgba(255,255,255,.08);margin:14px 0 6px}
+.d-seg button{padding:8px 16px;font-size:14px}
+
+/* siri/accessories */
+.d-wide{max-width:960px;margin:50px auto 0}
+.d-wide img{width:100%;max-height:600px;object-fit:contain;filter:drop-shadow(0 30px 60px rgba(0,0,0,.8));will-change:transform}
+
+/* cta */
+.d-cta{padding:120px 0 80px;text-align:center}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body class="duo-page dark-theme page-dark">
+<div class="d-bar" id="bar"></div>
+<div id="site-header"></div>
+
+<main class="duo">
+
+  <!-- 1. HERO -->
+  <section class="d-hero" id="overview">
+    <div class="d-glow" style="width:50vw;height:50vw;left:-10vw;top:10%;background:#0a84ff;opacity:.28"></div>
+    <div class="d-glow" style="width:44vw;height:44vw;right:-10vw;top:30%;background:#bf5af2;opacity:.24"></div>
+    <div class="d-wrap">
+      <h1 class="d-grad rv">Hello, hello.</h1>
+      <p class="d-p rv d1" style="margin-left:auto;margin-right:auto">The largest iPhone display ever. In a thin, foldable design.</p>
+      <div class="d-btns rv d2">
+        <a class="d-btn pri" href="product.html?id=iphone-duo">Buy Now &mdash; ₹2,99,900</a>
+        <a class="d-btn sec" href="https://superiorsystems.in/contact" target="_blank" rel="noopener">Contact us</a>
+        <a class="d-btn sec" href="#display">See the display &darr;</a>
+      </div>
+      <div class="d-stage" id="heroStage">
+        <img id="heroImg" src="images/iphone_duo_assets/Foldable Silver Smartphone iOS Mockup.png" alt="iPhone Duo in silver" draggable="false">
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. DISPLAY: scales as you scroll -->
+  <section class="d-disp" id="display">
+    <div class="d-pin">
+      <h2 class="d-h2 d-grad">The largest iPhone display ever.</h2>
+      <p class="d-p" style="margin:0 auto">In a thin, foldable design.</p>
+      <img id="dispImg" src="images/iphone_duo_assets/Foldable Screen Streaming Shrinking.png" alt="iPhone Duo inner display while streaming video" draggable="false">
+    </div>
+  </section>
+
+  <!-- 3. MORE WAYS TO iPHONE (tabs) -->
+  <section class="d-sec" id="ios">
+    <div class="d-glow" style="width:46vw;height:46vw;left:27vw;top:20%;background:#0a84ff;opacity:.16"></div>
+    <div class="d-wrap" style="position:relative;z-index:1">
+      <h2 class="d-h2 rv">More ways to iPhone.</h2>
+      <p class="d-p rv d1">Reimagined iOS experiences for ultimate versatility.</p>
+      <div class="d-tabs rv d2" role="tablist" aria-label="iOS experiences">
+        <button role="tab" aria-selected="true" data-t="0">Messaging</button>
+        <button role="tab" aria-selected="false" data-t="1">Streaming</button>
+        <button role="tab" aria-selected="false" data-t="2">Productivity</button>
+      </div>
+      <div class="d-panes" id="panes">
+        <div class="d-pane on"><img src="images/iphone_duo_assets/Silver Foldable Messaging Laptop.png" alt="Messaging on iPhone Duo" loading="lazy"><span>Messaging</span></div>
+        <div class="d-pane"><img src="images/iphone_duo_assets/Foldable Screen Streaming Shrinking.png" alt="Streaming on iPhone Duo" loading="lazy"><span>Streaming</span></div>
+        <div class="d-pane"><img src="images/iphone_duo_assets/Silver Foldable Tablet Productivity Interface.png" alt="Productivity on iPhone Duo" loading="lazy"><span>Productivity</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CAMERA -->
+  <section class="d-sec" id="camera">
+    <div class="d-wrap">
+      <div class="d-split">
+        <div>
+          <h2 class="d-h2 rv">48MP Dual Fusion camera system.</h2>
+          <p class="d-p rv d1">And all&#8209;new ways to shoot.</p>
+        </div>
+        <div class="d-media rv d1"><img class="tilt" src="images/iphone_duo_assets/Foldable Phone with iOS Desert Display.png" alt="iPhone Duo showing a desert photo" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CHIP -->
+  <section class="d-sec" id="chip">
+    <div class="d-glow" style="width:40vw;height:40vw;right:-8vw;top:10%;background:#ff375f;opacity:.14"></div>
+    <div class="d-wrap" style="position:relative;z-index:1">
+      <h2 class="d-h2 rv">Vapor&#8209;cooled A20 Pro chip for pro performance.</h2>
+      <p class="d-cmp rv d1">Compare with:</p>
+      <div class="d-pills rv d1" id="pills" role="group" aria-label="Compare with">
+        <button class="d-pill" aria-pressed="true">iPhone 16 Pro Max</button>
+        <button class="d-pill" aria-pressed="false">iPhone 16 Pro</button>
+        <button class="d-pill" aria-pressed="false">iPhone 16</button>
+        <button class="d-pill" aria-pressed="false">iPhone 15 Pro Max</button>
+        <button class="d-pill" aria-pressed="false">iPhone 15 Pro</button>
+        <button class="d-pill" aria-pressed="false">iPhone 15</button>
+        <button class="d-pill" aria-pressed="false">iPhone 14 Pro Max</button>
+      </div>
+      <div class="d-stats">
+        <div class="d-card rv"><small>Up to</small><b><span data-to="50" data-pre="" data-suf="%">50%</span> faster</b><p>6-core CPU</p></div>
+        <div class="d-card rv d1"><small>Up to</small><b><span data-to="2.1" data-dec="1" data-suf="x">2.1x</span> faster</b><p>7-core GPU</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. BATTERY -->
+  <section class="d-sec" id="battery">
+    <div class="d-wrap">
+      <h2 class="d-h2 rv">Dual-battery system. All&#8209;day power.</h2>
+      <div class="d-batt">
+        <div class="d-card rv">
+          <svg class="d-ring" id="ring" viewBox="0 0 160 160" aria-hidden="true">
+            <defs><linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#30d158"/><stop offset="1" stop-color="#0a84ff"/></linearGradient></defs>
+            <circle class="bg" cx="80" cy="80" r="70"/><circle class="fg" cx="80" cy="80" r="70"/>
+            <text x="80" y="92">50%</text>
+          </svg>
+          <small>Up to</small><b style="font-size:clamp(38px,4.5vw,56px)">50% charge</b>
+          <p>in 20 minutes with fast wired charging</p>
+        </div>
+        <div class="d-card rv d1">
+          <small>Up to</small>
+          <b><span id="hours" data-to="31">31</span> hours</b>
+          <p>of video playback when using the <span id="hoursWhich">inner</span> display</p>
+          <div class="d-seg" id="seg" role="group" aria-label="Display">
+            <button aria-pressed="true" data-h="31" data-w="inner">Inner display</button>
+            <button aria-pressed="false" data-h="44" data-w="outer">Outer display</button>
+          </div>
+          <p style="font-size:13px">31 hours inner &middot; 44 hours outer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. DESIGN -->
+  <section class="d-sec" id="design">
+    <div class="d-wrap">
+      <div class="d-split rev">
+        <div>
+          <h2 class="d-h2 rv">Titanium frame and hinge cover.</h2>
+          <p class="d-p rv d1">Beautiful and durable.</p>
+        </div>
+        <div class="d-media rv d1"><img class="tilt" src="images/iphone_duo_assets/download.png" alt="iPhone Duo titanium frame and hinge" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. SIRI -->
+  <section class="d-sec" id="siri">
+    <div class="d-glow" style="width:46vw;height:46vw;left:27vw;top:30%;background:#bf5af2;opacity:.18"></div>
+    <div class="d-wrap" style="position:relative;z-index:1">
+      <h2 class="d-h2 rv">Siri AI is rolling out in English.</h2>
+      <p class="d-p rv d1">Usage limits may apply.</p>
+      <div class="d-wide rv d2"><img class="tilt" src="images/iphone_duo_assets/siri_ai_large_2x.png" alt="Siri AI on iPhone Duo" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- 9. ACCESSORIES -->
+  <section class="d-sec" id="accessories">
+    <div class="d-wrap">
+      <h2 class="d-h2 rv">Snap it on. Stand it up.</h2>
+      <div class="d-wide rv d1"><img class="tilt" src="images/iphone_duo_assets/accessories_large_2x.png" alt="iPhone Duo accessories" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="d-cta">
+    <div class="d-wrap">
+      <h2 class="d-h2 d-grad rv">Hello, hello.</h2>
+      <div class="d-btns rv d1">
+        <a class="d-btn pri" href="product.html?id=iphone-duo">Buy Now &mdash; ₹2,99,900</a>
+        <a class="d-btn sec" href="https://superiorsystems.in/contact" target="_blank" rel="noopener">Contact us</a>
+        <a class="d-btn sec" href="#overview">Back to top &uarr;</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+<div id="whatsapp-float"></div>
+
+<script src="js/data.js"></script>
+<script src="js/config.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/main.js"></script>
+<script src="js/catalog-sync.js"></script>
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  if(typeof renderHeader==="function") renderHeader("iphone");
+  if(typeof renderFooter==="function") renderFooter();
+  if(typeof renderWhatsAppFloat==="function") renderWhatsAppFloat("Hi, I have a question about iPhone Duo.");
+
+  var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(s){return document.querySelector(s)}, $$=function(s){return [].slice.call(document.querySelectorAll(s))};
+  var clamp=function(v,a,b){return Math.min(b,Math.max(a,v))};
+
+  // header height for sticky offsets
+  var hd=$('#site-header');
+  function setHdr(){var h=hd&&hd.firstElementChild?hd.firstElementChild.getBoundingClientRect().height:0;document.documentElement.style.setProperty('--hdr',(h||0)+'px')}
+  setHdr();addEventListener('load',setHdr);addEventListener('resize',setHdr);
+
+  // reveal once (never hides again)
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+  $$('.rv').forEach(function(el){io.observe(el)});
+  var ringIo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ringIo.unobserve(e.target)}})},{threshold:.5});
+  ringIo.observe($('#ring'));
+
+  // scroll effects
+  var bar=$('#bar'),hero=$('#heroImg'),disp=$('#dispImg'),dispSec=$('#display'),tilts=$$('.tilt'),mx=0,my=0,tk=false;
+  function frame(){
+    tk=false;var y=scrollY,vh=innerHeight,H=document.documentElement.scrollHeight-vh;
+    bar.style.width=(H>0?y/H*100:0)+'%';
+    if(!rm){
+      var hp=clamp(y/vh,0,1);
+      hero.style.transform='perspective(1200px) rotateX('+(6-hp*6-my*6)+'deg) rotateY('+(mx*12)+'deg) translate3d(0,'+(y*.08)+'px,0) scale('+(1+hp*.05)+')';
+      var r=dispSec.getBoundingClientRect(),t=clamp(-r.top/Math.max(1,r.height-vh),0,1);
+      var s=.62+Math.min(1,t*1.6)*.46;
+      disp.style.transform='scale('+s+') translate3d(0,'+((1-Math.min(1,t*1.6))*30)+'px,0)';
+      tilts.forEach(function(im){im.style.transform='translate3d('+(mx*-10)+'px,'+(my*-8)+'px,0)'});
+    }
+  }
+  function req(){if(!tk){tk=true;requestAnimationFrame(frame)}}
+  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);
+  if(!rm)addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;req()},{passive:true});
+  frame();
+
+  // tabs
+  var tabs=$$('.d-tabs button'),panes=$$('.d-pane');
+  tabs.forEach(function(b,i){b.addEventListener('click',function(){
+    tabs.forEach(function(x){x.setAttribute('aria-selected',x===b)});
+    panes.forEach(function(p,k){p.classList.toggle('on',k===i)});
+  })});
+
+  // number animation
+  function count(el,to,dec,suf){
+    var s=null,from=parseFloat(el.dataset.cur||0);
+    function step(ts){s=s||ts;var k=rm?1:clamp((ts-s)/900,0,1),e=1-Math.pow(1-k,3),v=from+(to-from)*e;
+      el.textContent=v.toFixed(dec)+(suf||'');if(k<1)requestAnimationFrame(step);else el.dataset.cur=to}
+    requestAnimationFrame(step);
+  }
+  var nio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var el=e.target;count(el,+el.dataset.to,+(el.dataset.dec||0),el.dataset.suf||'');nio.unobserve(el)}})},{threshold:.6});
+  $$('[data-to][data-suf]').forEach(function(el){el.dataset.cur=0;nio.observe(el)});
+  var hrs=$('#hours');hrs.dataset.cur=0;
+  var hio=new IntersectionObserver(function(es){if(es[0].isIntersecting){count(hrs,31,0,'');hio.disconnect()}},{threshold:.6});hio.observe(hrs);
+
+  // compare pills replay the chip numbers
+  var pills=$$('.d-pill');
+  pills.forEach(function(p){p.addEventListener('click',function(){
+    pills.forEach(function(x){x.setAttribute('aria-pressed',x===p)});
+    $$('.d-stats [data-to]').forEach(function(el){el.dataset.cur=0;count(el,+el.dataset.to,+(el.dataset.dec||0),el.dataset.suf||'')});
+  })});
+
+  // battery display toggle
+  var segs=$$('#seg button');
+  segs.forEach(function(b){b.addEventListener('click',function(){
+    segs.forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+    $('#hoursWhich').textContent=b.dataset.w;count(hrs,+b.dataset.h,0,'');
+  })});
+})();
+</script>
+</body>
+</html>
+

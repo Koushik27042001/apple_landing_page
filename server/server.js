@@ -117,6 +117,12 @@ app.use("/images/uploads", async function (req, res, next) {
   return res.status(404).json({ error: "Image not found" });
 });
 app.use("/admin", express.static(path.join(clientDir, "admin")));
+app.get("/iphone-duo", function (req, res) {
+  res.sendFile(path.join(clientDir, "iphone-duo.html"));
+});
+app.get("/macbook-neo", function (req, res) {
+  res.sendFile(path.join(clientDir, "macbook-neo.html"));
+});
 app.use(express.static(clientDir));
 
 app.use(function (req, res) {
