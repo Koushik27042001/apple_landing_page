@@ -170,6 +170,67 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
 .d-media img{width:100%;max-width:440px;max-height:360px;object-fit:contain;margin:0 auto;filter:drop-shadow(0 25px 50px rgba(0,0,0,.75));transition:transform .2s;will-change:transform}
 @media(max-width:820px){.d-split{grid-template-columns:1fr;text-align:center}.d-split .d-p{margin-left:auto;margin-right:auto}.d-split.rev .d-media{order:0}.d-media img{max-width:380px}}
 
+/* chip video showcase (borderless & feathered shadow) */
+.d-chip-video-stage {
+  position: relative;
+  max-width: 760px;
+  width: 94%;
+  margin: 32px auto 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.d-chip-video-glow {
+  position: absolute;
+  width: 88%;
+  height: 82%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 55, 95, 0.32) 0%, rgba(255, 159, 10, 0.20) 45%, rgba(10, 132, 255, 0.12) 70%, transparent 85%);
+  filter: blur(75px);
+  pointer-events: none;
+  z-index: 0;
+  transform: translateZ(0);
+}
+
+.d-chip-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 28px;
+  overflow: hidden;
+  background: transparent;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 20px 45px rgba(255, 55, 95, 0.22)) drop-shadow(0 30px 60px rgba(0, 0, 0, 0.85));
+}
+
+.d-chip-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent;
+  pointer-events: none;
+  /* Feathered soft edges */
+  -webkit-mask-image: radial-gradient(ellipse 74% 72% at 50% 50%, #000 48%, rgba(0, 0, 0, 0.7) 72%, transparent 98%);
+  mask-image: radial-gradient(ellipse 74% 72% at 50% 50%, #000 48%, rgba(0, 0, 0, 0.7) 72%, transparent 98%);
+}
+
+.d-chip-video-feather {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 74% 72% at 50% 50%, transparent 48%, rgba(0, 0, 0, 0.45) 75%, #000 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
 /* chip stats */
 .d-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:24px auto 0;max-width:860px}
 .d-pill{font:inherit;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#d2d2d7;padding:7px 15px;border-radius:980px;font-size:13.5px;font-weight:500;cursor:pointer;transition:background .2s ease,border-color .2s ease,color .2s ease,transform .15s ease}
@@ -407,6 +468,8 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
   .d-batt-stage{order:-1;min-height:280px}
   .d-batt-img-wrap{height:270px}
   .d-card-ring{padding:20px 22px;gap:18px}
+  .d-chip-video-stage{margin:22px auto 16px;max-width:540px}
+  .d-chip-video-glow{filter:blur(50px);opacity:.2}
 }
 
 @media(max-width:600px){
@@ -438,6 +501,8 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
   .d-batt-img-wrap{height:230px}
   .d-card-ring{flex-direction:column;text-align:center;padding:22px 16px;gap:12px}
   .d-card-ring .d-ring{margin:0 auto}
+  .d-chip-video-stage{margin:18px auto 14px}
+  .d-chip-video-wrap{border-radius:18px}
 }
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}}
@@ -520,10 +585,34 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
 
   <!-- 5. CHIP -->
   <section class="d-sec" id="chip">
-    <div class="d-glow" style="width:40vw;height:40vw;right:-8vw;top:10%;background:#ff375f;opacity:.14"></div>
+    <div class="d-glow" style="width:46vw;height:46vw;right:-8vw;top:10%;background:#ff375f;opacity:.16"></div>
     <div class="d-wrap" style="position:relative;z-index:1">
       <h2 class="d-h2 rv">Vapor&#8209;cooled A20 Pro chip for pro performance.</h2>
-      <p class="d-cmp rv d1">Compare with:</p>
+      <p class="d-p rv d1" style="margin:14px auto 0;">Groundbreaking thermal architecture meets unprecedented mobile power.</p>
+
+      <!-- Borderless Feathered Chip Video Showcase -->
+      <div class="d-chip-video-stage rv d1">
+        <div class="d-chip-video-glow" aria-hidden="true"></div>
+        <div class="d-chip-video-wrap">
+          <video
+            id="chipVideo"
+            class="d-chip-video"
+            src="images/iphone_duo_assets/gemini_generated_video_651768f2.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="auto"
+            disablepictureinpicture
+            disableremoteplayback
+            tabindex="-1"
+            aria-label="Vapor-cooled A20 Pro chip in action"
+          ></video>
+          <div class="d-chip-video-feather" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <p class="d-cmp rv d1" style="margin-top:20px;">Compare with:</p>
       <div class="d-pills rv d1" id="pills" role="group" aria-label="Compare with">
         <button class="d-pill" aria-pressed="true">iPhone 16 Pro Max</button>
         <button class="d-pill" aria-pressed="false">iPhone 16 Pro</button>
@@ -812,6 +901,31 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
       var nextIdx = segs[0] && segs[0].classList.contains('active') ? 1 : 0;
       if (segs[nextIdx]) selectSeg(segs[nextIdx], nextIdx);
     });
+  }
+
+  // Chip video autoplay & viewport performance
+  var chipVid = $('#chipVideo');
+  if (chipVid) {
+    chipVid.muted = true;
+    var tryPlayVid = function() {
+      var p = chipVid.play();
+      if (p !== undefined) p.catch(function(){});
+    };
+    tryPlayVid();
+    addEventListener('touchstart', tryPlayVid, { once: true, passive: true });
+    addEventListener('click', tryPlayVid, { once: true, passive: true });
+    if ('IntersectionObserver' in window) {
+      var vidIo = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            tryPlayVid();
+          } else {
+            chipVid.pause();
+          }
+        });
+      }, { threshold: 0.15 });
+      vidIo.observe(chipVid);
+    }
   }
 })();
 </script>
