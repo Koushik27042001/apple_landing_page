@@ -79,7 +79,7 @@ function renderHeader(active) {
             '<div class="cascade-mega-container" id="productsSubmenu" role="menu" aria-label="Apple navigation">' +
               '<!-- LEVEL 2: FIRST PANEL (APPLE DROPDOWN) -->' +
               '<div class="cascade-panel cascade-panel-1" id="cascadePanel1" role="group" aria-label="Apple Main Menu">' +
-                '<div class="cascade-item has-submenu active" data-sub="products" tabindex="0" role="menuitem" aria-haspopup="true">' +
+                '<div class="cascade-item has-submenu" data-sub="products" tabindex="0" role="menuitem" aria-haspopup="true">' +
                   '<span class="cascade-item-text">Products</span>' +
                   '<span class="red-arrow">&rsaquo;</span>' +
                 '</div>' +
@@ -93,7 +93,7 @@ function renderHeader(active) {
 
               '<!-- LEVEL 3: SECOND PANEL (PRODUCT CATEGORIES) -->' +
               '<div class="cascade-panel cascade-panel-2" id="cascadePanel2" role="group" aria-label="Product Categories">' +
-                '<div class="cascade-cat-item has-submenu active" data-cat="iphone" tabindex="0" role="menuitem" aria-haspopup="true">' +
+                '<div class="cascade-cat-item has-submenu" data-cat="iphone" tabindex="0" role="menuitem" aria-haspopup="true">' +
                   '<span class="cascade-item-text">iPhone</span>' +
                   '<span class="red-arrow">&rsaquo;</span>' +
                 '</div>' +
@@ -118,7 +118,7 @@ function renderHeader(active) {
               '<!-- LEVEL 4: THIRD PANEL (PRODUCT LISTINGS DYNAMICALLY TOP-ALIGNED) -->' +
               '<div class="cascade-panel cascade-panel-3" id="cascadePanel3" role="group" aria-label="Product Listings">' +
                 '<!-- iPhone -->' +
-                '<div class="cascade-prod-group active" data-cat-group="iphone">' +
+                '<div class="cascade-prod-group" data-cat-group="iphone">' +
                   '<div class="cascade-group-title">iPhone Lineup</div>' +
                   '<a href="product.html?id=iphone-duo" class="cascade-prod-item"><span class="cascade-prod-name">iPhone duo</span><span class="badge-new-red">New</span></a>' +
                   '<a href="product.html?id=iphone-18-pro" class="cascade-prod-item"><span class="cascade-prod-name">iPhone 18 Pro</span><span class="badge-new-red">New</span></a>' +
@@ -177,7 +177,6 @@ function renderHeader(active) {
           '</div>' +
           navLink("macbook-neo.html", "MacBook Neo", active === "macbook-neo") +
           navLink("about.html#business", "Business", active === "business") +
-          navLink("entertainment.html", "Events", active === "events" || active === "entertainment") +
           navLink("support.html#insights", "Insights", active === "insights") +
           navLink("contact.html", "Contact Us", active === "contact") +
           navLink("support.html", "Support", active === "support") +
@@ -272,7 +271,6 @@ function renderHeader(active) {
       '</div>' +
       '<a href="macbook-neo.html" style="font-weight:700;color:var(--accent,#0071e3);">MacBook Neo 🔥</a>' +
       '<a href="about.html#business">Business</a>' +
-      '<a href="entertainment.html">Events</a>' +
       '<a href="support.html#insights">Insights</a>' +
       '<a href="contact.html">Contact Us</a>' +
       '<a href="support.html">Support</a>' +
@@ -347,21 +345,39 @@ function wireCascadingMegaMenu() {
   if (!menuWrapper || !panel1 || !panel2 || !panel3) return;
 
   let closeTimer = null;
-  let activeCategory = "iphone";
+  let activeCategory = null;
 
-  function openMenu() {
+  const p1Items = panel1.querySelectorAll(".cascade-item");
+  const catItems = panel2.querySelectorAll(".cascade-cat-item");
+  const prodGroups = panel3.querySelectorAll(".cascade-prod-group");
+
+  function openAppleMenu() {
     clearTimeout(closeTimer);
     menuWrapper.classList.add("open");
     if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "true");
-    activateCategory(activeCategory);
+    // Initially ONLY Panel 1 is visible. Sub-panels open one-by-one on hover!
+    closeSubmenus();
+  }
+
+  function closeSubmenus() {
+    panel2.classList.remove("open");
+    panel3.classList.remove("open");
+    p1Items.forEach(function (i) { i.classList.remove("active"); });
+    catItems.forEach(function (ci) { ci.classList.remove("active"); });
+    prodGroups.forEach(function (g) { g.classList.remove("active"); });
+    activeCategory = null;
+    if (megaContainer) megaContainer.style.transform = "";
+  }
+
+  function closeAll() {
+    menuWrapper.classList.remove("open");
+    if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "false");
+    closeSubmenus();
   }
 
   function scheduleClose() {
     clearTimeout(closeTimer);
-    closeTimer = setTimeout(function () {
-      menuWrapper.classList.remove("open");
-      if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "false");
-    }, 200);
+    closeTimer = setTimeout(closeAll, 220);
   }
 
   function cancelClose() {
@@ -369,13 +385,16 @@ function wireCascadingMegaMenu() {
   }
 
   if (toggleBtn) {
-    toggleBtn.addEventListener("mouseenter", openMenu);
+    toggleBtn.addEventListener("mouseenter", openAppleMenu);
     toggleBtn.addEventListener("mouseleave", scheduleClose);
     toggleBtn.addEventListener("click", function (e) {
       e.stopPropagation();
-      const isOpen = menuWrapper.classList.toggle("open");
-      toggleBtn.setAttribute("aria-expanded", String(isOpen));
-      if (isOpen) activateCategory(activeCategory);
+      const willOpen = !menuWrapper.classList.contains("open");
+      if (willOpen) {
+        openAppleMenu();
+      } else {
+        closeAll();
+      }
     });
   }
 
@@ -384,8 +403,22 @@ function wireCascadingMegaMenu() {
     megaContainer.addEventListener("mouseleave", scheduleClose);
   }
 
-  // Panel 1 hover items
-  const p1Items = panel1.querySelectorAll(".cascade-item");
+  panel1.addEventListener("mouseenter", cancelClose);
+  panel2.addEventListener("mouseenter", function () {
+    cancelClose();
+    panel2.classList.add("open");
+    const prodItem = panel1.querySelector('[data-sub="products"]');
+    if (prodItem) prodItem.classList.add("active");
+  });
+  panel3.addEventListener("mouseenter", function () {
+    cancelClose();
+    panel2.classList.add("open");
+    panel3.classList.add("open");
+    const prodItem = panel1.querySelector('[data-sub="products"]');
+    if (prodItem) prodItem.classList.add("active");
+  });
+
+  // Level 2 (Panel 1) hover items
   p1Items.forEach(function (item) {
     item.addEventListener("mouseenter", function () {
       cancelClose();
@@ -393,50 +426,80 @@ function wireCascadingMegaMenu() {
       item.classList.add("active");
 
       if (item.dataset.sub === "products") {
-        panel2.style.display = "block";
-        panel2.style.opacity = "1";
-        panel3.style.display = "block";
-        panel3.style.opacity = "1";
-        activateCategory(activeCategory);
+        // Open Level 3 (Panel 2: Categories)
+        panel2.classList.add("open");
+        // Panel 3 stays closed until user hovers over a category in Panel 2
+        panel3.classList.remove("open");
+        catItems.forEach(function (ci) { ci.classList.remove("active"); });
+        prodGroups.forEach(function (g) { g.classList.remove("active"); });
       } else {
-        panel2.style.display = "none";
-        panel3.style.display = "none";
+        // Non-product item in Panel 1: close Level 3 & Level 4
+        panel2.classList.remove("open");
+        panel3.classList.remove("open");
+        catItems.forEach(function (ci) { ci.classList.remove("active"); });
+        prodGroups.forEach(function (g) { g.classList.remove("active"); });
+      }
+    });
+
+    item.addEventListener("focus", function () {
+      cancelClose();
+      p1Items.forEach(function (i) { i.classList.remove("active"); });
+      item.classList.add("active");
+      if (item.dataset.sub === "products") {
+        panel2.classList.add("open");
+      } else {
+        panel2.classList.remove("open");
+        panel3.classList.remove("open");
       }
     });
   });
 
-  // Panel 2 category hover items
-  const catItems = panel2.querySelectorAll(".cascade-cat-item");
+  // Level 3 (Panel 2) category hover items
   catItems.forEach(function (item) {
     item.addEventListener("mouseenter", function () {
       cancelClose();
+      panel2.classList.add("open");
+      const prodItem = panel1.querySelector('[data-sub="products"]');
+      if (prodItem) prodItem.classList.add("active");
+
       const catKey = item.dataset.cat;
       if (catKey) {
-        activateCategory(catKey);
+        activateCategory(catKey, item);
       }
+    });
+
+    item.addEventListener("focus", function () {
+      cancelClose();
+      panel2.classList.add("open");
+      const catKey = item.dataset.cat;
+      if (catKey) activateCategory(catKey, item);
     });
   });
 
-  function activateCategory(catKey) {
+  function activateCategory(catKey, catElement) {
     activeCategory = catKey;
 
     catItems.forEach(function (ci) {
       if (ci.dataset.cat === catKey) {
         ci.classList.add("active");
-        alignPanel3ToCategory(ci);
       } else {
         ci.classList.remove("active");
       }
     });
 
-    const groups = panel3.querySelectorAll(".cascade-prod-group");
-    groups.forEach(function (g) {
+    // Open Level 4 (Panel 3: Product Listings)
+    panel3.classList.add("open");
+    prodGroups.forEach(function (g) {
       if (g.dataset.catGroup === catKey) {
         g.classList.add("active");
       } else {
         g.classList.remove("active");
       }
     });
+
+    if (catElement) {
+      alignPanel3ToCategory(catElement);
+    }
   }
 
   function alignPanel3ToCategory(catElement) {
@@ -471,19 +534,15 @@ function wireCascadingMegaMenu() {
   // Keyboard accessibility
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && menuWrapper.classList.contains("open")) {
-      menuWrapper.classList.remove("open");
-      if (toggleBtn) {
-        toggleBtn.setAttribute("aria-expanded", "false");
-        toggleBtn.focus();
-      }
+      closeAll();
+      if (toggleBtn) toggleBtn.focus();
     }
   });
 
   // Outside click closes
   document.addEventListener("click", function (e) {
     if (!menuWrapper.contains(e.target)) {
-      menuWrapper.classList.remove("open");
-      if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "false");
+      closeAll();
     }
   });
 }

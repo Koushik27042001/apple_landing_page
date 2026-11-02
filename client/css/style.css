@@ -451,29 +451,52 @@ button {
   height: 100%;
 }
 
-/* Panel 1: Primary Apple Dropdown */
+/* Panel 1: Primary Apple Dropdown (Level 2: opens on hovering Apple) */
 .cascade-panel-1 {
   position: relative;
   width: 250px;
 }
 
-/* Panel 2: Product Categories */
+/* Panel 2: Product Categories (Level 3: opens on hovering Products in Panel 1) */
 .cascade-panel-2 {
+  display: none;
   position: absolute;
   left: 258px;
   top: 0;
   width: 200px;
   z-index: 1001;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
 }
 
-/* Panel 3: Product Listings (Dynamically Top-Aligned) */
+.cascade-panel-2.open {
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateX(0);
+  pointer-events: auto !important;
+}
+
+/* Panel 3: Product Listings (Level 4: opens on hovering a category in Panel 2) */
 .cascade-panel-3 {
+  display: none;
   position: absolute;
   left: 466px;
   top: 0;
   width: 320px;
   z-index: 1002;
-  transition: top 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, top 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.cascade-panel-3.open {
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateX(0);
+  pointer-events: auto !important;
 }
 
 /* Menu Items inside Panels */
@@ -890,11 +913,36 @@ button {
   margin-bottom: 24px;
 }
 
-.mobile-nav a {
+.mobile-nav > a {
   display: block;
-  padding: 16px 4px;
-  font-size: 20px;
-  border-bottom: 1px solid var(--gray-bg);
+  padding: 14px 4px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--black, #1d1d1f);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.mobile-nav .mobile-sub-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 8px 6px !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  color: #333336 !important;
+  -webkit-text-fill-color: #333336 !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
+}
+
+.mobile-nav .mobile-sub-link:last-child {
+  border-bottom: none !important;
+}
+
+.mobile-nav .mobile-sub-link:hover {
+  color: #0071e3 !important;
+  -webkit-text-fill-color: #0071e3 !important;
 }
 
 .mobile-nav-divider {
@@ -918,14 +966,14 @@ body.page-dark .mobile-nav {
   color: #ffffff;
 }
 
-body.dark-theme .mobile-nav a,
-body.page-dark .mobile-nav a {
+body.dark-theme .mobile-nav > a,
+body.page-dark .mobile-nav > a {
   color: #e5e5ea;
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
-body.dark-theme .mobile-nav a:hover,
-body.page-dark .mobile-nav a:hover {
+body.dark-theme .mobile-nav > a:hover,
+body.page-dark .mobile-nav > a:hover {
   color: #ffffff;
 }
 
