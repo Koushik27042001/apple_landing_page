@@ -71,15 +71,16 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
 .d-stage{perspective:1400px;margin:28px auto 0;max-width:580px;width:90%;position:relative;z-index:2}
 .d-stage img{width:100%;max-height:400px;object-fit:contain;margin:0 auto;filter:drop-shadow(0 30px 60px rgba(0,0,0,.85));transition:transform .2s cubic-bezier(.2,.8,.2,1);will-change:transform}
 
-/* display (sticky scale - Apple cinema experience) */
-.d-disp{height:180vh;position:relative;scroll-margin-top:var(--hdr,54px)}
-.d-pin{position:sticky;top:var(--hdr,0px);height:calc(100vh - var(--hdr, 54px));height:calc(100dvh - var(--hdr, 54px));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px, 2vh, 20px);text-align:center;padding:12px 18px;overflow:visible;box-sizing:border-box}
-.d-disp-stage{perspective:1400px;perspective-origin:center center;width:100%;max-width:980px;display:flex;justify-content:center;align-items:center;position:relative;margin:6px auto 0}
-.d-disp-glow{position:absolute;width:75%;height:65%;border-radius:50%;background:radial-gradient(circle,rgba(10,132,255,.45) 0%,rgba(191,90,242,.25) 45%,transparent 75%);filter:blur(65px);pointer-events:none;opacity:0;transition:opacity .3s ease,transform .3s ease;z-index:0}
-.d-disp img{position:relative;z-index:1;width:min(920px,90vw);max-height:clamp(260px,48vh,520px);object-fit:contain;margin:0 auto;filter:drop-shadow(0 25px 60px rgba(0,0,0,.9));will-change:transform,filter;transition:transform .12s cubic-bezier(.16,1,.3,1),filter .15s ease;transform-origin:center center}
+/* display (scales smoothly as you scroll - tight Apple spacing) */
+.d-disp{position:relative;padding:54px 0 10px;scroll-margin-top:var(--hdr,54px);overflow:visible}
+.d-pin{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:0 18px;overflow:visible;box-sizing:border-box}
+.d-disp-stage{perspective:1400px;perspective-origin:center center;width:100%;max-width:980px;display:flex;justify-content:center;align-items:center;position:relative;margin:10px auto 0}
+.d-disp-glow{position:absolute;width:75%;height:65%;border-radius:50%;background:radial-gradient(circle,rgba(10,132,255,.45) 0%,rgba(191,90,242,.25) 45%,transparent 75%);filter:blur(65px);pointer-events:none;opacity:.35;transition:opacity .3s ease,transform .3s ease;z-index:0}
+.d-disp img{position:relative;z-index:1;width:min(920px,90vw);max-height:clamp(260px,48vh,500px);object-fit:contain;margin:0 auto;filter:drop-shadow(0 25px 60px rgba(0,0,0,.9));will-change:transform,filter;transition:transform .12s cubic-bezier(.16,1,.3,1),filter .15s ease;transform-origin:center center}
 
 /* sections */
 .d-sec{position:relative;padding:90px 0;text-align:center;overflow:hidden}
+#ios.d-sec{padding:26px 0 76px}
 .d-sec .d-p{margin:14px auto 0}
 
 /* unique iOS showcase image */
@@ -276,7 +277,8 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
   .d-cta{padding:54px 0 36px}
   .d-stage{margin-top:18px;width:95%}
   .d-stage img{max-height:280px}
-  .d-disp{height:150vh}
+  .d-disp{padding:36px 0 10px;height:auto}
+  #ios.d-sec{padding-top:22px}
   .d-disp-stage{max-width:100%}
   .d-disp img{width:min(92vw,420px);max-height:40vh}
   .d-ios-hero{margin:20px auto 16px;width:95%}
@@ -333,7 +335,7 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
       <p class="d-p rv d1" style="margin-left:auto;margin-right:auto">The largest iPhone display ever. In a thin, foldable design.</p>
       <div class="d-btns rv d2">
         <a class="d-btn pri" href="product.html?id=iphone-duo">Buy Now &mdash; ₹2,99,900</a>
-        <a class="d-btn sec" href="https://superiorsystems.in/contact" target="_blank" rel="noopener">Contact us</a>
+        <a class="d-btn sec" href="contact.html">Contact Us</a>
         <a class="d-btn sec" href="#display">See the display &darr;</a>
       </div>
       <div class="d-stage" id="heroStage">
@@ -482,7 +484,7 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
       <p class="d-p rv d1" style="margin:12px auto 0; font-size:16px;">Experience the largest iPhone display ever in a thin, foldable design.</p>
       <div class="d-btns rv d1" style="margin-top:22px;">
         <a class="d-btn pri" href="product.html?id=iphone-duo">Buy Now &mdash; ₹2,99,900</a>
-        <a class="d-btn sec" href="https://superiorsystems.in/contact" target="_blank" rel="noopener">Contact us</a>
+        <a class="d-btn sec" href="contact.html">Contact Us</a>
         <a class="d-btn sec" href="#overview">Back to top &uarr;</a>
       </div>
     </div>
@@ -533,38 +535,28 @@ html, body.duo-page{background:var(--bg);color:var(--fg);font-family:-apple-syst
 
       // display unfolding & scale animation
       var r = dispSec.getBoundingClientRect();
-      var hdr = hd && hd.firstElementChild ? hd.firstElementChild.getBoundingClientRect().height : 54;
-      var pinDist = Math.max(1, r.height - vh);
-
-      var progress = 0;
-      if (r.top <= hdr) {
-        var pinnedRatio = clamp((hdr - r.top) / pinDist, 0, 1);
-        progress = 0.2 + pinnedRatio * 0.8;
-      } else if (r.top < vh) {
-        var enterRatio = clamp((vh - r.top) / Math.max(1, vh - hdr), 0, 1);
-        progress = enterRatio * 0.2;
-      }
+      var enterRatio = clamp((vh - r.top) / (vh * 0.75), 0, 1);
 
       // Smooth ease curve: easeOutCubic
-      var ease = 1 - Math.pow(1 - progress, 3);
+      var ease = 1 - Math.pow(1 - enterRatio, 3);
 
-      var startScale = isMobile ? 0.84 : 0.76;
-      var maxScale = isMobile ? 0.98 : 1.06;
+      var startScale = isMobile ? 0.86 : 0.80;
+      var maxScale = isMobile ? 0.98 : 1.05;
       var s = startScale + ease * (maxScale - startScale);
 
-      // 3D unfolding angle: unfolds from 12deg (mobile 8deg) down to 0deg (flat)
-      var rx = (1 - ease) * (isMobile ? 8 : 12);
-      var ty = (1 - ease) * (isMobile ? 12 : 24);
+      // 3D unfolding angle: unfolds from 10deg (mobile 6deg) down to 0deg (flat)
+      var rx = (1 - ease) * (isMobile ? 6 : 10);
+      var ty = (1 - ease) * (isMobile ? 8 : 16);
 
       disp.style.transform = 'perspective(1200px) rotateX(' + rx.toFixed(2) + 'deg) scale(' + s.toFixed(3) + ') translate3d(0,' + ty.toFixed(1) + 'px,0)';
 
-      var shadowBlur = (30 + ease * 40).toFixed(0);
+      var shadowBlur = (25 + ease * 40).toFixed(0);
       var glowSpread = (ease * 16).toFixed(0);
-      disp.style.filter = 'drop-shadow(0 ' + (20 + ease * 15).toFixed(0) + 'px ' + shadowBlur + 'px rgba(0,0,0,0.85)) drop-shadow(0 0 ' + glowSpread + 'px rgba(10,132,255,' + (ease * 0.35).toFixed(2) + '))';
+      disp.style.filter = 'drop-shadow(0 ' + (18 + ease * 14).toFixed(0) + 'px ' + shadowBlur + 'px rgba(0,0,0,0.85)) drop-shadow(0 0 ' + glowSpread + 'px rgba(10,132,255,' + (ease * 0.35).toFixed(2) + '))';
 
       if (dispGlow) {
-        dispGlow.style.opacity = (ease * 0.65).toFixed(2);
-        dispGlow.style.transform = 'scale(' + (0.8 + ease * 0.3).toFixed(2) + ')';
+        dispGlow.style.opacity = (0.2 + ease * 0.55).toFixed(2);
+        dispGlow.style.transform = 'scale(' + (0.85 + ease * 0.25).toFixed(2) + ')';
       }
 
       tilts.forEach(function(im){im.style.transform='translate3d('+(mx*-10)+'px,'+(my*-8)+'px,0)'});
