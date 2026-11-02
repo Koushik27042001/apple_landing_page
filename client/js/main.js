@@ -120,11 +120,11 @@ function renderHeader(active) {
                 '<!-- iPhone -->' +
                 '<div class="cascade-prod-group active" data-cat-group="iphone">' +
                   '<div class="cascade-group-title">iPhone Lineup</div>' +
-                  '<a href="product.html?id=iphone-duo" class="cascade-prod-item"><span>iPhone duo</span><span class="badge-new-red">New</span></a>' +
-                  '<a href="product.html?id=iphone-18-pro" class="cascade-prod-item"><span>iPhone 18 Pro</span><span class="badge-new-red">New</span></a>' +
-                  '<a href="product.html?id=iphone-17e" class="cascade-prod-item"><span>iPhone 17e</span></a>' +
-                  '<a href="product.html?id=iphone-17" class="cascade-prod-item"><span>iPhone 17</span></a>' +
-                  '<a href="product.html?id=iphone-air" class="cascade-prod-item"><span>iPhone Air</span></a>' +
+                  '<a href="product.html?id=iphone-duo" class="cascade-prod-item"><span class="cascade-prod-name">iPhone duo</span><span class="badge-new-red">New</span></a>' +
+                  '<a href="product.html?id=iphone-18-pro" class="cascade-prod-item"><span class="cascade-prod-name">iPhone 18 Pro</span><span class="badge-new-red">New</span></a>' +
+                  '<a href="product.html?id=iphone-17e" class="cascade-prod-item"><span class="cascade-prod-name">iPhone 17e</span></a>' +
+                  '<a href="product.html?id=iphone-17" class="cascade-prod-item"><span class="cascade-prod-name">iPhone 17</span></a>' +
+                  '<a href="product.html?id=iphone-air" class="cascade-prod-item"><span class="cascade-prod-name">iPhone Air</span></a>' +
                   '<div class="cascade-divider"></div>' +
                   '<a href="category.html?cat=iphone" class="cascade-explore-link">Explore all iPhone &rarr;</a>' +
                 '</div>' +
@@ -132,9 +132,9 @@ function renderHeader(active) {
                 '<!-- iPad -->' +
                 '<div class="cascade-prod-group" data-cat-group="ipad">' +
                   '<div class="cascade-group-title">iPad Lineup</div>' +
-                  '<a href="product.html?id=ipad-pro-13-m5" class="cascade-prod-item"><span>iPad Pro M5</span></a>' +
-                  '<a href="product.html?id=ipad-air-11-m4" class="cascade-prod-item"><span>iPad Air M4</span></a>' +
-                  '<a href="product.html?id=ipad-11-gen" class="cascade-prod-item"><span>iPad Mini</span><span class="badge-new-red">New</span></a>' +
+                  '<a href="product.html?id=ipad-pro-13-m5" class="cascade-prod-item"><span class="cascade-prod-name">iPad Pro M5</span></a>' +
+                  '<a href="product.html?id=ipad-air-11-m4" class="cascade-prod-item"><span class="cascade-prod-name">iPad Air M4</span></a>' +
+                  '<a href="product.html?id=ipad-11-gen" class="cascade-prod-item"><span class="cascade-prod-name">iPad Mini</span><span class="badge-new-red">New</span></a>' +
                   '<div class="cascade-divider"></div>' +
                   '<a href="category.html?cat=ipad" class="cascade-explore-link">Explore all iPad &rarr;</a>' +
                 '</div>' +
@@ -142,13 +142,13 @@ function renderHeader(active) {
                 '<!-- Mac -->' +
                 '<div class="cascade-prod-group" data-cat-group="mac">' +
                   '<div class="cascade-group-title">Mac Lineup</div>' +
-                  '<a href="product.html?id=macbook-pro-16-m5" class="cascade-prod-item"><span>MacBook Pro PROLED XDR Display</span><span class="badge-new-red">New</span></a>' +
-                  '<a href="product.html?id=macbook-pro-14-m5" class="cascade-prod-item"><span>MacBook Pro</span></a>' +
-                  '<a href="product.html?id=macbook-air-13-m5" class="cascade-prod-item"><span>MacBook Air</span></a>' +
-                  '<a href="product.html?id=imac-24-m4" class="cascade-prod-item"><span>iMac</span></a>' +
-                  '<a href="macbook-neo.html" class="cascade-prod-item"><span>MacBook Neo</span></a>' +
-                  '<a href="product.html?id=mac-mini-m4" class="cascade-prod-item"><span>Mac Mini</span><span class="badge-new-red">New</span></a>' +
-                  '<a href="category.html?cat=mac" class="cascade-prod-item"><span>Mac Studio</span></a>' +
+                  '<a href="product.html?id=macbook-pro-16-m5" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Pro PROLED XDR Display</span><span class="badge-new-red">New</span></a>' +
+                  '<a href="product.html?id=macbook-pro-14-m5" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Pro</span></a>' +
+                  '<a href="product.html?id=macbook-air-13-m5" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Air</span></a>' +
+                  '<a href="product.html?id=imac-24-m4" class="cascade-prod-item"><span class="cascade-prod-name">iMac</span></a>' +
+                  '<a href="macbook-neo.html" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Neo</span></a>' +
+                  '<a href="product.html?id=mac-mini-m4" class="cascade-prod-item"><span class="cascade-prod-name">Mac Mini</span><span class="badge-new-red">New</span></a>' +
+                  '<a href="category.html?cat=mac" class="cascade-prod-item"><span class="cascade-prod-name">Mac Studio</span></a>' +
                   '<div class="cascade-divider"></div>' +
                   '<a href="category.html?cat=mac" class="cascade-explore-link">Explore all Mac &rarr;</a>' +
                 '</div>' +
@@ -156,9 +156,9 @@ function renderHeader(active) {
                 '<!-- Apple Watch -->' +
                 '<div class="cascade-prod-group" data-cat-group="watch">' +
                   '<div class="cascade-group-title">Apple Watch Lineup</div>' +
-                  '<a href="product.html?id=watch-series-11" class="cascade-prod-item"><span>Apple Watch Series</span></a>' +
-                  '<a href="product.html?id=watch-se-3" class="cascade-prod-item"><span>Apple Watch SE</span></a>' +
-                  '<a href="product.html?id=watch-ultra-3" class="cascade-prod-item"><span>Apple Watch Ultra</span></a>' +
+                  '<a href="product.html?id=watch-series-11" class="cascade-prod-item"><span class="cascade-prod-name">Apple Watch Series</span></a>' +
+                  '<a href="product.html?id=watch-se-3" class="cascade-prod-item"><span class="cascade-prod-name">Apple Watch SE</span></a>' +
+                  '<a href="product.html?id=watch-ultra-3" class="cascade-prod-item"><span class="cascade-prod-name">Apple Watch Ultra</span></a>' +
                   '<div class="cascade-divider"></div>' +
                   '<a href="category.html?cat=watch" class="cascade-explore-link">Explore all Watch &rarr;</a>' +
                 '</div>' +
@@ -166,9 +166,9 @@ function renderHeader(active) {
                 '<!-- AirPods -->' +
                 '<div class="cascade-prod-group" data-cat-group="airpods">' +
                   '<div class="cascade-group-title">AirPods Lineup</div>' +
-                  '<a href="product.html?id=airpods-pro-3" class="cascade-prod-item"><span>AirPods Pro</span></a>' +
-                  '<a href="category.html?cat=airpods" class="cascade-prod-item"><span>AirPods 4</span></a>' +
-                  '<a href="product.html?id=airpods-max" class="cascade-prod-item"><span>AirPods Max</span></a>' +
+                  '<a href="product.html?id=airpods-pro-3" class="cascade-prod-item"><span class="cascade-prod-name">AirPods Pro</span></a>' +
+                  '<a href="category.html?cat=airpods" class="cascade-prod-item"><span class="cascade-prod-name">AirPods 4</span></a>' +
+                  '<a href="product.html?id=airpods-max" class="cascade-prod-item"><span class="cascade-prod-name">AirPods Max</span></a>' +
                   '<div class="cascade-divider"></div>' +
                   '<a href="category.html?cat=airpods" class="cascade-explore-link">Explore all AirPods &rarr;</a>' +
                 '</div>' +

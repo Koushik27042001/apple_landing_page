@@ -245,13 +245,13 @@ button { font-family: inherit; cursor: pointer; }
   flex: 1;
   min-width: 0;
 }
-.main-nav a {
+.main-nav > a {
   font-size: 12.5px;
   color: var(--gray-dark);
   white-space: nowrap;
 }
-.main-nav a:hover { color: var(--blue); }
-.main-nav a.active { color: var(--blue); font-weight: 600; }
+.main-nav > a:hover { color: var(--blue); }
+.main-nav > a.active { color: var(--blue); font-weight: 600; }
 
 /* ============================================================
    Apple-Style Cascading Mega Menu
@@ -387,43 +387,62 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* Menu Items inside Panels */
-.cascade-item,
-.cascade-cat-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px;
-  border-radius: 10px;
+.cascade-panel .cascade-item,
+.cascade-panel .cascade-cat-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 10px 14px !important;
+  border-radius: 10px !important;
   color: #1d1d1f !important;
-  font-size: 13.5px;
-  font-weight: 500;
+  -webkit-text-fill-color: #1d1d1f !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
   text-decoration: none !important;
-  cursor: pointer;
-  user-select: none;
-  transition: background 0.15s ease, color 0.15s ease;
+  cursor: pointer !important;
+  user-select: none !important;
+  transition: background 0.15s ease, color 0.15s ease !important;
 }
 
-.cascade-item:hover,
-.cascade-item.active,
-.cascade-cat-item:hover,
-.cascade-cat-item.active {
+.cascade-panel .cascade-item-text {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  display: inline-block !important;
+}
+
+.cascade-panel .cascade-item:hover,
+.cascade-panel .cascade-item.active,
+.cascade-panel .cascade-cat-item:hover,
+.cascade-panel .cascade-cat-item.active {
   background: #f5f5f7 !important;
   color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+.cascade-panel .cascade-item:hover .cascade-item-text,
+.cascade-panel .cascade-item.active .cascade-item-text,
+.cascade-panel .cascade-cat-item:hover .cascade-item-text,
+.cascade-panel .cascade-cat-item.active .cascade-item-text {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
 }
 
 /* Red Directional Arrows */
 .cascade-panel .red-arrow {
   color: #d60017 !important;
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1;
-  margin-left: 8px;
-  transition: transform 0.15s ease;
+  -webkit-text-fill-color: #d60017 !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  margin-left: 8px !important;
+  transition: transform 0.15s ease !important;
 }
 
-.cascade-item.active .red-arrow,
-.cascade-cat-item.active .red-arrow {
-  transform: translateX(2px);
+.cascade-panel .cascade-item.active .red-arrow,
+.cascade-panel .cascade-cat-item.active .red-arrow {
+  transform: translateX(2px) !important;
 }
 
 /* Product Groups inside Panel 3 */
@@ -441,65 +460,91 @@ button { font-family: inherit; cursor: pointer; }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.cascade-group-title {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #86868b !important;
-  padding: 6px 12px 10px;
+.cascade-panel .cascade-group-title {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: #6e6e73 !important;
+  -webkit-text-fill-color: #6e6e73 !important;
+  padding: 6px 12px 10px !important;
+  display: block !important;
 }
 
-.cascade-prod-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 9px 12px;
-  border-radius: 9px;
+.cascade-panel .cascade-prod-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 9px 12px !important;
+  border-radius: 9px !important;
   color: #1d1d1f !important;
-  font-size: 13.5px;
-  font-weight: 500;
+  -webkit-text-fill-color: #1d1d1f !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
   text-decoration: none !important;
-  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease !important;
 }
 
-.cascade-prod-item:hover {
+.cascade-panel .cascade-prod-name,
+.cascade-panel .cascade-prod-item span:first-child,
+.cascade-panel .cascade-prod-item > span:not(.badge-new-red) {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  display: inline-block !important;
+}
+
+.cascade-panel .cascade-prod-item:hover {
   background: #f5f5f7 !important;
   color: #0071e3 !important;
-  transform: translateX(2px);
+  -webkit-text-fill-color: #0071e3 !important;
+  transform: translateX(2px) !important;
+}
+
+.cascade-panel .cascade-prod-item:hover .cascade-prod-name,
+.cascade-panel .cascade-prod-item:hover span:first-child,
+.cascade-panel .cascade-prod-item:hover > span:not(.badge-new-red) {
+  color: #0071e3 !important;
+  -webkit-text-fill-color: #0071e3 !important;
 }
 
 /* Red 'New' Badges */
 .cascade-panel .badge-new-red,
 .mobile-nav .badge-new-red {
-  display: inline-block;
-  background: rgba(214, 0, 23, 0.09) !important;
+  display: inline-block !important;
+  background: rgba(214, 0, 23, 0.1) !important;
   color: #d60017 !important;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 999px;
-  line-height: 1.2;
-  letter-spacing: 0.02em;
+  -webkit-text-fill-color: #d60017 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 2px 7px !important;
+  border-radius: 999px !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.02em !important;
 }
 
-.cascade-divider {
-  height: 1px;
-  background: #ebebee;
-  margin: 8px 4px;
+.cascade-panel .cascade-divider {
+  height: 1px !important;
+  background: #e5e5ea !important;
+  margin: 8px 4px !important;
+  border: none !important;
 }
 
-.cascade-explore-link {
-  display: inline-block;
-  padding: 8px 12px 4px;
+.cascade-panel .cascade-explore-link {
+  display: inline-block !important;
+  padding: 8px 12px 4px !important;
   color: #0071e3 !important;
-  font-size: 12.5px;
-  font-weight: 600;
+  -webkit-text-fill-color: #0071e3 !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
   text-decoration: none !important;
-  transition: color 0.15s ease;
+  transition: color 0.15s ease !important;
 }
 
-.cascade-explore-link:hover {
+.cascade-panel .cascade-explore-link:hover {
+  color: #0077ed !important;
+  -webkit-text-fill-color: #0077ed !important;
   text-decoration: underline !important;
 }
 
@@ -3940,8 +3985,8 @@ body.dark-theme .site-header .logo span.store-tag,
   color: #a1a1a6 !important;
 }
 
-body.dark-theme .site-header .main-nav a,
-.site-header--dark .main-nav a {
+body.dark-theme .site-header .main-nav > a,
+.site-header--dark .main-nav > a {
   color: #e5e5ea !important;
   font-size: 13px !important;
   font-weight: 500 !important;
@@ -3949,10 +3994,10 @@ body.dark-theme .site-header .main-nav a,
   transition: color 0.2s ease !important;
 }
 
-body.dark-theme .site-header .main-nav a:hover,
-body.dark-theme .site-header .main-nav a.active,
-.site-header--dark .main-nav a:hover,
-.site-header--dark .main-nav a.active {
+body.dark-theme .site-header .main-nav > a:hover,
+body.dark-theme .site-header .main-nav > a.active,
+.site-header--dark .main-nav > a:hover,
+.site-header--dark .main-nav > a.active {
   color: #ffffff !important;
 }
 
@@ -3974,22 +4019,12 @@ body.dark-theme .site-header .products-menu.active .products-menu-toggle,
   color: #ffffff !important;
 }
 
-body.dark-theme .site-header .products-submenu,
-.site-header--dark .products-submenu {
-  background: #1c1c1e !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75) !important;
-}
-
-body.dark-theme .site-header .main-nav .products-submenu a,
-.site-header--dark .main-nav .products-submenu a {
-  color: #e5e5ea !important;
-}
-
-body.dark-theme .site-header .main-nav .products-submenu a:hover,
-.site-header--dark .main-nav .products-submenu a:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: #ffffff !important;
+body.dark-theme .site-header .cascade-mega-container,
+.site-header--dark .cascade-mega-container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
 
 body.dark-theme .site-header .search-input,
@@ -6150,63 +6185,287 @@ body.dark-theme .qr-lightbox-close:hover {
   background: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Ensure Floating White Cascading Mega Menu Panels Stay Crisp White Across All Themes */
+/* ============================================================
+   BULLETPROOF VISIBILITY FOR FLOATING CASCADING MEGA-MENU
+   Ensures all dropdown panels, product lineups, category items,
+   action buttons, and badges have 100% visible, high-contrast,
+   crisp text styling across all themes and viewports.
+   ============================================================ */
+
+.cascade-mega-container,
 body.dark-theme .cascade-mega-container,
 .site-header--dark .cascade-mega-container {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+  padding: 0 !important;
 }
 
+.cascade-panel,
 body.dark-theme .cascade-panel,
 .site-header--dark .cascade-panel {
   background: #ffffff !important;
   color: #1d1d1f !important;
+  border-radius: 18px !important;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18), 0 4px 16px rgba(0, 0, 0, 0.08) !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-sizing: border-box !important;
 }
 
-body.dark-theme .cascade-panel a,
+/* Category & Action Items (Panel 1 & Panel 2) */
+.cascade-panel .cascade-item,
+.cascade-panel .cascade-cat-item,
 body.dark-theme .cascade-panel .cascade-item,
 body.dark-theme .cascade-panel .cascade-cat-item,
-body.dark-theme .cascade-panel .cascade-prod-item,
-.site-header--dark .cascade-panel a,
 .site-header--dark .cascade-panel .cascade-item,
-.site-header--dark .cascade-panel .cascade-cat-item,
-.site-header--dark .cascade-panel .cascade-prod-item {
+.site-header--dark .cascade-panel .cascade-cat-item {
   color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
+.cascade-panel .cascade-item-text,
+body.dark-theme .cascade-panel .cascade-item-text,
+.site-header--dark .cascade-panel .cascade-item-text {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: inline-block !important;
+}
+
+.cascade-panel .cascade-item:hover,
+.cascade-panel .cascade-item.active,
+.cascade-panel .cascade-cat-item:hover,
+.cascade-panel .cascade-cat-item.active,
 body.dark-theme .cascade-panel .cascade-item:hover,
 body.dark-theme .cascade-panel .cascade-item.active,
 body.dark-theme .cascade-panel .cascade-cat-item:hover,
 body.dark-theme .cascade-panel .cascade-cat-item.active,
-body.dark-theme .cascade-panel .cascade-prod-item:hover,
 .site-header--dark .cascade-panel .cascade-item:hover,
 .site-header--dark .cascade-panel .cascade-item.active,
 .site-header--dark .cascade-panel .cascade-cat-item:hover,
-.site-header--dark .cascade-panel .cascade-cat-item.active,
-.site-header--dark .cascade-panel .cascade-prod-item:hover {
+.site-header--dark .cascade-panel .cascade-cat-item.active {
   background: #f5f5f7 !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
 }
 
-body.dark-theme .cascade-panel .cascade-prod-item:hover,
-.site-header--dark .cascade-panel .cascade-prod-item:hover {
-  color: #0071e3 !important;
+.cascade-panel .cascade-item:hover .cascade-item-text,
+.cascade-panel .cascade-item.active .cascade-item-text,
+.cascade-panel .cascade-cat-item:hover .cascade-item-text,
+.cascade-panel .cascade-cat-item.active .cascade-item-text,
+body.dark-theme .cascade-panel .cascade-item:hover .cascade-item-text,
+body.dark-theme .cascade-panel .cascade-item.active .cascade-item-text,
+body.dark-theme .cascade-panel .cascade-cat-item:hover .cascade-item-text,
+body.dark-theme .cascade-panel .cascade-cat-item.active .cascade-item-text,
+.site-header--dark .cascade-panel .cascade-item:hover .cascade-item-text,
+.site-header--dark .cascade-panel .cascade-item.active .cascade-item-text,
+.site-header--dark .cascade-panel .cascade-cat-item:hover .cascade-item-text,
+.site-header--dark .cascade-panel .cascade-cat-item.active .cascade-item-text {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
 }
 
-body.dark-theme .cascade-panel .cascade-group-title,
-.site-header--dark .cascade-panel .cascade-group-title {
-  color: #86868b !important;
-}
-
+/* Red Directional Arrows */
+.cascade-panel .red-arrow,
 body.dark-theme .cascade-panel .red-arrow,
 .site-header--dark .cascade-panel .red-arrow {
   color: #d60017 !important;
+  -webkit-text-fill-color: #d60017 !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  margin-left: 8px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
+/* Lineup Group Titles (e.g., iPhone Lineup, iPad Lineup) */
+.cascade-panel .cascade-group-title,
+body.dark-theme .cascade-panel .cascade-group-title,
+.site-header--dark .cascade-panel .cascade-group-title {
+  color: #6e6e73 !important;
+  -webkit-text-fill-color: #6e6e73 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  padding: 6px 12px 10px !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Product Lineup Items (e.g., iPhone duo, iPhone 18 Pro, iPhone 17e) */
+.cascade-panel .cascade-prod-item,
+.cascade-panel a.cascade-prod-item,
+body.dark-theme .cascade-panel .cascade-prod-item,
+body.dark-theme .cascade-panel a.cascade-prod-item,
+.site-header--dark .cascade-panel .cascade-prod-item,
+.site-header--dark .cascade-panel a.cascade-prod-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 9px 12px !important;
+  border-radius: 9px !important;
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.cascade-panel .cascade-prod-name,
+.cascade-panel .cascade-prod-item span,
+.cascade-panel a.cascade-prod-item span,
+.cascade-panel .cascade-prod-item span:first-child,
+.cascade-panel a.cascade-prod-item span:first-child,
+body.dark-theme .cascade-panel .cascade-prod-name,
+body.dark-theme .cascade-panel .cascade-prod-item span,
+body.dark-theme .cascade-panel a.cascade-prod-item span,
+body.dark-theme .cascade-panel .cascade-prod-item span:first-child,
+body.dark-theme .cascade-panel a.cascade-prod-item span:first-child,
+.site-header--dark .cascade-panel .cascade-prod-name,
+.site-header--dark .cascade-panel .cascade-prod-item span,
+.site-header--dark .cascade-panel a.cascade-prod-item span,
+.site-header--dark .cascade-panel .cascade-prod-item span:first-child,
+.site-header--dark .cascade-panel a.cascade-prod-item span:first-child {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: inline-block !important;
+}
+
+.cascade-panel .cascade-prod-item:hover,
+.cascade-panel a.cascade-prod-item:hover,
+body.dark-theme .cascade-panel .cascade-prod-item:hover,
+body.dark-theme .cascade-panel a.cascade-prod-item:hover,
+.site-header--dark .cascade-panel .cascade-prod-item:hover,
+.site-header--dark .cascade-panel a.cascade-prod-item:hover {
+  background: #f5f5f7 !important;
+  color: #0071e3 !important;
+  -webkit-text-fill-color: #0071e3 !important;
+}
+
+.cascade-panel .cascade-prod-item:hover .cascade-prod-name,
+.cascade-panel .cascade-prod-item:hover span:first-child,
+.cascade-panel a.cascade-prod-item:hover .cascade-prod-name,
+.cascade-panel a.cascade-prod-item:hover span:first-child,
+body.dark-theme .cascade-panel .cascade-prod-item:hover .cascade-prod-name,
+body.dark-theme .cascade-panel .cascade-prod-item:hover span:first-child,
+body.dark-theme .cascade-panel a.cascade-prod-item:hover .cascade-prod-name,
+body.dark-theme .cascade-panel a.cascade-prod-item:hover span:first-child,
+.site-header--dark .cascade-panel .cascade-prod-item:hover .cascade-prod-name,
+.site-header--dark .cascade-panel .cascade-prod-item:hover span:first-child,
+.site-header--dark .cascade-panel a.cascade-prod-item:hover .cascade-prod-name,
+.site-header--dark .cascade-panel a.cascade-prod-item:hover span:first-child {
+  color: #0071e3 !important;
+  -webkit-text-fill-color: #0071e3 !important;
+}
+
+/* Red 'New' Badges */
+.cascade-panel .badge-new-red,
 body.dark-theme .cascade-panel .badge-new-red,
 .site-header--dark .cascade-panel .badge-new-red {
-  background: rgba(214, 0, 23, 0.09) !important;
+  display: inline-block !important;
+  background: rgba(214, 0, 23, 0.1) !important;
   color: #d60017 !important;
+  -webkit-text-fill-color: #d60017 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 2px 7px !important;
+  border-radius: 999px !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.02em !important;
+  margin-left: 6px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Divider & Explore Link */
+.cascade-panel .cascade-divider,
+body.dark-theme .cascade-panel .cascade-divider,
+.site-header--dark .cascade-panel .cascade-divider {
+  height: 1px !important;
+  background: #e5e5ea !important;
+  margin: 8px 4px !important;
+  border: none !important;
+}
+
+.cascade-panel .cascade-explore-link,
+.cascade-panel a.cascade-explore-link,
+body.dark-theme .cascade-panel .cascade-explore-link,
+body.dark-theme .cascade-panel a.cascade-explore-link,
+.site-header--dark .cascade-panel .cascade-explore-link,
+.site-header--dark .cascade-panel a.cascade-explore-link {
+  display: inline-block !important;
+  padding: 8px 12px 4px !important;
+  color: #0071e3 !important;
+  -webkit-text-fill-color: #0071e3 !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: color 0.15s ease !important;
+}
+
+.cascade-panel .cascade-explore-link:hover,
+.cascade-panel a.cascade-explore-link:hover,
+body.dark-theme .cascade-panel .cascade-explore-link:hover,
+body.dark-theme .cascade-panel a.cascade-explore-link:hover,
+.site-header--dark .cascade-panel .cascade-explore-link:hover,
+.site-header--dark .cascade-panel a.cascade-explore-link:hover {
+  color: #0077ed !important;
+  -webkit-text-fill-color: #0077ed !important;
+  text-decoration: underline !important;
+}
+
+/* Mobile Nav Accordion Visibility on Dark and Light Themes */
+body.dark-theme .mobile-nav,
+body.page-dark .mobile-nav {
+  background: rgba(14, 14, 16, 0.98) !important;
+}
+
+body.dark-theme .mobile-nav .mobile-accordion-toggle,
+body.page-dark .mobile-nav .mobile-accordion-toggle {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+body.dark-theme .mobile-nav .mobile-accordion-toggle .toggle-icon,
+body.page-dark .mobile-nav .mobile-accordion-toggle .toggle-icon {
+  color: #d60017 !important;
+  -webkit-text-fill-color: #d60017 !important;
+}
+
+body.dark-theme .mobile-nav .mobile-sub-link,
+body.page-dark .mobile-nav .mobile-sub-link {
+  color: #e5e5ea !important;
+  -webkit-text-fill-color: #e5e5ea !important;
+}
+
+body.dark-theme .mobile-nav .mobile-sub-link:hover,
+body.page-dark .mobile-nav .mobile-sub-link:hover {
+  color: #2997ff !important;
+  -webkit-text-fill-color: #2997ff !important;
+}
+
+body.dark-theme .mobile-nav .badge-new-red,
+body.page-dark .mobile-nav .badge-new-red {
+  background: rgba(214, 0, 23, 0.15) !important;
+  color: #ff453a !important;
+  -webkit-text-fill-color: #ff453a !important;
 }
 
