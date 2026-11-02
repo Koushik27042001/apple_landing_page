@@ -57,25 +57,129 @@ function renderHeader(active) {
   if (active) window.__ACTIVE_NAV__ = active;
   const el = document.getElementById("site-header");
   if (!el) return;
-  const isProductActive = ["iphone", "ipad", "mac", "watch"].includes(active);
+  const isProductActive = ["iphone", "ipad", "mac", "watch", "airpods", "apple"].includes(active);
   const isDarkPage = document.body.classList.contains("dark-theme") || document.body.classList.contains("page-dark");
+
   el.innerHTML =
     '<header class="site-header' + (isDarkPage ? ' site-header--dark' : '') + '" id="siteHeaderEl">' +
       '<div class="header-inner">' +
         '<button class="menu-toggle" id="menuToggleBtn" aria-label="Menu">' + icon("menu", { size: 22 }) + '</button>' +
-        '<a href="index.html" class="logo" aria-label="Iswift Test Business Partner home"><span class="logo-name">Iswift</span><span class="apple-logo" aria-hidden="true">' + appleLogoHtml(18) + '</span><span class="store-tag">Test Business Partner</span></a>' +
+        '<a href="index.html" class="logo" aria-label="Iswift Business Partner home">' +
+          '<span class="logo-name">Iswift</span>' +
+          '<span class="apple-logo" aria-hidden="true">' + appleLogoHtml(18) + '</span>' +
+          '<span class="store-tag"><span class="store-tag-line">Business</span><span class="store-tag-line">Partner</span></span>' +
+        '</a>' +
         '<nav class="main-nav">' +
-          navLink("index.html", "Store", active === "home") +
-          navLink("macbook-neo.html", "MacBook Neo", active === "macbook-neo") +
-          '<div class="products-menu' + (isProductActive ? ' active' : '') + '">' +
-            '<button class="products-menu-toggle" id="productsMenuToggle" type="button" aria-expanded="false" aria-controls="productsSubmenu">Products ' + icon("chevronDown", { size: 14 }) + '</button>' +
-            '<div class="products-submenu" id="productsSubmenu" role="group" aria-label="Product categories">' +
-              navLink("category.html?cat=iphone", "iPhone", active === "iphone") +
-              navLink("category.html?cat=ipad", "iPad", active === "ipad") +
-              navLink("category.html?cat=mac", "Mac", active === "mac") +
-              navLink("category.html?cat=watch", "Apple Watch", active === "watch") +
+          navLink("index.html", "Home", active === "home" || active === "store") +
+          '<div class="products-menu apple-cascade-menu' + (isProductActive ? ' active' : '') + '" id="appleCascadeMenu">' +
+            '<button class="products-menu-toggle apple-cascade-toggle" id="productsMenuToggle" type="button" aria-expanded="false" aria-controls="productsSubmenu">' +
+              '<span>Apple</span>' +
+              '<svg class="chevron-icon" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+            '</button>' +
+            '<div class="cascade-mega-container" id="productsSubmenu" role="menu" aria-label="Apple navigation">' +
+              '<!-- LEVEL 2: FIRST PANEL (APPLE DROPDOWN) -->' +
+              '<div class="cascade-panel cascade-panel-1" id="cascadePanel1" role="group" aria-label="Apple Main Menu">' +
+                '<div class="cascade-item has-submenu active" data-sub="products" tabindex="0" role="menuitem" aria-haspopup="true">' +
+                  '<span class="cascade-item-text">Products</span>' +
+                  '<span class="red-arrow">&rsaquo;</span>' +
+                '</div>' +
+                '<a href="about.html#business" class="cascade-item" role="menuitem">' +
+                  '<span class="cascade-item-text">Apple&#39;s Business Initiatives</span>' +
+                '</a>' +
+                '<a href="about.html#solutions" class="cascade-item" role="menuitem">' +
+                  '<span class="cascade-item-text">Superior Solutions</span>' +
+                '</a>' +
+              '</div>' +
+
+              '<!-- LEVEL 3: SECOND PANEL (PRODUCT CATEGORIES) -->' +
+              '<div class="cascade-panel cascade-panel-2" id="cascadePanel2" role="group" aria-label="Product Categories">' +
+                '<div class="cascade-cat-item has-submenu active" data-cat="iphone" tabindex="0" role="menuitem" aria-haspopup="true">' +
+                  '<span class="cascade-item-text">iPhone</span>' +
+                  '<span class="red-arrow">&rsaquo;</span>' +
+                '</div>' +
+                '<div class="cascade-cat-item has-submenu" data-cat="ipad" tabindex="0" role="menuitem" aria-haspopup="true">' +
+                  '<span class="cascade-item-text">iPad</span>' +
+                  '<span class="red-arrow">&rsaquo;</span>' +
+                '</div>' +
+                '<div class="cascade-cat-item has-submenu" data-cat="mac" tabindex="0" role="menuitem" aria-haspopup="true">' +
+                  '<span class="cascade-item-text">Mac</span>' +
+                  '<span class="red-arrow">&rsaquo;</span>' +
+                '</div>' +
+                '<div class="cascade-cat-item has-submenu" data-cat="watch" tabindex="0" role="menuitem" aria-haspopup="true">' +
+                  '<span class="cascade-item-text">Apple Watch</span>' +
+                  '<span class="red-arrow">&rsaquo;</span>' +
+                '</div>' +
+                '<div class="cascade-cat-item has-submenu" data-cat="airpods" tabindex="0" role="menuitem" aria-haspopup="true">' +
+                  '<span class="cascade-item-text">AirPods</span>' +
+                  '<span class="red-arrow">&rsaquo;</span>' +
+                '</div>' +
+              '</div>' +
+
+              '<!-- LEVEL 4: THIRD PANEL (PRODUCT LISTINGS DYNAMICALLY TOP-ALIGNED) -->' +
+              '<div class="cascade-panel cascade-panel-3" id="cascadePanel3" role="group" aria-label="Product Listings">' +
+                '<!-- iPhone -->' +
+                '<div class="cascade-prod-group active" data-cat-group="iphone">' +
+                  '<div class="cascade-group-title">iPhone Lineup</div>' +
+                  '<a href="product.html?id=iphone-duo" class="cascade-prod-item"><span>iPhone duo</span><span class="badge-new-red">New</span></a>' +
+                  '<a href="product.html?id=iphone-18-pro" class="cascade-prod-item"><span>iPhone 18 Pro</span><span class="badge-new-red">New</span></a>' +
+                  '<a href="product.html?id=iphone-17e" class="cascade-prod-item"><span>iPhone 17e</span></a>' +
+                  '<a href="product.html?id=iphone-17" class="cascade-prod-item"><span>iPhone 17</span></a>' +
+                  '<a href="product.html?id=iphone-air" class="cascade-prod-item"><span>iPhone Air</span></a>' +
+                  '<div class="cascade-divider"></div>' +
+                  '<a href="category.html?cat=iphone" class="cascade-explore-link">Explore all iPhone &rarr;</a>' +
+                '</div>' +
+
+                '<!-- iPad -->' +
+                '<div class="cascade-prod-group" data-cat-group="ipad">' +
+                  '<div class="cascade-group-title">iPad Lineup</div>' +
+                  '<a href="product.html?id=ipad-pro-13-m5" class="cascade-prod-item"><span>iPad Pro M5</span></a>' +
+                  '<a href="product.html?id=ipad-air-11-m4" class="cascade-prod-item"><span>iPad Air M4</span></a>' +
+                  '<a href="product.html?id=ipad-11-gen" class="cascade-prod-item"><span>iPad Mini</span><span class="badge-new-red">New</span></a>' +
+                  '<div class="cascade-divider"></div>' +
+                  '<a href="category.html?cat=ipad" class="cascade-explore-link">Explore all iPad &rarr;</a>' +
+                '</div>' +
+
+                '<!-- Mac -->' +
+                '<div class="cascade-prod-group" data-cat-group="mac">' +
+                  '<div class="cascade-group-title">Mac Lineup</div>' +
+                  '<a href="product.html?id=macbook-pro-16-m5" class="cascade-prod-item"><span>MacBook Pro PROLED XDR Display</span><span class="badge-new-red">New</span></a>' +
+                  '<a href="product.html?id=macbook-pro-14-m5" class="cascade-prod-item"><span>MacBook Pro</span></a>' +
+                  '<a href="product.html?id=macbook-air-13-m5" class="cascade-prod-item"><span>MacBook Air</span></a>' +
+                  '<a href="product.html?id=imac-24-m4" class="cascade-prod-item"><span>iMac</span></a>' +
+                  '<a href="macbook-neo.html" class="cascade-prod-item"><span>MacBook Neo</span></a>' +
+                  '<a href="product.html?id=mac-mini-m4" class="cascade-prod-item"><span>Mac Mini</span><span class="badge-new-red">New</span></a>' +
+                  '<a href="category.html?cat=mac" class="cascade-prod-item"><span>Mac Studio</span></a>' +
+                  '<div class="cascade-divider"></div>' +
+                  '<a href="category.html?cat=mac" class="cascade-explore-link">Explore all Mac &rarr;</a>' +
+                '</div>' +
+
+                '<!-- Apple Watch -->' +
+                '<div class="cascade-prod-group" data-cat-group="watch">' +
+                  '<div class="cascade-group-title">Apple Watch Lineup</div>' +
+                  '<a href="product.html?id=watch-series-11" class="cascade-prod-item"><span>Apple Watch Series</span></a>' +
+                  '<a href="product.html?id=watch-se-3" class="cascade-prod-item"><span>Apple Watch SE</span></a>' +
+                  '<a href="product.html?id=watch-ultra-3" class="cascade-prod-item"><span>Apple Watch Ultra</span></a>' +
+                  '<div class="cascade-divider"></div>' +
+                  '<a href="category.html?cat=watch" class="cascade-explore-link">Explore all Watch &rarr;</a>' +
+                '</div>' +
+
+                '<!-- AirPods -->' +
+                '<div class="cascade-prod-group" data-cat-group="airpods">' +
+                  '<div class="cascade-group-title">AirPods Lineup</div>' +
+                  '<a href="product.html?id=airpods-pro-3" class="cascade-prod-item"><span>AirPods Pro</span></a>' +
+                  '<a href="category.html?cat=airpods" class="cascade-prod-item"><span>AirPods 4</span></a>' +
+                  '<a href="product.html?id=airpods-max" class="cascade-prod-item"><span>AirPods Max</span></a>' +
+                  '<div class="cascade-divider"></div>' +
+                  '<a href="category.html?cat=airpods" class="cascade-explore-link">Explore all AirPods &rarr;</a>' +
+                '</div>' +
+              '</div>' +
             '</div>' +
           '</div>' +
+          navLink("macbook-neo.html", "MacBook Neo", active === "macbook-neo") +
+          navLink("about.html#business", "Business", active === "business") +
+          navLink("entertainment.html", "Events", active === "events" || active === "entertainment") +
+          navLink("support.html#insights", "Insights", active === "insights") +
+          navLink("contact.html", "Contact Us", active === "contact") +
           navLink("support.html", "Support", active === "support") +
         '</nav>' +
         '<div class="header-actions">' +
@@ -90,7 +194,11 @@ function renderHeader(active) {
     '</header>' +
     '<div class="mobile-nav" id="mobileNav">' +
       '<div class="mobile-nav-head">' +
-        '<span class="logo"><span class="logo-name">Iswift</span><span class="apple-logo" aria-hidden="true">' + appleLogoHtml(18) + '</span><span class="store-tag">Test Business Partner</span></span>' +
+        '<span class="logo">' +
+          '<span class="logo-name">Iswift</span>' +
+          '<span class="apple-logo" aria-hidden="true">' + appleLogoHtml(18) + '</span>' +
+          '<span class="store-tag"><span class="store-tag-line">Business</span><span class="store-tag-line">Partner</span></span>' +
+        '</span>' +
         '<button class="btn-icon" id="mobileNavClose" aria-label="Close menu">' + icon("close", { size: 22 }) + '</button>' +
       '</div>' +
       '<div style="margin-bottom:18px;">' +
@@ -99,25 +207,78 @@ function renderHeader(active) {
           '<input type="text" class="search-input" id="mobileSearch" placeholder="Search products..." autocomplete="off" style="padding:12px 14px 12px 34px;">' +
         '</div>' +
       '</div>' +
-      '<a href="index.html">Store</a>' +
+      '<a href="index.html">Home</a>' +
+      '<div class="mobile-accordion-group" data-group="apple">' +
+        '<button type="button" class="mobile-accordion-toggle"><span>Apple</span><span class="toggle-icon">&rsaquo;</span></button>' +
+        '<div class="mobile-accordion-content">' +
+          '<div class="mobile-accordion-group" data-group="products">' +
+            '<button type="button" class="mobile-accordion-toggle" style="font-size:14.5px; padding:8px 0;"><span>Products</span><span class="toggle-icon">&rsaquo;</span></button>' +
+            '<div class="mobile-accordion-content" style="padding-left:10px;">' +
+              '<div class="mobile-accordion-group" data-group="iphone">' +
+                '<button type="button" class="mobile-accordion-toggle" style="font-size:13.5px; padding:6px 0;"><span>iPhone</span><span class="toggle-icon">&rsaquo;</span></button>' +
+                '<div class="mobile-accordion-content">' +
+                  '<a href="product.html?id=iphone-duo" class="mobile-sub-link"><span>iPhone duo</span> <span class="badge-new-red">New</span></a>' +
+                  '<a href="product.html?id=iphone-18-pro" class="mobile-sub-link"><span>iPhone 18 Pro</span> <span class="badge-new-red">New</span></a>' +
+                  '<a href="product.html?id=iphone-17e" class="mobile-sub-link">iPhone 17e</a>' +
+                  '<a href="product.html?id=iphone-17" class="mobile-sub-link">iPhone 17</a>' +
+                  '<a href="product.html?id=iphone-air" class="mobile-sub-link">iPhone Air</a>' +
+                  '<a href="category.html?cat=iphone" class="mobile-sub-link" style="color:#2997ff; font-weight:600;">All iPhones &rarr;</a>' +
+                '</div>' +
+              '</div>' +
+              '<div class="mobile-accordion-group" data-group="ipad">' +
+                '<button type="button" class="mobile-accordion-toggle" style="font-size:13.5px; padding:6px 0;"><span>iPad</span><span class="toggle-icon">&rsaquo;</span></button>' +
+                '<div class="mobile-accordion-content">' +
+                  '<a href="product.html?id=ipad-pro-13-m5" class="mobile-sub-link">iPad Pro M5</a>' +
+                  '<a href="product.html?id=ipad-air-11-m4" class="mobile-sub-link">iPad Air M4</a>' +
+                  '<a href="product.html?id=ipad-11-gen" class="mobile-sub-link"><span>iPad Mini</span> <span class="badge-new-red">New</span></a>' +
+                  '<a href="category.html?cat=ipad" class="mobile-sub-link" style="color:#2997ff; font-weight:600;">All iPads &rarr;</a>' +
+                '</div>' +
+              '</div>' +
+              '<div class="mobile-accordion-group" data-group="mac">' +
+                '<button type="button" class="mobile-accordion-toggle" style="font-size:13.5px; padding:6px 0;"><span>Mac</span><span class="toggle-icon">&rsaquo;</span></button>' +
+                '<div class="mobile-accordion-content">' +
+                  '<a href="product.html?id=macbook-pro-16-m5" class="mobile-sub-link"><span>MacBook Pro PROLED XDR Display</span> <span class="badge-new-red">New</span></a>' +
+                  '<a href="product.html?id=macbook-pro-14-m5" class="mobile-sub-link">MacBook Pro</a>' +
+                  '<a href="product.html?id=macbook-air-13-m5" class="mobile-sub-link">MacBook Air</a>' +
+                  '<a href="product.html?id=imac-24-m4" class="mobile-sub-link">iMac</a>' +
+                  '<a href="macbook-neo.html" class="mobile-sub-link">MacBook Neo</a>' +
+                  '<a href="product.html?id=mac-mini-m4" class="mobile-sub-link"><span>Mac Mini</span> <span class="badge-new-red">New</span></a>' +
+                  '<a href="category.html?cat=mac" class="mobile-sub-link">Mac Studio</a>' +
+                  '<a href="category.html?cat=mac" class="mobile-sub-link" style="color:#2997ff; font-weight:600;">All Macs &rarr;</a>' +
+                '</div>' +
+              '</div>' +
+              '<div class="mobile-accordion-group" data-group="watch">' +
+                '<button type="button" class="mobile-accordion-toggle" style="font-size:13.5px; padding:6px 0;"><span>Apple Watch</span><span class="toggle-icon">&rsaquo;</span></button>' +
+                '<div class="mobile-accordion-content">' +
+                  '<a href="product.html?id=watch-series-11" class="mobile-sub-link">Apple Watch Series</a>' +
+                  '<a href="product.html?id=watch-se-3" class="mobile-sub-link">Apple Watch SE</a>' +
+                  '<a href="product.html?id=watch-ultra-3" class="mobile-sub-link">Apple Watch Ultra</a>' +
+                  '<a href="category.html?cat=watch" class="mobile-sub-link" style="color:#2997ff; font-weight:600;">All Apple Watches &rarr;</a>' +
+                '</div>' +
+              '</div>' +
+              '<div class="mobile-accordion-group" data-group="airpods">' +
+                '<button type="button" class="mobile-accordion-toggle" style="font-size:13.5px; padding:6px 0;"><span>AirPods</span><span class="toggle-icon">&rsaquo;</span></button>' +
+                '<div class="mobile-accordion-content">' +
+                  '<a href="product.html?id=airpods-pro-3" class="mobile-sub-link">AirPods Pro</a>' +
+                  '<a href="category.html?cat=airpods" class="mobile-sub-link">AirPods 4</a>' +
+                  '<a href="product.html?id=airpods-max" class="mobile-sub-link">AirPods Max</a>' +
+                  '<a href="category.html?cat=airpods" class="mobile-sub-link" style="color:#2997ff; font-weight:600;">All AirPods &rarr;</a>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<a href="about.html#business" class="mobile-sub-link">Apple&#39;s Business Initiatives</a>' +
+          '<a href="about.html#solutions" class="mobile-sub-link">Superior Solutions</a>' +
+        '</div>' +
+      '</div>' +
       '<a href="macbook-neo.html" style="font-weight:700;color:var(--accent,#0071e3);">MacBook Neo 🔥</a>' +
-      '<div class="mobile-products-label">Products</div>' +
-      '<a href="category.html?cat=iphone">iPhone</a>' +
-      '<a href="category.html?cat=ipad">iPad</a>' +
-      '<a href="category.html?cat=mac">Mac</a>' +
-      '<a href="category.html?cat=watch">Apple Watch</a>' +
-      '<div class="mobile-nav-divider"></div>' +
-      '<a href="category.html?cat=vision">Vision</a>' +
-      '<a href="category.html?cat=airpods">AirPods</a>' +
-      '<a href="category.html?cat=tvhome">TV &amp; Home</a>' +
-      '<a href="entertainment.html">Entertainment</a>' +
-      '<a href="category.html?cat=accessories">Accessories</a>' +
-      '<a href="category.html?cat=all">Shop All Products</a>' +
+      '<a href="about.html#business">Business</a>' +
+      '<a href="entertainment.html">Events</a>' +
+      '<a href="support.html#insights">Insights</a>' +
+      '<a href="contact.html">Contact Us</a>' +
       '<a href="support.html">Support</a>' +
       '<div class="mobile-nav-divider"></div>' +
       '<a href="cart.html">Bag</a>' +
-      '<a href="about.html">About Us</a>' +
-      '<a href="contact.html">Contact Us</a>' +
       '<a href="terms.html">Terms &amp; Policies</a>' +
     '</div>';
 
@@ -127,7 +288,7 @@ function renderHeader(active) {
 }
 
 function navLink(href, label, isActive) {
-  return '<a href="' + href + '" class="' + (isActive ? "active" : "") + '">' + label + "</a>";
+  return '<a href="' + href + '" class="' + (isActive ? "active" : "") + '">' + label + '</a>';
 }
 
 function wireHeaderInteractions() {
@@ -140,31 +301,22 @@ function wireHeaderInteractions() {
   if (closeBtn && mobileNav) {
     closeBtn.addEventListener("click", function () { mobileNav.classList.remove("open"); });
   }
-  mobileNav && mobileNav.querySelectorAll("a").forEach(function (a) {
-    a.addEventListener("click", function () { mobileNav.classList.remove("open"); });
-  });
+  if (mobileNav) {
+    mobileNav.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () { mobileNav.classList.remove("open"); });
+    });
 
-  const productsMenu = document.querySelector(".products-menu");
-  const productsToggle = document.getElementById("productsMenuToggle");
-  if (productsMenu && productsToggle) {
-    productsToggle.addEventListener("click", function () {
-      const isOpen = productsMenu.classList.toggle("open");
-      productsToggle.setAttribute("aria-expanded", String(isOpen));
-    });
-    document.addEventListener("click", function (event) {
-      if (!productsMenu.contains(event.target)) {
-        productsMenu.classList.remove("open");
-        productsToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && productsMenu.classList.contains("open")) {
-        productsMenu.classList.remove("open");
-        productsToggle.setAttribute("aria-expanded", "false");
-        productsToggle.focus();
-      }
+    mobileNav.querySelectorAll(".mobile-accordion-toggle").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const grp = btn.closest(".mobile-accordion-group");
+        if (grp) grp.classList.toggle("open");
+      });
     });
   }
+
+  // Cascading desktop mega-menu interactions
+  wireCascadingMegaMenu();
 
   wireSearch("headerSearch", "searchSuggestions");
 
@@ -177,14 +329,165 @@ function wireHeaderInteractions() {
     });
   }
 
-  const headerEl = document.getElementById("siteHeaderEl");
-  if (headerEl) {
+  const header = document.getElementById("siteHeaderEl");
+  if (header) {
     const onScroll = function () {
-      headerEl.classList.toggle("scrolled", window.scrollY > 8);
+      header.classList.toggle("scrolled", window.scrollY > 8);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
   }
+}
+
+function wireCascadingMegaMenu() {
+  const menuWrapper = document.getElementById("appleCascadeMenu");
+  const toggleBtn = document.getElementById("productsMenuToggle");
+  const megaContainer = document.getElementById("productsSubmenu");
+  const panel1 = document.getElementById("cascadePanel1");
+  const panel2 = document.getElementById("cascadePanel2");
+  const panel3 = document.getElementById("cascadePanel3");
+  if (!menuWrapper || !panel1 || !panel2 || !panel3) return;
+
+  let closeTimer = null;
+  let activeCategory = "iphone";
+
+  function openMenu() {
+    clearTimeout(closeTimer);
+    menuWrapper.classList.add("open");
+    if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "true");
+    activateCategory(activeCategory);
+  }
+
+  function scheduleClose() {
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(function () {
+      menuWrapper.classList.remove("open");
+      if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "false");
+    }, 200);
+  }
+
+  function cancelClose() {
+    clearTimeout(closeTimer);
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener("mouseenter", openMenu);
+    toggleBtn.addEventListener("mouseleave", scheduleClose);
+    toggleBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      const isOpen = menuWrapper.classList.toggle("open");
+      toggleBtn.setAttribute("aria-expanded", String(isOpen));
+      if (isOpen) activateCategory(activeCategory);
+    });
+  }
+
+  if (megaContainer) {
+    megaContainer.addEventListener("mouseenter", cancelClose);
+    megaContainer.addEventListener("mouseleave", scheduleClose);
+  }
+
+  // Panel 1 hover items
+  const p1Items = panel1.querySelectorAll(".cascade-item");
+  p1Items.forEach(function (item) {
+    item.addEventListener("mouseenter", function () {
+      cancelClose();
+      p1Items.forEach(function (i) { i.classList.remove("active"); });
+      item.classList.add("active");
+
+      if (item.dataset.sub === "products") {
+        panel2.style.display = "block";
+        panel2.style.opacity = "1";
+        panel3.style.display = "block";
+        panel3.style.opacity = "1";
+        activateCategory(activeCategory);
+      } else {
+        panel2.style.display = "none";
+        panel3.style.display = "none";
+      }
+    });
+  });
+
+  // Panel 2 category hover items
+  const catItems = panel2.querySelectorAll(".cascade-cat-item");
+  catItems.forEach(function (item) {
+    item.addEventListener("mouseenter", function () {
+      cancelClose();
+      const catKey = item.dataset.cat;
+      if (catKey) {
+        activateCategory(catKey);
+      }
+    });
+  });
+
+  function activateCategory(catKey) {
+    activeCategory = catKey;
+
+    catItems.forEach(function (ci) {
+      if (ci.dataset.cat === catKey) {
+        ci.classList.add("active");
+        alignPanel3ToCategory(ci);
+      } else {
+        ci.classList.remove("active");
+      }
+    });
+
+    const groups = panel3.querySelectorAll(".cascade-prod-group");
+    groups.forEach(function (g) {
+      if (g.dataset.catGroup === catKey) {
+        g.classList.add("active");
+      } else {
+        g.classList.remove("active");
+      }
+    });
+  }
+
+  function alignPanel3ToCategory(catElement) {
+    if (!catElement || !panel2 || !panel3) return;
+
+    const catOffsetTop = catElement.offsetTop;
+    let targetTop = catOffsetTop;
+
+    const p2Rect = panel2.getBoundingClientRect();
+    const p3Height = panel3.offsetHeight || 300;
+    const viewportHeight = window.innerHeight;
+
+    const absoluteScreenTop = p2Rect.top + targetTop;
+    if (absoluteScreenTop + p3Height > viewportHeight - 16) {
+      const maxScreenTop = viewportHeight - p3Height - 16;
+      targetTop = Math.max(0, maxScreenTop - p2Rect.top);
+    }
+
+    panel3.style.top = targetTop + "px";
+
+    if (megaContainer) {
+      const p3Right = p2Rect.right + 8 + (panel3.offsetWidth || 330);
+      if (p3Right > window.innerWidth - 16) {
+        const shiftX = Math.min(p3Right - window.innerWidth + 20, 240);
+        megaContainer.style.transform = "translateX(-" + shiftX + "px)";
+      } else {
+        megaContainer.style.transform = "";
+      }
+    }
+  }
+
+  // Keyboard accessibility
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && menuWrapper.classList.contains("open")) {
+      menuWrapper.classList.remove("open");
+      if (toggleBtn) {
+        toggleBtn.setAttribute("aria-expanded", "false");
+        toggleBtn.focus();
+      }
+    }
+  });
+
+  // Outside click closes
+  document.addEventListener("click", function (e) {
+    if (!menuWrapper.contains(e.target)) {
+      menuWrapper.classList.remove("open");
+      if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "false");
+    }
+  });
 }
 
 function wireSearch(inputId, dropdownId) {

@@ -25,7 +25,7 @@
   --radius-sm: 8px;
   --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.07);
-  --header-h: 52px;
+  --header-h: 68px;
   --max-width: 1300px;
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
@@ -219,10 +219,23 @@ button { font-family: inherit; cursor: pointer; }
   fill: currentColor;
 }
 .logo span.store-tag {
-  font-weight: 400;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 8px;
+  padding-left: 8px;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  font-weight: 500;
   color: var(--gray-text);
-  font-size: 12px;
+  font-size: 10px;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
   white-space: nowrap;
+}
+.logo span.store-tag .store-tag-line {
+  display: block;
 }
 
 .main-nav {
@@ -240,49 +253,313 @@ button { font-family: inherit; cursor: pointer; }
 .main-nav a:hover { color: var(--blue); }
 .main-nav a.active { color: var(--blue); font-weight: 600; }
 
-.products-menu {
+/* ============================================================
+   Apple-Style Cascading Mega Menu
+   Level 2: Apple Dropdown
+   Level 3: Product Categories
+   Level 4: Product Listings (Dynamically Top-Aligned)
+   ============================================================ */
+
+.apple-cascade-menu {
   position: relative;
   align-self: stretch;
   display: flex;
   align-items: center;
 }
-.products-menu-toggle {
+
+.apple-cascade-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 8px 0;
-  border: 0;
+  gap: 6px;
   background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
   color: var(--gray-dark);
-  font-size: 12.5px;
-  white-space: nowrap;
+  padding: 8px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.18s ease, background 0.18s ease;
 }
-.products-menu-toggle:hover,
-.products-menu.active .products-menu-toggle { color: var(--blue); }
-.products-menu-toggle .icon-svg { transition: transform 0.2s ease; }
-.products-menu.open .products-menu-toggle .icon-svg { transform: rotate(180deg); }
-.products-submenu {
-  position: absolute;
-  top: 100%;
-  left: -18px;
-  z-index: 700;
+
+.apple-cascade-toggle:hover,
+.apple-cascade-menu.open .apple-cascade-toggle,
+.apple-cascade-menu.active .apple-cascade-toggle {
+  color: var(--blue, #0071e3);
+}
+
+.apple-cascade-toggle .chevron-icon {
+  transition: transform 0.22s ease;
+}
+
+.apple-cascade-menu.open .apple-cascade-toggle .chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* Mega Menu Container */
+.cascade-mega-container {
   display: none;
-  min-width: 190px;
-  padding: 8px;
-  background: var(--white);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 12px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
-.products-menu:hover .products-submenu,
-.products-menu:focus-within .products-submenu,
-.products-menu.open .products-submenu { display: grid; }
-.main-nav .products-submenu a {
+
+/* Invisible bridge so mouse hover doesn't break between button and panel */
+.cascade-mega-container::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 14px;
+}
+
+.apple-cascade-menu.open .cascade-mega-container {
   display: block;
-  padding: 10px 12px;
-  border-radius: 7px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
-.main-nav .products-submenu a:hover { background: var(--gray-bg); }
+
+/* Cascading Floating White Panels (Apple design: clean white, rounded 18px, subtle shadow) */
+.cascade-panel {
+  background: #ffffff !important;
+  border-radius: 18px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  padding: 10px;
+  color: #1d1d1f !important;
+  box-sizing: border-box;
+}
+
+/* Hover bridges between adjacent panels */
+.cascade-panel-1::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -10px;
+  width: 12px;
+  height: 100%;
+}
+
+.cascade-panel-2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -10px;
+  width: 12px;
+  height: 100%;
+}
+
+/* Panel 1: Primary Apple Dropdown */
+.cascade-panel-1 {
+  position: relative;
+  width: 250px;
+}
+
+/* Panel 2: Product Categories */
+.cascade-panel-2 {
+  position: absolute;
+  left: 258px;
+  top: 0;
+  width: 200px;
+  z-index: 1001;
+}
+
+/* Panel 3: Product Listings (Dynamically Top-Aligned) */
+.cascade-panel-3 {
+  position: absolute;
+  left: 466px;
+  top: 0;
+  width: 320px;
+  z-index: 1002;
+  transition: top 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Menu Items inside Panels */
+.cascade-item,
+.cascade-cat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #1d1d1f !important;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none !important;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.cascade-item:hover,
+.cascade-item.active,
+.cascade-cat-item:hover,
+.cascade-cat-item.active {
+  background: #f5f5f7 !important;
+  color: #000000 !important;
+}
+
+/* Red Directional Arrows */
+.cascade-panel .red-arrow {
+  color: #d60017 !important;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1;
+  margin-left: 8px;
+  transition: transform 0.15s ease;
+}
+
+.cascade-item.active .red-arrow,
+.cascade-cat-item.active .red-arrow {
+  transform: translateX(2px);
+}
+
+/* Product Groups inside Panel 3 */
+.cascade-prod-group {
+  display: none;
+  animation: fadeInCascade 0.18s ease forwards;
+}
+
+.cascade-prod-group.active {
+  display: block;
+}
+
+@keyframes fadeInCascade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cascade-group-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #86868b !important;
+  padding: 6px 12px 10px;
+}
+
+.cascade-prod-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border-radius: 9px;
+  color: #1d1d1f !important;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.cascade-prod-item:hover {
+  background: #f5f5f7 !important;
+  color: #0071e3 !important;
+  transform: translateX(2px);
+}
+
+/* Red 'New' Badges */
+.cascade-panel .badge-new-red,
+.mobile-nav .badge-new-red {
+  display: inline-block;
+  background: rgba(214, 0, 23, 0.09) !important;
+  color: #d60017 !important;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.cascade-divider {
+  height: 1px;
+  background: #ebebee;
+  margin: 8px 4px;
+}
+
+.cascade-explore-link {
+  display: inline-block;
+  padding: 8px 12px 4px;
+  color: #0071e3 !important;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: color 0.15s ease;
+}
+
+.cascade-explore-link:hover {
+  text-decoration: underline !important;
+}
+
+/* Mobile Accordions */
+.mobile-accordion-group {
+  margin-bottom: 2px;
+}
+
+.mobile-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--black, #1d1d1f);
+  padding: 10px 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.mobile-accordion-toggle .toggle-icon {
+  font-size: 18px;
+  font-weight: 600;
+  color: #d60017;
+  transition: transform 0.2s ease;
+}
+
+.mobile-accordion-group.open > .mobile-accordion-toggle .toggle-icon {
+  transform: rotate(90deg);
+}
+
+.mobile-accordion-content {
+  display: none;
+  padding-left: 14px;
+  border-left: 2px solid rgba(0, 0, 0, 0.08);
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+.mobile-accordion-group.open > .mobile-accordion-content {
+  display: block;
+}
+
+.mobile-sub-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 0;
+  font-size: 14px;
+  color: #424245;
+  text-decoration: none;
+}
+
+.mobile-sub-link:hover {
+  color: #0071e3;
+}
 
 .header-actions {
   display: flex;
@@ -3659,6 +3936,7 @@ body.dark-theme .site-header .apple-logo,
 
 body.dark-theme .site-header .logo span.store-tag,
 .site-header--dark .logo span.store-tag {
+  border-left-color: rgba(255, 255, 255, 0.25) !important;
   color: #a1a1a6 !important;
 }
 
@@ -5871,3 +6149,64 @@ body.dark-theme .qr-lightbox-close {
 body.dark-theme .qr-lightbox-close:hover {
   background: rgba(255, 255, 255, 0.2) !important;
 }
+
+/* Ensure Floating White Cascading Mega Menu Panels Stay Crisp White Across All Themes */
+body.dark-theme .cascade-mega-container,
+.site-header--dark .cascade-mega-container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-theme .cascade-panel,
+.site-header--dark .cascade-panel {
+  background: #ffffff !important;
+  color: #1d1d1f !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+body.dark-theme .cascade-panel a,
+body.dark-theme .cascade-panel .cascade-item,
+body.dark-theme .cascade-panel .cascade-cat-item,
+body.dark-theme .cascade-panel .cascade-prod-item,
+.site-header--dark .cascade-panel a,
+.site-header--dark .cascade-panel .cascade-item,
+.site-header--dark .cascade-panel .cascade-cat-item,
+.site-header--dark .cascade-panel .cascade-prod-item {
+  color: #1d1d1f !important;
+}
+
+body.dark-theme .cascade-panel .cascade-item:hover,
+body.dark-theme .cascade-panel .cascade-item.active,
+body.dark-theme .cascade-panel .cascade-cat-item:hover,
+body.dark-theme .cascade-panel .cascade-cat-item.active,
+body.dark-theme .cascade-panel .cascade-prod-item:hover,
+.site-header--dark .cascade-panel .cascade-item:hover,
+.site-header--dark .cascade-panel .cascade-item.active,
+.site-header--dark .cascade-panel .cascade-cat-item:hover,
+.site-header--dark .cascade-panel .cascade-cat-item.active,
+.site-header--dark .cascade-panel .cascade-prod-item:hover {
+  background: #f5f5f7 !important;
+}
+
+body.dark-theme .cascade-panel .cascade-prod-item:hover,
+.site-header--dark .cascade-panel .cascade-prod-item:hover {
+  color: #0071e3 !important;
+}
+
+body.dark-theme .cascade-panel .cascade-group-title,
+.site-header--dark .cascade-panel .cascade-group-title {
+  color: #86868b !important;
+}
+
+body.dark-theme .cascade-panel .red-arrow,
+.site-header--dark .cascade-panel .red-arrow {
+  color: #d60017 !important;
+}
+
+body.dark-theme .cascade-panel .badge-new-red,
+.site-header--dark .cascade-panel .badge-new-red {
+  background: rgba(214, 0, 23, 0.09) !important;
+  color: #d60017 !important;
+}
+
