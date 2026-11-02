@@ -56,6 +56,8 @@ function log(step, ok, extra) {
       "/contact.html",
       "/support.html",
       "/entertainment.html",
+      "/pricing.html",
+      "/pricing",
       "/admin/"
     ];
     for (const p of pages) {
@@ -67,7 +69,9 @@ function log(step, ok, extra) {
 
     const assets = [
       "/css/style.css",
+      "/css/pricing.css",
       "/js/data.js",
+      "/js/pricing-data.js",
       "/js/main.js",
       "/js/config.js",
       "/js/catalog-sync.js",

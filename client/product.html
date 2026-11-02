@@ -45,7 +45,7 @@
 <script src="js/main.js"></script>
 <script src="js/animations.js" defer></script>
 <script>
-  const productId = getQueryParam("id");
+  const productId = getQueryParam("id") || getQueryParam("slug");
   let product = getProductById(productId);
   if (!product && productId) {
     const searchMatches = searchProducts(productId);

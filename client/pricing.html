@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing &amp; Product Catalogue | Iswift Apple Store</title>
+  <meta name="description" content="Explore verified prices, model numbers, and technical specifications for Apple's 2026 lineup: MacBook, iPad, iPhone, Apple Watch, AppleCare+, and Enterprise Hardware.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/enhancements.css">
+  <link rel="stylesheet" href="css/pricing.css">
+</head>
+<body class="dark-theme page-dark">
+  <!-- Ambient luxury glow orbs -->
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+
+  <!-- Shared Header -->
+  <div id="site-header"></div>
+
+  <div class="pricing-page-wrapper">
+    <main class="container" style="max-width: 1240px; margin: 0 auto; padding: 0 16px;">
+      
+      <!-- Breadcrumb -->
+      <nav class="pricing-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">/</span>
+        <a href="about.html#business">Business</a>
+        <span class="sep">/</span>
+        <span class="current">Pricing &amp; Product Catalogue</span>
+      </nav>
+
+      <!-- Hero Header -->
+      <section class="pricing-hero">
+        <div class="pricing-badge-strip">
+          <span class="verified-check">&#10003;</span>
+          <span>Official 2026 Price List &amp; Configurations</span>
+        </div>
+        <h1>Find your next Apple device.</h1>
+        <p class="hero-sub">
+          Explore the latest devices, compare configurations and discover the right product for your needs.
+        </p>
+        <div class="pricing-guarantee-note">
+          <span class="item"><span class="dot">&#9679;</span> 377 Verified Model Numbers</span>
+          <span class="item"><span class="dot">&#9679;</span> Supplier-Validated Pricing</span>
+          <span class="item"><span class="dot">&#9679;</span> 100% Genuine Apple Warranty</span>
+          <span class="item"><span class="dot">&#9679;</span> GST Business Invoicing</span>
+        </div>
+      </section>
+
+      <!-- Sticky Controls & Filters -->
+      <section class="pricing-controls-sticky">
+        <div class="pricing-controls-inner">
+          <div class="pricing-search-row">
+            <div class="pricing-search-box">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="pricingSearch" placeholder="Search products and models (e.g. MDH74HN/A, M5, iPhone 18 Pro, 1TB)..." autocomplete="off">
+              <button type="button" class="clear-btn" id="clearSearchBtn" aria-label="Clear search">&times;</button>
+            </div>
+
+            <div class="pricing-view-switcher" role="group" aria-label="View toggle">
+              <button type="button" class="pricing-view-btn active" data-view="cards">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                <span>Cards</span>
+              </button>
+              <button type="button" class="pricing-view-btn" data-view="table">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                <span>Catalogue Table</span>
+              </button>
+            </div>
+
+            <select id="pricingSort" class="pricing-sort-select" aria-label="Sort products">
+              <option value="featured">Sort: Featured Lineup</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="name-asc">Name: A to Z</option>
+            </select>
+          </div>
+
+          <!-- Category Pills Row -->
+          <div class="pricing-category-tabs" role="tablist" aria-label="Product Categories">
+            <button type="button" class="pricing-cat-pill active" data-cat="all">All <span class="count">28</span></button>
+            <button type="button" class="pricing-cat-pill" data-cat="mac">Mac <span class="count">5</span></button>
+            <button type="button" class="pricing-cat-pill" data-cat="desktop">Desktop <span class="count">2</span></button>
+            <button type="button" class="pricing-cat-pill" data-cat="ipad">iPad <span class="count">5</span></button>
+            <button type="button" class="pricing-cat-pill" data-cat="iphone">iPhone <span class="count">6</span></button>
+            <button type="button" class="pricing-cat-pill" data-cat="watch">Apple Watch <span class="count">3</span></button>
+            <button type="button" class="pricing-cat-pill" data-cat="services">AppleCare+ <span class="count">1</span></button>
+            <button type="button" class="pricing-cat-pill" data-cat="business">Business &amp; Infrastructure <span class="count">6</span></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Active Count -->
+      <div class="pricing-results-count" id="resultsCount">
+        Showing all verified product configurations
+      </div>
+
+      <!-- Product Cards View -->
+      <div class="pricing-grid" id="pricingGrid"></div>
+
+      <!-- Master Catalogue Table View -->
+      <div class="pricing-table-container" id="pricingTableContainer">
+        <div class="pricing-table-scroll">
+          <table class="pricing-master-table">
+            <thead>
+              <tr>
+                <th>Model No.</th>
+                <th>Product Family</th>
+                <th>Technical Specifications</th>
+                <th>Storage</th>
+                <th>Colour</th>
+                <th>Availability</th>
+                <th>Verified Price (INR)</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="masterTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- AppleCare+ Protection Feature Banner -->
+      <section class="pricing-services-banner">
+        <div class="pricing-services-info">
+          <h2>AppleCare+ for Every Device</h2>
+          <p>
+            Protect your investment with 24/7 priority technical support, global repair coverage, and unlimited repairs for accidental damage from handling. Official Apple genuine parts and expert technicians.
+          </p>
+        </div>
+        <a href="contact.html?subject=AppleCare+Protection+Plan" class="pricing-services-cta">
+          <span>Enquire for AppleCare+ Coverage &rarr;</span>
+        </a>
+      </section>
+
+      <!-- Business IT & Enterprise Procurement Notice -->
+      <section style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:24px; padding:32px; margin-bottom:50px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;">
+          <div>
+            <h3 style="font-size:22px; color:#ffffff; margin:0 0 8px;">Corporate &amp; Enterprise Procurement</h3>
+            <p style="color:#a1a1a6; font-size:14px; max-width:680px; margin:0; line-height:1.45;">
+              Bulk pricing, GST input tax credits, customized Apple Financial Services leasing, and MDM zero-touch deployment available for corporate offices, educational institutions, and startups.
+            </p>
+          </div>
+          <a href="contact.html?type=business" class="d-btn" style="background:#2997ff; color:#ffffff; padding:12px 24px; border-radius:999px; text-decoration:none; font-weight:600; font-size:13.5px;">
+            Request Corporate Quote &rarr;
+          </a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Interactive Configuration Modal / Drawer -->
+  <div class="config-modal-overlay" id="configModalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="config-modal">
+      <button type="button" class="config-modal-close" id="configModalClose" aria-label="Close dialog">&times;</button>
+      
+      <!-- Left Column: Preview -->
+      <div class="config-modal-preview">
+        <div class="config-modal-badge" id="modalBadge">Apple Silicon</div>
+        <img src="images/hero/mac/nav_mba_ea12e0d5b.png" alt="Device preview" class="config-modal-img" id="modalImg">
+        <h3 id="modalTitle">MacBook Air 13-inch M5</h3>
+        <div class="modal-specs-summary" id="modalDisplay">Liquid Retina Display</div>
+      </div>
+
+      <!-- Right Column: Interactive Configuration Options -->
+      <div class="config-modal-controls">
+        <div id="modalDynamicControls"></div>
+
+        <!-- Selected Variant Live Card -->
+        <div class="config-live-card">
+          <div class="config-model-row">
+            <span class="config-model-label">Model Number</span>
+            <span class="config-model-code" id="modalModelCode">MDH74HN/A</span>
+          </div>
+
+          <div class="config-specs-desc" id="modalSpecsDesc">
+            13-inch MacBook Air: Apple M5 chip with 10-core CPU and 8-core GPU, 16GB, 512GB SSD - Silver
+          </div>
+
+          <div class="config-price-row">
+            <div>
+              <div style="font-size:11.5px; color:#86868b;">Distributor Price</div>
+              <div class="config-price-val" id="modalPriceVal">&#8377;1,49,900</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="config-verified-badge" id="modalVerifiedStatus">&#10003; Verified Official Distributor Price</div>
+              <div class="config-stock-status">
+                <span class="config-stock-dot"></span>
+                <span>In Stock &middot; Immediate Dispatch</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="config-modal-actions">
+          <button type="button" class="config-btn-enquire" id="modalEnquireBtn">
+            Enquire with Selected Configuration &rarr;
+          </button>
+          
+          <div class="config-btn-secondary-row">
+            <a href="#" class="config-btn-outline" id="modalDetailBtn">
+              <span>View Product Page</span>
+            </a>
+            <button type="button" class="config-btn-outline" id="modalCopyBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy Model Spec</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Enquiry Modal -->
+  <div class="enquiry-modal-overlay" id="enquiryModalOverlay" role="dialog" aria-modal="true" aria-labelledby="enquiryModalTitle">
+    <div class="enquiry-modal">
+      <button type="button" class="config-modal-close" id="enquiryModalClose" aria-label="Close enquiry form">&times;</button>
+      <h3 id="enquiryModalTitle">Request Product Quotation</h3>
+      <p class="sub">Direct quote from Iswift Apple Business Partner with immediate WhatsApp dispatch.</p>
+
+      <div class="enquiry-prefilled-box" id="enquiryPrefilledDetails"></div>
+
+      <form id="pricingEnquiryForm">
+        <input type="hidden" id="enquiryModelInput" name="model" value="">
+        <input type="hidden" id="enquiryDescInput" name="desc" value="">
+
+        <div class="enquiry-form-group">
+          <label for="eqName">Full Name *</label>
+          <input type="text" id="eqName" name="name" required placeholder="Enter your full name">
+        </div>
+
+        <div class="enquiry-form-group">
+          <label for="eqPhone">Mobile Number (WhatsApp) *</label>
+          <input type="tel" id="eqPhone" name="phone" required placeholder="+91 98765 43210">
+        </div>
+
+        <div class="enquiry-form-group">
+          <label for="eqEmail">Business or Personal Email *</label>
+          <input type="email" id="eqEmail" name="email" required placeholder="name@company.com">
+        </div>
+
+        <div class="enquiry-form-group">
+          <label for="eqCompany">Company / Organization (Optional)</label>
+          <input type="text" id="eqCompany" name="company" placeholder="Company name for GST invoice">
+        </div>
+
+        <button type="submit" class="enquiry-submit-btn">
+          Submit Enquiry &amp; Connect on WhatsApp &rarr;
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Shared Footer & Floating WhatsApp Widget -->
+  <div id="site-footer"></div>
+  <div id="whatsapp-float"></div>
+
+  <!-- Dependencies -->
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/pricing-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pricing.js"></script>
+  <script src="js/animations.js" defer></script>
+  <script>
+    renderHeader("pricing");
+    renderFooter();
+  </script>
+</body>
+</html>
+

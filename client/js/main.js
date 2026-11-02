@@ -83,11 +83,17 @@ function renderHeader(active) {
                   '<span class="cascade-item-text">Products</span>' +
                   '<span class="red-arrow">&rsaquo;</span>' +
                 '</div>' +
+                '<a href="pricing.html" class="cascade-item" role="menuitem">' +
+                  '<span class="cascade-item-text">Pricing &amp; Catalogue</span>' +
+                '</a>' +
                 '<a href="about.html#business" class="cascade-item" role="menuitem">' +
                   '<span class="cascade-item-text">Apple&#39;s Business Initiatives</span>' +
                 '</a>' +
                 '<a href="about.html#solutions" class="cascade-item" role="menuitem">' +
                   '<span class="cascade-item-text">Superior Solutions</span>' +
+                '</a>' +
+                '<a href="support.html#insights" class="cascade-item" role="menuitem">' +
+                  '<span class="cascade-item-text">Business Insights</span>' +
                 '</a>' +
               '</div>' +
 
@@ -176,7 +182,20 @@ function renderHeader(active) {
             '</div>' +
           '</div>' +
           navLink("macbook-neo.html", "MacBook Neo", active === "macbook-neo") +
-          navLink("about.html#business", "Business", active === "business") +
+          navLink("pricing.html", "Pricing", active === "pricing") +
+          '<div class="business-dropdown-menu' + (active === "business" ? ' active' : '') + '" id="bizNavDropdown">' +
+            '<a href="about.html#business" class="biz-dropdown-toggle' + (active === "business" ? ' active' : '') + '">' +
+              '<span>Business</span>' +
+              '<svg class="chevron-icon" width="8" height="5" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+            '</a>' +
+            '<div class="biz-dropdown-panel" role="menu">' +
+              '<a href="pricing.html" class="biz-dropdown-item"><span class="bdi-title">Pricing &amp; Catalogue</span><span class="bdi-desc">Full 2026 specs, model numbers &amp; prices</span></a>' +
+              '<a href="about.html#business" class="biz-dropdown-item"><span class="bdi-title">Business Initiatives</span><span class="bdi-desc">Apple in Enterprise &amp; Education</span></a>' +
+              '<a href="about.html#solutions" class="biz-dropdown-item"><span class="bdi-title">Superior Solutions</span><span class="bdi-desc">Custom IT deployments &amp; leasing</span></a>' +
+              '<a href="support.html#insights" class="biz-dropdown-item"><span class="bdi-title">Insights</span><span class="bdi-desc">Case studies &amp; technology guides</span></a>' +
+              '<a href="contact.html?type=business" class="biz-dropdown-item"><span class="bdi-title">Enterprise Consultation &rarr;</span><span class="bdi-desc">Speak to an Apple business specialist</span></a>' +
+            '</div>' +
+          '</div>' +
           navLink("support.html#insights", "Insights", active === "insights") +
           navLink("contact.html", "Contact Us", active === "contact") +
           navLink("support.html", "Support", active === "support") +
@@ -265,12 +284,24 @@ function renderHeader(active) {
               '</div>' +
             '</div>' +
           '</div>' +
+          '<a href="pricing.html" class="mobile-sub-link" style="color:#2997ff;font-weight:600;">Pricing &amp; Catalogue</a>' +
           '<a href="about.html#business" class="mobile-sub-link">Apple&#39;s Business Initiatives</a>' +
           '<a href="about.html#solutions" class="mobile-sub-link">Superior Solutions</a>' +
+          '<a href="support.html#insights" class="mobile-sub-link">Business Insights</a>' +
         '</div>' +
       '</div>' +
       '<a href="macbook-neo.html" style="font-weight:700;color:var(--accent,#0071e3);">MacBook Neo 🔥</a>' +
-      '<a href="about.html#business">Business</a>' +
+      '<a href="pricing.html" style="font-weight:600;color:#2997ff;">Pricing &amp; Catalogue</a>' +
+      '<div class="mobile-accordion-group" data-group="business">' +
+        '<button type="button" class="mobile-accordion-toggle"><span>Business</span><span class="toggle-icon">&rsaquo;</span></button>' +
+        '<div class="mobile-accordion-content">' +
+          '<a href="pricing.html" class="mobile-sub-link" style="color:#2997ff;font-weight:600;">Pricing &amp; Catalogue</a>' +
+          '<a href="about.html#business" class="mobile-sub-link">Business Initiatives</a>' +
+          '<a href="about.html#solutions" class="mobile-sub-link">Superior Solutions</a>' +
+          '<a href="support.html#insights" class="mobile-sub-link">Insights</a>' +
+          '<a href="contact.html?type=business" class="mobile-sub-link" style="color:#2997ff;font-weight:600;">Enterprise Consultation &rarr;</a>' +
+        '</div>' +
+      '</div>' +
       '<a href="support.html#insights">Insights</a>' +
       '<a href="contact.html">Contact Us</a>' +
       '<a href="support.html">Support</a>' +
