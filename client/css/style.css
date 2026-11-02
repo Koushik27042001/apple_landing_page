@@ -8373,3 +8373,23 @@ body.page-dark .mobile-nav .badge-new-red {
   color: #ff453a !important;
   -webkit-text-fill-color: #ff453a !important;
 }
+
+body.dark-theme .mobile-nav .logo,
+body.page-dark .mobile-nav .logo,
+body.dark-theme .mobile-nav .logo-name,
+body.dark-theme .mobile-nav .apple-logo,
+body.page-dark .mobile-nav .logo-name,
+body.page-dark .mobile-nav .apple-logo {
+  color: #ffffff !important;
+}
+
+body.dark-theme .mobile-nav .store-tag,
+body.page-dark .mobile-nav .store-tag {
+  color: #a1a1a6 !important;
+  border-left-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+body.dark-theme .mobile-nav .mobile-accordion-content,
+body.page-dark .mobile-nav .mobile-accordion-content {
+  border-left-color: rgba(255, 255, 255, 0.12) !important;
+}
