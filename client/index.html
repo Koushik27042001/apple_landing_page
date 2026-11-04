@@ -641,7 +641,156 @@ body.dark-theme .m6__actions .btn--outline:hover {
   .m6__media { margin-top: 24px; }
 }
 
-/* ==================== SECTION 3: HERO (THE NEW IPHONE 17 PRO MAX) ==================== */
+/* ==================== SECTION 3: IPHONE DUO ==================== */
+.duo,
+body.dark-theme .duo {
+  width: 100%;
+  background: #f5f5f7 !important;
+  color: #1d1d1f !important;
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 24px;
+}
+
+/* ---------- copy ---------- */
+.duo__copy {
+  text-align: center;
+  padding: 36px 20px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.duo__title,
+body.dark-theme .duo__title {
+  margin: 0;
+  font-size: clamp(44px, 6vw, 80px);
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+}
+
+.duo__subtitle,
+body.dark-theme .duo__subtitle {
+  margin: 12px 0 0;
+  font-size: clamp(24px, 3vw, 40px);
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+}
+
+/* ---------- buttons ---------- */
+.duo__actions {
+  margin-top: 28px;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.duo__actions .btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px 32px !important;
+  border-radius: 980px !important;
+  font-size: 21px !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  transition: background-color .2s ease, color .2s ease, transform .2s ease !important;
+  cursor: pointer !important;
+}
+
+.duo__actions .btn--primary,
+body.dark-theme .duo__actions .btn--primary {
+  background: #0071e3 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 1px solid #0071e3 !important;
+}
+.duo__actions .btn--primary:hover,
+body.dark-theme .duo__actions .btn--primary:hover {
+  background: #0077ed !important;
+  border-color: #0077ed !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+.duo__actions .btn--outline,
+body.dark-theme .duo__actions .btn--outline {
+  min-width: 109px !important;
+  background: transparent !important;
+  color: #0066cc !important;
+  -webkit-text-fill-color: #0066cc !important;
+  border: 1px solid #0066cc !important;
+}
+.duo__actions .btn--outline:hover,
+body.dark-theme .duo__actions .btn--outline:hover {
+  background: #0066cc !important;
+  border-color: #0066cc !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+.duo__actions .btn:focus-visible {
+  outline: 2px solid #0071e3;
+  outline-offset: 3px;
+}
+
+/* ---------- tile wrapper (710 x 500) ---------- */
+.duo .tile-wrapper {
+  position: relative;
+  width: 710px;
+  max-width: 100%;
+  height: 500px;
+  margin-top: 40px;
+  overflow: hidden;          /* clips the extra 24px of image width */
+}
+
+/* image: 734 x 500, centred inside the narrower wrapper */
+.duo .tile-wrapper img {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 355px;                       /* middle of the 710px wrapper */
+  width: 734px !important;
+  max-width: none !important;
+  height: 500px !important;
+  max-height: none !important;
+  object-fit: fill;
+  transform: translateX(-367px);     /* half of 734px */
+}
+
+/* when the wrapper shrinks below 710px, keep the image centred */
+@media (max-width: 734px) {
+  .duo__actions { gap: 12px; }
+  .duo__actions .btn { font-size: 17px !important; padding: 13px 24px !important; }
+  .duo__actions .btn--outline { min-width: 88px !important; }
+  .duo .tile-wrapper {
+    margin-top: 28px;
+    width: min(100%, 710px);
+    height: auto;
+    aspect-ratio: 710 / 500;
+  }
+  .duo .tile-wrapper img {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 103.38% !important;
+    height: 100% !important;
+  }
+}
+
+/* ==================== SECTION 4: HERO (THE NEW IPHONE 17 PRO MAX) ==================== */
 .hero {
   min-height: 92vh;
   display: flex;
@@ -2725,7 +2874,27 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
     </div>
   </section>
 
-  <!-- ================= SECTION 3: HERO (THE NEW IPHONE 17 PRO MAX) ================= -->
+  <!-- ================= SECTION 3: IPHONE DUO ================= -->
+  <section class="duo" id="iphone-duo" aria-labelledby="duo-title">
+    <div class="duo__copy">
+      <h2 class="duo__title" id="duo-title">iPhone Duo</h2>
+      <p class="duo__subtitle">Hello, hello.</p>
+      <div class="duo__actions">
+        <a class="btn btn--primary" href="iphone-duo.html">Learn more</a>
+        <a class="btn btn--outline" href="pricing.html?cat=iphone">Buy</a>
+      </div>
+    </div>
+
+    <div class="tile-wrapper">
+      <img
+        src="images/home/hero_iphone_duo_announce__fh4u8yzndpe2_large_2x.jpg"
+        alt="iPhone Duo, held by two hands in landscape orientation, unfolded to show the home screen"
+        width="734" height="500"
+        loading="lazy">
+    </div>
+  </section>
+
+  <!-- ================= SECTION 4: HERO (THE NEW IPHONE 17 PRO MAX) ================= -->
   <section class="hero" id="hero">
     <div class="hero-container">
 
