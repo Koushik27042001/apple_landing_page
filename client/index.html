@@ -364,7 +364,156 @@ a { color: inherit; text-decoration: none; }
 .o2 { width: 38vw; height: 38vw; right: -8vw; top: 38vh; background: #bf5af2; }
 .o3 { width: 32vw; height: 32vw; left: 32vw; top: 75vh; background: #ff375f; opacity: 0.2; }
 
-/* ==================== SECTION 1: HERO (THE NEW IPHONE 17 PRO MAX) ==================== */
+/* ==================== SECTION 1: MACBOOK PRO HERO (PROLED XDR DISPLAY) ==================== */
+.hero--mbp {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #000;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  padding: 0 !important;
+  z-index: 2;
+}
+
+.hero--mbp .hero__copy,
+.hero__copy {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 44px 20px 0;
+}
+
+.hero--mbp .hero__title,
+.hero__title {
+  margin: 0;
+  font-size: clamp(40px, 6vw, 80px);
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #f5f5f7;
+}
+
+.hero--mbp .hero__subtitle,
+.hero__subtitle {
+  margin: 14px 0 0;
+  font-size: clamp(24px, 3vw, 40px);
+  line-height: 1.1;
+  font-weight: 400;
+  background: linear-gradient(90deg,
+    #f7d046 0%, #f7d046 14%,
+    #f5f5f7 20%, #f5f5f7 26%,
+    #3a9bff 36%, #2d8cf0 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.hero--mbp .hero__availability,
+.hero__availability {
+  margin: 20px 0 0;
+  font-size: clamp(17px, 1.6vw, 21px);
+  color: #86868b;
+}
+
+.hero--mbp .hero__actions,
+.hero__actions {
+  margin-top: 26px;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero--mbp .btn,
+.hero__actions .btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 128px !important;
+  padding: 16px 32px !important;
+  border-radius: 980px !important;
+  font-size: 21px !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  transition: background-color .2s ease, color .2s ease, transform .2s ease !important;
+  cursor: pointer !important;
+}
+
+.hero--mbp .btn--primary,
+.hero__actions .btn--primary,
+body.dark-theme .hero__actions .btn--primary {
+  background: #0071e3 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 1px solid #0071e3 !important;
+}
+.hero--mbp .btn--primary:hover,
+.hero__actions .btn--primary:hover,
+body.dark-theme .hero__actions .btn--primary:hover {
+  background: #0077ed !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+.hero--mbp .btn--outline,
+.hero__actions .btn--outline,
+body.dark-theme .hero__actions .btn--outline {
+  background: transparent !important;
+  color: #2997ff !important;
+  -webkit-text-fill-color: #2997ff !important;
+  border: 1px solid #2997ff !important;
+}
+.hero--mbp .btn--outline:hover,
+.hero__actions .btn--outline:hover,
+body.dark-theme .hero__actions .btn--outline:hover {
+  background: #2997ff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  transform: translateY(-2px);
+}
+
+.hero--mbp .btn:focus-visible,
+.hero__actions .btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.hero--mbp .hero__media,
+.hero__media {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.hero--mbp .hero__media img,
+.hero__media img {
+  display: block;
+  width: 100%;
+  max-width: 1813px;
+  height: auto;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+@media (max-width: 734px) {
+  .hero--mbp { min-height: 640px; }
+  .hero--mbp .hero__actions,
+  .hero__actions { gap: 12px; }
+  .hero--mbp .btn,
+  .hero__actions .btn { font-size: 17px !important; padding: 13px 24px !important; min-width: 110px !important; }
+  .hero--mbp .hero__media img,
+  .hero__media img { width: 180%; max-width: none; }
+}
+
+/* ==================== SECTION 2: HERO (THE NEW IPHONE 17 PRO MAX) ==================== */
 .hero {
   min-height: 92vh;
   display: flex;
@@ -1209,9 +1358,6 @@ body.dark-theme .product-card .pc-actions .btn:hover {
   background: #fff;
   border-radius: 10px;
   animation: dotFill 5s linear forwards;
-}
-.show:hover .show-dots-nav button.active::after {
-  animation-play-state: paused;
 }
 @keyframes dotFill {
   0% { transform: scaleX(0); transform-origin: left; }
@@ -2409,7 +2555,28 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
 
 <main id="top">
 
-  <!-- ================= SECTION 1: HERO (THE NEW IPHONE 17 PRO MAX) ================= -->
+  <!-- ================= SECTION 1: MACBOOK PRO HERO (PROLED XDR DISPLAY) ================= -->
+  <section class="hero hero--mbp" aria-labelledby="hero-title">
+    <div class="hero__copy">
+      <h1 class="hero__title" id="hero-title">MacBook Pro</h1>
+      <p class="hero__subtitle">PROLED XDR Display</p>
+      <p class="hero__availability">Available from 9 November</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="product.html?id=macbook-pro-14-m5">Learn more</a>
+        <a class="btn btn--outline" href="pricing.html?cat=mac">Pre-order</a>
+      </div>
+    </div>
+
+    <div class="hero__media">
+      <img
+        src="images/home/hero_macbook_pro_proled_xdr_preorder__df38n593sxg2_large_2x.jpg"
+        alt="MacBook Pro with PROLED XDR Display, open to show the screen"
+        width="1813" height="742"
+        loading="eager">
+    </div>
+  </section>
+
+  <!-- ================= SECTION 2: HERO (THE NEW IPHONE 17 PRO MAX) ================= -->
   <section class="hero" id="hero">
     <div class="hero-container">
 
@@ -2930,8 +3097,7 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
     var currentIndex = 0;
     var isTransitioning = false;
     var timer = null;
-    var intervalDuration = 5000;
-    var isHovered = false;
+    var intervalDuration = 5000; // Strict 5-second interval
 
     var glows = [
       'rgba(0, 180, 255, 0.38)',   // MacBook Neo (Electric cyan/blue)
@@ -2956,27 +3122,18 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
       var targetContent = contentItems[nextIndex];
       var targetFrame = frameSlides[nextIndex];
 
-      // Update dots immediately for snappy feedback
+      // Reset and trigger active dot progress animation cleanly
       dots.forEach(function (d, k) {
         var isActive = (k === nextIndex);
-        d.classList.toggle('active', isActive);
+        d.classList.remove('active');
         d.setAttribute('aria-selected', isActive ? 'true' : 'false');
       });
-
-      if (rm) {
-        // Reduced motion preference: immediate switch
-        if (currentContent) currentContent.classList.remove('is-active');
-        if (currentFrame) currentFrame.classList.remove('is-active');
-        currentIndex = nextIndex;
-        if (targetContent) targetContent.classList.add('is-active');
-        if (targetFrame) targetFrame.classList.add('is-active');
-        if (glow && glows[nextIndex]) glow.style.background = glows[nextIndex];
-        if (badge && badges[nextIndex]) badge.textContent = badges[nextIndex];
-        isTransitioning = false;
-        return;
+      if (dots[nextIndex]) {
+        void dots[nextIndex].offsetWidth; // reflow to restart CSS progress keyframe
+        dots[nextIndex].classList.add('active');
       }
 
-      // Step 1: Smooth Vanish / Disappear animation
+      // Step 1: Smooth Vanish / Disappear animation (text & hardware image)
       if (currentContent) currentContent.classList.add('is-exiting');
       if (currentFrame) currentFrame.classList.add('is-exiting');
 
@@ -2995,7 +3152,7 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
 
         setTimeout(function () {
           isTransitioning = false;
-        }, 320);
+        }, 300);
       }, 350);
     }
 
@@ -3012,9 +3169,7 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
     function startTimer() {
       stopTimer();
       timer = setInterval(function () {
-        if (!isHovered) {
-          nextSlide();
-        }
+        nextSlide();
       }, intervalDuration);
     }
 
@@ -3052,12 +3207,13 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
       });
     }
 
-    // Hover pause / resume so visitors can easily read and click buttons
-    section.addEventListener('mouseenter', function () {
-      isHovered = true;
-    });
-    section.addEventListener('mouseleave', function () {
-      isHovered = false;
+    // Clean timer management on page visibility change
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        stopTimer();
+      } else {
+        restartTimer();
+      }
     });
 
     // Mobile touch swipe gestures
@@ -3082,7 +3238,7 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
       }
     }, { passive: true });
 
-    // Start auto timer
+    // Start auto timer immediately
     startTimer();
   })();
 
