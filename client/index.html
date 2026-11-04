@@ -876,71 +876,398 @@ a { color: inherit; text-decoration: none; }
   }
 }
 
-/* ---------------- SECTION 2: SLIDING SHOWCASE ---------------- */
-.show { height: 420vh; position: relative; z-index: 1; }
-.pin {
-  position: sticky;
-  top: 52px;
-  height: calc(100vh - 52px);
+/* ---------------- SECTION 2: SLIDING SHOWCASE (PREMIUM SPLIT SHOWCASE) ---------------- */
+.show {
+  position: relative;
+  z-index: 2;
+  min-height: 86vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  padding: 16px 20px 24px;
+  padding: 80px 24px;
   overflow: hidden;
+  background: radial-gradient(100% 70% at 50% 30%, rgba(18, 24, 38, 0.45) 0%, rgba(0, 0, 0, 0.95) 100%);
 }
-.show-stage {
+.show-split-container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: 56px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Left side: Product Content */
+.show-content-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  min-height: 440px;
+}
+.show-content-stage {
   position: relative;
   width: 100%;
-  max-width: 1000px;
-  flex: 1 1 auto;
-  min-height: 0;
-  max-height: 560px;
-  perspective: 1400px;
+  min-height: 380px;
 }
-.show-glow {
-  position: absolute; top: 50%; left: 50%;
-  width: 60%; height: 70%;
+.show-content-item {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(22px) scale(0.98);
+  filter: blur(5px);
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+.show-content-item.is-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  pointer-events: auto;
+  position: relative;
+  z-index: 2;
+}
+.show-content-item.is-exiting {
+  opacity: 0;
+  transform: translateY(-20px) scale(0.97);
+  filter: blur(6px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
+}
+
+.show-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2997ff;
+  margin-bottom: 14px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.show-pill-badge .pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2997ff;
+  box-shadow: 0 0 10px #2997ff;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 0.6; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.show-heading {
+  font-size: clamp(32px, 3.8vw, 52px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: #fff;
+  margin: 0 0 16px;
+}
+.show-heading .highlight-gradient {
+  background: linear-gradient(135deg, #ffffff 30%, rgba(255, 255, 255, 0.65) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.show-desc {
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 24px;
+  max-width: 540px;
+}
+
+.show-specs-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.show-spec-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  font-size: 13px;
+  font-weight: 500;
+  color: #e5e7eb;
+  transition: all 0.25s ease;
+}
+.show-spec-tag:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.show-spec-tag svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.8;
+  color: #2997ff;
+}
+
+.show-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.show-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: #0071e3;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 18px rgba(0, 113, 227, 0.35);
+}
+.show-btn-primary:hover {
+  background: #0077ed;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(0, 113, 227, 0.45);
+}
+.show-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+}
+.show-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+}
+
+/* Controls: Dots, Next/Prev, Auto-play Indicator */
+.show-controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  max-width: 520px;
+}
+.show-dots-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.show-dots-nav button {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  padding: 0;
+  border: 0;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+  overflow: hidden;
+}
+.show-dots-nav button.active {
+  width: 32px;
+  background: rgba(255, 255, 255, 0.35);
+}
+.show-dots-nav button.active::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  animation: dotFill 5s linear forwards;
+}
+.show:hover .show-dots-nav button.active::after {
+  animation-play-state: paused;
+}
+@keyframes dotFill {
+  0% { transform: scaleX(0); transform-origin: left; }
+  100% { transform: scaleX(1); transform-origin: left; }
+}
+.show-arrows-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+.show-nav-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.show-nav-arrow:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: scale(1.05);
+}
+.show-nav-arrow svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Right side: Framed Product Display */
+.show-visual-col {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.show-hardware-frame {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  aspect-ratio: 4 / 3;
+  min-height: 440px;
+  max-height: 540px;
+  border-radius: 32px;
+  background: radial-gradient(120% 120% at 50% 20%, rgba(255, 255, 255, 0.07) 0%, rgba(13, 17, 27, 0.75) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  box-shadow: 0 32px 80px -10px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+.show-hardware-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 70%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  filter: blur(60px);
+  filter: blur(70px);
   pointer-events: none;
-  background: rgba(10, 132, 255, 0.3);
-  transition: background 0.6s ease;
+  background: rgba(0, 180, 255, 0.35);
+  transition: background 0.8s ease;
+  z-index: 1;
 }
-.show-slide {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
+.show-frame-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 4;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+}
+.show-frame-pedestal {
+  position: absolute;
+  bottom: 24px;
+  left: 15%;
+  right: 15%;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, transparent 70%);
+  filter: blur(6px);
+  z-index: 2;
+}
+
+/* Framed slides */
+.show-frame-slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+.show-frame-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
-  will-change: transform, opacity;
+  transform: scale(0.94) translateY(14px);
+  filter: blur(6px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+  pointer-events: none;
 }
-.show-slide[data-slide="0"] { opacity: 1; }
-.show-slide img {
-  max-width: 100%; max-height: 100%;
+.show-frame-slide.is-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  filter: blur(0);
+  pointer-events: auto;
+}
+.show-frame-slide.is-exiting {
+  opacity: 0;
+  transform: scale(0.94) translateY(-14px);
+  filter: blur(6px);
+  transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
+}
+.show-frame-slide img {
+  max-width: 90%;
+  max-height: 90%;
   object-fit: contain;
-  filter: drop-shadow(0 30px 60px rgba(0,0,0,.9));
-  user-select: none; pointer-events: none; display: block;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7));
+  user-select: none;
+  pointer-events: none;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.show-caps { position: relative; width: 100%; max-width: 640px; height: 185px; flex: none; text-align: center; }
-.cap {
-  position: absolute; inset: 0;
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity .5s ease, transform .5s ease;
-  font-size: clamp(24px, 3.4vw, 40px);
-  font-weight: 700; letter-spacing: -0.035em; line-height: 1.1; color: #fff;
+.show-hardware-frame:hover .show-frame-slide.is-active img {
+  transform: scale(1.03) translateY(-4px);
 }
-.cap.on { opacity: 1; transform: none; }
-.cap-eyebrow { display: block; font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #2997ff; margin-bottom: 8px; }
-.cap-desc { display: block; margin-top: 10px; font-size: clamp(14px, 1.4vw, 17px); font-weight: 400; color: var(--mute); letter-spacing: 0; line-height: 1.45; }
-.dots { display: flex; gap: 10px; flex: none; }
-.dots button {
-  width: 8px; height: 8px; padding: 0; border: 0; border-radius: 8px;
-  background: rgba(255,255,255,.3); cursor: pointer;
-  transition: width .3s, background .3s;
-}
-.dots button[aria-current="true"] { width: 26px; background: #fff; }
 
 /* ---------------- SECTION 3: FINISHES / COLORS (ILLUSTRATOR SHOWCASE) ---------------- */
 .colors {
@@ -1570,44 +1897,20 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
     font-size: 10.5px;
   }
 
-  /* Sliding Showcase (#show) */
-  .pin {
-    top: 48px;
-    height: calc(100svh - 48px);
-    padding: 12px 16px 18px;
-    gap: 12px;
+  /* Showcase (#show) */
+  .show {
+    padding: 60px 20px;
+    min-height: auto;
   }
-  .show-stage {
-    max-height: 320px;
-    min-height: 180px;
+  .show-split-container {
+    gap: 32px;
   }
-  .show-caps {
-    height: 135px;
-    max-width: 95%;
+  .show-content-stage {
+    min-height: 360px;
   }
-  .cap {
-    font-size: clamp(19px, 5.2vw, 25px);
-    line-height: 1.15;
-    letter-spacing: -0.025em;
-  }
-  .cap-eyebrow {
-    font-size: 11px;
-    margin-bottom: 4px;
-  }
-  .cap-desc {
-    font-size: 13.5px;
-    margin-top: 6px;
-    line-height: 1.38;
-  }
-  .dots {
-    gap: 8px;
-  }
-  .dots button {
-    width: 7px;
-    height: 7px;
-  }
-  .dots button[aria-current="true"] {
-    width: 22px;
+  .show-hardware-frame {
+    min-height: 340px;
+    max-height: 440px;
   }
 
   /* Finishes / Colors */
@@ -1870,22 +2173,25 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
     font-size: 10px;
   }
 
-  /* Sliding Showcase */
-  .pin {
-    padding: 10px 12px 14px;
-    gap: 8px;
+  /* Showcase Mobile */
+  .show {
+    padding: 44px 16px;
   }
-  .show-stage {
-    max-height: 240px;
+  .show-heading {
+    font-size: clamp(24px, 6.8vw, 32px);
   }
-  .show-caps {
-    height: 120px;
+  .show-desc {
+    font-size: 14px;
+    margin-bottom: 18px;
   }
-  .cap {
-    font-size: clamp(18px, 5.2vw, 22px);
+  .show-content-stage {
+    min-height: 330px;
   }
-  .cap-desc {
-    font-size: 12.5px;
+  .show-hardware-frame {
+    min-height: 280px;
+    max-height: 360px;
+    padding: 16px;
+    border-radius: 20px;
   }
 
   /* Finishes / Colors */
@@ -2116,54 +2422,189 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
     </div>
   </section>
 
-<!-- ================= SECTION 2: SLIDING SHOWCASE ================= -->
-  <section class="show" id="show">
-    <div class="pin" id="pin">
+<!-- ================= SECTION 2: SLIDING SHOWCASE (PREMIUM TWO-COLUMN SHOWCASE) ================= -->
+  <section class="show" id="show" aria-label="Featured Apple Products Showcase">
+    <div class="show-split-container">
 
-      <div class="show-stage" id="showStage">
-        <div class="show-glow" id="showGlow"></div>
-        <div class="show-slide" data-slide="0">
-          <img src="images/products/iPhone 18 Pro Max_ Beyond What’s Next.png" alt="iPhone Pro in titanium" draggable="false">
+      <!-- LEFT COLUMN: Product Content & Story -->
+      <div class="show-content-col">
+        <div class="show-content-stage" id="showContentStage">
+
+          <!-- Slide 0: MacBook Neo (1st requested product) -->
+          <div class="show-content-item is-active" data-index="0">
+            <div class="show-pill-badge">
+              <span class="pulse-dot"></span>
+              <span>A18 PRO SILICON · MACBOOK NEO</span>
+            </div>
+            <h2 class="show-heading">Power that stays cool.</h2>
+            <p class="show-desc">All-day battery life and performance for the things you do next. Revolutionary efficiency with pro thermal architecture in an ultra-thin design that stays whisper-quiet under heavy creative loads.</p>
+            <div class="show-specs-row">
+              <span class="show-spec-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                From ₹79,900
+              </span>
+              <span class="show-spec-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                Liquid Retina Display
+              </span>
+              <span class="show-spec-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="11" x2="23" y2="13"/></svg>
+                Up to 22h Battery
+              </span>
+            </div>
+            <div class="show-cta-row">
+              <a href="product.html?id=macbook-neo" class="show-btn-primary">
+                Explore MacBook Neo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="pricing.html?cat=mac" class="show-btn-secondary">Buy with No-Cost EMI</a>
+            </div>
+          </div>
+
+          <!-- Slide 1: iPhone 18 Pro Max (2nd requested product) -->
+          <div class="show-content-item" data-index="1">
+            <div class="show-pill-badge" style="color:#f59e0b; border-color:rgba(245,158,11,0.25);">
+              <span class="pulse-dot" style="background:#f59e0b; box-shadow:0 0 10px #f59e0b;"></span>
+              <span>A20 PRO · IPHONE 18 PRO MAX</span>
+            </div>
+            <h2 class="show-heading">Forged in titanium. Beyond what's next.</h2>
+            <p class="show-desc">The ultimate iPhone flagship. Aerospace Grade 5 titanium, groundbreaking 48MP Pro Fusion camera system with variable aperture, and unprecedented all-day battery endurance.</p>
+            <div class="show-specs-row">
+              <span class="show-spec-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                From ₹1,64,900
+              </span>
+              <span class="show-spec-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                6.9″ Super Retina XDR
+              </span>
+              <span class="show-spec-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                48MP Pro Fusion
+              </span>
+            </div>
+            <div class="show-cta-row">
+              <a href="product.html?id=iphone-18-pro" class="show-btn-primary" style="background:#d97706;">
+                Buy iPhone 18 Pro Max
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="pricing.html?cat=iphone" class="show-btn-secondary">Compare Models</a>
+            </div>
+          </div>
+
+          <!-- Slide 2: Pro Camera System -->
+          <div class="show-content-item" data-index="2">
+            <div class="show-pill-badge" style="color:#f43f5e; border-color:rgba(244,63,94,0.25);">
+              <span class="pulse-dot" style="background:#f43f5e; box-shadow:0 0 10px #f43f5e;"></span>
+              <span>PRO CAMERA SYSTEM</span>
+            </div>
+            <h2 class="show-heading">A camera that sees the whole story.</h2>
+            <p class="show-desc">Three cinematic studio lenses built for zero compromise in low light. 48MP Dual Fusion sensor, 5x telephoto optical zoom, and 4K 120 fps Dolby Vision recording.</p>
+            <div class="show-specs-row">
+              <span class="show-spec-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+                48MP Dual Fusion
+              </span>
+              <span class="show-spec-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                5x Optical Zoom
+              </span>
+              <span class="show-spec-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                Spatial Video
+              </span>
+            </div>
+            <div class="show-cta-row">
+              <a href="pricing.html?cat=iphone" class="show-btn-primary" style="background:#be185d;">
+                Explore Camera Specs
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="contact.html" class="show-btn-secondary">Order Now</a>
+            </div>
+          </div>
+
+          <!-- Slide 3: The Whole Lineup -->
+          <div class="show-content-item" data-index="3">
+            <div class="show-pill-badge" style="color:#eab308; border-color:rgba(234,179,8,0.25);">
+              <span class="pulse-dot" style="background:#eab308; box-shadow:0 0 10px #eab308;"></span>
+              <span>THE WHOLE LINEUP</span>
+            </div>
+            <h2 class="show-heading">Every device, in perfect sync.</h2>
+            <p class="show-desc">From iPhone to Mac, shop genuine Apple products with No-Cost EMI, official Apple India warranty, and instant trade-in value for your current gear.</p>
+            <div class="show-specs-row">
+              <span class="show-spec-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                Official Apple Warranty
+              </span>
+              <span class="show-spec-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                No-Cost EMI Available
+              </span>
+              <span class="show-spec-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+                Express Shipping
+              </span>
+            </div>
+            <div class="show-cta-row">
+              <a href="pricing.html" class="show-btn-primary" style="background:#ca8a04;">
+                Explore Complete Catalogue
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="contact.html" class="show-btn-secondary">Contact Apple Expert</a>
+            </div>
+          </div>
+
         </div>
-        <div class="show-slide" data-slide="1">
-          <img src="images/products/Burgundy iPhone-Style Showcase.png" alt="iPhone Pro camera system in burgundy" draggable="false">
+
+        <!-- Controls: Dots, Arrows & Progress Bar -->
+        <div class="show-controls-bar">
+          <div class="show-dots-nav" id="showDotsNav" role="tablist" aria-label="Showcase slides">
+            <button class="active" role="tab" aria-selected="true" aria-label="Slide 1: MacBook Neo" data-goto="0"></button>
+            <button role="tab" aria-selected="false" aria-label="Slide 2: iPhone 18 Pro Max" data-goto="1"></button>
+            <button role="tab" aria-selected="false" aria-label="Slide 3: Pro Camera System" data-goto="2"></button>
+            <button role="tab" aria-selected="false" aria-label="Slide 4: The Whole Lineup" data-goto="3"></button>
+          </div>
+          <div class="show-arrows-nav">
+            <button class="show-nav-arrow" id="showPrevBtn" aria-label="Previous slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="show-nav-arrow" id="showNextBtn" aria-label="Next slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
         </div>
-        <div class="show-slide" data-slide="2">
-          <img src="images/products/iphone-17-pro-orange.jpeg" alt="iPhone Pro in cosmic orange" draggable="false">
-        </div>
-        <div class="show-slide" data-slide="3">
-          <img src="images/products/Golden Laptop_ A Cinematic Product Collage-1.png" alt="Golden laptop product collage" draggable="false">
-        </div>
+
       </div>
 
-      <div class="show-caps">
-        <div class="cap on">
-          <span class="cap-eyebrow">AEROSPACE-GRADE</span>
-          Forged in titanium.
-          <span class="cap-desc">Strong, light, and finished by hand to feel as good as it looks.</span>
-        </div>
-        <div class="cap">
-          <span class="cap-eyebrow">PRO CAMERA SYSTEM</span>
-          A camera that sees the whole story.
-          <span class="cap-desc">Three cinematic lenses built for zero compromise in low light.</span>
-        </div>
-        <div class="cap">
-          <span class="cap-eyebrow">A18 PRO SILICON</span>
-          Power that stays cool.
-          <span class="cap-desc">All-day battery life and performance for the things you do next.</span>
-        </div>
-        <div class="cap">
-          <span class="cap-eyebrow">THE WHOLE LINEUP</span>
-          Every device, in perfect sync.
-          <span class="cap-desc">From iPhone to Mac, shop genuine Apple products with No-Cost EMI.</span>
-        </div>
-      </div>
+      <!-- RIGHT COLUMN: Hardware Display Frame -->
+      <div class="show-visual-col">
+        <div class="show-hardware-frame" id="showHardwareFrame">
+          <div class="show-hardware-glow" id="showGlow"></div>
+          <div class="show-frame-badge" id="showFrameBadge">A18 Pro Silicon</div>
+          <div class="show-frame-pedestal"></div>
 
-      <div class="dots" id="showDots" role="group" aria-label="Showcase slides">
-        <button aria-label="Slide 1" aria-current="true"></button>
-        <button aria-label="Slide 2" aria-current="false"></button>
-        <button aria-label="Slide 3" aria-current="false"></button>
-        <button aria-label="Slide 4" aria-current="false"></button>
+          <div class="show-frame-slides" id="showFrameSlides">
+            <!-- Slide 0 Image: MacBook Neo (1st requested product) -->
+            <div class="show-frame-slide is-active" data-index="0">
+              <img src="images/products/macbook-neo.jpeg" alt="MacBook Neo with A18 Pro silicon" draggable="false" loading="eager">
+            </div>
+
+            <!-- Slide 1 Image: iPhone 18 Pro Max (2nd requested product) -->
+            <div class="show-frame-slide" data-index="1">
+              <img src="images/products/iphone-18pro-max.jpeg" alt="iPhone 18 Pro Max in aerospace titanium" draggable="false" loading="lazy">
+            </div>
+
+            <!-- Slide 2 Image: Pro Camera System -->
+            <div class="show-frame-slide" data-index="2">
+              <img src="images/products/Burgundy iPhone-Style Showcase.png" alt="Pro Camera System cinematic lenses" draggable="false" loading="lazy">
+            </div>
+
+            <!-- Slide 3 Image: Golden Lineup -->
+            <div class="show-frame-slide" data-index="3">
+              <img src="images/products/Golden Laptop_ A Cinematic Product Collage-1.png" alt="Apple complete ecosystem lineup" draggable="false" loading="lazy">
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -2344,17 +2785,8 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
   var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
   var heroCopy = $('.hero-content') || $('.hero-copy'),
       heroPhone = $('#heroPhone'),
-      show = $('#show'),
-      showGlow = $('#showGlow'),
-      slides = [].slice.call(document.querySelectorAll('.show-slide')),
-      caps = [].slice.call(document.querySelectorAll('.show-caps .cap')),
-      dots = [].slice.call(document.querySelectorAll('#showDots button')),
       orbs = [].slice.call(document.querySelectorAll('.orb')),
-      glows = ['rgba(10,132,255,.32)', 'rgba(120,29,50,.45)', 'rgba(255,107,0,.34)', 'rgba(212,175,55,.32)'],
-      lastIdx = -1,
       mx = 0, my = 0, ticking = false;
-
-  function smooth(x) { return x * x * (3 - 2 * x); }
 
   function frame() {
     ticking = false;
@@ -2374,47 +2806,182 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
     orbs.forEach(function (o, i) {
       o.style.transform = 'translate3d(' + (mx * 18 * (i + 1)) + 'px,' + (orbY * (1 + i * 0.35)) + 'px,0)';
     });
-
-    // 3. SHOWCASE: continuous horizontal slider driven by scroll
-    if (show && slides.length) {
-      var r = show.getBoundingClientRect();
-      var range = Math.max(1, r.height - vh);
-      var t = clamp(-r.top / range, 0, 1);
-      var n = slides.length;
-      var pos = t * (n - 1);
-      var i = Math.min(n - 2, Math.floor(pos));
-      var f = pos - i;
-      // hold on each slide, then glide to the next
-      var cur = i + smooth(clamp((f - 0.2) / 0.6, 0, 1));
-
-      slides.forEach(function (s, k) {
-        var d = k - cur;
-        var ad = Math.min(Math.abs(d), 1);
-        s.style.transform = 'translate3d(' + (d * 70) + '%,0,0) rotateY(' + (-d * 25 + mx * 6) + 'deg) scale(' + (1 - 0.25 * ad) + ')';
-        s.style.opacity = String(1 - ad * 0.88);
-        s.style.zIndex = ad < 0.5 ? 2 : 1;
-        s.style.visibility = Math.abs(d) > 1.3 ? 'hidden' : 'visible';
-      });
-
-      var idx = Math.round(cur);
-      if (idx !== lastIdx) {
-        lastIdx = idx;
-        caps.forEach(function (c, k) { c.classList.toggle('on', k === idx); });
-        dots.forEach(function (d, k) { d.setAttribute('aria-current', k === idx ? 'true' : 'false'); });
-        if (showGlow) showGlow.style.background = glows[idx] || glows[0];
-      }
-    }
   }
 
-  // Dots jump to a slide
-  dots.forEach(function (d, k) {
-    d.addEventListener('click', function () {
-      var r = show.getBoundingClientRect();
-      var range = Math.max(1, r.height - window.innerHeight);
-      var top = window.scrollY + r.top + (k / (slides.length - 1)) * range + 1;
-      window.scrollTo({ top: top, behavior: rm ? 'auto' : 'smooth' });
+  // ================= 3. FEATURED SHOWCASE AUTO-ROTATION WITH VANISH & REAPPEAR =================
+  (function initShowcaseCarousel() {
+    var section = document.getElementById('show');
+    if (!section) return;
+
+    var contentItems = [].slice.call(section.querySelectorAll('.show-content-item'));
+    var frameSlides = [].slice.call(section.querySelectorAll('.show-frame-slide'));
+    var dots = [].slice.call(section.querySelectorAll('#showDotsNav button'));
+    var prevBtn = document.getElementById('showPrevBtn');
+    var nextBtn = document.getElementById('showNextBtn');
+    var glow = document.getElementById('showGlow');
+    var badge = document.getElementById('showFrameBadge');
+
+    if (!contentItems.length || !frameSlides.length) return;
+
+    var total = Math.min(contentItems.length, frameSlides.length);
+    var currentIndex = 0;
+    var isTransitioning = false;
+    var timer = null;
+    var intervalDuration = 5000;
+    var isHovered = false;
+
+    var glows = [
+      'rgba(0, 180, 255, 0.38)',   // MacBook Neo (Electric cyan/blue)
+      'rgba(245, 158, 11, 0.40)',  // iPhone 18 Pro Max (Titanium Amber)
+      'rgba(244, 63, 94, 0.42)',   // Pro Camera System (Crimson/Burgundy)
+      'rgba(234, 179, 8, 0.38)'    // Apple Lineup (Warm Gold)
+    ];
+
+    var badges = [
+      'A18 Pro Silicon',
+      'Aerospace Titanium · A20 Pro',
+      '48MP Pro Fusion System',
+      'Apple Ecosystem · Lineup'
+    ];
+
+    function updateSlide(nextIndex) {
+      if (isTransitioning || nextIndex === currentIndex) return;
+      isTransitioning = true;
+
+      var currentContent = contentItems[currentIndex];
+      var currentFrame = frameSlides[currentIndex];
+      var targetContent = contentItems[nextIndex];
+      var targetFrame = frameSlides[nextIndex];
+
+      // Update dots immediately for snappy feedback
+      dots.forEach(function (d, k) {
+        var isActive = (k === nextIndex);
+        d.classList.toggle('active', isActive);
+        d.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      if (rm) {
+        // Reduced motion preference: immediate switch
+        if (currentContent) currentContent.classList.remove('is-active');
+        if (currentFrame) currentFrame.classList.remove('is-active');
+        currentIndex = nextIndex;
+        if (targetContent) targetContent.classList.add('is-active');
+        if (targetFrame) targetFrame.classList.add('is-active');
+        if (glow && glows[nextIndex]) glow.style.background = glows[nextIndex];
+        if (badge && badges[nextIndex]) badge.textContent = badges[nextIndex];
+        isTransitioning = false;
+        return;
+      }
+
+      // Step 1: Smooth Vanish / Disappear animation
+      if (currentContent) currentContent.classList.add('is-exiting');
+      if (currentFrame) currentFrame.classList.add('is-exiting');
+
+      // Step 2: Swap after vanish (350ms) and trigger smooth entrance animation
+      setTimeout(function () {
+        if (currentContent) currentContent.classList.remove('is-active', 'is-exiting');
+        if (currentFrame) currentFrame.classList.remove('is-active', 'is-exiting');
+
+        currentIndex = nextIndex;
+
+        if (glow && glows[nextIndex]) glow.style.background = glows[nextIndex];
+        if (badge && badges[nextIndex]) badge.textContent = badges[nextIndex];
+
+        if (targetContent) targetContent.classList.add('is-active');
+        if (targetFrame) targetFrame.classList.add('is-active');
+
+        setTimeout(function () {
+          isTransitioning = false;
+        }, 320);
+      }, 350);
+    }
+
+    function nextSlide() {
+      var next = (currentIndex + 1) % total;
+      updateSlide(next);
+    }
+
+    function prevSlide() {
+      var prev = (currentIndex - 1 + total) % total;
+      updateSlide(prev);
+    }
+
+    function startTimer() {
+      stopTimer();
+      timer = setInterval(function () {
+        if (!isHovered) {
+          nextSlide();
+        }
+      }, intervalDuration);
+    }
+
+    function stopTimer() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function restartTimer() {
+      stopTimer();
+      startTimer();
+    }
+
+    // Dot click listeners
+    dots.forEach(function (btn, idx) {
+      btn.addEventListener('click', function () {
+        updateSlide(idx);
+        restartTimer();
+      });
     });
-  });
+
+    // Arrow navigation
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        prevSlide();
+        restartTimer();
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        nextSlide();
+        restartTimer();
+      });
+    }
+
+    // Hover pause / resume so visitors can easily read and click buttons
+    section.addEventListener('mouseenter', function () {
+      isHovered = true;
+    });
+    section.addEventListener('mouseleave', function () {
+      isHovered = false;
+    });
+
+    // Mobile touch swipe gestures
+    var touchStartX = 0;
+    section.addEventListener('touchstart', function (e) {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchStartX = e.changedTouches[0].clientX;
+      }
+    }, { passive: true });
+    section.addEventListener('touchend', function (e) {
+      if (e.changedTouches && e.changedTouches[0]) {
+        var touchEndX = e.changedTouches[0].clientX;
+        var diffX = touchStartX - touchEndX;
+        if (Math.abs(diffX) > 40) {
+          if (diffX > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+          restartTimer();
+        }
+      }
+    }, { passive: true });
+
+    // Start auto timer
+    startTimer();
+  })();
 
 
   function req() {

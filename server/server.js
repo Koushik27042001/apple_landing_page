@@ -123,7 +123,7 @@ app.get("/iphone-duo", function (req, res) {
 app.get("/macbook-neo", function (req, res) {
   res.sendFile(path.join(clientDir, "macbook-neo.html"));
 });
-app.get("/pricing", function (req, res) {
+app.get(["/pricing", "/pricing/"], function (req, res) {
   res.sendFile(path.join(clientDir, "pricing.html"));
 });
 app.use(express.static(clientDir));

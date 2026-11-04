@@ -5,7 +5,7 @@
    and Cleaned Pricing (Anomalous ₹28,631 extraction errors resolved).
    ============================================================ */
 
-const PRICING_CATALOGUE = [
+var PRICING_CATALOGUE = [
   {
     "id": "iphone-duo",
     "slug": "iphone-duo",
@@ -6057,6 +6057,10 @@ const PRICING_CATALOGUE = [
     ]
   }
 ];
+
+if (typeof window !== 'undefined') {
+  window.PRICING_CATALOGUE = PRICING_CATALOGUE;
+}
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { PRICING_CATALOGUE };

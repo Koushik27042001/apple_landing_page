@@ -18,7 +18,7 @@
     glass: ''
   };
 
-  // DOM elements
+  // Cached DOM elements
   let gridEl = null;
   let tableBodyEl = null;
   let tableContainerEl = null;
@@ -29,7 +29,15 @@
   let configModalOverlay = null;
   let enquiryModalOverlay = null;
 
-  document.addEventListener('DOMContentLoaded', initPricingPage);
+  function getCatalogue() {
+    if (typeof window !== 'undefined' && Array.isArray(window.PRICING_CATALOGUE) && window.PRICING_CATALOGUE.length) {
+      return window.PRICING_CATALOGUE;
+    }
+    if (typeof PRICING_CATALOGUE !== 'undefined' && Array.isArray(PRICING_CATALOGUE) && PRICING_CATALOGUE.length) {
+      return PRICING_CATALOGUE;
+    }
+    return [];
+  }
 
   function initPricingPage() {
     gridEl = document.getElementById('pricingGrid');
@@ -42,8 +50,10 @@
     configModalOverlay = document.getElementById('configModalOverlay');
     enquiryModalOverlay = document.getElementById('enquiryModalOverlay');
 
-    if (!window.PRICING_CATALOGUE || !Array.isArray(window.PRICING_CATALOGUE)) {
-      console.error('PRICING_CATALOGUE dataset not loaded.');
+    const catalogue = getCatalogue();
+    if (!catalogue.length) {
+      console.warn('PRICING_CATALOGUE dataset not yet loaded, waiting for script...');
+      setTimeout(initPricingPage, 80);
       return;
     }
 
@@ -54,7 +64,7 @@
       searchQuery = urlParams.get('q');
       if (searchInput) {
         searchInput.value = searchQuery;
-        searchInput.parentElement.classList.add('has-val');
+        if (searchInput.parentElement) searchInput.parentElement.classList.add('has-val');
       }
     }
     if (urlParams.get('view') === 'table') currentView = 'table';
@@ -64,41 +74,87 @@
     updateViewSwitcherState();
     render();
 
-    // Auto-open modal if model or slug specified
+    // Auto-open modal if model or slug specified in URL
     if (urlParams.get('model')) {
       const match = findVariantByModel(urlParams.get('model'));
       if (match) openConfigModal(match.product, match.variant);
     } else if (urlParams.get('product')) {
-      const p = window.PRICING_CATALOGUE.find(item => item.id === urlParams.get('product') || item.slug === urlParams.get('product'));
+      const p = catalogue.find(item => item.id === urlParams.get('product') || item.slug === urlParams.get('product'));
       if (p) openConfigModal(p);
     }
   }
 
   function wireEvents() {
-    // Category tabs
-    const pills = document.querySelectorAll('.pricing-cat-pill');
-    pills.forEach(pill => {
-      pill.addEventListener('click', function () {
-        currentCategory = this.getAttribute('data-cat') || 'all';
+    // Delegated Category tabs click
+    document.addEventListener('click', function (e) {
+      const catBtn = e.target.closest('.pricing-cat-pill, .pricing-category-tabs button');
+      if (catBtn && catBtn.hasAttribute('data-cat')) {
+        e.preventDefault();
+        currentCategory = (catBtn.getAttribute('data-cat') || 'all').toLowerCase();
         updateCategoryPillState();
         render();
-      });
+        return;
+      }
+
+      // Delegated View buttons click
+      const viewBtn = e.target.closest('.pricing-view-btn');
+      if (viewBtn && viewBtn.hasAttribute('data-view')) {
+        e.preventDefault();
+        currentView = viewBtn.getAttribute('data-view') || 'cards';
+        updateViewSwitcherState();
+        render();
+        return;
+      }
+
+      // Delegated Configure buttons on cards
+      const configBtn = e.target.closest('[data-action="configure"]');
+      if (configBtn) {
+        e.preventDefault();
+        const id = configBtn.getAttribute('data-id');
+        const prod = getCatalogue().find(p => p.id === id);
+        if (prod) openConfigModal(prod);
+        return;
+      }
+
+      // Delegated clicking anywhere on a card (except links) opens configurator
+      const card = e.target.closest('.pricing-card');
+      if (card && !e.target.closest('a') && !e.target.closest('button')) {
+        const id = card.getAttribute('data-id');
+        const prod = getCatalogue().find(p => p.id === id);
+        if (prod) openConfigModal(prod);
+        return;
+      }
+
+      // Delegated Table configure buttons
+      const tblConfigBtn = e.target.closest('[data-action="table-configure"]');
+      if (tblConfigBtn) {
+        e.preventDefault();
+        const prodId = tblConfigBtn.getAttribute('data-prod-id');
+        const model = tblConfigBtn.getAttribute('data-model');
+        const prod = getCatalogue().find(p => p.id === prodId);
+        const variant = (prod && prod.variants) ? prod.variants.find(v => v.modelNumber === model) : null;
+        if (prod) openConfigModal(prod, variant);
+        return;
+      }
     });
 
     // Search input
     if (searchInput) {
       searchInput.addEventListener('input', function () {
         searchQuery = this.value.trim();
-        this.parentElement.classList.toggle('has-val', searchQuery.length > 0);
+        if (this.parentElement) {
+          this.parentElement.classList.toggle('has-val', searchQuery.length > 0);
+        }
         render();
       });
     }
 
+    // Clear search button
     if (clearSearchBtn) {
       clearSearchBtn.addEventListener('click', function () {
         if (searchInput) {
           searchInput.value = '';
-          searchInput.parentElement.classList.remove('has-val');
+          if (searchInput.parentElement) searchInput.parentElement.classList.remove('has-val');
           searchQuery = '';
           searchInput.focus();
           render();
@@ -113,16 +169,6 @@
         render();
       });
     }
-
-    // View switcher
-    const viewBtns = document.querySelectorAll('.pricing-view-btn');
-    viewBtns.forEach(btn => {
-      btn.addEventListener('click', function () {
-        currentView = this.getAttribute('data-view') || 'cards';
-        updateViewSwitcherState();
-        render();
-      });
-    });
 
     // Modal close handlers
     const modalCloseBtn = document.getElementById('configModalClose');
@@ -161,9 +207,9 @@
   }
 
   function updateCategoryPillState() {
-    const pills = document.querySelectorAll('.pricing-cat-pill');
+    const pills = document.querySelectorAll('.pricing-cat-pill, .pricing-category-tabs button');
     pills.forEach(pill => {
-      const cat = pill.getAttribute('data-cat');
+      const cat = (pill.getAttribute('data-cat') || '').toLowerCase();
       pill.classList.toggle('active', cat === currentCategory);
     });
   }
@@ -180,7 +226,9 @@
 
   function filterProducts() {
     const q = searchQuery.toLowerCase();
-    return window.PRICING_CATALOGUE.filter(prod => {
+    const catalogue = getCatalogue();
+
+    return catalogue.filter(prod => {
       // Category check
       if (currentCategory !== 'all') {
         if (currentCategory === 'business' || currentCategory === 'accessories') {
@@ -245,9 +293,22 @@
         <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: #86868b;">
           <h3 style="color:#ffffff; font-size:22px; margin-bottom:8px;">No matching products found</h3>
           <p>Try searching with another keyword like "M5", "Air", "256GB", or model number "MDH74HN/A".</p>
-          <button class="pricing-cat-pill active" style="margin-top:16px;" onclick="document.getElementById('clearSearchBtn').click();">Reset Filters</button>
+          <button type="button" class="pricing-cat-pill active" style="margin-top:16px; cursor:pointer;" id="resetFilterBtn">Reset Filters</button>
         </div>
       `;
+      const resetBtn = document.getElementById('resetFilterBtn');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function () {
+          currentCategory = 'all';
+          searchQuery = '';
+          if (searchInput) {
+            searchInput.value = '';
+            if (searchInput.parentElement) searchInput.parentElement.classList.remove('has-val');
+          }
+          updateCategoryPillState();
+          render();
+        });
+      }
       return;
     }
 
@@ -259,7 +320,7 @@
       const configSummary = getProductConfigSummary(prod);
 
       return `
-        <article class="pricing-card" data-id="${escapeHtml(prod.id)}">
+        <article class="pricing-card" data-id="${escapeHtml(prod.id)}" style="cursor:pointer;">
           <div class="pricing-card-head">
             <span class="pricing-card-category">${escapeHtml(prod.category)}</span>
             <span class="pricing-card-chip">${escapeHtml(prod.chip || 'Apple')}</span>
@@ -285,7 +346,7 @@
                   <span>Configure &amp; View Variants</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
                 </button>
-                <a href="${escapeHtml(prod.detailUrl || '#')}" class="pricing-btn-explore">
+                <a href="${escapeHtml(prod.detailUrl || '#')}" class="pricing-btn-explore" onclick="event.stopPropagation();">
                   <span>Explore Model Overview &rarr;</span>
                 </a>
               </div>
@@ -294,15 +355,6 @@
         </article>
       `;
     }).join('');
-
-    // Wire configure buttons
-    gridEl.querySelectorAll('[data-action="configure"]').forEach(btn => {
-      btn.addEventListener('click', function () {
-        const id = this.getAttribute('data-id');
-        const prod = window.PRICING_CATALOGUE.find(p => p.id === id);
-        if (prod) openConfigModal(prod);
-      });
-    });
   }
 
   function getProductConfigSummary(prod) {
@@ -322,7 +374,7 @@
 
     products.forEach(prod => {
       (prod.variants || []).forEach(v => {
-        // Also apply search query to table rows
+        // Apply search query to table rows
         if (searchQuery) {
           const q = searchQuery.toLowerCase();
           const inRow = (v.modelNumber || '').toLowerCase().includes(q) ||
@@ -364,17 +416,6 @@
     }
 
     tableBodyEl.innerHTML = rows.join('');
-
-    // Wire table configure buttons
-    tableBodyEl.querySelectorAll('[data-action="table-configure"]').forEach(btn => {
-      btn.addEventListener('click', function () {
-        const prodId = this.getAttribute('data-prod-id');
-        const model = this.getAttribute('data-model');
-        const prod = window.PRICING_CATALOGUE.find(p => p.id === prodId);
-        const variant = (prod && prod.variants) ? prod.variants.find(v => v.modelNumber === model) : null;
-        if (prod) openConfigModal(prod, variant);
-      });
-    });
   }
 
   // ============================================================
@@ -395,7 +436,7 @@
       glass: first.glass || ''
     };
 
-    updateModalDOM();
+    updateModalDOM(first);
     if (configModalOverlay) configModalOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -406,46 +447,53 @@
     activeProduct = null;
   }
 
-  function findMatchingVariant() {
-    if (!activeProduct || !activeProduct.variants) return null;
+  function selectOption(type, value) {
+    if (!activeProduct || !activeProduct.variants) return;
     const variants = activeProduct.variants;
 
-    // Try exact match
+    // Target configuration with the changed attribute
+    const targetConfig = Object.assign({}, activeConfig, { [type]: value });
+
+    // 1. Exact match across all attributes
     let match = variants.find(v => {
-      const mStorage = !activeConfig.storage || v.storage === activeConfig.storage;
-      const mColor = !activeConfig.color || v.color === activeConfig.color;
-      const mConn = !activeConfig.connectivity || v.connectivity === activeConfig.connectivity;
-      const mGlass = !activeConfig.glass || v.glass === activeConfig.glass;
+      const mStorage = !targetConfig.storage || v.storage === targetConfig.storage;
+      const mColor = !targetConfig.color || v.color === targetConfig.color;
+      const mConn = !targetConfig.connectivity || v.connectivity === targetConfig.connectivity;
+      const mGlass = !targetConfig.glass || v.glass === targetConfig.glass;
       return mStorage && mColor && mConn && mGlass;
     });
 
-    // Fallback: storage + color
+    // 2. Storage + Color match
     if (!match) {
       match = variants.find(v => {
-        const mStorage = !activeConfig.storage || v.storage === activeConfig.storage;
-        const mColor = !activeConfig.color || v.color === activeConfig.color;
+        const mStorage = !targetConfig.storage || v.storage === targetConfig.storage;
+        const mColor = !targetConfig.color || v.color === targetConfig.color;
         return mStorage && mColor;
       });
     }
 
-    // Fallback: storage
+    // 3. Match the specific option chosen
     if (!match) {
-      match = variants.find(v => !activeConfig.storage || v.storage === activeConfig.storage);
+      match = variants.find(v => v[type] === value);
     }
 
-    return match || variants[0];
+    if (!match) match = variants[0];
+
+    // Synchronize activeConfig to matched variant
+    activeConfig = {
+      storage: match.storage || '',
+      color: match.color || '',
+      connectivity: match.connectivity || '',
+      glass: match.glass || ''
+    };
+
+    updateModalDOM(match);
   }
 
-  function updateModalDOM() {
+  function updateModalDOM(matchedVariant) {
     if (!activeProduct) return;
-    const matched = findMatchingVariant();
+    const matched = matchedVariant || (activeProduct.variants ? activeProduct.variants[0] : null);
     if (!matched) return;
-
-    // Update activeConfig to match actual variant found
-    if (matched.storage) activeConfig.storage = matched.storage;
-    if (matched.color) activeConfig.color = matched.color;
-    if (matched.connectivity) activeConfig.connectivity = matched.connectivity;
-    if (matched.glass) activeConfig.glass = matched.glass;
 
     // Left Preview
     const imgEl = document.getElementById('modalImg');
@@ -453,8 +501,10 @@
     const titleEl = document.getElementById('modalTitle');
     const displayEl = document.getElementById('modalDisplay');
 
-    if (imgEl) imgEl.src = activeProduct.image;
-    if (imgEl) imgEl.alt = activeProduct.name;
+    if (imgEl) {
+      imgEl.src = activeProduct.image;
+      imgEl.alt = activeProduct.name;
+    }
     if (badgeEl) badgeEl.textContent = activeProduct.chip || activeProduct.category;
     if (titleEl) titleEl.textContent = activeProduct.name;
     if (displayEl) displayEl.textContent = activeProduct.display || activeProduct.tagline;
@@ -504,11 +554,15 @@
     if (copyBtn) {
       copyBtn.onclick = function () {
         const text = `${activeProduct.name} - Model: ${matched.modelNumber} | ${matched.specs} | ${matched.price ? '₹' + Number(matched.price).toLocaleString('en-IN') : 'Quote on Request'}`;
-        navigator.clipboard.writeText(text).then(() => {
-          showNotification('Model & specification copied to clipboard!');
-        }).catch(() => {
-          showNotification('Copied: ' + matched.modelNumber);
-        });
+        if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            showNotification('Model & specification copied to clipboard!');
+          }).catch(() => {
+            showNotification('Copied: ' + matched.modelNumber);
+          });
+        } else {
+          showNotification('Model: ' + matched.modelNumber);
+        }
       };
     }
 
@@ -539,7 +593,7 @@
     const storages = [...new Set(variants.map(v => v.storage).filter(Boolean))];
     if (storages.length > 0) {
       html += `
-        <div class="config-group">
+        <div class="config-group" style="margin-bottom:16px;">
           <div class="config-group-title">Select Capacity / Storage</div>
           <div class="config-pills" id="modalStoragePills">
             ${storages.map(s => `
@@ -556,7 +610,7 @@
     const colors = [...new Set(variants.map(v => v.color).filter(Boolean))];
     if (colors.length > 0) {
       html += `
-        <div class="config-group">
+        <div class="config-group" style="margin-bottom:16px;">
           <div class="config-group-title">Colour — <span style="color:#ffffff; font-weight:600;" id="activeColorLabel">${escapeHtml(activeConfig.color || colors[0])}</span></div>
           <div class="config-swatches" id="modalColorSwatches">
             ${colors.map(c => `
@@ -568,11 +622,11 @@
       `;
     }
 
-    // 3. Connectivity / Glass (if iPad Pro or Apple Watch)
+    // 3. Connectivity / Glass
     const conns = [...new Set(variants.map(v => v.connectivity).filter(Boolean))];
     if (conns.length > 1) {
       html += `
-        <div class="config-group">
+        <div class="config-group" style="margin-bottom:16px;">
           <div class="config-group-title">Connectivity</div>
           <div class="config-pills" id="modalConnPills">
             ${conns.map(cn => `
@@ -588,7 +642,7 @@
     const glasses = [...new Set(variants.map(v => v.glass).filter(Boolean))];
     if (glasses.length > 1) {
       html += `
-        <div class="config-group">
+        <div class="config-group" style="margin-bottom:16px;">
           <div class="config-group-title">Glass Finish</div>
           <div class="config-pills" id="modalGlassPills">
             ${glasses.map(g => `
@@ -611,8 +665,7 @@
         const type = this.getAttribute('data-type');
         const val = this.getAttribute('data-val');
         if (type && val) {
-          activeConfig[type] = val;
-          updateModalDOM();
+          selectOption(type, val);
         }
       });
     });
@@ -668,13 +721,12 @@
     form.reset();
   }
 
-  // Helper function to find variant by model
   function findVariantByModel(modelNum) {
-    if (!window.PRICING_CATALOGUE) return null;
-    const q = modelNum.trim().toUpperCase();
-    for (const prod of window.PRICING_CATALOGUE) {
+    const catalogue = getCatalogue();
+    const q = (modelNum || '').trim().toUpperCase();
+    for (const prod of catalogue) {
       for (const v of prod.variants || []) {
-        if (v.modelNumber.toUpperCase() === q) {
+        if ((v.modelNumber || '').toUpperCase() === q) {
           return { product: prod, variant: v };
         }
       }
@@ -752,5 +804,24 @@
     }, 2800);
   }
 
-})();
+  // Expose global methods
+  window.openConfigModal = openConfigModal;
+  window.closeConfigModal = closeConfigModal;
+  window.openEnquiryModal = openEnquiryModal;
+  window.closeEnquiryModal = closeEnquiryModal;
+  window.initPricingPage = initPricingPage;
 
+  // Initialize immediately or on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPricingPage);
+  } else {
+    initPricingPage();
+  }
+  window.addEventListener('load', function () {
+    const g = document.getElementById('pricingGrid');
+    if (g && (!g.children || g.children.length === 0)) {
+      initPricingPage();
+    }
+  });
+
+})();
