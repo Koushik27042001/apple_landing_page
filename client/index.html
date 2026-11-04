@@ -496,11 +496,12 @@ body.dark-theme .hero__actions .btn--outline:hover {
 .hero--mbp .hero__media img,
 .hero__media img {
   display: block;
-  width: 100%;
-  max-width: 1813px;
+  width: calc(100% + 100px);
+  max-width: 1913px;
   height: auto;
   object-fit: cover;
   object-position: center bottom;
+  flex-shrink: 0;
 }
 
 @media (max-width: 734px) {
@@ -513,7 +514,138 @@ body.dark-theme .hero__actions .btn--outline:hover {
   .hero__media img { width: 180%; max-width: none; }
 }
 
-/* ==================== SECTION 2: HERO (THE NEW IPHONE 17 PRO MAX) ==================== */
+/* ==================== SECTION 2: MACBOOK PRO M6 ==================== */
+.m6 {
+  width: 100%;
+  background: #000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 24px;
+}
+
+/* ---------- copy ---------- */
+.m6__copy {
+  text-align: center;
+  padding: 48px 20px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.m6__title {
+  margin: 0;
+  font-size: clamp(40px, 6vw, 80px);
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #f5f5f7;
+}
+
+.m6__subtitle {
+  margin: 12px 0 0;
+  font-size: clamp(24px, 3vw, 40px);
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: #f5f5f7;
+}
+
+.m6__availability {
+  margin: 18px 0 0;
+  font-size: clamp(17px, 1.6vw, 21px);
+  line-height: 1.2;
+  color: #86868b;
+}
+
+/* ---------- buttons ---------- */
+.m6__actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.m6__actions .btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px 32px !important;
+  border-radius: 980px !important;
+  font-size: 21px !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  transition: background-color .2s ease, color .2s ease, transform .2s ease !important;
+  cursor: pointer !important;
+}
+
+.m6__actions .btn--primary,
+body.dark-theme .m6__actions .btn--primary {
+  background: #0071e3 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 1px solid #0071e3 !important;
+}
+.m6__actions .btn--primary:hover,
+body.dark-theme .m6__actions .btn--primary:hover {
+  background: #0077ed !important;
+  border-color: #0077ed !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+.m6__actions .btn--outline,
+body.dark-theme .m6__actions .btn--outline {
+  min-width: 124px !important;
+  background: transparent !important;
+  color: #2997ff !important;
+  -webkit-text-fill-color: #2997ff !important;
+  border: 1px solid #2997ff !important;
+}
+.m6__actions .btn--outline:hover,
+body.dark-theme .m6__actions .btn--outline:hover {
+  background: #2997ff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  transform: translateY(-2px);
+}
+
+.m6__actions .btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* ---------- image ---------- */
+.m6__media {
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.m6__media img {
+  display: block;
+  width: 100%;
+  max-width: 1738px;
+  height: auto;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 734px) {
+  .m6__copy { padding-top: 32px; }
+  .m6__actions { gap: 12px; }
+  .m6__actions .btn { font-size: 17px !important; padding: 13px 24px !important; }
+  .m6__actions .btn--outline { min-width: 100px !important; }
+  .m6__media { margin-top: 24px; }
+  .m6__media img { width: 150%; max-width: none; }
+}
+
+/* ==================== SECTION 3: HERO (THE NEW IPHONE 17 PRO MAX) ==================== */
 .hero {
   min-height: 92vh;
   display: flex;
@@ -2571,12 +2703,33 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
       <img
         src="images/home/hero_macbook_pro_proled_xdr_preorder__df38n593sxg2_large_2x.jpg"
         alt="MacBook Pro with PROLED XDR Display, open to show the screen"
-        width="1813" height="742"
+        width="1913" height="742"
         loading="eager">
     </div>
   </section>
 
-  <!-- ================= SECTION 2: HERO (THE NEW IPHONE 17 PRO MAX) ================= -->
+  <!-- ================= SECTION 2: MACBOOK PRO M6 ================= -->
+  <section class="m6" id="macbook-pro-m6" aria-labelledby="m6-title">
+    <div class="m6__copy">
+      <h2 class="m6__title" id="m6-title">MacBook Pro</h2>
+      <p class="m6__subtitle">14″ model now with M6.</p>
+      <p class="m6__availability">Available from 6 November</p>
+      <div class="m6__actions">
+        <a class="btn btn--primary" href="product.html?id=macbook-pro-14-m5">Learn more</a>
+        <a class="btn btn--outline" href="pricing.html?cat=mac">Shop</a>
+      </div>
+    </div>
+
+    <div class="m6__media">
+      <img
+        src="images/home/hero_macbook_pro_m6_preorder__djr4reqm3ziq_large_2x.jpg"
+        alt="14-inch MacBook Pro opening in front of a glowing M6 logo"
+        width="1738" height="730"
+        loading="lazy">
+    </div>
+  </section>
+
+  <!-- ================= SECTION 3: HERO (THE NEW IPHONE 17 PRO MAX) ================= -->
   <section class="hero" id="hero">
     <div class="hero-container">
 
