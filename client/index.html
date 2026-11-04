@@ -368,173 +368,146 @@ a { color: inherit; text-decoration: none; }
 .hero--mbp {
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
   background: #000;
+  overflow: hidden;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  padding: 0 !important;
+  padding: 44px 0 0 0 !important;
   z-index: 2;
 }
 
-.hero--mbp .hero__copy,
-.hero__copy {
+.hero--mbp .hero__copy {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 44px 20px 0;
+  padding: 0 20px;
 }
 
-.hero--mbp .hero__title,
-.hero__title {
+.hero--mbp .hero__title {
   margin: 0;
-  font-size: clamp(40px, 6vw, 80px);
-  line-height: 1.05;
+  font-size: clamp(38px, 5.2vw, 56px);
+  line-height: 1.07;
   font-weight: 600;
   letter-spacing: -0.015em;
   color: #f5f5f7;
 }
 
-.hero--mbp .hero__subtitle,
-.hero__subtitle {
-  margin: 14px 0 0;
-  font-size: clamp(24px, 3vw, 40px);
-  line-height: 1.1;
+.hero--mbp .hero__subtitle {
+  margin: 6px 0 0;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.15;
   font-weight: 400;
-  background: linear-gradient(90deg,
-    #f7d046 0%, #f7d046 14%,
-    #f5f5f7 20%, #f5f5f7 26%,
-    #3a9bff 36%, #2d8cf0 100%);
+  letter-spacing: -0.01em;
+  color: #f5f5f7;
+}
+
+.hero--mbp .hero__subtitle .pro-tag {
+  background: linear-gradient(135deg, #f7d046 0%, #e5a93b 100%);
   -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent;
+  color: #f7d046;
+  font-weight: 500;
 }
 
-.hero--mbp .hero__availability,
-.hero__availability {
-  margin: 20px 0 0;
-  font-size: clamp(17px, 1.6vw, 21px);
+.hero--mbp .hero__subtitle .disp-tag {
+  color: #2997ff;
+  -webkit-text-fill-color: #2997ff;
+}
+
+.hero--mbp .hero__availability {
+  margin: 12px 0 0;
+  font-size: clamp(14px, 1.4vw, 17px);
+  line-height: 1.3;
   color: #86868b;
+  font-weight: 400;
 }
 
-.hero--mbp .hero__actions,
-.hero__actions {
-  margin-top: 26px;
+.hero--mbp .hero__actions {
+  margin-top: 18px;
   display: flex;
-  gap: 24px;
+  gap: 14px;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
 }
 
-.hero--mbp .btn,
-.hero__actions .btn {
+.hero--mbp .hero__actions .btn {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  min-width: 128px !important;
-  padding: 16px 32px !important;
+  padding: 8px 18px !important;
+  min-width: 96px !important;
   border-radius: 980px !important;
-  font-size: 21px !important;
-  line-height: 1 !important;
+  font-size: 15px !important;
+  line-height: 1.3 !important;
+  font-weight: 400 !important;
   text-decoration: none !important;
   transition: background-color .2s ease, color .2s ease, transform .2s ease !important;
   cursor: pointer !important;
 }
 
-.hero--mbp .btn--primary,
-.hero__actions .btn--primary,
-body.dark-theme .hero__actions .btn--primary {
+.hero--mbp .hero__actions .btn--primary,
+body.dark-theme .hero--mbp .hero__actions .btn--primary {
   background: #0071e3 !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   border: 1px solid #0071e3 !important;
 }
-.hero--mbp .btn--primary:hover,
-.hero__actions .btn--primary:hover,
-body.dark-theme .hero__actions .btn--primary:hover {
+.hero--mbp .hero__actions .btn--primary:hover,
+body.dark-theme .hero--mbp .hero__actions .btn--primary:hover {
   background: #0077ed !important;
+  border-color: #0077ed !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
-.hero--mbp .btn--outline,
-.hero__actions .btn--outline,
-body.dark-theme .hero__actions .btn--outline {
+.hero--mbp .hero__actions .btn--outline,
+body.dark-theme .hero--mbp .hero__actions .btn--outline {
   background: transparent !important;
   color: #2997ff !important;
   -webkit-text-fill-color: #2997ff !important;
   border: 1px solid #2997ff !important;
 }
-.hero--mbp .btn--outline:hover,
-.hero__actions .btn--outline:hover,
-body.dark-theme .hero__actions .btn--outline:hover {
+.hero--mbp .hero__actions .btn--outline:hover,
+body.dark-theme .hero--mbp .hero__actions .btn--outline:hover {
   background: #2997ff !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  transform: translateY(-2px);
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: translateY(-1px);
 }
 
-.hero--mbp .btn:focus-visible,
-.hero__actions .btn:focus-visible {
+.hero--mbp .hero__actions .btn:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 3px;
 }
 
-.hero--mbp .hero__media,
-.hero__media {
+.hero--mbp .hero__media {
   position: relative;
   width: 100%;
-  margin-top: 32px;
+  margin-top: 36px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   z-index: 1;
 }
 
-.hero--mbp .tile-image-wrapper {
-  position: relative;
-  width: 710px;
-  height: 500px;
-  overflow: hidden;
+.hero--mbp .hero__media img {
+  display: block;
+  width: min(100% - 32px, 980px);
+  max-width: 980px;
+  height: auto;
   margin: 0 auto;
 }
 
-.hero--mbp .tile-image-wrapper img {
-  width: 734px !important;
-  height: 500px !important;
-  position: absolute;
-  display: block;
-  top: 0px;
-  left: 355px;
-  transform: matrix(1, 0, 0, 1, -367, 0);
-  object-fit: cover;
-  max-width: none !important;
-  max-height: none !important;
-}
-
 @media (max-width: 734px) {
-  .hero--mbp { min-height: auto; }
-  .hero--mbp .hero__actions,
-  .hero__actions { gap: 12px; }
-  .hero--mbp .btn,
-  .hero__actions .btn { font-size: 17px !important; padding: 13px 24px !important; min-width: 110px !important; }
-  .hero--mbp .hero__media { margin-top: 20px; }
-  .hero--mbp .tile-image-wrapper {
-    width: min(100%, 710px);
-    max-width: 100%;
-    height: auto;
-    aspect-ratio: 710 / 500;
-  }
-  .hero--mbp .tile-image-wrapper img {
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 103.38% !important;
-    height: 100% !important;
-  }
+  .hero--mbp { padding-top: 36px !important; }
+  .hero--mbp .hero__actions { gap: 10px; margin-top: 14px; }
+  .hero--mbp .hero__actions .btn { font-size: 14px !important; padding: 7px 16px !important; min-width: 84px !important; }
+  .hero--mbp .hero__media { margin-top: 24px; }
 }
 
 /* ==================== SECTION 2: MACBOOK PRO M6 ==================== */
@@ -547,48 +520,48 @@ body.dark-theme .hero__actions .btn--outline:hover {
   align-items: center;
   position: relative;
   z-index: 2;
-  padding-bottom: 24px;
+  padding: 48px 0 0 0;
 }
 
-/* ---------- copy ---------- */
 .m6__copy {
   text-align: center;
-  padding: 48px 20px 0;
+  padding: 0 20px;
   position: relative;
   z-index: 2;
 }
 
 .m6__title {
   margin: 0;
-  font-size: clamp(40px, 6vw, 80px);
-  line-height: 1.05;
+  font-size: clamp(38px, 5.2vw, 56px);
+  line-height: 1.07;
   font-weight: 600;
   letter-spacing: -0.015em;
   color: #f5f5f7;
 }
 
 .m6__subtitle {
-  margin: 12px 0 0;
-  font-size: clamp(24px, 3vw, 40px);
-  line-height: 1.1;
+  margin: 6px 0 0;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.15;
   font-weight: 400;
   letter-spacing: -0.01em;
   color: #f5f5f7;
 }
 
 .m6__availability {
-  margin: 18px 0 0;
-  font-size: clamp(17px, 1.6vw, 21px);
-  line-height: 1.2;
+  margin: 12px 0 0;
+  font-size: clamp(14px, 1.4vw, 17px);
+  line-height: 1.3;
   color: #86868b;
+  font-weight: 400;
 }
 
-/* ---------- buttons ---------- */
 .m6__actions {
-  margin-top: 24px;
+  margin-top: 18px;
   display: flex;
-  gap: 24px;
+  gap: 14px;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
 }
 
@@ -596,10 +569,12 @@ body.dark-theme .hero__actions .btn--outline:hover {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 16px 32px !important;
+  padding: 8px 18px !important;
+  min-width: 96px !important;
   border-radius: 980px !important;
-  font-size: 21px !important;
-  line-height: 1 !important;
+  font-size: 15px !important;
+  line-height: 1.3 !important;
+  font-weight: 400 !important;
   text-decoration: none !important;
   transition: background-color .2s ease, color .2s ease, transform .2s ease !important;
   cursor: pointer !important;
@@ -618,12 +593,11 @@ body.dark-theme .m6__actions .btn--primary:hover {
   border-color: #0077ed !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .m6__actions .btn--outline,
 body.dark-theme .m6__actions .btn--outline {
-  min-width: 124px !important;
   background: transparent !important;
   color: #2997ff !important;
   -webkit-text-fill-color: #2997ff !important;
@@ -632,9 +606,9 @@ body.dark-theme .m6__actions .btn--outline {
 .m6__actions .btn--outline:hover,
 body.dark-theme .m6__actions .btn--outline:hover {
   background: #2997ff !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  transform: translateY(-2px);
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: translateY(-1px);
 }
 
 .m6__actions .btn:focus-visible {
@@ -642,57 +616,29 @@ body.dark-theme .m6__actions .btn--outline:hover {
   outline-offset: 3px;
 }
 
-/* ---------- image & tile wrapper ---------- */
 .m6__media {
   width: 100%;
   margin-top: 32px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   position: relative;
   z-index: 1;
 }
 
-.m6 .tile-image-wrapper {
-  position: relative;
-  width: 710px;
-  height: 500px;
-  overflow: hidden;
+.m6__media img {
+  display: block;
+  width: min(100% - 32px, 760px);
+  max-width: 760px;
+  height: auto;
   margin: 0 auto;
 }
 
-.m6 .tile-image-wrapper img {
-  width: 734px !important;
-  height: 500px !important;
-  position: absolute;
-  display: block;
-  top: 0px;
-  left: 355px;
-  transform: matrix(1, 0, 0, 1, -367, 0);
-  object-fit: fill;
-  max-width: none !important;
-  max-height: none !important;
-}
-
-/* ---------- responsive ---------- */
 @media (max-width: 734px) {
-  .m6__copy { padding-top: 32px; }
-  .m6__actions { gap: 12px; }
-  .m6__actions .btn { font-size: 17px !important; padding: 13px 24px !important; }
-  .m6__actions .btn--outline { min-width: 100px !important; }
-  .m6__media { margin-top: 20px; }
-  .m6 .tile-image-wrapper {
-    width: min(100%, 710px);
-    max-width: 100%;
-    height: auto;
-    aspect-ratio: 710 / 500;
-  }
-  .m6 .tile-image-wrapper img {
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 103.38% !important;
-    height: 100% !important;
-  }
+  .m6 { padding-top: 36px; }
+  .m6__actions { gap: 10px; margin-top: 14px; }
+  .m6__actions .btn { font-size: 14px !important; padding: 7px 16px !important; min-width: 84px !important; }
+  .m6__media { margin-top: 24px; }
 }
 
 /* ==================== SECTION 3: HERO (THE NEW IPHONE 17 PRO MAX) ==================== */
@@ -2741,7 +2687,7 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
   <section class="hero hero--mbp" aria-labelledby="hero-title">
     <div class="hero__copy">
       <h1 class="hero__title" id="hero-title">MacBook Pro</h1>
-      <p class="hero__subtitle">PROLED XDR Display</p>
+      <p class="hero__subtitle"><span class="pro-tag">PRO</span>LED XDR <span class="disp-tag">Display</span></p>
       <p class="hero__availability">Available from 9 November</p>
       <div class="hero__actions">
         <a class="btn btn--primary" href="product.html?id=macbook-pro-14-m5">Learn more</a>
@@ -2750,14 +2696,11 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
     </div>
 
     <div class="hero__media">
-      <div class="tile-image-wrapper">
-        <img
-          src="images/home/hero_macbook_pro_proled_xdr_preorder__df38n593sxg2_large.jpg"
-          srcset="images/home/hero_macbook_pro_proled_xdr_preorder__df38n593sxg2_large.jpg 1x, images/home/hero_macbook_pro_proled_xdr_preorder__df38n593sxg2_large_2x.jpg 2x"
-          alt="MacBook Pro with PROLED XDR Display, open to show the screen"
-          width="734" height="500"
-          loading="eager">
-      </div>
+      <img
+        src="images/home/macbook_pro_proled_xdr.jpg"
+        alt="MacBook Pro with PROLED XDR Display, open to show the screen"
+        width="2416" height="620"
+        loading="eager">
     </div>
   </section>
 
@@ -2774,14 +2717,11 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
     </div>
 
     <div class="m6__media">
-      <div class="tile-image-wrapper">
-        <img
-          src="images/home/hero_macbook_pro_m6_preorder__djr4reqm3ziq_large.jpg"
-          srcset="images/home/hero_macbook_pro_m6_preorder__djr4reqm3ziq_large.jpg 1x, images/home/hero_macbook_pro_m6_preorder__djr4reqm3ziq_large_2x.jpg 2x"
-          alt="14-inch MacBook Pro opening in front of a glowing M6 logo"
-          width="734" height="500"
-          loading="lazy">
-      </div>
+      <img
+        src="images/home/macbook_pro_m6.jpg"
+        alt="14-inch MacBook Pro opening in front of a glowing M6 logo"
+        width="1070" height="475"
+        loading="lazy">
     </div>
   </section>
 
