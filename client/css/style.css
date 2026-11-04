@@ -8477,3 +8477,59 @@ body.dark-theme .mobile-nav .mobile-accordion-content,
 body.page-dark .mobile-nav .mobile-accordion-content {
   border-left-color: rgba(255, 255, 255, 0.12) !important;
 }
+
+/* =========================================
+   GLOBAL PRODUCT BUTTONS TEXT VISIBILITY
+========================================= */
+body.dark-theme a.btn,
+body.dark-theme .btn,
+body.dark-theme a.btn-primary,
+body.dark-theme .btn-primary,
+body.dark-theme a.btn.pri,
+body.dark-theme .btn.pri,
+body.dark-theme a.show-btn-primary,
+body.dark-theme .show-btn-primary,
+body.dark-theme a.show-btn-secondary,
+body.dark-theme .show-btn-secondary,
+body.dark-theme .show-cta-row a,
+body.dark-theme .show-cta-row a span,
+body.dark-theme .pc-actions .btn,
+body.dark-theme .pc-actions a,
+body.dark-theme .product-card .btn,
+body.dark-theme .product-card a.btn,
+body.dark-theme .product-card .btn-dark,
+body.dark-theme .product-card a.btn-dark {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+body.dark-theme a.btn:visited,
+body.dark-theme a.btn-primary:visited,
+body.dark-theme a.btn.pri:visited,
+body.dark-theme a.show-btn-primary:visited,
+body.dark-theme a.show-btn-secondary:visited,
+body.dark-theme .show-cta-row a:visited,
+body.dark-theme .pc-actions a:visited,
+body.dark-theme .product-card a.btn:visited {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+body.dark-theme a.btn:hover,
+body.dark-theme a.btn-primary:hover,
+body.dark-theme a.btn.pri:hover,
+body.dark-theme a.show-btn-primary:hover,
+body.dark-theme a.show-btn-secondary:hover,
+body.dark-theme .show-cta-row a:hover,
+body.dark-theme .pc-actions a:hover,
+body.dark-theme .product-card a.btn:hover {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+body.dark-theme .show-cta-row a svg,
+body.dark-theme .show-btn-primary svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+}

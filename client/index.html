@@ -1033,45 +1033,140 @@ a { color: inherit; text-decoration: none; }
   flex-wrap: wrap;
   margin-bottom: 24px;
 }
+
+/* Ensure product showcase buttons have crystal-clear visible white text with no overrides */
+.show-cta-row a.show-btn-primary,
+body.dark-theme .show-cta-row a.show-btn-primary,
+body.dark-theme a.show-btn-primary,
 .show-btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  border-radius: 999px;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 13px 26px !important;
+  border-radius: 999px !important;
   background: #0071e3;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 18px rgba(0, 113, 227, 0.35);
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  text-decoration: none !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 20px rgba(0, 113, 227, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  cursor: pointer !important;
 }
+
+.show-cta-row a.show-btn-primary span,
+.show-cta-row a.show-btn-primary,
+.show-btn-primary span,
+.show-btn-primary {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.show-cta-row a.show-btn-primary:visited,
+body.dark-theme a.show-btn-primary:visited {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.show-cta-row a.show-btn-primary:hover,
+body.dark-theme .show-cta-row a.show-btn-primary:hover,
+body.dark-theme a.show-btn-primary:hover,
 .show-btn-primary:hover {
-  background: #0077ed;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 22px rgba(0, 113, 227, 0.45);
+  background: #0077ed !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 28px rgba(0, 113, 227, 0.6) !important;
 }
+
+.show-cta-row a.show-btn-primary svg,
+.show-btn-primary svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+
+/* Secondary showcase buttons */
+.show-cta-row a.show-btn-secondary,
+body.dark-theme .show-cta-row a.show-btn-secondary,
+body.dark-theme a.show-btn-secondary,
 .show-btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 22px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: #fff;
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: none;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.25s ease;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 13px 24px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
 }
+
+.show-cta-row a.show-btn-secondary span,
+.show-btn-secondary span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.show-cta-row a.show-btn-secondary:visited,
+body.dark-theme a.show-btn-secondary:visited {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.show-cta-row a.show-btn-secondary:hover,
+body.dark-theme .show-cta-row a.show-btn-secondary:hover,
+body.dark-theme a.show-btn-secondary:hover,
 .show-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.28);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.22) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Global Product Card & CTA Buttons Text Visibility */
+body.dark-theme a.btn,
+body.dark-theme .btn,
+body.dark-theme .pc-actions .btn,
+body.dark-theme .pc-actions a.btn,
+body.dark-theme .product-card .btn,
+body.dark-theme .product-card a.btn,
+body.dark-theme .product-card a.btn-dark,
+body.dark-theme .product-card .btn-dark,
+body.dark-theme a.btn.pri,
+body.dark-theme .btn-primary,
+body.dark-theme a.btn-primary {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+body.dark-theme .product-card .btn-dark,
+body.dark-theme .product-card .pc-actions .btn {
+  background: #0071e3 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 1px solid #0071e3 !important;
+}
+
+body.dark-theme .product-card .btn-dark:hover,
+body.dark-theme .product-card .pc-actions .btn:hover {
+  background: #0077ed !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
 /* Controls: Dots, Next/Prev, Auto-play Indicator */
@@ -2453,11 +2548,13 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
               </span>
             </div>
             <div class="show-cta-row">
-              <a href="product.html?id=macbook-neo" class="show-btn-primary">
-                Explore MacBook Neo
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <a href="product.html?id=macbook-neo" class="show-btn-primary" style="color:#ffffff !important; -webkit-text-fill-color:#ffffff !important;">
+                <span>Explore MacBook Neo</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
-              <a href="pricing.html?cat=mac" class="show-btn-secondary">Buy with No-Cost EMI</a>
+              <a href="pricing.html?cat=mac" class="show-btn-secondary" style="color:#ffffff !important; -webkit-text-fill-color:#ffffff !important;">
+                <span>Buy with No-Cost EMI</span>
+              </a>
             </div>
           </div>
 
@@ -2484,11 +2581,13 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
               </span>
             </div>
             <div class="show-cta-row">
-              <a href="product.html?id=iphone-18-pro" class="show-btn-primary" style="background:#d97706;">
-                Buy iPhone 18 Pro Max
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <a href="product.html?id=iphone-18-pro" class="show-btn-primary" style="background:#d97706 !important; color:#ffffff !important; -webkit-text-fill-color:#ffffff !important;">
+                <span>Buy iPhone 18 Pro Max</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
-              <a href="pricing.html?cat=iphone" class="show-btn-secondary">Compare Models</a>
+              <a href="pricing.html?cat=iphone" class="show-btn-secondary" style="color:#ffffff !important; -webkit-text-fill-color:#ffffff !important;">
+                <span>Compare Models</span>
+              </a>
             </div>
           </div>
 
@@ -2515,11 +2614,13 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
               </span>
             </div>
             <div class="show-cta-row">
-              <a href="pricing.html?cat=iphone" class="show-btn-primary" style="background:#be185d;">
-                Explore Camera Specs
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <a href="pricing.html?cat=iphone" class="show-btn-primary" style="background:#be185d !important; color:#ffffff !important; -webkit-text-fill-color:#ffffff !important;">
+                <span>Explore Camera Specs</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
-              <a href="contact.html" class="show-btn-secondary">Order Now</a>
+              <a href="contact.html" class="show-btn-secondary" style="color:#ffffff !important; -webkit-text-fill-color:#ffffff !important;">
+                <span>Order Now</span>
+              </a>
             </div>
           </div>
 
@@ -2546,11 +2647,13 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
               </span>
             </div>
             <div class="show-cta-row">
-              <a href="pricing.html" class="show-btn-primary" style="background:#ca8a04;">
-                Explore Complete Catalogue
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <a href="pricing.html" class="show-btn-primary" style="background:#ca8a04 !important; color:#ffffff !important; -webkit-text-fill-color:#ffffff !important;">
+                <span>Explore Complete Catalogue</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
-              <a href="contact.html" class="show-btn-secondary">Contact Apple Expert</a>
+              <a href="contact.html" class="show-btn-secondary" style="color:#ffffff !important; -webkit-text-fill-color:#ffffff !important;">
+                <span>Contact Apple Expert</span>
+              </a>
             </div>
           </div>
 
