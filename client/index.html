@@ -486,32 +486,55 @@ body.dark-theme .hero__actions .btn--outline:hover {
 
 .hero--mbp .hero__media,
 .hero__media {
-  position: absolute;
-  inset: auto 0 0 0;
-  z-index: 1;
+  position: relative;
+  width: 100%;
+  margin-top: 32px;
   display: flex;
   justify-content: center;
-  pointer-events: none;
+  align-items: center;
+  z-index: 1;
 }
-.hero--mbp .hero__media img,
-.hero__media img {
+
+.hero--mbp .tile-image-wrapper {
+  position: relative;
+  width: 710px;
+  height: 500px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.hero--mbp .tile-image-wrapper img {
+  width: 734px !important;
+  height: 500px !important;
+  position: absolute;
   display: block;
-  width: calc(100% + 100px);
-  max-width: 1913px;
-  height: auto;
+  top: 0px;
+  left: 355px;
+  transform: matrix(1, 0, 0, 1, -367, 0);
   object-fit: cover;
-  object-position: center bottom;
-  flex-shrink: 0;
+  max-width: none !important;
+  max-height: none !important;
 }
 
 @media (max-width: 734px) {
-  .hero--mbp { min-height: 640px; }
+  .hero--mbp { min-height: auto; }
   .hero--mbp .hero__actions,
   .hero__actions { gap: 12px; }
   .hero--mbp .btn,
   .hero__actions .btn { font-size: 17px !important; padding: 13px 24px !important; min-width: 110px !important; }
-  .hero--mbp .hero__media img,
-  .hero__media img { width: 180%; max-width: none; }
+  .hero--mbp .hero__media { margin-top: 20px; }
+  .hero--mbp .tile-image-wrapper {
+    width: min(100%, 710px);
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 710 / 500;
+  }
+  .hero--mbp .tile-image-wrapper img {
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 103.38% !important;
+    height: 100% !important;
+  }
 }
 
 /* ==================== SECTION 2: MACBOOK PRO M6 ==================== */
@@ -619,20 +642,36 @@ body.dark-theme .m6__actions .btn--outline:hover {
   outline-offset: 3px;
 }
 
-/* ---------- image ---------- */
+/* ---------- image & tile wrapper ---------- */
 .m6__media {
   width: 100%;
-  margin-top: 40px;
+  margin-top: 32px;
   display: flex;
   justify-content: center;
+  align-items: center;
   position: relative;
   z-index: 1;
 }
-.m6__media img {
+
+.m6 .tile-image-wrapper {
+  position: relative;
+  width: 710px;
+  height: 500px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.m6 .tile-image-wrapper img {
+  width: 734px !important;
+  height: 500px !important;
+  position: absolute;
   display: block;
-  width: 100%;
-  max-width: 1738px;
-  height: auto;
+  top: 0px;
+  left: 355px;
+  transform: matrix(1, 0, 0, 1, -367, 0);
+  object-fit: fill;
+  max-width: none !important;
+  max-height: none !important;
 }
 
 /* ---------- responsive ---------- */
@@ -641,8 +680,19 @@ body.dark-theme .m6__actions .btn--outline:hover {
   .m6__actions { gap: 12px; }
   .m6__actions .btn { font-size: 17px !important; padding: 13px 24px !important; }
   .m6__actions .btn--outline { min-width: 100px !important; }
-  .m6__media { margin-top: 24px; }
-  .m6__media img { width: 150%; max-width: none; }
+  .m6__media { margin-top: 20px; }
+  .m6 .tile-image-wrapper {
+    width: min(100%, 710px);
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 710 / 500;
+  }
+  .m6 .tile-image-wrapper img {
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 103.38% !important;
+    height: 100% !important;
+  }
 }
 
 /* ==================== SECTION 3: HERO (THE NEW IPHONE 17 PRO MAX) ==================== */
@@ -2700,11 +2750,14 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
     </div>
 
     <div class="hero__media">
-      <img
-        src="images/home/hero_macbook_pro_proled_xdr_preorder__df38n593sxg2_large_2x.jpg"
-        alt="MacBook Pro with PROLED XDR Display, open to show the screen"
-        width="1913" height="742"
-        loading="eager">
+      <div class="tile-image-wrapper">
+        <img
+          src="images/home/hero_macbook_pro_proled_xdr_preorder__df38n593sxg2_large.jpg"
+          srcset="images/home/hero_macbook_pro_proled_xdr_preorder__df38n593sxg2_large.jpg 1x, images/home/hero_macbook_pro_proled_xdr_preorder__df38n593sxg2_large_2x.jpg 2x"
+          alt="MacBook Pro with PROLED XDR Display, open to show the screen"
+          width="734" height="500"
+          loading="eager">
+      </div>
     </div>
   </section>
 
@@ -2721,11 +2774,14 @@ body.dark-theme .product-card .btn-dark:hover { background: #0077ed; }
     </div>
 
     <div class="m6__media">
-      <img
-        src="images/home/hero_macbook_pro_m6_preorder__djr4reqm3ziq_large_2x.jpg"
-        alt="14-inch MacBook Pro opening in front of a glowing M6 logo"
-        width="1738" height="730"
-        loading="lazy">
+      <div class="tile-image-wrapper">
+        <img
+          src="images/home/hero_macbook_pro_m6_preorder__djr4reqm3ziq_large.jpg"
+          srcset="images/home/hero_macbook_pro_m6_preorder__djr4reqm3ziq_large.jpg 1x, images/home/hero_macbook_pro_m6_preorder__djr4reqm3ziq_large_2x.jpg 2x"
+          alt="14-inch MacBook Pro opening in front of a glowing M6 logo"
+          width="734" height="500"
+          loading="lazy">
+      </div>
     </div>
   </section>
 
