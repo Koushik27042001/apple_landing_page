@@ -4071,69 +4071,6 @@
 
     </div>
 
-    <!-- ================= SECTION 5: HERO (THE NEW IPHONE 17 PRO MAX) ================= -->
-    <section class="hero" id="hero">
-      <div class="hero-container">
-
-        <!-- LEFT COLUMN: Headline & CTAs -->
-        <div class="hero-content">
-          <span class="eyebrow">THE NEW IPHONE 17 PRO MAX</span>
-          <h1 id="h1">Built for <span>Beyond.</span></h1>
-          <p>Powerful performance. Extraordinary camera capabilities. A bold new look. Discover a world where
-            cutting-edge technology meets beautifully crafted design.</p>
-
-          <div class="hero-actions">
-            <a href="#buy" class="btn btn-light">Explore iPhone 17 Pro Max &nearr;</a>
-            <a href="#show" class="btn btn-outline">Discover the Experience</a>
-          </div>
-
-          <div class="hero-meta">
-            <span class="meta-dot"></span>
-            <span>Precision in every detail. Power in every moment.</span>
-          </div>
-
-          <div class="hero-highlights">
-            <span class="highlight-chip">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-              </svg>
-              Pro-level performance
-            </span>
-            <span class="highlight-chip">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-              Advanced camera system
-            </span>
-            <span class="highlight-chip">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="3" width="20" height="14" rx="2" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-              </svg>
-              Stunning display
-            </span>
-            <span class="highlight-chip">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path
-                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-              Standout finishes
-            </span>
-          </div>
-        </div>
-
-        <!-- RIGHT COLUMN: Clean Illustrator Lineup Showcase (Aligned to Background) -->
-        <div class="hero-visual" id="stage">
-          <div class="hero-device-wrap" id="heroPhone">
-            <img src="images/products/Colourful iPhone-Style Pro Lineup.png"
-              alt="The New iPhone 17 Pro Max Colourful Lineup" class="hero-product-img" id="heroImg" draggable="false">
-          </div>
-        </div>
-
-      </div>
-    </section>
-
     <!-- ================= SECTION 2: HOMEPOD MINI 2 SHOWCASE ================= -->
     <section class="homepod-hero" id="homepod-mini-2">
       <!-- Heading -->
@@ -4619,7 +4556,7 @@
       var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
       var $ = function (s) { return document.querySelector(s); };
       var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
-      var heroCopy = $('.hero-content') || $('.hero-copy'),
+      var heroCopy = $('#hero .hero-content'),
         heroPhone = $('#heroPhone'),
         orbs = [].slice.call(document.querySelectorAll('.orb')),
         mx = 0, my = 0, ticking = false;
