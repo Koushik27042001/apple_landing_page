@@ -213,24 +213,24 @@ function renderHeader(active) {
     '</header>' +
     '<div class="mobile-nav" id="mobileNav">' +
       '<div class="mobile-nav-head">' +
-        '<span class="logo">' +
+        '<a href="index.html" class="logo" aria-label="Iswift Business Partner home">' +
           '<img src="images/logo_for-website.svg" alt="Iswift" class="site-logo-img">' +
           '<img src="images/apple.svg" alt="Apple" class="apple-logo-svg" width="14" height="14">' +
           '<span class="store-tag"><span class="store-tag-line">Business</span><span class="store-tag-line">Partner</span></span>' +
           '<span class="sr-only">Iswift Business Partner</span>' +
-        '</span>' +
+        '</a>' +
         '<button class="btn-icon" id="mobileNavClose" aria-label="Close menu">' + icon("close", { size: 22 }) + '</button>' +
       '</div>' +
-      '<div class="mobile-search-box" style="margin-bottom:18px;">' +
+      '<form class="mobile-search-box" id="mobileSearchForm" action="category.html" method="get" style="margin-bottom:18px;">' +
         '<div class="search-wrap" style="width:100%;">' +
           '<span class="search-icon">' + icon("search", { size: 15 }) + '</span>' +
-          '<input type="text" class="search-input" id="mobileSearch" placeholder="Search iPhone, Mac, iPad, Watch..." autocomplete="off" style="padding:12px 14px 12px 34px;">' +
+          '<input type="search" name="q" class="search-input" id="mobileSearch" placeholder="Search iPhone, Mac, iPad, Watch..." autocomplete="off" style="padding:12px 14px 12px 34px;">' +
         '</div>' +
-      '</div>' +
+      '</form>' +
       '<nav class="mobile-nav-links">' +
         '<a href="index.html" class="mobile-nav-link' + (active === "home" || active === "store" ? ' active' : '') + '">Home</a>' +
         '<div class="mobile-accordion-group" data-group="products">' +
-          '<button type="button" class="mobile-accordion-toggle"><span>Products</span><span class="toggle-icon">&rsaquo;</span></button>' +
+          '<button type="button" class="mobile-accordion-toggle" aria-expanded="false"><span>Products</span><span class="toggle-icon">&rsaquo;</span></button>' +
           '<div class="mobile-accordion-content">' +
             '<a href="category.html?cat=iphone" class="mobile-sub-link"><span>iPhone</span><span class="sub-arrow">&rsaquo;</span></a>' +
             '<a href="category.html?cat=mac" class="mobile-sub-link"><span>Mac</span><span class="sub-arrow">&rsaquo;</span></a>' +
@@ -242,7 +242,7 @@ function renderHeader(active) {
           '</div>' +
         '</div>' +
         '<div class="mobile-accordion-group" data-group="business">' +
-          '<button type="button" class="mobile-accordion-toggle"><span>Business</span><span class="toggle-icon">&rsaquo;</span></button>' +
+          '<button type="button" class="mobile-accordion-toggle" aria-expanded="false"><span>Business</span><span class="toggle-icon">&rsaquo;</span></button>' +
           '<div class="mobile-accordion-content">' +
             '<a href="pricing.html" class="mobile-sub-link"><span>Pricing &amp; Catalogue</span></a>' +
             '<a href="about.html#business" class="mobile-sub-link"><span>Business Initiatives</span></a>' +
@@ -272,23 +272,93 @@ function wireHeaderInteractions() {
   const menuBtn = document.getElementById("menuToggleBtn");
   const mobileNav = document.getElementById("mobileNav");
   const closeBtn = document.getElementById("mobileNavClose");
-  if (menuBtn && mobileNav) {
-    menuBtn.addEventListener("click", function () { mobileNav.classList.add("open"); });
-  }
-  if (closeBtn && mobileNav) {
-    closeBtn.addEventListener("click", function () { mobileNav.classList.remove("open"); });
-  }
-  if (mobileNav) {
-    mobileNav.querySelectorAll("a").forEach(function (a) {
-      a.addEventListener("click", function () { mobileNav.classList.remove("open"); });
-    });
 
+  function openMobileMenu() {
+    if (mobileNav) {
+      mobileNav.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function closeMobileMenu() {
+    if (mobileNav) {
+      mobileNav.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+  }
+
+  if (menuBtn) {
+    menuBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      openMobileMenu();
+    });
+  }
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      closeMobileMenu();
+    });
+  }
+
+  if (mobileNav) {
+    // Accordion toggle handlers (Products, Business)
     mobileNav.querySelectorAll(".mobile-accordion-toggle").forEach(function (btn) {
       btn.addEventListener("click", function (e) {
+        e.preventDefault();
         e.stopPropagation();
         const grp = btn.closest(".mobile-accordion-group");
-        if (grp) grp.classList.toggle("open");
+        if (grp) {
+          const isOpen = grp.classList.toggle("open");
+          btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        }
       });
+    });
+
+    // Mobile nav links redirection & handling
+    mobileNav.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        const href = a.getAttribute("href");
+        if (!href || href === "#") {
+          e.preventDefault();
+          return;
+        }
+
+        // If it's an in-page hash anchor on the current page
+        const currentPath = window.location.pathname.split("/").pop() || "index.html";
+        const isHashAnchor = href.startsWith("#") || (href.startsWith(currentPath + "#"));
+        if (isHashAnchor) {
+          closeMobileMenu();
+          const targetId = href.split("#")[1];
+          const target = targetId ? document.getElementById(targetId) : null;
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+          return;
+        }
+
+        // For all page redirects: explicitly navigate to ensure mobile browsers never drop the click
+        e.preventDefault();
+        window.location.href = href;
+      });
+    });
+  }
+
+  // Desktop Business dropdown interactions (hover + click toggle for touch devices)
+  const bizDropdown = document.getElementById("bizNavDropdown");
+  if (bizDropdown) {
+    const bizToggle = bizDropdown.querySelector(".biz-dropdown-toggle");
+    if (bizToggle) {
+      bizToggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        bizDropdown.classList.toggle("open");
+      });
+    }
+    document.addEventListener("click", function (e) {
+      if (!bizDropdown.contains(e.target)) {
+        bizDropdown.classList.remove("open");
+      }
     });
   }
 
@@ -297,10 +367,22 @@ function wireHeaderInteractions() {
 
   wireSearch("headerSearch", "searchSuggestions");
 
+  // Mobile search input and form submission
+  const mobileSearchForm = document.getElementById("mobileSearchForm");
   const mobileSearch = document.getElementById("mobileSearch");
+  if (mobileSearchForm && mobileSearch) {
+    mobileSearchForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const val = mobileSearch.value.trim();
+      if (val) {
+        window.location.href = "category.html?q=" + encodeURIComponent(val);
+      }
+    });
+  }
   if (mobileSearch) {
     mobileSearch.addEventListener("keydown", function (e) {
       if (e.key === "Enter" && mobileSearch.value.trim()) {
+        e.preventDefault();
         window.location.href = "category.html?q=" + encodeURIComponent(mobileSearch.value.trim());
       }
     });
