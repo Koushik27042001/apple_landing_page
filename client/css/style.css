@@ -271,12 +271,10 @@ button {
 
 .site-logo-img {
   display: inline-block;
-  height: 32px;
+  height: 30px;
   width: auto;
   max-width: 124px;
   object-fit: contain;
-  filter: brightness(2.2) contrast(1.15);
-  mix-blend-mode: screen;
   vertical-align: middle;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }

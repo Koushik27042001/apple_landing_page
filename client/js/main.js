@@ -65,7 +65,7 @@ function renderHeader(active) {
       '<div class="header-inner">' +
         '<button class="menu-toggle" id="menuToggleBtn" aria-label="Menu">' + icon("menu", { size: 22 }) + '</button>' +
         '<a href="index.html" class="logo" aria-label="Iswift Business Partner home">' +
-          '<img src="images/logo_for-website.jpeg" alt="Iswift" class="site-logo-img">' +
+          '<img src="images/logo_for-website.svg" alt="Iswift" class="site-logo-img">' +
           '<img src="images/apple.svg" alt="Apple" class="apple-logo-svg" width="14" height="14">' +
           '<span class="store-tag"><span class="store-tag-line">Business</span><span class="store-tag-line">Partner</span></span>' +
           '<span class="sr-only">Iswift Business Partner</span>' +
@@ -217,7 +217,7 @@ function renderHeader(active) {
     '<div class="mobile-nav" id="mobileNav">' +
       '<div class="mobile-nav-head">' +
         '<span class="logo">' +
-          '<img src="images/logo_for-website.jpeg" alt="Iswift" class="site-logo-img">' +
+          '<img src="images/logo_for-website.svg" alt="Iswift" class="site-logo-img">' +
           '<img src="images/apple.svg" alt="Apple" class="apple-logo-svg" width="14" height="14">' +
           '<span class="store-tag"><span class="store-tag-line">Business</span><span class="store-tag-line">Partner</span></span>' +
           '<span class="sr-only">Iswift Business Partner</span>' +
@@ -605,7 +605,7 @@ function renderFooter() {
         '<div class="footer-grid">' +
           '<div class="footer-col footer-brand">' +
             '<a href="index.html" class="logo footer-logo" aria-label="Iswift Business Partner home">' +
-              '<img src="images/logo_for-website.jpeg" alt="Iswift" class="site-logo-img footer-logo-img">' +
+              '<img src="images/logo_for-website.svg" alt="Iswift" class="site-logo-img footer-logo-img">' +
               '<img src="images/apple.svg" alt="Apple" class="apple-logo-svg" width="14" height="14">' +
               '<span class="store-tag"><span class="store-tag-line">Business</span><span class="store-tag-line">Partner</span></span>' +
               '<span class="sr-only">Iswift Business Partner</span>' +
