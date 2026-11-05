@@ -232,13 +232,84 @@ function renderHeader(active) {
         '<div class="mobile-accordion-group" data-group="products">' +
           '<button type="button" class="mobile-accordion-toggle" aria-expanded="false"><span>Products</span><span class="toggle-icon">&rsaquo;</span></button>' +
           '<div class="mobile-accordion-content">' +
-            '<a href="category.html?cat=iphone" class="mobile-sub-link"><span>iPhone</span><span class="sub-arrow">&rsaquo;</span></a>' +
-            '<a href="category.html?cat=mac" class="mobile-sub-link"><span>Mac</span><span class="sub-arrow">&rsaquo;</span></a>' +
-            '<a href="category.html?cat=ipad" class="mobile-sub-link"><span>iPad</span><span class="sub-arrow">&rsaquo;</span></a>' +
-            '<a href="category.html?cat=watch" class="mobile-sub-link"><span>Apple Watch</span><span class="sub-arrow">&rsaquo;</span></a>' +
-            '<a href="category.html?cat=airpods" class="mobile-sub-link"><span>AirPods</span><span class="sub-arrow">&rsaquo;</span></a>' +
-            '<a href="category.html?cat=tvhome" class="mobile-sub-link"><span>TV &amp; Home</span><span class="sub-arrow">&rsaquo;</span></a>' +
-            '<a href="pricing.html" class="mobile-sub-link" style="color:#2997ff;font-weight:600;"><span>All Products &amp; Pricing &rarr;</span></a>' +
+            '<!-- iPhone Submenu -->' +
+            '<div class="mobile-subcat-group" data-subcat="iphone">' +
+              '<button type="button" class="mobile-subcat-toggle" aria-expanded="false"><span>iPhone</span><span class="subcat-arrow">&rsaquo;</span></button>' +
+              '<div class="mobile-subcat-content">' +
+                '<a href="iphone-duo.html" class="mobile-leaf-link"><span class="mll-name">iPhone duo</span><span class="badge-new-red">New</span></a>' +
+                '<a href="product.html?id=iphone-17-pro-max" class="mobile-leaf-link"><span class="mll-name">iPhone 17 Pro Max</span></a>' +
+                '<a href="product.html?id=iphone-17-pro" class="mobile-leaf-link"><span class="mll-name">iPhone 17 Pro</span></a>' +
+                '<a href="product.html?id=iphone-17" class="mobile-leaf-link"><span class="mll-name">iPhone 17</span></a>' +
+                '<a href="product.html?id=iphone-16-pro-max" class="mobile-leaf-link"><span class="mll-name">iPhone 16 Pro Max</span></a>' +
+                '<a href="product.html?id=iphone-16-pro" class="mobile-leaf-link"><span class="mll-name">iPhone 16 Pro</span></a>' +
+                '<a href="product.html?id=iphone-16" class="mobile-leaf-link"><span class="mll-name">iPhone 16</span></a>' +
+                '<a href="product.html?id=iphone-15" class="mobile-leaf-link"><span class="mll-name">iPhone 15</span></a>' +
+                '<a href="category.html?cat=iphone" class="mobile-leaf-link mobile-leaf-explore"><span>Explore All iPhone &rarr;</span></a>' +
+              '</div>' +
+            '</div>' +
+
+            '<!-- iPad Submenu -->' +
+            '<div class="mobile-subcat-group" data-subcat="ipad">' +
+              '<button type="button" class="mobile-subcat-toggle" aria-expanded="false"><span>iPad</span><span class="subcat-arrow">&rsaquo;</span></button>' +
+              '<div class="mobile-subcat-content">' +
+                '<a href="product.html?id=ipad-pro-13-m4" class="mobile-leaf-link"><span class="mll-name">iPad Pro M4</span></a>' +
+                '<a href="product.html?id=ipad-air-11-m2" class="mobile-leaf-link"><span class="mll-name">iPad Air M2</span></a>' +
+                '<a href="product.html?id=ipad-10th-gen" class="mobile-leaf-link"><span class="mll-name">iPad (10th gen)</span></a>' +
+                '<a href="product.html?id=ipad-mini-a17-pro" class="mobile-leaf-link"><span class="mll-name">iPad mini (A17 Pro)</span></a>' +
+                '<a href="category.html?cat=accessories" class="mobile-leaf-link"><span class="mll-name">Apple Pencil &amp; Keyboards</span></a>' +
+                '<a href="category.html?cat=ipad" class="mobile-leaf-link mobile-leaf-explore"><span>Explore All iPad &rarr;</span></a>' +
+              '</div>' +
+            '</div>' +
+
+            '<!-- Mac Submenu -->' +
+            '<div class="mobile-subcat-group" data-subcat="mac">' +
+              '<button type="button" class="mobile-subcat-toggle" aria-expanded="false"><span>Mac</span><span class="subcat-arrow">&rsaquo;</span></button>' +
+              '<div class="mobile-subcat-content">' +
+                '<a href="product.html?id=mba-m3-13" class="mobile-leaf-link"><span class="mll-name">MacBook Air M3</span></a>' +
+                '<a href="product.html?id=mbp-14-m4-pro" class="mobile-leaf-link"><span class="mll-name">MacBook Pro 14&quot; &amp; 16&quot;</span></a>' +
+                '<a href="product.html?id=imac-24-m4" class="mobile-leaf-link"><span class="mll-name">iMac 24&quot;</span></a>' +
+                '<a href="product.html?id=mac-mini-m4" class="mobile-leaf-link"><span class="mll-name">Mac mini (M4)</span></a>' +
+                '<a href="product.html?id=mac-studio-m2-max" class="mobile-leaf-link"><span class="mll-name">Mac Studio</span></a>' +
+                '<a href="product.html?id=studio-display" class="mobile-leaf-link"><span class="mll-name">Displays</span></a>' +
+                '<a href="category.html?cat=mac" class="mobile-leaf-link mobile-leaf-explore"><span>Explore All Mac &rarr;</span></a>' +
+              '</div>' +
+            '</div>' +
+
+            '<!-- Apple Watch Submenu -->' +
+            '<div class="mobile-subcat-group" data-subcat="watch">' +
+              '<button type="button" class="mobile-subcat-toggle" aria-expanded="false"><span>Apple Watch</span><span class="subcat-arrow">&rsaquo;</span></button>' +
+              '<div class="mobile-subcat-content">' +
+                '<a href="product.html?id=watch-series-10" class="mobile-leaf-link"><span class="mll-name">Apple Watch Series 10</span></a>' +
+                '<a href="product.html?id=watch-ultra-2" class="mobile-leaf-link"><span class="mll-name">Apple Watch Ultra 2</span></a>' +
+                '<a href="product.html?id=watch-se-2nd-gen" class="mobile-leaf-link"><span class="mll-name">Apple Watch SE</span></a>' +
+                '<a href="category.html?cat=accessories" class="mobile-leaf-link"><span class="mll-name">Watch Bands</span></a>' +
+                '<a href="category.html?cat=watch" class="mobile-leaf-link mobile-leaf-explore"><span>Explore All Watch &rarr;</span></a>' +
+              '</div>' +
+            '</div>' +
+
+            '<!-- AirPods Submenu -->' +
+            '<div class="mobile-subcat-group" data-subcat="airpods">' +
+              '<button type="button" class="mobile-subcat-toggle" aria-expanded="false"><span>AirPods</span><span class="subcat-arrow">&rsaquo;</span></button>' +
+              '<div class="mobile-subcat-content">' +
+                '<a href="product.html?id=airpods-4" class="mobile-leaf-link"><span class="mll-name">AirPods 4</span></a>' +
+                '<a href="product.html?id=airpods-pro-2" class="mobile-leaf-link"><span class="mll-name">AirPods Pro 2</span></a>' +
+                '<a href="product.html?id=airpods-max" class="mobile-leaf-link"><span class="mll-name">AirPods Max</span></a>' +
+                '<a href="category.html?cat=airpods" class="mobile-leaf-link mobile-leaf-explore"><span>Explore All AirPods &rarr;</span></a>' +
+              '</div>' +
+            '</div>' +
+
+            '<!-- TV & Home Submenu -->' +
+            '<div class="mobile-subcat-group" data-subcat="tvhome">' +
+              '<button type="button" class="mobile-subcat-toggle" aria-expanded="false"><span>TV &amp; Home</span><span class="subcat-arrow">&rsaquo;</span></button>' +
+              '<div class="mobile-subcat-content">' +
+                '<a href="product.html?id=apple-tv-4k" class="mobile-leaf-link"><span class="mll-name">Apple TV 4K</span></a>' +
+                '<a href="product.html?id=homepod-midnight" class="mobile-leaf-link"><span class="mll-name">HomePod</span></a>' +
+                '<a href="product.html?id=homepod-mini-space-grey" class="mobile-leaf-link"><span class="mll-name">HomePod mini</span></a>' +
+                '<a href="category.html?cat=tvhome" class="mobile-leaf-link mobile-leaf-explore"><span>Explore All TV &amp; Home &rarr;</span></a>' +
+              '</div>' +
+            '</div>' +
+
+            '<a href="pricing.html" class="mobile-sub-link" style="color:#2997ff;font-weight:600;margin-top:6px;"><span>All Products &amp; Pricing &rarr;</span></a>' +
           '</div>' +
         '</div>' +
         '<div class="mobile-accordion-group" data-group="business">' +
@@ -307,6 +378,19 @@ function wireHeaderInteractions() {
         e.preventDefault();
         e.stopPropagation();
         const grp = btn.closest(".mobile-accordion-group");
+        if (grp) {
+          const isOpen = grp.classList.toggle("open");
+          btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        }
+      });
+    });
+
+    // Nested Category toggle handlers (iPhone, iPad, Mac, Watch, AirPods, TV & Home)
+    mobileNav.querySelectorAll(".mobile-subcat-toggle").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const grp = btn.closest(".mobile-subcat-group");
         if (grp) {
           const isOpen = grp.classList.toggle("open");
           btn.setAttribute("aria-expanded", isOpen ? "true" : "false");

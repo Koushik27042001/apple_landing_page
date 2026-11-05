@@ -91,9 +91,9 @@
 
     .site-logo-img {
       display: inline-block !important;
-      height: 32px !important;
+      height: 35px !important;
       width: auto !important;
-      max-width: 130px !important;
+      max-width: 138px !important;
       object-fit: contain !important;
       vertical-align: middle !important;
       transition: opacity 0.2s ease, transform 0.2s ease !important;
@@ -118,8 +118,8 @@
     }
 
     .footer-logo-img {
-      height: 38px !important;
-      max-width: 150px !important;
+      height: 42px !important;
+      max-width: 165px !important;
     }
 
     .sr-only {
@@ -447,10 +447,10 @@
 
       .site-header .logo .site-logo-img,
       .site-header--dark .logo .site-logo-img {
-        height: 25px !important;
-        max-height: 25px !important;
+        height: 28px !important;
+        max-height: 28px !important;
         width: auto !important;
-        max-width: 110px !important;
+        max-width: 118px !important;
       }
 
       .site-header .logo .apple-logo-svg,
@@ -667,6 +667,106 @@
     .mobile-nav .mobile-sub-link .sub-arrow {
       color: #86868b !important;
       font-size: 16px !important;
+    }
+
+    /* Level 2 Sub-Accordion for Categories (iPhone, Mac, iPad, Watch, AirPods, TV & Home) */
+    .mobile-nav .mobile-subcat-group {
+      width: 100% !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .mobile-nav .mobile-subcat-toggle {
+      width: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      background: transparent !important;
+      border: none !important;
+      font-family: inherit !important;
+      font-size: 15px !important;
+      font-weight: 500 !important;
+      color: #e5e5ea !important;
+      -webkit-text-fill-color: #e5e5ea !important;
+      padding: 11px 6px 11px 8px !important;
+      cursor: pointer !important;
+      text-align: left !important;
+      -webkit-tap-highlight-color: rgba(41, 151, 255, 0.2) !important;
+      transition: color 0.15s ease !important;
+    }
+
+    .mobile-nav .mobile-subcat-toggle:hover,
+    .mobile-nav .mobile-subcat-toggle:active {
+      color: #2997ff !important;
+      -webkit-text-fill-color: #2997ff !important;
+    }
+
+    .mobile-nav .mobile-subcat-toggle > * {
+      pointer-events: none !important;
+    }
+
+    .mobile-nav .mobile-subcat-toggle .subcat-arrow {
+      font-size: 17px !important;
+      color: #86868b !important;
+      transition: transform 0.2s ease, color 0.2s ease !important;
+      display: inline-block !important;
+    }
+
+    .mobile-subcat-group.open > .mobile-subcat-toggle .subcat-arrow {
+      transform: rotate(90deg) !important;
+      color: #2997ff !important;
+    }
+
+    .mobile-nav .mobile-subcat-content {
+      display: none !important;
+      padding: 2px 0 6px 12px !important;
+      border-left: 2px solid rgba(41, 151, 255, 0.3) !important;
+      margin: 2px 0 8px 10px !important;
+    }
+
+    .mobile-subcat-group.open > .mobile-subcat-content {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    .mobile-nav .mobile-leaf-link {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      padding: 9px 8px !important;
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      color: #a1a1a6 !important;
+      -webkit-text-fill-color: #a1a1a6 !important;
+      text-decoration: none !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+      transition: color 0.15s ease !important;
+      cursor: pointer !important;
+      -webkit-tap-highlight-color: rgba(41, 151, 255, 0.2) !important;
+    }
+
+    .mobile-nav .mobile-leaf-link:hover,
+    .mobile-nav .mobile-leaf-link:active {
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+    }
+
+    .mobile-nav .mobile-leaf-link .badge-new-red {
+      font-size: 10px !important;
+      padding: 1px 6px !important;
+      border-radius: 980px !important;
+      background: #ff3b30 !important;
+      color: #ffffff !important;
+      font-weight: 600 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.04em !important;
+    }
+
+    .mobile-nav .mobile-leaf-explore {
+      color: #2997ff !important;
+      -webkit-text-fill-color: #2997ff !important;
+      font-weight: 500 !important;
+      margin-top: 4px !important;
+      border-bottom: none !important;
     }
 
     .mobile-nav-divider {
