@@ -8568,12 +8568,17 @@ body.dark-theme .show-btn-primary svg {
 
 /* Heading section */
 .homepod-hero .hero-content {
-  text-align: center;
+  text-align: center !important;
   position: relative;
   z-index: 10;
   padding-top: 24px;
-  margin: 0 auto;
-  max-width: 900px;
+  margin: 0 auto !important;
+  max-width: 900px !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .homepod-hero .hero-content h1 {
@@ -8584,16 +8589,25 @@ body.dark-theme .show-btn-primary svg {
   line-height: 1.15;
   color: #1d1d1f !important;
   -webkit-text-fill-color: #1d1d1f !important;
-  margin: 0 auto;
+  text-align: center !important;
+  margin: 0 auto !important;
+  max-width: none !important;
+  width: 100% !important;
 }
 
-.homepod-hero .hero-content p {
+.homepod-hero .hero-content p,
+.homepod-hero .hero-content > p,
+.homepod-hero .hero-content .homepod-subhead {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(22px, 3vw, 30px);
-  margin-top: 3px;
-  font-weight: 400;
+  font-size: clamp(22px, 3vw, 30px) !important;
+  margin: 6px auto 0 auto !important;
+  font-weight: 400 !important;
   color: #1d1d1f !important;
   -webkit-text-fill-color: #1d1d1f !important;
+  text-align: center !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  display: block !important;
 }
 
 /* CTA buttons */

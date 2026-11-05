@@ -182,8 +182,6 @@ function renderHeader(active) {
               '</div>' +
             '</div>' +
           '</div>' +
-          navLink("macbook-neo.html", "MacBook Neo", active === "macbook-neo") +
-          navLink("pricing.html", "Pricing", active === "pricing") +
           '<div class="business-dropdown-menu' + (active === "business" ? ' active' : '') + '" id="bizNavDropdown">' +
             '<a href="about.html#business" class="biz-dropdown-toggle' + (active === "business" ? ' active' : '') + '">' +
               '<span>Business</span>' +
@@ -197,7 +195,6 @@ function renderHeader(active) {
               '<a href="contact.html?type=business" class="biz-dropdown-item"><span class="bdi-title">Enterprise Consultation &rarr;</span><span class="bdi-desc">Speak to an Apple business specialist</span></a>' +
             '</div>' +
           '</div>' +
-          navLink("support.html#insights", "Insights", active === "insights") +
           navLink("contact.html", "Contact Us", active === "contact") +
           navLink("support.html", "Support", active === "support") +
         '</nav>' +
@@ -244,17 +241,16 @@ function renderHeader(active) {
             '<a href="pricing.html" class="mobile-sub-link" style="color:#2997ff;font-weight:600;"><span>All Products &amp; Pricing &rarr;</span></a>' +
           '</div>' +
         '</div>' +
-        '<a href="macbook-neo.html" class="mobile-nav-link' + (active === "macbook-neo" ? ' active' : '') + '">MacBook Neo</a>' +
-        '<a href="pricing.html" class="mobile-nav-link' + (active === "pricing" ? ' active' : '') + '">Pricing</a>' +
         '<div class="mobile-accordion-group" data-group="business">' +
           '<button type="button" class="mobile-accordion-toggle"><span>Business</span><span class="toggle-icon">&rsaquo;</span></button>' +
           '<div class="mobile-accordion-content">' +
+            '<a href="pricing.html" class="mobile-sub-link"><span>Pricing &amp; Catalogue</span></a>' +
             '<a href="about.html#business" class="mobile-sub-link"><span>Business Initiatives</span></a>' +
             '<a href="about.html#solutions" class="mobile-sub-link"><span>Superior Solutions</span></a>' +
+            '<a href="support.html#insights" class="mobile-sub-link"><span>Insights</span></a>' +
             '<a href="contact.html?type=business" class="mobile-sub-link" style="color:#2997ff;font-weight:600;"><span>Enterprise Consultation &rarr;</span></a>' +
           '</div>' +
         '</div>' +
-        '<a href="support.html#insights" class="mobile-nav-link' + (active === "insights" ? ' active' : '') + '">Insights</a>' +
         '<a href="contact.html" class="mobile-nav-link' + (active === "contact" ? ' active' : '') + '">Contact Us</a>' +
         '<a href="support.html" class="mobile-nav-link' + (active === "support" ? ' active' : '') + '">Support</a>' +
         '<div class="mobile-nav-divider"></div>' +

@@ -67,6 +67,7 @@ async function ensureServerRunning() {
     // Go to product page, click Buy Now, proceed to checkout, verify demo-mode notice
     await page.goto(base + "product.html?id=iphone-duo", { waitUntil: "domcontentloaded" });
     await page.waitForSelector("#buyNowBtn", { timeout: 5000 });
+    await page.waitForTimeout(500);
     await page.locator("#buyNowBtn").click();
     await page.waitForURL("**/checkout.html", { timeout: 10000 });
     await page.waitForSelector("#fullName", { timeout: 5000 });
