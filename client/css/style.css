@@ -271,9 +271,9 @@ button {
 
 .site-logo-img {
   display: inline-block;
-  height: 30px;
+  height: 32px;
   width: auto;
-  max-width: 124px;
+  max-width: 130px;
   object-fit: contain;
   vertical-align: middle;
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -286,18 +286,20 @@ button {
 
 .apple-logo-svg {
   display: inline-block;
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   margin: 0 4px 0 2px;
   vertical-align: middle;
-  filter: invert(1);
-  opacity: 0.95;
+  fill: #ffffff;
+  color: #ffffff;
+  filter: none;
+  opacity: 1;
   flex-shrink: 0;
 }
 
 .footer-logo-img {
-  height: 36px;
-  max-width: 140px;
+  height: 38px;
+  max-width: 150px;
 }
 
 /* Accessibility screen-reader only utility */
@@ -320,10 +322,10 @@ button {
   align-items: flex-start;
   margin-left: 6px;
   padding-left: 8px;
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
-  font-weight: 500;
-  color: #a1a1a6;
-  font-size: 10px;
+  border-left: 1.5px solid rgba(255, 255, 255, 0.45);
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 11px;
   line-height: 1.15;
   letter-spacing: 0.02em;
   text-transform: capitalize;
@@ -5762,8 +5764,9 @@ body.dark-theme .site-header .apple-logo,
 
 body.dark-theme .site-header .logo span.store-tag,
 .site-header--dark .logo span.store-tag {
-  border-left-color: rgba(255, 255, 255, 0.25) !important;
-  color: #a1a1a6 !important;
+  border-left-color: rgba(255, 255, 255, 0.45) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
 body.dark-theme .site-header .main-nav>a,
@@ -8687,8 +8690,9 @@ body.page-dark .mobile-nav .apple-logo {
 
 body.dark-theme .mobile-nav .store-tag,
 body.page-dark .mobile-nav .store-tag {
-  color: #a1a1a6 !important;
-  border-left-color: rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-left-color: rgba(255, 255, 255, 0.45) !important;
 }
 
 body.dark-theme .mobile-nav .mobile-accordion-content,
