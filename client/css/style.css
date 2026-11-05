@@ -269,6 +269,40 @@ button {
   flex-shrink: 0;
 }
 
+.site-logo-img {
+  display: block;
+  height: 38px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.logo:hover .site-logo-img {
+  opacity: 0.92;
+  transform: scale(1.02);
+}
+
+.footer-logo-img {
+  height: 44px;
+  max-width: 170px;
+  margin-bottom: 8px;
+}
+
+/* Accessibility screen-reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .logo .logo-mark {
   font-size: 20px;
   line-height: 1;

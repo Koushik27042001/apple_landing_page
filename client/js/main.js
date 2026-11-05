@@ -65,9 +65,8 @@ function renderHeader(active) {
       '<div class="header-inner">' +
         '<button class="menu-toggle" id="menuToggleBtn" aria-label="Menu">' + icon("menu", { size: 22 }) + '</button>' +
         '<a href="index.html" class="logo" aria-label="Iswift Business Partner home">' +
-          '<span class="logo-name">Iswift</span>' +
-          '<span class="apple-logo" aria-hidden="true">' + appleLogoHtml(18) + '</span>' +
-          '<span class="store-tag"><span class="store-tag-line">Business</span><span class="store-tag-line">Partner</span></span>' +
+          '<img src="images/logo_for-website.jpeg" alt="Iswift Business Partner" class="site-logo-img">' +
+          '<span class="sr-only">Iswift Business Partner</span>' +
         '</a>' +
         '<nav class="main-nav">' +
           navLink("index.html", "Home", active === "home" || active === "store") +
@@ -212,9 +211,8 @@ function renderHeader(active) {
     '<div class="mobile-nav" id="mobileNav">' +
       '<div class="mobile-nav-head">' +
         '<span class="logo">' +
-          '<span class="logo-name">Iswift</span>' +
-          '<span class="apple-logo" aria-hidden="true">' + appleLogoHtml(18) + '</span>' +
-          '<span class="store-tag"><span class="store-tag-line">Business</span><span class="store-tag-line">Partner</span></span>' +
+          '<img src="images/logo_for-website.jpeg" alt="Iswift Business Partner" class="site-logo-img">' +
+          '<span class="sr-only">Iswift Business Partner</span>' +
         '</span>' +
         '<button class="btn-icon" id="mobileNavClose" aria-label="Close menu">' + icon("close", { size: 22 }) + '</button>' +
       '</div>' +
@@ -377,6 +375,7 @@ function wireCascadingMegaMenu() {
 
   let closeTimer = null;
   let activeCategory = null;
+  let lastOpenedAt = 0;
 
   const p1Items = panel1.querySelectorAll(".cascade-item");
   const catItems = panel2.querySelectorAll(".cascade-cat-item");
@@ -384,6 +383,7 @@ function wireCascadingMegaMenu() {
 
   function openAppleMenu() {
     clearTimeout(closeTimer);
+    lastOpenedAt = Date.now();
     menuWrapper.classList.add("open");
     if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "true");
     // Initially ONLY Panel 1 is visible. Sub-panels open one-by-one on hover!
@@ -420,6 +420,11 @@ function wireCascadingMegaMenu() {
     toggleBtn.addEventListener("mouseleave", scheduleClose);
     toggleBtn.addEventListener("click", function (e) {
       e.stopPropagation();
+      const isQuickClickAfterHover = Date.now() - lastOpenedAt < 600;
+      if (isQuickClickAfterHover) {
+        openAppleMenu();
+        return;
+      }
       const willOpen = !menuWrapper.classList.contains("open");
       if (willOpen) {
         openAppleMenu();
@@ -643,7 +648,10 @@ function renderFooter() {
         '</div>' +
         '<div class="footer-grid">' +
           '<div class="footer-col footer-brand">' +
-            '<span class="logo"><span class="logo-name">Iswift</span><span class="apple-logo" aria-hidden="true">' + appleLogoHtml(18) + '</span><span class="store-tag">Gadgets Private Limited</span></span>' +
+            '<a href="index.html" class="logo footer-logo" aria-label="Iswift Gadgets Private Limited home">' +
+              '<img src="images/logo_for-website.jpeg" alt="Iswift Gadgets Private Limited" class="site-logo-img footer-logo-img">' +
+              '<span class="sr-only">Iswift Gadgets Private Limited</span>' +
+            '</a>' +
             '<p>Trusted destination for iPhone, Mac, iPad, Watch &amp; AirPods \u2014 genuine products with the best prices and No-Cost EMI. Head office in HSR Layout, Bengaluru.</p>' +
             '<div class="payment-icons">' +
               '<span>UPI</span><span>Visa</span><span>Mastercard</span><span>Razorpay</span><span>Cashfree</span><span>No-Cost EMI</span>' +

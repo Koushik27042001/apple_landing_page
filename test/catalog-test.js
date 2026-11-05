@@ -25,7 +25,13 @@ async function ensureServerRunning() {
 
 (async () => {
   const serverProc = await ensureServerRunning();
-  const browser = await chromium.launch();
+  const launchOpts = process.platform === "win32" ? { channel: "msedge" } : {};
+  let browser;
+  try {
+    browser = await chromium.launch(launchOpts);
+  } catch (_) {
+    browser = await chromium.launch();
+  }
   const page = await browser.newPage({ viewport: { width: 1400, height: 1000 } });
   const errors = [];
   page.on("pageerror", (err) => errors.push("[pageerror] " + err.message));
