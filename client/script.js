@@ -172,3 +172,35 @@ window.addEventListener("resize", () => {
 });
 
 updateScrollAnimation();
+
+
+// HomePod mini 2 entrance animation
+document.addEventListener("DOMContentLoaded", () => {
+  const gallery = document.querySelector(".homepod-gallery");
+  const speakers = document.querySelectorAll(".speaker");
+  if (!gallery || !speakers.length) return;
+
+  // Initial state
+  speakers.forEach((speaker) => {
+    speaker.classList.add("speaker-hidden");
+  });
+
+  // Observe gallery visibility
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          speakers.forEach((speaker, index) => {
+            setTimeout(() => {
+              speaker.classList.add("speaker-visible");
+            }, index * 180);
+          });
+          observer.unobserve(gallery);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  observer.observe(gallery);
+});

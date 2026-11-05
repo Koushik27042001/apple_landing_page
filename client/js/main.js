@@ -207,6 +207,10 @@ function renderHeader(active) {
             '<input type="text" class="search-input" id="headerSearch" placeholder="Search iPhone, Mac, iPad..." autocomplete="off">' +
             '<div class="search-suggestions" id="searchSuggestions"></div>' +
           '</div>' +
+          '<a href="cart.html" class="icon-btn header-bag-btn" aria-label="Shopping Bag">' +
+            icon("bag", { size: 18 }) +
+            '<span class="cart-count">0</span>' +
+          '</a>' +
         '</div>' +
       '</div>' +
     '</header>' +
@@ -220,95 +224,43 @@ function renderHeader(active) {
         '</span>' +
         '<button class="btn-icon" id="mobileNavClose" aria-label="Close menu">' + icon("close", { size: 22 }) + '</button>' +
       '</div>' +
-      '<div style="margin-bottom:18px;">' +
+      '<div class="mobile-search-box" style="margin-bottom:18px;">' +
         '<div class="search-wrap" style="width:100%;">' +
           '<span class="search-icon">' + icon("search", { size: 15 }) + '</span>' +
-          '<input type="text" class="search-input" id="mobileSearch" placeholder="Search products..." autocomplete="off" style="padding:12px 14px 12px 34px;">' +
+          '<input type="text" class="search-input" id="mobileSearch" placeholder="Search iPhone, Mac, iPad, Watch..." autocomplete="off" style="padding:12px 14px 12px 34px;">' +
         '</div>' +
       '</div>' +
-      '<a href="index.html">Home</a>' +
-      '<div class="mobile-accordion-group" data-group="apple">' +
-        '<button type="button" class="mobile-accordion-toggle"><span>Apple</span><span class="toggle-icon">&rsaquo;</span></button>' +
-        '<div class="mobile-accordion-content">' +
-          '<div class="mobile-accordion-group" data-group="products">' +
-            '<button type="button" class="mobile-accordion-toggle" style="font-size:14.5px; padding:8px 0;"><span>Products</span><span class="toggle-icon">&rsaquo;</span></button>' +
-            '<div class="mobile-accordion-content" style="padding-left:10px;">' +
-              '<div class="mobile-accordion-group" data-group="iphone">' +
-                '<button type="button" class="mobile-accordion-toggle" style="font-size:13.5px; padding:6px 0;"><span>iPhone</span><span class="toggle-icon">&rsaquo;</span></button>' +
-                '<div class="mobile-accordion-content">' +
-                  '<a href="iphone-duo.html" class="mobile-sub-link"><span>iPhone duo</span> <span class="badge-new-red">New</span></a>' +
-                  '<a href="product.html?id=iphone-18-pro" class="mobile-sub-link"><span>iPhone 18 Pro</span> <span class="badge-new-red">New</span></a>' +
-                  '<a href="product.html?id=iphone-17e" class="mobile-sub-link">iPhone 17e</a>' +
-                  '<a href="product.html?id=iphone-17" class="mobile-sub-link">iPhone 17</a>' +
-                  '<a href="product.html?id=iphone-air" class="mobile-sub-link">iPhone Air</a>' +
-                  '<a href="category.html?cat=iphone" class="mobile-sub-link" style="color:#2997ff; font-weight:600;">All iPhones &rarr;</a>' +
-                '</div>' +
-              '</div>' +
-              '<div class="mobile-accordion-group" data-group="ipad">' +
-                '<button type="button" class="mobile-accordion-toggle" style="font-size:13.5px; padding:6px 0;"><span>iPad</span><span class="toggle-icon">&rsaquo;</span></button>' +
-                '<div class="mobile-accordion-content">' +
-                  '<a href="product.html?id=ipad-pro-13-m5" class="mobile-sub-link">iPad Pro M5</a>' +
-                  '<a href="product.html?id=ipad-air-11-m4" class="mobile-sub-link">iPad Air M4</a>' +
-                  '<a href="product.html?id=ipad-11-gen" class="mobile-sub-link"><span>iPad Mini</span> <span class="badge-new-red">New</span></a>' +
-                  '<a href="category.html?cat=ipad" class="mobile-sub-link" style="color:#2997ff; font-weight:600;">All iPads &rarr;</a>' +
-                '</div>' +
-              '</div>' +
-              '<div class="mobile-accordion-group" data-group="mac">' +
-                '<button type="button" class="mobile-accordion-toggle" style="font-size:13.5px; padding:6px 0;"><span>Mac</span><span class="toggle-icon">&rsaquo;</span></button>' +
-                '<div class="mobile-accordion-content">' +
-                  '<a href="product.html?id=macbook-pro-16-m5" class="mobile-sub-link"><span>MacBook Pro PROLED XDR Display</span> <span class="badge-new-red">New</span></a>' +
-                  '<a href="product.html?id=macbook-pro-14-m5" class="mobile-sub-link">MacBook Pro</a>' +
-                  '<a href="product.html?id=macbook-air-13-m5" class="mobile-sub-link">MacBook Air</a>' +
-                  '<a href="product.html?id=imac-24-m4" class="mobile-sub-link">iMac</a>' +
-                  '<a href="macbook-neo.html" class="mobile-sub-link">MacBook Neo</a>' +
-                  '<a href="product.html?id=mac-mini-m4" class="mobile-sub-link"><span>Mac Mini</span> <span class="badge-new-red">New</span></a>' +
-                  '<a href="category.html?cat=mac" class="mobile-sub-link">Mac Studio</a>' +
-                  '<a href="category.html?cat=mac" class="mobile-sub-link" style="color:#2997ff; font-weight:600;">All Macs &rarr;</a>' +
-                '</div>' +
-              '</div>' +
-              '<div class="mobile-accordion-group" data-group="watch">' +
-                '<button type="button" class="mobile-accordion-toggle" style="font-size:13.5px; padding:6px 0;"><span>Apple Watch</span><span class="toggle-icon">&rsaquo;</span></button>' +
-                '<div class="mobile-accordion-content">' +
-                  '<a href="product.html?id=watch-series-11" class="mobile-sub-link">Apple Watch Series</a>' +
-                  '<a href="product.html?id=watch-se-3" class="mobile-sub-link">Apple Watch SE</a>' +
-                  '<a href="product.html?id=watch-ultra-3" class="mobile-sub-link">Apple Watch Ultra</a>' +
-                  '<a href="category.html?cat=watch" class="mobile-sub-link" style="color:#2997ff; font-weight:600;">All Apple Watches &rarr;</a>' +
-                '</div>' +
-              '</div>' +
-              '<div class="mobile-accordion-group" data-group="airpods">' +
-                '<button type="button" class="mobile-accordion-toggle" style="font-size:13.5px; padding:6px 0;"><span>AirPods</span><span class="toggle-icon">&rsaquo;</span></button>' +
-                '<div class="mobile-accordion-content">' +
-                  '<a href="product.html?id=airpods-pro-3" class="mobile-sub-link">AirPods Pro</a>' +
-                  '<a href="category.html?cat=airpods" class="mobile-sub-link">AirPods 4</a>' +
-                  '<a href="product.html?id=airpods-max" class="mobile-sub-link">AirPods Max</a>' +
-                  '<a href="category.html?cat=airpods" class="mobile-sub-link" style="color:#2997ff; font-weight:600;">All AirPods &rarr;</a>' +
-                '</div>' +
-              '</div>' +
-            '</div>' +
+      '<nav class="mobile-nav-links">' +
+        '<a href="index.html" class="mobile-nav-link' + (active === "home" || active === "store" ? ' active' : '') + '">Home</a>' +
+        '<div class="mobile-accordion-group" data-group="products">' +
+          '<button type="button" class="mobile-accordion-toggle"><span>Products</span><span class="toggle-icon">&rsaquo;</span></button>' +
+          '<div class="mobile-accordion-content">' +
+            '<a href="category.html?cat=iphone" class="mobile-sub-link"><span>iPhone</span><span class="sub-arrow">&rsaquo;</span></a>' +
+            '<a href="category.html?cat=mac" class="mobile-sub-link"><span>Mac</span><span class="sub-arrow">&rsaquo;</span></a>' +
+            '<a href="category.html?cat=ipad" class="mobile-sub-link"><span>iPad</span><span class="sub-arrow">&rsaquo;</span></a>' +
+            '<a href="category.html?cat=watch" class="mobile-sub-link"><span>Apple Watch</span><span class="sub-arrow">&rsaquo;</span></a>' +
+            '<a href="category.html?cat=airpods" class="mobile-sub-link"><span>AirPods</span><span class="sub-arrow">&rsaquo;</span></a>' +
+            '<a href="category.html?cat=tvhome" class="mobile-sub-link"><span>TV &amp; Home</span><span class="sub-arrow">&rsaquo;</span></a>' +
+            '<a href="pricing.html" class="mobile-sub-link" style="color:#2997ff;font-weight:600;"><span>All Products &amp; Pricing &rarr;</span></a>' +
           '</div>' +
-          '<a href="pricing.html" class="mobile-sub-link" style="color:#2997ff;font-weight:600;">Pricing &amp; Catalogue</a>' +
-          '<a href="about.html#business" class="mobile-sub-link">Apple&#39;s Business Initiatives</a>' +
-          '<a href="about.html#solutions" class="mobile-sub-link">Superior Solutions</a>' +
-          '<a href="support.html#insights" class="mobile-sub-link">Business Insights</a>' +
         '</div>' +
-      '</div>' +
-      '<a href="macbook-neo.html" style="font-weight:700;color:var(--accent,#0071e3);">MacBook Neo 🔥</a>' +
-      '<a href="pricing.html" style="font-weight:600;color:#2997ff;">Pricing &amp; Catalogue</a>' +
-      '<div class="mobile-accordion-group" data-group="business">' +
-        '<button type="button" class="mobile-accordion-toggle"><span>Business</span><span class="toggle-icon">&rsaquo;</span></button>' +
-        '<div class="mobile-accordion-content">' +
-          '<a href="pricing.html" class="mobile-sub-link" style="color:#2997ff;font-weight:600;">Pricing &amp; Catalogue</a>' +
-          '<a href="about.html#business" class="mobile-sub-link">Business Initiatives</a>' +
-          '<a href="about.html#solutions" class="mobile-sub-link">Superior Solutions</a>' +
-          '<a href="support.html#insights" class="mobile-sub-link">Insights</a>' +
-          '<a href="contact.html?type=business" class="mobile-sub-link" style="color:#2997ff;font-weight:600;">Enterprise Consultation &rarr;</a>' +
+        '<a href="macbook-neo.html" class="mobile-nav-link' + (active === "macbook-neo" ? ' active' : '') + '">MacBook Neo</a>' +
+        '<a href="pricing.html" class="mobile-nav-link' + (active === "pricing" ? ' active' : '') + '">Pricing</a>' +
+        '<div class="mobile-accordion-group" data-group="business">' +
+          '<button type="button" class="mobile-accordion-toggle"><span>Business</span><span class="toggle-icon">&rsaquo;</span></button>' +
+          '<div class="mobile-accordion-content">' +
+            '<a href="about.html#business" class="mobile-sub-link"><span>Business Initiatives</span></a>' +
+            '<a href="about.html#solutions" class="mobile-sub-link"><span>Superior Solutions</span></a>' +
+            '<a href="contact.html?type=business" class="mobile-sub-link" style="color:#2997ff;font-weight:600;"><span>Enterprise Consultation &rarr;</span></a>' +
+          '</div>' +
         '</div>' +
-      '</div>' +
-      '<a href="support.html#insights">Insights</a>' +
-      '<a href="contact.html">Contact Us</a>' +
-      '<a href="support.html">Support</a>' +
-      '<div class="mobile-nav-divider"></div>' +
-      '<a href="terms.html">Terms &amp; Policies</a>' +
+        '<a href="support.html#insights" class="mobile-nav-link' + (active === "insights" ? ' active' : '') + '">Insights</a>' +
+        '<a href="contact.html" class="mobile-nav-link' + (active === "contact" ? ' active' : '') + '">Contact Us</a>' +
+        '<a href="support.html" class="mobile-nav-link' + (active === "support" ? ' active' : '') + '">Support</a>' +
+        '<div class="mobile-nav-divider"></div>' +
+        '<a href="cart.html" class="mobile-nav-link" style="display:flex;align-items:center;justify-content:space-between;color:#2997ff;"><span>My Bag</span><span class="cart-count" style="display:none;background:#2997ff;color:#fff;border-radius:12px;padding:2px 8px;font-size:12px;font-weight:600;">0</span></a>' +
+        '<a href="terms.html" style="font-size:13px;color:#86868b;padding:8px 4px;border:none;">Terms &amp; Policies</a>' +
+      '</nav>' +
     '</div>';
 
   wireHeaderInteractions();
