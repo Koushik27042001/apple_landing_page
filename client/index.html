@@ -90,24 +90,36 @@
     }
 
     .site-logo-img {
-      display: block;
-      height: 38px;
-      width: auto;
-      max-width: 150px;
-      object-fit: contain;
-      mix-blend-mode: screen;
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      display: inline-block !important;
+      height: 32px !important;
+      width: auto !important;
+      max-width: 124px !important;
+      object-fit: contain !important;
+      filter: brightness(2.2) contrast(1.15) !important;
+      mix-blend-mode: screen !important;
+      vertical-align: middle !important;
+      transition: opacity 0.2s ease, transform 0.2s ease !important;
     }
 
     .logo:hover .site-logo-img {
-      opacity: 0.92;
-      transform: scale(1.02);
+      opacity: 0.95 !important;
+      transform: scale(1.02) !important;
+    }
+
+    .apple-logo-svg {
+      display: inline-block !important;
+      width: 14px !important;
+      height: 14px !important;
+      margin: 0 4px 0 2px !important;
+      vertical-align: middle !important;
+      filter: invert(1) !important;
+      opacity: 0.95 !important;
+      flex-shrink: 0 !important;
     }
 
     .footer-logo-img {
-      height: 44px;
-      max-width: 170px;
-      margin-bottom: 8px;
+      height: 36px !important;
+      max-width: 140px !important;
     }
 
     .sr-only {
@@ -122,17 +134,30 @@
       border: 0;
     }
 
-    .site-header .apple-logo svg,
-    .site-header--dark .apple-logo svg {
-      display: inline-block;
-      vertical-align: middle;
-      fill: #ffffff !important;
+    .site-header .logo span.store-tag,
+    .site-header--dark .logo span.store-tag,
+    .site-footer .logo span.store-tag {
+      display: inline-flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: flex-start !important;
+      margin-left: 6px !important;
+      padding-left: 8px !important;
+      border-left: 1px solid rgba(255, 255, 255, 0.3) !important;
+      font-weight: 500 !important;
+      color: #a1a1a6 !important;
+      font-size: 10px !important;
+      line-height: 1.15 !important;
+      letter-spacing: 0.02em !important;
+      text-transform: capitalize !important;
+      white-space: nowrap !important;
     }
 
-    .site-header .logo span.store-tag,
-    .site-header--dark .logo span.store-tag {
-      border-left-color: rgba(255, 255, 255, 0.25) !important;
-      color: #a1a1a6 !important;
+    .site-header .logo span.store-tag .store-tag-line,
+    .site-header--dark .logo span.store-tag .store-tag-line,
+    .site-footer .logo span.store-tag .store-tag-line {
+      display: block !important;
+    }
     }
 
     .site-header .main-nav>a,

@@ -270,24 +270,36 @@ button {
 }
 
 .site-logo-img {
-  display: block;
-  height: 38px;
+  display: inline-block;
+  height: 32px;
   width: auto;
-  max-width: 150px;
+  max-width: 124px;
   object-fit: contain;
+  filter: brightness(2.2) contrast(1.15);
   mix-blend-mode: screen;
+  vertical-align: middle;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .logo:hover .site-logo-img {
-  opacity: 0.92;
+  opacity: 0.95;
   transform: scale(1.02);
 }
 
+.apple-logo-svg {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin: 0 4px 0 2px;
+  vertical-align: middle;
+  filter: invert(1);
+  opacity: 0.95;
+  flex-shrink: 0;
+}
+
 .footer-logo-img {
-  height: 44px;
-  max-width: 170px;
-  margin-bottom: 8px;
+  height: 36px;
+  max-width: 140px;
 }
 
 /* Accessibility screen-reader only utility */
@@ -303,41 +315,16 @@ button {
   border: 0;
 }
 
-.logo .logo-mark {
-  font-size: 20px;
-  line-height: 1;
-}
-
-.logo-name {
-  white-space: nowrap;
-}
-
-.apple-logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 4px 0 2px;
-  line-height: 1;
-  vertical-align: middle;
-}
-
-.apple-logo svg,
-.apple-logo .icon-apple {
-  display: inline-block;
-  vertical-align: middle;
-  fill: currentColor;
-}
-
 .logo span.store-tag {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin-left: 8px;
+  margin-left: 6px;
   padding-left: 8px;
-  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
   font-weight: 500;
-  color: var(--gray-text);
+  color: #a1a1a6;
   font-size: 10px;
   line-height: 1.15;
   letter-spacing: 0.02em;
@@ -1071,7 +1058,7 @@ body.dark-theme .bdi-desc,
   margin-bottom: 24px;
 }
 
-.mobile-nav > a {
+.mobile-nav>a {
   display: block;
   padding: 14px 4px;
   font-size: 18px;
@@ -1124,14 +1111,14 @@ body.page-dark .mobile-nav {
   color: #ffffff;
 }
 
-body.dark-theme .mobile-nav > a,
-body.page-dark .mobile-nav > a {
+body.dark-theme .mobile-nav>a,
+body.page-dark .mobile-nav>a {
   color: #e5e5ea;
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
-body.dark-theme .mobile-nav > a:hover,
-body.page-dark .mobile-nav > a:hover {
+body.dark-theme .mobile-nav>a:hover,
+body.page-dark .mobile-nav>a:hover {
   color: #ffffff;
 }
 
