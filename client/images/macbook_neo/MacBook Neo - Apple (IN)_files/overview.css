@@ -1,0 +1,60 @@
+.ric-modal-viewport-content .footnotes a {
+	color: inherit;
+}
+
+@supports (mask-image: url("")) {
+	html:not(.text-zoom, .no-image-text)
+		.section-performance
+		.performance-stat {
+		mask-repeat: no-repeat;
+		mask-image: url(/in/macbook-neo/images/overview/product-stories/performance/stats/performance_stat_1_mask__dcvhszvrhm82_large.png);
+	}
+
+	@media (min-resolution: 1.5dppx), (min-resolution: 144dpi) {
+		html:not(.text-zoom, .no-image-text)
+			.section-performance
+			.performance-stat {
+			mask-image: url(/in/macbook-neo/images/overview/product-stories/performance/stats/performance_stat_1_mask__dcvhszvrhm82_large_2x.png);
+		}
+	}
+}
+
+@media (max-width: 1068px) {
+	@supports (mask-image: url("")) {
+		html:not(.text-zoom, .no-image-text)
+			.section-performance
+			.performance-stat {
+			mask-repeat: no-repeat;
+			mask-image: url(/in/macbook-neo/images/overview/product-stories/performance/stats/performance_stat_1_mask__dcvhszvrhm82_medium.png);
+		}
+
+		@media (max-width: 1068px) and (min-resolution: 1.5dppx),
+			(max-width: 1068px) and (min-resolution: 144dpi) {
+			html:not(.text-zoom, .no-image-text)
+				.section-performance
+				.performance-stat {
+				mask-image: url(/in/macbook-neo/images/overview/product-stories/performance/stats/performance_stat_1_mask__dcvhszvrhm82_medium_2x.png);
+			}
+		}
+	}
+}
+
+@media (max-width: 734px) {
+	@supports (mask-image: url("")) {
+		html:not(.text-zoom, .no-image-text)
+			.section-performance
+			.performance-stat {
+			mask-repeat: no-repeat;
+			mask-image: url(/in/macbook-neo/images/overview/product-stories/performance/stats/performance_stat_1_mask__dcvhszvrhm82_small.png);
+		}
+
+		@media (max-width: 734px) and (min-resolution: 1.5dppx),
+			(max-width: 734px) and (min-resolution: 144dpi) {
+			html:not(.text-zoom, .no-image-text)
+				.section-performance
+				.performance-stat {
+				mask-image: url(/in/macbook-neo/images/overview/product-stories/performance/stats/performance_stat_1_mask__dcvhszvrhm82_small_2x.png);
+			}
+		}
+	}
+}

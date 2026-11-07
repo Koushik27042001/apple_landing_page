@@ -143,6 +143,264 @@
       }
     }
 
+    
+    /* ==================== CLOSER SECTION ==================== */
+    .closer {
+      padding: 48px 0 80px;
+      background: #ffffff !important;
+      color: #1d1d1f !important;
+      position: relative;
+      z-index: 2;
+      font-family: "Inter", -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif !important;
+    }
+
+    .closer__title {
+      max-width: 1400px;
+      margin: 0 auto 48px;
+      padding: 0 20px 0 clamp(20px, 10vw, 148px);
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.1;
+      font-weight: 600;
+      letter-spacing: -.025em;
+      color: #1d1d1f !important;
+      -webkit-text-fill-color: #1d1d1f !important;
+    }
+
+    .closer__card {
+      position: relative;
+      overflow: hidden;
+      background: #f5f5f7;
+      max-width: 1400px;
+      margin: 0 auto;
+      border-radius: 28px;
+      display: grid;
+      grid-template-columns: minmax(300px, .8fr) 1.4fr;
+      align-items: stretch;
+      min-height: min(760px, 90vh);
+      padding-left: clamp(20px, 6vw, 90px);
+    }
+
+    /* left: accordion pills */
+    .closer__list {
+      list-style: none;
+      align-self: center;
+      padding: 100px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
+      margin: 0;
+    }
+
+    .closer .pill {
+      background: #ececf0;
+      border-radius: 28px;
+      overflow: hidden;
+      max-width: 100%;
+      transition: background .25s, box-shadow .25s;
+    }
+
+    .closer .pill:hover {
+      background: #e4e4e9;
+    }
+
+    .closer .pill__btn {
+      all: unset;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      height: 56px;
+      padding: 0 20px 0 14px;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -.01em;
+      white-space: nowrap;
+      color: #1d1d1f !important;
+      -webkit-text-fill-color: #1d1d1f !important;
+    }
+
+    .closer .pill__btn:focus-visible {
+      outline: 2px solid #0071e3;
+      outline-offset: -2px;
+      border-radius: 28px;
+    }
+
+    .closer .icon {
+      width: 24px;
+      height: 24px;
+      flex: none;
+      border: 1.5px solid #1d1d1f;
+      border-radius: 50%;
+      position: relative;
+      transition: transform .35s cubic-bezier(.2, .7, .2, 1);
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .closer .icon::before,
+    .closer .icon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      background: #1d1d1f;
+      transform: translate(-50%, -50%);
+      border-radius: 1px;
+    }
+
+    .closer .icon::before {
+      width: 10px;
+      height: 1.5px;
+    }
+
+    .closer .icon::after {
+      width: 1.5px;
+      height: 10px;
+      transition: opacity .2s;
+    }
+
+    .closer .pill.is-open .icon {
+      transform: rotate(180deg);
+    }
+
+    .closer .pill.is-open .icon::after {
+      opacity: 0;
+    }
+
+    .closer .icon--swatch {
+      border: 1.5px solid #d2d2d7;
+      background: #dcdce0;
+    }
+
+    .closer .icon--swatch::before,
+    .closer .icon--swatch::after {
+      display: none;
+    }
+
+    .closer .pill__panel {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .4s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .closer .pill.is-open .pill__panel {
+      grid-template-rows: 1fr;
+    }
+
+    .closer .pill__inner {
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .closer .pill__text {
+      width: min(380px, 70vw);
+      padding: 0 24px 22px 52px;
+      font-size: 15px;
+      line-height: 1.45;
+      font-weight: 500;
+      color: #6e6e73 !important;
+      -webkit-text-fill-color: #6e6e73 !important;
+      margin: 0;
+    }
+
+    .closer .swatches {
+      display: flex;
+      gap: 12px;
+      padding: 0 24px 22px 52px;
+    }
+
+    .closer .swatch {
+      all: unset;
+      box-sizing: border-box;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 1px solid rgba(0, 0, 0, .15);
+      background: var(--c);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .closer .swatch:hover {
+      transform: scale(1.1);
+    }
+
+    .closer .swatch[aria-pressed="true"] {
+      box-shadow: 0 0 0 2px #ececf0, 0 0 0 3.5px #1d1d1f;
+    }
+
+    .closer .swatch:focus-visible {
+      outline: 2px solid #0071e3;
+      outline-offset: 3px;
+    }
+
+    .closer .swatch-label {
+      padding: 0 24px 22px 52px;
+      margin-top: -10px;
+      font-size: 14px;
+      color: #6e6e73 !important;
+      -webkit-text-fill-color: #6e6e73 !important;
+      font-weight: 500;
+    }
+
+    /* right: product image, cropped by card bottom */
+    .closer__media {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 90px 0 0 0;
+      margin-bottom: -6%;
+    }
+
+    .closer__media img {
+      width: 100%;
+      max-width: 960px;
+      height: auto;
+      display: block;
+      transform: translateY(30px);
+      opacity: 0;
+      transition: opacity .9s ease, transform .9s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .closer.is-visible .closer__media img {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 900px) {
+      .closer__card {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+      }
+
+      .closer__list {
+        padding: 48px 0 16px;
+      }
+
+      .closer__media {
+        padding-top: 20px;
+        margin-bottom: -4%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .closer__media img {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .closer .pill__panel,
+      .closer .icon {
+        transition: none;
+      }
+    }
+
     /* MacBook Neo Premium Dark Apple Design */
     .neo-subnav {
       display: none !important;
@@ -547,6 +805,84 @@
     </section>
 
 
+    <!-- ================= 2ND SECTION: TAKE A CLOSER LOOK ================= -->
+    <section class="closer" id="closer">
+      <h2 class="closer__title">Take a closer look.</h2>
+
+      <div class="closer__card">
+        <ul class="closer__list" id="pillList">
+          <li class="pill is-open">
+            <button class="pill__btn" aria-expanded="true"><span class="icon icon--swatch"></span>Colours</button>
+            <div class="pill__panel">
+              <div class="pill__inner">
+                <div class="swatches" role="group" aria-label="Choose a colour">
+                  <button class="swatch" style="--c:#394a6b" aria-pressed="true" data-name="Indigo"></button>
+                  <button class="swatch" style="--c:#e8e36a" aria-pressed="false" data-name="Citrus"></button>
+                  <button class="swatch" style="--c:#f2b5c4" aria-pressed="false" data-name="Blush"></button>
+                  <button class="swatch" style="--c:#d8dadf" aria-pressed="false" data-name="Silver"></button>
+                </div>
+                <p class="swatch-label" id="swatchLabel">Indigo</p>
+              </div>
+            </div>
+          </li>
+          <li class="pill"><button class="pill__btn" aria-expanded="false"><span class="icon"></span>Durable design</button>
+            <div class="pill__panel">
+              <div class="pill__inner">
+                <p class="pill__text">A tough aluminium enclosure that is built to handle life in a backpack, a café or a classroom.</p>
+              </div>
+            </div>
+          </li>
+          <li class="pill"><button class="pill__btn" aria-expanded="false"><span class="icon"></span>Display</button>
+            <div class="pill__panel">
+              <div class="pill__inner">
+                <p class="pill__text">A bright Liquid Retina display brings colours, text and video to life.</p>
+              </div>
+            </div>
+          </li>
+          <li class="pill"><button class="pill__btn" aria-expanded="false"><span class="icon"></span>Keyboard and trackpad</button>
+            <div class="pill__panel">
+              <div class="pill__inner">
+                <p class="pill__text">A full-size, comfortable keyboard and a large Multi-Touch trackpad for effortless typing and navigation.</p>
+              </div>
+            </div>
+          </li>
+          <li class="pill"><button class="pill__btn" aria-expanded="false"><span class="icon"></span>Touch ID</button>
+            <div class="pill__panel">
+              <div class="pill__inner">
+                <p class="pill__text">Unlock your Mac, pay with Apple Pay and sign in to apps with just a touch.</p>
+              </div>
+            </div>
+          </li>
+          <li class="pill"><button class="pill__btn" aria-expanded="false"><span class="icon"></span>Camera</button>
+            <div class="pill__panel">
+              <div class="pill__inner">
+                <p class="pill__text">A sharp front-facing camera keeps you looking your best on every video call.</p>
+              </div>
+            </div>
+          </li>
+          <li class="pill"><button class="pill__btn" aria-expanded="false"><span class="icon"></span>Mics and speakers</button>
+            <div class="pill__panel">
+              <div class="pill__inner">
+                <p class="pill__text">Studio-quality mics pick up your voice clearly, and the speakers deliver rich, immersive sound.</p>
+              </div>
+            </div>
+          </li>
+          <li class="pill"><button class="pill__btn" aria-expanded="false"><span class="icon"></span>Connectivity</button>
+            <div class="pill__panel">
+              <div class="pill__inner">
+                <p class="pill__text">Fast Wi-Fi and Bluetooth, plus USB-C ports for charging, data and displays.</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="closer__media">
+          <img id="lookImg" src="images/macbook_neo/out-look.png" alt="MacBook Neo in indigo showing a colourful pill-shaped wallpaper">
+        </div>
+      </div>
+    </section>
+
+
     <!-- Hero Section -->
     <section class="neo-hero-section">
       <div class="container">
@@ -794,6 +1130,56 @@
             buySec.scrollIntoView({ behavior: "smooth" });
           }
         });
+      }
+
+      
+      // Closer Section Accordion: one pill open at a time
+      const closerPills = document.querySelectorAll(".closer .pill");
+      closerPills.forEach(function (pill) {
+        const btn = pill.querySelector(".pill__btn");
+        if (!btn) return;
+        btn.addEventListener("click", function () {
+          const opening = !pill.classList.contains("is-open");
+          closerPills.forEach(function (p) {
+            p.classList.remove("is-open");
+            const b = p.querySelector(".pill__btn");
+            if (b) b.setAttribute("aria-expanded", "false");
+          });
+          if (opening) {
+            pill.classList.add("is-open");
+            btn.setAttribute("aria-expanded", "true");
+          }
+        });
+      });
+
+      // Closer Colour Swatches: updates label & photo
+      const closerSwatches = document.querySelectorAll(".closer .swatch");
+      closerSwatches.forEach(function (sw) {
+        sw.addEventListener("click", function () {
+          closerSwatches.forEach(function (s) { s.setAttribute("aria-pressed", "false"); });
+          sw.setAttribute("aria-pressed", "true");
+          const swatchLabel = document.getElementById("swatchLabel");
+          if (swatchLabel) swatchLabel.textContent = sw.dataset.name;
+          if (sw.dataset.src) {
+            const lookImg = document.getElementById("lookImg");
+            if (lookImg) lookImg.src = sw.dataset.src;
+          }
+        });
+      });
+
+      // Reveal closer media image when section scrolls into view
+      const closerSection = document.getElementById("closer");
+      if (closerSection) {
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(function (entries, obs) {
+            if (entries[0].isIntersecting) {
+              closerSection.classList.add("is-visible");
+              obs.disconnect();
+            }
+          }, { threshold: 0.2 }).observe(closerSection);
+        } else {
+          closerSection.classList.add("is-visible");
+        }
       }
 
       if (typeof renderHeader === "function") renderHeader("macbook-neo");
