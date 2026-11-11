@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MacBook Air – Might takes flight. | Iswift Gadgets</title>
+  <meta name="description" content="MacBook Air with M5 chip. Strikingly thin design, up to 18 hours of battery life, Liquid Retina display, and Apple Intelligence.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/enhancements.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --blue: #0071e3;
+      --blue-hover: #0077ed;
+      --orange: #b64400;
+      --pill-bg: #f2f2f4;
+      --bg: #ffffff;
+      --card-bg: #f5f5f7;
+      --border: #d2d2d7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont,
+                   "Inter", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* ---------- Hero (1st Section) ---------- */
+    .hero.air-hero,
+    .air-hero {
+      position: relative;
+      width: 100%;
+      min-height: 760px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(180deg, #d8eaf6 0%, #e9f3fa 30%, #f7f9fb 62%, #fafafa 100%);
+      overflow: hidden;
+      padding: 0;
+      color: var(--text);
+    }
+
+    .air-hero .hero__media {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 24px 0;
+    }
+
+    .air-hero .hero__media img {
+      display: block;
+      width: min(100%, 980px);
+      height: auto;
+      max-height: 520px;
+      object-fit: contain;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .air-hero .hero__media.is-visible img {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------- Bottom row ---------- */
+    .air-hero .hero__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+      padding: 0 64px 40px 93px;
+      max-width: 1815px;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .air-hero .hero__copy {
+      text-align: left;
+    }
+
+    .air-hero .hero__product {
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      color: var(--text);
+      -webkit-text-fill-color: var(--text);
+      margin: 0;
+    }
+
+    .air-hero .hero__title {
+      margin-top: 6px;
+      font-size: clamp(48px, 6vw, 68px);
+      line-height: 1.05;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      /* dark navy → steel blue, left to right */
+      background: linear-gradient(90deg, #0d2d4a 0%, #1f4a73 45%, #5a86ab 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .air-hero .hero__sub {
+      margin-top: 18px;
+      font-size: 17px;
+      line-height: 1.3;
+      font-weight: 500;
+      color: var(--orange);
+      -webkit-text-fill-color: var(--orange);
+    }
+
+    /* ---------- Price pill ---------- */
+    .air-hero .price-pill {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding: 18px 20px 18px 26px;
+      background: var(--pill-bg);
+      border-radius: 48px;
+      flex-shrink: 0;
+    }
+
+    .air-hero .price-pill__text {
+      font-size: 17px;
+      line-height: 1.25;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      color: var(--text);
+      -webkit-text-fill-color: var(--text);
+      text-align: left;
+      margin: 0;
+    }
+
+    .air-hero .price-pill__text sup { font-size: 0.65em; line-height: 0; }
+
+    .air-hero .btn-buy {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      background: var(--blue);
+      color: #fff !important;
+      -webkit-text-fill-color: #fff !important;
+      font: inherit;
+      font-size: 17px;
+      font-weight: 500;
+      padding: 12px 22px;
+      border-radius: 980px;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+      display: inline-block;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .air-hero .btn-buy:hover { background: var(--blue-hover); color: #fff !important; }
+    .air-hero .btn-buy:active { transform: scale(0.97); }
+    .air-hero .btn-buy:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .hero.air-hero,
+      .air-hero { min-height: 0; }
+      .air-hero .hero__footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 32px 24px 40px;
+        gap: 24px;
+      }
+      .air-hero .price-pill { width: 100%; justify-content: space-between; }
+    }
+
+    /* ---------- Highlights Bar ---------- */
+    .air-highlights {
+      padding: 70px 24px;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e5ea;
+    }
+
+    .air-highlights-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: left;
+    }
+
+    .air-highlight-item h3 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #1d1d1f;
+      margin-bottom: 8px;
+    }
+
+    .air-highlight-item p {
+      font-size: 15px;
+      line-height: 1.45;
+      color: #6e6e73;
+    }
+
+    @media (max-width: 900px) {
+      .air-highlights-inner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+    @media (max-width: 540px) {
+      .air-highlights-inner {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    /* ---------- Buy & Configure Section ---------- */
+    .air-buy-section {
+      background: #f5f5f7;
+      padding: 80px 24px 100px;
+      color: #1d1d1f;
+    }
+
+    .air-buy-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .air-buy-head {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .air-buy-head h2 {
+      font-size: clamp(32px, 4.5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #1d1d1f;
+      margin-bottom: 12px;
+    }
+
+    .air-buy-head p {
+      font-size: 19px;
+      color: #6e6e73;
+    }
+
+    .air-config-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* Left: Product Stage */
+    .air-stage {
+      position: sticky;
+      top: 100px;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 48px 32px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .air-stage-img-wrap {
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .air-stage-img-wrap img {
+      max-width: 100%;
+      height: auto;
+      max-height: 280px;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .air-stage-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1d1d1f;
+      margin-bottom: 6px;
+    }
+
+    .air-stage-sub {
+      font-size: 15px;
+      color: #6e6e73;
+    }
+
+    /* Right: Options */
+    .air-options {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .air-opt-group {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .air-opt-label {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1d1d1f;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .air-opt-label small {
+      font-size: 13px;
+      font-weight: 500;
+      color: #6e6e73;
+    }
+
+    /* Size selector tabs */
+    .air-size-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .air-size-btn {
+      appearance: none;
+      background: #ffffff;
+      border: 1.5px solid #d2d2d7;
+      border-radius: 14px;
+      padding: 18px 16px;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .air-size-btn:hover {
+      border-color: #86868b;
+    }
+
+    .air-size-btn.active {
+      border-color: #0071e3;
+      box-shadow: 0 0 0 1px #0071e3;
+    }
+
+    .air-size-btn .size-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1d1d1f;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .air-size-btn .size-detail {
+      font-size: 13px;
+      color: #6e6e73;
+      display: block;
+    }
+
+    .air-size-btn .size-price {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1d1d1f;
+      display: block;
+      margin-top: 10px;
+    }
+
+    /* Color Swatches */
+    .air-swatches {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .air-swatch-btn {
+      appearance: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px #d2d2d7;
+      background: var(--swatch-color);
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .air-swatch-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .air-swatch-btn.active {
+      box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #0071e3;
+    }
+
+    /* Storage Selector */
+    .air-storage-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .air-storage-btn {
+      appearance: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      border: 1.5px solid #d2d2d7;
+      border-radius: 14px;
+      padding: 16px 20px;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .air-storage-btn:hover {
+      border-color: #86868b;
+    }
+
+    .air-storage-btn.active {
+      border-color: #0071e3;
+      box-shadow: 0 0 0 1px #0071e3;
+    }
+
+    .air-storage-main {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1d1d1f;
+    }
+
+    .air-storage-extra {
+      font-size: 14px;
+      color: #6e6e73;
+    }
+
+    .air-storage-btn.active .air-storage-extra {
+      color: #0071e3;
+      font-weight: 600;
+    }
+
+    /* Summary & Buy CTA */
+    .air-buy-summary {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .air-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .air-total-label {
+      font-size: 17px;
+      color: #6e6e73;
+    }
+
+    .air-total-val {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #1d1d1f;
+    }
+
+    .air-emi-val {
+      font-size: 14px;
+      color: #6e6e73;
+      margin-bottom: 24px;
+    }
+
+    .air-add-btn {
+      appearance: none;
+      width: 100%;
+      border: none;
+      background: #0071e3;
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 600;
+      padding: 16px 24px;
+      border-radius: 980px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+      display: block;
+      text-align: center;
+    }
+
+    .air-add-btn:hover {
+      background: #0077ed;
+    }
+
+    .air-add-btn:active {
+      transform: scale(0.98);
+    }
+
+    .air-delivery-info {
+      margin-top: 16px;
+      font-size: 13px;
+      color: #6e6e73;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 960px) {
+      .air-config-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+      .air-stage {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Global Header Navigation -->
+  <div id="site-header"></div>
+
+  <main>
+    <!-- ================= 1ST SECTION: MACBOOK AIR HERO ================= -->
+    <section class="hero air-hero" id="heroAir">
+      <div class="hero__media" id="airHeroMedia">
+        <img src="images/macbook-air/hero-img.png"
+             alt="MacBook Air in sky blue, opened flat so the display and keyboard face each other">
+      </div>
+
+      <div class="hero__footer">
+        <div class="hero__copy">
+          <p class="hero__product">MacBook Air</p>
+          <h1 class="hero__title">Might takes flight.</h1>
+          <p class="hero__sub">Now supercharged by M5.</p>
+        </div>
+
+        <div class="price-pill">
+          <p class="price-pill__text">
+            From ₹149900.00<sup>*</sup> or<br>
+            ₹11658.00/mo.<br>
+            for 12 mo.<sup>‡</sup>
+          </p>
+          <a class="btn-buy" href="#buy" id="airHeroBuyBtn">Buy</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 2ND SECTION: HIGHLIGHTS ================= -->
+    <section class="air-highlights" id="highlights">
+      <div class="air-highlights-inner">
+        <div class="air-highlight-item">
+          <h3>Apple M5</h3>
+          <p>Supercharged performance for work, creating, and gaming with breakthrough energy efficiency.</p>
+        </div>
+        <div class="air-highlight-item">
+          <h3>11.3 mm</h3>
+          <p>Impossibly thin unibody design crafted with durable 100% recycled aluminum.</p>
+        </div>
+        <div class="air-highlight-item">
+          <h3>Up to 18 hrs</h3>
+          <p>All-day battery life that goes anywhere you do, with zero fan noise thanks to fanless architecture.</p>
+        </div>
+        <div class="air-highlight-item">
+          <h3>Liquid Retina</h3>
+          <p>Brilliant 13.6″ or 15.3″ display with 500 nits brightness and support for 1 billion colors.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 3RD SECTION: BUY & CONFIGURE ================= -->
+    <section class="air-buy-section" id="buy">
+      <div class="air-buy-container">
+        <div class="air-buy-head">
+          <h2>Configure your MacBook Air.</h2>
+          <p>Select your size, finish, and memory to make it yours.</p>
+        </div>
+
+        <div class="air-config-grid">
+          <!-- Left: Live Preview Stage -->
+          <div class="air-stage">
+            <div class="air-stage-img-wrap">
+              <img id="airStageImage" src="images/macbook-air/hero-img.png" alt="MacBook Air preview">
+            </div>
+            <div class="air-stage-title" id="airStageTitle">MacBook Air 13″ with M5</div>
+            <div class="air-stage-sub" id="airStageSub">Sky Blue · 16GB · 512GB SSD</div>
+          </div>
+
+          <!-- Right: Configuration Options -->
+          <div class="air-options">
+            <!-- 1. Size -->
+            <div class="air-opt-group">
+              <div class="air-opt-label">
+                <span>1. Select your display size</span>
+              </div>
+              <div class="air-size-selector">
+                <button type="button" class="air-size-btn active" data-size="13" data-base="149900" data-name="MacBook Air 13″">
+                  <span class="size-name">13.6-inch</span>
+                  <span class="size-detail">Liquid Retina display</span>
+                  <span class="size-price">From ₹1,49,900</span>
+                </button>
+                <button type="button" class="air-size-btn" data-size="15" data-base="179900" data-name="MacBook Air 15″">
+                  <span class="size-name">15.3-inch</span>
+                  <span class="size-detail">Liquid Retina display</span>
+                  <span class="size-price">From ₹1,79,900</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Finish -->
+            <div class="air-opt-group">
+              <div class="air-opt-label">
+                <span>2. Choose your finish</span>
+                <small id="selectedColorLabel">Sky Blue</small>
+              </div>
+              <div class="air-swatches">
+                <button type="button" class="air-swatch-btn active" data-color="Sky Blue" style="--swatch-color: #b9d3e6;" aria-label="Sky Blue"></button>
+                <button type="button" class="air-swatch-btn" data-color="Midnight" style="--swatch-color: #1e2129;" aria-label="Midnight"></button>
+                <button type="button" class="air-swatch-btn" data-color="Starlight" style="--swatch-color: #f0ece1;" aria-label="Starlight"></button>
+                <button type="button" class="air-swatch-btn" data-color="Silver" style="--swatch-color: #e3e4e6;" aria-label="Silver"></button>
+              </div>
+            </div>
+
+            <!-- 3. Memory & Storage -->
+            <div class="air-opt-group">
+              <div class="air-opt-label">
+                <span>3. Memory &amp; Storage</span>
+              </div>
+              <div class="air-storage-list">
+                <button type="button" class="air-storage-btn active" data-extra="0" data-label="16GB / 512GB SSD">
+                  <span class="air-storage-main">16GB Unified Memory / 512GB SSD</span>
+                  <span class="air-storage-extra">Included</span>
+                </button>
+                <button type="button" class="air-storage-btn" data-extra="36000" data-label="16GB / 1TB SSD">
+                  <span class="air-storage-main">16GB Unified Memory / 1TB SSD</span>
+                  <span class="air-storage-extra">+₹36,000</span>
+                </button>
+                <button type="button" class="air-storage-btn" data-extra="60000" data-label="24GB / 1TB SSD">
+                  <span class="air-storage-main">24GB Unified Memory / 1TB SSD</span>
+                  <span class="air-storage-extra">+₹60,000</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Summary & Add to Bag -->
+            <div class="air-buy-summary">
+              <div class="air-total-row">
+                <span class="air-total-label">Total</span>
+                <span class="air-total-val" id="airTotalPrice">₹1,49,900</span>
+              </div>
+              <p class="air-emi-val" id="airTotalEmi">Or ₹11,658/mo. for 12 mo. with No-Cost EMI</p>
+              <button type="button" class="air-add-btn" id="airAddToBagBtn">Add to Bag</button>
+              <div class="air-delivery-info">
+                Free delivery · In stock · Genuine Apple India warranty included
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <div id="site-footer"></div>
+  <div id="whatsapp-float"></div>
+
+  <!-- Shared Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/catalog-sync.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // 1. Initialize Site Components
+      if (typeof renderHeader === "function") renderHeader("mac");
+      if (typeof renderFooter === "function") renderFooter();
+      if (typeof renderWhatsAppFloat === "function") renderWhatsAppFloat();
+
+      // 2. Hero reveal animation
+      requestAnimationFrame(function () {
+        const heroMedia = document.getElementById("airHeroMedia");
+        if (heroMedia) {
+          heroMedia.classList.add("is-visible");
+        }
+      });
+
+      // 3. Smooth scroll for hero Buy button
+      const heroBuyBtn = document.getElementById("airHeroBuyBtn");
+      if (heroBuyBtn) {
+        heroBuyBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.getElementById("buy");
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      }
+
+      // 4. Interactive Configuration State
+      let selectedSize = "13";
+      let selectedModelName = "MacBook Air 13″";
+      let basePrice = 149900;
+      let selectedColor = "Sky Blue";
+      let storageExtra = 0;
+      let selectedStorageLabel = "16GB / 512GB SSD";
+
+      const stageTitle = document.getElementById("airStageTitle");
+      const stageSub = document.getElementById("airStageSub");
+      const totalPriceEl = document.getElementById("airTotalPrice");
+      const totalEmiEl = document.getElementById("airTotalEmi");
+      const colorLabel = document.getElementById("selectedColorLabel");
+
+      function updateSummary() {
+        const total = basePrice + storageExtra;
+        const formatted = "₹" + total.toLocaleString("en-IN");
+        const monthly = Math.round(total / 12);
+        const formattedMonthly = "₹" + monthly.toLocaleString("en-IN");
+
+        if (totalPriceEl) totalPriceEl.textContent = formatted;
+        if (totalEmiEl) totalEmiEl.textContent = "Or " + formattedMonthly + "/mo. for 12 mo. with No-Cost EMI";
+        if (stageTitle) stageTitle.textContent = selectedModelName + " with M5";
+        if (stageSub) stageSub.textContent = selectedColor + " · " + selectedStorageLabel;
+        if (colorLabel) colorLabel.textContent = selectedColor;
+      }
+
+      // Size switch
+      const sizeBtns = document.querySelectorAll(".air-size-btn");
+      sizeBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          sizeBtns.forEach(function (b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          selectedSize = btn.getAttribute("data-size") || "13";
+          basePrice = Number(btn.getAttribute("data-base") || 149900);
+          selectedModelName = btn.getAttribute("data-name") || "MacBook Air " + selectedSize + "″";
+          updateSummary();
+        });
+      });
+
+      // Color switch
+      const swatchBtns = document.querySelectorAll(".air-swatch-btn");
+      swatchBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          swatchBtns.forEach(function (b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          selectedColor = btn.getAttribute("data-color") || "Sky Blue";
+          updateSummary();
+        });
+      });
+
+      // Storage switch
+      const storageBtns = document.querySelectorAll(".air-storage-btn");
+      storageBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          storageBtns.forEach(function (b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          storageExtra = Number(btn.getAttribute("data-extra") || 0);
+          selectedStorageLabel = btn.getAttribute("data-label") || "16GB / 512GB SSD";
+          updateSummary();
+        });
+      });
+
+      // Add to Bag action
+      const addBtn = document.getElementById("airAddToBagBtn");
+      if (addBtn) {
+        addBtn.addEventListener("click", function () {
+          const total = basePrice + storageExtra;
+          const productId = selectedSize === "15" ? "macbook-air-15-m5" : "macbook-air-13-m5";
+          const fullName = selectedModelName + " (" + selectedColor + ", " + selectedStorageLabel + ")";
+
+          if (typeof addToCart === "function") {
+            addToCart({
+              id: productId,
+              name: fullName,
+              price: total,
+              category: "mac",
+              images: ["images/macbook-air/hero-img.png"]
+            }, {
+              color: selectedColor,
+              storage: selectedStorageLabel,
+              unitPrice: total,
+              image: "images/macbook-air/hero-img.png"
+            });
+            if (typeof showToast === "function") {
+              showToast("Added " + fullName + " to Bag!");
+            } else {
+              alert("Added " + fullName + " to Bag!");
+            }
+          } else {
+            alert("Added " + fullName + " to Bag!");
+          }
+        });
+      }
+
+      updateSummary();
+    });
+  </script>
+</body>
+</html>

@@ -151,7 +151,7 @@ function renderHeader(active) {
                   '<div class="cascade-group-title">Mac Lineup</div>' +
                   '<a href="product.html?id=macbook-pro-16-m5" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Pro PROLED XDR Display</span><span class="badge-new-red">New</span></a>' +
                   '<a href="product.html?id=macbook-pro-14-m5" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Pro</span></a>' +
-                  '<a href="product.html?id=macbook-air-13-m5" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Air</span></a>' +
+                  '<a href="macbook-air.html" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Air</span></a>' +
                   '<a href="product.html?id=imac-24-m4" class="cascade-prod-item"><span class="cascade-prod-name">iMac</span></a>' +
                   '<a href="macbook-neo.html" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Neo</span></a>' +
                   '<a href="product.html?id=mac-mini-m4" class="cascade-prod-item"><span class="cascade-prod-name">Mac Mini</span><span class="badge-new-red">New</span></a>' +
@@ -265,7 +265,7 @@ function renderHeader(active) {
             '<div class="mobile-subcat-group" data-subcat="mac">' +
               '<button type="button" class="mobile-subcat-toggle" aria-expanded="false"><span>Mac</span><span class="subcat-arrow">&rsaquo;</span></button>' +
               '<div class="mobile-subcat-content">' +
-                '<a href="product.html?id=mba-m3-13" class="mobile-leaf-link"><span class="mll-name">MacBook Air M3</span></a>' +
+                '<a href="macbook-air.html" class="mobile-leaf-link"><span class="mll-name">MacBook Air</span></a>' +
                 '<a href="product.html?id=mbp-14-m4-pro" class="mobile-leaf-link"><span class="mll-name">MacBook Pro 14&quot; &amp; 16&quot;</span></a>' +
                 '<a href="product.html?id=imac-24-m4" class="mobile-leaf-link"><span class="mll-name">iMac 24&quot;</span></a>' +
                 '<a href="product.html?id=mac-mini-m4" class="mobile-leaf-link"><span class="mll-name">Mac mini (M4)</span></a>' +
