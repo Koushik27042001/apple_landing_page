@@ -58,7 +58,10 @@ function renderHeader(active) {
   const el = document.getElementById("site-header");
   if (!el) return;
   const isProductActive = ["iphone", "ipad", "mac", "watch", "airpods", "apple"].includes(active);
-  const isDarkPage = document.body.classList.contains("dark-theme") || document.body.classList.contains("page-dark");
+  const isDarkPage = document.body.classList.contains("dark-theme") ||
+    document.body.classList.contains("page-dark") ||
+    window.location.pathname.includes("macbook-air") ||
+    window.location.pathname.includes("macbook-neo");
 
   el.innerHTML =
     '<header class="site-header' + (isDarkPage ? ' site-header--dark' : '') + '" id="siteHeaderEl">' +
@@ -754,7 +757,10 @@ function renderFooter() {
   const el = document.getElementById("site-footer");
   if (!el) return;
   const year = new Date().getFullYear();
-  const isDarkPage = document.body.classList.contains("dark-theme") || document.body.classList.contains("page-dark");
+  const isDarkPage = document.body.classList.contains("dark-theme") ||
+    document.body.classList.contains("page-dark") ||
+    window.location.pathname.includes("macbook-air") ||
+    window.location.pathname.includes("macbook-neo");
   el.innerHTML =
     '<footer class="site-footer' + (isDarkPage ? ' site-footer--dark' : '') + '">' +
       '<div class="container">' +
