@@ -1174,6 +1174,64 @@
       .design__eyebrow { font-size: 17px; }
     }
 
+    /* ==================== 4TH SECTION: PRIVACY ==================== */
+    .privacy {
+      padding: 20px 24px 120px;
+      text-align: center;
+      background: #ffffff;
+    }
+
+    .privacy__logo {
+      display: block;
+      width: 120px;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .privacy__title {
+      margin-top: 8px;
+      font-size: clamp(30px, 4vw, 34px);
+      line-height: 1.17;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: #1d1d1f;
+    }
+
+    .privacy__title .grad {
+      background: linear-gradient(90deg, #1a8cff 0%, #7d6bf0 30%, #d65bd6 60%, #f0502e 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .privacy__body {
+      width: min(820px, 100%);
+      margin: 54px auto 0;
+    }
+
+    .privacy__body p {
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.38;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: #86868b;
+    }
+
+    .privacy__body p + p { margin-top: 18px; }
+
+    .privacy__body strong {
+      font-weight: 600;
+      color: #1d1d1f;
+    }
+
+    @media (max-width: 700px) {
+      .privacy { padding-bottom: 72px; }
+      .privacy__body { margin-top: 36px; }
+      /* let the text wrap naturally on narrow screens */
+      .privacy__title br { display: none; }
+    }
+
     /* ---------- Buy & Configure Section ---------- */
     .air-buy-section {
       background: #ffffff;
@@ -1603,7 +1661,32 @@
       </div>
     </section>
 
-    <!-- ================= 4TH SECTION: BUY & CONFIGURE ================= -->
+    <!-- ================= 4TH SECTION: PRIVACY ================= -->
+    <section class="privacy" id="privacy" aria-labelledby="privacy-title">
+      <video class="privacy__logo" id="logoVideo" muted playsinline preload="auto" aria-hidden="true">
+        <source src="images/macbook-air/large.webm" type="video/webm">
+      </video>
+
+      <h2 class="privacy__title" id="privacy-title">
+        Great powers come<br>
+        with great <span class="grad">privacy.</span>
+      </h2>
+
+      <div class="privacy__body">
+        <p>
+          Apple Intelligence is <strong>designed to protect your privacy at every step</strong>.
+          It’s integrated into the core of your Mac through on-device processing. So it’s aware of
+          your personal information without collecting your personal information.
+        </p>
+        <p>
+          And with groundbreaking Private Cloud Compute, Apple Intelligence can draw on larger
+          server-based models, running on Apple silicon, to handle more complex requests for you
+          while protecting your privacy.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= 5TH SECTION: BUY & CONFIGURE ================= -->
     <section class="air-buy-section" id="buy">
       <div class="air-buy-container">
         <div class="air-buy-head">
@@ -1807,7 +1890,28 @@
         dlg.addEventListener('close', () => vid.pause());
       }
 
-      // 5. Interactive Configuration State
+      // 5. Privacy Logo Video Animation on Scroll
+      const privacyVid = document.getElementById('logoVideo');
+      if (privacyVid) {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion) {
+          privacyVid.addEventListener('loadedmetadata', () => { privacyVid.currentTime = privacyVid.duration; });
+        } else if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                privacyVid.play().catch(() => {});
+                io.disconnect();
+              }
+            });
+          }, { threshold: 0.5 });
+          io.observe(privacyVid);
+        } else {
+          privacyVid.play().catch(() => {});
+        }
+      }
+
+      // 6. Interactive Configuration State
       let selectedSize = "13";
       let selectedModelName = "MacBook Air 13″";
       let basePrice = 149900;
