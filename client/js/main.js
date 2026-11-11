@@ -20,13 +20,13 @@ let STORE_PHONE_MOBILE = "919972612530";
 let STORE_PHONE_ALT = "917980128631";
 let STORE_EMAIL = "info@axion.co.in";
 let STORE_ADDRESS_LINES = [
-  "#L-176, Ground Floor, 5th Main,",
-  "HSR Layout, Sector 6,",
-  "Bengaluru, 560102"
+  "Service Lane, L-176, 2nd Floor 5th Main,",
+  "near Outer Ring Rd, Sector 6, HSR Layout,",
+  "Bengaluru, Karnataka 560102"
 ];
-let STORE_MAP_LINK = "https://share.google/xm1mcXn94xCpgRc7I";
+let STORE_MAP_LINK = "https://www.google.com/maps/search/?api=1&query=Service+Lane,+L-176,+2nd+Floor+5th+Main,+near+Outer+Ring+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102";
 let STORE_MAP_EMBED =
-  "https://www.google.com/maps?q=Axion+Computers+(Head+Office),+L-176,+5th+Main,+HSR+Layout,+Sector+6,+Bengaluru,+560102&hl=en&z=16&output=embed";
+  "https://www.google.com/maps?q=Service+Lane,+L-176,+2nd+Floor+5th+Main,+near+Outer+Ring+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102&hl=en&z=16&output=embed";
 
 function whatsappLink(message) {
   return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
@@ -832,7 +832,7 @@ function renderFooter() {
           '<div class="footer-map-head">' +
             '<div>' +
               '<h5>Visit our head office</h5>' +
-              '<p>HSR Layout, Sector 6, Bengaluru</p>' +
+              '<p>Service Lane, L-176, 2nd Floor 5th Main, near Outer Ring Rd, Sector 6, HSR Layout, Bengaluru</p>' +
             '</div>' +
             '<a class="btn btn-outline" href="' + STORE_MAP_LINK + '" target="_blank" rel="noopener">Open in Google Maps</a>' +
           '</div>' +

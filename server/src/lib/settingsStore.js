@@ -10,12 +10,12 @@ const DEFAULTS = {
   email: "info@axion.co.in",
   phones: ["08041492709", "919972612530", "917975627008", "917980128631"],
   whatsapp: "917975627008",
-  address: [
-    "#L-176, Ground Floor, 5th Main,",
-    "HSR Layout, Sector 6,",
-    "Bengaluru, 560102"
+  address: [
+    "Service Lane, L-176, 2nd Floor 5th Main,",
+    "near Outer Ring Rd, Sector 6, HSR Layout,",
+    "Bengaluru, Karnataka 560102"
   ],
-  mapLink: "https://share.google/xm1mcXn94xCpgRc7I",
+  mapLink: "https://www.google.com/maps/search/?api=1&query=Service+Lane,+L-176,+2nd+Floor+5th+Main,+near+Outer+Ring+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102",
   shippingFee: 199,
   shippingThreshold: 50000,
   announcement: "",
