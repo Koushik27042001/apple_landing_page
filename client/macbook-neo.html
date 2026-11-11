@@ -144,6 +144,96 @@
     }
 
     
+    
+    /* ==================== MACBOOK NEO PERFORMANCE FEATURES ==================== */
+    .neo-performance-wrapper {
+      background: #ffffff !important;
+      color: #1d1d1f !important;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: 1fr 1.9fr;   /* text | image */
+      align-items: center;
+      max-width: 1440px;
+      margin: 0 auto;
+      min-height: 520px;
+      overflow: hidden;
+      background: #ffffff !important;
+      color: #1d1d1f !important;
+      font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif !important;
+    }
+
+    .feature__copy {
+      padding: 0 24px 0 clamp(24px, 12vw, 190px);
+      max-width: 560px;
+    }
+
+    .feature__copy p {
+      font-size: clamp(22px, 2.2vw, 28px);
+      line-height: 1.18;
+      font-weight: 600;
+      letter-spacing: -0.012em;
+      color: #1d1d1f !important;
+      -webkit-text-fill-color: #1d1d1f !important;
+      margin: 0;
+    }
+
+    .feature__copy .lead {
+      display: block;
+    }
+
+    .feature--green .lead {
+      color: #128a12 !important;
+      -webkit-text-fill-color: #128a12 !important;
+    }
+
+    .feature--pink .lead {
+      color: #d62bc5 !important;
+      -webkit-text-fill-color: #d62bc5 !important;
+    }
+
+    .feature--blue .lead {
+      color: #2323f0 !important;
+      -webkit-text-fill-color: #2323f0 !important;
+    }
+
+    .feature__media {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .feature__media img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+    }
+
+    /* Slightly different text offset per section, as in the design */
+    .feature--pink .feature__copy { padding-left: clamp(24px, 12vw, 172px); }
+    .feature--blue .feature__copy { padding-left: clamp(24px, 12vw, 178px); }
+
+    /* ---------- Tablet / mobile ---------- */
+    @media (max-width: 900px) {
+      .feature {
+        grid-template-columns: 1fr;
+        min-height: 0;
+        padding: 48px 0 0;
+        gap: 24px;
+      }
+      .feature__copy,
+      .feature--pink .feature__copy,
+      .feature--blue .feature__copy {
+        padding: 0 24px;
+        max-width: 640px;
+      }
+    }
+
     /* ==================== CLOSER SECTION ==================== */
     .closer {
       padding: 48px 0 80px;
@@ -881,6 +971,52 @@
         </div>
       </div>
     </section>
+
+
+    <!-- ================= 3RD SECTION: PERFORMANCE FEATURES ================= -->
+    <div class="neo-performance-wrapper" id="neoPerformance">
+      <!-- Section 1 : Everyday productivity -->
+      <section class="feature feature--green">
+        <div class="feature__copy">
+          <p>
+            <span class="lead">Everyday productivity.</span>
+            Answering email, taking video calls, browsing the web, updating after-school schedules, sharing photos — master your to-do list with MacBook Neo.
+          </p>
+        </div>
+        <div class="feature__media">
+          <img src="images/macbook_neo/performance_hero_1_static__c782t9ycacya_large_2x.jpg"
+               alt="MacBook Neo in yellow showing Safari and Mail side by side">
+        </div>
+      </section>
+
+      <!-- Section 2 : Conquer your courses -->
+      <section class="feature feature--pink">
+        <div class="feature__copy">
+          <p>
+            <span class="lead">Conquer your courses.</span>
+            MacBook Neo is perfect for learning, whether you’re cramming for finals, using Apple Intelligence to summarise class notes<sup>3</sup> or creating presentations.
+          </p>
+        </div>
+        <div class="feature__media">
+          <img src="images/macbook_neo/performance_hero_2_static__eyt6d992mbau_large_2x.jpg"
+               alt="MacBook Neo in pink showing Pages and Preview documents">
+        </div>
+      </section>
+
+      <!-- Section 3 : Make work feel like play -->
+      <section class="feature feature--blue">
+        <div class="feature__copy">
+          <p>
+            <span class="lead">Make work feel like play.</span>
+            From building spreadsheets to managing payroll, MacBook Neo gets the job done.
+          </p>
+        </div>
+        <div class="feature__media">
+          <img src="images/macbook_neo/performance_hero_3_static__dzg6zb7h18a6_large_2x.jpg"
+               alt="MacBook Neo in blue showing a FaceTime call and a design board">
+        </div>
+      </section>
+    </div>
 
 
     <!-- Hero Section -->
