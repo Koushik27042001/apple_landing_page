@@ -57,11 +57,12 @@ function renderHeader(active) {
   if (active) window.__ACTIVE_NAV__ = active;
   const el = document.getElementById("site-header");
   if (!el) return;
-  const isProductActive = ["iphone", "ipad", "mac", "watch", "airpods", "apple"].includes(active);
+  const isProductActive = ["iphone", "ipad", "mac", "watch", "airpods", "apple", "macbook-air", "macbook-neo", "iphone-18-pro"].includes(active);
   const isDarkPage = document.body.classList.contains("dark-theme") ||
     document.body.classList.contains("page-dark") ||
     window.location.pathname.includes("macbook-air") ||
-    window.location.pathname.includes("macbook-neo");
+    window.location.pathname.includes("macbook-neo") ||
+    window.location.pathname.includes("iphone-18-pro");
 
   el.innerHTML =
     '<header class="site-header' + (isDarkPage ? ' site-header--dark' : '') + '" id="siteHeaderEl">' +
@@ -131,7 +132,7 @@ function renderHeader(active) {
                 '<div class="cascade-prod-group" data-cat-group="iphone">' +
                   '<div class="cascade-group-title">iPhone Lineup</div>' +
                   '<a href="iphone-duo.html" class="cascade-prod-item"><span class="cascade-prod-name">iPhone duo</span><span class="badge-new-red">New</span></a>' +
-                  '<a href="product.html?id=iphone-18-pro" class="cascade-prod-item"><span class="cascade-prod-name">iPhone 18 Pro</span><span class="badge-new-red">New</span></a>' +
+                  '<a href="iphone-18-pro.html" class="cascade-prod-item"><span class="cascade-prod-name">iPhone 18 Pro</span><span class="badge-new-red">New</span></a>' +
                   '<a href="product.html?id=iphone-17e" class="cascade-prod-item"><span class="cascade-prod-name">iPhone 17e</span></a>' +
                   '<a href="product.html?id=iphone-17" class="cascade-prod-item"><span class="cascade-prod-name">iPhone 17</span></a>' +
                   '<a href="product.html?id=iphone-air" class="cascade-prod-item"><span class="cascade-prod-name">iPhone Air</span></a>' +
@@ -240,6 +241,7 @@ function renderHeader(active) {
               '<button type="button" class="mobile-subcat-toggle" aria-expanded="false"><span>iPhone</span><span class="subcat-arrow">&rsaquo;</span></button>' +
               '<div class="mobile-subcat-content">' +
                 '<a href="iphone-duo.html" class="mobile-leaf-link"><span class="mll-name">iPhone duo</span><span class="badge-new-red">New</span></a>' +
+                '<a href="iphone-18-pro.html" class="mobile-leaf-link"><span class="mll-name">iPhone 18 Pro</span><span class="badge-new-red">New</span></a>' +
                 '<a href="product.html?id=iphone-17-pro-max" class="mobile-leaf-link"><span class="mll-name">iPhone 17 Pro Max</span></a>' +
                 '<a href="product.html?id=iphone-17-pro" class="mobile-leaf-link"><span class="mll-name">iPhone 17 Pro</span></a>' +
                 '<a href="product.html?id=iphone-17" class="mobile-leaf-link"><span class="mll-name">iPhone 17</span></a>' +
@@ -760,7 +762,8 @@ function renderFooter() {
   const isDarkPage = document.body.classList.contains("dark-theme") ||
     document.body.classList.contains("page-dark") ||
     window.location.pathname.includes("macbook-air") ||
-    window.location.pathname.includes("macbook-neo");
+    window.location.pathname.includes("macbook-neo") ||
+    window.location.pathname.includes("iphone-18-pro");
   el.innerHTML =
     '<footer class="site-footer' + (isDarkPage ? ' site-footer--dark' : '') + '">' +
       '<div class="container">' +

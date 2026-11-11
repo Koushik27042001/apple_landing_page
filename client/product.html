@@ -49,6 +49,9 @@
   if (productId === "macbook-air-13-m5" || productId === "macbook-air-15-m5" || productId === "mba-m3-13" || productId === "macbook-air") {
     window.location.replace("macbook-air.html");
   }
+  if (productId === "iphone-18-pro" || productId === "iphone-18-pro-max" || productId === "iphone18pro") {
+    window.location.replace("iphone-18-pro.html");
+  }
   let product = getProductById(productId);
   if (!product && productId) {
     const searchMatches = searchProducts(productId);

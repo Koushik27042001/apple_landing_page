@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>iPhone 18 Pro – Built for Beyond. | Iswift Gadgets</title>
+  <meta name="description" content="iPhone 18 Pro and iPhone 18 Pro Max. Aerospace titanium, A20 Pro chip, 48MP Pro Fusion variable aperture camera system, and Apple Intelligence.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/enhancements.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --muted: #86868b;
+      --blue: #0071e3;
+      --blue-hover: #0077ed;
+      --logo-size: 120px;
+      --bg: #ffffff;
+      --bg-dark: #000000;
+      --card-bg: #f5f5f7;
+      --border: #d2d2d7;
+      --slide-ratio: 2 / 1;
+      --slide-min: 460px;
+      --slide-max: 780px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont,
+                   "Inter", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* ==================== GLOBAL SITE HEADER (EXACT HOME PAGE STYLING & COLORS) ==================== */
+    #site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      width: 100%;
+    }
+
+    .site-header,
+    .site-header--dark {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      width: 100%;
+      background: rgba(18, 18, 20, 0.88) !important;
+      backdrop-filter: saturate(180%) blur(24px) !important;
+      -webkit-backdrop-filter: saturate(180%) blur(24px) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+
+    .site-header.scrolled,
+    .site-header--dark.scrolled {
+      background: rgba(12, 12, 14, 0.96) !important;
+      border-bottom-color: rgba(255, 255, 255, 0.18) !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.65) !important;
+    }
+
+    .site-header .logo,
+    .site-header .logo-name,
+    .site-header .apple-logo,
+    .site-header--dark .logo,
+    .site-header--dark .logo-name,
+    .site-header--dark .apple-logo {
+      color: #ffffff !important;
+      display: inline-flex;
+      align-items: center;
+      margin: 0 4px 0 2px;
+      vertical-align: middle;
+    }
+
+    .site-logo-img {
+      display: inline-block !important;
+      height: 35px !important;
+      width: auto !important;
+      max-width: 138px !important;
+      object-fit: contain !important;
+      vertical-align: middle !important;
+      transition: opacity 0.2s ease, transform 0.2s ease !important;
+    }
+
+    .logo:hover .site-logo-img {
+      opacity: 0.95 !important;
+      transform: scale(1.02) !important;
+    }
+
+    .apple-logo-svg {
+      display: inline-block !important;
+      width: 15px !important;
+      height: 15px !important;
+      margin: 0 4px 0 2px !important;
+      vertical-align: middle !important;
+      fill: #ffffff !important;
+      color: #ffffff !important;
+      filter: none !important;
+      opacity: 1 !important;
+      flex-shrink: 0 !important;
+    }
+
+    .footer-logo-img {
+      height: 42px !important;
+      max-width: 165px !important;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .site-header .logo span.store-tag,
+    .site-header--dark .logo span.store-tag,
+    .site-footer .logo span.store-tag {
+      display: inline-flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: flex-start !important;
+      margin-left: 6px !important;
+      padding-left: 8px !important;
+      border-left: 1.5px solid rgba(255, 255, 255, 0.45) !important;
+      font-weight: 600 !important;
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+      font-size: 11px !important;
+      line-height: 1.15 !important;
+      letter-spacing: 0.02em !important;
+      text-transform: capitalize !important;
+      white-space: nowrap !important;
+    }
+
+    .site-header .logo span.store-tag .store-tag-line,
+    .site-header--dark .logo span.store-tag .store-tag-line,
+    .site-footer .logo span.store-tag .store-tag-line {
+      display: block !important;
+    }
+
+    .site-header .main-nav>a,
+    .site-header--dark .main-nav>a {
+      color: #e5e5ea !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      letter-spacing: -0.01em !important;
+      transition: color 0.2s ease !important;
+    }
+
+    .site-header .main-nav>a:hover,
+    .site-header .main-nav>a.active,
+    .site-header--dark .main-nav>a:hover,
+    .site-header--dark .main-nav>a.active {
+      color: #ffffff !important;
+    }
+
+    .site-header .products-menu-toggle,
+    .site-header--dark .products-menu-toggle {
+      color: #e5e5ea !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      letter-spacing: -0.01em !important;
+    }
+
+    .site-header .products-menu-toggle:hover,
+    .site-header .products-menu.open .products-menu-toggle,
+    .site-header .products-menu.active .products-menu-toggle,
+    .site-header--dark .products-menu-toggle:hover,
+    .site-header--dark .products-menu.open .products-menu-toggle,
+    .site-header--dark .products-menu.active .products-menu-toggle {
+      color: #ffffff !important;
+    }
+
+    /* Cascading Floating White Mega-Menu */
+    .site-header .cascade-mega-container,
+    .site-header--dark .cascade-mega-container {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+    }
+
+    .site-header .cascade-panel,
+    .site-header--dark .cascade-panel {
+      background: #ffffff !important;
+      color: #1d1d1f !important;
+      border-radius: 18px !important;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18), 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .site-header .cascade-panel-2,
+    .site-header--dark .cascade-panel-2,
+    .site-header .cascade-panel-3,
+    .site-header--dark .cascade-panel-3 {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    .site-header .cascade-panel-2.open,
+    .site-header--dark .cascade-panel-2.open,
+    .site-header .cascade-panel-3.open,
+    .site-header--dark .cascade-panel-3.open {
+      display: block !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    .site-header .cascade-panel a,
+    .site-header--dark .cascade-panel a,
+    .site-header .cascade-panel a span,
+    .site-header--dark .cascade-panel a span,
+    .site-header .cascade-panel .cascade-item,
+    .site-header--dark .cascade-panel .cascade-item,
+    .site-header .cascade-panel .cascade-item-text,
+    .site-header--dark .cascade-panel .cascade-item-text,
+    .site-header .cascade-panel .cascade-cat-item,
+    .site-header--dark .cascade-panel .cascade-cat-item,
+    .site-header .cascade-panel .cascade-prod-item,
+    .site-header--dark .cascade-panel .cascade-prod-item,
+    .site-header .cascade-panel .cascade-prod-name,
+    .site-header--dark .cascade-panel .cascade-prod-name,
+    .site-header .cascade-panel .cascade-prod-item span,
+    .site-header--dark .cascade-panel .cascade-prod-item span {
+      color: #1d1d1f !important;
+      -webkit-text-fill-color: #1d1d1f !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .site-header .cascade-panel .cascade-group-title,
+    .site-header--dark .cascade-panel .cascade-group-title {
+      color: #6e6e73 !important;
+      -webkit-text-fill-color: #6e6e73 !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.06em !important;
+      text-transform: uppercase !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .site-header .cascade-panel .cascade-item:hover,
+    .site-header--dark .cascade-panel .cascade-item:hover,
+    .site-header .cascade-panel .cascade-item.active,
+    .site-header--dark .cascade-panel .cascade-item.active,
+    .site-header .cascade-panel .cascade-cat-item:hover,
+    .site-header--dark .cascade-panel .cascade-cat-item:hover,
+    .site-header .cascade-panel .cascade-cat-item.active,
+    .site-header--dark .cascade-panel .cascade-cat-item.active {
+      background: #f5f5f7 !important;
+      color: #000000 !important;
+      -webkit-text-fill-color: #000000 !important;
+    }
+
+    .site-header .cascade-panel .cascade-item:hover .cascade-item-text,
+    .site-header--dark .cascade-panel .cascade-item:hover .cascade-item-text,
+    .site-header .cascade-panel .cascade-item.active .cascade-item-text,
+    .site-header--dark .cascade-panel .cascade-item.active .cascade-item-text,
+    .site-header .cascade-panel .cascade-cat-item:hover .cascade-item-text,
+    .site-header--dark .cascade-panel .cascade-cat-item:hover .cascade-item-text,
+    .site-header .cascade-panel .cascade-cat-item.active .cascade-item-text,
+    .site-header--dark .cascade-panel .cascade-cat-item.active .cascade-item-text {
+      color: #000000 !important;
+      -webkit-text-fill-color: #000000 !important;
+    }
+
+    .site-header .cascade-panel .cascade-prod-item:hover,
+    .site-header--dark .cascade-panel .cascade-prod-item:hover {
+      background: #f5f5f7 !important;
+      color: #0071e3 !important;
+      -webkit-text-fill-color: #0071e3 !important;
+    }
+
+    .site-header .cascade-panel .cascade-explore-link,
+    .site-header--dark .cascade-panel .cascade-explore-link {
+      color: #0071e3 !important;
+      -webkit-text-fill-color: #0071e3 !important;
+    }
+
+    .site-header .cascade-panel .red-arrow,
+    .site-header--dark .cascade-panel .red-arrow {
+      color: #d60017 !important;
+      -webkit-text-fill-color: #d60017 !important;
+    }
+
+    .site-header .cascade-panel .badge-new-red,
+    .site-header--dark .cascade-panel .badge-new-red {
+      background: rgba(214, 0, 23, 0.1) !important;
+      color: #d60017 !important;
+      -webkit-text-fill-color: #d60017 !important;
+    }
+
+    .site-header .search-input,
+    .site-header--dark .search-input {
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.16) !important;
+      color: #ffffff !important;
+    }
+
+    .site-header .search-input::placeholder,
+    .site-header--dark .search-input::placeholder {
+      color: #86868b !important;
+    }
+
+    .site-header .search-icon,
+    .site-header--dark .search-icon {
+      color: #86868b !important;
+    }
+
+    .site-header .icon-btn,
+    .site-header--dark .icon-btn {
+      color: #e5e5ea !important;
+    }
+
+    .site-header .menu-toggle,
+    .site-header--dark .menu-toggle {
+      color: #ffffff !important;
+    }
+
+    .site-header .header-inner,
+    .site-header--dark .header-inner {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 16px !important;
+    }
+
+    @media (min-width: 901px) {
+      .site-header .menu-toggle,
+      .site-header--dark .menu-toggle {
+        display: none !important;
+      }
+
+      .site-header .logo,
+      .site-header--dark .logo {
+        min-width: 220px !important;
+        flex: 0 0 auto !important;
+      }
+
+      .site-header .main-nav,
+      .site-header--dark .main-nav {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: clamp(10px, 1.25vw, 22px) !important;
+        flex: 1 !important;
+        min-width: 0 !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+      }
+
+      .site-header .header-actions,
+      .site-header--dark .header-actions {
+        min-width: 220px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        margin-left: auto !important;
+        flex: 0 0 auto !important;
+        gap: 12px !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .site-header .main-nav,
+      .site-header--dark .main-nav {
+        display: none !important;
+      }
+
+      .site-header .menu-toggle,
+      .site-header--dark .menu-toggle {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: transparent !important;
+        border: none !important;
+        color: #ffffff !important;
+        cursor: pointer !important;
+        padding: 8px !important;
+        margin: 0 !important;
+        font-size: 22px !important;
+        flex: 0 0 auto !important;
+      }
+
+      .site-header .header-inner,
+      .site-header--dark .header-inner {
+        height: 52px !important;
+        min-height: 52px !important;
+        padding: 0 16px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+      }
+
+      .site-header .logo,
+      .site-header--dark .logo {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        margin: 0 !important;
+        flex: 0 0 auto !important;
+      }
+
+      .site-header .logo .site-logo-img,
+      .site-header--dark .logo .site-logo-img {
+        height: 28px !important;
+        max-height: 28px !important;
+        width: auto !important;
+        max-width: 118px !important;
+      }
+
+      .site-header .logo .apple-logo-svg,
+      .site-header--dark .logo .apple-logo-svg {
+        width: 14px !important;
+        height: 14px !important;
+        fill: #ffffff !important;
+        color: #ffffff !important;
+        filter: none !important;
+      }
+
+      .site-header .header-actions,
+      .site-header--dark .header-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        margin-left: auto !important;
+        flex: 0 0 auto !important;
+      }
+
+      .site-header .header-actions .search-wrap,
+      .site-header--dark .header-actions .search-wrap {
+        display: none !important;
+      }
+    }
+
+    /* ==================== HERO SECTION ==================== */
+    .pro-hero {
+      position: relative;
+      background: linear-gradient(180deg, #0d0f12 0%, #15181e 40%, #ffffff 100%);
+      color: #ffffff;
+      padding: 56px 20px 60px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .pro-hero__content {
+      max-width: 980px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .pro-hero__eyebrow {
+      font-size: clamp(20px, 2.5vw, 24px);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: #bfa181; /* Titanium gold/bronze accent */
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .pro-hero__title {
+      font-size: clamp(48px, 7.5vw, 88px);
+      line-height: 1.04;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      background: linear-gradient(180deg, #ffffff 40%, #a1a1a6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+
+    .pro-hero__subtitle {
+      font-size: clamp(18px, 2.4vw, 26px);
+      line-height: 1.35;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: #86868b;
+      max-width: 720px;
+      margin: 0 auto 28px;
+    }
+
+    .pro-hero__actions {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .pro-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      padding: 0 24px;
+      border-radius: 980px;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      border: 0;
+    }
+
+    .pro-btn--primary {
+      background: #0071e3;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(0, 113, 227, 0.35);
+    }
+
+    .pro-btn--primary:hover {
+      background: #0077ed;
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(0, 113, 227, 0.45);
+    }
+
+    .pro-btn--secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #f5f5f7;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .pro-btn--secondary:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      transform: scale(1.02);
+    }
+
+    .pro-hero__price {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #86868b;
+      letter-spacing: -0.01em;
+      margin-bottom: 40px;
+    }
+
+    .pro-hero__media {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      z-index: 2;
+    }
+
+    .pro-hero__media img {
+      width: 100%;
+      height: auto;
+      max-height: 520px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 28px 60px rgba(0, 0, 0, 0.45));
+    }
+
+    /* ==================== 2ND SECTION: SLIDER GALLERY ==================== */
+    .gallery {
+      position: relative;
+      background: #000000;
+      overflow: hidden;
+      outline: none;
+    }
+
+    .gallery__track {
+      display: flex;
+      transition: transform .7s cubic-bezier(.4, 0, .2, 1);
+      will-change: transform;
+      touch-action: pan-y;
+    }
+
+    .slide {
+      position: relative;
+      flex: 0 0 100%;
+      aspect-ratio: var(--slide-ratio);
+      min-height: var(--slide-min);
+      max-height: var(--slide-max);
+      overflow: hidden;
+      background: #000000;
+    }
+
+    .slide__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center bottom;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /* ---------- Copy ---------- */
+    .slide__copy {
+      position: absolute;
+      top: clamp(28px, 5vw, 56px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(820px, 100% - 48px);
+      text-align: center;
+      z-index: 2;
+    }
+
+    .slide__headline {
+      font-size: clamp(20px, 2.3vw, 28px);
+      line-height: 1.14;
+      font-weight: 600;
+      letter-spacing: -0.012em;
+      color: #f5f5f7;
+    }
+
+    .slide__note {
+      margin-top: 18px;
+      font-size: 17px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: #86868b;
+    }
+    .slide__note sup, .slide__headline sup { font-size: .6em; line-height: 0; }
+
+    /* Siri slide – soft pearl gradient headline */
+    .slide__headline--siri {
+      background: linear-gradient(90deg, #f3d6c6 0%, #e9dfe6 30%, #bfd0ea 60%, #f1f1f3 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    /* ---------- Chevron controls (bottom right) ---------- */
+    .gallery__nav {
+      position: absolute;
+      right: clamp(16px, 3vw, 40px);
+      bottom: clamp(16px, 3vw, 32px);
+      display: flex;
+      gap: 14px;
+      z-index: 5;
+    }
+
+    .gallery__btn {
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      color: #f5f5f7;
+      background: rgba(66, 66, 69, .72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transition: background .2s ease, opacity .2s ease;
+    }
+    .gallery__btn:hover:not(:disabled) { background: rgba(90, 90, 94, .9); }
+    .gallery__btn:focus-visible { outline: 2px solid #0071e3; outline-offset: 3px; }
+    .gallery__btn:disabled { opacity: .35; cursor: default; }
+    .gallery__btn svg { width: 14px; height: 14px; }
+
+    @media (max-width: 700px) {
+      :root { --slide-ratio: 3 / 4; --slide-min: 520px; }
+      .slide__bg { object-position: center bottom; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gallery__track { transition: none; }
+    }
+
+    /* ==================== HIGHLIGHTS BAR ==================== */
+    .pro-features {
+      background: #ffffff;
+      padding: 60px 24px 70px;
+      border-bottom: 1px solid #e5e5ea;
+    }
+
+    .pro-features__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+
+    .pro-feat-card {
+      background: #fbfbfd;
+      border: 1px solid #e5e5ea;
+      border-radius: 20px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .pro-feat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .pro-feat-stat {
+      font-size: clamp(32px, 3.8vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #1d1d1f 0%, #434346 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .pro-feat-stat.accent {
+      background: linear-gradient(135deg, #0071e3 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .pro-feat-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #1d1d1f;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .pro-feat-desc {
+      font-size: 14px;
+      line-height: 1.4;
+      color: #86868b;
+      font-weight: 400;
+    }
+
+    @media (max-width: 900px) {
+      .pro-features__inner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .pro-features__inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ==================== PRIVACY SECTION (EXACT REQUESTED STYLES) ==================== */
+    .privacy {
+      padding: 60px 24px 120px;
+      text-align: center;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e5ea;
+    }
+
+    .privacy__logo {
+      display: block;
+      width: var(--logo-size);
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .privacy__title {
+      margin-top: 16px;
+      font-size: clamp(32px, 4.2vw, 48px);
+      line-height: 1.15;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--text);
+    }
+
+    .privacy__title .grad {
+      background: linear-gradient(90deg, #1a8cff 0%, #7d6bf0 30%, #d65bd6 60%, #f0502e 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .privacy__body {
+      width: min(820px, 100%);
+      margin: 54px auto 0;
+    }
+
+    .privacy__body p {
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.38;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--muted);
+    }
+
+    .privacy__body p + p { margin-top: 18px; }
+
+    .privacy__body strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    @media (max-width: 700px) {
+      .privacy { padding-bottom: 72px; padding-top: 40px; }
+      .privacy__body { margin-top: 36px; }
+      .privacy__title br { display: none; }
+    }
+
+    /* ==================== BUY / CONFIGURE SECTION ==================== */
+    .buy-section {
+      background: #fbfbfd;
+      padding: 80px 24px 100px;
+      scroll-margin-top: 60px;
+    }
+
+    .buy-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .buy-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .buy-eyebrow {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #0071e3;
+      margin-bottom: 8px;
+    }
+
+    .buy-title {
+      font-size: clamp(32px, 4.5vw, 54px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #1d1d1f;
+      line-height: 1.1;
+    }
+
+    .buy-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: clamp(32px, 5vw, 64px);
+      align-items: start;
+    }
+
+    .buy-visual {
+      position: sticky;
+      top: 90px;
+      background: #ffffff;
+      border: 1px solid #e5e5ea;
+      border-radius: 28px;
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+    }
+
+    .buy-visual img {
+      max-width: 100%;
+      height: 380px;
+      object-fit: contain;
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .buy-visual-caption {
+      margin-top: 24px;
+      text-align: center;
+      color: #86868b;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .buy-visual-caption strong {
+      color: #1d1d1f;
+      display: block;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .buy-options {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .opt-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .opt-label {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #1d1d1f;
+    }
+
+    .opt-label span {
+      font-weight: 400;
+      color: #86868b;
+      font-size: 14px;
+      margin-left: 6px;
+    }
+
+    /* Size selector cards */
+    .size-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .size-card {
+      border: 2px solid #e5e5ea;
+      border-radius: 16px;
+      padding: 18px 16px;
+      background: #ffffff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .size-card:hover {
+      border-color: #86868b;
+    }
+
+    .size-card.active {
+      border-color: #0071e3;
+      box-shadow: 0 0 0 1px #0071e3;
+      background: #f7fbff;
+    }
+
+    .size-name {
+      font-size: 17px;
+      font-weight: 600;
+      color: #1d1d1f;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .size-spec {
+      font-size: 13px;
+      color: #86868b;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .size-price {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0071e3;
+    }
+
+    /* Color Swatches */
+    .color-swatches {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .color-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      outline: 2px solid #e5e5ea;
+      outline-offset: 3px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+      background-clip: padding-box;
+    }
+
+    .color-btn:hover {
+      outline-color: #86868b;
+      transform: scale(1.08);
+    }
+
+    .color-btn.active {
+      outline-color: #0071e3;
+      outline-width: 2.5px;
+      transform: scale(1.08);
+    }
+
+    /* Storage pills */
+    .storage-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .storage-card {
+      border: 2px solid #e5e5ea;
+      border-radius: 14px;
+      padding: 14px 10px;
+      background: #ffffff;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .storage-card:hover {
+      border-color: #86868b;
+    }
+
+    .storage-card.active {
+      border-color: #0071e3;
+      box-shadow: 0 0 0 1px #0071e3;
+      background: #f7fbff;
+    }
+
+    .storage-size {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1d1d1f;
+      display: block;
+    }
+
+    .storage-extra {
+      font-size: 12px;
+      color: #86868b;
+      margin-top: 2px;
+      display: block;
+    }
+
+    /* Price Summary & Checkout */
+    .buy-summary {
+      background: #ffffff;
+      border: 1px solid #e5e5ea;
+      border-radius: 20px;
+      padding: 24px;
+      margin-top: 8px;
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .total-label {
+      font-size: 16px;
+      font-weight: 500;
+      color: #86868b;
+    }
+
+    .total-val {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1d1d1f;
+      letter-spacing: -0.02em;
+    }
+
+    .summary-emi {
+      font-size: 14px;
+      color: #0071e3;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .atc-btn {
+      width: 100%;
+      height: 52px;
+      border-radius: 980px;
+      background: #0071e3;
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 600;
+      border: 0;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 18px rgba(0, 113, 227, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .atc-btn:hover {
+      background: #0077ed;
+      transform: scale(1.01);
+      box-shadow: 0 6px 24px rgba(0, 113, 227, 0.45);
+    }
+
+    .atc-btn:active {
+      transform: scale(0.98);
+    }
+
+    .buy-perks {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13px;
+      color: #86868b;
+      line-height: 1.4;
+    }
+
+    .buy-perk-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .buy-perk-item svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: #0071e3;
+    }
+
+    @media (max-width: 900px) {
+      .buy-grid {
+        grid-template-columns: 1fr;
+      }
+      .buy-visual {
+        position: relative;
+        top: 0;
+      }
+      .storage-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= HEADER CONTAINER ================= -->
+  <div id="site-header"></div>
+
+  <!-- ================= 1ST SECTION: HERO ================= -->
+  <section class="pro-hero" id="hero" aria-labelledby="hero-title">
+    <div class="pro-hero__content">
+      <div class="pro-hero__eyebrow">iPhone 18 Pro</div>
+      <h1 class="pro-hero__title" id="hero-title">Built for Beyond.</h1>
+      <p class="pro-hero__subtitle">
+        Extraordinary A20 Pro performance. Groundbreaking variable aperture camera. Titanium finishes crafted for the future.
+      </p>
+
+      <div class="pro-hero__actions">
+        <a href="#buy" class="pro-btn pro-btn--primary" id="heroBuyBtn">Buy</a>
+        <a href="#gallery" class="pro-btn pro-btn--secondary">Explore Highlights</a>
+      </div>
+
+      <div class="pro-hero__price">
+        From ₹1,64,900 or ₹13,741/mo. for 12 mo.*
+      </div>
+    </div>
+
+    <div class="pro-hero__media" id="heroMedia">
+      <img src="images/iphone 18pro/18pro-hero.png" alt="iPhone 18 Pro lineup in stunning aerospace titanium finishes" loading="eager">
+    </div>
+  </section>
+
+  <!-- ================= 2ND SECTION: SLIDES GALLERY (USER REQUESTED) ================= -->
+  <section class="gallery" id="gallery" aria-roledescription="carousel" aria-label="iPhone 18 Pro highlights">
+
+    <div class="gallery__track" id="track">
+
+      <!-- 1 : Main camera -->
+      <article class="slide" aria-roledescription="slide" aria-label="1 of 4">
+        <img class="slide__bg" src="images/iphone%2018pro/main_camera_startframe__dbtqkrydkxua_large.jpg" alt="48MP Fusion Main camera with variable aperture" draggable="false">
+        <div class="slide__copy">
+          <p class="slide__headline">48MP Fusion Main camera with variable aperture. Improved low-light photos and video. Impressive depth of field.</p>
+        </div>
+      </article>
+
+      <!-- 2 : Colours (video over start frame) -->
+      <article class="slide" aria-roledescription="slide" aria-label="2 of 4">
+        <img class="slide__bg" src="images/iphone%2018pro/colors_startframe__dswlwmy4piuu_large.jpg" alt="Four gorgeous colours" draggable="false">
+        <video class="slide__bg" id="colorsVideo" muted playsinline loop preload="metadata"
+               poster="images/iphone%2018pro/colors_startframe__dswlwmy4piuu_large.jpg">
+          <source src="images/iphone%2018pro/large.mp4" type="video/mp4">
+        </video>
+        <div class="slide__copy">
+          <p class="slide__headline">Four gorgeous colours. Two great sizes. One durable aluminium design.</p>
+        </div>
+      </article>
+
+      <!-- 3 : Chip -->
+      <article class="slide" aria-roledescription="slide" aria-label="3 of 4">
+        <img class="slide__bg" src="images/iphone%2018pro/chip_startframe__cbo2noldjewi_large.jpg" alt="A20 Pro chip" draggable="false">
+        <div class="slide__copy">
+          <p class="slide__headline">A20 Pro chip. Next-generation vapour chamber. Dual 16-core Neural Engine.</p>
+        </div>
+      </article>
+
+      <!-- 4 : Siri AI -->
+      <article class="slide" aria-roledescription="slide" aria-label="4 of 4">
+        <img class="slide__bg" src="images/iphone%2018pro/siri__eprmtp3edh8i_large.jpg" alt="Meet Siri AI" draggable="false">
+        <div class="slide__copy">
+          <p class="slide__headline slide__headline--siri">Meet Siri AI. Your AI assistant. More personal. More powerful.</p>
+          <p class="slide__note">Siri AI is available in English.<sup>3</sup></p>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="gallery__nav">
+      <button class="gallery__btn" id="prev" type="button" aria-label="Previous slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4l-8 8 8 8"/></svg>
+      </button>
+      <button class="gallery__btn" id="next" type="button" aria-label="Next slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l8 8-8 8"/></svg>
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ================= 2ND SECTION: HIGHLIGHTS ================= -->
+  <section class="pro-features" aria-label="Key highlights of iPhone 18 Pro">
+    <div class="pro-features__inner">
+      <div class="pro-feat-card">
+        <div class="pro-feat-stat accent">A20 Pro</div>
+        <div class="pro-feat-title">Vapor-Cooled Power</div>
+        <div class="pro-feat-desc">Industry-leading 3nm architecture with groundbreaking desktop-class GPU ray tracing.</div>
+      </div>
+      <div class="pro-feat-card">
+        <div class="pro-feat-stat">48MP</div>
+        <div class="pro-feat-title">Pro Fusion Camera</div>
+        <div class="pro-feat-desc">Mechanical variable aperture with 5x telephoto optical zoom for pro cinematography.</div>
+      </div>
+      <div class="pro-feat-card">
+        <div class="pro-feat-stat">3000 nits</div>
+        <div class="pro-feat-title">Super Retina XDR</div>
+        <div class="pro-feat-desc">ProMotion 120Hz display with record outdoor brightness and ultra-thin titanium borders.</div>
+      </div>
+      <div class="pro-feat-card">
+        <div class="pro-feat-stat accent">43 hrs</div>
+        <div class="pro-feat-title">Record Battery Life</div>
+        <div class="pro-feat-desc">The longest video playback ever in an iPhone on iPhone 18 Pro Max.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3RD SECTION: PRIVACY (USER REQUESTED CODE) ================= -->
+  <section class="privacy" id="privacy" aria-labelledby="privacy-title">
+    <video class="privacy__logo" id="logoVideo" muted playsinline preload="auto" aria-hidden="true">
+      <source src="images/macbook-air/large.webm" type="video/webm">
+    </video>
+
+    <h2 class="privacy__title" id="privacy-title">
+      Great powers come<br>
+      with great <span class="grad">privacy.</span>
+    </h2>
+
+    <div class="privacy__body">
+      <p>
+        Apple Intelligence is <strong>designed to protect your privacy at every step</strong>.
+        It’s integrated into the core of your iPhone through on-device processing. So it’s aware of
+        your personal information without collecting your personal information.
+      </p>
+      <p>
+        And with groundbreaking Private Cloud Compute, Apple Intelligence can draw on larger
+        server-based models, running on Apple silicon, to handle more complex requests for you
+        while protecting your privacy.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 4TH SECTION: BUY / CONFIGURE ================= -->
+  <section class="buy-section" id="buy" aria-labelledby="buy-title">
+    <div class="buy-container">
+      <div class="buy-header">
+        <div class="buy-eyebrow">Store Exclusive Offer</div>
+        <h2 class="buy-title" id="buy-title">Configure your iPhone 18 Pro.</h2>
+      </div>
+
+      <div class="buy-grid">
+        <!-- Visual Display Column -->
+        <div class="buy-visual">
+          <img id="buyProductImg" src="images/iphone 18pro/18pro-hero.png" alt="iPhone 18 Pro">
+          <div class="buy-visual-caption">
+            <strong id="buySummaryTitle">iPhone 18 Pro · 256GB · Burgundy</strong>
+            <span>Super Retina XDR display with ProMotion · Aerospace Titanium</span>
+          </div>
+        </div>
+
+        <!-- Configuration Options Column -->
+        <div class="buy-options">
+          <!-- 1. Model / Size -->
+          <div class="opt-group">
+            <div class="opt-label">Model. <span>Choose your screen size.</span></div>
+            <div class="size-cards">
+              <div class="size-card active" data-size="pro" data-name="iPhone 18 Pro" data-base="164900">
+                <span class="size-name">iPhone 18 Pro</span>
+                <span class="size-spec">6.3-inch Super Retina XDR</span>
+                <span class="size-price">From ₹1,64,900</span>
+              </div>
+              <div class="size-card" data-size="promax" data-name="iPhone 18 Pro Max" data-base="184900">
+                <span class="size-name">iPhone 18 Pro Max</span>
+                <span class="size-spec">6.9-inch Super Retina XDR</span>
+                <span class="size-price">From ₹1,84,900</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Finish / Color -->
+          <div class="opt-group">
+            <div class="opt-label">Finish. <span id="colorNameDisplay">Deep Burgundy</span></div>
+            <div class="color-swatches">
+              <button class="color-btn active" data-color="Burgundy" data-label="Deep Burgundy" style="background:#4d2028;" aria-label="Deep Burgundy"></button>
+              <button class="color-btn" data-color="Glacier" data-label="Glacier Titanium" style="background:#dce7ee;" aria-label="Glacier Titanium"></button>
+              <button class="color-btn" data-color="Silver" data-label="Natural Silver Titanium" style="background:#e3e4e6;" aria-label="Natural Silver"></button>
+              <button class="color-btn" data-color="Black" data-label="Space Black Titanium" style="background:#1c1c1e;" aria-label="Space Black"></button>
+            </div>
+          </div>
+
+          <!-- 3. Storage -->
+          <div class="opt-group">
+            <div class="opt-label">Storage. <span>How much capacity do you need?</span></div>
+            <div class="storage-cards">
+              <div class="storage-card active" data-storage="256GB" data-extra="0">
+                <span class="storage-size">256GB</span>
+                <span class="storage-extra">Included</span>
+              </div>
+              <div class="storage-card" data-storage="512GB" data-extra="25000">
+                <span class="storage-size">512GB</span>
+                <span class="storage-extra">+₹25,000</span>
+              </div>
+              <div class="storage-card" data-storage="1TB" data-extra="75000">
+                <span class="storage-size">1TB</span>
+                <span class="storage-extra">+₹75,000</span>
+              </div>
+              <div class="storage-card" data-storage="2TB" data-extra="150000">
+                <span class="storage-size">2TB</span>
+                <span class="storage-extra">+₹1,50,000</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Price & Action -->
+          <div class="buy-summary">
+            <div class="summary-total">
+              <span class="total-label">Total Amount</span>
+              <span class="total-val" id="totalPriceDisplay">₹1,64,900</span>
+            </div>
+            <div class="summary-emi" id="emiDisplay">
+              Or ₹13,741/mo. for 12 months with No Cost EMI*
+            </div>
+
+            <button class="atc-btn" id="addToBagBtn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span>Add to Bag</span>
+            </button>
+
+            <div class="buy-perks">
+              <div class="buy-perk-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="1" y="3" width="15" height="13"></rect>
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+                <span>Free express courier delivery in Pune & across India</span>
+              </div>
+              <div class="buy-perk-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>1-Year Official Apple India Warranty included</span>
+              </div>
+              <div class="buy-perk-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 4 23 10 17 10"></polyline>
+                  <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                </svg>
+                <span>Get up to ₹65,000 credit when you trade in your current device</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER CONTAINER ================= -->
+  <div id="site-footer"></div>
+  <div id="whatsapp-float"></div>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/catalog-sync.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/animations.js" defer></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // 1. Render global components
+      if (typeof renderHeader === "function") renderHeader("iphone");
+      if (typeof renderFooter === "function") renderFooter();
+      if (typeof renderWhatsAppFloat === "function") renderWhatsAppFloat();
+
+      // 2. Smooth scroll for hero Buy button
+      const heroBuyBtn = document.getElementById("heroBuyBtn");
+      if (heroBuyBtn) {
+        heroBuyBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.getElementById("buy");
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      }
+
+      // 3. Slides Gallery Carousel Controller (User Requested)
+      const gallery = document.getElementById('gallery');
+      const track   = document.getElementById('track');
+      const slides  = track ? [...track.children] : [];
+      const prevBtn = document.getElementById('prev');
+      const nextBtn = document.getElementById('next');
+      const colorsVid = document.getElementById('colorsVideo');
+      const colorsIndex = 1;
+
+      let index = 0;
+
+      function go(i) {
+        if (!track || !slides.length) return;
+        index = Math.max(0, Math.min(slides.length - 1, i));
+        track.style.transform = `translateX(${-index * 100}%)`;
+        if (prevBtn) prevBtn.disabled = index === 0;
+        if (nextBtn) nextBtn.disabled = index === slides.length - 1;
+
+        slides.forEach((s, n) => s.setAttribute('aria-hidden', n === index ? 'false' : 'true'));
+
+        // Only play the colors video while its slide is showing
+        if (colorsVid) {
+          if (index === colorsIndex) {
+            colorsVid.currentTime = 0;
+            colorsVid.play().catch(() => {});
+          } else {
+            colorsVid.pause();
+          }
+        }
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', () => go(index - 1));
+      if (nextBtn) nextBtn.addEventListener('click', () => go(index + 1));
+
+      // Keyboard navigation
+      if (gallery) {
+        gallery.tabIndex = 0;
+        gallery.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft')  go(index - 1);
+          if (e.key === 'ArrowRight') go(index + 1);
+        });
+      }
+
+      // Swipe / drag gesture support
+      let startX = null;
+      if (track) {
+        track.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+        window.addEventListener('pointerup', (e) => {
+          if (startX === null) return;
+          const dx = e.clientX - startX;
+          startX = null;
+          if (Math.abs(dx) > 50) go(index + (dx < 0 ? 1 : -1));
+        });
+      }
+
+      go(0);
+
+      // 4. Privacy Logo Video Animation on Scroll (Exact requested logic)
+      const video = document.getElementById('logoVideo');
+      if (video) {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion) {
+          video.addEventListener('loadedmetadata', () => { video.currentTime = video.duration; });
+        } else if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                video.play().catch(() => {});
+                io.disconnect();
+              }
+            });
+          }, { threshold: 0.5 });
+          io.observe(video);
+        } else {
+          video.play().catch(() => {});
+        }
+      }
+
+      // 4. Interactive Configuration State
+      let selectedModel = "iPhone 18 Pro";
+      let basePrice = 164900;
+      let selectedColor = "Burgundy";
+      let selectedColorLabel = "Deep Burgundy";
+      let storageExtra = 0;
+      let selectedStorage = "256GB";
+
+      const totalPriceDisplay = document.getElementById("totalPriceDisplay");
+      const emiDisplay = document.getElementById("emiDisplay");
+      const buySummaryTitle = document.getElementById("buySummaryTitle");
+      const colorNameDisplay = document.getElementById("colorNameDisplay");
+      const atcBtn = document.getElementById("addToBagBtn");
+
+      function updatePricing() {
+        const total = basePrice + storageExtra;
+        const formatted = "₹" + total.toLocaleString("en-IN");
+        if (totalPriceDisplay) totalPriceDisplay.textContent = formatted;
+
+        const emi12 = Math.round(total / 12);
+        if (emiDisplay) {
+          emiDisplay.textContent = "Or ₹" + emi12.toLocaleString("en-IN") + "/mo. for 12 months with No Cost EMI*";
+        }
+
+        if (buySummaryTitle) {
+          buySummaryTitle.textContent = selectedModel + " · " + selectedStorage + " · " + selectedColorLabel;
+        }
+      }
+
+      // Model size click handler
+      document.querySelectorAll(".size-card").forEach(card => {
+        card.addEventListener("click", function () {
+          document.querySelectorAll(".size-card").forEach(c => c.classList.remove("active"));
+          this.classList.add("active");
+          selectedModel = this.getAttribute("data-name");
+          basePrice = parseInt(this.getAttribute("data-base"), 10);
+          updatePricing();
+        });
+      });
+
+      // Color swatches click handler
+      document.querySelectorAll(".color-btn").forEach(btn => {
+        btn.addEventListener("click", function () {
+          document.querySelectorAll(".color-btn").forEach(b => b.classList.remove("active"));
+          this.classList.add("active");
+          selectedColor = this.getAttribute("data-color");
+          selectedColorLabel = this.getAttribute("data-label");
+          if (colorNameDisplay) colorNameDisplay.textContent = selectedColorLabel;
+          updatePricing();
+        });
+      });
+
+      // Storage cards click handler
+      document.querySelectorAll(".storage-card").forEach(card => {
+        card.addEventListener("click", function () {
+          document.querySelectorAll(".storage-card").forEach(c => c.classList.remove("active"));
+          this.classList.add("active");
+          selectedStorage = this.getAttribute("data-storage");
+          storageExtra = parseInt(this.getAttribute("data-extra"), 10);
+          updatePricing();
+        });
+      });
+
+      // Add to Cart handler
+      if (atcBtn) {
+        atcBtn.addEventListener("click", function () {
+          const total = basePrice + storageExtra;
+          const cartItem = {
+            id: selectedModel.toLowerCase().includes("max") ? "iphone-18-pro-max" : "iphone-18-pro",
+            name: selectedModel + " " + selectedStorage + " (" + selectedColorLabel + ")",
+            price: total,
+            image: "images/iphone 18pro/18pro-hero.png",
+            color: selectedColorLabel,
+            storage: selectedStorage,
+            quantity: 1
+          };
+
+          if (typeof Cart !== "undefined" && typeof Cart.add === "function") {
+            Cart.add(cartItem);
+          } else {
+            let cart = [];
+            try { cart = JSON.parse(localStorage.getItem("apple_cart") || "[]"); } catch(e){}
+            cart.push(cartItem);
+            localStorage.setItem("apple_cart", JSON.stringify(cart));
+          }
+
+          atcBtn.innerHTML = '✓ Added to Bag!';
+          atcBtn.style.background = '#34c759';
+          setTimeout(() => {
+            atcBtn.innerHTML = `
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span>Add to Bag</span>
+            `;
+            atcBtn.style.background = '#0071e3';
+          }, 2000);
+        });
+      }
+
+      updatePricing();
+    });
+  </script>
+</body>
+</html>
+
