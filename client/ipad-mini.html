@@ -1074,7 +1074,7 @@
     /* ==================== 5TH SECTION: MEET SIRI AI (USER SPECIFIED) ==================== */
     .siri {
       background: #ffffff;
-      padding: 32px 24px 100px;
+      padding: 48px 24px 100px;
       text-align: center;
       overflow: hidden;
       position: relative;
@@ -1096,69 +1096,65 @@
 
     .siri__title {
       margin-top: 10px;
-      font-size: clamp(48px, 7vw, 112px);
-      line-height: 1.03;
+      font-size: clamp(48px, 6.8vw, 104px);
+      line-height: 1.04;
       font-weight: 600;
-      letter-spacing: -0.045em;
+      letter-spacing: -0.04em;
       color: var(--text);
     }
     .siri__title span { display: block; }
 
     .siri__note {
-      margin-top: clamp(28px, 3.4vw, 52px);
+      margin-top: clamp(24px, 3vw, 44px);
       font-size: 17px;
-      line-height: 1.25;
-      font-weight: 600;
+      line-height: 1.35;
+      font-weight: 500;
       color: var(--muted);
     }
 
-    /* ---------- Image stack ---------- */
-    .siri__stage {
-      position: relative;
-      width: min(100%, 1480px);
-      margin: clamp(48px, 8vw, 120px) auto 0;
+    /* ---------- Feature Cards Fan Media ---------- */
+    .siri__media {
+      margin-top: clamp(36px, 6vw, 72px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 1160px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 16px;
     }
 
-    /* the end frame sits in normal flow and sets the box size */
-    .siri__stage img {
+    .siri__media img {
       display: block;
       width: 100%;
       height: auto;
+      max-width: 1100px;
+      object-fit: contain;
       user-select: none;
       -webkit-user-drag: none;
+      filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.04));
     }
-    .siri__stage img.frame {
-      position: absolute;
-      inset: 0;
-      height: 100%;
-      object-fit: contain;
-      opacity: 0;
-      transition: opacity var(--frame-ms) ease;
-    }
-    .siri__stage img.frame.is-on { opacity: 1; }
-    .siri__stage img.final { opacity: 0; transition: opacity var(--frame-ms) ease; }
-    .siri__stage.is-done img.final { opacity: 1; }
-    .siri__stage.is-done img.frame { opacity: 0; }
 
     /* ---------- Siri Entrance animation ---------- */
     .siri .reveal {
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+      transform: translateY(28px);
+      transition: opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1);
       transition-delay: var(--d, 0s);
     }
-    .siri .reveal--zoom { transform: translateY(48px) scale(.92); }
+    .siri .reveal--zoom { transform: translateY(36px) scale(.96); }
     .siri .reveal.is-visible { opacity: 1; transform: none; }
 
     @media (max-width: 700px) {
-      .siri { padding-bottom: 64px; }
+      .siri { padding-top: 32px; padding-bottom: 64px; }
+      .siri__title { font-size: clamp(36px, 8.5vw, 56px); }
       .siri__eyebrow { font-size: 17px; }
-      .siri__note { font-size: 15px; }
+      .siri__note { font-size: 15px; margin-top: 20px; }
+      .siri__media { margin-top: 32px; padding: 0 12px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .siri .reveal, .siri .reveal--zoom { opacity: 1; transform: none; transition: none; }
-      .siri__stage img { transition: none; }
     }
 
     /* ==================== 6TH SECTION: BUY / CONFIGURE ==================== */
@@ -1661,15 +1657,11 @@
         Siri AI is available in English.<br>Usage limits may apply.
       </p>
 
-      <div class="siri__stage reveal reveal--zoom" id="stage" style="--d:.1s">
-        <!-- intro frames, shown in order, then the end frame stays -->
-        <img class="frame" src="images/ipad-mini/hero_intro_1__qowjhgnes9mm_large_2x.jpg" alt="" aria-hidden="true">
-        <img class="frame" src="images/ipad-mini/hero_intro_2__cx4f2gtun6ie_large_2x.jpg" alt="" aria-hidden="true">
-        <img class="frame" src="images/ipad-mini/hero_intro_3__dpvm7eraugmu_large_2x.jpg" alt="" aria-hidden="true">
-        <img class="frame" src="images/ipad-mini/hero_intro_4__gbu6220ghtiu_large_2x.jpg" alt="" aria-hidden="true">
-        <img class="final" src="images/ipad-mini/hero_intro_endframe__edff65eao2qa_large_2x.png"
-             alt="iPad mini surrounded by Apple Intelligence features: photo search, notes, Clean Up and image creation"
-             loading="lazy">
+      <div class="siri__media reveal reveal--zoom" style="--d:.15s">
+        <img src="images/ipad-mini/siri_features_fan.jpg"
+             alt="iPad mini in the center surrounded by Apple Intelligence features: photo search, notes, Clean Up and image creation"
+             loading="lazy"
+             draggable="false">
       </div>
     </section>
 
@@ -1960,10 +1952,7 @@
         document.querySelectorAll('#oled .reveal').forEach((el) => el.classList.add('is-visible'));
       }
 
-      // 6. Siri AI Section Entrance Animation & Frame Sequence (User Specified)
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      // Reveal each block in Siri section as it scrolls into view
+      // 6. Siri AI Section Entrance Animation
       if ('IntersectionObserver' in window) {
         const siriIo = new IntersectionObserver((entries) => {
           entries.forEach((e) => {
@@ -1976,38 +1965,6 @@
         document.querySelectorAll('#siri .reveal').forEach((el) => siriIo.observe(el));
       } else {
         document.querySelectorAll('#siri .reveal').forEach((el) => el.classList.add('is-visible'));
-      }
-
-      // Play the intro frames once when the image area comes into view
-      const siriStage = document.getElementById('stage');
-      if (siriStage) {
-        const frames = [...siriStage.querySelectorAll('.frame')];
-        const STEP_MS = 700;
-
-        if (reduceMotion || !frames.length) {
-          siriStage.classList.add('is-done');
-        } else if ('IntersectionObserver' in window) {
-          frames[0].classList.add('is-on'); // first frame shows while waiting
-          const playIo = new IntersectionObserver((entries, obs) => {
-            if (!entries[0].isIntersecting) return;
-            obs.disconnect();
-            let fi = 0;
-            const tick = () => {
-              fi++;
-              if (fi < frames.length) {
-                frames[fi - 1].classList.remove('is-on');
-                frames[fi].classList.add('is-on');
-                setTimeout(tick, STEP_MS);
-              } else {
-                siriStage.classList.add('is-done'); // fade to the end frame
-              }
-            };
-            setTimeout(tick, STEP_MS + 400);
-          }, { threshold: 0.3 });
-          playIo.observe(siriStage);
-        } else {
-          siriStage.classList.add('is-done');
-        }
       }
 
       // 7. Interactive Product Configurator
