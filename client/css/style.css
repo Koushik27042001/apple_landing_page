@@ -347,7 +347,7 @@ button {
 }
 
 .main-nav>a {
-  font-size: clamp(12px, 0.9vw, 13.5px);
+  font-size: clamp(14px, 1vw, 15.5px);
   color: var(--gray-dark);
   white-space: nowrap;
   font-weight: 500;
@@ -702,7 +702,7 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: clamp(12px, 0.9vw, 13.5px);
+  font-size: clamp(14px, 1vw, 15.5px);
   color: var(--gray-dark);
   text-decoration: none;
   font-weight: 500;
@@ -5772,7 +5772,7 @@ body.dark-theme .site-header .logo span.store-tag,
 body.dark-theme .site-header .main-nav>a,
 .site-header--dark .main-nav>a {
   color: #e5e5ea !important;
-  font-size: 13px !important;
+  font-size: 15px !important;
   font-weight: 500 !important;
   letter-spacing: -0.01em !important;
   transition: color 0.2s ease !important;
@@ -5786,9 +5786,11 @@ body.dark-theme .site-header .main-nav>a.active,
 }
 
 body.dark-theme .site-header .products-menu-toggle,
-.site-header--dark .products-menu-toggle {
+.site-header--dark .products-menu-toggle,
+body.dark-theme .site-header .biz-dropdown-toggle,
+.site-header--dark .biz-dropdown-toggle {
   color: #e5e5ea !important;
-  font-size: 13px !important;
+  font-size: 15px !important;
   font-weight: 500 !important;
   letter-spacing: -0.01em !important;
   transition: color 0.2s ease !important;
@@ -5797,9 +5799,15 @@ body.dark-theme .site-header .products-menu-toggle,
 body.dark-theme .site-header .products-menu-toggle:hover,
 body.dark-theme .site-header .products-menu.open .products-menu-toggle,
 body.dark-theme .site-header .products-menu.active .products-menu-toggle,
+body.dark-theme .site-header .biz-dropdown-toggle:hover,
+body.dark-theme .site-header .business-dropdown-menu.open .biz-dropdown-toggle,
+body.dark-theme .site-header .business-dropdown-menu.active .biz-dropdown-toggle,
 .site-header--dark .products-menu-toggle:hover,
 .site-header--dark .products-menu.open .products-menu-toggle,
-.site-header--dark .products-menu.active .products-menu-toggle {
+.site-header--dark .products-menu.active .products-menu-toggle,
+.site-header--dark .biz-dropdown-toggle:hover,
+.site-header--dark .business-dropdown-menu.open .biz-dropdown-toggle,
+.site-header--dark .business-dropdown-menu.active .biz-dropdown-toggle {
   color: #ffffff !important;
 }
 
