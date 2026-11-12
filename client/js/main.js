@@ -57,7 +57,7 @@ function renderHeader(active) {
   if (active) window.__ACTIVE_NAV__ = active;
   const el = document.getElementById("site-header");
   if (!el) return;
-  const isProductActive = ["iphone", "ipad", "mac", "watch", "airpods", "apple", "macbook-air", "macbook-neo", "iphone-18-pro"].includes(active);
+  const isProductActive = ["iphone", "ipad", "mac", "watch", "airpods", "apple", "macbook-air", "macbook-neo", "iphone-18-pro", "ipad-mini"].includes(active);
   const isDarkPage = document.body.classList.contains("dark-theme") ||
     document.body.classList.contains("page-dark") ||
     window.location.pathname.includes("macbook-air") ||
@@ -145,7 +145,7 @@ function renderHeader(active) {
                   '<div class="cascade-group-title">iPad Lineup</div>' +
                   '<a href="product.html?id=ipad-pro-13-m5" class="cascade-prod-item"><span class="cascade-prod-name">iPad Pro M5</span></a>' +
                   '<a href="product.html?id=ipad-air-11-m4" class="cascade-prod-item"><span class="cascade-prod-name">iPad Air M4</span></a>' +
-                  '<a href="product.html?id=ipad-11-gen" class="cascade-prod-item"><span class="cascade-prod-name">iPad Mini</span><span class="badge-new-red">New</span></a>' +
+                  '<a href="ipad-mini.html" class="cascade-prod-item"><span class="cascade-prod-name">iPad mini</span><span class="badge-new-red">New</span></a>' +
                   '<div class="cascade-divider"></div>' +
                   '<a href="category.html?cat=ipad" class="cascade-explore-link">Explore all iPad &rarr;</a>' +
                 '</div>' +
@@ -260,7 +260,7 @@ function renderHeader(active) {
                 '<a href="product.html?id=ipad-pro-13-m4" class="mobile-leaf-link"><span class="mll-name">iPad Pro M4</span></a>' +
                 '<a href="product.html?id=ipad-air-11-m2" class="mobile-leaf-link"><span class="mll-name">iPad Air M2</span></a>' +
                 '<a href="product.html?id=ipad-10th-gen" class="mobile-leaf-link"><span class="mll-name">iPad (10th gen)</span></a>' +
-                '<a href="product.html?id=ipad-mini-a17-pro" class="mobile-leaf-link"><span class="mll-name">iPad mini (A17 Pro)</span></a>' +
+                '<a href="ipad-mini.html" class="mobile-leaf-link"><span class="mll-name">iPad mini (A17 Pro)</span><span class="badge-new-red" style="margin-left:6px;font-size:10px;padding:2px 6px;">New</span></a>' +
                 '<a href="category.html?cat=accessories" class="mobile-leaf-link"><span class="mll-name">Apple Pencil &amp; Keyboards</span></a>' +
                 '<a href="category.html?cat=ipad" class="mobile-leaf-link mobile-leaf-explore"><span>Explore All iPad &rarr;</span></a>' +
               '</div>' +

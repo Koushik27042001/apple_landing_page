@@ -123,6 +123,9 @@ app.get("/iphone-duo", function (req, res) {
 app.get("/macbook-neo", function (req, res) {
   res.sendFile(path.join(clientDir, "macbook-neo.html"));
 });
+app.get(["/ipad-mini", "/ipad-mini.html"], function (req, res) {
+  res.sendFile(path.join(clientDir, "ipad-mini.html"));
+});
 app.get(["/pricing", "/pricing/"], function (req, res) {
   res.sendFile(path.join(clientDir, "pricing.html"));
 });

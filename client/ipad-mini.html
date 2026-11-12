@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>iPad mini – More than a little awesome. | Iswift Gadgets</title>
+  <meta name="description" content="iPad mini with A17 Pro chip. 8.3-inch Liquid Retina display, Apple Intelligence, Apple Pencil Pro support, and all-day battery life.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/enhancements.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --text: #1d1d1f;
+      --muted: #86868b;
+      --blue: #0071e3;
+      --blue-hover: #0077ed;
+      --card-bg: #f5f5f7;
+      --link: #0066cc;
+      --border: #d2d2d7;
+      --gutter: clamp(24px, 8.85vw, 160px);
+      --gap: 20px;
+      --card-w: min(1260px, calc(100vw - 2 * var(--gutter)));
+      --card-h: clamp(460px, 35.4vw, 612px);
+      --slide-time: 6s;
+      --pill: #f0f0f5;
+      --pill-hover: #e8e8ee;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont,
+                   "Inter", "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* ==================== GLOBAL SITE HEADER (EXACT HOME PAGE STYLING & COLORS) ==================== */
+    #site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      width: 100%;
+    }
+
+    .site-header,
+    .site-header--dark {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      width: 100%;
+      background: rgba(18, 18, 20, 0.88) !important;
+      backdrop-filter: saturate(180%) blur(24px) !important;
+      -webkit-backdrop-filter: saturate(180%) blur(24px) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+
+    .site-header.scrolled,
+    .site-header--dark.scrolled {
+      background: rgba(12, 12, 14, 0.96) !important;
+      border-bottom-color: rgba(255, 255, 255, 0.18) !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.65) !important;
+    }
+
+    .site-header .logo,
+    .site-header .logo-name,
+    .site-header .apple-logo,
+    .site-header--dark .logo,
+    .site-header--dark .logo-name,
+    .site-header--dark .apple-logo {
+      color: #ffffff !important;
+      display: inline-flex;
+      align-items: center;
+      margin: 0 4px 0 2px;
+      vertical-align: middle;
+    }
+
+    .site-logo-img {
+      display: inline-block !important;
+      height: 35px !important;
+      width: auto !important;
+      max-width: 138px !important;
+      object-fit: contain !important;
+      vertical-align: middle !important;
+      transition: opacity 0.2s ease, transform 0.2s ease !important;
+    }
+
+    .logo:hover .site-logo-img {
+      opacity: 0.95 !important;
+      transform: scale(1.02) !important;
+    }
+
+    .apple-logo-svg {
+      display: inline-block !important;
+      width: 17px !important;
+      height: 17px !important;
+      vertical-align: middle !important;
+      margin-right: 4px !important;
+      fill: #ffffff !important;
+      color: #ffffff !important;
+      filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.4)) !important;
+    }
+
+    .site-header .logo span.store-tag,
+    .site-header--dark .logo span.store-tag {
+      font-size: 10px !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase !important;
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+      font-weight: 700 !important;
+      margin-left: 6px !important;
+      padding-left: 8px !important;
+      border-left: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+      display: inline-block !important;
+    }
+
+    .site-header .nav-links a,
+    .site-header--dark .nav-links a,
+    .site-header .nav-link,
+    .site-header--dark .nav-link {
+      color: #e5e5ea !important;
+      -webkit-text-fill-color: #e5e5ea !important;
+      font-size: 13.5px !important;
+      font-weight: 500 !important;
+      letter-spacing: -0.01em !important;
+      transition: color 0.2s ease !important;
+    }
+
+    .site-header .nav-links a:hover,
+    .site-header--dark .nav-links a:hover,
+    .site-header .nav-link:hover,
+    .site-header--dark .nav-link:hover {
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+    }
+
+    .site-header .products-menu-btn,
+    .site-header--dark .products-menu-btn {
+      color: #e5e5ea !important;
+      -webkit-text-fill-color: #e5e5ea !important;
+      font-size: 13.5px !important;
+      font-weight: 500 !important;
+      transition: color 0.2s ease !important;
+    }
+
+    .site-header .products-menu-btn:hover,
+    .site-header--dark .products-menu-btn:hover,
+    .site-header .products-menu.active .products-menu-btn,
+    .site-header--dark .products-menu.active .products-menu-btn {
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+    }
+
+    .site-header .products-menu-btn .chevron-down,
+    .site-header--dark .products-menu-btn .chevron-down {
+      color: #a1a1a6 !important;
+      stroke: #a1a1a6 !important;
+    }
+
+    .site-header .cascade-panel,
+    .site-header--dark .cascade-panel {
+      background: #ffffff !important;
+      color: #1d1d1f !important;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.24) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .site-header .cascade-panel a,
+    .site-header--dark .cascade-panel a {
+      color: #1d1d1f !important;
+      -webkit-text-fill-color: #1d1d1f !important;
+    }
+
+    .site-header .cascade-panel .cascade-cat-item,
+    .site-header--dark .cascade-panel .cascade-cat-item {
+      color: #1d1d1f !important;
+      -webkit-text-fill-color: #1d1d1f !important;
+    }
+
+    .site-header .cascade-panel .cascade-cat-item:hover,
+    .site-header .cascade-panel .cascade-cat-item.active,
+    .site-header--dark .cascade-panel .cascade-cat-item:hover,
+    .site-header--dark .cascade-panel .cascade-cat-item.active {
+      background: #f5f5f7 !important;
+      color: #0071e3 !important;
+      -webkit-text-fill-color: #0071e3 !important;
+    }
+
+    .site-header .cascade-panel .cascade-group-title,
+    .site-header--dark .cascade-panel .cascade-group-title {
+      color: #86868b !important;
+      -webkit-text-fill-color: #86868b !important;
+    }
+
+    .site-header .cascade-panel .cascade-prod-name,
+    .site-header--dark .cascade-panel .cascade-prod-name {
+      color: #000000 !important;
+      -webkit-text-fill-color: #000000 !important;
+    }
+
+    .site-header .cascade-panel .cascade-prod-item:hover,
+    .site-header--dark .cascade-panel .cascade-prod-item:hover {
+      background: #f5f5f7 !important;
+      color: #0071e3 !important;
+      -webkit-text-fill-color: #0071e3 !important;
+    }
+
+    .site-header .cascade-panel .cascade-prod-item:hover .cascade-prod-name,
+    .site-header--dark .cascade-panel .cascade-prod-item:hover .cascade-prod-name {
+      color: #0071e3 !important;
+      -webkit-text-fill-color: #0071e3 !important;
+    }
+
+    .site-header .cascade-panel .cascade-explore-link,
+    .site-header--dark .cascade-panel .cascade-explore-link {
+      color: #0071e3 !important;
+      -webkit-text-fill-color: #0071e3 !important;
+    }
+
+    .site-header .cascade-panel .badge-new-red,
+    .site-header--dark .cascade-panel .badge-new-red {
+      background: rgba(214, 0, 23, 0.1) !important;
+      color: #d60017 !important;
+      -webkit-text-fill-color: #d60017 !important;
+    }
+
+    .site-header .search-input,
+    .site-header--dark .search-input {
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.16) !important;
+      color: #ffffff !important;
+    }
+
+    .site-header .search-input::placeholder,
+    .site-header--dark .search-input::placeholder {
+      color: #86868b !important;
+    }
+
+    .site-header .search-icon,
+    .site-header--dark .search-icon {
+      color: #86868b !important;
+    }
+
+    .site-header .icon-btn,
+    .site-header--dark .icon-btn {
+      color: #e5e5ea !important;
+    }
+
+    .site-header .menu-toggle,
+    .site-header--dark .menu-toggle {
+      color: #ffffff !important;
+    }
+
+    .site-header .header-inner,
+    .site-header--dark .header-inner {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 16px !important;
+    }
+
+    @media (min-width: 901px) {
+      .site-header .menu-toggle,
+      .site-header--dark .menu-toggle {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .site-header .nav-links,
+      .site-header--dark .nav-links,
+      .site-header .products-menu,
+      .site-header--dark .products-menu {
+        display: none !important;
+      }
+
+      .site-header .header-inner,
+      .site-header--dark .header-inner {
+        height: 52px !important;
+        min-height: 52px !important;
+        padding: 0 16px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+      }
+
+      .site-header .logo,
+      .site-header--dark .logo {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        margin: 0 !important;
+        flex: 0 0 auto !important;
+      }
+
+      .site-header .logo .site-logo-img,
+      .site-header--dark .logo .site-logo-img {
+        height: 28px !important;
+        max-height: 28px !important;
+        width: auto !important;
+        max-width: 118px !important;
+      }
+
+      .site-header .logo .apple-logo-svg,
+      .site-header--dark .logo .apple-logo-svg {
+        width: 14px !important;
+        height: 14px !important;
+        fill: #ffffff !important;
+        color: #ffffff !important;
+        filter: none !important;
+      }
+
+      .site-header .header-actions,
+      .site-header--dark .header-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        margin-left: auto !important;
+        flex: 0 0 auto !important;
+      }
+
+      .site-header .header-actions .search-wrap,
+      .site-header--dark .header-actions .search-wrap {
+        display: none !important;
+      }
+    }
+
+    /* ==================== 1ST SECTION: IPAD MINI HERO (EXACT USER SPECIFIED) ==================== */
+    .hero {
+      position: relative;
+      background: var(--bg);
+      padding: 36px 24px 0;
+      text-align: center;
+      overflow: hidden;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      min-height: auto !important;
+      width: 100%;
+    }
+
+    /* ---------- Copy ---------- */
+    .hero__product {
+      font-size: 26px;
+      line-height: 1.1;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: #1d1d1f;
+      margin: 0;
+    }
+
+    /* "mini" – slanted script with a blue → violet gradient */
+    .hero__product .mini {
+      font-family: "Snell Roundhand", "Caveat", "Segoe Script", "Brush Script MT", cursive;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 1.15em;
+      letter-spacing: 0;
+      background: linear-gradient(90deg, #4a2fd6 0%, #6a5cf0 55%, #7fa6ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      padding-right: 0.12em;
+      display: inline-block;
+      vertical-align: baseline;
+    }
+
+    .hero__title {
+      margin-top: 8px;
+      font-size: clamp(40px, 5.6vw, 64px);
+      line-height: 1.08;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: #1d1d1f;
+    }
+
+    /* ---------- Image ---------- */
+    .hero__media {
+      margin-top: clamp(20px, 3vw, 32px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      position: relative;
+    }
+
+    .hero__media img {
+      display: block;
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.06));
+    }
+
+    /* ---------- Price pill (overlaps bottom of image) ---------- */
+    .price-pill {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      width: min(516px, calc(100% - 32px));
+      padding: 12px 14px 12px 24px;
+      background: rgba(232, 232, 237, .82);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 40px;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08);
+      text-align: left;
+      z-index: 10;
+    }
+
+    .price-pill__text {
+      font-size: 14.5px;
+      line-height: 1.5;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      color: #1d1d1f;
+      margin: 0;
+    }
+
+    .price-pill__text sup { font-size: .65em; line-height: 0; }
+
+    .btn-buy {
+      flex-shrink: 0;
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      background: var(--blue);
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+      font: inherit;
+      font-size: 17px;
+      font-weight: 500;
+      padding: 12px 24px;
+      border-radius: 980px;
+      text-decoration: none;
+      transition: background .2s ease, transform .15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-buy:hover {
+      background: var(--blue-hover);
+      transform: scale(1.02);
+    }
+
+    .btn-buy:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 700px) {
+      .hero {
+        padding: 24px 16px 0 !important;
+        min-height: auto !important;
+      }
+      .hero__title { font-size: clamp(32px, 8vw, 44px); margin-top: 6px; }
+      .price-pill { gap: 16px; padding: 10px 12px 10px 18px; bottom: 16px; width: min(440px, calc(100% - 24px)); }
+      .price-pill__text { font-size: 12px; line-height: 1.35; }
+      .btn-buy { padding: 10px 18px; font-size: 15px; }
+    }
+
+    @media (max-width: 440px) {
+      .price-pill { padding: 8px 10px 8px 14px; gap: 10px; width: calc(100% - 20px); }
+      .price-pill__text { font-size: 11px; }
+      .btn-buy { padding: 8px 14px; font-size: 14px; }
+    }
+
+    /* ==================== 2ND SECTION: GET THE HIGHLIGHTS (USER SPECIFIED) ==================== */
+    .highlights {
+      background: #ffffff;
+      padding: 56px 0 72px;
+      overflow: hidden;
+    }
+
+    /* ---------- Header ---------- */
+    .highlights__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0 var(--gutter);
+      margin-bottom: 44px;
+    }
+
+    .highlights__title {
+      font-size: clamp(36px, 3.4vw, 56px);
+      line-height: 1.1;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+
+    .film-link {
+      margin-top: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font: inherit;
+      font-size: 17px;
+      color: var(--link);
+      background: none;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .film-link:hover { text-decoration: underline; }
+    .film-link svg { width: 17px; height: 17px; }
+
+    /* ---------- Track ---------- */
+    .viewport { padding-left: var(--gutter); }
+
+    .track {
+      display: flex;
+      gap: var(--gap);
+      transition: transform .8s cubic-bezier(.4, 0, .2, 1);
+      will-change: transform;
+      touch-action: pan-y;
+    }
+
+    .card {
+      position: relative;
+      flex: 0 0 var(--card-w);
+      height: var(--card-h);
+      border-radius: 28px;
+      background: var(--card-bg);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .card__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .card__text {
+      position: absolute;
+      top: clamp(28px, 4vw, 52px);
+      left: clamp(24px, 3vw, 47px);
+      max-width: 620px;
+      font-size: clamp(21px, 1.75vw, 28px);
+      line-height: 1.16;
+      font-weight: 600;
+      letter-spacing: -0.012em;
+      color: var(--text);
+    }
+    .card__text sup { font-size: .55em; line-height: 0; }
+
+    /* centred text variant (display + Siri cards) */
+    .card--center .card__text {
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(560px, 100% - 48px);
+      text-align: center;
+    }
+
+    /* vertically-centred left text (chip card) */
+    .card--middle .card__text {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* dark Siri card */
+    .card--dark { background: #000000; }
+    .card--dark .card__text--siri {
+      background: linear-gradient(90deg, #f3d6c6 0%, #e9dfe6 30%, #bfd0ea 62%, #f1f1f3 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .card__note {
+      position: absolute;
+      top: calc(clamp(28px, 4vw, 52px) + 4.6em);
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 17px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: #86868b;
+      white-space: nowrap;
+    }
+    .card__note sup { font-size: .6em; line-height: 0; }
+
+    /* ---------- Pager (dots + pause) ---------- */
+    .pager {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .pager__dots {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      height: 48px;
+      padding: 0 22px;
+      border-radius: 40px;
+      background: rgba(232, 232, 237, .85);
+    }
+
+    .dot {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 0;
+      border-radius: 8px;
+      background: rgba(29, 29, 31, .32);
+      cursor: pointer;
+      overflow: hidden;
+      transition: width .35s ease, background .25s ease;
+    }
+    .dot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: #1d1d1f;
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    .dot.is-active { width: 40px; background: rgba(29, 29, 31, .22); }
+    .dot.is-active::after { animation: fill var(--slide-time) linear forwards; }
+    .pager.is-paused .dot.is-active::after { animation-play-state: paused; }
+    @keyframes fill { to { transform: scaleX(1); } }
+
+    .pager__toggle {
+      width: 48px;
+      height: 48px;
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      background: rgba(232, 232, 237, .85);
+      color: #1d1d1f;
+      transition: filter .2s ease;
+    }
+    .pager__toggle:hover, .dot:hover { filter: brightness(.94); }
+    .pager__toggle svg { width: 14px; height: 14px; }
+    .dot:focus-visible, .pager__toggle:focus-visible { outline: 2px solid #0071e3; outline-offset: 3px; }
+
+    /* ---------- Film modal ---------- */
+    dialog.film {
+      border: 0;
+      border-radius: 20px;
+      padding: 0;
+      width: min(1100px, 92vw);
+      background: #000000;
+      overflow: hidden;
+      margin: auto;
+    }
+    dialog.film::backdrop { background: rgba(0, 0, 0, .72); }
+    dialog.film video { display: block; width: 100%; height: auto; }
+    .film__close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .85);
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      color: #1d1d1f;
+      transition: background .2s ease;
+    }
+    .film__close:hover { background: #ffffff; }
+
+    @media (max-width: 700px) {
+      :root { --card-w: calc(100vw - var(--gutter) - 40px); --card-h: 480px; }
+      .highlights { padding: 40px 0 56px; }
+      .highlights__head { margin-bottom: 28px; }
+      .card--middle .card__text { top: 28px; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .track { transition: none; }
+    }
+
+    /* ==================== 3RD SECTION: DESIGN (USER SPECIFIED) ==================== */
+    .design {
+      background: #ffffff;
+      padding: 64px 0 120px;
+      overflow: hidden;
+    }
+
+    /* ---------- Intro copy ---------- */
+    .design__intro {
+      width: min(1100px, 100% - 48px);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .design__eyebrow {
+      font-size: 21px;
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      background: linear-gradient(90deg, #3a2fd0 0%, #5a63f0 50%, #6f9bff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .design__title {
+      margin-top: 10px;
+      font-size: clamp(44px, 6.2vw, 96px);
+      line-height: 1.04;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      color: var(--text);
+    }
+
+    .design__lead {
+      width: min(760px, 100%);
+      margin: 34px auto 0;
+      font-size: clamp(17px, 1.3vw, 21px);
+      line-height: 1.4;
+      font-weight: 600;
+      letter-spacing: -0.003em;
+      color: var(--muted);
+    }
+    .design__lead strong { font-weight: 600; color: #000; }
+    .design__lead sup { font-size: .55em; line-height: 0; }
+
+    /* ---------- Feature area ---------- */
+    .design__stage {
+      display: grid;
+      grid-template-columns: minmax(300px, 420px) 1fr;
+      align-items: center;
+      gap: clamp(24px, 4vw, 80px);
+      padding: clamp(64px, 9vw, 150px) var(--gutter) 0;
+      max-width: 1700px;
+      margin: 0 auto;
+    }
+
+    .design__media img {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+      -webkit-user-drag: none;
+      filter: drop-shadow(0 20px 48px rgba(0, 0, 0, 0.08));
+    }
+
+    /* ---------- Pills / accordion ---------- */
+    .pills {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .pill {
+      width: fit-content;
+      max-width: 100%;
+      min-width: 135px;
+      background: var(--pill);
+      border-radius: 28px;
+      transition: background .25s ease, width .35s ease;
+    }
+    .pill:hover { background: var(--pill-hover); }
+    .pill.is-open { width: min(420px, 100%); }
+
+    .pill__btn {
+      appearance: none;
+      border: 0;
+      background: none;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 24px 14px 14px;
+      font: inherit;
+      font-size: 17px;
+      line-height: 1.25;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      border-radius: 28px;
+    }
+    .pill__btn:focus-visible { outline: 2px solid #0071e3; outline-offset: 2px; }
+    .pill__btn sup { font-size: .6em; line-height: 0; }
+
+    /* plus → × icon */
+    .pill__icon {
+      position: relative;
+      flex: 0 0 24px;
+      width: 24px;
+      height: 24px;
+      border: 1.6px solid var(--text);
+      border-radius: 50%;
+      transition: transform .3s ease;
+    }
+    .pill__icon::before, .pill__icon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 10px;
+      height: 1.8px;
+      background: var(--text);
+      border-radius: 2px;
+      transform: translate(-50%, -50%);
+    }
+    .pill__icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+    .pill.is-open .pill__icon { transform: rotate(45deg); }
+
+    /* colour swatch in the first pill */
+    .pill__swatch {
+      flex: 0 0 24px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--swatch, #4a4f57);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+      transition: background .3s ease;
+    }
+
+    .pill__panel {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .4s ease;
+    }
+    .pill.is-open .pill__panel { grid-template-rows: 1fr; }
+    .pill__panel > div { overflow: hidden; }
+
+    .pill__body {
+      padding: 0 24px 20px 52px;
+      font-size: 17px;
+      line-height: 1.35;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .pill__body strong { color: var(--text); font-weight: 600; }
+
+    /* colour choices */
+    .swatches {
+      display: flex;
+      gap: 18px;
+      margin-top: 16px;
+      list-style: none;
+      padding: 0;
+    }
+    .swatches button {
+      appearance: none;
+      border: 0;
+      background: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .swatches i {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--c);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.14);
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      transition: outline-color .2s ease;
+    }
+    .swatches button[aria-pressed="true"] { color: var(--text); }
+    .swatches button[aria-pressed="true"] i { outline-color: #0071e3; }
+    .swatches button:focus-visible i { outline-color: #0071e3; }
+
+    /* ---------- Entrance animation ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+      transition-delay: var(--d, 0s);
+    }
+    .reveal--left  { transform: translateX(-64px); }
+    .reveal--right { transform: translateX(72px); }
+
+    .design.in-view .reveal { opacity: 1; transform: none; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .design { padding-bottom: 72px; padding-top: 48px; }
+      .design__stage {
+        grid-template-columns: 1fr;
+        padding-top: 40px;
+      }
+      .design__media { order: -1; }
+      .pills { align-items: stretch; }
+      .pill, .pill.is-open { width: 100%; }
+      .reveal--left { transform: translateY(24px); }
+      .reveal--right { transform: translateY(24px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal--left, .reveal--right { opacity: 1; transform: none; transition: none; }
+      .pill__panel, .pill, .pill__icon { transition: none; }
+    }
+
+    /* ==================== 4TH SECTION: OLED DISPLAY (USER SPECIFIED) ==================== */
+    .oled {
+      background: #ffffff;
+      padding: 32px 24px 120px;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ---------- Heading ---------- */
+    .oled__eyebrow {
+      display: inline-block;
+      font-size: 21px;
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      background: linear-gradient(90deg, #3a2fd0 0%, #5a63f0 50%, #6f9bff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .oled__title {
+      width: min(1000px, 100%);
+      margin: 10px auto 0;
+      font-size: clamp(44px, 6.2vw, 96px);
+      line-height: 1.04;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      color: var(--text);
+    }
+
+    /* ---------- Image ---------- */
+    .oled__media {
+      margin-top: clamp(24px, 5vw, 64px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .oled__media img {
+      display: block;
+      width: min(100%, 1100px);
+      height: auto;
+      user-select: none;
+      -webkit-user-drag: none;
+      filter: drop-shadow(0 24px 60px rgba(0, 0, 0, 0.08));
+    }
+
+    /* ---------- Body copy ---------- */
+    .oled__copy {
+      width: min(760px, 100%);
+      margin: clamp(24px, 3.5vw, 48px) auto 0;
+      font-size: clamp(17px, 1.3vw, 21px);
+      line-height: 1.45;
+      font-weight: 600;
+      letter-spacing: -0.003em;
+      color: var(--muted);
+      text-wrap: balance;
+    }
+
+    .oled__copy strong { font-weight: 600; color: #000000; }
+
+    /* ---------- Stats ---------- */
+    .oled .stats {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 32px clamp(40px, 6.5vw, 100px);
+      margin-top: 64px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .oled .stat {
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .oled .stat__value {
+      display: block;
+      font-size: clamp(34px, 3.4vw, 48px);
+      line-height: 1.1;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #2e2a8c 0%, #4a3fe0 45%, #6a8cff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .oled .stat__label {
+      display: block;
+      margin-top: 4px;
+      font-size: 15px;
+      line-height: 1.3;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* ---------- OLED Entrance animation ---------- */
+    .oled .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+      transition-delay: var(--d, 0s);
+    }
+
+    .oled .reveal--zoom {
+      transform: translateY(40px) scale(.94);
+    }
+
+    .oled .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 700px) {
+      .oled { padding-bottom: 72px; padding-top: 16px; }
+      .oled .stats { gap: 28px 20px; margin-top: 44px; }
+      .oled .stat { flex: 0 0 calc(50% - 10px); min-width: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .oled .reveal, .oled .reveal--zoom { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ==================== 5TH SECTION: BUY / CONFIGURE ==================== */
+    .buy-section {
+      background: #f5f5f7;
+      padding: 80px 24px 100px;
+    }
+
+    .buy-section__inner {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .buy-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .buy-eyebrow {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+
+    .buy-title {
+      font-size: clamp(34px, 4.5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #1d1d1f;
+    }
+
+    .buy-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* Preview gallery column */
+    .preview-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      position: sticky;
+      top: 80px;
+    }
+
+    .preview-img-wrap {
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .preview-img-wrap img {
+      max-width: 100%;
+      height: auto;
+      max-height: 320px;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .preview-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1d1d1f;
+      margin-bottom: 6px;
+    }
+
+    .preview-sub {
+      font-size: 15px;
+      color: #6e6e73;
+    }
+
+    /* Configuration controls column */
+    .config-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .opt-box {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 24px 28px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    }
+
+    .opt-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1d1d1f;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .opt-title small {
+      font-size: 14px;
+      font-weight: 500;
+      color: #6e6e73;
+    }
+
+    /* Connectivity pills */
+    .conn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .conn-card {
+      appearance: none;
+      background: #fbfbfd;
+      border: 1.5px solid #d2d2d7;
+      border-radius: 14px;
+      padding: 16px;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .conn-card:hover { border-color: #86868b; }
+    .conn-card.active { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+
+    .conn-card .name { font-size: 16px; font-weight: 700; color: #1d1d1f; display: block; margin-bottom: 4px; }
+    .conn-card .detail { font-size: 13px; color: #6e6e73; }
+
+    /* Color Swatches */
+    .swatches {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .swatch-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      outline: 2px solid transparent;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s ease, outline-color 0.2s ease;
+    }
+
+    .swatch-btn:hover { transform: scale(1.1); }
+    .swatch-btn.active { outline-color: var(--blue); outline-offset: 3px; }
+
+    /* Storage Selector */
+    .storage-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .storage-card {
+      appearance: none;
+      background: #fbfbfd;
+      border: 1.5px solid #d2d2d7;
+      border-radius: 14px;
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .storage-card:hover { border-color: #86868b; }
+    .storage-card.active { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+
+    .storage-size { font-size: 16px; font-weight: 700; color: #1d1d1f; display: block; }
+    .storage-extra { font-size: 12px; color: #6e6e73; margin-top: 4px; display: block; }
+    .storage-card.active .storage-extra { color: var(--blue); font-weight: 600; }
+
+    /* Summary & Cart Box */
+    .summary-box {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .total-label { font-size: 17px; color: #6e6e73; }
+    .total-val { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; color: #1d1d1f; }
+    .emi-val { font-size: 14px; color: #6e6e73; margin-bottom: 22px; }
+
+    .add-btn {
+      appearance: none;
+      width: 100%;
+      border: none;
+      background: var(--blue);
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 600;
+      padding: 16px 24px;
+      border-radius: 980px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .add-btn:hover { background: var(--blue-hover); transform: scale(1.01); }
+    .add-btn:active { transform: scale(0.98); }
+
+    .delivery-info {
+      margin-top: 14px;
+      font-size: 13px;
+      color: #6e6e73;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 860px) {
+      .buy-grid { grid-template-columns: 1fr; gap: 32px; }
+      .preview-card { position: static; }
+      .buy-section { padding: 48px 16px 64px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Global Header Navigation -->
+  <div id="site-header"></div>
+
+  <main>
+    <!-- ================= 1ST SECTION: IPAD MINI HERO (EXACT USER SPECIFIED) ================= -->
+    <section class="hero" id="hero" aria-labelledby="ipad-title">
+      <p class="hero__product">iPad <span class="mini">mini</span></p>
+      <h1 class="hero__title" id="ipad-title">More than a little awesome.</h1>
+
+      <div class="hero__media">
+        <img src="images/ipad-mini/highlights_siri_startframe__elrknweeric2_large_2x.jpg"
+             alt="A hand holding iPad mini showing a glowing blue and violet “mini” wallpaper"
+             draggable="false">
+      </div>
+
+      <div class="price-pill">
+        <p class="price-pill__text">
+          From $699 or $58.25/mo. for 12 mo.<sup>±</sup><br>
+          Lease from $14.99/mo. for 36 mo. with Apple Upgrade<sup>**</sup>
+        </p>
+        <a class="btn-buy" href="#buy" id="heroBuyBtn">Buy</a>
+      </div>
+    </section>
+
+    <!-- ================= 2ND SECTION: GET THE HIGHLIGHTS (USER SPECIFIED) ================= -->
+    <section class="highlights" id="highlights" aria-labelledby="hl-title">
+      <div class="highlights__head">
+        <h2 class="highlights__title" id="hl-title">Get the highlights.</h2>
+        <button class="film-link" id="openFilm" type="button">
+          Watch the film
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z" fill="currentColor" stroke="none"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="viewport">
+        <div class="track" id="track">
+
+          <!-- 1 : Design -->
+          <article class="card">
+            <img class="card__bg" src="images/ipad-mini/design__bkxgoxeb2o9y_large_2x.jpg" alt="" draggable="false">
+            <p class="card__text">Thinner. Lighter. Ultraportable.<sup>1</sup><br>With even more to love.</p>
+          </article>
+
+          <!-- 2 : Display -->
+          <article class="card card--center">
+            <img class="card__bg" src="images/ipad-mini/highlights_pencil_endframe__b72ilx08ul6u_large_2x.jpg" alt="" draggable="false">
+            <p class="card__text">Super Retina XDR display with OLED for vivid colors and dramatic contrast. Optional nano-texture glass that reduces glare.</p>
+          </article>
+
+          <!-- 3 : Chip -->
+          <article class="card card--middle">
+            <img class="card__bg" src="images/ipad-mini/chip__btt9ql0unn7m_large_2x.jpg" alt="" draggable="false">
+            <p class="card__text">A20 Pro.<br>Latest-generation chip.<br>Huge leap in performance.<br>Total AI powerhouse.</p>
+          </article>
+
+          <!-- 4 : Siri AI -->
+          <article class="card card--dark card--center">
+            <img class="card__bg" src="images/ipad-mini/highlights_siri_startframe__elrknweeric2_large_2x.jpg" alt="" draggable="false">
+            <p class="card__text card__text--siri">Meet Siri AI. Your AI assistant. More personal. More powerful.</p>
+            <p class="card__note">Siri AI is available in English.<sup>2</sup></p>
+          </article>
+
+          <!-- 5 : Apple Pencil Pro -->
+          <article class="card">
+            <img class="card__bg" src="images/ipad-mini/pencil_pro__fudptpz6juy6_large_2x.jpg" alt="" draggable="false">
+            <p class="card__text">Apple Pencil Pro.<br>Write, sketch and mark up with precision.</p>
+          </article>
+
+          <!-- 6 : iPadOS -->
+          <article class="card">
+            <img class="card__bg" src="images/ipad-mini/ipados__c07adtzfpf2a_large_2x.jpg" alt="" draggable="false">
+            <p class="card__text">iPadOS.<br>Powerful, intuitive and made for iPad.</p>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="pager" id="pager">
+        <div class="pager__dots" id="dots" role="tablist" aria-label="Slides"></div>
+        <button class="pager__toggle" id="toggle" type="button" aria-label="Pause autoplay">
+          <svg id="toggleIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Film Modal Dialog -->
+    <dialog class="film" id="filmDialog" aria-label="iPad mini film">
+      <button class="film__close" id="closeFilm" type="button" aria-label="Close">&times;</button>
+      <video id="filmVideo" controls playsinline preload="none">
+        <source src="images/ipad-mini/large_2x.mp4" type="video/mp4">
+      </video>
+    </dialog>
+
+    <!-- ================= 3RD SECTION: DESIGN (USER SPECIFIED) ================= -->
+    <section class="design" id="design" aria-labelledby="design-title">
+      <div class="design__intro">
+        <p class="design__eyebrow reveal" style="--d:0s">Design</p>
+        <h2 class="design__title reveal" id="design-title" style="--d:.1s">
+          Easy to hold.<br>Impossible to put down.
+        </h2>
+        <p class="design__lead reveal" style="--d:.2s">
+          There’s so much more to love about the new iPad mini. It’s more portable and powerful than
+          ever. It’s the lightest iPad yet — <strong>14 percent thinner</strong> than the previous
+          model.<sup>1</sup> A stunning new OLED display delivers incredible visuals on a larger-than-ever
+          8.5-inch canvas.<sup>4</sup> It’s perfect for travel, beautiful, and resistant to dust,
+          splashes, and spills, too.<sup>5</sup>
+        </p>
+      </div>
+
+      <div class="design__stage">
+        <ul class="pills" id="pills">
+
+          <!-- Colors (open by default) -->
+          <li class="pill is-open reveal reveal--left" style="--d:.15s" id="colorsPill">
+            <button class="pill__btn" type="button" aria-expanded="true" aria-controls="p0">
+              <span class="pill__swatch" id="pillSwatch"></span>
+              Colors
+            </button>
+            <div class="pill__panel" id="p0" role="region">
+              <div>
+                <div class="pill__body">
+                  <strong>Colors.</strong> Choose from beautiful finishes. iPad mini is shown in Midnight.
+                  <ul class="swatches" id="swatches">
+                    <li><button type="button" data-color="#4a4f57" aria-pressed="true"><i style="--c:#4a4f57"></i>Midnight</button></li>
+                    <li><button type="button" data-color="#68696d" aria-pressed="false"><i style="--c:#68696d"></i>Space Grey</button></li>
+                    <li><button type="button" data-color="#9eb8d4" aria-pressed="false"><i style="--c:#9eb8d4"></i>Blue</button></li>
+                    <li><button type="button" data-color="#e9e4da" aria-pressed="false"><i style="--c:#e9e4da"></i>Starlight</button></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="pill reveal reveal--left" style="--d:.3s">
+            <button class="pill__btn" type="button" aria-expanded="false" aria-controls="p1">
+              <span class="pill__icon" aria-hidden="true"></span>
+              Thinner, lighter design
+            </button>
+            <div class="pill__panel" id="p1" role="region">
+              <div><div class="pill__body">
+                <strong>Thinner, lighter design.</strong> The lightest iPad yet — 14 percent thinner than the previous model.<sup>1</sup>
+              </div></div>
+            </div>
+          </li>
+
+          <li class="pill reveal reveal--left" style="--d:.45s">
+            <button class="pill__btn" type="button" aria-expanded="false" aria-controls="p2">
+              <span class="pill__icon" aria-hidden="true"></span>
+              <span>8.5-inch OLED display<sup>4</sup></span>
+            </button>
+            <div class="pill__panel" id="p2" role="region">
+              <div><div class="pill__body">
+                <strong>8.5-inch OLED display.</strong> A stunning new OLED display delivers incredible visuals on a larger-than-ever 8.5-inch canvas.<sup>4</sup>
+              </div></div>
+            </div>
+          </li>
+
+          <li class="pill reveal reveal--left" style="--d:.6s">
+            <button class="pill__btn" type="button" aria-expanded="false" aria-controls="p3">
+              <span class="pill__icon" aria-hidden="true"></span>
+              <span>Water and dust resistance<sup>5</sup></span>
+            </button>
+            <div class="pill__panel" id="p3" role="region">
+              <div><div class="pill__body">
+                <strong>Water and dust resistance.</strong> Resistant to dust, splashes, and spills, too.<sup>5</sup>
+              </div></div>
+            </div>
+          </li>
+
+          <li class="pill reveal reveal--left" style="--d:.75s">
+            <button class="pill__btn" type="button" aria-expanded="false" aria-controls="p4">
+              <span class="pill__icon" aria-hidden="true"></span>
+              Camera system
+            </button>
+            <div class="pill__panel" id="p4" role="region">
+              <div><div class="pill__body">
+                <strong>Camera system.</strong> Advanced 12MP Wide back camera with Focus Pixels captures 4K ProRes video. 12MP Ultra Wide front camera features Center Stage.
+              </div></div>
+            </div>
+          </li>
+
+          <li class="pill reveal reveal--left" style="--d:.9s">
+            <button class="pill__btn" type="button" aria-expanded="false" aria-controls="p5">
+              <span class="pill__icon" aria-hidden="true"></span>
+              Apple Pencil
+            </button>
+            <div class="pill__panel" id="p5" role="region">
+              <div><div class="pill__body">
+                <strong>Apple Pencil.</strong> Compatible with Apple Pencil Pro and Apple Pencil (USB-C). Snap magnetically to charge, sketch, and mark up with pixel-perfect precision.
+              </div></div>
+            </div>
+          </li>
+
+        </ul>
+
+        <div class="design__media reveal reveal--right" style="--d:.2s">
+          <img src="images/ipad-mini/landing__fvmg5mijonam_large_2x.jpg"
+               alt="iPad mini in Midnight, showing the back with camera and the front with a colourful wallpaper"
+               draggable="false"
+               loading="lazy">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 4TH SECTION: OLED DISPLAY (USER SPECIFIED) ================= -->
+    <section class="oled" id="oled" aria-labelledby="oled-title">
+      <p class="oled__eyebrow reveal">OLED display</p>
+      <h2 class="oled__title reveal" id="oled-title" style="--d:.1s">
+        Color and precision<br>by the pixel.
+      </h2>
+
+      <div class="oled__media reveal reveal--zoom" style="--d:.2s">
+        <img src="images/ipad-mini/section%20vertical%20image.png"
+             alt="iPad mini lying at an angle, its OLED display showing a vivid red and orange portrait"
+             draggable="false"
+             loading="lazy">
+      </div>
+
+      <p class="oled__copy reveal" style="--d:.1s">
+        OLED comes to iPad mini. The new Super Retina XDR display delivers
+        <strong>deep, vivid colors and incredibly high contrast</strong> for your viewing pleasure.
+        With 1200 nits peak brightness and 1 nit minimum brightness, content is easy on the eyes in
+        any light. Colors are incredibly vivid and accurate, with support for P3 wide color and
+        True Tone technology that automatically adapts white balance to match ambient lighting.
+        And an optional nano-texture glass finish helps reduce glare even in challenging lighting
+        conditions.
+      </p>
+
+      <ul class="stats">
+        <li class="stat reveal" style="--d:.2s">
+          <span class="stat__value">600 nits</span>
+          <span class="stat__label">full-screen brightness</span>
+        </li>
+        <li class="stat reveal" style="--d:.35s">
+          <span class="stat__value">1200 nits</span>
+          <span class="stat__label">peak brightness</span>
+        </li>
+        <li class="stat reveal" style="--d:.5s">
+          <span class="stat__value">P3</span>
+          <span class="stat__label">wide color</span>
+        </li>
+        <li class="stat reveal" style="--d:.65s">
+          <span class="stat__value">2,000,000:1</span>
+          <span class="stat__label">contrast ratio</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ================= 5TH SECTION: BUY / CONFIGURE ================= -->
+    <section class="buy-section" id="buy" aria-labelledby="buy-heading">
+      <div class="buy-section__inner">
+        <div class="buy-header">
+          <p class="buy-eyebrow">Buy iPad mini</p>
+          <h2 class="buy-title" id="buy-heading">Choose your finish and storage.</h2>
+        </div>
+
+        <div class="buy-grid">
+          <!-- Left: Preview -->
+          <div class="preview-card">
+            <div class="preview-img-wrap">
+              <img id="previewImg" src="images/ipad-mini/hero_intro_endframe__edff65eao2qa_large_2x.png" alt="iPad mini preview">
+            </div>
+            <h3 class="preview-title" id="previewTitle">iPad mini Wi-Fi 128GB</h3>
+            <p class="preview-sub" id="previewColorText">Space Grey finish</p>
+          </div>
+
+          <!-- Right: Options -->
+          <div class="config-controls">
+            <!-- 1. Connectivity -->
+            <div class="opt-box">
+              <div class="opt-title">
+                <span>1. Select Connectivity</span>
+              </div>
+              <div class="conn-grid">
+                <button type="button" class="conn-card active" data-conn="wifi" data-extra="0">
+                  <span class="name">Wi-Fi</span>
+                  <span class="detail">Fast Wi-Fi 6E connectivity</span>
+                </button>
+                <button type="button" class="conn-card" data-conn="cellular" data-extra="14000">
+                  <span class="name">Wi-Fi + Cellular</span>
+                  <span class="detail">5G superfast mobile data</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Finish -->
+            <div class="opt-box">
+              <div class="opt-title">
+                <span>2. Select Finish</span>
+                <small id="colorLabel">Space Grey</small>
+              </div>
+              <div class="swatches">
+                <button type="button" class="swatch-btn active" style="background:#68696d;" data-color="Space Grey" aria-label="Space Grey finish"></button>
+                <button type="button" class="swatch-btn" style="background:#9eb8d4;" data-color="Blue" aria-label="Blue finish"></button>
+                <button type="button" class="swatch-btn" style="background:#c7b8da;" data-color="Purple" aria-label="Purple finish"></button>
+                <button type="button" class="swatch-btn" style="background:#e8e4d8;" data-color="Starlight" aria-label="Starlight finish"></button>
+              </div>
+            </div>
+
+            <!-- 3. Storage -->
+            <div class="opt-box">
+              <div class="opt-title">
+                <span>3. Select Storage</span>
+              </div>
+              <div class="storage-grid">
+                <button type="button" class="storage-card active" data-storage="128GB" data-extra="0">
+                  <span class="storage-size">128GB</span>
+                  <span class="storage-extra">Included</span>
+                </button>
+                <button type="button" class="storage-card" data-storage="256GB" data-extra="10000">
+                  <span class="storage-size">256GB</span>
+                  <span class="storage-extra">+₹10,000</span>
+                </button>
+                <button type="button" class="storage-card" data-storage="512GB" data-extra="30000">
+                  <span class="storage-size">512GB</span>
+                  <span class="storage-extra">+₹30,000</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Summary & Add to Bag -->
+            <div class="summary-box">
+              <div class="total-row">
+                <span class="total-label">Total Price</span>
+                <span class="total-val" id="totalPriceDisplay">₹49,900</span>
+              </div>
+              <p class="emi-val" id="emiDisplay">Or ₹4,158/mo. for 12 months with No Cost EMI*</p>
+              <button type="button" class="add-btn" id="addToBagBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                <span>Add to Bag</span>
+              </button>
+              <p class="delivery-info">
+                ✓ Free shipping &amp; Store Pickup in HSR Layout, Bengaluru<br>
+                ✓ 1 Year Apple India Warranty Included
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <div id="site-footer"></div>
+  <div id="whatsapp-float"></div>
+
+  <!-- Shared Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/catalog-sync.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // 1. Initialize Site Components
+      if (typeof renderHeader === "function") renderHeader("ipad-mini");
+      if (typeof renderFooter === "function") renderFooter();
+      if (typeof renderWhatsAppFloat === "function") renderWhatsAppFloat();
+
+      // 2. Smooth scroll for hero Buy button
+      const heroBuyBtn = document.getElementById("heroBuyBtn");
+      if (heroBuyBtn) {
+        heroBuyBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.getElementById("buy");
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      }
+
+      // 3. Highlights Carousel & Film Dialog (User Specified)
+      const track = document.getElementById('track');
+      const cards = track ? [...track.children] : [];
+      const dotsEl = document.getElementById('dots');
+      const pager  = document.getElementById('pager');
+      const toggle = document.getElementById('toggle');
+      const icon   = document.getElementById('toggleIcon');
+
+      const PAUSE = '<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>';
+      const PLAY  = '<path d="M7 4.5v15l12-7.5z"/>';
+
+      let index = 0;
+      let paused = false;
+
+      // Dots
+      const dots = cards.map((_, i) => {
+        const b = document.createElement('button');
+        b.className = 'dot';
+        b.type = 'button';
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        b.addEventListener('click', () => go(i));
+        if (dotsEl) dotsEl.appendChild(b);
+        return b;
+      });
+
+      function offset() {
+        if (!cards.length || !track) return 0;
+        const w = cards[0].getBoundingClientRect().width;
+        const gap = parseFloat(getComputedStyle(track).columnGap) || 20;
+        return w + gap;
+      }
+
+      function go(i) {
+        if (!cards.length || !track) return;
+        index = (i + cards.length) % cards.length;
+        track.style.transform = `translateX(${-index * offset()}px)`;
+        dots.forEach((d, n) => {
+          d.classList.remove('is-active');
+          d.setAttribute('aria-selected', n === index);
+        });
+        if (dots[index]) {
+          void dots[index].offsetWidth; // restart the fill animation
+          dots[index].classList.add('is-active');
+        }
+      }
+
+      // Auto-advance when the active dot's progress finishes
+      if (dotsEl) {
+        dotsEl.addEventListener('animationend', (e) => {
+          if (e.animationName === 'fill' && !paused) go(index + 1);
+        }, true);
+      }
+
+      if (toggle && icon && pager) {
+        toggle.addEventListener('click', () => {
+          paused = !paused;
+          pager.classList.toggle('is-paused', paused);
+          icon.innerHTML = paused ? PLAY : PAUSE;
+          toggle.setAttribute('aria-label', paused ? 'Play autoplay' : 'Pause autoplay');
+        });
+      }
+
+      // Swipe
+      let startX = null;
+      if (track) {
+        track.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+        window.addEventListener('pointerup', (e) => {
+          if (startX === null) return;
+          const dx = e.clientX - startX;
+          startX = null;
+          if (Math.abs(dx) > 50) go(Math.min(cards.length - 1, Math.max(0, index + (dx < 0 ? 1 : -1))));
+        });
+      }
+
+      window.addEventListener('resize', () => go(index));
+      go(0);
+
+      // Film modal
+      const dlg = document.getElementById('filmDialog');
+      const vid = document.getElementById('filmVideo');
+      const openFilm = document.getElementById('openFilm');
+      const closeFilmBtn = document.getElementById('closeFilm');
+
+      if (dlg && vid) {
+        const closeFilm = () => { vid.pause(); dlg.close(); };
+        if (openFilm) openFilm.addEventListener('click', () => { dlg.showModal(); vid.play().catch(() => {}); });
+        if (closeFilmBtn) closeFilmBtn.addEventListener('click', closeFilm);
+        dlg.addEventListener('click', (e) => { if (e.target === dlg) closeFilm(); });
+        dlg.addEventListener('close', () => vid.pause());
+      }
+
+      // 4. Design Section Accordion & Entrance Animation (User Specified)
+      const designSection = document.getElementById('design');
+      if (designSection) {
+        if ('IntersectionObserver' in window) {
+          const obs = new IntersectionObserver((entries, observer) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                designSection.classList.add('in-view');
+                observer.disconnect();
+              }
+            });
+          }, { threshold: 0.12 });
+          obs.observe(designSection);
+        } else {
+          designSection.classList.add('in-view');
+        }
+      }
+
+      // Accordion – one pill open at a time
+      const pillEls = [...document.querySelectorAll('#pills .pill')];
+      pillEls.forEach((pill) => {
+        const btn = pill.querySelector('.pill__btn');
+        if (btn) {
+          btn.addEventListener('click', () => {
+            const willOpen = !pill.classList.contains('is-open');
+            pillEls.forEach((p) => {
+              p.classList.remove('is-open');
+              const b = p.querySelector('.pill__btn');
+              if (b) b.setAttribute('aria-expanded', 'false');
+            });
+            if (willOpen) {
+              pill.classList.add('is-open');
+              btn.setAttribute('aria-expanded', 'true');
+            }
+          });
+        }
+      });
+
+      // Colour swatches – update the swatch dot in the pill
+      const pillSwatch = document.getElementById('pillSwatch');
+      if (pillSwatch) {
+        pillSwatch.style.setProperty('--swatch', '#4a4f57');
+        document.querySelectorAll('#swatches button').forEach((b) => {
+          b.addEventListener('click', () => {
+            document.querySelectorAll('#swatches button').forEach((x) => x.setAttribute('aria-pressed', 'false'));
+            b.setAttribute('aria-pressed', 'true');
+            pillSwatch.style.setProperty('--swatch', b.dataset.color);
+          });
+        });
+      }
+
+      // 5. OLED Display Section Entrance Animation (User Specified)
+      if ('IntersectionObserver' in window) {
+        const oledIo = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              oledIo.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('#oled .reveal').forEach((el) => oledIo.observe(el));
+      } else {
+        document.querySelectorAll('#oled .reveal').forEach((el) => el.classList.add('is-visible'));
+      }
+
+      // 6. Interactive Product Configurator
+      let basePrice = 49900;
+      let connExtra = 0;
+      let storageExtra = 0;
+      let selectedConn = "Wi-Fi";
+      let selectedColor = "Space Grey";
+      let selectedStorage = "128GB";
+
+      const previewTitle = document.getElementById("previewTitle");
+      const previewColorText = document.getElementById("previewColorText");
+      const colorLabel = document.getElementById("colorLabel");
+      const totalPriceDisplay = document.getElementById("totalPriceDisplay");
+      const emiDisplay = document.getElementById("emiDisplay");
+      const atcBtn = document.getElementById("addToBagBtn");
+
+      function updatePricing() {
+        const total = basePrice + connExtra + storageExtra;
+        if (totalPriceDisplay) {
+          totalPriceDisplay.textContent = "₹" + total.toLocaleString("en-IN");
+        }
+        if (emiDisplay) {
+          const emi = Math.round(total / 12);
+          emiDisplay.textContent = "Or ₹" + emi.toLocaleString("en-IN") + "/mo. for 12 months with No Cost EMI*";
+        }
+        if (previewTitle) {
+          previewTitle.textContent = "iPad mini " + selectedConn + " " + selectedStorage;
+        }
+        if (previewColorText) {
+          previewColorText.textContent = selectedColor + " finish";
+        }
+        if (colorLabel) {
+          colorLabel.textContent = selectedColor;
+        }
+      }
+
+      // Connectivity Handler
+      document.querySelectorAll(".conn-card").forEach(function (card) {
+        card.addEventListener("click", function () {
+          document.querySelectorAll(".conn-card").forEach(function (c) { c.classList.remove("active"); });
+          this.classList.add("active");
+          connExtra = parseInt(this.getAttribute("data-extra") || "0", 10);
+          selectedConn = this.getAttribute("data-conn") === "cellular" ? "Wi-Fi + Cellular" : "Wi-Fi";
+          updatePricing();
+        });
+      });
+
+      // Color Swatches Handler
+      document.querySelectorAll(".swatch-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          document.querySelectorAll(".swatch-btn").forEach(function (b) { b.classList.remove("active"); });
+          this.classList.add("active");
+          selectedColor = this.getAttribute("data-color");
+          updatePricing();
+        });
+      });
+
+      // Storage Handler
+      document.querySelectorAll(".storage-card").forEach(function (card) {
+        card.addEventListener("click", function () {
+          document.querySelectorAll(".storage-card").forEach(function (c) { c.classList.remove("active"); });
+          this.classList.add("active");
+          storageExtra = parseInt(this.getAttribute("data-extra") || "0", 10);
+          selectedStorage = this.getAttribute("data-storage");
+          updatePricing();
+        });
+      });
+
+      // Add to Cart
+      if (atcBtn) {
+        atcBtn.addEventListener("click", function () {
+          const total = basePrice + connExtra + storageExtra;
+          const fullName = "iPad mini (" + selectedConn + ", " + selectedStorage + ", " + selectedColor + ")";
+          const cartItem = {
+            id: "ipad-mini-a17-pro",
+            name: fullName,
+            price: total,
+            image: "images/ipad-mini/hero_intro_endframe__edff65eao2qa_large_2x.png",
+            color: selectedColor,
+            storage: selectedStorage,
+            connectivity: selectedConn,
+            quantity: 1
+          };
+
+          if (typeof Cart !== "undefined" && typeof Cart.add === "function") {
+            Cart.add(cartItem);
+          } else {
+            let cart = [];
+            try { cart = JSON.parse(localStorage.getItem("apple_cart") || "[]"); } catch (e) {}
+            cart.push(cartItem);
+            localStorage.setItem("apple_cart", JSON.stringify(cart));
+          }
+
+          atcBtn.innerHTML = '✓ Added to Bag!';
+          atcBtn.style.background = '#34c759';
+          setTimeout(function () {
+            atcBtn.innerHTML = `
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span>Add to Bag</span>
+            `;
+            atcBtn.style.background = 'var(--blue)';
+          }, 2000);
+        });
+      }
+
+      updatePricing();
+    });
+  </script>
+</body>
+</html>
