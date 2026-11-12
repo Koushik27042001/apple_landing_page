@@ -450,10 +450,16 @@
       }
     }
 
+    /* Scroll Margin for Fixed Header */
+    section[id],
+    #hero, #gallery, #upgrade, #compare, #privacy, #buy {
+      scroll-margin-top: calc(var(--header-height, 52px) + 20px);
+    }
+
     /* ==================== HERO SECTION ==================== */
     .pro-hero {
       position: relative;
-      background: linear-gradient(180deg, #0d0f12 0%, #15181e 40%, #ffffff 100%);
+      background: linear-gradient(180deg, #0d0f12 0%, #15181e 60%, #000000 100%);
       color: #ffffff;
       padding: 56px 20px 60px;
       text-align: center;

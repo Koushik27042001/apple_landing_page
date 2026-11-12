@@ -19,6 +19,7 @@
       --blue: #0071e3;
       --blue-hover: #0077ed;
       --border: #d2d2d7;
+      --pad: clamp(16px, 5.6vw, 106px);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -591,6 +592,617 @@
         margin-top: 22px !important;
       }
     }
+
+    /* ==================== 3RD SECTION: PERFORMANCE ==================== */
+    .perf {
+      background: var(--bg);
+      padding: clamp(48px, 6vw, 84px) 0 72px;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ---------- Performance Copy ---------- */
+    .perf__eyebrow {
+      font-size: 21px;
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+
+    .perf__title {
+      margin-top: 18px;
+      font-size: clamp(44px, 4.5vw, 84px);
+      line-height: 1.04;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      color: var(--text);
+    }
+    .perf__title span { display: block; }
+    .perf__title .accent {
+      background: linear-gradient(90deg, #6b3bf2 0%, #5a2bdc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .perf__lead {
+      width: min(580px, 100% - 48px);
+      margin: 34px auto 0;
+      font-size: clamp(16px, 1.05vw, 19px);
+      line-height: 1.35;
+      font-weight: 600;
+      letter-spacing: -0.005em;
+      color: var(--text);
+    }
+
+    /* ---------- Monitors Showcase ---------- */
+    .perf__shots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(8px, 0.7vw, 14px);
+      max-width: 1700px;
+      margin: clamp(40px, 5vw, 64px) auto 0;
+      padding: 0 var(--pad);
+      list-style: none;
+    }
+
+    .perf__shots li {
+      position: relative;
+      border-radius: clamp(12px, 1.4vw, 18px);
+      overflow: hidden;
+      box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.12),
+                  0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+    .perf__shots li:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.18),
+                  0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .perf__shots img {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .perf__caption {
+      margin-top: 22px;
+      font-size: 13px;
+      line-height: 1.3;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .reveal--shot {
+      transform: translateY(56px) scale(.95);
+    }
+    .reveal--shot.is-visible {
+      transform: none;
+    }
+
+    /* ---------- Mobile: swipeable row ---------- */
+    @media (max-width: 800px) {
+      .perf {
+        padding: 36px 0 56px !important;
+      }
+      .perf__title {
+        font-size: clamp(32px, 8.5vw, 48px) !important;
+        line-height: 1.08 !important;
+      }
+      .perf__lead {
+        font-size: 16px !important;
+        line-height: 1.35 !important;
+        margin-top: 22px !important;
+      }
+      .perf__shots {
+        display: flex !important;
+        gap: 12px !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        scrollbar-width: none !important;
+        padding: 0 20px !important;
+        margin-top: 28px !important;
+      }
+      .perf__shots::-webkit-scrollbar { display: none; }
+      .perf__shots li {
+        flex: 0 0 86% !important;
+        scroll-snap-align: center !important;
+        border-radius: 14px !important;
+      }
+    }
+
+    /* ==================== 4TH SECTION: WORKSPACE SHOWCASE (FULL WIDTH) ==================== */
+    .workspace-showcase {
+      width: 100%;
+      background: var(--bg);
+      padding: clamp(24px, 4vw, 56px) 0 clamp(48px, 6vw, 84px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .workspace-showcase__media {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .workspace-showcase__media img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    @media (max-width: 768px) {
+      .workspace-showcase {
+        padding: 16px 0 44px !important;
+      }
+      .workspace-showcase__media img {
+        height: clamp(280px, 74vw, 420px) !important;
+        object-fit: cover !important;
+        object-position: center !important;
+      }
+    }
+
+    /* ==================== 5TH SECTION: CHIP COMPARISON & WORKFLOWS ==================== */
+    .performance-section {
+      width: 100%;
+      padding: clamp(56px, 7vw, 90px) 24px clamp(64px, 8vw, 105px);
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .performance-container {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    /* CHIP COMPARISON */
+    .chip-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(24px, 4vw, 50px);
+      margin-bottom: clamp(60px, 8vw, 105px);
+    }
+
+    .chip-card {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .chip-image {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      margin-bottom: 20px;
+      transition: transform .45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .chip-card:hover .chip-image {
+      transform: translateY(-7px) scale(1.06);
+    }
+
+    .chip-card h2 {
+      max-width: 440px;
+      font-size: clamp(20px, 1.8vw, 23px);
+      line-height: 1.25;
+      font-weight: 650;
+      letter-spacing: -0.025em;
+      margin-bottom: 19px;
+      color: var(--text);
+    }
+
+    .chip-speed {
+      font-size: clamp(20px, 1.8vw, 23px);
+      font-weight: 650;
+      letter-spacing: -0.02em;
+    }
+
+    .chip-speed.m6 {
+      background: linear-gradient(90deg, #00a7b9, #12617c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .chip-speed.m5 {
+      background: linear-gradient(90deg, #416ff0, #162c7c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .chip-speed sup {
+      font-size: 11px;
+    }
+
+    /* PRODUCTIVITY IMAGES */
+    .productivity-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: clamp(28px, 3.5vw, 48px);
+      aspect-ratio: 1 / 1;
+      background: #d0ceca;
+      isolation: isolate;
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform .18s ease-out, box-shadow .35s ease;
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.08);
+    }
+
+    .product-card:hover {
+      box-shadow: 0 24px 55px rgba(0, 0, 0, .15);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transform: scale(1.001);
+      transition: transform .8s cubic-bezier(.2,.7,.2,1);
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.045);
+    }
+
+    .product-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.13),
+        transparent 40%,
+        rgba(0,0,0,.05)
+      );
+      pointer-events: none;
+    }
+
+    /* CATEGORY TABS */
+    .category-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 36px;
+    }
+
+    .category-tabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      background: #fff;
+      padding: 5px;
+      border-radius: 50px;
+      max-width: 100%;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .category-tab {
+      border: none;
+      background: transparent;
+      color: #4b4b4b;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 11px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color .3s ease, background .3s ease, transform .3s ease;
+    }
+
+    .category-tab:hover {
+      color: #000;
+      transform: translateY(-1px);
+    }
+
+    .category-tab.active {
+      background: #1d1d1f;
+      color: white;
+    }
+
+    /* DESCRIPTION */
+    .category-description {
+      max-width: 560px;
+      min-height: 95px;
+      margin: 32px auto 0;
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 550;
+      letter-spacing: -.15px;
+      color: #292929;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity .25s ease, transform .25s ease;
+    }
+
+    .category-description.changing {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    /* IMAGE HOVER LIGHT EFFECT */
+    .product-card .hover-glow {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(255,255,255,.23),
+        transparent 70%
+      );
+      pointer-events: none;
+      opacity: 0;
+      z-index: 2;
+      transform: translate(-50%, -50%);
+      transition: opacity .3s ease;
+    }
+
+    .product-card:hover .hover-glow {
+      opacity: 1;
+    }
+
+    /* RESPONSIVE */
+    @media (min-width: 1200px) {
+      .performance-container {
+        max-width: 1000px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .performance-section {
+        padding: 55px 20px;
+      }
+      .chip-grid {
+        gap: 25px;
+        margin-bottom: 65px;
+      }
+      .chip-image {
+        width: 75px;
+        height: 75px;
+      }
+      .chip-card h2 {
+        font-size: 19px;
+      }
+      .chip-speed {
+        font-size: 19px;
+      }
+      .productivity-grid {
+        gap: 14px;
+      }
+      .product-card {
+        border-radius: 30px;
+      }
+      .category-tab {
+        padding: 10px 14px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .performance-section {
+        padding: 45px 16px;
+      }
+      .chip-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+        margin-bottom: 55px;
+      }
+      .chip-card h2 {
+        max-width: 330px;
+      }
+      .productivity-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .product-card {
+        border-radius: 32px;
+        aspect-ratio: 1 / 1;
+      }
+      .category-wrapper {
+        margin-top: 25px;
+        overflow-x: auto;
+        justify-content: flex-start;
+        scrollbar-width: none;
+        padding: 4px 0;
+      }
+      .category-wrapper::-webkit-scrollbar {
+        display: none;
+      }
+      .category-tabs {
+        margin: auto;
+        flex-shrink: 0;
+      }
+      .category-tab {
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+      .category-description {
+        font-size: 14px;
+        margin-top: 25px;
+        min-height: 120px;
+      }
+    }
+
+    /* ==================== 6TH SECTION: AI PERFORMANCE ==================== */
+    .ai-section {
+      width: 100%;
+      min-height: 720px;
+      padding: clamp(48px, 6vw, 75px) 24px clamp(50px, 6vw, 80px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: #f5f5f7;
+    }
+
+    .ai-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* EYEBROW TITLE */
+    .ai-eyebrow {
+      font-size: 17px;
+      font-weight: 650;
+      letter-spacing: -0.3px;
+      margin-bottom: 22px;
+      color: #1d1d1f;
+    }
+
+    /* MAIN HEADING */
+    .ai-heading {
+      font-size: clamp(38px, 5vw, 60px);
+      line-height: 1.08;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin-bottom: 23px;
+      color: #1d1d1f;
+    }
+
+    .ai-heading span {
+      background: linear-gradient(100deg, #e33d50, #e83e4c, #f04458);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* DESCRIPTION */
+    .ai-description {
+      max-width: 480px;
+      font-size: clamp(14px, 1.05vw, 15px);
+      line-height: 1.58;
+      font-weight: 600;
+      letter-spacing: -0.15px;
+      color: #242426;
+      margin-bottom: clamp(40px, 5vw, 65px);
+    }
+
+    /* IMAGE WRAPPER */
+    .ai-image-wrapper {
+      width: 100%;
+      max-width: 590px;
+      position: relative;
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease-out;
+      will-change: transform;
+    }
+
+    .ai-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      transition: filter 0.5s ease, transform 0.6s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .ai-image-wrapper:hover .ai-image {
+      filter: drop-shadow(0 18px 22px rgba(0,0,0,0.08));
+    }
+
+    /* IMAGE SHINE EFFECT */
+    .ai-image-wrapper::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(110deg, transparent, rgba(255,255,255,0.18), transparent);
+      pointer-events: none;
+      transition: left 0.8s ease;
+    }
+
+    .ai-image-wrapper:hover::after {
+      left: 150%;
+    }
+
+    /* IMAGE CAPTION */
+    .ai-caption {
+      margin-top: 14px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #77777d;
+      letter-spacing: -0.1px;
+    }
+
+    @media (max-width: 992px) {
+      .ai-section {
+        min-height: auto;
+        padding: 55px 25px 40px;
+      }
+      .ai-heading {
+        font-size: 50px;
+      }
+      .ai-description {
+        margin-bottom: 50px;
+      }
+      .ai-image-wrapper {
+        max-width: 560px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .ai-section {
+        padding: 45px 18px 36px;
+      }
+      .ai-eyebrow {
+        font-size: 15px;
+        margin-bottom: 18px;
+      }
+      .ai-heading {
+        font-size: clamp(32px, 8.5vw, 40px);
+        letter-spacing: -0.03em;
+        margin-bottom: 20px;
+      }
+      .ai-description {
+        max-width: 360px;
+        font-size: 13px;
+        line-height: 1.65;
+        margin-bottom: 38px;
+      }
+      .ai-image-wrapper {
+        max-width: 100%;
+      }
+      .ai-caption {
+        font-size: 10px;
+        margin-top: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -675,6 +1287,154 @@
           <svg id="toggleIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="3" width="5" height="18" rx="1"/><rect x="14" y="3" width="5" height="18" rx="1"/></svg>
         </button>
         <div class="pager__dots" id="dots" role="tablist" aria-label="Slides"></div>
+      </div>
+    </section>
+
+    <!-- ================= 3RD SECTION: PERFORMANCE ================= -->
+    <section class="perf" id="performance" aria-labelledby="perf-title">
+      <p class="perf__eyebrow reveal">Performance</p>
+
+      <h2 class="perf__title" id="perf-title">
+        <span class="reveal" style="--d:.1s">M6 and M5 Pro.</span>
+        <span class="accent reveal" style="--d:.25s">Fast and curious.</span>
+      </h2>
+
+      <p class="perf__lead reveal" style="--d:.35s">
+        Buckle up for Mac mini with M6 and M5 Pro. Both chips are loaded with more CPU cores, so
+        everything feels extra snappy and responsive. Next-level GPUs with hardware-accelerated ray
+        tracing bring more graphics horsepower to everything from gaming to 3D modelling. And a
+        powerful Neural Accelerator in each GPU core speeds up tasks like running on-device AI
+        models, as well as editing photos and videos with built-in AI features in supported apps.
+      </p>
+
+      <ul class="perf__shots">
+        <li class="reveal reveal--shot" style="--d:0s">
+          <img src="images/mac-mini/Modern%20iMac%20Blender%20Workspace%20Setup.png"
+               alt="Studio Display showing a 3D scene in Houdini next to an AI assistant panel"
+               loading="lazy"
+               draggable="false">
+        </li>
+        <li class="reveal reveal--shot" style="--d:.15s">
+          <img src="images/mac-mini/Pastel%20Still%20Life%20on%20Studio%20Display.png"
+               alt="Studio Display showing a pastel still life of sculpted objects on stepped plinths, with Mac mini in front"
+               loading="lazy"
+               draggable="false">
+        </li>
+        <li class="reveal reveal--shot" style="--d:.3s">
+          <img src="images/mac-mini/Incense%20Holder%20Website%20Design%20Mockup.png"
+               alt="Studio Display showing a web design mockup for an incense holder product page"
+               loading="lazy"
+               draggable="false">
+        </li>
+      </ul>
+
+      <p class="perf__caption reveal" style="--d:.2s">Houdini, Claude, Figma Weave</p>
+    </section>
+
+    <!-- ================= 4TH SECTION: WORKSPACE SHOWCASE (FULL WIDTH) ================= -->
+    <section class="workspace-showcase" id="workspace" aria-label="Mac mini creative workspace">
+      <div class="workspace-showcase__media reveal">
+        <img src="images/mac-mini/performance_hero_1__eq1k7v88xloy_large.jpg"
+             alt="Overhead view of a creative studio desk with Mac mini, Studio Display, keyboard and trackpad"
+             loading="lazy"
+             draggable="false">
+      </div>
+    </section>
+
+    <!-- ================= 5TH SECTION: CHIPS & WORKFLOWS ================= -->
+    <section class="performance-section" id="chips" aria-label="Mac mini chips and workflows">
+      <div class="performance-container">
+
+        <!-- CHIP COMPARISON -->
+        <div class="chip-grid">
+          <div class="chip-card reveal">
+            <img class="chip-image"
+                 src="images/mac-mini/performance_chip_mx__gis8y0lp52eu_large.jpg"
+                 alt="Apple M6 chip"
+                 loading="lazy">
+            <h2>Seriously speedy and smart, M6 helps you tackle almost anything.</h2>
+            <p class="chip-speed m6">Up to 4.8x faster than M4<sup>4</sup></p>
+          </div>
+
+          <div class="chip-card reveal" style="--d:.15s">
+            <img class="chip-image"
+                 src="images/mac-mini/performance_chip_mx_pro__d9qk8u0qjkeq_large.jpg"
+                 alt="Apple M5 Pro chip"
+                 loading="lazy">
+            <h2>M5 Pro delivers even more power for demanding workflows.</h2>
+            <p class="chip-speed m5">Up to 4x faster than M4 Pro<sup>5</sup></p>
+          </div>
+        </div>
+
+        <!-- PRODUCTIVITY IMAGE CARDS -->
+        <div class="productivity-grid">
+          <div class="product-card reveal" style="--d:.1s">
+            <img src="images/mac-mini/performance_productivity_1__d40pebfrlqmq_large.jpg"
+                 alt="Mac mini productivity setup"
+                 loading="lazy">
+            <div class="hover-glow"></div>
+          </div>
+
+          <div class="product-card reveal" style="--d:.25s">
+            <img src="images/mac-mini/performance_productivity_2__do0p70ktiuuu_large.jpg"
+                 alt="Mac mini creative workflow"
+                 loading="lazy">
+            <div class="hover-glow"></div>
+          </div>
+        </div>
+
+        <!-- CATEGORY NAVIGATION -->
+        <div class="category-wrapper reveal" style="--d:.2s">
+          <div class="category-tabs" role="tablist">
+            <button class="category-tab active" data-category="productivity" role="tab" aria-selected="true">Productivity</button>
+            <button class="category-tab" data-category="creativity" role="tab" aria-selected="false">Creativity</button>
+            <button class="category-tab" data-category="stem" role="tab" aria-selected="false">STEM</button>
+            <button class="category-tab" data-category="gaming" role="tab" aria-selected="false">Gaming</button>
+            <button class="category-tab" data-category="coding" role="tab" aria-selected="false">Coding</button>
+          </div>
+        </div>
+
+        <!-- CATEGORY DESCRIPTION -->
+        <div class="category-description reveal" id="categoryDescription" aria-live="polite" style="--d:.3s">
+          Make short work of everyday tasks, open and switch
+          between apps seamlessly, and collaborate across apps
+          like Microsoft 365, Google Workspace, WhatsApp, Canva,
+          Notion and Keynote. Or use tools like LM Studio Bionic
+          and Perplexity Personal Computer to create your own AI agents.
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 6TH SECTION: AI PERFORMANCE ================= -->
+    <section class="ai-section" id="ai-performance" aria-labelledby="aiHeading">
+      <div class="ai-container">
+        <p class="ai-eyebrow reveal" style="--d:.1s">AI</p>
+
+        <h2 class="ai-heading reveal" id="aiHeading" style="--d:.2s">
+          Apt for <span>anything.</span>
+        </h2>
+
+        <p class="ai-description reveal" style="--d:.3s">
+          Whether you're outlining a presentation or
+          fine-tuning your own large language model,
+          Mac mini makes AI as accessible as it is powerful.
+          Nearly every aspect of the M6 and M5 Pro chips
+          is designed for AI — creating a platform that
+          comprehensively unites hardware, software and ecosystem.
+        </p>
+
+        <div class="ai-image-wrapper reveal" id="aiImageWrapper" style="--d:.45s">
+          <img src="images/mac-mini/ai_agentic__bdref58mxbma_large.jpg"
+               alt="Mac mini AI and agentic workflow"
+               class="ai-image"
+               loading="lazy"
+               draggable="false">
+        </div>
+
+        <p class="ai-caption reveal" style="--d:.55s">
+          Perplexity Personal Computer, Final Cut Pro, Pages
+        </p>
       </div>
     </section>
   </main>
@@ -798,7 +1558,7 @@
             }
           });
         }, { threshold: 0.15 });
-        document.querySelectorAll('#highlights .reveal').forEach((el) => revealObs.observe(el));
+        document.querySelectorAll('.reveal').forEach((el) => revealObs.observe(el));
 
         const hlEl = document.getElementById('highlights');
         if (hlEl) {
@@ -808,7 +1568,7 @@
           }, { threshold: 0.3 }).observe(hlEl);
         }
       } else {
-        document.querySelectorAll('#highlights .reveal').forEach((el) => el.classList.add('is-visible'));
+        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
       }
 
       // film modal
@@ -823,6 +1583,85 @@
         if (closeFilmBtn) closeFilmBtn.addEventListener('click', closeFilm);
         dlg.addEventListener('click', (e) => { if (e.target === dlg) closeFilm(); });
         dlg.addEventListener('close', () => vid.pause());
+      }
+
+      // Category Tab Interaction
+      const categoryTabs = document.querySelectorAll('.category-tab');
+      const categoryDesc = document.getElementById('categoryDescription');
+      const categoryContent = {
+        productivity: 'Make short work of everyday tasks, open and switch between apps seamlessly, and collaborate across apps like Microsoft 365, Google Workspace, WhatsApp, Canva, Notion and Keynote. Or use tools like LM Studio Bionic and Perplexity Personal Computer to create your own AI agents.',
+        creativity: 'Bring your creative ideas to life. Edit high-resolution photos, create stunning videos, design beautiful graphics and work across your favourite creative applications.',
+        stem: 'Explore science, technology, engineering and mathematics with powerful applications. Run complex simulations, visualize data and explore new possibilities.',
+        gaming: 'Experience immersive gaming with responsive performance, detailed graphics and smooth gameplay across your favourite games and entertainment experiences.',
+        coding: 'Build, compile and test your applications with ease. Run development environments, manage multiple projects and work with powerful coding tools and AI assistants.'
+      };
+
+      if (categoryTabs.length && categoryDesc) {
+        categoryTabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            const cat = tab.dataset.category;
+            categoryTabs.forEach((item) => {
+              item.classList.remove('active');
+              item.setAttribute('aria-selected', 'false');
+            });
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+
+            categoryDesc.classList.add('changing');
+            setTimeout(() => {
+              if (categoryContent[cat]) categoryDesc.textContent = categoryContent[cat];
+              categoryDesc.classList.remove('changing');
+            }, 220);
+          });
+        });
+      }
+
+      // 3D Card Hover Follow Glow
+      const productCards = document.querySelectorAll('.product-card');
+      productCards.forEach((card) => {
+        const glow = card.querySelector('.hover-glow');
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -4;
+          const rotateY = ((x - centerX) / centerX) * 4;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.015, 1.015, 1.015)`;
+          if (glow) {
+            glow.style.left = `${x}px`;
+            glow.style.top = `${y}px`;
+          }
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
+      });
+
+      // AI Section Mouse Parallax Effect
+      const aiWrapper = document.getElementById('aiImageWrapper');
+      const aiSec = document.querySelector('.ai-section');
+      const isTouch = window.matchMedia('(pointer: coarse)').matches;
+
+      if (aiWrapper && aiSec && !isTouch) {
+        aiSec.addEventListener('mousemove', (event) => {
+          const rect = aiWrapper.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const mouseX = event.clientX - centerX;
+          const mouseY = event.clientY - centerY;
+          const rotateY = (mouseX / rect.width) * 2.5;
+          const rotateX = (mouseY / rect.height) * -2.5;
+
+          aiWrapper.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
+        });
+
+        aiSec.addEventListener('mouseleave', () => {
+          aiWrapper.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        });
       }
     });
   </script>
