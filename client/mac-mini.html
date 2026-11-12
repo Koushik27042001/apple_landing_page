@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mac mini – Little do-it-all. | Iswift Gadgets</title>
+  <meta name="description" content="Mac mini with M4 and M4 Pro. Impossibly compact at just 5x5 inches. Built for Apple Intelligence. Thunderbolt 5, front ports, and all-day pro power.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#63743;</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/enhancements.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbf8f5;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --blue: #0071e3;
+      --blue-hover: #0077ed;
+      --border: #d2d2d7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont,
+                   "Inter", "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* ==================== GLOBAL SITE HEADER ==================== */
+    #site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      width: 100%;
+    }
+
+    .site-header,
+    .site-header--dark {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      width: 100%;
+      background: rgba(18, 18, 20, 0.88) !important;
+      backdrop-filter: saturate(180%) blur(24px) !important;
+      -webkit-backdrop-filter: saturate(180%) blur(24px) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+
+    .site-header.scrolled,
+    .site-header--dark.scrolled {
+      background: rgba(12, 12, 14, 0.96) !important;
+      border-bottom-color: rgba(255, 255, 255, 0.18) !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.65) !important;
+    }
+
+    .site-header .logo,
+    .site-header .logo-name,
+    .site-header .apple-logo,
+    .site-header--dark .logo,
+    .site-header--dark .logo-name,
+    .site-header--dark .apple-logo {
+      color: #ffffff !important;
+      display: inline-flex;
+      align-items: center;
+      margin: 0 4px 0 2px;
+      vertical-align: middle;
+    }
+
+    .site-logo-img {
+      display: inline-block !important;
+      height: 35px !important;
+      width: auto !important;
+      max-width: 138px !important;
+      object-fit: contain !important;
+      vertical-align: middle !important;
+      transition: opacity 0.2s ease, transform 0.2s ease !important;
+    }
+
+    .apple-logo-svg {
+      display: inline-block !important;
+      width: 15px !important;
+      height: 15px !important;
+      margin: 0 4px 0 2px !important;
+      vertical-align: middle !important;
+      fill: #ffffff !important;
+      color: #ffffff !important;
+      filter: none !important;
+      opacity: 1 !important;
+      flex-shrink: 0 !important;
+    }
+
+    .site-header .logo span.store-tag,
+    .site-header--dark .logo span.store-tag,
+    .site-footer .logo span.store-tag {
+      display: inline-flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: flex-start !important;
+      margin-left: 6px !important;
+      padding-left: 8px !important;
+      border-left: 1.5px solid rgba(255, 255, 255, 0.45) !important;
+      font-weight: 600 !important;
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+      font-size: 11px !important;
+      line-height: 1.15 !important;
+      letter-spacing: 0.02em !important;
+      text-transform: capitalize !important;
+      white-space: nowrap !important;
+    }
+
+    .site-header .main-nav>a,
+    .site-header--dark .main-nav>a {
+      color: #e5e5ea !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      letter-spacing: -0.01em !important;
+      transition: color 0.2s ease !important;
+    }
+
+    .site-header .main-nav>a:hover,
+    .site-header .main-nav>a.active,
+    .site-header--dark .main-nav>a:hover,
+    .site-header--dark .main-nav>a.active {
+      color: #ffffff !important;
+    }
+
+    .site-header .products-menu-toggle,
+    .site-header--dark .products-menu-toggle {
+      color: #e5e5ea !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      letter-spacing: -0.01em !important;
+    }
+
+    /* ==================== MAC MINI HERO SECTION ==================== */
+    .hero {
+      position: relative;
+      background: var(--bg);
+      min-height: clamp(520px, 85vh, 760px);
+      padding: clamp(48px, 6vw, 96px) 24px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero__eyebrow {
+      font-size: clamp(17px, 1.8vw, 21px);
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #b64400;
+      margin-bottom: 8px;
+    }
+
+    .hero__title {
+      font-size: clamp(44px, 6.2vw, 84px);
+      line-height: 1.05;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text);
+    }
+
+    /* Fixed Device Media Framing (Eliminating Excess Whitespace) */
+    .hero__media {
+      position: relative;
+      width: min(100%, 760px);
+      height: clamp(140px, 20vw, 230px);
+      margin-top: clamp(16px, 2.5vw, 32px);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero__media img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: clamp(520px, 72vw, 920px);
+      max-width: none;
+      height: auto;
+      transform: translate(-50%, -50%);
+      user-select: none;
+      -webkit-user-drag: none;
+      filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.08));
+    }
+
+    .hero__sub {
+      margin-top: clamp(16px, 2.2vw, 28px);
+      font-size: clamp(19px, 2vw, 28px);
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--text);
+    }
+
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn-buy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 22px;
+      min-width: 68px;
+      background: var(--blue);
+      color: #ffffff;
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 980px;
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0, 113, 227, 0.28);
+    }
+    .btn-buy:hover {
+      background: var(--blue-hover);
+      transform: scale(1.02);
+      box-shadow: 0 6px 18px rgba(0, 113, 227, 0.38);
+    }
+    .btn-buy:active { transform: scale(0.98); }
+    .btn-buy:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 15px;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    .btn-secondary:hover {
+      text-decoration: underline;
+    }
+    .btn-secondary svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+    .btn-secondary:hover svg {
+      transform: translateX(2px);
+    }
+
+    .hero__price {
+      margin-top: 18px;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      color: var(--muted);
+    }
+    .hero__price strong {
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .hero__price sup {
+      font-size: 0.65em;
+      line-height: 0;
+      vertical-align: super;
+    }
+
+    /* ---------- Entrance animation ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: var(--d, 0s);
+    }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; animation: none; }
+    }
+
+    /* ---------- Mobile Adjustments ---------- */
+    @media (max-width: 700px) {
+      .hero {
+        min-height: auto;
+        padding: 44px 20px 48px;
+      }
+      .hero__title {
+        font-size: clamp(38px, 9.5vw, 54px);
+        letter-spacing: -0.035em;
+      }
+      .hero__media {
+        height: 160px;
+        margin-top: 18px;
+      }
+      .hero__media img {
+        width: 140%;
+      }
+      .hero__sub {
+        font-size: clamp(18px, 4.8vw, 22px);
+        margin-top: 18px;
+      }
+      .hero__actions {
+        margin-top: 20px;
+        gap: 12px;
+      }
+      .hero__price {
+        font-size: 13px;
+        margin-top: 16px;
+      }
+      .hero__price strong {
+        font-size: 15px;
+      }
+    }
+
+    /* ==================== 2ND SECTION: GET THE HIGHLIGHTS (USER SPECIFIED) ==================== */
+    :root {
+      --gutter: clamp(24px, 12vw, 240px);
+      --gap: 16px;
+      --card-w: min(1260px, calc(100vw - 2 * var(--gutter)));
+      --slide-time: 6s;
+    }
+
+    .highlights {
+      background: #ffffff;
+      padding: 64px 0 72px;
+      overflow: hidden;
+    }
+
+    /* ---------- Header (aligned to the active card) ---------- */
+    .highlights__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: min(1260px, calc(100vw - 2 * var(--gutter)));
+      margin: 0 auto 48px var(--gutter);
+    }
+
+    .highlights__title {
+      font-size: clamp(32px, 3.2vw, 52px);
+      line-height: 1.08;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+
+    .film-link {
+      margin-bottom: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--blue);
+      background: none;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .film-link:hover { text-decoration: underline; }
+    .film-link svg { width: 16px; height: 16px; }
+
+    /* ---------- Track & Cards ---------- */
+    .viewport {
+      padding-left: var(--gutter);
+      overflow: visible;
+    }
+
+    .track {
+      display: flex;
+      gap: var(--gap);
+      transition: transform .8s cubic-bezier(.4, 0, .2, 1);
+      will-change: transform;
+      touch-action: pan-y;
+    }
+
+    .card {
+      position: relative;
+      flex: 0 0 var(--card-w);
+      aspect-ratio: 1260 / 555;
+      min-height: 440px;
+      border-radius: 28px;
+      background: #f5f5f7;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .card--lavender { background: #f3f3f8; }
+    .card--stone    { background: #c6c2bc; }
+
+    .card__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .card__text {
+      position: absolute;
+      top: clamp(28px, 3vw, 48px);
+      left: clamp(24px, 3vw, 44px);
+      max-width: min(580px, 60%);
+      font-size: clamp(18px, 1.4vw, 24px);
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: -0.012em;
+      color: var(--text);
+    }
+    .card__text sup { font-size: .55em; line-height: 0; }
+
+    /* text centred along the bottom (design card) */
+    .card--bottom .card__text {
+      top: auto;
+      bottom: clamp(24px, 2.6vw, 40px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(540px, 100% - 48px);
+      max-width: none;
+      text-align: center;
+    }
+
+    /* left text, vertically centred (memory card) */
+    .card--middle .card__text {
+      top: 50%;
+      transform: translateY(-50%);
+      max-width: min(340px, 45%);
+    }
+
+    /* ---------- Pager: play/pause + dots ---------- */
+    .pager {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    .pager__toggle {
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      background: rgba(232, 232, 237, .9);
+      color: #1d1d1f;
+      transition: filter .2s ease;
+    }
+    .pager__toggle svg { width: 14px; height: 14px; }
+
+    .pager__dots {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      height: 44px;
+      padding: 0 18px;
+      border-radius: 40px;
+      background: rgba(232, 232, 237, .9);
+    }
+
+    .dot {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 0;
+      border-radius: 8px;
+      background: rgba(29, 29, 31, .35);
+      cursor: pointer;
+      overflow: hidden;
+      transition: width .35s ease, background .35s ease;
+    }
+    .dot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: #1d1d1f;
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    .dot.is-active { width: 38px; background: rgba(29, 29, 31, .15); }
+    .dot.is-active::after { animation: fill var(--slide-time) linear forwards; }
+    .pager:not(.is-running) .dot.is-active::after { animation-play-state: paused; }
+    @keyframes fill { to { transform: scaleX(1); } }
+
+    .pager__toggle:hover, .dot:hover { filter: brightness(.94); }
+    .dot:focus-visible, .pager__toggle:focus-visible { outline: 2px solid #0071e3; outline-offset: 3px; }
+
+    /* ---------- Film modal ---------- */
+    dialog.film {
+      border: 0;
+      border-radius: 20px;
+      padding: 0;
+      width: min(1100px, 92vw);
+      background: #000;
+      overflow: hidden;
+      margin: auto;
+    }
+    dialog.film::backdrop { background: rgba(0, 0, 0, .75); }
+    dialog.film video { display: block; width: 100%; height: auto; }
+    .film__close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 2;
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .88);
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+
+    /* ---------- Mobile Adjustments for Highlights ---------- */
+    @media (max-width: 800px) {
+      :root {
+        --gutter: 20px !important;
+        --gap: 14px !important;
+        --card-w: calc(100vw - 40px) !important;
+      }
+      .highlights {
+        padding: 40px 0 56px !important;
+      }
+      .highlights__head {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        margin: 0 20px 24px 20px !important;
+        width: calc(100% - 40px) !important;
+      }
+      .highlights__title {
+        font-size: clamp(28px, 7.5vw, 38px) !important;
+        line-height: 1.1 !important;
+      }
+      .film-link {
+        margin-top: 0 !important;
+        font-size: 16px !important;
+      }
+      .viewport {
+        padding-left: 20px !important;
+      }
+      .card {
+        flex: 0 0 calc(100vw - 40px) !important;
+        aspect-ratio: auto !important;
+        height: 480px !important;
+        border-radius: 22px !important;
+      }
+      .card__text {
+        top: 24px !important;
+        left: 20px !important;
+        right: 20px !important;
+        max-width: calc(100% - 40px) !important;
+        font-size: clamp(16px, 4.4vw, 19px) !important;
+        line-height: 1.25 !important;
+      }
+      .card--middle .card__text {
+        top: 24px !important;
+        transform: none !important;
+        max-width: calc(100% - 40px) !important;
+      }
+      .card--bottom .card__text {
+        bottom: 24px !important;
+        width: calc(100% - 40px) !important;
+        text-align: center !important;
+      }
+      .pager {
+        margin-top: 22px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Global Header Navigation -->
+  <div id="site-header"></div>
+
+  <main>
+    <!-- ================= 1ST SECTION: MAC MINI HERO ================= -->
+    <section class="hero" id="hero" aria-labelledby="mini-title">
+      <p class="hero__eyebrow reveal" style="--d:0s">Mac mini</p>
+      <h1 class="hero__title reveal" id="mini-title" style="--d:.08s">Little do-it-all.</h1>
+
+      <div class="hero__media reveal" style="--d:.16s">
+        <img src="images/mac-mini/hero_endframe__d9kro8y76v42_large.jpg"
+             alt="Mac mini in silver unibody aluminum with dual front USB-C ports, power indicator and headphone jack"
+             draggable="false">
+      </div>
+
+      <p class="hero__sub reveal" style="--d:.24s">Mac mini now with M6 and M5 Pro.</p>
+
+      <div class="hero__actions reveal" style="--d:.32s">
+        <a class="btn-buy" href="#buy">Buy</a>
+        <a class="btn-secondary" href="product.html?id=mac-mini-m4">
+          Learn more
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <p class="hero__price reveal" style="--d:.40s">
+        <strong>From ₹99,900<sup>*</sup></strong><br>
+        or ₹15,817/mo. for 6 mo.<sup>‡</sup>
+      </p>
+    </section>
+
+    <!-- ================= 2ND SECTION: GET THE HIGHLIGHTS (USER SPECIFIED) ================= -->
+    <section class="highlights" id="highlights" aria-labelledby="hl-title">
+      <div class="highlights__head reveal">
+        <h2 class="highlights__title" id="hl-title">Get the highlights.</h2>
+        <button class="film-link" id="openFilm" type="button">
+          Watch the film
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z" fill="currentColor" stroke="none"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="viewport reveal" style="--d:.15s">
+        <div class="track" id="track">
+
+          <!-- 1 : M6 / M5 Pro -->
+          <article class="card card--lavender">
+            <img class="card__bg" src="images/mac-mini/highlights_mx_startframe__d9xuqya16qqa_xlarge.jpg" alt="M6 and M5 Pro chips" draggable="false">
+            <p class="card__text">The all-new, blazing-fast M6 chip. The next-level performance of M5 Pro. Take your pick — both rip.</p>
+          </article>
+
+          <!-- 2 : AI platform -->
+          <article class="card">
+            <img class="card__bg" src="images/mac-mini/macos__dc9oy014voia_large.jpg" alt="macOS AI platform wallpaper" draggable="false">
+            <p class="card__text">A powerful platform for AI, from accelerating everyday productivity with Siri AI to running your own agentic workflows.<sup>1</sup></p>
+          </article>
+
+          <!-- 3 : Design -->
+          <article class="card card--stone card--bottom">
+            <img class="card__bg" src="images/mac-mini/highlights_design__b5v3zy2alo5e_xlarge.jpg" alt="Mac mini ultra-compact design with front and back ports" draggable="false">
+            <p class="card__text">Ultra-compact design. Front and back ports. Fits, flexes and flies in any setup.</p>
+          </article>
+
+          <!-- 4 : Memory -->
+          <article class="card card--middle">
+            <img class="card__bg" src="images/mac-mini/highlights_memory__q0utmgpflfey_xlarge.jpg" alt="Mac mini unified memory architecture" draggable="false">
+            <p class="card__text">Faster unified memory. Up to 2x faster storage.<sup>2</sup> 2.5Gb Ethernet. And support for Wi-Fi 7<sup>3</sup> and Bluetooth 6.</p>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="pager reveal" id="pager" style="--d:.3s">
+        <button class="pager__toggle" id="toggle" type="button" aria-label="Pause autoplay">
+          <svg id="toggleIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="3" width="5" height="18" rx="1"/><rect x="14" y="3" width="5" height="18" rx="1"/></svg>
+        </button>
+        <div class="pager__dots" id="dots" role="tablist" aria-label="Slides"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Film modal dialog -->
+  <dialog class="film" id="filmDialog" aria-label="Mac mini film">
+    <button class="film__close" id="closeFilm" type="button" aria-label="Close">&times;</button>
+    <video id="filmVideo" controls playsinline preload="none">
+      <source src="images/ipad-mini/large_2x.mp4" type="video/mp4">
+      <source src="images/mac-mini/large.mp4" type="video/mp4">
+    </video>
+  </dialog>
+
+  <!-- Global Footer -->
+  <div id="site-footer"></div>
+  <div id="whatsapp-float"></div>
+
+  <!-- Shared Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/catalog-sync.js"></script>
+
+  <!-- Section Interactive Carousel Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const track  = document.getElementById('track');
+      if (!track) return;
+
+      const cards  = [...track.children];
+      const dotsEl = document.getElementById('dots');
+      const pager  = document.getElementById('pager');
+      const toggle = document.getElementById('toggle');
+      const icon   = document.getElementById('toggleIcon');
+
+      const PAUSE = '<rect x="5" y="3" width="5" height="18" rx="1"/><rect x="14" y="3" width="5" height="18" rx="1"/>';
+      const PLAY  = '<path d="M6 3.5v17l14-8.5z"/>';
+
+      let index = 0;
+      let userPaused = false;
+      let inView = false;
+
+      const dots = cards.map((_, i) => {
+        const b = document.createElement('button');
+        b.className = 'dot';
+        b.type = 'button';
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        b.addEventListener('click', () => go(i));
+        if (dotsEl) dotsEl.appendChild(b);
+        return b;
+      });
+
+      const step = () => {
+        if (!cards.length) return 0;
+        const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 16;
+        return cards[0].getBoundingClientRect().width + gap;
+      };
+
+      function sync() {
+        if (pager) pager.classList.toggle('is-running', inView && !userPaused);
+      }
+
+      function go(i) {
+        if (!cards.length) return;
+        index = (i + cards.length) % cards.length;
+        track.style.transform = `translateX(${-index * step()}px)`;
+        dots.forEach((d, n) => {
+          d.classList.remove('is-active');
+          d.setAttribute('aria-selected', n === index);
+        });
+        if (dots[index]) {
+          void dots[index].offsetWidth; // restart progress animation
+          dots[index].classList.add('is-active');
+        }
+      }
+
+      // advance when the active dot finishes filling
+      if (dotsEl) {
+        dotsEl.addEventListener('animationend', (e) => {
+          if (e.animationName === 'fill' && !userPaused) go(index + 1);
+        }, true);
+      }
+
+      if (toggle && icon) {
+        toggle.addEventListener('click', () => {
+          userPaused = !userPaused;
+          icon.innerHTML = userPaused ? PLAY : PAUSE;
+          toggle.setAttribute('aria-label', userPaused ? 'Play autoplay' : 'Pause autoplay');
+          sync();
+        });
+      }
+
+      // swipe
+      let startX = null;
+      track.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+      window.addEventListener('pointerup', (e) => {
+        if (startX === null) return;
+        const dx = e.clientX - startX;
+        startX = null;
+        if (Math.abs(dx) > 50) go(Math.min(cards.length - 1, Math.max(0, index + (dx < 0 ? 1 : -1))));
+      });
+
+      window.addEventListener('resize', () => go(index));
+      go(0);
+
+      // reveal on scroll
+      if ('IntersectionObserver' in window) {
+        const revealObs = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              revealObs.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('#highlights .reveal').forEach((el) => revealObs.observe(el));
+
+        const hlEl = document.getElementById('highlights');
+        if (hlEl) {
+          new IntersectionObserver((entries) => {
+            inView = entries[0].isIntersecting;
+            sync();
+          }, { threshold: 0.3 }).observe(hlEl);
+        }
+      } else {
+        document.querySelectorAll('#highlights .reveal').forEach((el) => el.classList.add('is-visible'));
+      }
+
+      // film modal
+      const dlg = document.getElementById('filmDialog');
+      const vid = document.getElementById('filmVideo');
+      const openFilmBtn = document.getElementById('openFilm');
+      const closeFilmBtn = document.getElementById('closeFilm');
+
+      if (dlg && vid) {
+        const closeFilm = () => { vid.pause(); dlg.close(); };
+        if (openFilmBtn) openFilmBtn.addEventListener('click', () => { dlg.showModal(); vid.play().catch(() => {}); });
+        if (closeFilmBtn) closeFilmBtn.addEventListener('click', closeFilm);
+        dlg.addEventListener('click', (e) => { if (e.target === dlg) closeFilm(); });
+        dlg.addEventListener('close', () => vid.pause());
+      }
+    });
+  </script>
+</body>
+</html>
+
