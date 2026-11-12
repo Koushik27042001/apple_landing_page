@@ -57,7 +57,7 @@ function renderHeader(active) {
   if (active) window.__ACTIVE_NAV__ = active;
   const el = document.getElementById("site-header");
   if (!el) return;
-  const isProductActive = ["iphone", "ipad", "mac", "watch", "airpods", "apple", "macbook-air", "macbook-neo", "iphone-18-pro", "ipad-mini"].includes(active);
+  const isProductActive = ["iphone", "ipad", "mac", "watch", "airpods", "apple", "macbook-air", "macbook-neo", "iphone-18-pro", "ipad-mini", "mac-mini"].includes(active);
   const isDarkPage = true; // Signature Apple luxury dark glass navbar across all pages
 
   el.innerHTML =
@@ -154,7 +154,7 @@ function renderHeader(active) {
                   '<a href="macbook-air.html" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Air</span></a>' +
                   '<a href="product.html?id=imac-24-m4" class="cascade-prod-item"><span class="cascade-prod-name">iMac</span></a>' +
                   '<a href="macbook-neo.html" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Neo</span></a>' +
-                  '<a href="product.html?id=mac-mini-m4" class="cascade-prod-item"><span class="cascade-prod-name">Mac Mini</span><span class="badge-new-red">New</span></a>' +
+                  '<a href="mac-mini.html" class="cascade-prod-item"><span class="cascade-prod-name">Mac Mini</span><span class="badge-new-red">New</span></a>' +
                   '<a href="category.html?cat=mac" class="cascade-prod-item"><span class="cascade-prod-name">Mac Studio</span></a>' +
                   '<div class="cascade-divider"></div>' +
                   '<a href="category.html?cat=mac" class="cascade-explore-link">Explore all Mac &rarr;</a>' +
@@ -269,7 +269,7 @@ function renderHeader(active) {
                 '<a href="macbook-air.html" class="mobile-leaf-link"><span class="mll-name">MacBook Air</span></a>' +
                 '<a href="product.html?id=mbp-14-m4-pro" class="mobile-leaf-link"><span class="mll-name">MacBook Pro 14&quot; &amp; 16&quot;</span></a>' +
                 '<a href="product.html?id=imac-24-m4" class="mobile-leaf-link"><span class="mll-name">iMac 24&quot;</span></a>' +
-                '<a href="product.html?id=mac-mini-m4" class="mobile-leaf-link"><span class="mll-name">Mac mini (M4)</span></a>' +
+                '<a href="mac-mini.html" class="mobile-leaf-link"><span class="mll-name">Mac mini</span></a>' +
                 '<a href="product.html?id=mac-studio-m2-max" class="mobile-leaf-link"><span class="mll-name">Mac Studio</span></a>' +
                 '<a href="product.html?id=studio-display" class="mobile-leaf-link"><span class="mll-name">Displays</span></a>' +
                 '<a href="category.html?cat=mac" class="mobile-leaf-link mobile-leaf-explore"><span>Explore All Mac &rarr;</span></a>' +

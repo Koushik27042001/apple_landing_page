@@ -1259,10 +1259,10 @@
       .oled .reveal, .oled .reveal--zoom { opacity: 1; transform: none; transition: none; }
     }
 
-    /* ==================== 5TH SECTION: MEET SIRI AI (USER SPECIFIED) ==================== */
+    /* ==================== 5TH SECTION: MEET SIRI AI (FAN SHOWCASE) ==================== */
     .siri {
       background: #ffffff;
-      padding: 48px 24px 100px;
+      padding: clamp(48px, 6vw, 80px) 20px clamp(72px, 9vw, 120px);
       text-align: center;
       overflow: hidden;
       position: relative;
@@ -1271,7 +1271,7 @@
     /* ---------- Copy ---------- */
     .siri__eyebrow {
       display: inline-block;
-      font-size: 21px;
+      font-size: clamp(17px, 1.6vw, 21px);
       line-height: 1.2;
       font-weight: 600;
       letter-spacing: -0.01em;
@@ -1284,7 +1284,7 @@
 
     .siri__title {
       margin-top: 10px;
-      font-size: clamp(48px, 6.8vw, 104px);
+      font-size: clamp(38px, 6.2vw, 96px);
       line-height: 1.04;
       font-weight: 600;
       letter-spacing: -0.04em;
@@ -1293,49 +1293,148 @@
     .siri__title span { display: block; }
 
     .siri__note {
-      margin-top: clamp(24px, 3vw, 44px);
-      font-size: 17px;
+      margin-top: clamp(20px, 2.5vw, 36px);
+      font-size: clamp(14px, 1.2vw, 17px);
       line-height: 1.35;
       font-weight: 500;
       color: var(--muted);
     }
 
-    /* ---------- Feature Cards Fan Media ---------- */
-    .siri__media {
-      margin-top: clamp(36px, 6vw, 72px);
+    /* ---------- Fanned Cards Showcase ---------- */
+    .siri__fan-wrap {
+      margin-top: clamp(32px, 5.5vw, 68px);
+      width: 100%;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 10px;
       display: flex;
       justify-content: center;
       align-items: center;
-      max-width: 1160px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 0 16px;
+      position: relative;
     }
 
-    .siri__media img {
-      display: block;
+    .siri__fan-stage {
+      position: relative;
       width: 100%;
-      height: auto;
-      max-width: 1100px;
-      object-fit: contain;
+      aspect-ratio: 1024 / 460;
+      min-height: 180px;
       user-select: none;
       -webkit-user-drag: none;
-      filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.04));
     }
 
-    /* ---------- Siri Entrance animation ---------- */
+    /* Common Card Styling */
+    .fan-card {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: clamp(8px, 1.8vw, 24px);
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.16),
+                  0 3px 10px rgba(0, 0, 0, 0.04);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+    .fan-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    .fan-card:hover {
+      box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.22),
+                  0 6px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Card 1: Far Left (Photo Mosaic) */
+    .fan-card--c1 {
+      width: 11.5%;
+      aspect-ratio: 492 / 536;
+      left: 14.5%;
+      z-index: 2;
+    }
+    .fan-card--c1:hover {
+      transform: translateY(-54%) scale(1.03);
+      z-index: 4;
+    }
+
+    /* Card 2: Near Left (Notes & Summaries) */
+    .fan-card--c2 {
+      width: 16.5%;
+      aspect-ratio: 640 / 696;
+      left: 23.5%;
+      z-index: 3;
+    }
+    .fan-card--c2:hover {
+      transform: translateY(-54%) scale(1.03);
+      z-index: 4;
+    }
+
+    /* Center iPad Mini */
+    .fan-card--ipad {
+      width: 25.5%;
+      aspect-ratio: 800 / 1228;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      overflow: visible;
+    }
+    .fan-card--ipad img {
+      object-fit: contain;
+      filter: drop-shadow(0 20px 48px rgba(0, 0, 0, 0.22));
+    }
+    .fan-card--ipad:hover {
+      box-shadow: none;
+      transform: translate(-50%, -53%) scale(1.02);
+    }
+
+    /* Card 3: Near Right (Clean Up Woman) */
+    .fan-card--c3 {
+      width: 16.5%;
+      aspect-ratio: 640 / 696;
+      right: 23.5%;
+      z-index: 3;
+    }
+    .fan-card--c3:hover {
+      transform: translateY(-54%) scale(1.03);
+      z-index: 4;
+    }
+
+    /* Card 4: Far Right (Mars Astronaut) */
+    .fan-card--c4 {
+      width: 11.5%;
+      aspect-ratio: 492 / 536;
+      right: 14.5%;
+      z-index: 2;
+    }
+    .fan-card--c4:hover {
+      transform: translateY(-54%) scale(1.03);
+      z-index: 4;
+    }
+
+    /* ---------- Siri Entrance Animation ---------- */
     .siri .reveal {
       opacity: 0;
       transform: translateY(28px);
       transition: opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1);
       transition-delay: var(--d, 0s);
     }
-    .siri .reveal--zoom { transform: translateY(36px) scale(.96); }
-    .siri .reveal.is-visible { opacity: 1; transform: none; }
+    .siri .reveal--fan {
+      transform: translateY(36px) scale(0.96);
+    }
+    .siri .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
 
-    @media (max-width: 700px) {
+    /* Mobile Responsive (< 768px) */
+    @media (max-width: 768px) {
       .siri {
-        padding: 32px 16px 64px !important;
+        padding: 36px 12px 64px !important;
       }
       .siri__title {
         font-size: clamp(34px, 8.5vw, 54px) !important;
@@ -1349,21 +1448,45 @@
         margin-top: 18px !important;
         line-height: 1.4 !important;
       }
-      .siri .reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-      }
-      .siri__media {
-        margin-top: 28px !important;
+      .siri__fan-wrap {
         padding: 0 !important;
-        width: 100% !important;
-        display: flex !important;
-        justify-content: center !important;
+        margin-top: 28px !important;
+        overflow: hidden !important;
       }
-      .siri__media img {
-        width: 125% !important;
-        max-width: none !important;
+      .siri__fan-stage {
+        aspect-ratio: auto !important;
+        height: clamp(240px, 66vw, 340px) !important;
+        width: 100% !important;
+        max-width: 440px !important;
+      }
+      .fan-card--ipad {
+        width: auto !important;
+        height: 92% !important;
+        aspect-ratio: 800 / 1228 !important;
+      }
+      .fan-card--c2 {
+        width: auto !important;
+        height: 55% !important;
+        aspect-ratio: 640 / 696 !important;
+        left: 8% !important;
+      }
+      .fan-card--c1 {
+        width: auto !important;
+        height: 42% !important;
+        aspect-ratio: 492 / 536 !important;
+        left: -2% !important;
+      }
+      .fan-card--c3 {
+        width: auto !important;
+        height: 55% !important;
+        aspect-ratio: 640 / 696 !important;
+        right: 8% !important;
+      }
+      .fan-card--c4 {
+        width: auto !important;
+        height: 42% !important;
+        aspect-ratio: 492 / 536 !important;
+        right: -2% !important;
       }
     }
 
@@ -1935,11 +2058,48 @@
         Siri AI is available in English.<br>Usage limits may apply.
       </p>
 
-      <div class="siri__media reveal reveal--zoom" style="--d:.15s">
-        <img src="images/ipad-mini/siri_features_fan.jpg"
-             alt="iPad mini in the center surrounded by Apple Intelligence features: photo search, notes, Clean Up and image creation"
-             loading="lazy"
-             draggable="false">
+      <div class="siri__fan-wrap reveal reveal--fan" style="--d:.2s">
+        <div class="siri__fan-stage">
+          <!-- Far Left: Photo Mosaic -->
+          <div class="fan-card fan-card--c1">
+            <img src="images/ipad-mini/hero_intro_1__qowjhgnes9mm_large_2x.jpg"
+                 alt="Photo search in Apple Intelligence"
+                 loading="lazy"
+                 draggable="false">
+          </div>
+
+          <!-- Near Left: Notes & Summaries -->
+          <div class="fan-card fan-card--c2">
+            <img src="images/ipad-mini/hero_intro_2__cx4f2gtun6ie_large_2x.jpg"
+                 alt="Notes and summaries in Apple Intelligence"
+                 loading="lazy"
+                 draggable="false">
+          </div>
+
+          <!-- Center: iPad mini -->
+          <div class="fan-card fan-card--ipad">
+            <img src="images/ipad-mini/hero_intro_endframe__edff65eao2qa_large_2x.png"
+                 alt="iPad mini with Siri AI"
+                 loading="lazy"
+                 draggable="false">
+          </div>
+
+          <!-- Near Right: Clean Up Photo Editing -->
+          <div class="fan-card fan-card--c3">
+            <img src="images/ipad-mini/hero_intro_3__dpvm7eraugmu_large_2x.jpg"
+                 alt="Clean Up photo editing in Apple Intelligence"
+                 loading="lazy"
+                 draggable="false">
+          </div>
+
+          <!-- Far Right: Image Playground -->
+          <div class="fan-card fan-card--c4">
+            <img src="images/ipad-mini/hero_intro_4__gbu6220ghtiu_large_2x.jpg"
+                 alt="Image Playground with astronaut on Mars"
+                 loading="lazy"
+                 draggable="false">
+          </div>
+        </div>
       </div>
     </section>
 

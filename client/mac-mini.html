@@ -699,6 +699,11 @@
   <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
   <script src="js/catalog-sync.js"></script>
+  <script>
+    if (typeof renderHeader === "function") renderHeader("mac");
+    if (typeof renderFooter === "function") renderFooter();
+    if (typeof renderWhatsAppFloat === "function") renderWhatsAppFloat();
+  </script>
 
   <!-- Section Interactive Carousel Script -->
   <script>
