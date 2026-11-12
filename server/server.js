@@ -117,11 +117,17 @@ app.use("/images/uploads", async function (req, res, next) {
   return res.status(404).json({ error: "Image not found" });
 });
 app.use("/admin", express.static(path.join(clientDir, "admin")));
-app.get("/iphone-duo", function (req, res) {
+app.get(["/iphone-duo", "/iphone-duo.html"], function (req, res) {
   res.sendFile(path.join(clientDir, "iphone-duo.html"));
 });
-app.get("/macbook-neo", function (req, res) {
+app.get(["/iphone-18-pro", "/iphone-18-pro.html"], function (req, res) {
+  res.sendFile(path.join(clientDir, "iphone-18-pro.html"));
+});
+app.get(["/macbook-neo", "/macbook-neo.html"], function (req, res) {
   res.sendFile(path.join(clientDir, "macbook-neo.html"));
+});
+app.get(["/macbook-air", "/macbook-air.html"], function (req, res) {
+  res.sendFile(path.join(clientDir, "macbook-air.html"));
 });
 app.get(["/ipad-mini", "/ipad-mini.html"], function (req, res) {
   res.sendFile(path.join(clientDir, "ipad-mini.html"));
