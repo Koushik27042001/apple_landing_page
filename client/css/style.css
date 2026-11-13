@@ -4098,6 +4098,61 @@ body.page-dark .mobile-nav .search-input {
   margin-bottom: 3px;
 }
 
+.store-info-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  display: flex;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+  cursor: pointer;
+}
+
+.store-info-link:hover {
+  opacity: 0.88;
+}
+
+.store-info-link:hover p:not(.label) {
+  color: var(--blue) !important;
+  text-decoration: underline;
+}
+
+.store-info-link .pin-hint {
+  font-size: 11px;
+  color: var(--blue);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+  margin-left: 5px;
+}
+
+body.dark-theme .store-info-link .pin-hint {
+  color: #2997ff;
+}
+
+body.dark-theme .store-info-link:hover p:not(.label) {
+  color: #2997ff !important;
+}
+
+.footer-address-link {
+  color: inherit !important;
+  text-decoration: none !important;
+  display: block;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.footer-address-link:hover {
+  color: #2997ff !important;
+  text-decoration: underline !important;
+}
+
+.footer-pin-hint {
+  display: inline-block;
+  font-size: 11.5px;
+  color: #2997ff;
+  font-weight: 500;
+  margin-top: 3px;
+}
+
 .map-frame {
   width: 100%;
   height: 320px;

@@ -15,7 +15,7 @@ const DEFAULTS = {
     "near Outer Ring Rd, Sector 6, HSR Layout,",
     "Bengaluru, Karnataka 560102"
   ],
-  mapLink: "https://www.google.com/maps/search/?api=1&query=Service+Lane,+L-176,+2nd+Floor+5th+Main,+near+Outer+Ring+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102",
+  mapLink: "https://www.google.com/maps/search/?api=1&query=L-176,+5th+Main+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102",
   shippingFee: 199,
   shippingThreshold: 50000,
   announcement: "",

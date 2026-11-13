@@ -24,9 +24,9 @@ let STORE_ADDRESS_LINES = [
   "near Outer Ring Rd, Sector 6, HSR Layout,",
   "Bengaluru, Karnataka 560102"
 ];
-let STORE_MAP_LINK = "https://www.google.com/maps/search/?api=1&query=Service+Lane,+L-176,+2nd+Floor+5th+Main,+near+Outer+Ring+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102";
+let STORE_MAP_LINK = "https://www.google.com/maps/search/?api=1&query=L-176,+5th+Main+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102";
 let STORE_MAP_EMBED =
-  "https://www.google.com/maps?q=Service+Lane,+L-176,+2nd+Floor+5th+Main,+near+Outer+Ring+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102&hl=en&z=16&output=embed";
+  "https://maps.google.com/maps?q=L-176,+5th+Main+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102&t=&z=16&ie=UTF8&iwloc=B&output=embed";
 
 function whatsappLink(message) {
   return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
@@ -851,7 +851,10 @@ function renderFooter() {
           '<div class="footer-col footer-contact"><h5>Get in touch</h5><ul>' +
             '<li class="footer-address">' +
               '<span class="footer-label">Head Office</span>' +
-              STORE_ADDRESS_LINES.join("<br>") +
+              '<a href="' + STORE_MAP_LINK + '" target="_blank" rel="noopener" class="footer-address-link" title="Pinpoint Head Office on Google Maps">' +
+                STORE_ADDRESS_LINES.join("<br>") +
+                '<span class="footer-pin-hint">Pinpoint on Map &rarr;</span>' +
+              '</a>' +
             '</li>' +
             '<li class="footer-phones">' +
               '<span class="footer-label">Phone</span>' +
@@ -871,7 +874,9 @@ function renderFooter() {
           '<div class="footer-map-head">' +
             '<div>' +
               '<h5>Visit our head office</h5>' +
-              '<p>Service Lane, L-176, 2nd Floor 5th Main, near Outer Ring Rd, Sector 6, HSR Layout, Bengaluru</p>' +
+              '<a href=\"' + STORE_MAP_LINK + '\" target=\"_blank\" rel=\"noopener\" class=\"footer-address-link\" title=\"Pinpoint Head Office on Google Maps\">' +
+                '<p>Service Lane, L-176, 2nd Floor 5th Main, near Outer Ring Rd, Sector 6, HSR Layout, Bengaluru</p>' +
+              '</a>' +
             '</div>' +
             '<a class="btn btn-outline" href="' + STORE_MAP_LINK + '" target="_blank" rel="noopener">Open in Google Maps</a>' +
           '</div>' +

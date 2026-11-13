@@ -75,13 +75,13 @@
       <div>
         <div class="store-info-card">
           <h3>Get in Touch</h3>
-          <div class="store-info-row">
+          <a class="store-info-row store-info-link" id="contactAddressLink" href="https://www.google.com/maps/search/?api=1&query=L-176,+5th+Main+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102" target="_blank" rel="noopener" title="Pinpoint Head Office on Google Maps">
             <span class="icon" data-icon="pin" data-icon-size="18"></span>
             <div>
-              <p class="label">Head Office</p>
+              <p class="label">Head Office <span class="pin-hint">(Pinpoint on Map ↗)</span></p>
               <p id="contactAddress">Service Lane, L-176, 2nd Floor 5th Main,<br>near Outer Ring Rd, Sector 6, HSR Layout,<br>Bengaluru, Karnataka 560102</p>
             </div>
-          </div>
+          </a>
           <div class="store-info-row">
             <span class="icon" data-icon="phone" data-icon-size="18"></span>
             <div>
@@ -111,10 +111,10 @@
           <a href="#" id="contactWaLink" target="_blank" rel="noopener" class="btn btn-primary btn-block" style="margin-top:6px;">Chat on WhatsApp</a>
         </div>
         <iframe class="map-frame" id="contactMapFrame" style="margin-top:20px;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=Service+Lane,+L-176,+2nd+Floor+5th+Main,+near+Outer+Ring+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102&amp;hl=en&amp;z=16&amp;output=embed"
+          src="https://maps.google.com/maps?q=L-176,+5th+Main+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102&t=&z=16&ie=UTF8&iwloc=B&output=embed"
           title="Head Office map — HSR Layout, Bengaluru" allowfullscreen></iframe>
         <p style="margin-top:10px; font-size:13px;">
-          <a href="https://www.google.com/maps/search/?api=1&query=Service+Lane,+L-176,+2nd+Floor+5th+Main,+near+Outer+Ring+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102" id="contactMapLink" target="_blank" rel="noopener" style="color:var(--blue);">Open this location in Google Maps →</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=L-176,+5th+Main+Rd,+Sector+6,+HSR+Layout,+Bengaluru,+Karnataka+560102" id="contactMapLink" target="_blank" rel="noopener" style="color:var(--blue);">Open this location in Google Maps →</a>
         </p>
       </div>
 
@@ -157,6 +157,10 @@
     }
     const mapLnk = document.getElementById("contactMapLink");
     if (mapLnk && STORE_MAP_LINK) mapLnk.href = STORE_MAP_LINK;
+    const addrLink = document.getElementById("contactAddressLink");
+    if (addrLink && STORE_MAP_LINK) addrLink.href = STORE_MAP_LINK;
+    const mapFrame = document.getElementById("contactMapFrame");
+    if (mapFrame && STORE_MAP_EMBED) mapFrame.src = STORE_MAP_EMBED;
   }
   document.addEventListener("store_settings:applied", updateContactPageSettings);
   updateContactPageSettings();
