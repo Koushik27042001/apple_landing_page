@@ -452,6 +452,13 @@
         flex: 0 0 auto !important;
       }
 
+      body.mobile-nav-open .site-header .header-actions,
+      body.mobile-nav-open .site-header--dark .header-actions,
+      body:has(#mobileNav.open) .site-header .header-actions,
+      body:has(#mobileNav.open) .site-header--dark .header-actions {
+        display: none !important;
+      }
+
       .site-header .header-actions .search-wrap,
       .site-header--dark .header-actions .search-wrap {
         display: none !important;

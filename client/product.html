@@ -716,11 +716,16 @@
   }
 
   function updateStickyAtc() {
+    const el = document.getElementById("stickyAtc");
+    if (!el) return;
     const unitPrice = currentUnitPrice();
-    document.getElementById("stickyAtc").innerHTML =
+    el.innerHTML =
       '<div class="satc-price"><span class="price">' + formatINR(unitPrice) + '</span><span class="emi">From ' + formatINR(getEmi(unitPrice, 12)) + '/mo</span></div>' +
       '<button class="btn btn-outline" onclick="handleAddToCart()">Add to Cart</button>' +
       '<button class="btn btn-primary" onclick="handleBuyNow()">Buy Now</button>';
+    if (document.body.classList.contains("mobile-nav-open")) {
+      el.style.setProperty("display", "none", "important");
+    }
   }
 
   function relatedProductCard(p) {

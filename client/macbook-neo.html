@@ -462,6 +462,13 @@
         flex: 0 0 auto !important;
       }
 
+      body.mobile-nav-open .site-header .header-actions,
+      body.mobile-nav-open .site-header--dark .header-actions,
+      body:has(#mobileNav.open) .site-header .header-actions,
+      body:has(#mobileNav.open) .site-header--dark .header-actions {
+        display: none !important;
+      }
+
       .site-header .header-actions .search-wrap,
       .site-header--dark .header-actions .search-wrap {
         display: none !important;
@@ -479,21 +486,31 @@
 
     /* Mobile Navigation Drawer Enhancements - Clean & Elegant Layout */
     .mobile-nav {
-      position: fixed;
-      inset: 0;
-      background: rgba(18, 18, 20, 0.98) !important;
-      backdrop-filter: blur(28px) !important;
-      -webkit-backdrop-filter: blur(28px) !important;
-      z-index: 100001;
+      position: fixed !important;
+      inset: 0 !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100% !important;
+      width: 100vw !important;
+      height: 100% !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+      background: #000000 !important;
+      z-index: 9999999 !important;
       display: none;
-      flex-direction: column;
-      padding: 16px 20px 32px !important;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      flex-direction: column !important;
+      padding: 16px 20px max(36px, env(safe-area-inset-bottom) + 24px) !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      box-sizing: border-box !important;
     }
 
     .mobile-nav.open {
       display: flex !important;
+      background: #000000 !important;
+      opacity: 1 !important;
     }
 
     .mobile-nav-head {

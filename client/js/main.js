@@ -348,16 +348,63 @@ function wireHeaderInteractions() {
   function openMobileMenu() {
     if (mobileNav) {
       mobileNav.classList.add("open");
+      document.body.classList.add("mobile-nav-open");
+      document.documentElement.classList.add("mobile-nav-open");
       document.body.style.overflow = "hidden";
+
+      // Completely hide sticky mobile add-to-bag/cart bar and floating widgets
+      const stickyAtc = document.getElementById("stickyAtc");
+      if (stickyAtc) stickyAtc.style.setProperty("display", "none", "important");
+      const waFloat = document.getElementById("whatsapp-float");
+      if (waFloat) waFloat.style.setProperty("display", "none", "important");
+
+      // Hide all purchase CTAs / add to bag buttons so nothing peeks through open nav
+      const atcSelectors = "#addToBagBtn, .atc-btn, #airAddToBagBtn, #neoAddToBagBtn, #miniAddToBagBtn, .add-to-cart-btn, .btn-bag, .sticky-atc, .pdp-actions, .buy-summary";
+      document.querySelectorAll(atcSelectors).forEach(function (el) {
+        el.style.setProperty("visibility", "hidden", "important");
+      });
     }
   }
 
   function closeMobileMenu() {
     if (mobileNav) {
       mobileNav.classList.remove("open");
+      document.body.classList.remove("mobile-nav-open");
+      document.documentElement.classList.remove("mobile-nav-open");
       document.body.style.overflow = "";
+
+      // Restore sticky mobile add-to-cart bar if on mobile
+      const stickyAtc = document.getElementById("stickyAtc");
+      if (stickyAtc) {
+        stickyAtc.style.removeProperty("display");
+        if (window.innerWidth <= 768) {
+          stickyAtc.style.display = "flex";
+        }
+      }
+      const waFloat = document.getElementById("whatsapp-float");
+      if (waFloat) waFloat.style.removeProperty("display");
+
+      // Restore purchase CTAs / buttons
+      const atcSelectors = "#addToBagBtn, .atc-btn, #airAddToBagBtn, #neoAddToBagBtn, #miniAddToBagBtn, .add-to-cart-btn, .btn-bag, .sticky-atc, .pdp-actions, .buy-summary";
+      document.querySelectorAll(atcSelectors).forEach(function (el) {
+        el.style.removeProperty("visibility");
+      });
     }
   }
+
+  // Close mobile menu on Escape key press
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && mobileNav && mobileNav.classList.contains("open")) {
+      closeMobileMenu();
+    }
+  });
+
+  // Close mobile menu if window resized to desktop
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 900 && mobileNav && mobileNav.classList.contains("open")) {
+      closeMobileMenu();
+    }
+  });
 
   if (menuBtn) {
     menuBtn.addEventListener("click", function (e) {

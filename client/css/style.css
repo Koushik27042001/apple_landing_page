@@ -8455,19 +8455,103 @@ body.dark-theme .cascade-panel a.cascade-explore-link:hover,
 .mobile-nav {
   position: fixed !important;
   inset: 0 !important;
-  background: rgba(18, 18, 20, 0.98) !important;
-  backdrop-filter: blur(28px) !important;
-  -webkit-backdrop-filter: blur(28px) !important;
-  z-index: 100001 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  width: 100vw !important;
+  height: 100% !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  background: #000000 !important;
+  z-index: 9999999 !important;
   display: none;
   flex-direction: column !important;
-  padding: 16px 20px 32px !important;
+  padding: 16px 20px max(36px, env(safe-area-inset-bottom) + 24px) !important;
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch !important;
+  box-sizing: border-box !important;
 }
 
 .mobile-nav.open {
   display: flex !important;
+  background: #000000 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+body:not(.dark-theme):not(.page-dark) .mobile-nav.open {
+  background: #ffffff !important;
+}
+
+/* ==================== MOBILE MENU OPEN STATE (HIDE STICKY ATC, FLOATING BUTTONS & BUY CTAS) ==================== */
+body.mobile-nav-open,
+html.mobile-nav-open {
+  overflow: hidden !important;
+}
+
+body.mobile-nav-open #site-header,
+html.mobile-nav-open #site-header,
+body:has(#mobileNav.open) #site-header,
+body:has(.mobile-nav.open) #site-header {
+  z-index: 9999999 !important;
+}
+
+body.mobile-nav-open .sticky-atc,
+body.mobile-nav-open #stickyAtc,
+html.mobile-nav-open .sticky-atc,
+html.mobile-nav-open #stickyAtc,
+body:has(#mobileNav.open) .sticky-atc,
+body:has(#mobileNav.open) #stickyAtc,
+body:has(.mobile-nav.open) .sticky-atc,
+body:has(.mobile-nav.open) #stickyAtc,
+body.mobile-nav-open [class*="sticky-atc"],
+body:has(#mobileNav.open) [class*="sticky-atc"],
+body:has(.mobile-nav.open) [class*="sticky-atc"],
+body.mobile-nav-open .whatsapp-float,
+body.mobile-nav-open #whatsapp-float,
+html.mobile-nav-open .whatsapp-float,
+html.mobile-nav-open #whatsapp-float,
+body:has(#mobileNav.open) .whatsapp-float,
+body:has(#mobileNav.open) #whatsapp-float,
+body:has(.mobile-nav.open) .whatsapp-float,
+body:has(.mobile-nav.open) #whatsapp-float,
+body.mobile-nav-open #addToBagBtn,
+body.mobile-nav-open .atc-btn,
+body.mobile-nav-open #airAddToBagBtn,
+body.mobile-nav-open #neoAddToBagBtn,
+body.mobile-nav-open #miniAddToBagBtn,
+body.mobile-nav-open .add-to-cart-btn,
+body.mobile-nav-open .btn-bag,
+body.mobile-nav-open .pdp-actions,
+body.mobile-nav-open .buy-summary,
+body:has(#mobileNav.open) #addToBagBtn,
+body:has(#mobileNav.open) .atc-btn,
+body:has(#mobileNav.open) #airAddToBagBtn,
+body:has(#mobileNav.open) #neoAddToBagBtn,
+body:has(#mobileNav.open) #miniAddToBagBtn,
+body:has(#mobileNav.open) .add-to-cart-btn,
+body:has(#mobileNav.open) .btn-bag,
+body:has(#mobileNav.open) .pdp-actions,
+body:has(#mobileNav.open) .buy-summary,
+body:has(.mobile-nav.open) #addToBagBtn,
+body:has(.mobile-nav.open) .atc-btn,
+body:has(.mobile-nav.open) #airAddToBagBtn,
+body:has(.mobile-nav.open) #neoAddToBagBtn,
+body:has(.mobile-nav.open) #miniAddToBagBtn,
+body:has(.mobile-nav.open) .add-to-cart-btn,
+body:has(.mobile-nav.open) .btn-bag,
+body:has(.mobile-nav.open) .pdp-actions,
+body:has(.mobile-nav.open) .buy-summary,
+body.mobile-nav-open .site-header .header-actions,
+body:has(#mobileNav.open) .site-header .header-actions,
+body:has(.mobile-nav.open) .site-header .header-actions {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
 }
 
 .mobile-nav-head {
@@ -8753,7 +8837,7 @@ body.dark-theme .cascade-panel a.cascade-explore-link:hover,
 
 body.dark-theme .mobile-nav,
 body.page-dark .mobile-nav {
-  background: rgba(14, 14, 16, 0.98) !important;
+  background: #000000 !important;
 }
 
 body.dark-theme .mobile-nav .mobile-accordion-toggle,
