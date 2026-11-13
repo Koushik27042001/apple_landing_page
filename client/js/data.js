@@ -379,11 +379,11 @@ const PRODUCTS = [
     rating: 4.6,
     reviews: 58,
     stock: 20,
-    images: ["images/products/macbook-neo-citrus.png", "images/products/macbook-neo-indigo.png", "images/products/macbook-neo-silver.png"],
+    images: ["images/products/macbook-neo-citrus.png", "images/products/macbook-neo-indigo.png", "images/products/macbook-neo-blush.png", "images/products/macbook-neo-silver.png"],
     colors: [
       { name: "Citrus", hex: "#f2c14e", image: "images/products/macbook-neo-citrus.png" },
       { name: "Indigo", hex: "#4b4e8f", image: "images/products/macbook-neo-indigo.png" },
-      { name: "Blush", hex: "#f1c8c8", image: "images/products/macbook-neo-citrus.png" },
+      { name: "Blush", hex: "#f1c8c8", image: "images/products/macbook-neo-blush.png" },
       { name: "Silver", hex: "#e3e4e6", image: "images/products/macbook-neo-silver.png" }
     ],
     storageOptions: [
@@ -414,11 +414,11 @@ const PRODUCTS = [
     rating: 4.9,
     reviews: 128,
     stock: 25,
-    images: ["images/products/macbook-neo-citrus.png", "images/products/macbook-neo-indigo.png", "images/products/macbook-neo-silver.png"],
+    images: ["images/products/macbook-neo-citrus.png", "images/products/macbook-neo-indigo.png", "images/products/macbook-neo-blush.png", "images/products/macbook-neo-silver.png"],
     colors: [
       { name: "Citrus", hex: "#e5bc35", image: "images/products/macbook-neo-citrus.png" },
       { name: "Indigo", hex: "#394b68", image: "images/products/macbook-neo-indigo.png" },
-      { name: "Blush", hex: "#e6b3b8", image: "images/products/macbook-neo-citrus.png" },
+      { name: "Blush", hex: "#e6b3b8", image: "images/products/macbook-neo-blush.png" },
       { name: "Silver", hex: "#e3e4e6", image: "images/products/macbook-neo-silver.png" }
     ],
     storageOptions: [
