@@ -2303,3 +2303,104 @@ body.dark-theme .spec-table td {
 body.dark-theme .spec-table td:first-child {
   color: #86868b !important;
 }
+
+
+/* ============================================================
+   CONTAINER OVERFLOW & EMI TEXT FIXES ACROSS ALL PAGES
+   Prevents pricing, EMI text, and buttons from overflowing outer borders
+   ============================================================ */
+
+.pdp-showcase-wrapper,
+body.dark-theme .pdp-showcase-wrapper {
+  width: 100% !important;
+  max-width: 1140px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+}
+
+.pdp-purchase-container,
+body.dark-theme .pdp-purchase-container {
+  width: 100% !important;
+  max-width: 1100px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.pdp-purchase-left {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+.pdp-purchase-right {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.pdp-purchase-left .pdp-price-block {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+.pdp-purchase-left .pdp-price-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: baseline !important;
+  gap: 8px 12px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.pdp-purchase-left .pdp-emi-line,
+body.dark-theme .pdp-purchase-left .pdp-emi-line {
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: block !important;
+}
+
+.pdp-purchase-left .pdp-emi-line a#emiToggle,
+body.dark-theme .pdp-purchase-left .pdp-emi-line a#emiToggle {
+  display: inline-block !important;
+  margin-left: 6px !important;
+  white-space: nowrap !important;
+  font-weight: 500 !important;
+}
+
+/* Responsive breakpoint: Switch purchase container to single column below 960px */
+@media (max-width: 960px) {
+  .pdp-purchase-container,
+  body.dark-theme .pdp-purchase-container {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    padding: 28px 24px !important;
+  }
+  
+  .pdp-purchase-right {
+    border-left: none !important;
+    padding-left: 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding-top: 28px !important;
+  }
+}
+
+/* Universal EMI & Pricing text overflow prevention across Category, Home, Pricing */
+.product-card .pc-emi,
+.product-card .pc-price-row,
+.pricing-card .pricing-price-block,
+.collection-card .cc-price {
+  max-width: 100% !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  box-sizing: border-box !important;
+}

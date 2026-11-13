@@ -1335,53 +1335,111 @@
 
     /* Color Switcher Section */
     .neo-color-switcher-section {
-      padding: 60px 20px;
+      padding: clamp(60px, 8vw, 100px) 20px;
       background: #000000;
       text-align: center;
       color: #ffffff;
+      position: relative;
+      overflow: hidden;
     }
 
     .color-picker-title {
-      font-size: 28px;
+      font-size: clamp(28px, 4.2vw, 46px);
       font-weight: 700;
-      margin-bottom: 8px;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
       color: #ffffff;
     }
 
     .color-picker-subtitle {
-      font-size: 16px;
+      font-size: clamp(16px, 1.8vw, 20px);
       color: #86868b;
-      margin-bottom: 30px;
+      margin-bottom: 36px;
+    }
+
+    .color-picker-subtitle strong {
+      color: #ffffff;
+    }
+
+    /* Product Display Stage - Transparent RGBA on Apple Dark Luxury Stage */
+    .neo-color-stage {
+      max-width: 960px;
+      margin: 0 auto 36px;
+      position: relative;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, rgba(10, 10, 14, 0.75) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px;
+      padding: 40px 24px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .neo-color-img {
+      width: 100%;
+      max-width: 720px;
+      max-height: 460px;
+      object-fit: contain;
+      filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.75));
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      will-change: opacity, transform;
     }
 
     .color-swatches {
       display: flex;
       justify-content: center;
-      gap: 16px;
-      margin-bottom: 36px;
+      align-items: center;
+      gap: clamp(16px, 3vw, 32px);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
     }
 
     .color-swatch-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      padding: 3px;
-      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
       background: transparent;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 12px;
+      transition: transform 0.2s ease;
     }
 
-    .color-swatch-btn.active {
-      border-color: #2997ff;
-      transform: scale(1.15);
-    }
-
-    .color-swatch-dot {
-      width: 100%;
-      height: 100%;
+    .color-swatch-btn .color-swatch-dot {
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+      border: 2.5px solid transparent;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .color-swatch-btn:hover .color-swatch-dot {
+      transform: scale(1.12);
+    }
+
+    .color-swatch-btn.active .color-swatch-dot {
+      border-color: #2997ff;
+      transform: scale(1.2);
+      box-shadow: 0 0 18px rgba(41, 151, 255, 0.55), inset 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+
+    .color-swatch-btn .swatch-name {
+      font-size: 13px;
+      color: #86868b;
+      font-weight: 500;
+      transition: color 0.25s ease;
+    }
+
+    .color-swatch-btn.active .swatch-name {
+      color: #ffffff;
+      font-weight: 600;
     }
 
     .neo-showcase-stage {
@@ -1638,10 +1696,10 @@
             <div class="pill__panel">
               <div class="pill__inner">
                 <div class="swatches" role="group" aria-label="Choose a colour">
-                  <button class="swatch" style="--c:#394a6b" aria-pressed="true" data-name="Indigo"></button>
-                  <button class="swatch" style="--c:#e8e36a" aria-pressed="false" data-name="Citrus"></button>
-                  <button class="swatch" style="--c:#f2b5c4" aria-pressed="false" data-name="Blush"></button>
-                  <button class="swatch" style="--c:#d8dadf" aria-pressed="false" data-name="Silver"></button>
+                  <button class="swatch" style="--c:#394a6b" aria-pressed="true" data-name="Indigo" data-src="images/macbook_neo/colors/macbook-neo-indigo.png"></button>
+                  <button class="swatch" style="--c:#e8e36a" aria-pressed="false" data-name="Citrus" data-src="images/macbook_neo/colors/macbook-neo-citrus.png"></button>
+                  <button class="swatch" style="--c:#f2b5c4" aria-pressed="false" data-name="Blush" data-src="images/macbook_neo/colors/macbook-neo-blush.png"></button>
+                  <button class="swatch" style="--c:#d8dadf" aria-pressed="false" data-name="Silver" data-src="images/macbook_neo/colors/macbook-neo-silver.png"></button>
                 </div>
                 <p class="swatch-label" id="swatchLabel">Indigo</p>
               </div>
@@ -1772,38 +1830,47 @@
 
         <div class="neo-showcase-stage">
           <a href="product.html?id=macbook-neo" title="View MacBook Neo Details">
-            <video id="heroShowcaseImg" class="neo-showcase-img" style="cursor: pointer;" muted loop playsinline
-              preload="metadata" poster="images/products/macbook-neo-citrus.png">
-              <source src="videos/macbook-neo-citrus.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
+            <img id="heroShowcaseImg" class="neo-showcase-img"
+                 src="images/macbook_neo/colors/macbook-neo-citrus.png"
+                 alt="MacBook Neo in Citrus finish" style="cursor: pointer;">
           </a>
         </div>
       </div>
     </section>
 
     <!-- Interactive Color Switcher Section -->
-    <section class="neo-color-switcher-section">
+    <section class="neo-color-switcher-section" id="colorSwitcher">
       <div class="container">
         <h2 class="color-picker-title">Four vivid finishes. One durable design.</h2>
         <p class="color-picker-subtitle" id="selectedColorLabel">Selected finish: <strong>Citrus</strong></p>
 
-        <div class="color-swatches">
+        <!-- Product Display Stage: Transparent RGBA on Dark Luxury Stage (No White Background) -->
+        <div class="neo-color-stage">
+          <img id="neoColorShowcaseImg" class="neo-color-img"
+               src="images/macbook_neo/colors/macbook-neo-citrus.png"
+               alt="MacBook Neo in Citrus finish">
+        </div>
+
+        <div class="color-swatches" role="radiogroup" aria-label="MacBook Neo Finishes">
           <button type="button" class="color-swatch-btn active" data-color="Citrus"
-            data-img="images/products/macbook-neo-citrus.png" data-video="videos/macbook-neo-citrus.mp4" title="Citrus">
+            data-img="images/macbook_neo/colors/macbook-neo-citrus.png" title="Citrus" aria-label="Citrus">
             <div class="color-swatch-dot" style="background:#e5bc35;"></div>
+            <span class="swatch-name">Citrus</span>
           </button>
           <button type="button" class="color-swatch-btn" data-color="Indigo"
-            data-img="images/products/macbook-neo-indigo.png" data-video="videos/macbook-neo-indigo.mp4" title="Indigo">
+            data-img="images/macbook_neo/colors/macbook-neo-indigo.png" title="Indigo" aria-label="Indigo">
             <div class="color-swatch-dot" style="background:#394b68;"></div>
+            <span class="swatch-name">Indigo</span>
           </button>
           <button type="button" class="color-swatch-btn" data-color="Blush"
-            data-img="images/products/macbook-neo-citrus.png" data-video="videos/macbook-neo-blush.mp4" title="Blush">
+            data-img="images/macbook_neo/colors/macbook-neo-blush.png" title="Blush" aria-label="Blush">
             <div class="color-swatch-dot" style="background:#e6b3b8;"></div>
+            <span class="swatch-name">Blush</span>
           </button>
           <button type="button" class="color-swatch-btn" data-color="Silver"
-            data-img="images/products/macbook-neo-silver.png" data-video="videos/macbook-neo-silver.mp4" title="Silver">
+            data-img="images/macbook_neo/colors/macbook-neo-silver.png" title="Silver" aria-label="Silver">
             <div class="color-swatch-dot" style="background:#e3e4e6;"></div>
+            <span class="swatch-name">Silver</span>
           </button>
         </div>
       </div>
@@ -2060,34 +2127,41 @@
       let basePrice = 69900;
       let selectedStorageExtra = 0;
 
-      // Swatch switcher logic with 3D Morph Animation
+      // Swatch switcher logic for MacBook Neo Color Section
       const swatches = document.querySelectorAll(".color-swatch-btn");
       const heroImg = document.getElementById("heroShowcaseImg");
+      const colorShowcaseImg = document.getElementById("neoColorShowcaseImg");
       const colorLabel = document.getElementById("selectedColorLabel");
+
+      function updateNeoColor(btn) {
+        swatches.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        selectedColor = btn.getAttribute("data-color");
+        const imgPath = btn.getAttribute("data-img");
+
+        function crossfade(imgEl) {
+          if (!imgEl || !imgPath) return;
+          imgEl.style.opacity = "0.2";
+          imgEl.style.transform = "scale(0.97)";
+          setTimeout(() => {
+            imgEl.src = imgPath;
+            imgEl.alt = "MacBook Neo in " + selectedColor + " finish";
+            imgEl.style.opacity = "1";
+            imgEl.style.transform = "scale(1)";
+          }, 150);
+        }
+
+        crossfade(colorShowcaseImg);
+        crossfade(heroImg);
+
+        if (colorLabel) {
+          colorLabel.innerHTML = "Selected finish: <strong>" + selectedColor + "</strong>";
+        }
+      }
 
       swatches.forEach(btn => {
         btn.addEventListener("click", function () {
-          swatches.forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          selectedColor = btn.getAttribute("data-color");
-          const imgPath = btn.getAttribute("data-img");
-
-          // Simple media switch handling
-          if (heroImg) {
-            if (heroImg.tagName === "IMG" && imgPath) {
-              heroImg.src = imgPath;
-            } else if (heroImg.tagName === "VIDEO" && btn.getAttribute("data-video")) {
-              const source = heroImg.querySelector('source');
-              if (source) {
-                source.src = btn.getAttribute("data-video");
-                heroImg.load();
-                heroImg.play();
-              }
-            }
-          }
-          if (colorLabel) {
-            colorLabel.innerHTML = "Selected finish: <strong>" + selectedColor + "</strong>";
-          }
+          updateNeoColor(btn);
         });
       });
 
