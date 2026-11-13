@@ -581,7 +581,7 @@
             '<h3>Overview</h3>' +
             '<p class="pdp-desc">' + product.description + '</p>' +
             '<ul class="pdp-highlights">' +
-              Object.keys(product.specs).slice(0, 4).map(function (k) {
+              Object.keys(product.specs).filter(function (k) { return k !== "Model No." && !k.toLowerCase().includes("model no"); }).slice(0, 4).map(function (k) {
                 return '<li><strong>' + k + ':</strong> ' + product.specs[k] + '</li>';
               }).join("") +
             '</ul>' +
@@ -589,7 +589,7 @@
           '<div class="pdp-details-block">' +
             '<h3>Technical Specifications</h3>' +
             '<table class="spec-table">' +
-              Object.keys(product.specs).map(function (k) {
+              Object.keys(product.specs).filter(function (k) { return k !== "Model No." && !k.toLowerCase().includes("model no"); }).map(function (k) {
                 return '<tr><td>' + k + '</td><td>' + product.specs[k] + '</td></tr>';
               }).join("") +
             '</table>' +

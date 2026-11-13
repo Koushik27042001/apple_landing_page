@@ -169,7 +169,6 @@ const PRODUCTS = [
     short: "The most affordable way into the iPhone 17 lineup.",
     description: "iPhone 17e brings the power of the A18 chip, a 48MP Fusion camera, and all-day battery life to the most accessible iPhone yet.",
     specs: {
-      "Model No.": "MHRV4HN/A (Black), MHRW4HN/A (White), MHRX4HN/A (Soft Pink)",
       "Display": "6.1-inch Super Retina XDR",
       "Chip": "Apple A18 chip",
       "Camera": "48MP Fusion camera",
@@ -206,7 +205,6 @@ const PRODUCTS = [
     short: "A total powerhouse. Now in five gorgeous colors.",
     description: "iPhone 17 features a 6.3-inch ProMotion display, the A19 chip, and a 48MP Dual Fusion camera system — all in a durable Ceramic Shield 2 design.",
     specs: {
-      "Model No.": "MG6J–MG6N4HN/A (256GB), MG6P–MG6V4HN/A (512GB)",
       "Display": "6.3-inch Super Retina XDR, ProMotion 120Hz",
       "Chip": "A19 chip, 6-core CPU",
       "Camera": "48MP Fusion Main + 48MP Ultra Wide",
@@ -243,7 +241,6 @@ const PRODUCTS = [
     short: "Astonishingly thin. Astonishingly capable.",
     description: "iPhone Air is Apple's thinnest iPhone ever, built around the A19 Pro chip with a striking titanium frame and an advanced single-lens camera system that shoots like a Pro.",
     specs: {
-      "Model No.": "MG2L–MG304HN/A",
       "Display": "6.5-inch Super Retina XDR, ProMotion 120Hz",
       "Chip": "A19 Pro chip, 6-core CPU",
       "Camera": "48MP Fusion Main camera",
@@ -282,7 +279,6 @@ const PRODUCTS = [
     short: "Forged in aluminium. Powered by A19 Pro.",
     description: "iPhone 17 Pro features a new forged-aluminium unibody design, the blazing-fast A19 Pro chip with a vapor chamber, and a full triple 48MP Pro camera system with up to 8x optical-quality zoom.",
     specs: {
-      "Model No.": "MG8G–MG8R4HN/A",
       "Display": "6.3-inch Super Retina XDR, ProMotion 120Hz",
       "Chip": "A19 Pro chip, 6-core CPU with vapor chamber cooling",
       "Camera": "48MP Main + 48MP Ultra Wide + 48MP 8x Telephoto",
@@ -322,7 +318,6 @@ const PRODUCTS = [
     short: "The biggest, most capable Pro. Ever.",
     description: "iPhone 17 Pro Max pairs the largest iPhone display ever with the longest battery life of any iPhone, all driven by the A19 Pro chip and a pro-grade triple-camera system.",
     specs: {
-      "Model No.": "MFYM–MGO14HN/A",
       "Display": "6.9-inch Super Retina XDR, ProMotion 120Hz",
       "Chip": "A19 Pro chip, 6-core CPU with vapor chamber cooling",
       "Camera": "48MP Main + 48MP Ultra Wide + 48MP 8x Telephoto",
@@ -398,7 +393,6 @@ const PRODUCTS = [
     short: "The most affordable Mac. Now with A18 Pro.",
     description: "The all-new entry-level MacBook brings Apple silicon performance to a fanless, ultra-portable design in four fresh colors — perfect for students and everyday use.",
     specs: {
-      "Model No.": "MHFA–MHFJ4HN/A",
       "Display": "13.6-inch Liquid Retina",
       "Chip": "Apple A18 Pro chip, 6-core CPU / 5-core GPU / 16-core Neural Engine",
       "Memory": "8GB unified memory",
@@ -471,7 +465,6 @@ const PRODUCTS = [
     short: "Impressively big. Impressively thin. Supercharged by M5.",
     description: "MacBook Air with M5 delivers a huge leap in performance in the same strikingly thin fanless design, with up to 18 hours of battery life.",
     specs: {
-      "Model No.": "MDH7–MDHK4HN/A",
       "Display": "13.6-inch Liquid Retina",
       "Chip": "Apple M5 chip, 10-core CPU / 8-core GPU",
       "Memory": "16GB unified memory (up to 24GB)",
@@ -508,7 +501,6 @@ const PRODUCTS = [
     short: "Impressively big. Impressively thin.",
     description: "MacBook Air with M5 delivers incredible performance in a strikingly thin design, with a big 15.3-inch Liquid Retina display and up to 18 hours of battery life.",
     specs: {
-      "Model No.": "MDV9–MDVU4HN/A",
       "Display": "15.3-inch Liquid Retina",
       "Chip": "Apple M5 chip, 10-core CPU / 10-core GPU",
       "Memory": "16GB unified memory (up to 24GB)",
@@ -547,7 +539,6 @@ const PRODUCTS = [
     short: "Mind-blowing performance with M5, M5 Pro or M5 Max.",
     description: "The 14-inch MacBook Pro scales from the all-new M5 chip to M5 Pro and M5 Max, bringing exceptional performance and up to 24 hours of battery life to a stunning Liquid Retina XDR display.",
     specs: {
-      "Model No.": "MDE1–MJ3E / MGDN–MGDU4HN/A",
       "Display": "14.2-inch Liquid Retina XDR",
       "Chip": "Apple M5 / M5 Pro / M5 Max chip",
       "Memory": "16GB unified memory (up to 36GB)",
@@ -583,7 +574,6 @@ const PRODUCTS = [
     short: "The ultimate pro laptop. M5 Pro and M5 Max.",
     description: "The 16-inch MacBook Pro is built for the most demanding workflows, with the M5 Pro or M5 Max chip, a massive Liquid Retina XDR display, and up to 24 hours of battery life.",
     specs: {
-      "Model No.": "MGEA–MGE94HN/A",
       "Display": "16.2-inch Liquid Retina XDR",
       "Chip": "Apple M5 Pro / M5 Max chip",
       "Memory": "24GB unified memory (up to 48GB)",
@@ -621,7 +611,6 @@ const PRODUCTS = [
     short: "Hello, color. Supercharged by M4.",
     description: "iMac with M4 packs a stunning 24-inch 4.5K Retina display, a 12MP Center Stage camera, and all-day performance into a strikingly thin all-in-one design available in four colors.",
     specs: {
-      "Model No.": "MWUC–MD2U4HN/A",
       "Display": "24-inch Retina 4.5K",
       "Chip": "Apple M4 chip, 8-core / 10-core GPU",
       "Memory": "16GB unified memory (up to 24GB)",
@@ -655,7 +644,6 @@ const PRODUCTS = [
     short: "Mini in size. Mighty in power.",
     description: "Mac mini with M4 or M4 Pro packs immense power into an impossibly compact design — perfect as a desktop workstation or home media hub.",
     specs: {
-      "Model No.": "MU9D–MCX44HN/A",
       "Chip": "Apple M4 / M4 Pro chip",
       "Memory": "16GB unified memory (up to 24GB)",
       "Storage": "256GB / 512GB SSD",
@@ -692,7 +680,6 @@ const PRODUCTS = [
     short: "Powerful. Colorful. Wonderful.",
     description: "The 11th-generation iPad brings the A16 chip, a bigger Liquid Retina display, and Apple Pencil Pro support to the most affordable full-size iPad.",
     specs: {
-      "Model No.": "MD3Y–MD5C4HN/A (Wi-Fi)",
       "Display": "11-inch Liquid Retina",
       "Chip": "Apple A16 chip",
       "Camera": "12MP Wide, 12MP Ultra Wide front",
@@ -729,7 +716,6 @@ const PRODUCTS = [
     short: "Serious performance in a thin, light design.",
     description: "iPad Air is more capable than ever with the M4 chip, a gorgeous 11-inch Liquid Retina display, and support for Apple Pencil Pro and Magic Keyboard.",
     specs: {
-      "Model No.": "MH30–MH7Q4HN/A",
       "Display": "11-inch Liquid Retina",
       "Chip": "Apple M4 chip",
       "Camera": "12MP Wide",
@@ -766,7 +752,6 @@ const PRODUCTS = [
     short: "The bigger Air. Just as light.",
     description: "iPad Air 13-inch pairs the M4 chip with a large, immersive Liquid Retina display — ideal for creativity, note-taking, and productivity on the go.",
     specs: {
-      "Model No.": "MH5N–MH9V4HN/A",
       "Display": "13-inch Liquid Retina",
       "Chip": "Apple M4 chip",
       "Camera": "12MP Wide",
@@ -801,7 +786,6 @@ const PRODUCTS = [
     short: "Unbelievably thin. Impossibly capable. M5.",
     description: "iPad Pro features the M5 chip, an Ultra Retina XDR tandem OLED display, and support for Apple Pencil Pro — built for the most demanding pro workflows on the go.",
     specs: {
-      "Model No.": "MDWK–ME6D4HN/A",
       "Display": "11-inch Ultra Retina XDR (tandem OLED)",
       "Chip": "Apple M5 chip",
       "Camera": "12MP Wide + LiDAR Scanner",
@@ -836,7 +820,6 @@ const PRODUCTS = [
     short: "The ultimate iPad experience, supersized.",
     description: "iPad Pro 13-inch pairs the M5 chip with the largest, most immersive Ultra Retina XDR display ever on an iPad — a true portable studio.",
     specs: {
-      "Model No.": "MDYJ–ME8N4HN/A",
       "Display": "13-inch Ultra Retina XDR (tandem OLED)",
       "Chip": "Apple M5 chip",
       "Camera": "12MP Wide + LiDAR Scanner",
@@ -874,7 +857,6 @@ const PRODUCTS = [
     short: "A great deal to love. A great deal to give.",
     description: "Apple Watch SE 3 has the essential features to keep you moving, motivated, and connected — including Crash Detection, sleep tracking, and up to 18 hours of battery life.",
     specs: {
-      "Model No.": "MEH3–MEPJ4HN/A",
       "Display": "Retina LTPO OLED, Always-On",
       "Chip": "S10 SiP",
       "Health": "Heart Rate, Crash Detection, Sleep Apnea notifications",
@@ -913,7 +895,6 @@ const PRODUCTS = [
     short: "Smarter. Brighter. Mightier.",
     description: "Apple Watch Series 11 introduces hypertension notifications, all-day battery life up to 24 hours, and a brighter always-on display, all powered by the S10 chip.",
     specs: {
-      "Model No.": "MEQT–MF8N4HN/A",
       "Display": "Always-On Retina LTPO OLED",
       "Chip": "S10 SiP with 4-core Neural Engine",
       "Health": "Blood Oxygen, ECG, Hypertension notifications",
@@ -947,7 +928,6 @@ const PRODUCTS = [
     short: "The ultimate sports watch. Now with satellite communication.",
     description: "Apple Watch Ultra 3 features the biggest, brightest display yet, satellite communication for emergencies off the grid, and up to 42 hours of normal battery life (72 hours in low power mode).",
     specs: {
-      "Model No.": "MEWH–MF1T4HN/A",
       "Display": "Always-On LTPO OLED, largest &amp; brightest yet",
       "Chip": "S10 SiP",
       "Health": "Depth Gauge, Dive computer, ECG, Blood Oxygen",
@@ -1108,7 +1088,6 @@ const PRODUCTS = [
     short: "Heart rate sensing. Even richer sound.",
     description: "AirPods Pro 3 feature up to 2x more Active Noise Cancellation, a built-in heart-rate sensor, Adaptive Audio, and a MagSafe Charging Case with speaker.",
     specs: {
-      "Model No.": "SYLW2HN/A",
       "Chip": "Apple H3 headphone chip",
       "Health": "Built-in heart-rate sensor",
       "Noise Control": "Active Noise Cancellation + Adaptive Transparency",
@@ -1266,7 +1245,7 @@ const PRODUCTS = [
     storageOptions: [],
     short: "2 years of accidental damage protection for iPhone 17e.",
     description: "AppleCare+ provides expert repairs and support directly from Apple, including coverage for accidental damage (deductibles apply, 2 incidents every 12 months) and 24/7 priority support.",
-    specs: { "Model No.": "SCYW3HN/A", "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts", "Battery Service": "Included if capacity falls below 80%" }
+    specs: { "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts", "Battery Service": "Included if capacity falls below 80%" }
   },
   {
     id: "applecare-iphone-17",
@@ -1284,7 +1263,7 @@ const PRODUCTS = [
     storageOptions: [],
     short: "2 years of accidental damage protection for iPhone 17.",
     description: "AppleCare+ provides expert repairs and support directly from Apple, including coverage for accidental damage (deductibles apply, 2 incidents every 12 months) and 24/7 priority support.",
-    specs: { "Model No.": "SWXT2HN/A", "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts", "Battery Service": "Included if capacity falls below 80%" }
+    specs: { "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts", "Battery Service": "Included if capacity falls below 80%" }
   },
   {
     id: "applecare-iphone-air",
@@ -1302,7 +1281,7 @@ const PRODUCTS = [
     storageOptions: [],
     short: "2 years of accidental damage protection for iPhone Air.",
     description: "AppleCare+ provides expert repairs and support directly from Apple, including coverage for accidental damage (deductibles apply, 2 incidents every 12 months) and 24/7 priority support.",
-    specs: { "Model No.": "SWXY2HN/A", "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts", "Battery Service": "Included if capacity falls below 80%" }
+    specs: { "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts", "Battery Service": "Included if capacity falls below 80%" }
   },
   {
     id: "applecare-iphone-17-pro",
@@ -1320,7 +1299,7 @@ const PRODUCTS = [
     storageOptions: [],
     short: "2 years of accidental damage protection for iPhone 17 Pro & Pro Max.",
     description: "AppleCare+ provides expert repairs and support directly from Apple, including coverage for accidental damage (deductibles apply, 2 incidents every 12 months) and 24/7 priority support.",
-    specs: { "Model No.": "SWY42HN/A / SWY92HN/A", "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts", "Battery Service": "Included if capacity falls below 80%" }
+    specs: { "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts", "Battery Service": "Included if capacity falls below 80%" }
   },
   {
     id: "applecare-ipad-air",
@@ -1338,7 +1317,7 @@ const PRODUCTS = [
     storageOptions: [],
     short: "2 years of accidental damage protection for iPad Air.",
     description: "AppleCare+ provides expert repairs and support directly from Apple, including coverage for accidental damage (deductibles apply, 2 incidents every 12 months) and 24/7 priority support.",
-    specs: { "Model No.": "SCV93HN/A / SCVD3HN/A", "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts" }
+    specs: { "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts" }
   },
   {
     id: "applecare-ipad-pro",
@@ -1356,7 +1335,7 @@ const PRODUCTS = [
     storageOptions: [],
     short: "2 years of accidental damage protection for iPad Pro.",
     description: "AppleCare+ provides expert repairs and support directly from Apple, including coverage for accidental damage (deductibles apply, 2 incidents every 12 months) and 24/7 priority support.",
-    specs: { "Model No.": "SXTO2HN/A / SXT12HN/A", "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts" }
+    specs: { "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts" }
   },
   {
     id: "applecare-macbook-air",
@@ -1374,7 +1353,7 @@ const PRODUCTS = [
     storageOptions: [],
     short: "3 years of accidental damage protection for MacBook Air.",
     description: "AppleCare+ provides expert repairs and support directly from Apple, including coverage for accidental damage (deductibles apply, 2 incidents every 12 months) and 24/7 priority support.",
-    specs: { "Model No.": "SCW83HN/A / SCW93HN/A", "Coverage Term": "3 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts" }
+    specs: { "Coverage Term": "3 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts" }
   },
   {
     id: "applecare-macbook-pro",
@@ -1392,7 +1371,7 @@ const PRODUCTS = [
     storageOptions: [],
     short: "3 years of accidental damage protection for MacBook Pro.",
     description: "AppleCare+ provides expert repairs and support directly from Apple, including coverage for accidental damage (deductibles apply, 2 incidents every 12 months) and 24/7 priority support.",
-    specs: { "Model No.": "SXKH2HN/A / SCXU3HN/A", "Coverage Term": "3 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts" }
+    specs: { "Coverage Term": "3 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts" }
   },
   {
     id: "applecare-watch",
@@ -1410,7 +1389,7 @@ const PRODUCTS = [
     storageOptions: [],
     short: "2 years of accidental damage protection for Apple Watch SE 3 / Series 11.",
     description: "AppleCare+ provides expert repairs and support directly from Apple, including coverage for accidental damage (deductibles apply, 2 incidents every 12 months) and 24/7 priority support.",
-    specs: { "Model No.": "SXHW2HN/A / SXCJ2HN/A", "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts" }
+    specs: { "Coverage Term": "2 years from purchase", "Accidental Damage": "2 incidents every 12 months", "Support": "24/7 priority access to Apple experts" }
   },
   {
     id: "applecare-airpods",
@@ -1428,7 +1407,7 @@ const PRODUCTS = [
     storageOptions: [],
     short: "2 years of accidental damage protection for AirPods Pro 3.",
     description: "AppleCare+ provides expert repairs and support directly from Apple, including coverage for accidental damage (deductibles apply) and battery service.",
-    specs: { "Model No.": "SYLW2HN/A", "Coverage Term": "2 years from purchase", "Accidental Damage": "Covered, deductible applies per incident", "Support": "24/7 priority access to Apple experts" }
+    specs: { "Coverage Term": "2 years from purchase", "Accidental Damage": "Covered, deductible applies per incident", "Support": "24/7 priority access to Apple experts" }
   }
 ];
 

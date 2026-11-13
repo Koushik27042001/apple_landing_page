@@ -2095,3 +2095,211 @@ section img,
   outline: none !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45) !important;
 }
+
+/* ============================================================
+   DARK THEME ALIGNED PDP SHOWCASE & PURCHASING SUITE
+   Removes white backgrounds and applies Apple dark luxury glass
+   ============================================================ */
+
+body.dark-theme .pdp-showcase-wrapper {
+  background: transparent !important;
+}
+
+body.dark-theme .pdp-top-header h1 {
+  color: #ffffff !important;
+}
+
+body.dark-theme .pdp-top-header .pc-cat {
+  color: #86868b !important;
+}
+
+body.dark-theme .pdp-top-header .pdp-short {
+  color: #a1a1a6 !important;
+}
+
+body.dark-theme .pdp-top-header .pdp-rating {
+  color: #86868b !important;
+}
+
+/* Product Image Gallery Stage - Removed White Background */
+body.dark-theme .pdp-gallery-main.pdp-top-aligned {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.04) 0%, rgba(12, 12, 16, 0.8) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(24px) !important;
+}
+
+body.dark-theme .pdp-gallery-main.pdp-top-aligned img {
+  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.55)) !important;
+  background: transparent !important;
+}
+
+body.dark-theme .pdp-thumbs .pdp-thumb {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-theme .pdp-thumbs .pdp-thumb.active {
+  border-color: #0071e3 !important;
+  box-shadow: 0 0 14px rgba(0, 113, 227, 0.45) !important;
+}
+
+/* Purchase & Configurator Container - Removed White Background */
+body.dark-theme .pdp-purchase-container {
+  background: rgba(18, 18, 22, 0.78) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(30px) !important;
+  color: #f5f5f7 !important;
+}
+
+body.dark-theme .pdp-purchase-left .pdp-price {
+  color: #ffffff !important;
+}
+
+body.dark-theme .pdp-purchase-left .pdp-mrp {
+  color: #86868b !important;
+}
+
+body.dark-theme .pdp-purchase-left .pdp-discount {
+  background: rgba(48, 209, 88, 0.15) !important;
+  color: #30d158 !important;
+  border: 1px solid rgba(48, 209, 88, 0.3) !important;
+}
+
+body.dark-theme .pdp-purchase-left .pdp-emi-line {
+  color: #86868b !important;
+}
+
+body.dark-theme .pdp-purchase-left .pdp-emi-line strong {
+  color: #ffffff !important;
+}
+
+body.dark-theme .pdp-purchase-left .pdp-emi-line a {
+  color: #2997ff !important;
+}
+
+body.dark-theme .pdp-purchase-left .option-group > label.title {
+  color: #ffffff !important;
+}
+
+body.dark-theme .pdp-purchase-left .option-group > label.title .sel-value {
+  color: #86868b !important;
+}
+
+body.dark-theme .pdp-purchase-left .storage-opt {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #f5f5f7 !important;
+}
+
+body.dark-theme .pdp-purchase-left .storage-opt:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+body.dark-theme .pdp-purchase-left .storage-opt.active {
+  background: rgba(0, 113, 227, 0.2) !important;
+  border-color: #0071e3 !important;
+  color: #ffffff !important;
+}
+
+body.dark-theme .pdp-purchase-left .qty-selector {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+body.dark-theme .pdp-purchase-left .qty-selector button {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+body.dark-theme .pdp-purchase-left .qty-selector button:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+body.dark-theme .pdp-purchase-left .qty-selector span {
+  color: #ffffff !important;
+}
+
+body.dark-theme .pdp-purchase-left .stock-info {
+  color: #30d158 !important;
+}
+
+body.dark-theme .pdp-purchase-left .stock-info.low {
+  color: #ff9f0a !important;
+}
+
+body.dark-theme .pdp-purchase-right .trust-mini {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-theme .pdp-purchase-right .trust-mini div {
+  color: #86868b !important;
+}
+
+body.dark-theme .pdp-purchase-right .trust-mini .icon {
+  color: #2997ff !important;
+}
+
+body.dark-theme .pdp-purchase-right .whatsapp-inline-btn {
+  background: rgba(37, 211, 102, 0.12) !important;
+  color: #25d366 !important;
+  border: 1px solid rgba(37, 211, 102, 0.3) !important;
+}
+
+body.dark-theme .pdp-purchase-right .whatsapp-inline-btn:hover {
+  background: rgba(37, 211, 102, 0.2) !important;
+}
+
+body.dark-theme #emiPlans {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+}
+
+body.dark-theme .emi-plan {
+  color: #f5f5f7 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+body.dark-theme .emi-plan span:last-child {
+  color: #ffffff !important;
+}
+
+body.dark-theme .pdp-details {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #f5f5f7 !important;
+}
+
+body.dark-theme .pdp-details h3 {
+  color: #ffffff !important;
+}
+
+body.dark-theme .pdp-desc {
+  color: #a1a1a6 !important;
+}
+
+body.dark-theme .pdp-highlights li {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #f5f5f7 !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+body.dark-theme .pdp-highlights strong {
+  color: #ffffff !important;
+}
+
+body.dark-theme .spec-table tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+}
+
+body.dark-theme .spec-table td {
+  color: #ffffff !important;
+}
+
+body.dark-theme .spec-table td:first-child {
+  color: #86868b !important;
+}
