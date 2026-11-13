@@ -966,11 +966,18 @@
       reveals.forEach(function (el) { el.classList.add("is-visible"); });
     }
 
-    // Smooth scroll for internal anchor links (#pdpDetails, #pdpContent)
+    // Smooth scroll for internal anchor links (#pdpDetails, #pdpContent, #displaySpecs, etc.)
     heroContainer.querySelectorAll('a[href^="#"]').forEach(function (link) {
       link.addEventListener("click", function (e) {
         const hash = link.getAttribute("href");
-        const target = document.querySelector(hash);
+        let target = document.querySelector(hash);
+        if (!target) {
+          if (hash === "#learn-proled" || hash === "#learn-m6") {
+            target = document.getElementById("pdpDetails") || document.querySelector(".pdp-details");
+          } else if (hash === "#buy-proled" || hash === "#buy-m6") {
+            target = document.getElementById("pdpContent");
+          }
+        }
         if (target) {
           e.preventDefault();
           target.scrollIntoView({ behavior: "smooth", block: "start" });

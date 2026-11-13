@@ -132,6 +132,12 @@ app.get(["/macbook-air", "/macbook-air.html"], function (req, res) {
 app.get(["/ipad-mini", "/ipad-mini.html"], function (req, res) {
   res.sendFile(path.join(clientDir, "ipad-mini.html"));
 });
+app.get(["/mac-mini", "/mac-mini.html"], function (req, res) {
+  res.sendFile(path.join(clientDir, "mac-mini.html"));
+});
+app.get(["/product", "/product.html"], function (req, res) {
+  res.sendFile(path.join(clientDir, "product.html"));
+});
 app.get(["/pricing", "/pricing/"], function (req, res) {
   res.sendFile(path.join(clientDir, "pricing.html"));
 });
