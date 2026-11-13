@@ -9,6 +9,188 @@
 <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/enhancements.css">
   <link rel="stylesheet" href="css/chip-family.css">
+  <style>
+    :root {
+      --orange: #f56b23;
+      --blue: #0071e3;
+      --blue-hover: #0077ed;
+      --link: #2997ff;
+    }
+
+    /* MacBook Pro Hero ("Choose your Pro") */
+    .models {
+      background: #000;
+      padding: 32px 24px 96px;
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    .models__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(24px, 4vw, 72px);
+      width: min(1240px, 100%);
+      margin: 0 auto;
+    }
+
+    /* ---------- Product column ---------- */
+    .model {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .model__media {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .model__media img {
+      display: block;
+      width: min(100%, 520px);
+      height: auto;
+      user-select: none;
+    }
+
+    /* colour dots */
+    .models .dots {
+      display: flex;
+      gap: 6px;
+      margin-top: clamp(24px, 3vw, 44px);
+      list-style: none;
+      padding: 0;
+    }
+    .models .dots button {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      background: var(--c);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      transition: outline-color .2s ease, transform .2s ease;
+    }
+    .models .dots button:hover { transform: scale(1.1); }
+    .models .dots button[aria-pressed="true"] { outline-color: rgba(255,255,255,.55); }
+    .models .dots button:focus-visible { outline-color: #2997ff; }
+
+    .model__eyebrow {
+      margin-top: clamp(32px, 4vw, 56px);
+      font-size: 14.5px;
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: -0.005em;
+      color: var(--orange);
+    }
+
+    .model__title {
+      margin-top: 22px;
+      font-size: clamp(34px, 3.4vw, 40px);
+      line-height: 1.1;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .model__sub {
+      min-height: 1.3em;
+      margin-top: 14px;
+      font-size: clamp(18px, 1.7vw, 21px);
+      line-height: 1.2;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .model__desc {
+      margin-top: 12px;
+      min-height: 2.5em;            /* keeps the price rows level across columns */
+      max-width: 450px;
+      font-size: clamp(19px, 1.9vw, 23px);
+      line-height: 1.25;
+      font-weight: 600;
+      letter-spacing: -0.012em;
+      color: #fff;
+    }
+
+    .model__price {
+      margin-top: 32px;
+      font-size: 17px;
+      line-height: 1.3;
+      font-weight: 500;
+      color: #f5f5f7;
+    }
+    .model__price sup { font-size: .65em; line-height: 0; }
+
+    .btn-learn {
+      display: inline-block;
+      margin-top: 56px;
+      padding: 15px 30px;
+      min-width: 176px;
+      background: var(--blue);
+      color: #fff !important;
+      font-size: 21px;
+      line-height: 1.2;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 980px;
+      transition: background .2s ease;
+      text-align: center;
+    }
+    .btn-learn:hover { background: var(--blue-hover); color: #fff !important; }
+    .btn-learn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+    .link-buy {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 22px;
+      font-size: 21px;
+      line-height: 1.2;
+      color: var(--link) !important;
+      text-decoration: none;
+    }
+    .link-buy:hover { text-decoration: underline; color: var(--link) !important; }
+    .link-buy svg { width: 9px; height: 14px; }
+
+    /* ---------- Entrance animation ---------- */
+    .models .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+      transition-delay: var(--d, 0s);
+    }
+    .models .reveal.is-visible,
+    .models .reveal.in-view,
+    .models .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ---------- Mobile: stack ---------- */
+    @media (max-width: 800px) {
+      .models {
+        padding: 24px 16px 64px;
+      }
+      .models__grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+        width: 100%;
+      }
+      .model__desc { min-height: 0; }
+      .btn-learn { margin-top: 36px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .models .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
 </head>
 <body class="dark-theme">
   <!-- Ambient luxury glow orbs -->
@@ -18,6 +200,8 @@
 
 
 <div id="site-header"></div>
+
+<div id="productHeroContainer"></div>
 
 <main class="container">
   <nav class="breadcrumb" id="breadcrumb"></nav>
@@ -177,7 +361,7 @@
       '</div>' +
 
       '<!-- 4. Product Description & Specifications Section -->' +
-      '<section class="pdp-details">' +
+      '<section class="pdp-details" id="pdpDetails">' +
         '<div class="pdp-details-grid">' +
           '<div class="pdp-details-block">' +
             '<h3>Overview</h3>' +
@@ -343,6 +527,133 @@
     );
   }
 
+  
+  function renderMbpHero() {
+    const heroContainer = document.getElementById("productHeroContainer");
+    if (!heroContainer) return;
+
+    const isMbp16 = (product && product.id === "macbook-pro-16-m5") || productId === "macbook-pro-16-m5";
+    const isMbp14 = (product && product.id === "macbook-pro-14-m5") || productId === "macbook-pro-14-m5";
+
+    if (!isMbp16 && !isMbp14) {
+      heroContainer.innerHTML = "";
+      return;
+    }
+
+    const leftLearnHref = isMbp16 ? "#pdpDetails" : "product.html?id=macbook-pro-16-m5#pdpDetails";
+    const leftBuyHref = isMbp16 ? "#pdpContent" : "product.html?id=macbook-pro-16-m5#pdpContent";
+    const rightLearnHref = isMbp14 ? "#pdpDetails" : "product.html?id=macbook-pro-14-m5#pdpDetails";
+    const rightBuyHref = isMbp14 ? "#pdpContent" : "product.html?id=macbook-pro-14-m5#pdpContent";
+
+    heroContainer.innerHTML =
+      '<section class="models" aria-label="Choose your MacBook Pro">' +
+        '<div class="models__grid">' +
+
+          '<!-- Left : PROLED XDR -->' +
+          '<article class="model reveal" style="--d:0s">' +
+            '<div class="model__media">' +
+              '<img src="images/macbook-pro/mbp_proled_xdr__6kmaoqc3m7my_large_2x.avif" alt="Two MacBook Pro laptops with PROLED XDR displays showing abstract light streaks">' +
+            '</div>' +
+
+            '<ul class="dots" aria-label="Finish">' +
+              '<li><button type="button" style="--c:#2e2e30" aria-pressed="true" aria-label="Space Black" data-color="Space Black"></button></li>' +
+              '<li><button type="button" style="--c:#e3e4e6" aria-pressed="false" aria-label="Silver" data-color="Silver"></button></li>' +
+            '</ul>' +
+
+            '<p class="model__eyebrow">New</p>' +
+            '<h2 class="model__title">MacBook Pro</h2>' +
+            '<p class="model__sub">PROLED XDR Display</p>' +
+            '<p class="model__desc">The most advanced MacBook Pro with the world\u2019s best laptop display.</p>' +
+
+            '<p class="model__price">' +
+              'From \u20b9349900.00<sup>*</sup><br>' +
+              'or \u20b955817.00/mo. for 6 mo.<sup>\u2021</sup>' +
+            '</p>' +
+
+            '<a class="btn-learn" href="' + leftLearnHref + '">Learn more</a>' +
+            '<a class="link-buy" href="' + leftBuyHref + '">Buy ' +
+              '<svg viewBox="0 0 9 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 1.5L7 7l-5.5 5.5"/></svg>' +
+            '</a>' +
+          '</article>' +
+
+          '<!-- Right : 14\u2033 with M6 -->' +
+          '<article class="model reveal" style="--d:.18s">' +
+            '<div class="model__media">' +
+              '<img src="images/macbook-pro/mbp__gc3ay8k5kaie_large_2x.avif" alt="Two MacBook Pro laptops in Space Black showing a flowing monochrome wallpaper">' +
+            '</div>' +
+
+            '<ul class="dots" aria-label="Finish">' +
+              '<li><button type="button" style="--c:#2e2e30" aria-pressed="true" aria-label="Space Black" data-color="Space Black"></button></li>' +
+              '<li><button type="button" style="--c:#e3e4e6" aria-pressed="false" aria-label="Silver" data-color="Silver"></button></li>' +
+            '</ul>' +
+
+            '<p class="model__eyebrow">New 14\u2033 with M6</p>' +
+            '<h2 class="model__title">MacBook Pro</h2>' +
+            '<p class="model__sub" aria-hidden="true"></p>' +
+            '<p class="model__desc">A powerful laptop for every kind of pro.</p>' +
+
+            '<p class="model__price">' +
+              'From \u20b9239900.00<sup>*</sup><br>' +
+              'or \u20b937483.00/mo. for 6 mo.<sup>\u2021</sup>' +
+            '</p>' +
+
+            '<a class="btn-learn" href="' + rightLearnHref + '">Learn more</a>' +
+            '<a class="link-buy" href="' + rightBuyHref + '">Buy ' +
+              '<svg viewBox="0 0 9 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 1.5L7 7l-5.5 5.5"/></svg>' +
+            '</a>' +
+          '</article>' +
+
+        '</div>' +
+      '</section>';
+
+    // Colour dots toggle
+    heroContainer.querySelectorAll(".dots").forEach(function (group) {
+      const btns = Array.prototype.slice.call(group.querySelectorAll("button"));
+      btns.forEach(function (b) {
+        b.addEventListener("click", function () {
+          btns.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+          b.setAttribute("aria-pressed", "true");
+          const chosenColor = b.getAttribute("data-color");
+          if (chosenColor) {
+            const swatchBtn = document.querySelector('.swatch[data-color="' + chosenColor + '"]');
+            if (swatchBtn) swatchBtn.click();
+          }
+        });
+      });
+    });
+
+    // Reveal columns as they scroll into view
+    const reveals = heroContainer.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      reveals.forEach(function (el) { io.observe(el); });
+    } else {
+      reveals.forEach(function (el) { el.classList.add("is-visible"); });
+    }
+
+    // Smooth scroll for internal anchor links (#pdpDetails, #pdpContent)
+    heroContainer.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        const hash = link.getAttribute("href");
+        const target = document.querySelector(hash);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (history.pushState) {
+            history.pushState(null, "", hash);
+          }
+        }
+      });
+    });
+  }
+
   function syncProductFromCatalog() {
     let updatedP = getProductById(productId);
     if (!updatedP && productId) {
@@ -359,6 +670,7 @@
         '<a href="category.html?cat=' + product.category + '">' + (cat ? cat.name : product.category) + '</a><span>/</span>' +
         '<span>' + product.name + '</span>';
       renderPdp();
+      renderMbpHero();
       updateStickyAtc();
       const related = PRODUCTS.filter(function (p) { return p.category === product.category && p.id !== product.id; }).slice(0, 4);
       document.getElementById("relatedGrid").innerHTML = related.map(relatedProductCard).join("");
@@ -369,6 +681,7 @@
   document.getElementById("relatedGrid").innerHTML = related.map(relatedProductCard).join("");
 
   renderPdp();
+  renderMbpHero();
   updateStickyAtc();
   document.body.classList.add("has-sticky-atc");
   document.addEventListener("catalog:updated", syncProductFromCatalog);
