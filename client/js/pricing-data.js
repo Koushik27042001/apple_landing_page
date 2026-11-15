@@ -3452,7 +3452,7 @@ var PRICING_CATALOGUE = [
     "chip": "A18 Chip",
     "display": "6.1-inch Super Retina XDR Display",
     "tagline": "Essential iPhone performance at an accessible price.",
-    "image": "images/hero/iphone_17e__cq5ygzct314y_large_2x.png",
+    "image": "images/home/iphone 17e.jpg",
     "detailUrl": "product.html?id=iphone-17e",
     "variants": [
       {
@@ -3559,7 +3559,7 @@ var PRICING_CATALOGUE = [
     "chip": "A19 Chip",
     "display": "6.3-inch ProMotion 120Hz Display",
     "tagline": "Colourful, durable, and ready for Apple Intelligence.",
-    "image": "images/hero/iphone_17__fb1277oq3eaa_large_2x.png",
+    "image": "images/home/-original-imahqvadmn9uydqz.webp",
     "detailUrl": "product.html?id=iphone-17",
     "variants": [
       {
