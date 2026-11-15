@@ -2404,3 +2404,43 @@ body.dark-theme .pdp-purchase-left .pdp-emi-line a#emiToggle {
   word-wrap: break-word !important;
   box-sizing: border-box !important;
 }
+
+/* Supplied iPhone photos have opaque backgrounds; keep their media stages
+   neutral and centered in both themes without cropping the source photos. */
+body img:is([src$="images/home/iphone 17e.jpg"], [src$="images/home/iphone%2017e.jpg"], [src$="images/home/-original-imahqvadmn9uydqz.webp"]) {
+  object-fit: contain !important;
+  object-position: center !important;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 6px;
+  border-radius: 12px;
+  background: #fff !important;
+  mix-blend-mode: normal !important;
+  filter: none !important;
+  align-self: center !important;
+}
+
+body img:is([src$="images/home/iphone 17e.jpg"], [src$="images/home/iphone%2017e.jpg"]) {
+  background: #f5f5f7 !important;
+}
+
+body:is(.dark-theme, *) :is(.pc-image, .compare-card-media, .pdp-gallery-main, .pdp-thumb, .pricing-card-img-wrap, .chapter-nav-icon):has(img:is([src$="images/home/iphone 17e.jpg"], [src$="images/home/iphone%2017e.jpg"], [src$="images/home/-original-imahqvadmn9uydqz.webp"])) {
+  background: #fff !important;
+  display: flex;
+  align-items: center !important;
+  justify-content: center;
+  border-radius: 12px;
+  isolation: isolate;
+}
+
+body:is(.dark-theme, *) :is(.pc-image, .compare-card-media, .pdp-gallery-main, .pdp-thumb, .pricing-card-img-wrap, .chapter-nav-icon):has(img:is([src$="images/home/iphone 17e.jpg"], [src$="images/home/iphone%2017e.jpg"])) {
+  background: #f5f5f7 !important;
+}
+
+body .pdp-gallery-main:has(img:is([src$="images/home/iphone 17e.jpg"], [src$="images/home/iphone%2017e.jpg"], [src$="images/home/-original-imahqvadmn9uydqz.webp"]))::before {
+  display: none;
+}
+
+body.dark-theme .pdp-gallery-main.pdp-top-aligned img:is([src$="images/home/iphone 17e.jpg"], [src$="images/home/iphone%2017e.jpg"], [src$="images/home/-original-imahqvadmn9uydqz.webp"]) {
+  filter: none !important;
+}
