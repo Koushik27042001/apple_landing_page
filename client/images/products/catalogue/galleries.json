@@ -79,5 +79,22 @@
       "alt": "mac mini: An everyday workspace",
       "caption": "An everyday workspace"
     }
+  ],
+  "macbook-air-13-m5": [
+    {
+      "src": "images/products/catalogue/macbook-air-m5-gallery-1.jpg",
+      "alt": "MacBook Air M5: 13-inch and 15-inch design",
+      "caption": "13-inch and 15-inch design"
+    },
+    {
+      "src": "images/products/catalogue/macbook-air-m5-gallery-2.jpg",
+      "alt": "MacBook Air M5: Slim profile and connections",
+      "caption": "Slim profile and connections"
+    },
+    {
+      "src": "images/products/catalogue/macbook-air-m5-gallery-3.jpg",
+      "alt": "MacBook Air M5: MacBook Air in your workspace",
+      "caption": "MacBook Air in your workspace"
+    }
   ]
 }

@@ -51,3 +51,13 @@ test('bag keeps different hardware configurations on separate lines', () => {
  assert.equal(context.getCart().length, 2);
  assert.notEqual(context.getCart()[0].modelNumber, context.getCart()[1].modelNumber);
 });
+
+
+test('Watch SE 3 configurations expose every case, band, connectivity, and finish combination', () => {
+ const watch = PRODUCTS.find(p => p.id === 'watch-se-3');
+ assert.equal(watch.gallery.length, 6);
+ assert.equal(new Set(watch.variants.map(v => [v.caseSize, v.bandSize, v.connectivity, v.color].join('|'))).size, 16);
+ assert.deepEqual([...new Set(watch.variants.map(v => v.caseSize))].sort(), ['40mm', '44mm']);
+ assert.deepEqual([...new Set(watch.variants.map(v => v.bandSize))].sort(), ['M/L', 'S/M']);
+ for (const image of watch.gallery) assert.ok(fs.existsSync('client/' + image.src));
+});

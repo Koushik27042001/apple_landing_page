@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/enhancements.css">
   <link rel="stylesheet" href="css/chip-family.css">
 <link rel="stylesheet" href="css/product-gallery.css">
+<link rel="stylesheet" href="css/watch-se-showcase.css">
   <style>
     :root {
       --orange: #f56b23;
@@ -479,9 +480,13 @@
 <script src="js/icons.js"></script>
 <script src="js/main.js"></script>
 <script src="js/product-gallery.js"></script>
+<script src="js/watch-se-showcase.js"></script>
 <script src="js/animations.js" defer></script>
 <script>
   const productId = getQueryParam("id") || getQueryParam("slug");
+  if (productId === 'iphone-18-pro' || productId === 'iphone18pro') {
+    window.location.replace('/iphone-18-pro' + window.location.hash);
+  }
   let product = getProductById(productId);
   if (!product && productId) {
     const searchMatches = searchProducts(productId);
@@ -509,7 +514,7 @@
 
   const variantFields = [
     ['chip', 'Chip'], ['cpu', 'CPU'], ['gpu', 'GPU'], ['ram', 'RAM'],
-    ['storage', 'Storage'], ['connectivity', 'Connectivity'], ['glass', 'Display glass'], ['color', 'Color']
+    ['caseSize', 'Case size'], ['bandSize', 'Band size'], ['storage', 'Storage'], ['connectivity', 'Connectivity'], ['glass', 'Display glass'], ['color', 'Color']
   ];
   let selectedVariant = product.variants && product.variants[0];
   if (selectedVariant) syncVariantSelection();
@@ -557,6 +562,7 @@
   }
 
   function renderPdp() {
+    document.body.classList.toggle('watch-se-page', product.id === 'watch-se-3');
     const discount = product.mrp > product.price ? Math.round((1 - product.price / product.mrp) * 100) : 0;
     const unitPrice = currentUnitPrice();
     const emi12 = getEmi(unitPrice, 12);
@@ -565,18 +571,19 @@
     document.getElementById("pdpContent").innerHTML =
       '<div class="pdp-showcase-wrapper">' +
 
-        '<!-- 1. Header Section Above Product Image -->' +
+        (product.id === 'watch-se-3' ? WatchSEShowcase.intro(product) : (
+'<!-- 1. Header Section Above Product Image -->' +
         '<div class="pdp-top-header text-center">' +
           '<div class="pc-cat">' + product.category + ' &middot; ' + product.brand + '</div>' +
           '<h1>' + product.name + '</h1>' +
           '<p class="pdp-short">' + product.short + '</p>' +
           '<div class="pdp-rating"><span class="stars">★★★★★</span> ' + product.rating + ' &middot; ' + product.reviews + ' ratings</div>' +
-        '</div>' +
+        '</div>' )) +
 
         ProductGallery.hero(product, currentImage()) +
 
         '<!-- 3. Pricing, Configurator & Purchase Controls Below Image -->' +
-        '<div class="pdp-purchase-container">' +
+        '<div class="pdp-purchase-container" id="watchConfigure">' +
           '<!-- Left Column: Price, EMI, Colors, Storage, Qty & Stock (Left Aligned) -->' +
           '<div class="pdp-purchase-left">' +
             '<div class="pdp-price-block">' +
@@ -630,7 +637,7 @@
 
       '</div>' +
 
-      ProductGallery.section(product) +
+      (product.id === 'watch-se-3' ? WatchSEShowcase.sections() : ProductGallery.section(product)) +
       ProductGallery.viewer() +
       '<!-- 4. Product Description & Specifications Section -->' +
       '<section class="pdp-details" id="pdpDetails">' +
@@ -791,14 +798,14 @@
     return (
       '<div class="product-card">' +
         (p.badge ? '<span class="product-badge ' + badgeClass + '">' + p.badge + '</span>' : '') +
-        '<a href="product.html?id=' + p.id + '" class="pc-image"><img src="' + p.images[0] + '" alt="' + p.name + '"></a>' +
+        '<a href="' + getProductPageUrl(p.id) + '" class="pc-image"><img src="' + p.images[0] + '" alt="' + p.name + '"></a>' +
         '<div class="pc-cat">' + p.category + '</div>' +
-        '<a href="product.html?id=' + p.id + '"><h4>' + p.name + '</h4></a>' +
+        '<a href="' + getProductPageUrl(p.id) + '"><h4>' + p.name + '</h4></a>' +
         '<p class="pc-short">' + p.short + '</p>' +
         '<div class="pc-price-row"><span class="pc-price">' + formatINR(p.price) + '</span>' +
         (discount ? '<span class="pc-mrp">' + formatINR(p.mrp) + '</span>' : '') + '</div>' +
         '<div class="pc-emi">From <strong>' + formatINR(getEmi(p.price, 12)) + '/mo</strong></div>' +
-        '<div class="pc-actions"><a href="product.html?id=' + p.id + '" class="btn btn-dark btn-block">View Details</a></div>' +
+        '<div class="pc-actions"><a href="' + getProductPageUrl(p.id) + '" class="btn btn-dark btn-block">View Details</a></div>' +
       '</div>'
     );
   }

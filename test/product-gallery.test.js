@@ -16,6 +16,10 @@ test('older live catalogs retain downloaded galleries and finish images', async 
  vm.runInContext(fs.readFileSync('client/js/data.js', 'utf8'), context);
  const original = vm.runInContext('getProductById("macbook-pro-14-m6")', context);
  response = { products: [{ id: original.id, name: original.name, price: 99999, stock: 3, images: ['old-thumbnail.png'], colors: [{ name: 'Silver', hex: '#eee', image: 'old-silver.png' }] }] };
+ const watch = vm.runInContext('getProductById("watch-se-3")', context);
+ response.products.push(Object.assign({}, watch, {
+  variants: watch.variants.map(({ caseSize, bandSize, ...row }) => Object.assign({}, row, { configuration: 'legacy configuration' }))
+ }));
  vm.runInContext(fs.readFileSync('client/js/catalog-sync.js', 'utf8'), context);
  await new Promise(setImmediate);
  const updated = vm.runInContext('getProductById("macbook-pro-14-m6")', context);
@@ -26,5 +30,9 @@ test('older live catalogs retain downloaded galleries and finish images', async 
  assert.match(updated.colors[0].image, /silver\.png$/);
  assert.ok(updated.variants.length);
  assert.ok(vm.runInContext('getProductById("mac-studio-m5").gallery.length', context));
+ const refreshedWatch = vm.runInContext('getProductById("watch-se-3")', context);
+ assert.equal(refreshedWatch.variants[0].caseSize, '40mm');
+ assert.equal(refreshedWatch.variants[0].bandSize, 'S/M');
+ assert.match(refreshedWatch.variants[0].configuration, /40mm/);
  assert.equal(events[0].type, 'catalog:updated');
 });

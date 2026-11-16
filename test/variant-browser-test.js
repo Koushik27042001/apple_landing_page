@@ -26,9 +26,9 @@ const { PRODUCTS, CATEGORIES } = require('../client/js/data');
   await page.locator('#variant-ram').waitFor();
   for (const category of CATEGORIES) {
    const expected = PRODUCTS.filter(p => p.category === category.id).map(p => p.id).sort();
-   const actual = await page.locator('.cascade-prod-group[data-cat-group="' + category.id + '"] .cascade-prod-item').evaluateAll(nodes => nodes.map(n => new URL(n.href).searchParams.get('id')).sort());
+   const actual = await page.locator('.cascade-prod-group[data-cat-group="' + category.id + '"] .cascade-prod-item').evaluateAll(nodes => nodes.map(n => (new URL(n.href).pathname === '/iphone-18-pro' ? 'iphone-18-pro' : new URL(n.href).searchParams.get('id'))).sort());
    assert.deepEqual(actual, expected);
-   const mobile = await page.locator('.mobile-subcat-group[data-subcat="' + category.id + '"] .mobile-leaf-link:not(.mobile-leaf-explore)').evaluateAll(nodes => nodes.map(n => new URL(n.href).searchParams.get('id')).sort());
+   const mobile = await page.locator('.mobile-subcat-group[data-subcat="' + category.id + '"] .mobile-leaf-link:not(.mobile-leaf-explore)').evaluateAll(nodes => nodes.map(n => (new URL(n.href).pathname === '/iphone-18-pro' ? 'iphone-18-pro' : new URL(n.href).searchParams.get('id'))).sort());
    assert.deepEqual(mobile, expected);
   }
   await page.selectOption('#variant-ram', '32GB');
@@ -40,7 +40,7 @@ const { PRODUCTS, CATEGORIES } = require('../client/js/data');
   assert.equal(cart[0].modelNumber, 'MHWY4HN/A'); assert.equal(cart[0].price, 287900);
   const style = await page.locator('#pdpGalleryMain').evaluate(el => ({ background: getComputedStyle(el).backgroundColor, border: getComputedStyle(el).borderTopWidth }));
   assert.equal(style.border, '0px'); assert.equal(style.background, 'rgba(0, 0, 0, 0)');
-  for (const p of PRODUCTS.filter(p => p.variants)) {
+  for (const p of PRODUCTS.filter(p => p.variants && p.id !== 'iphone-18-pro')) {
    console.log('Checking ' + p.id);
    await page.goto(base + '/product.html?id=' + p.id + '&configure=1', { waitUntil: 'domcontentloaded' });
    await page.locator('.variant-select').first().waitFor();

@@ -131,5 +131,54 @@
     "url": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mac-mini-chip-unselect-202608-gallery-5?wid=2400&hei=1538&fmt=jpeg&qlt=90",
     "width": 2400,
     "height": 1538
+  },
+  {
+    "file": "macbook-air-13-m5-silver.jpg",
+    "page": "https://www.apple.com/shop/buy-mac/macbook-air/13-inch-silver-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage",
+    "url": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-air-specs-select-202601-13inch-silver?wid=2400&hei=1538&fmt=jpeg&qlt=90",
+    "width": 2400,
+    "height": 1538
+  },
+  {
+    "file": "macbook-air-13-m5-sky-blue.jpg",
+    "page": "https://www.apple.com/shop/buy-mac/macbook-air/13-inch-sky-blue-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage",
+    "url": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-air-specs-select-202601-13inch-skyblue?wid=2400&hei=1538&fmt=jpeg&qlt=90",
+    "width": 2400,
+    "height": 1538
+  },
+  {
+    "file": "macbook-air-13-m5-starlight.jpg",
+    "page": "https://www.apple.com/shop/buy-mac/macbook-air/13-inch-starlight-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage",
+    "url": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-air-specs-select-202601-13inch-starlight?wid=2400&hei=1538&fmt=jpeg&qlt=90",
+    "width": 2400,
+    "height": 1538
+  },
+  {
+    "file": "macbook-air-13-m5-midnight.jpg",
+    "page": "https://www.apple.com/shop/buy-mac/macbook-air/13-inch-midnight-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage",
+    "url": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-air-specs-select-202601-13inch-midnight?wid=2400&hei=1538&fmt=jpeg&qlt=90",
+    "width": 2400,
+    "height": 1538
+  },
+  {
+    "file": "macbook-air-m5-gallery-1.jpg",
+    "page": "https://www.apple.com/shop/buy-mac/macbook-air/13-inch-silver-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage",
+    "url": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-air-size-unselect-202601-gallery-1?wid=2400&hei=1538&fmt=jpeg&qlt=90",
+    "width": 2400,
+    "height": 1538
+  },
+  {
+    "file": "macbook-air-m5-gallery-2.jpg",
+    "page": "https://www.apple.com/shop/buy-mac/macbook-air/13-inch-silver-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage",
+    "url": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-air-size-unselect-202601-gallery-2?wid=2400&hei=1538&fmt=jpeg&qlt=90",
+    "width": 2400,
+    "height": 1538
+  },
+  {
+    "file": "macbook-air-m5-gallery-3.jpg",
+    "page": "https://www.apple.com/shop/buy-mac/macbook-air/13-inch-silver-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage",
+    "url": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-air-size-unselect-202603-gallery-3?wid=2400&hei=1538&fmt=jpeg&qlt=90",
+    "width": 2400,
+    "height": 1538
   }
 ]

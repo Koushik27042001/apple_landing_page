@@ -4,6 +4,8 @@ const ProductGallery = (() => {
 
   function images(product, hero) {
     const first = { src: hero, alt: product.name + (product.colors.length ? ' in the selected finish' : ''), caption: 'Selected configuration' };
+    const overview = Array.isArray(product.gallery) && product.gallery.find(view => view.src === hero);
+    if (overview) Object.assign(first, overview);
     const additional = Array.isArray(product.gallery) ? product.gallery : product.images.map((src, i) => ({ src, alt: product.name + ' view ' + (i + 1), caption: 'Product view ' + (i + 1) }));
     const seen = new Set();
     return [first].concat(additional).filter(image => {

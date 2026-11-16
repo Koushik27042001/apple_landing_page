@@ -214,7 +214,7 @@ var PRICING_CATALOGUE = [
     "chip": "Apple M5",
     "display": "13.6-inch Liquid Retina Display",
     "tagline": "Lean. Mean. M5 machine with all-day battery life.",
-    "image": "images/hero/mac/nav_mba_ea12e0d5b.png",
+    "image": "images/products/catalogue/macbook-air-13-m5-silver.jpg",
     "detailUrl": "product.html?id=macbook-air-13-m5",
     "variants": [
       {
@@ -400,7 +400,30 @@ var PRICING_CATALOGUE = [
     ],
     "startingPrice": 149900,
     "maxPrice": 239900,
-    "priceRange": "₹1,49,900 – ₹2,39,900"
+    "priceRange": "₹1,49,900 – ₹2,39,900",
+    "colorImages": {
+      "Silver": "images/products/catalogue/macbook-air-13-m5-silver.jpg",
+      "Sky Blue": "images/products/catalogue/macbook-air-13-m5-sky-blue.jpg",
+      "Starlight": "images/products/catalogue/macbook-air-13-m5-starlight.jpg",
+      "Midnight": "images/products/catalogue/macbook-air-13-m5-midnight.jpg"
+    },
+    "gallery": [
+      {
+        "src": "images/products/catalogue/macbook-air-m5-gallery-1.jpg",
+        "alt": "MacBook Air M5: 13-inch and 15-inch design",
+        "caption": "13-inch and 15-inch design"
+      },
+      {
+        "src": "images/products/catalogue/macbook-air-m5-gallery-2.jpg",
+        "alt": "MacBook Air M5: Slim profile and connections",
+        "caption": "Slim profile and connections"
+      },
+      {
+        "src": "images/products/catalogue/macbook-air-m5-gallery-3.jpg",
+        "alt": "MacBook Air M5: MacBook Air in your workspace",
+        "caption": "MacBook Air in your workspace"
+      }
+    ]
   },
   {
     "tableMatch": "New Air 15 inches M5 CHIP Models",
@@ -3873,7 +3896,7 @@ var PRICING_CATALOGUE = [
     "chip": "A20 Pro Chip",
     "display": "6.3-inch ProMotion 120Hz XDR Display",
     "tagline": "Forged in titanium with vapor-cooled A20 Pro chip.",
-    "image": "images/hero/iphone_18_pro__dj48ysc0yagm_large_2x.png",
+    "image": "images/iphone 18pro/hero__elo7tt0mnqy6_large.jpg",
     "detailUrl": "product.html?id=iphone-18-pro",
     "variants": [
       {
@@ -4130,8 +4153,8 @@ var PRICING_CATALOGUE = [
     "chip": "A20 Pro Chip",
     "display": "6.9-inch ProMotion 120Hz XDR Display",
     "tagline": "The ultimate Pro flagship with 48MP Pro Fusion variable aperture.",
-    "image": "images/products/iPhone 18 Pro Max_ Beyond What's Next.png",
-    "detailUrl": "product.html?id=iphone-17-pro-max",
+    "image": "images/iphone 18pro/hero__elo7tt0mnqy6_large.jpg",
+    "detailUrl": "product.html?id=iphone-18-pro-max",
     "variants": [
       {
         "modelNumber": "MJXN4HN/A",
@@ -4387,7 +4410,7 @@ var PRICING_CATALOGUE = [
     "chip": "S10 SiP",
     "display": "Retina LTPO OLED Display",
     "tagline": "Heavy on features. Light on price.",
-    "image": "images/hero/watch/nav_se3_67e2d8619.png",
+    "image": "images/watch_segment/hero__fnvi3x49ydei_large_2x.jpg",
     "detailUrl": "product.html?id=watch-se-3",
     "variants": [
       {
@@ -4633,7 +4656,43 @@ var PRICING_CATALOGUE = [
     ],
     "startingPrice": 25900,
     "maxPrice": 33900,
-    "priceRange": "₹25,900 – ₹33,900"
+    "priceRange": "₹25,900 – ₹33,900",
+    "colorImages": {
+      "Starlight": "images/watch_segment/hero__fnvi3x49ydei_large_2x.jpg",
+      "Midnight": "images/watch_segment/hero__fnvi3x49ydei_large_2x.jpg"
+    },
+    "gallery": [
+      {
+        "src": "images/watch_segment/hero__fnvi3x49ydei_large_2x.jpg",
+        "caption": "Apple Watch SE 3 overview",
+        "alt": "Three Apple Watch SE 3 watches showing Activity Rings, Sleep Score, and a call"
+      },
+      {
+        "src": "images/watch_segment/highlights_activity_rings_endframe__fjf3belbpw2u_large_2x.jpg",
+        "caption": "Activity Rings",
+        "alt": "Apple Watch showing a colorful Activity Rings celebration"
+      },
+      {
+        "src": "images/watch_segment/highlights_sleep_score__gg1jx7w3zfee_large_2x.jpg",
+        "caption": "Sleep Score",
+        "alt": "Apple Watch showing a Sleep Score of 84"
+      },
+      {
+        "src": "images/watch_segment/highlights_safety__ehj70sr1vygm_large_2x.jpg",
+        "caption": "Safety",
+        "alt": "Emergency SOS symbol on a soft pink background"
+      },
+      {
+        "src": "images/watch_segment/highlights_siri_ai__9zfn0d22xxue_large_2x.jpg",
+        "caption": "Siri",
+        "alt": "Apple Watch showing Siri and a personalized watch face"
+      },
+      {
+        "src": "images/watch_segment/product_finishes__dluijwwmh7ue_large_2x.jpg",
+        "caption": "Design details",
+        "alt": "Close-up of Apple Watch SE 3 with a purple woven band"
+      }
+    ]
   },
   {
     "tableMatch": "Apple Watch Series 11",

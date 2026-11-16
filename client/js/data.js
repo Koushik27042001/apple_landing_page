@@ -18,7 +18,7 @@ const CATEGORIES = [
 
 const IPHONE_OFFICIAL_IMAGES = {
   duo: "images/hero/iphone_duo__hefmlegzwbmi_large_2x.png",
-  pro18: "images/hero/iphone_18_pro__dj48ysc0yagm_large_2x.png",
+  pro18: "images/iphone 18pro/hero__elo7tt0mnqy6_large.jpg",
   air: "images/home/shopping.webp",
   iphone17: "images/home/-original-imahqvadmn9uydqz.webp",
   iphone17e: "images/home/iphone 17e.jpg",
@@ -1506,17 +1506,21 @@ function normalizeCatalogueVariant(row, model) {
   const memory = specs.match(/(?:,|\||\/)\s*(\d+)\s*(?:GB|G)(?=\s*(?:,|\||\/))/i);
   const capacity = [...specs.matchAll(/(\d+)\s*(GB|TB)\s*(?:SSD)?/gi)].map(m => m[1] + m[2].toUpperCase());
   const storage = row.storage || capacity[capacity.length - 1] || '';
+  const caseSize = model.category === 'watch' ? (specs.match(/\b(\d{2})\s*mm\b/i)?.[1] || '') : '';
+  const bandSize = model.category === 'watch' ? (specs.match(/\b(S\/M|M\/L|L\/XL)\b/i)?.[1] || '') : '';
   const variant = Object.assign({}, row, {
     chip: row.chip || (chipMatch ? chipMatch[1] : model.chip || ''),
     ram: row.ram || (memory && ['mac', 'desktop'].includes(model.category) ? memory[1] + 'GB' : ''),
     storage: storage,
+    caseSize: caseSize ? caseSize + 'mm' : '',
+    bandSize: bandSize,
     cpu: row.cpu || (cpu ? cpu[1] + '-core CPU' : ''),
     gpu: row.gpu || (gpu ? gpu[1] + '-core GPU' : ''),
     color: row.color || 'Standard',
     connectivity: row.connectivity || '',
     glass: row.glass || ''
   });
-  variant.configuration = [variant.chip, variant.cpu, variant.gpu, variant.ram && variant.ram + ' RAM', variant.storage, variant.connectivity, variant.glass].filter(Boolean).join(' / ');
+  variant.configuration = [variant.chip, variant.cpu, variant.gpu, variant.ram && variant.ram + ' RAM', variant.caseSize, variant.bandSize, variant.storage, variant.connectivity, variant.glass].filter(Boolean).join(' / ');
   return variant;
 }
 
@@ -1545,12 +1549,12 @@ function applyCatalogueVariants(catalogue) {
     product.name = model.name;
     product.variants = variants;
     if (Array.isArray(model.gallery)) product.gallery = model.gallery;
-    if (model.image && model.image.startsWith('images/products/catalogue/')) product.images = [model.image];
+    if (model.image && (model.image.startsWith('images/products/catalogue/') || model.id === 'watch-se-3')) product.images = [model.image];
     const oldColors = product.colors;
     product.colors = [...new Set(variants.map(v => v.color))].map(function (name) {
       const existing = oldColors.find(c => c.name === name);
       if (model.colorImages && model.colorImages[name]) return Object.assign({}, existing || { name: name, hex: name === 'Silver' ? '#e3e4e6' : '#1c1c1e' }, { image: model.colorImages[name] });
-      if (model.image && model.image.startsWith('images/products/catalogue/')) return Object.assign({}, existing || { name: name, hex: '#e3e4e6' }, { image: model.image });
+      if (model.image && (model.image.startsWith('images/products/catalogue/') || model.id === 'watch-se-3')) return Object.assign({}, existing || { name: name, hex: '#e3e4e6' }, { image: model.image });
       return existing || { name: name, hex: ({ Silver: '#e3e4e6', 'Space Black': '#1c1c1e', Blue: '#8fb6de', Purple: '#b79fd1', Starlight: '#f0ece1' })[name] || '#86868b', image: product.images[0] };
     });
     product.price = Math.min(...variants.map(v => v.price));

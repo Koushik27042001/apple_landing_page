@@ -370,7 +370,7 @@ function renderCatalogueNavigation(header) {
     const mobileArrow = document.createElement('span'); mobileArrow.className = 'subcat-arrow'; mobileArrow.textContent = '\u203a'; toggle.append(mobileTitle, mobileArrow);
     const content = document.createElement('div'); content.className = 'mobile-subcat-content';
     products.forEach(function (product) {
-      const href = 'product.html?id=' + encodeURIComponent(product.id) + '&configure=1';
+      const href = product.id === 'iphone-18-pro' ? getProductPageUrl(product.id) : getProductPageUrl(product.id) + '&configure=1';
       const link = document.createElement('a'); link.href = href; link.className = 'cascade-prod-item';
       const name = document.createElement('span'); name.className = 'cascade-prod-name'; name.textContent = product.name; link.append(name); group.append(link);
       const leaf = document.createElement('a'); leaf.href = href; leaf.className = 'mobile-leaf-link';
@@ -380,6 +380,10 @@ function renderCatalogueNavigation(header) {
     const mobileExplore = explore.cloneNode(true); mobileExplore.className = 'mobile-leaf-link mobile-leaf-explore'; content.append(mobileExplore);
     groups.append(group); mobileGroup.append(toggle, content); mobile.append(mobileGroup);
   });
+}
+
+function getProductPageUrl(id) {
+  return id === 'iphone-18-pro' ? '/iphone-18-pro' : 'product.html?id=' + encodeURIComponent(id);
 }
 
 function navLink(href, label, isActive) {
@@ -813,7 +817,7 @@ function wireSearch(inputId, dropdownId) {
       return;
     }
     dropdown.innerHTML = results.map(function (p) {
-      return '<a class="suggestion-item" href="product.html?id=' + p.id + '">' +
+      return '<a class="suggestion-item" href="' + getProductPageUrl(p.id) + '">' +
         '<img src="' + p.images[0] + '" alt="' + p.name + '" loading="lazy">' +
         '<div class="suggestion-info">' +
           '<div class="suggestion-name">' + p.name + '</div>' +

@@ -16,18 +16,21 @@
         .then(function (data) {
           if (!data || !Array.isArray(data.products) || !data.products.length) return;
           // Keep local photography when an older backend catalog lacks the new asset fields.
-          const localMedia = new Map(PRODUCTS.filter(p => Array.isArray(p.gallery) && p.gallery.length).map(p => [p.id, p]));
+          const localMedia = new Map(PRODUCTS.filter(p => (Array.isArray(p.gallery) && p.gallery.length) || (p.category === 'iphone' && Array.isArray(p.images) && p.images.length)).map(p => [p.id, p]));
           PRODUCTS.length = 0;
           data.products.forEach(function (p) {
             const local = localMedia.get(p.id);
             if (local) {
-              p.gallery = local.gallery;
+              if (local.gallery) p.gallery = local.gallery;
               p.images = local.images;
               p.colors = (p.colors && p.colors.length ? p.colors : local.colors).map(function (color) {
                 const match = local.colors.find(c => c.name === color.name);
                 return Object.assign({}, color, { image: match ? match.image : local.images[0] });
               });
               if (!Array.isArray(p.variants) || !p.variants.length) p.variants = local.variants;
+              if (p.id === 'watch-se-3' && Array.isArray(p.variants)) {
+                p.variants = p.variants.map(row => normalizeCatalogueVariant(row, { category: 'watch', chip: local.specs && local.specs.Chip }));
+              }
               localMedia.delete(p.id);
             }
             PRODUCTS.push(p);

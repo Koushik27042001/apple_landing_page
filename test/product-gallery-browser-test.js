@@ -23,7 +23,8 @@ const { PRODUCTS, CATEGORIES } = require('../client/js/data');
   await page.addInitScript(() => { window.APPLE_STORE_API_BASE = '/api'; });
   const errors=[]; page.on('pageerror',e=>errors.push(e.message));
   const base='http://127.0.0.1:'+server.address().port;
-  for(const id of ['macbook-pro-14-m6','macbook-pro-14-m5','macbook-pro-16-m5','mac-studio-m5','mac-mini-m6']) {
+  const requestedModels = process.argv.slice(2);
+  for(const id of (requestedModels.length ? requestedModels : ['macbook-air-13-m5','macbook-pro-14-m6','macbook-pro-14-m5','macbook-pro-16-m5','mac-studio-m5','mac-mini-m6'])) {
    const product=PRODUCTS.find(p=>p.id===id);
    await page.goto(base+'/product.html?id='+id,{waitUntil:'domcontentloaded'});
    assert.equal(await page.locator('[data-detail-image]').count(),product.gallery.length);
@@ -43,8 +44,16 @@ const { PRODUCTS, CATEGORIES } = require('../client/js/data');
    if(id.startsWith('macbook')) {
     await page.selectOption('#variant-color','Silver');
     await page.locator('#mainImage').evaluate(img=>img.decode());
-    assert.match(await page.locator('#mainImage').getAttribute('src'),/silver\.png$/);
+    assert.match(await page.locator('#mainImage').getAttribute('src'),/silver\.(png|jpg)$/);
     assert.match(await page.locator('.gallery-counter').textContent(),/^1 /);
+   }
+   if(id === 'macbook-air-13-m5') {
+    for(const color of product.colors) {
+     await page.selectOption('#variant-color',color.name);
+     await page.locator('#mainImage').evaluate(img=>img.decode());
+     assert.equal(await page.locator('#mainImage').getAttribute('src'),color.image);
+     assert.equal(await page.locator('#mainImage').evaluate(img=>img.naturalWidth),2400);
+    }
    }
    await page.locator('.product-photo img').evaluateAll(imgs=>Promise.all(imgs.map(img=>{img.loading='eager';return img.decode();})));
    for(const image of product.gallery) {

@@ -14,7 +14,7 @@ const families = [
  const directory = path.join(__dirname, '../client/images/products/catalogue');
  const sourceFile = path.join(directory, 'sources.json');
  const sources = JSON.parse(fs.readFileSync(sourceFile, 'utf8')).filter(source => !/-gallery-\d+\.png$/.test(source.file));
- const gallery = {};
+ const gallery = fs.existsSync(path.join(directory, 'galleries.json')) ? JSON.parse(fs.readFileSync(path.join(directory, 'galleries.json'), 'utf8')) : {};
  for (const family of families) {
   const page = 'https://www.apple.com/shop/buy-mac/' + family.slug;
   const response = await fetch(page);
