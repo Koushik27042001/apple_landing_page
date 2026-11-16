@@ -14,6 +14,7 @@ const productSchema = new mongoose.Schema(
     stock: { type: Number, default: 0 },
     images: { type: [String], default: [] },
     colors: { type: [mongoose.Schema.Types.Mixed], default: [] },
+    variants: { type: [mongoose.Schema.Types.Mixed], default: [] },
     storageOptions: { type: [mongoose.Schema.Types.Mixed], default: [] },
     short: { type: String, default: "" },
     description: { type: String, default: "" },

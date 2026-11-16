@@ -331,9 +331,55 @@ function renderHeader(active) {
       '</nav>' +
     '</div>';
 
+  renderCatalogueNavigation(el);
   wireHeaderInteractions();
   updateCartBadge();
   updateCompareBadgeIfPresent();
+}
+
+
+function renderCatalogueNavigation(header) {
+  if (typeof getNavigationProducts !== 'function') return;
+  const panel = header.querySelector('#cascadePanel2');
+  const groups = header.querySelector('#cascadePanel3') || header.querySelector('.cascade-panel-3');
+  const mobile = header.querySelector('[data-group="products"] > .mobile-accordion-content');
+  if (!panel || !groups || !mobile) return;
+  panel.replaceChildren();
+  groups.replaceChildren();
+  mobile.querySelectorAll('.mobile-subcat-group').forEach(node => node.remove());
+  CATEGORIES.forEach(function (category) {
+    const products = getNavigationProducts(category.id);
+    if (!products.length) return;
+    const item = document.createElement('div');
+    item.className = 'cascade-cat-item has-submenu';
+    item.dataset.cat = category.id;
+    item.tabIndex = 0;
+    item.setAttribute('role', 'menuitem');
+    item.setAttribute('aria-haspopup', 'true');
+    const title = document.createElement('span');
+    title.className = 'cascade-item-text'; title.textContent = category.name;
+    item.append(title);
+    const arrow = document.createElement('span'); arrow.className = 'red-arrow'; arrow.textContent = '\u203a'; item.append(arrow);
+    panel.append(item);
+    const group = document.createElement('div');
+    group.className = 'cascade-prod-group'; group.dataset.catGroup = category.id;
+    const heading = document.createElement('div'); heading.className = 'cascade-group-title'; heading.textContent = category.name + ' Lineup'; group.append(heading);
+    const mobileGroup = document.createElement('div'); mobileGroup.className = 'mobile-subcat-group'; mobileGroup.dataset.subcat = category.id;
+    const toggle = document.createElement('button'); toggle.type = 'button'; toggle.className = 'mobile-subcat-toggle'; toggle.setAttribute('aria-expanded', 'false');
+    const mobileTitle = document.createElement('span'); mobileTitle.textContent = category.name;
+    const mobileArrow = document.createElement('span'); mobileArrow.className = 'subcat-arrow'; mobileArrow.textContent = '\u203a'; toggle.append(mobileTitle, mobileArrow);
+    const content = document.createElement('div'); content.className = 'mobile-subcat-content';
+    products.forEach(function (product) {
+      const href = 'product.html?id=' + encodeURIComponent(product.id) + '&configure=1';
+      const link = document.createElement('a'); link.href = href; link.className = 'cascade-prod-item';
+      const name = document.createElement('span'); name.className = 'cascade-prod-name'; name.textContent = product.name; link.append(name); group.append(link);
+      const leaf = document.createElement('a'); leaf.href = href; leaf.className = 'mobile-leaf-link';
+      const label = document.createElement('span'); label.className = 'mll-name'; label.textContent = product.name; leaf.append(label); content.append(leaf);
+    });
+    const explore = document.createElement('a'); explore.href = 'category.html?cat=' + category.id; explore.className = 'cascade-explore-link'; explore.textContent = 'Explore all ' + category.name + ' \u2192'; group.append(explore);
+    const mobileExplore = explore.cloneNode(true); mobileExplore.className = 'mobile-leaf-link mobile-leaf-explore'; content.append(mobileExplore);
+    groups.append(group); mobileGroup.append(toggle, content); mobile.append(mobileGroup);
+  });
 }
 
 function navLink(href, label, isActive) {

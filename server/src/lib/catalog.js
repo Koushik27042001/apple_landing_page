@@ -1,17 +1,27 @@
 /* Authoritative catalog + pricing. Reads from MongoDB-backed product /
    coupon / settings stores (seeded from client/js/data.js). */
 
+const seed = require("../../../client/js/data.js");
 const productsStore = require("./productsStore");
 const couponsStore = require("./couponsStore");
 const settingsStore = require("./settingsStore");
 
 async function getProductById(id) {
-  return productsStore.getById(id);
+  return (await productsStore.getById(id)) || seed.PRODUCTS.find(p => p.id === id) || null;
 }
 
-async function getUnitPrice(productId, storageLabel) {
+async function getUnitPrice(productId, storageLabel, modelNumber, color) {
   const product = await getProductById(productId);
   if (!product) return null;
+  const current = seed.PRODUCTS.find(p => p.id === productId);
+  const variants = (current && current.variants) || product.variants || [];
+  if (modelNumber) {
+    const variant = variants.find(v => v.modelNumber === modelNumber);
+    if (!variant || (color && color !== variant.color) || (storageLabel && storageLabel !== variant.configuration)) return null;
+    return variant.price;
+  }
+  const configuration = variants.find(v => v.configuration === storageLabel && (!color || color === v.color));
+  if (configuration) return configuration.price;
   const opt = (product.storageOptions || []).find(function (o) { return o.label === storageLabel; });
   return product.price + (opt ? opt.extra : 0);
 }
@@ -31,7 +41,7 @@ async function priceCart(items, couponCode) {
     if (!product) throw new Error("Unknown product id: " + item.id);
     const qty = Number(item.qty) || 0;
     if (!Number.isInteger(qty) || qty < 1 || qty > 20) throw new Error("Invalid quantity for " + item.id);
-    const unitPrice = await getUnitPrice(item.id, item.storage);
+    const unitPrice = await getUnitPrice(item.id, item.storage, item.modelNumber, item.color);
     if (unitPrice == null) throw new Error("Invalid storage option for " + item.id);
     const lineTotal = unitPrice * qty;
     subtotal += lineTotal;
@@ -40,6 +50,7 @@ async function priceCart(items, couponCode) {
       name: product.name,
       color: item.color || "",
       storage: item.storage || "",
+      modelNumber: item.modelNumber || "",
       qty: qty,
       unitPrice: unitPrice,
       lineTotal: lineTotal

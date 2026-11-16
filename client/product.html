@@ -431,6 +431,14 @@
       border-radius: 0;
       box-shadow: none;
     }
+
+    .variant-select {
+      width: 100%; padding: 12px 14px; border-radius: 10px;
+      border: 1px solid #555; background: #171719; color: #fff;
+      font: inherit; min-height: 44px;
+    }
+    .variant-select:focus-visible { outline: 2px solid #2997ff; outline-offset: 3px; }
+    .pdp-variant-summary { color: #a1a1a6; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
   </style>
 </head>
 <body class="dark-theme">
@@ -463,6 +471,7 @@
 <div id="whatsapp-float"></div>
 
 <script src="js/config.js"></script>
+<script src="js/pricing-data.js"></script>
 <script src="js/data.js"></script>
 <script src="js/catalog-sync.js"></script>
 <script src="js/cart.js"></script>
@@ -471,12 +480,6 @@
 <script src="js/animations.js" defer></script>
 <script>
   const productId = getQueryParam("id") || getQueryParam("slug");
-  if (productId === "macbook-air-13-m5" || productId === "macbook-air-15-m5" || productId === "mba-m3-13" || productId === "macbook-air") {
-    window.location.replace("macbook-air.html");
-  }
-  if (productId === "iphone-18-pro" || productId === "iphone-18-pro-max" || productId === "iphone18pro") {
-    window.location.replace("iphone-18-pro.html");
-  }
   let product = getProductById(productId);
   if (!product && productId) {
     const searchMatches = searchProducts(productId);
@@ -502,12 +505,51 @@
     qty: 1
   };
 
+  const variantFields = [
+    ['chip', 'Chip'], ['cpu', 'CPU'], ['gpu', 'GPU'], ['ram', 'RAM'],
+    ['storage', 'Storage'], ['connectivity', 'Connectivity'], ['glass', 'Display glass'], ['color', 'Color']
+  ];
+  let selectedVariant = product.variants && product.variants[0];
+  if (selectedVariant) syncVariantSelection();
+
+  function syncVariantSelection() {
+    selection.color = selectedVariant.color;
+    selection.storage = selectedVariant.configuration;
+  }
+
+  function currentSpecs() {
+    if (!selectedVariant) return product.specs;
+    const specs = Object.assign({}, product.specs);
+    variantFields.forEach(function (field) {
+      if (selectedVariant[field[0]]) specs[field[1] === 'RAM' ? 'Memory' : field[1]] = selectedVariant[field[0]];
+    });
+    specs['Model No.'] = selectedVariant.modelNumber;
+    return specs;
+  }
+
+  function variantPickerHtml() {
+    return variantFields.map(function (field, index) {
+      const candidates = product.variants.filter(v => variantFields.slice(0, index).every(f => v[f[0]] === selectedVariant[f[0]]));
+      const values = [...new Set(candidates.map(v => v[field[0]]).filter(Boolean))];
+      if (!values.length) return '';
+      const id = 'variant-' + field[0];
+      return '<div class="option-group"><label class="title" for="' + id + '">' + field[1] + '</label>' +
+        '<select class="variant-select" id="' + id + '" data-variant-field="' + field[0] + '">' +
+        values.map(value => '<option value="' + escapeVariantHtml(value) + '"' + (value === selectedVariant[field[0]] ? ' selected' : '') + '>' + escapeVariantHtml(value) + '</option>').join('') + '</select></div>';
+    }).join('') + '<p class="pdp-variant-summary" aria-live="polite"><strong>Model: ' + escapeVariantHtml(selectedVariant.modelNumber) + '</strong><br>' + escapeVariantHtml(selectedVariant.specs) + '</p>';
+  }
+
+  function escapeVariantHtml(value) {
+    return String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  }
+
   function currentImage() {
     const colorObj = product.colors.find(function (c) { return c.name === selection.color; });
     return (colorObj && colorObj.image) || product.images[0];
   }
 
   function currentUnitPrice() {
+    if (selectedVariant) return selectedVariant.price;
     const opt = product.storageOptions.find(function (o) { return o.label === selection.storage; });
     return product.price + (opt ? opt.extra : 0);
   }
@@ -567,8 +609,8 @@
               '</div>' +
             '</div>' +
 
-            (product.colors.length ? colorPickerHtml() : '') +
-            (product.storageOptions.length > 0 ? storagePickerHtml() : '') +
+            (selectedVariant ? variantPickerHtml() : (product.colors.length ? colorPickerHtml() : '')) +
+            (!selectedVariant && product.storageOptions.length > 0 ? storagePickerHtml() : '') +
 
             '<div class="qty-row">' +
               '<div class="qty-selector">' +
@@ -608,16 +650,16 @@
             '<h3>Overview</h3>' +
             '<p class="pdp-desc">' + product.description + '</p>' +
             '<ul class="pdp-highlights">' +
-              Object.keys(product.specs).filter(function (k) { return k !== "Model No." && !k.toLowerCase().includes("model no"); }).slice(0, 4).map(function (k) {
-                return '<li><strong>' + k + ':</strong> ' + product.specs[k] + '</li>';
+              Object.keys(currentSpecs()).slice(0, 4).map(function (k) {
+                return '<li><strong>' + k + ':</strong> ' + currentSpecs()[k] + '</li>';
               }).join("") +
             '</ul>' +
           '</div>' +
           '<div class="pdp-details-block">' +
             '<h3>Technical Specifications</h3>' +
             '<table class="spec-table">' +
-              Object.keys(product.specs).filter(function (k) { return k !== "Model No." && !k.toLowerCase().includes("model no"); }).map(function (k) {
-                return '<tr><td>' + k + '</td><td>' + product.specs[k] + '</td></tr>';
+              Object.keys(currentSpecs()).map(function (k) {
+                return '<tr><td>' + k + '</td><td>' + currentSpecs()[k] + '</td></tr>';
               }).join("") +
             '</table>' +
           '</div>' +
@@ -650,6 +692,20 @@
   }
 
   function wirePdpInteractions(unitPrice, emi12) {
+    document.querySelectorAll('[data-variant-field]').forEach(function (input) {
+      input.addEventListener('change', function () {
+        const field = input.dataset.variantField;
+        const index = variantFields.findIndex(f => f[0] === field);
+        const matches = product.variants.filter(v => v[field] === input.value && variantFields.slice(0, index).every(f => v[f[0]] === selectedVariant[f[0]]));
+        const previous = selectedVariant;
+        selectedVariant = matches.sort((a, b) => variantFields.reduce((score, f) => score + (b[f[0]] === previous[f[0]] ? 1 : 0) - (a[f[0]] === previous[f[0]] ? 1 : 0), 0))[0];
+        syncVariantSelection();
+        renderPdp();
+        updateStickyAtc();
+        const next = document.getElementById(input.id);
+        if (next) next.focus();
+      });
+    });
     const galleryMain = document.getElementById("pdpGalleryMain");
     const mainImg = document.getElementById("mainImage");
 
@@ -726,7 +782,10 @@
       storage: selection.storage,
       qty: selection.qty,
       unitPrice: currentUnitPrice(),
-      image: currentImage()
+      image: currentImage(),
+      modelNumber: selectedVariant ? selectedVariant.modelNumber : '',
+      chip: selectedVariant ? selectedVariant.chip : '',
+      ram: selectedVariant ? selectedVariant.ram : ''
     });
     showToast(product.name + " added to your bag");
   }
@@ -737,7 +796,10 @@
       storage: selection.storage,
       qty: selection.qty,
       unitPrice: currentUnitPrice(),
-      image: currentImage()
+      image: currentImage(),
+      modelNumber: selectedVariant ? selectedVariant.modelNumber : '',
+      chip: selectedVariant ? selectedVariant.chip : '',
+      ram: selectedVariant ? selectedVariant.ram : ''
     });
     window.location.href = "checkout.html";
   }

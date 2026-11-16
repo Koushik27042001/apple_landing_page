@@ -1,10 +1,4 @@
-/* ============================================================
-   Apple Official Catalogue & Pricing Dataset — Iswift Gadgets
-   Extracted, validated, and supplier-verified for 2026 lineup.
-   Includes Model Numbers, Technical Specs, Colours, Storage,
-   and Cleaned Pricing (Anomalous ₹28,631 extraction errors resolved).
-   ============================================================ */
-
+/* Store catalogue. Supplier-provided specifications and prices are retained as supplied. */
 var PRICING_CATALOGUE = [
   {
     "id": "iphone-duo",
@@ -609,7 +603,7 @@ var PRICING_CATALOGUE = [
     "tableMatch": "New MacBook Pro M5 & Pro and Max Chip 14 Inch Models",
     "id": "macbook-pro-14-m5",
     "slug": "macbook-pro-14-m5",
-    "name": "MacBook Pro 14-inch M5 / Pro / Max",
+    "name": "MacBook Pro 14-inch M5 Pro / Max",
     "category": "mac",
     "chip": "M5 / M5 Pro / M5 Max",
     "display": "14.2-inch Liquid Retina XDR Display",
@@ -708,129 +702,75 @@ var PRICING_CATALOGUE = [
         "availability": "In Stock"
       },
       {
-        "modelNumber": "MGDR4HN/A",
-        "specs": "14-inch MacBook Pro: Apple M5 Pro chip with 15-core CPU and 16-core GPU and 16-core Neural Engine, 24GB, 1TB SSD - Space Black",
-        "storage": "1TB",
+        "modelNumber": "MJ2K4HN/A",
+        "specs": "14-inch MacBook Pro with PROLED XDR display: Apple M5 Pro chip with 15-core CPU and 16-core GPU, 24GB, 1TB SSD - Space Black",
+        "price": 349900,
+        "storage": "",
         "color": "Space Black",
-        "connectivity": "",
-        "glass": "",
-        "price": 299900,
-        "displayPrice": "₹2,99,900",
-        "rawPrice": "₹299,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹3,49,900",
+        "rawPrice": "₹3,49,900"
       },
       {
-        "modelNumber": "MGDN4HN/A",
-        "specs": "14-inch MacBook Pro: Apple M5 Pro chip with 15-core CPU and 16-core GPU and 16-core Neural Engine, 24GB, 1TB SSD - Silver",
-        "storage": "1TB",
+        "modelNumber": "MJ2G4HN/A",
+        "specs": "14-inch MacBook Pro with PROLED XDR display: Apple M5 Pro chip with 15-core CPU and 16-core GPU, 24GB, 1TB SSD - Silver",
+        "price": 349900,
+        "storage": "",
         "color": "Silver",
-        "connectivity": "",
-        "glass": "",
-        "price": 299900,
-        "displayPrice": "₹2,99,900",
-        "rawPrice": "₹299,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹3,49,900",
+        "rawPrice": "₹3,49,900"
       },
       {
-        "modelNumber": "MJLW4HN/A",
-        "specs": "14-inch MacBook Pro: Apple M5 Pro chip with 15-core CPU and 16-core GPU and 16-core Neural Engine, 24GB, 2TB SSD - Space Black",
-        "storage": "2TB",
+        "modelNumber": "MMF64HN/A",
+        "specs": "14-inch MacBook Pro with PROLED XDR display: Apple M5 Pro chip with 18-core CPU and 20-core GPU, 48GB, 1TB SSD - Space Black",
+        "price": 459900,
+        "storage": "",
         "color": "Space Black",
-        "connectivity": "",
-        "glass": "",
-        "price": 359900,
-        "displayPrice": "₹3,59,900",
-        "rawPrice": "₹359,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹4,59,900",
+        "rawPrice": "₹4,59,900"
       },
       {
-        "modelNumber": "MJLV4HN/A",
-        "specs": "14-inch MacBook Pro: Apple M5 Pro chip with 15-core CPU and 16-core GPU and 16-core Neural Engine, 24GB, 2TB SSD - Silver",
-        "storage": "2TB",
+        "modelNumber": "MMF54HN/A",
+        "specs": "14-inch MacBook Pro with PROLED XDR display: Apple M5 Pro chip with 18-core CPU and 20-core GPU, 48GB, 1TB SSD - Silver",
+        "price": 459900,
+        "storage": "",
         "color": "Silver",
-        "connectivity": "",
-        "glass": "",
-        "price": 359900,
-        "displayPrice": "₹3,59,900",
-        "rawPrice": "₹359,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹4,59,900",
+        "rawPrice": "₹4,59,900"
       },
       {
-        "modelNumber": "MGDT4HN/A",
-        "specs": "14-inch MacBook Pro: Apple M5 Pro chip with 18-core CPU and 20-core GPU and 16-core Neural Engine, 24GB, 2TB SSD - Space Black",
-        "storage": "2TB",
+        "modelNumber": "MJ2M4HN/A",
+        "specs": "14-inch MacBook Pro with PROLED XDR display: Apple M5 Max chip with 18-core CPU and 32-core GPU, 36GB, 2TB SSD - Space Black",
+        "price": 549900,
+        "storage": "",
         "color": "Space Black",
-        "connectivity": "",
-        "glass": "",
-        "price": 399900,
-        "displayPrice": "₹3,99,900",
-        "rawPrice": "₹399,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹5,49,900",
+        "rawPrice": "₹5,49,900"
       },
       {
-        "modelNumber": "MGDP4HN/A",
-        "specs": "14-inch MacBook Pro: Apple M5 Pro chip with 18-core CPU and 20-core GPU and 16-core Neural Engine, 24GB, 2TB SSD - Silver",
-        "storage": "2TB",
+        "modelNumber": "MJ2J4HN/A",
+        "specs": "14-inch MacBook Pro with PROLED XDR display: Apple M5 Max chip with 18-core CPU and 32-core GPU, 36GB, 2TB SSD - Silver",
+        "price": 549900,
+        "storage": "",
         "color": "Silver",
-        "connectivity": "",
-        "glass": "",
-        "price": 399900,
-        "displayPrice": "₹3,99,900",
-        "rawPrice": "₹399,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
-      },
-      {
-        "modelNumber": "MGDU4HN/A",
-        "specs": "14-inch MacBook Pro: Apple M5 Max chip with 18-core CPU and 32-core GPU and 16-core Neural Engine, 36GB, 2TB SSD - Space Black",
-        "storage": "2TB",
-        "color": "Space Black",
-        "connectivity": "",
-        "glass": "",
-        "price": 499900,
-        "displayPrice": "₹4,99,900",
-        "rawPrice": "₹499,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
-      },
-      {
-        "modelNumber": "MGDQ4HN/A",
-        "specs": "14-inch MacBook Pro: Apple M5 Max chip with 18-core CPU and 32-core GPU and 16-core Neural Engine, 36GB, 2TB SSD - Silver",
-        "storage": "2TB",
-        "color": "Silver",
-        "connectivity": "",
-        "glass": "",
-        "price": 499900,
-        "displayPrice": "₹4,99,900",
-        "rawPrice": "₹499,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹5,49,900",
+        "rawPrice": "₹5,49,900"
       }
     ],
     "startingPrice": 239900,
-    "maxPrice": 499900,
-    "priceRange": "₹2,39,900 – ₹4,99,900"
+    "maxPrice": 549900,
+    "priceRange": "₹2,39,900 - ₹5,49,900"
   },
   {
     "tableMatch": "New Macbook Pro M5 & Max Chip 16 Inches",
@@ -845,129 +785,97 @@ var PRICING_CATALOGUE = [
     "detailUrl": "product.html?id=macbook-pro-16-m5",
     "variants": [
       {
-        "modelNumber": "MGEA4HN/A",
-        "specs": "16-inch MacBook Pro: Apple M5 Pro chip with 18-core CPU and 20-core GPU and 16-core Neural Engine, 24GB, 1TB SSD - Space Black",
-        "storage": "1TB",
+        "modelNumber": "MJ304HN/A",
+        "specs": "16-inch MacBook Pro with PROLED XDR display: Apple M5 Pro chip with 18-core CPU and 20-core GPU, 24GB, 1TB SSD - Space Black",
+        "price": 409900,
+        "storage": "",
         "color": "Space Black",
-        "connectivity": "",
-        "glass": "",
-        "price": 359900,
-        "displayPrice": "₹3,59,900",
-        "rawPrice": "₹359,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹4,09,900",
+        "rawPrice": "₹4,09,900"
       },
       {
-        "modelNumber": "MGE44HN/A",
-        "specs": "16-inch MacBook Pro: Apple M5 Pro chip with 18-core CPU and 20-core GPU and 16-core Neural Engine, 24GB, 1TB SSD - Silver",
-        "storage": "1TB",
+        "modelNumber": "MJ2W4HN/A",
+        "specs": "16-inch MacBook Pro with PROLED XDR display: Apple M5 Pro chip with 18-core CPU and 20-core GPU, 24GB, 1TB SSD - Silver",
+        "price": 409900,
+        "storage": "",
         "color": "Silver",
-        "connectivity": "",
-        "glass": "",
-        "price": 359900,
-        "displayPrice": "₹3,59,900",
-        "rawPrice": "₹359,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹4,09,900",
+        "rawPrice": "₹4,09,900"
       },
       {
-        "modelNumber": "MGEC4HN/A",
-        "specs": "16-inch MacBook Pro: Apple M5 Pro chip with 18-core CPU and 20-core GPU and 16-core Neural Engine, 48GB, 1TB SSD - Space Black",
-        "storage": "1TB",
+        "modelNumber": "MMFA4HN/A",
+        "specs": "16-inch MacBook Pro with PROLED XDR display: Apple M5 Pro chip with 18-core CPU and 20-core GPU, 48GB, 1TB SSD - Space Black",
+        "price": 481900,
+        "storage": "",
         "color": "Space Black",
-        "connectivity": "",
-        "glass": "",
-        "price": 431900,
-        "displayPrice": "₹4,31,900",
-        "rawPrice": "₹431,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹4,81,900",
+        "rawPrice": "₹4,81,900"
       },
       {
-        "modelNumber": "MGE64HN/A",
-        "specs": "16-inch MacBook Pro: Apple M5 Pro chip with 18-core CPU and 20-core GPU and 16-core Neural Engine, 48GB, 1TB SSD - Silver",
-        "storage": "1TB",
+        "modelNumber": "MMF94HN/A",
+        "specs": "16-inch MacBook Pro with PROLED XDR display: Apple M5 Pro chip with 18-core CPU and 20-core GPU, 48GB, 1TB SSD - Silver",
+        "price": 481900,
+        "storage": "",
         "color": "Silver",
-        "connectivity": "",
-        "glass": "",
-        "price": 431900,
-        "displayPrice": "₹4,31,900",
-        "rawPrice": "₹431,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹4,81,900",
+        "rawPrice": "₹4,81,900"
       },
       {
-        "modelNumber": "MGED4HN/A",
-        "specs": "16-inch MacBook Pro: Apple M5 Max chip with 18-core CPU and 32-core GPU and 16-core Neural Engine, 36GB, 2TB SSD - Space Black",
-        "storage": "2TB",
+        "modelNumber": "MJ314HN/A",
+        "specs": "16-inch MacBook Pro with PROLED XDR display: Apple M5 Max chip with 18-core CPU and 32-core GPU, 36GB, 2TB SSD - Space Black",
+        "price": 589900,
+        "storage": "",
         "color": "Space Black",
-        "connectivity": "",
-        "glass": "",
-        "price": 539900,
-        "displayPrice": "₹5,39,900",
-        "rawPrice": "₹539,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹5,89,900",
+        "rawPrice": "₹5,89,900"
       },
       {
-        "modelNumber": "MGE74HN/A",
-        "specs": "16-inch MacBook Pro: Apple M5 Max chip with 18-core CPU and 32-core GPU and 16-core Neural Engine, 36GB, 2TB SSD - Silver",
-        "storage": "2TB",
+        "modelNumber": "MJ2X4HN/A",
+        "specs": "16-inch MacBook Pro with PROLED XDR display: Apple M5 Max chip with 18-core CPU and 32-core GPU, 36GB, 2TB SSD - Silver",
+        "price": 589900,
+        "storage": "",
         "color": "Silver",
-        "connectivity": "",
-        "glass": "",
-        "price": 539900,
-        "displayPrice": "₹5,39,900",
-        "rawPrice": "₹539,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹5,89,900",
+        "rawPrice": "₹5,89,900"
       },
       {
-        "modelNumber": "MGEE4HN/A",
-        "specs": "16-inch MacBook Pro: Apple M5 Max chip with 18-core CPU and 40-core GPU and 16-core Neural Engine, 48GB, 2TB SSD - Space Black",
-        "storage": "2TB",
+        "modelNumber": "MJ334HN/A",
+        "specs": "16-inch MacBook Pro with PROLED XDR display: Apple M5 Max chip with 18-core CPU and 40-core GPU, 48GB, 2TB SSD - Space Black",
+        "price": 669900,
+        "storage": "",
         "color": "Space Black",
-        "connectivity": "",
-        "glass": "",
-        "price": 619900,
-        "displayPrice": "₹6,19,900",
-        "rawPrice": "₹619,900",
-        "priceVerified": true,
-        "corrected": false,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹6,69,900",
+        "rawPrice": "₹6,69,900"
       },
       {
-        "modelNumber": "MGE94HN/A",
-        "specs": "16-inch MacBook Pro: Apple M5 Max chip with 18-core CPU and 40-core GPU and 16-core Neural Engine, 48GB, 2TB SSD - Silver",
-        "storage": "2TB",
+        "modelNumber": "MJ2Y4HN/A",
+        "specs": "16-inch MacBook Pro with PROLED XDR display: Apple M5 Max chip with 18-core CPU and 40-core GPU, 48GB, 2TB SSD - Silver",
+        "price": 669900,
+        "storage": "",
         "color": "Silver",
-        "connectivity": "",
-        "glass": "",
-        "price": 619900,
-        "displayPrice": "₹6,19,900",
-        "rawPrice": "₹28,631",
-        "priceVerified": true,
-        "corrected": true,
-        "lastUpdated": "2026-11-02",
-        "availability": "In Stock"
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹6,69,900",
+        "rawPrice": "₹6,69,900"
       }
     ],
-    "startingPrice": 359900,
-    "maxPrice": 619900,
-    "priceRange": "₹3,59,900 – ₹6,19,900"
+    "startingPrice": 409900,
+    "maxPrice": 669900,
+    "priceRange": "₹4,09,900 - ₹6,69,900"
   },
   {
     "tableMatch": "New iMac M4 Chip",
@@ -6055,13 +5963,182 @@ var PRICING_CATALOGUE = [
         "priceVerified": true
       }
     ]
+  },
+  {
+    "id": "macbook-pro-14-m6",
+    "slug": "macbook-pro-14-m6",
+    "category": "mac",
+    "image": "images/products/macbook-pro-black.png",
+    "detailUrl": "product.html?id=macbook-pro-14-m6",
+    "variants": [
+      {
+        "modelNumber": "MHWT4HN/A",
+        "specs": "14-inch MacBook Pro: Apple M6 chip with 12-core CPU and 12-core GPU, 16GB, 1TB SSD - Space Black",
+        "price": 239900,
+        "storage": "",
+        "color": "Space Black",
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹2,39,900",
+        "rawPrice": "₹2,39,900"
+      },
+      {
+        "modelNumber": "MHWW4HN/A",
+        "specs": "14-inch MacBook Pro: Apple M6 chip with 12-core CPU and 12-core GPU, 16GB, 1TB SSD - Silver",
+        "price": 239900,
+        "storage": "",
+        "color": "Silver",
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹2,39,900",
+        "rawPrice": "₹2,39,900"
+      },
+      {
+        "modelNumber": "MHWU4HN/A",
+        "specs": "14-inch MacBook Pro: Apple M6 chip with 12-core CPU and 12-core GPU, 24GB, 1TB SSD - Space Black",
+        "price": 263900,
+        "storage": "",
+        "color": "Space Black",
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹2,63,900",
+        "rawPrice": "₹2,63,900"
+      },
+      {
+        "modelNumber": "MHWX4HN/A",
+        "specs": "14-inch MacBook Pro: Apple M6 chip with 12-core CPU and 12-core GPU, 24GB, 1TB SSD - Silver",
+        "price": 263900,
+        "storage": "",
+        "color": "Silver",
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹2,63,900",
+        "rawPrice": "₹2,63,900"
+      },
+      {
+        "modelNumber": "MHWV4HN/A",
+        "specs": "14-inch MacBook Pro: Apple M6 chip with 12-core CPU and 12-core GPU, 32GB, 1TB SSD - Space Black",
+        "price": 287900,
+        "storage": "",
+        "color": "Space Black",
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹2,87,900",
+        "rawPrice": "₹2,87,900"
+      },
+      {
+        "modelNumber": "MHWY4HN/A",
+        "specs": "14-inch MacBook Pro: Apple M6 chip with 12-core CPU and 12-core GPU, 32GB, 1TB SSD - Silver",
+        "price": 287900,
+        "storage": "",
+        "color": "Silver",
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹2,87,900",
+        "rawPrice": "₹2,87,900"
+      }
+    ],
+    "name": "MacBook Pro 14-inch M6",
+    "chip": "M6",
+    "startingPrice": 239900,
+    "maxPrice": 287900,
+    "priceRange": "₹2,39,900 - ₹2,87,900"
+  },
+  {
+    "id": "mac-studio-m5",
+    "slug": "mac-studio-m5",
+    "category": "desktop",
+    "image": "images/hero/mac/nav_mac_studio_f2f3212ea.png",
+    "detailUrl": "product.html?id=mac-studio-m5",
+    "variants": [
+      {
+        "modelNumber": "MHL64HN/A",
+        "specs": "MHL64-WS MS M5 Max/36G/512GB/18C CPU/32C GPU",
+        "price": 279900,
+        "storage": "",
+        "color": "Silver",
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹2,79,900",
+        "rawPrice": "₹2,79,900"
+      },
+      {
+        "modelNumber": "MHL74HN/A",
+        "specs": "MHL74-WS MS M5 Ultra/96G/1TB/30C CPU/64C GPU",
+        "price": 629900,
+        "storage": "",
+        "color": "Silver",
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹6,29,900",
+        "rawPrice": "₹6,29,900"
+      }
+    ],
+    "name": "Mac Studio M5 Max / Ultra",
+    "chip": "M5 Max / M5 Ultra",
+    "startingPrice": 279900,
+    "maxPrice": 629900,
+    "priceRange": "₹2,79,900 - ₹6,29,900"
+  },
+  {
+    "id": "mac-mini-m6",
+    "slug": "mac-mini-m6",
+    "category": "desktop",
+    "image": "images/products/macmini-silver.png",
+    "detailUrl": "product.html?id=mac-mini-m6",
+    "variants": [
+      {
+        "modelNumber": "MHQK4HN/A",
+        "specs": "MQHK4-WS MM M6/16GB/256GB/12C CPU/12C GPU",
+        "price": 99900,
+        "storage": "",
+        "color": "Silver",
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹99,900",
+        "rawPrice": "₹99,900"
+      },
+      {
+        "modelNumber": "MHQL4HN/A",
+        "specs": "MQHL4-WS MM M6/16GB/512GB/12C CPU/12C GPU",
+        "price": 123900,
+        "storage": "",
+        "color": "Silver",
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹1,23,900",
+        "rawPrice": "₹1,23,900"
+      },
+      {
+        "modelNumber": "MHQM4HN/A",
+        "specs": "MQHM4-WS MM M6/24GB/512GB/12C CPU/12C GPU",
+        "price": 147900,
+        "storage": "",
+        "color": "Silver",
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹1,47,900",
+        "rawPrice": "₹1,47,900"
+      },
+      {
+        "modelNumber": "MHQN4HN/A",
+        "specs": "MQHN4-WS MM M5 PRO/24GB/512GB/15C CPU/16C GPU",
+        "price": 209900,
+        "storage": "",
+        "color": "Silver",
+        "availability": "Available to Order",
+        "source": "Supplier product list",
+        "displayPrice": "₹2,09,900",
+        "rawPrice": "₹2,09,900"
+      }
+    ],
+    "name": "Mac mini M6 / M5 Pro",
+    "chip": "M6 / M4 / M5 PRO",
+    "startingPrice": 99900,
+    "maxPrice": 209900,
+    "priceRange": "₹99,900 - ₹2,09,900"
   }
 ];
 
-if (typeof window !== 'undefined') {
-  window.PRICING_CATALOGUE = PRICING_CATALOGUE;
-}
-
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { PRICING_CATALOGUE };
-}
+if (typeof window !== "undefined") window.PRICING_CATALOGUE = PRICING_CATALOGUE;
+if (typeof module !== "undefined" && module.exports) module.exports = { PRICING_CATALOGUE };

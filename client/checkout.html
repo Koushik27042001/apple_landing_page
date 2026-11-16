@@ -228,6 +228,7 @@
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="js/config.js"></script>
+<script src="js/pricing-data.js"></script>
 <script src="js/data.js"></script>
 <script src="js/catalog-sync.js"></script>
 <script src="js/cart.js"></script>
@@ -470,7 +471,7 @@
 
   function cartAsLineItems() {
     return getCart().map(function (item) {
-      return { id: item.id, color: item.color, storage: item.storage, qty: item.qty };
+      return { id: item.id, color: item.color, storage: item.storage, modelNumber: item.modelNumber, qty: item.qty };
     });
   }
 

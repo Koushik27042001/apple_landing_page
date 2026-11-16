@@ -1497,6 +1497,81 @@ function searchProducts(query) {
   });
 }
 
+/* Normalize real catalogue configurations for both storefront and order pricing. */
+function normalizeCatalogueVariant(row, model) {
+  const specs = (row.specs || '').replace(/\u2011/g, '-');
+  const chipMatch = specs.match(/\b(?:Apple\s+)?(M\d(?:\s+(?:Pro|Max|Ultra))?|A\d+(?:\s+Pro)?|S\d+)\b/i);
+  const cpu = specs.match(/(\d+)\s*(?:-core\s*CPU|C\s+CPU)/i);
+  const gpu = specs.match(/(\d+)\s*(?:-core\s*GPU|C\s+GPU)/i);
+  const memory = specs.match(/(?:,|\||\/)\s*(\d+)\s*(?:GB|G)(?=\s*(?:,|\||\/))/i);
+  const capacity = [...specs.matchAll(/(\d+)\s*(GB|TB)\s*(?:SSD)?/gi)].map(m => m[1] + m[2].toUpperCase());
+  const storage = row.storage || capacity[capacity.length - 1] || '';
+  const variant = Object.assign({}, row, {
+    chip: row.chip || (chipMatch ? chipMatch[1] : model.chip || ''),
+    ram: row.ram || (memory && ['mac', 'desktop'].includes(model.category) ? memory[1] + 'GB' : ''),
+    storage: storage,
+    cpu: row.cpu || (cpu ? cpu[1] + '-core CPU' : ''),
+    gpu: row.gpu || (gpu ? gpu[1] + '-core GPU' : ''),
+    color: row.color || 'Standard',
+    connectivity: row.connectivity || '',
+    glass: row.glass || ''
+  });
+  variant.configuration = [variant.chip, variant.cpu, variant.gpu, variant.ram && variant.ram + ' RAM', variant.storage, variant.connectivity, variant.glass].filter(Boolean).join(' / ');
+  return variant;
+}
+
+function applyCatalogueVariants(catalogue) {
+  (catalogue || []).forEach(function (model) {
+    if (!['mac', 'desktop', 'ipad', 'iphone', 'watch'].includes(model.category)) return;
+    const seen = new Set();
+    const variants = (model.variants || []).filter(function (v) {
+      if (!v.modelNumber || seen.has(v.modelNumber) || !Number.isFinite(v.price) || v.price <= 0) return false;
+      seen.add(v.modelNumber);
+      return true;
+    }).map(function (v) { return normalizeCatalogueVariant(v, model); });
+    if (!variants.length) return;
+    const id = model.id === 'macbook-neo-13' ? 'macbook-neo' : model.id;
+    let product = PRODUCTS.find(function (p) { return p.id === id; });
+    if (!product) {
+      product = {
+        id: id, name: model.name, category: model.category === 'desktop' ? 'mac' : model.category,
+        brand: 'Apple', badge: 'New', rating: 0, reviews: 0, stock: 10,
+        images: [model.image], colors: [], storageOptions: [],
+        short: model.tagline || model.name, description: model.tagline || model.name,
+        specs: {}
+      };
+      PRODUCTS.push(product);
+    }
+    product.name = model.name;
+    product.variants = variants;
+    const oldColors = product.colors;
+    product.colors = [...new Set(variants.map(v => v.color))].map(function (name) {
+      const existing = oldColors.find(c => c.name === name);
+      return existing || { name: name, hex: ({ Silver: '#e3e4e6', 'Space Black': '#1c1c1e', Blue: '#8fb6de', Purple: '#b79fd1', Starlight: '#f0ece1' })[name] || '#86868b', image: product.images[0] };
+    });
+    product.price = Math.min(...variants.map(v => v.price));
+    product.mrp = product.price;
+    product.specs = Object.assign({}, product.specs, { Chip: [...new Set(variants.map(v => v.chip).filter(Boolean))].join(' / ') });
+    const memory = [...new Set(variants.map(v => v.ram).filter(Boolean))];
+    if (memory.length) product.specs.Memory = memory.join(' / ');
+    if (model.display) product.specs.Display = model.display;
+  });
+}
+
+function getNavigationProducts(category) {
+  const seen = new Set();
+  return PRODUCTS.filter(function (p) {
+    if (p.category !== category || seen.has(p.id)) return false;
+    seen.add(p.id);
+    return true;
+  });
+}
+
+const variantCatalogue = typeof PRICING_CATALOGUE !== 'undefined' ? PRICING_CATALOGUE :
+  (typeof module !== 'undefined' && module.exports ? require('./pricing-data.js').PRICING_CATALOGUE : []);
+applyCatalogueVariants(variantCatalogue);
+
+
 /* Isomorphic export: makes this catalog the single source of truth for
    both the browser storefront and the Node.js backend (server/), so
    product prices/stock never drift out of sync between the two. This
@@ -1504,6 +1579,8 @@ function searchProducts(query) {
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
     CATEGORIES: CATEGORIES,
+    normalizeCatalogueVariant: normalizeCatalogueVariant,
+    getNavigationProducts: getNavigationProducts,
     PRODUCTS: PRODUCTS,
     formatINR: formatINR,
     getEmi: getEmi,

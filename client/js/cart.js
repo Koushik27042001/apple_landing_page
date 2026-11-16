@@ -20,8 +20,8 @@ function saveCart(cart) {
   updateCartBadge();
 }
 
-function cartLineId(productId, color, storage) {
-  return productId + "::" + (color || "") + "::" + (storage || "");
+function cartLineId(productId, color, storage, modelNumber) {
+  return productId + "::" + (color || "") + "::" + (storage || "") + (modelNumber ? "::" + modelNumber : "");
 }
 
 function addToCart(product, opts) {
@@ -33,7 +33,7 @@ function addToCart(product, opts) {
   const image = opts.image || product.images[0];
 
   const cart = getCart();
-  const lineId = cartLineId(product.id, color, storage);
+  const lineId = cartLineId(product.id, color, storage, opts.modelNumber);
   const existing = cart.find(function (i) { return i.lineId === lineId; });
 
   if (existing) {
@@ -48,6 +48,9 @@ function addToCart(product, opts) {
       color: color,
       storage: storage,
       qty: qty,
+      modelNumber: opts.modelNumber || '',
+      chip: opts.chip || '',
+      ram: opts.ram || '',
       category: product.category
     });
   }
