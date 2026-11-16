@@ -1,0 +1,83 @@
+{
+  "macbook-pro": [
+    {
+      "src": "images/products/catalogue/macbook-pro-gallery-1.jpg",
+      "alt": "macbook pro: 14-inch and 16-inch lineup",
+      "caption": "14-inch and 16-inch lineup"
+    },
+    {
+      "src": "images/products/catalogue/macbook-pro-gallery-2.jpg",
+      "alt": "macbook pro: Space Black and Silver profile",
+      "caption": "Space Black and Silver profile"
+    },
+    {
+      "src": "images/products/catalogue/macbook-pro-gallery-3.jpg",
+      "alt": "macbook pro: A creative workspace",
+      "caption": "A creative workspace"
+    }
+  ],
+  "mac-studio": [
+    {
+      "src": "images/products/catalogue/mac-studio-m5.png",
+      "alt": "mac studio: Front connections",
+      "caption": "Front connections"
+    },
+    {
+      "src": "images/products/catalogue/mac-studio-gallery-2.jpg",
+      "alt": "mac studio: Rear connections",
+      "caption": "Rear connections"
+    },
+    {
+      "src": "images/products/catalogue/mac-studio-gallery-3.jpg",
+      "alt": "mac studio: Compact aluminium design",
+      "caption": "Compact aluminium design"
+    },
+    {
+      "src": "images/products/catalogue/mac-studio-gallery-4.jpg",
+      "alt": "mac studio: Ventilation and base",
+      "caption": "Ventilation and base"
+    },
+    {
+      "src": "images/products/catalogue/mac-studio-gallery-5.jpg",
+      "alt": "mac studio: A complete desktop setup",
+      "caption": "A complete desktop setup"
+    },
+    {
+      "src": "images/products/catalogue/mac-studio-gallery-6.jpg",
+      "alt": "mac studio: A creative studio setup",
+      "caption": "A creative studio setup"
+    },
+    {
+      "src": "images/products/catalogue/mac-studio-gallery-7.jpg",
+      "alt": "mac studio: A video editing workspace",
+      "caption": "A video editing workspace"
+    }
+  ],
+  "mac-mini": [
+    {
+      "src": "images/products/catalogue/mac-mini-m6.png",
+      "alt": "mac mini: Front connections",
+      "caption": "Front connections"
+    },
+    {
+      "src": "images/products/catalogue/mac-mini-gallery-2.jpg",
+      "alt": "mac mini: Rear connections",
+      "caption": "Rear connections"
+    },
+    {
+      "src": "images/products/catalogue/mac-mini-gallery-3.jpg",
+      "alt": "mac mini: Compact aluminium design",
+      "caption": "Compact aluminium design"
+    },
+    {
+      "src": "images/products/catalogue/mac-mini-gallery-4.jpg",
+      "alt": "mac mini: A video editing setup",
+      "caption": "A video editing setup"
+    },
+    {
+      "src": "images/products/catalogue/mac-mini-gallery-5.jpg",
+      "alt": "mac mini: An everyday workspace",
+      "caption": "An everyday workspace"
+    }
+  ]
+}

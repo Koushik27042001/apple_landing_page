@@ -608,7 +608,7 @@ var PRICING_CATALOGUE = [
     "chip": "M5 / M5 Pro / M5 Max",
     "display": "14.2-inch Liquid Retina XDR Display",
     "tagline": "Mind-blowing performance for extreme creative workflows.",
-    "image": "images/hero/mac/nav_mbp_bfa749034.png",
+    "image": "images/products/catalogue/macbook-pro-14-space-black.png",
     "detailUrl": "product.html?id=macbook-pro-14-m5",
     "variants": [
       {
@@ -770,7 +770,28 @@ var PRICING_CATALOGUE = [
     ],
     "startingPrice": 239900,
     "maxPrice": 549900,
-    "priceRange": "₹2,39,900 - ₹5,49,900"
+    "priceRange": "₹2,39,900 - ₹5,49,900",
+    "colorImages": {
+      "Space Black": "images/products/catalogue/macbook-pro-14-space-black.png",
+      "Silver": "images/products/catalogue/macbook-pro-14-silver.png"
+    },
+    "gallery": [
+      {
+        "src": "images/products/catalogue/macbook-pro-gallery-1.jpg",
+        "alt": "macbook pro: 14-inch and 16-inch lineup",
+        "caption": "14-inch and 16-inch lineup"
+      },
+      {
+        "src": "images/products/catalogue/macbook-pro-gallery-2.jpg",
+        "alt": "macbook pro: Space Black and Silver profile",
+        "caption": "Space Black and Silver profile"
+      },
+      {
+        "src": "images/products/catalogue/macbook-pro-gallery-3.jpg",
+        "alt": "macbook pro: A creative workspace",
+        "caption": "A creative workspace"
+      }
+    ]
   },
   {
     "tableMatch": "New Macbook Pro M5 & Max Chip 16 Inches",
@@ -781,7 +802,7 @@ var PRICING_CATALOGUE = [
     "chip": "M5 Pro / M5 Max",
     "display": "16.2-inch Liquid Retina XDR Display",
     "tagline": "The ultimate pro laptop with PROLED XDR Display.",
-    "image": "images/hero/mac/nav_mbp_bfa749034.png",
+    "image": "images/products/catalogue/macbook-pro-16-space-black.png",
     "detailUrl": "product.html?id=macbook-pro-16-m5",
     "variants": [
       {
@@ -875,7 +896,28 @@ var PRICING_CATALOGUE = [
     ],
     "startingPrice": 409900,
     "maxPrice": 669900,
-    "priceRange": "₹4,09,900 - ₹6,69,900"
+    "priceRange": "₹4,09,900 - ₹6,69,900",
+    "colorImages": {
+      "Space Black": "images/products/catalogue/macbook-pro-16-space-black.png",
+      "Silver": "images/products/catalogue/macbook-pro-16-silver.png"
+    },
+    "gallery": [
+      {
+        "src": "images/products/catalogue/macbook-pro-gallery-1.jpg",
+        "alt": "macbook pro: 14-inch and 16-inch lineup",
+        "caption": "14-inch and 16-inch lineup"
+      },
+      {
+        "src": "images/products/catalogue/macbook-pro-gallery-2.jpg",
+        "alt": "macbook pro: Space Black and Silver profile",
+        "caption": "Space Black and Silver profile"
+      },
+      {
+        "src": "images/products/catalogue/macbook-pro-gallery-3.jpg",
+        "alt": "macbook pro: A creative workspace",
+        "caption": "A creative workspace"
+      }
+    ]
   },
   {
     "tableMatch": "New iMac M4 Chip",
@@ -5968,7 +6010,7 @@ var PRICING_CATALOGUE = [
     "id": "macbook-pro-14-m6",
     "slug": "macbook-pro-14-m6",
     "category": "mac",
-    "image": "images/products/macbook-pro-black.png",
+    "image": "images/products/catalogue/macbook-pro-14-space-black.png",
     "detailUrl": "product.html?id=macbook-pro-14-m6",
     "variants": [
       {
@@ -6042,13 +6084,34 @@ var PRICING_CATALOGUE = [
     "chip": "M6",
     "startingPrice": 239900,
     "maxPrice": 287900,
-    "priceRange": "₹2,39,900 - ₹2,87,900"
+    "priceRange": "₹2,39,900 - ₹2,87,900",
+    "colorImages": {
+      "Space Black": "images/products/catalogue/macbook-pro-14-space-black.png",
+      "Silver": "images/products/catalogue/macbook-pro-14-silver.png"
+    },
+    "gallery": [
+      {
+        "src": "images/products/catalogue/macbook-pro-gallery-1.jpg",
+        "alt": "macbook pro: 14-inch and 16-inch lineup",
+        "caption": "14-inch and 16-inch lineup"
+      },
+      {
+        "src": "images/products/catalogue/macbook-pro-gallery-2.jpg",
+        "alt": "macbook pro: Space Black and Silver profile",
+        "caption": "Space Black and Silver profile"
+      },
+      {
+        "src": "images/products/catalogue/macbook-pro-gallery-3.jpg",
+        "alt": "macbook pro: A creative workspace",
+        "caption": "A creative workspace"
+      }
+    ]
   },
   {
     "id": "mac-studio-m5",
     "slug": "mac-studio-m5",
     "category": "desktop",
-    "image": "images/hero/mac/nav_mac_studio_f2f3212ea.png",
+    "image": "images/products/catalogue/mac-studio-m5.png",
     "detailUrl": "product.html?id=mac-studio-m5",
     "variants": [
       {
@@ -6078,13 +6141,50 @@ var PRICING_CATALOGUE = [
     "chip": "M5 Max / M5 Ultra",
     "startingPrice": 279900,
     "maxPrice": 629900,
-    "priceRange": "₹2,79,900 - ₹6,29,900"
+    "priceRange": "₹2,79,900 - ₹6,29,900",
+    "gallery": [
+      {
+        "src": "images/products/catalogue/mac-studio-m5.png",
+        "alt": "mac studio: Front connections",
+        "caption": "Front connections"
+      },
+      {
+        "src": "images/products/catalogue/mac-studio-gallery-2.jpg",
+        "alt": "mac studio: Rear connections",
+        "caption": "Rear connections"
+      },
+      {
+        "src": "images/products/catalogue/mac-studio-gallery-3.jpg",
+        "alt": "mac studio: Compact aluminium design",
+        "caption": "Compact aluminium design"
+      },
+      {
+        "src": "images/products/catalogue/mac-studio-gallery-4.jpg",
+        "alt": "mac studio: Ventilation and base",
+        "caption": "Ventilation and base"
+      },
+      {
+        "src": "images/products/catalogue/mac-studio-gallery-5.jpg",
+        "alt": "mac studio: A complete desktop setup",
+        "caption": "A complete desktop setup"
+      },
+      {
+        "src": "images/products/catalogue/mac-studio-gallery-6.jpg",
+        "alt": "mac studio: A creative studio setup",
+        "caption": "A creative studio setup"
+      },
+      {
+        "src": "images/products/catalogue/mac-studio-gallery-7.jpg",
+        "alt": "mac studio: A video editing workspace",
+        "caption": "A video editing workspace"
+      }
+    ]
   },
   {
     "id": "mac-mini-m6",
     "slug": "mac-mini-m6",
     "category": "desktop",
-    "image": "images/products/macmini-silver.png",
+    "image": "images/products/catalogue/mac-mini-m6.png",
     "detailUrl": "product.html?id=mac-mini-m6",
     "variants": [
       {
@@ -6136,7 +6236,34 @@ var PRICING_CATALOGUE = [
     "chip": "M6 / M4 / M5 PRO",
     "startingPrice": 99900,
     "maxPrice": 209900,
-    "priceRange": "₹99,900 - ₹2,09,900"
+    "priceRange": "₹99,900 - ₹2,09,900",
+    "gallery": [
+      {
+        "src": "images/products/catalogue/mac-mini-m6.png",
+        "alt": "mac mini: Front connections",
+        "caption": "Front connections"
+      },
+      {
+        "src": "images/products/catalogue/mac-mini-gallery-2.jpg",
+        "alt": "mac mini: Rear connections",
+        "caption": "Rear connections"
+      },
+      {
+        "src": "images/products/catalogue/mac-mini-gallery-3.jpg",
+        "alt": "mac mini: Compact aluminium design",
+        "caption": "Compact aluminium design"
+      },
+      {
+        "src": "images/products/catalogue/mac-mini-gallery-4.jpg",
+        "alt": "mac mini: A video editing setup",
+        "caption": "A video editing setup"
+      },
+      {
+        "src": "images/products/catalogue/mac-mini-gallery-5.jpg",
+        "alt": "mac mini: An everyday workspace",
+        "caption": "An everyday workspace"
+      }
+    ]
   }
 ];
 

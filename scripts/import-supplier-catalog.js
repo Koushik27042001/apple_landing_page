@@ -16,11 +16,11 @@ for (const line of source.split(/\r?\n/)) {
   const generation = /Apple M6 chip/i.test(specs) ? 'm6' : 'm5';
   id = `macbook-pro-${size}-${generation}`;
   name = `MacBook Pro ${size}-inch ${generation.toUpperCase()}${generation === 'm5' ? ' Pro / Max' : ''}`;
-  image = 'images/products/macbook-pro-black.png';
+  image = `images/products/catalogue/macbook-pro-${size}-space-black.png`;
  } else if (/\bMS M5/i.test(specs)) {
-  id = 'mac-studio-m5'; name = 'Mac Studio M5 Max / Ultra'; image = 'images/hero/mac/nav_mac_studio_f2f3212ea.png';
+  id = 'mac-studio-m5'; name = 'Mac Studio M5 Max / Ultra'; image = 'images/products/catalogue/mac-studio-m5.png';
  } else if (/\bMM M[56]/i.test(specs)) {
-  id = 'mac-mini-m6'; name = 'Mac mini M6 / M5 Pro'; image = 'images/products/macmini-silver.png';
+  id = 'mac-mini-m6'; name = 'Mac mini M6 / M5 Pro'; image = 'images/products/catalogue/mac-mini-m6.png';
  } else { throw new Error(`Unrecognized supplier row: ${modelNumber}`); }
  if (!groups.has(id)) groups.set(id, { id, name, image, rows: [] });
  groups.get(id).rows.push({ modelNumber, specs, price: Number(rawPrice), storage: '', color: /- (Space Black|Silver)$/.exec(specs)?.[1] || 'Silver', availability: 'Available to Order', source: 'Supplier product list' });
@@ -35,6 +35,17 @@ for (const group of groups.values()) {
  const suppliedChips = new Set(group.rows.map(v => /M\d(?:\s+(?:Pro|Max|Ultra))?/i.exec(v.specs)?.[0].toLowerCase()));
  product.variants = product.variants.filter(v => !seen.has(v.modelNumber) && !suppliedChips.has(/M\d(?:\s+(?:Pro|Max|Ultra))?/i.exec(v.specs)?.[0].toLowerCase())).concat(group.rows);
  product.name = group.name;
+ product.image = group.image;
+ const galleryFile = path.join(__dirname, '../client/images/products/catalogue/galleries.json');
+ if (fs.existsSync(galleryFile)) {
+  const galleries = JSON.parse(fs.readFileSync(galleryFile, 'utf8'));
+  const family = group.id.startsWith('macbook') ? 'macbook-pro' : group.id.startsWith('mac-studio') ? 'mac-studio' : 'mac-mini';
+  product.gallery = galleries[family] || [];
+ }
+ if (group.id.startsWith('macbook-pro-')) {
+  const size = group.id.split('-')[2];
+  product.colorImages = { 'Space Black': 'images/products/catalogue/macbook-pro-' + size + '-space-black.png', Silver: 'images/products/catalogue/macbook-pro-' + size + '-silver.png' };
+ }
  product.chip = [...new Set(product.variants.map(v => /M\d(?:\s+(?:Pro|Max|Ultra))?/i.exec(v.specs)?.[0]).filter(Boolean))].join(' / ');
  product.startingPrice = Math.min(...product.variants.map(v => v.price).filter(Number.isFinite));
  product.maxPrice = Math.max(...product.variants.map(v => v.price).filter(Number.isFinite));

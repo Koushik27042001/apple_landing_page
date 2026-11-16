@@ -1544,9 +1544,13 @@ function applyCatalogueVariants(catalogue) {
     }
     product.name = model.name;
     product.variants = variants;
+    if (Array.isArray(model.gallery)) product.gallery = model.gallery;
+    if (model.image && model.image.startsWith('images/products/catalogue/')) product.images = [model.image];
     const oldColors = product.colors;
     product.colors = [...new Set(variants.map(v => v.color))].map(function (name) {
       const existing = oldColors.find(c => c.name === name);
+      if (model.colorImages && model.colorImages[name]) return Object.assign({}, existing || { name: name, hex: name === 'Silver' ? '#e3e4e6' : '#1c1c1e' }, { image: model.colorImages[name] });
+      if (model.image && model.image.startsWith('images/products/catalogue/')) return Object.assign({}, existing || { name: name, hex: '#e3e4e6' }, { image: model.image });
       return existing || { name: name, hex: ({ Silver: '#e3e4e6', 'Space Black': '#1c1c1e', Blue: '#8fb6de', Purple: '#b79fd1', Starlight: '#f0ece1' })[name] || '#86868b', image: product.images[0] };
     });
     product.price = Math.min(...variants.map(v => v.price));

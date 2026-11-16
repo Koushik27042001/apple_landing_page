@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/enhancements.css">
   <link rel="stylesheet" href="css/chip-family.css">
+<link rel="stylesheet" href="css/product-gallery.css">
   <style>
     :root {
       --orange: #f56b23;
@@ -477,6 +478,7 @@
 <script src="js/cart.js"></script>
 <script src="js/icons.js"></script>
 <script src="js/main.js"></script>
+<script src="js/product-gallery.js"></script>
 <script src="js/animations.js" defer></script>
 <script>
   const productId = getQueryParam("id") || getQueryParam("slug");
@@ -559,7 +561,6 @@
     const unitPrice = currentUnitPrice();
     const emi12 = getEmi(unitPrice, 12);
     const emi24 = getEmi(unitPrice, 24);
-    const galleryImages = product.images.length > 1 ? product.images : [currentImage()];
 
     document.getElementById("pdpContent").innerHTML =
       '<div class="pdp-showcase-wrapper">' +
@@ -572,21 +573,7 @@
           '<div class="pdp-rating"><span class="stars">★★★★★</span> ' + product.rating + ' &middot; ' + product.reviews + ' ratings</div>' +
         '</div>' +
 
-        '<!-- 2. Product Image Gallery (Top-Aligned) -->' +
-        '<div class="pdp-gallery-hero">' +
-          '<div class="pdp-gallery-main pdp-top-aligned" id="pdpGalleryMain">' +
-            '<div class="pdp-3d-stage" id="pdp3dStage">' +
-              '<img id="mainImage" src="' + currentImage() + '" alt="' + product.name + '">' +
-            '</div>' +
-          '</div>' +
-          (galleryImages.length > 1 ?
-            '<div class="pdp-thumbs" id="pdpThumbs">' +
-              galleryImages.map(function (img, i) {
-                return '<div class="pdp-thumb' + (i === 0 ? " active" : "") + '" data-img="' + img + '"><img src="' + img + '" alt="thumb"></div>';
-              }).join("") +
-            '</div>' : ''
-          ) +
-        '</div>' +
+        ProductGallery.hero(product, currentImage()) +
 
         '<!-- 3. Pricing, Configurator & Purchase Controls Below Image -->' +
         '<div class="pdp-purchase-container">' +
@@ -643,6 +630,8 @@
 
       '</div>' +
 
+      ProductGallery.section(product) +
+      ProductGallery.viewer() +
       '<!-- 4. Product Description & Specifications Section -->' +
       '<section class="pdp-details" id="pdpDetails">' +
         '<div class="pdp-details-grid">' +
@@ -667,6 +656,7 @@
       '</section>';
 
     wirePdpInteractions(unitPrice, emi12);
+    ProductGallery.mount(product, currentImage());
   }
 
   function colorPickerHtml() {
@@ -706,26 +696,13 @@
         if (next) next.focus();
       });
     });
-    const galleryMain = document.getElementById("pdpGalleryMain");
-    const mainImg = document.getElementById("mainImage");
-
-    function changeProductImage(newSrc) {
-      if (!mainImg || !newSrc) return;
-      if (mainImg.getAttribute("src") === newSrc) return;
-      mainImg.style.opacity = "0.3";
-      setTimeout(function () {
-        mainImg.src = newSrc;
-        mainImg.style.opacity = "1";
-      }, 150);
-    }
-
     document.querySelectorAll(".swatch").forEach(function (btn) {
       btn.addEventListener("click", function () {
         selection.color = btn.dataset.color;
         document.querySelectorAll(".swatch").forEach(function (s) { s.classList.remove("active"); });
         btn.classList.add("active");
         document.getElementById("selColorLabel").textContent = selection.color;
-        changeProductImage(currentImage());
+        renderPdp();
         updateStickyAtc();
       });
     });
@@ -738,15 +715,6 @@
         document.getElementById("selStorageLabel").textContent = selection.storage;
         renderPdp();
         updateStickyAtc();
-      });
-    });
-
-    const thumbs = document.querySelectorAll(".pdp-thumb");
-    thumbs.forEach(function (t) {
-      t.addEventListener("click", function () {
-        changeProductImage(t.dataset.img);
-        thumbs.forEach(function (x) { x.classList.remove("active"); });
-        t.classList.add("active");
       });
     });
 
@@ -1084,6 +1052,11 @@
   }
 
   function syncProductFromCatalog() {
+    const imageViewer = document.getElementById('productImageViewer');
+    if (imageViewer && imageViewer.open) {
+      imageViewer.addEventListener('close', syncProductFromCatalog, { once: true });
+      return;
+    }
     let updatedP = getProductById(productId);
     if (!updatedP && productId) {
       const searchMatches = searchProducts(productId);
@@ -1091,6 +1064,8 @@
     }
     if (updatedP) {
       product = updatedP;
+      selectedVariant = product.variants && (product.variants.find(v => selectedVariant && v.modelNumber === selectedVariant.modelNumber) || product.variants[0]);
+      if (selectedVariant) syncVariantSelection();
       document.title = product.name + " | The Apple Store";
       document.getElementById("pageDesc").setAttribute("content", product.short + " Buy now in Pune with best price and No-Cost EMI.");
       const cat = getCategoryById(product.category);
