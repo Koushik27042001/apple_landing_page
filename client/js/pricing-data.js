@@ -1704,7 +1704,7 @@ var PRICING_CATALOGUE = [
     "chip": "Apple M4",
     "display": "11-inch Liquid Retina Display",
     "tagline": "Fresh Air. Supercharged by the M4 chip.",
-    "image": "images/hero/ipad/ipad_air_a25153037.png",
+    "image": "images/home/ipad-air-finish-select-gallery-202405-11inch-blue-wifi_AV1_GEO_EMEA.webp",
     "detailUrl": "product.html?id=ipad-air-11-m4",
     "variants": [
       {
@@ -2201,7 +2201,7 @@ var PRICING_CATALOGUE = [
     "chip": "Apple M4",
     "display": "13-inch Liquid Retina Display",
     "tagline": "Endless possibilities on a massive 13-inch Liquid Retina display.",
-    "image": "images/hero/ipad/ipad_air_a25153037.png",
+    "image": "images/home/ipad-air-finish-select-gallery-202405-11inch-blue-wifi_AV1_GEO_EMEA.webp",
     "detailUrl": "product.html?id=ipad-air-13-m4",
     "variants": [
       {
@@ -2698,7 +2698,7 @@ var PRICING_CATALOGUE = [
     "chip": "Apple M5",
     "display": "11-inch Ultra Retina XDR (Tandem OLED)",
     "tagline": "Thinpossible design with breakthrough M5 performance.",
-    "image": "images/hero/ipad/ipad_pro_8c6c9576c.png",
+    "image": "images/home/shopping (1).webp",
     "detailUrl": "product.html?id=ipad-pro-11-m5",
     "variants": [
       {
@@ -3075,7 +3075,7 @@ var PRICING_CATALOGUE = [
     "chip": "Apple M5",
     "display": "13-inch Ultra Retina XDR (Tandem OLED)",
     "tagline": "The ultimate iPad experience with Ultra Retina XDR and nano-texture option.",
-    "image": "images/hero/ipad/ipad_pro_8c6c9576c.png",
+    "image": "images/home/shopping (1).webp",
     "detailUrl": "product.html?id=ipad-pro-13-m5",
     "variants": [
       {
@@ -3726,7 +3726,7 @@ var PRICING_CATALOGUE = [
     "chip": "A19 Pro Chip",
     "display": "6.5-inch ProMotion 120Hz Ultra-thin Display",
     "tagline": "Remarkably thin, featherlight, and exceptionally capable.",
-    "image": "images/hero/iphone_air__b5qmgl05ojyq_large_2x.png",
+    "image": "images/home/shopping.webp",
     "detailUrl": "product.html?id=iphone-air",
     "variants": [
       {

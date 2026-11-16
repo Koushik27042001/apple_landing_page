@@ -19,7 +19,7 @@ const CATEGORIES = [
 const IPHONE_OFFICIAL_IMAGES = {
   duo: "images/hero/iphone_duo__hefmlegzwbmi_large_2x.png",
   pro18: "images/hero/iphone_18_pro__dj48ysc0yagm_large_2x.png",
-  air: "images/hero/iphone_air__b5qmgl05ojyq_large_2x.png",
+  air: "images/home/shopping.webp",
   iphone17: "images/home/-original-imahqvadmn9uydqz.webp",
   iphone17e: "images/home/iphone 17e.jpg",
   iphone16: "images/hero/iphone_16__b6tkv86m2gc2_large_2x.png",
@@ -57,8 +57,8 @@ const MAC_OFFICIAL_IMAGES = {
 };
 
 const IPAD_OFFICIAL_IMAGES = {
-  pro: "images/hero/ipad/ipad_pro_8c6c9576c.png",
-  air: "images/hero/ipad/ipad_air_a25153037.png",
+  pro: "images/home/shopping (1).webp",
+  air: "images/home/ipad-air-finish-select-gallery-202405-11inch-blue-wifi_AV1_GEO_EMEA.webp",
   ipad: "images/hero/ipad/ipad_9308ca47a.png",
   mini: "images/hero/ipad/ipad_mini_6884caafc.png",
   pencil: "images/hero/ipad/apple_pencil_6c8408c54.png",
@@ -700,12 +700,12 @@ const PRODUCTS = [
     rating: 4.8,
     reviews: 74,
     stock: 28,
-    images: ["images/products/ipad-air-blue.png"],
+    images: [IPAD_OFFICIAL_IMAGES.air],
     colors: [
-      { name: "Space Grey", hex: "#6e6e73", image: "images/products/ipad-air-blue.png" },
-      { name: "Blue", hex: "#8fb6de", image: "images/products/ipad-air-blue.png" },
-      { name: "Starlight", hex: "#f0ece1", image: "images/products/ipad-air-blue.png" },
-      { name: "Purple", hex: "#b79fd1", image: "images/products/ipad-air-blue.png" }
+      { name: "Space Grey", hex: "#6e6e73", image: IPAD_OFFICIAL_IMAGES.air },
+      { name: "Blue", hex: "#8fb6de", image: IPAD_OFFICIAL_IMAGES.air },
+      { name: "Starlight", hex: "#f0ece1", image: IPAD_OFFICIAL_IMAGES.air },
+      { name: "Purple", hex: "#b79fd1", image: IPAD_OFFICIAL_IMAGES.air }
     ],
     storageOptions: [
       { label: "128GB", extra: 0 },
@@ -736,12 +736,12 @@ const PRODUCTS = [
     rating: 4.8,
     reviews: 52,
     stock: 20,
-    images: ["images/products/ipad-air-blue.png"],
+    images: [IPAD_OFFICIAL_IMAGES.air],
     colors: [
-      { name: "Space Grey", hex: "#6e6e73", image: "images/products/ipad-air-blue.png" },
-      { name: "Blue", hex: "#8fb6de", image: "images/products/ipad-air-blue.png" },
-      { name: "Starlight", hex: "#f0ece1", image: "images/products/ipad-air-blue.png" },
-      { name: "Purple", hex: "#b79fd1", image: "images/products/ipad-air-blue.png" }
+      { name: "Space Grey", hex: "#6e6e73", image: IPAD_OFFICIAL_IMAGES.air },
+      { name: "Blue", hex: "#8fb6de", image: IPAD_OFFICIAL_IMAGES.air },
+      { name: "Starlight", hex: "#f0ece1", image: IPAD_OFFICIAL_IMAGES.air },
+      { name: "Purple", hex: "#b79fd1", image: IPAD_OFFICIAL_IMAGES.air }
     ],
     storageOptions: [
       { label: "128GB", extra: 0 },
@@ -772,10 +772,10 @@ const PRODUCTS = [
     rating: 4.9,
     reviews: 61,
     stock: 14,
-    images: ["images/products/ipad-pro-silver.png"],
+    images: [IPAD_OFFICIAL_IMAGES.pro],
     colors: [
-      { name: "Space Black", hex: "#1c1c1e", image: "images/products/ipad-pro-silver.png" },
-      { name: "Silver", hex: "#e3e4e6", image: "images/products/ipad-pro-silver.png" }
+      { name: "Space Black", hex: "#1c1c1e", image: IPAD_OFFICIAL_IMAGES.pro },
+      { name: "Silver", hex: "#e3e4e6", image: IPAD_OFFICIAL_IMAGES.pro }
     ],
     storageOptions: [
       { label: "256GB", extra: 0 },
@@ -806,10 +806,10 @@ const PRODUCTS = [
     rating: 4.9,
     reviews: 89,
     stock: 11,
-    images: ["images/products/ipad-pro-silver.png"],
+    images: [IPAD_OFFICIAL_IMAGES.pro],
     colors: [
-      { name: "Space Black", hex: "#1c1c1e", image: "images/products/ipad-pro-silver.png" },
-      { name: "Silver", hex: "#e3e4e6", image: "images/products/ipad-pro-silver.png" }
+      { name: "Space Black", hex: "#1c1c1e", image: IPAD_OFFICIAL_IMAGES.pro },
+      { name: "Silver", hex: "#e3e4e6", image: IPAD_OFFICIAL_IMAGES.pro }
     ],
     storageOptions: [
       { label: "256GB", extra: 0 },

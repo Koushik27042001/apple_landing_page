@@ -9307,3 +9307,51 @@ body.dark-theme .homepod-hero .btn-outline:hover {
     transform: none !important;
   }
 }
+
+/* Keep product photography centered on a matching white image stage. */
+:is(img[src="images/home/shopping.webp"], img[src="images/home/shopping (1).webp"]) {
+  object-fit: contain;
+  object-position: center;
+  mix-blend-mode: multiply;
+}
+body .pdp-gallery-main:has(:is(img[src="images/home/shopping.webp"], img[src="images/home/shopping (1).webp"])),
+body .pdp-thumb:has(:is(img[src="images/home/shopping.webp"], img[src="images/home/shopping (1).webp"])),
+body .pc-image:has(:is(img[src="images/home/shopping.webp"], img[src="images/home/shopping (1).webp"])),
+body .compare-card-media:has(:is(img[src="images/home/shopping.webp"], img[src="images/home/shopping (1).webp"])),
+body .chapter-nav-icon:has(:is(img[src="images/home/shopping.webp"], img[src="images/home/shopping (1).webp"])) {
+  background: #fff;
+  border-radius: 12px;
+  isolation: isolate;
+}
+body .pdp-gallery-main:has(:is(img[src="images/home/shopping.webp"], img[src="images/home/shopping (1).webp"])) {
+  align-items: center;
+}
+body .pdp-gallery-main :is(img[src="images/home/shopping.webp"], img[src="images/home/shopping (1).webp"]) {
+  align-self: center;
+}
+body .pdp-gallery-main:has(:is(img[src="images/home/shopping.webp"], img[src="images/home/shopping (1).webp"]))::before {
+  display: none;
+}
+
+/* Match the iPad Air M4 gallery photograph's light gray backdrop. */
+img[src="images/home/ipad-air-finish-select-gallery-202405-11inch-blue-wifi_AV1_GEO_EMEA.webp"] {
+  object-fit: contain;
+  object-position: center;
+}
+body .pdp-gallery-main:has(img[src="images/home/ipad-air-finish-select-gallery-202405-11inch-blue-wifi_AV1_GEO_EMEA.webp"]),
+body .pdp-thumb:has(img[src="images/home/ipad-air-finish-select-gallery-202405-11inch-blue-wifi_AV1_GEO_EMEA.webp"]),
+body .pc-image:has(img[src="images/home/ipad-air-finish-select-gallery-202405-11inch-blue-wifi_AV1_GEO_EMEA.webp"]),
+body .compare-card-media:has(img[src="images/home/ipad-air-finish-select-gallery-202405-11inch-blue-wifi_AV1_GEO_EMEA.webp"]),
+body .chapter-nav-icon:has(img[src="images/home/ipad-air-finish-select-gallery-202405-11inch-blue-wifi_AV1_GEO_EMEA.webp"]) {
+  background: #f5f5f7;
+  border-radius: 12px;
+}
+body .pdp-gallery-main:has(img[src="images/home/ipad-air-finish-select-gallery-202405-11inch-blue-wifi_AV1_GEO_EMEA.webp"]) {
+  align-items: center;
+}
+body .pdp-gallery-main img[src="images/home/ipad-air-finish-select-gallery-202405-11inch-blue-wifi_AV1_GEO_EMEA.webp"] {
+  align-self: center;
+}
+body .pdp-gallery-main:has(img[src="images/home/ipad-air-finish-select-gallery-202405-11inch-blue-wifi_AV1_GEO_EMEA.webp"])::before {
+  display: none;
+}
