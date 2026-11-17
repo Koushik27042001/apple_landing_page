@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="css/iphone-air-showcase.css">
 <link rel="stylesheet" href="css/airpods-showcase.css">
 <link rel="stylesheet" href="css/apple-tv-showcase.css">
+<link rel="stylesheet" href="css/product-breadcrumbs.css">
   <style>
     :root {
       --orange: #f56b23;
@@ -474,7 +475,7 @@
 <div id="productHeroContainer"></div>
 
 <main class="container">
-  <nav class="breadcrumb" id="breadcrumb"></nav>
+  <nav class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb"></nav>
 
   <div id="pdpContent"></div>
 
@@ -526,9 +527,9 @@
 
   const cat = getCategoryById(product.category);
   document.getElementById("breadcrumb").innerHTML =
-    '<a href="index.html">Store</a><span>/</span>' +
-    '<a href="category.html?cat=' + product.category + '">' + (cat ? cat.name : product.category) + '</a><span>/</span>' +
-    '<span>' + product.name + '</span>';
+    '<a href="index.html">Store</a><span aria-hidden="true">/</span>' +
+    '<a href="category.html?cat=' + product.category + '">' + (cat ? cat.name : product.category) + '</a><span aria-hidden="true">/</span>' +
+    '<span aria-current="page">' + product.name + '</span>';
 
   const selection = {
     color: product.colors[0] ? product.colors[0].name : "",
@@ -1106,9 +1107,9 @@
       document.getElementById("pageDesc").setAttribute("content", product.short + " Buy now in Pune with best price and No-Cost EMI.");
       const cat = getCategoryById(product.category);
       document.getElementById("breadcrumb").innerHTML =
-        '<a href="index.html">Store</a><span>/</span>' +
-        '<a href="category.html?cat=' + product.category + '">' + (cat ? cat.name : product.category) + '</a><span>/</span>' +
-        '<span>' + product.name + '</span>';
+        '<a href="index.html">Store</a><span aria-hidden="true">/</span>' +
+        '<a href="category.html?cat=' + product.category + '">' + (cat ? cat.name : product.category) + '</a><span aria-hidden="true">/</span>' +
+        '<span aria-current="page">' + product.name + '</span>';
       renderPdp();
       renderMbpHero();
       updateStickyAtc();

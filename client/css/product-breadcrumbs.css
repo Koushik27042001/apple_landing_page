@@ -1,0 +1,38 @@
+﻿/* Shared breadcrumb treatment for the light product presentations. */
+body:is(.watch-se-page,.ipad-11-page,.vision-pro-page,.iphone-air-page,.airpods-pro-page,.apple-tv-page) #breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  width: min(1200px,calc(100% - 48px));
+  max-width: calc(100% - 48px);
+  margin: 18px auto;
+  padding: 12px 0;
+  color: #515158 !important;
+  font-size: 13px;
+  line-height: 1.6;
+}
+body:is(.watch-se-page,.ipad-11-page,.vision-pro-page,.iphone-air-page,.airpods-pro-page,.apple-tv-page) #breadcrumb :is(a,span) {
+  color: #515158 !important;
+  -webkit-text-fill-color: currentColor !important;
+  margin: 0;
+}
+body:is(.watch-se-page,.ipad-11-page,.vision-pro-page,.iphone-air-page,.airpods-pro-page,.apple-tv-page) #breadcrumb a {
+  text-decoration: none;
+  flex-shrink: 0;
+}
+body:is(.watch-se-page,.ipad-11-page,.vision-pro-page,.iphone-air-page,.airpods-pro-page,.apple-tv-page) #breadcrumb a:hover {
+  color: #0066cc !important;
+  text-decoration: underline;
+}
+body:is(.watch-se-page,.ipad-11-page,.vision-pro-page,.iphone-air-page,.airpods-pro-page,.apple-tv-page) #breadcrumb a:focus-visible {
+  outline: 2px solid #0071e3;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+body:is(.watch-se-page,.ipad-11-page,.vision-pro-page,.iphone-air-page,.airpods-pro-page,.apple-tv-page) #breadcrumb span:last-child {
+  color: #1d1d1f !important;
+  font-weight: 500;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
