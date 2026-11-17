@@ -1,0 +1,96 @@
+﻿body.iphone-17e-page { background: #fff !important; color: #1d1d1f; }
+.iphone-17e-page > .orb { display: none; }
+.iphone-17e-page main.container { width: 100%; max-width: none; padding-inline: 0; }
+body.iphone-17e-page .pdp-showcase-wrapper { width: 100%; max-width: none !important; padding: 0 !important; }
+.seventeen-story { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; }
+.seventeen-story * { box-sizing: border-box; }
+.seventeen-story :is(h1,h2,p,figure) { margin: 0; }
+body.iphone-17e-page .seventeen-story :is(h1,h2) { color: #1d1d1f !important; -webkit-text-fill-color: currentColor !important; background: none; }
+body.iphone-17e-page .seventeen-story p { color: #626267 !important; -webkit-text-fill-color: currentColor !important; }
+.seventeen-story img { display: block; width: 100%; height: auto; }
+.seventeen-wrap { width: min(1240px,100%); padding: 100px 48px; margin: auto; }
+.seventeen-story h2 { font-size: clamp(38px,5vw,70px); line-height: 1.05; letter-spacing: -.05em; font-weight: 650; }
+.seventeen-eyebrow { font-size: 18px; font-weight: 600; margin-bottom: 24px !important; }
+.seventeen-story .seventeen-lead { font-size: 22px; line-height: 1.5; max-width: 790px; margin-top: 30px; font-weight: 500; }
+.seventeen-hero { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; width: min(1440px,100%); margin: auto; padding: 60px 48px; background: #fff6f8; }
+.seventeen-hero-copy { padding-left: max(0px,calc((100vw - 1240px)/2 - 48px)); }
+body.iphone-17e-page .seventeen-hero h1 { font-size: clamp(43px,4.5vw,68px); line-height: 1.04; letter-spacing: -.055em; font-weight: 650; }
+body.iphone-17e-page .seventeen-hero .seventeen-eyebrow { font-size: 27px; color: #9a4563 !important; letter-spacing: -.03em; }
+.seventeen-hero .seventeen-lead { font-size: 21px; }
+.seventeen-hero>img { border-radius: 25px; max-height: 600px; object-fit: contain; }
+.seventeen-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 22px; margin-top: 28px; }
+.seventeen-story a { color: #0066cc; text-decoration: none; font-size: 16px; -webkit-text-fill-color: currentColor; }
+.seventeen-story .seventeen-cta { background: #0071e3; color: #fff; border-radius: 30px; padding: 14px 24px; }
+.seventeen-story a:focus-visible { outline: 3px solid #0071e3; outline-offset: 5px; }
+.seventeen-price { font-size: 17px; margin-top: 24px !important; }
+.seventeen-section-head { margin-bottom: 45px; }
+.seventeen-design>img { border-radius: 25px; }
+.seventeen-performance { padding-top: 15px; }
+.seventeen-performance>img { margin-top: 45px; }
+.seventeen-camera { padding-top: 20px; }
+.seventeen-camera-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 45px; }
+.seventeen-camera-grid img { width: 100%; aspect-ratio: 1.15; object-fit: cover; border-radius: 24px; }
+.seventeen-camera-grid figcaption { color: #626267; font-size: 15px; line-height: 1.5; padding: 22px 6px 0; }
+.seventeen-display { text-align: center; background: #f5f5f7; border-radius: 28px; }
+.seventeen-display .seventeen-lead,.seventeen-magsafe .seventeen-lead { margin-inline: auto; }
+.seventeen-display>img { margin-top: 45px; }
+.seventeen-ios { padding-bottom: 60px; }
+.seventeen-ios>img { margin-top: 45px; }
+.seventeen-magsafe { text-align: center; padding-top: 15px; }
+.seventeen-magsafe>img { margin-top: 45px; border-radius: 25px; }
+.seventeen-accessory-note { font-size: 13px; margin-top: 20px !important; }
+.seventeen-config { text-align: center; padding-top: 10px; padding-bottom: 40px; }
+.seventeen-config .seventeen-lead { margin-inline: auto; font-size: 19px; }
+@media(max-width:700px) {
+ .seventeen-wrap { padding: 65px 24px; }.seventeen-hero { grid-template-columns: 1fr; padding: 35px 24px; text-align: center; gap: 35px; }.seventeen-hero-copy { padding-left: 0; }body.iphone-17e-page .seventeen-hero h1 { font-size: clamp(43px,11vw,65px); }.seventeen-story .seventeen-lead { font-size: 18px; margin-top: 25px; }.seventeen-actions { justify-content: center; gap: 18px; }.seventeen-hero>img { max-height: 390px; }.seventeen-eyebrow { font-size: 16px; margin-bottom: 20px !important; }.seventeen-section-head { margin-bottom: 30px; }.seventeen-camera-grid { grid-template-columns: 1fr; gap: 30px; margin-top: 30px; }.seventeen-camera-grid img { aspect-ratio: 1.2; }.seventeen-performance,.seventeen-camera,.seventeen-magsafe { padding-top: 15px; }.seventeen-display { width: calc(100% - 28px); }.seventeen-performance>img,.seventeen-display>img,.seventeen-ios>img,.seventeen-magsafe>img { margin-top: 30px; }.seventeen-config { padding-top: 10px; }
+}
+
+.iphone-17e-page .product-gallery { width: min(600px,calc(100% - 40px)); margin-bottom: 25px; }
+body.iphone-17e-page #pdpGalleryMain { aspect-ratio: auto; height: auto; max-height: none; }
+.iphone-17e-page .pdp-3d-stage { height: auto; min-width: 0; }
+body.iphone-17e-page #mainImage { max-height: 350px; }
+.iphone-17e-page .gallery-counter { color: #6e6e73; }
+.iphone-17e-page .gallery-label { color: #1d1d1f; }
+body.iphone-17e-page .product-gallery :is(.gallery-controls button,.gallery-zoom) { background: #f5f5f7; color: #1d1d1f !important; -webkit-text-fill-color: currentColor !important; border-color: #b8b8bd; }
+body.iphone-17e-page .pdp-purchase-container { width: min(1120px,calc(100% - 48px)) !important; margin: auto; padding: 36px; background: #f5f5f7 !important; border: 0 !important; border-radius: 25px; box-shadow: none !important; color: #1d1d1f; scroll-margin-top: 100px; }
+body.iphone-17e-page .pdp-purchase-container :is(.pdp-price,.title,.pdp-emi-line,.pdp-emi-line strong,.pdp-variant-summary strong,.stock-info,.qty-selector span,.qty-selector button,.emi-plan,.emi-plan span,.trust-mini div) { color: #1d1d1f !important; }
+body.iphone-17e-page .pdp-purchase-container :is(button,a,select,option,span,strong) { -webkit-text-fill-color: currentColor !important; }
+body.iphone-17e-page .pdp-purchase-container :is(.pdp-variant-summary,.pdp-emi-line,.trust-mini div) { color: #5c5c61 !important; }
+.iphone-17e-page .variant-select { background: white; color: #1d1d1f; border-color: #b8b8bd; }
+body.iphone-17e-page .qty-selector { background: white !important; border-color: #d2d2d7 !important; }
+body.iphone-17e-page .qty-selector button { background: #e8e8ed !important; }
+body.iphone-17e-page .pdp-actions .btn-outline { color: #0066cc !important; background: white !important; border-color: #0071e3 !important; }
+body.iphone-17e-page .pdp-actions .btn-primary { color: white !important; background: #0071e3 !important; }
+body.iphone-17e-page .pdp-purchase-container .whatsapp-inline-btn { background: #e6f4eb !important; color: #146c35 !important; border: 1px solid #9dc9ac !important; }
+body.iphone-17e-page .whatsapp-inline-btn .icon-svg { color: inherit !important; }
+.iphone-17e-page .emi-plan { background: white; border: 1px solid #d2d2d7; gap: 16px; }
+.seventeen-product-notes { width: min(1120px,100%); padding: 35px 24px 0; margin: auto; font-size: 12px; line-height: 1.6; color: #6e6e73; }
+.seventeen-product-notes p+p { margin-top: 10px; }
+.iphone-17e-page :is(.pdp-details,.related-section) { width: min(1120px,100%); margin: 60px auto; padding: 0 24px; }
+body.iphone-17e-page .pdp-details, body.iphone-17e-page .pdp-details-grid { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+body.iphone-17e-page .pdp-details :is(h3,.pdp-desc,.pdp-highlights li,.pdp-highlights strong,td) { color: #1d1d1f !important; }
+.iphone-17e-page .spec-table td { border-color: #d2d2d7; overflow-wrap: anywhere; }
+body.iphone-17e-page .related-section :is(.section-head h2,.section-head p,.product-card) { opacity: 1; transform: none; }
+body.iphone-17e-page .related-section .section-head h2 { color: #1d1d1f !important; background: none; -webkit-text-fill-color: currentColor !important; }
+body.iphone-17e-page .related-section .product-card { background: #f5f5f7 !important; border-color: #d2d2d7 !important; min-width: 0; }
+body.iphone-17e-page .related-section .product-card :is(h4,.pc-price) { color: #1d1d1f !important; -webkit-text-fill-color: currentColor !important; }
+body.iphone-17e-page .related-section .product-card :is(.pc-short,.pc-cat,.pc-emi,.pc-emi strong,.pc-mrp) { color: #5c5c61 !important; -webkit-text-fill-color: currentColor !important; }
+body.iphone-17e-page .related-section .product-card .btn { color: white !important; background: #0071e3 !important; -webkit-text-fill-color: currentColor !important; }
+.iphone-17e-page #site-footer { background: #111; }
+.iphone-17e-page .toast { background: #1d1d1f !important; color: white !important; }
+
+@media(max-width:700px){body.iphone-17e-page .pdp-purchase-container{width:calc(100% - 28px) !important;padding:24px 20px}.iphone-17e-page .related-section .product-grid{grid-template-columns:minmax(0,1fr)}}
+body.iphone-17e-page .seventeen-product-notes p{color:#6e6e73 !important;-webkit-text-fill-color:currentColor !important}
+body.iphone-17e-page .pdp-purchase-container .storage-opt {
+  background: #fff !important;
+  color: #1d1d1f !important;
+  border-color: #b8b8bd !important;
+}
+body.iphone-17e-page .pdp-purchase-container .storage-opt.active {
+  background: #e8f2ff !important;
+  color: #0066cc !important;
+  border-color: #0071e3 !important;
+}
+body.iphone-17e-page .pdp-purchase-container .option-group .sel-value {
+  color: #5c5c61 !important;
+}
