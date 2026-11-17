@@ -370,7 +370,8 @@ function renderCatalogueNavigation(header) {
     const mobileArrow = document.createElement('span'); mobileArrow.className = 'subcat-arrow'; mobileArrow.textContent = '\u203a'; toggle.append(mobileTitle, mobileArrow);
     const content = document.createElement('div'); content.className = 'mobile-subcat-content';
     products.forEach(function (product) {
-      const href = product.id === 'iphone-18-pro' ? getProductPageUrl(product.id) : getProductPageUrl(product.id) + '&configure=1';
+      const productUrl = getProductPageUrl(product.id);
+      const href = (product.id === 'iphone-18-pro' || product.id === 'macbook-air-13-m5') ? productUrl : productUrl + (productUrl.includes('?') ? '&' : '?') + 'configure=1';
       const link = document.createElement('a'); link.href = href; link.className = 'cascade-prod-item';
       const name = document.createElement('span'); name.className = 'cascade-prod-name'; name.textContent = product.name; link.append(name); group.append(link);
       const leaf = document.createElement('a'); leaf.href = href; leaf.className = 'mobile-leaf-link';
@@ -383,6 +384,8 @@ function renderCatalogueNavigation(header) {
 }
 
 function getProductPageUrl(id) {
+  if (id === 'macbook-neo-13' || id === 'macbook-neo') return '/macbook-neo';
+  if (id === 'macbook-air-13-m5') return '/macbook-air';
   return id === 'iphone-18-pro' ? '/iphone-18-pro' : 'product.html?id=' + encodeURIComponent(id);
 }
 

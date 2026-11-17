@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  (() => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id') || params.get('slug');
+    if (id === 'macbook-air-13-m5') {
+      window.location.replace('/macbook-air' + window.location.hash);
+      return;
+    }
+    if (id === 'macbook-neo-13' || id === 'macbook-neo') {
+      const query = params.has('configure') ? '?configure=' + encodeURIComponent(params.get('configure')) : '';
+      window.location.replace('/macbook-neo' + query + window.location.hash);
+    }
+  })();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="pageTitle">Product | The Apple Store</title>
@@ -14,6 +28,8 @@
 <link rel="stylesheet" href="css/ipad-showcase.css">
 <link rel="stylesheet" href="css/vision-showcase.css">
 <link rel="stylesheet" href="css/iphone-air-showcase.css">
+<link rel="stylesheet" href="css/airpods-showcase.css">
+<link rel="stylesheet" href="css/apple-tv-showcase.css">
   <style>
     :root {
       --orange: #f56b23;
@@ -487,6 +503,8 @@
 <script src="js/ipad-showcase.js"></script>
 <script src="js/vision-showcase.js"></script>
 <script src="js/iphone-air-showcase.js"></script>
+<script src="js/airpods-showcase.js"></script>
+<script src="js/apple-tv-showcase.js"></script>
 <script src="js/animations.js" defer></script>
 <script>
   const productId = getQueryParam("id") || getQueryParam("slug");
@@ -572,6 +590,8 @@
     document.body.classList.toggle('ipad-11-page', product.id === 'ipad-11-gen');
     document.body.classList.toggle('vision-pro-page', product.id === 'apple-vision-pro');
     document.body.classList.toggle('iphone-air-page', product.id === 'iphone-air');
+    document.body.classList.toggle('airpods-pro-page', product.id === 'airpods-pro-3');
+    document.body.classList.toggle('apple-tv-page', product.id === 'apple-tv-4k');
     const discount = product.mrp > product.price ? Math.round((1 - product.price / product.mrp) * 100) : 0;
     const unitPrice = currentUnitPrice();
     const emi12 = getEmi(unitPrice, 12);
@@ -580,7 +600,7 @@
     document.getElementById("pdpContent").innerHTML =
       '<div class="pdp-showcase-wrapper">' +
 
-        (product.id === 'iphone-air' ? IPhoneAirShowcase.intro(product) : product.id === 'apple-vision-pro' ? VisionShowcase.intro(product) : product.id === 'ipad-11-gen' ? IPadShowcase.intro(product) : product.id === 'watch-se-3' ? WatchSEShowcase.intro(product) : (
+        (product.id === 'apple-tv-4k' ? AppleTVShowcase.intro(product) : product.id === 'airpods-pro-3' ? AirPodsShowcase.intro(product) : product.id === 'iphone-air' ? IPhoneAirShowcase.intro(product) : product.id === 'apple-vision-pro' ? VisionShowcase.intro(product) : product.id === 'ipad-11-gen' ? IPadShowcase.intro(product) : product.id === 'watch-se-3' ? WatchSEShowcase.intro(product) : (
 '<!-- 1. Header Section Above Product Image -->' +
         '<div class="pdp-top-header text-center">' +
           '<div class="pc-cat">' + product.category + ' &middot; ' + product.brand + '</div>' +
@@ -646,7 +666,7 @@
 
       '</div>' +
 
-      (product.id === 'iphone-air' ? IPhoneAirShowcase.sections() : product.id === 'apple-vision-pro' ? VisionShowcase.sections() : product.id === 'ipad-11-gen' ? IPadShowcase.sections() : product.id === 'watch-se-3' ? WatchSEShowcase.sections() : ProductGallery.section(product)) +
+      (product.id === 'apple-tv-4k' ? AppleTVShowcase.sections() : product.id === 'airpods-pro-3' ? AirPodsShowcase.sections() : product.id === 'iphone-air' ? IPhoneAirShowcase.sections() : product.id === 'apple-vision-pro' ? VisionShowcase.sections() : product.id === 'ipad-11-gen' ? IPadShowcase.sections() : product.id === 'watch-se-3' ? WatchSEShowcase.sections() : ProductGallery.section(product)) +
       ProductGallery.viewer() +
       '<!-- 4. Product Description & Specifications Section -->' +
       '<section class="pdp-details" id="pdpDetails">' +

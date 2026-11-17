@@ -1688,6 +1688,7 @@
       }
     }
   </style>
+<link rel="stylesheet" href="css/neo-variants.css">
 </head>
 
 <body class="dark-theme">
@@ -1702,6 +1703,10 @@
   <!-- MacBook Neo Local Subnav Removed -->
 
   <main>
+    <section class="neo-variants" id="neoVariants" aria-labelledby="neoVariantTitle">
+      <nav class="neo-segments" aria-label="MacBook Neo sections"><a href="#heroNeoIntro">Overview</a><a href="#neoVariants" aria-current="location">Configurations</a></nav>
+      <div class="neo-variants-grid"><div><p class="neo-variant-kicker">13-inch ? A18 Pro</p><h2 id="neoVariantTitle">Choose your MacBook Neo.</h2><p>Find your storage and finish. Explore the full MacBook Neo story below.</p><img id="neoVariantImage" src="images/macbook_neo/colors/macbook-neo-silver.png" alt="MacBook Neo in Silver" width="600" height="400"></div><div class="neo-variant-options"><div><label for="neoVariantStorage">Storage</label><select id="neoVariantStorage"></select></div><div><label for="neoVariantColor">Finish</label><select id="neoVariantColor"></select></div><p id="neoVariantSummary" aria-live="polite"></p><strong id="neoVariantPrice" aria-live="polite"></strong><button type="button" id="neoVariantAdd">Add to Bag</button><a href="#heroNeoIntro">Explore MacBook Neo ?</a><p id="neoVariantStatus" role="status"></p></div></div>
+    </section>
 
     <!-- ================= 1ST SECTION: MACBOOK NEO HERO ================= -->
     <section class="hero neo-intro-hero" id="heroNeoIntro">
@@ -2291,6 +2296,7 @@
       }
     });
   </script>
+<script src="js/neo-variants.js"></script>
 </body>
 
 </html>

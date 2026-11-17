@@ -1,0 +1,20 @@
+﻿.neo-variants { max-width: 1200px; margin: auto; padding: 32px 28px 65px; scroll-margin-top: 90px; }
+.neo-segments { display: flex; justify-content: center; gap: 8px; padding-bottom: 38px; }
+.neo-segments a { color: #c5c5ca; padding: 10px 20px; border: 1px solid #444; border-radius: 25px; font-size: 14px; }
+.neo-segments a[aria-current] { background: #f5f5f7; color: #1d1d1f; }
+.neo-variants-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 65px; align-items: center; }
+body .neo-variants h2 { font-size: clamp(30px,4vw,50px); line-height: 1.08; letter-spacing: -.04em; color: #fff !important; -webkit-text-fill-color: currentColor !important; background: none; margin: 16px 0 22px; }
+body .neo-variants p { color: #c5c5ca !important; -webkit-text-fill-color: currentColor !important; line-height: 1.6; }
+.neo-variant-kicker { font-size: 14px; font-weight: 600; }
+.neo-variants img { display: block; width: 100%; height: 280px; object-fit: contain; margin-top: 28px; }
+.neo-variant-options { padding: 30px; border: 1px solid #3b3b3f; background: #1b1b1e; border-radius: 22px; }
+.neo-variant-options>div { margin-bottom: 22px; }
+.neo-variant-options label { display: block; font-size: 14px; color: white; margin-bottom: 10px; }
+.neo-variant-options select { width: 100%; padding: 13px; background: #28282d; border: 1px solid #626267; border-radius: 8px; color: white; font: inherit; }
+#neoVariantSummary { font-size: 13px; min-height: 65px; overflow-wrap: anywhere; }
+#neoVariantPrice { display: block; font-size: 32px; margin: 22px 0; color: white; }
+body .neo-variant-options button { width: 100%; background: #0071e3; border: 0; color: white !important; -webkit-text-fill-color: currentColor !important; padding: 14px 20px; font: inherit; font-weight: 600; cursor: pointer; }
+.neo-variant-options>a { display: block; text-align: center; margin-top: 20px; color: #69b5ff; }
+#neoVariantStatus { margin-top: 14px; font-size: 13px; }
+.neo-variants :is(a,button,select):focus-visible { outline: 3px solid #69b5ff; outline-offset: 4px; }
+@media(max-width:700px) { .neo-variants { padding: 25px 20px 45px; }.neo-variants-grid { grid-template-columns: 1fr; gap: 25px; }.neo-variants img { height: 220px; }.neo-variant-options { padding: 24px; }.neo-segments { padding-bottom: 25px; } }
