@@ -371,7 +371,7 @@ function renderCatalogueNavigation(header) {
     const content = document.createElement('div'); content.className = 'mobile-subcat-content';
     products.forEach(function (product) {
       const productUrl = getProductPageUrl(product.id);
-      const href = (product.id === 'iphone-18-pro' || product.id === 'macbook-air-13-m5' || product.id === 'imac-24-m4') ? productUrl : productUrl + (productUrl.includes('?') ? '&' : '?') + 'configure=1';
+      const href = (product.id === 'iphone-18-pro' || product.id === 'macbook-air-13-m5' || product.id === 'macbook-air-15-m5' || product.id === 'imac-24-m4') ? productUrl : productUrl + (productUrl.includes('?') ? '&' : '?') + 'configure=1';
       const link = document.createElement('a'); link.href = href; link.className = 'cascade-prod-item';
       const name = document.createElement('span'); name.className = 'cascade-prod-name'; name.textContent = product.name; link.append(name); group.append(link);
       const leaf = document.createElement('a'); leaf.href = href; leaf.className = 'mobile-leaf-link';
@@ -386,6 +386,7 @@ function renderCatalogueNavigation(header) {
 function getProductPageUrl(id) {
   if (id === 'macbook-neo-13' || id === 'macbook-neo') return '/macbook-neo';
   if (id === 'macbook-air-13-m5') return '/macbook-air';
+  if (id === 'macbook-air-15-m5') return '/macbook-air?size=15';
   if (id === 'imac-24-m4') return '/imac';
   return id === 'iphone-18-pro' ? '/iphone-18-pro' : 'product.html?id=' + encodeURIComponent(id);
 }

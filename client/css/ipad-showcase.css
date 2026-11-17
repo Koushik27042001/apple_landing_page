@@ -8,7 +8,7 @@ body.ipad-11-page .pdp-showcase-wrapper { width: 100%; max-width: none !importan
 .ipad-story { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
 .ipad-story *, .ipad-product-notes { box-sizing: border-box; }
 .ipad-story :is(h1,h2,h3,p) { margin: 0; }
-.ipad-story :is(h1,h2,h3) { color: #1d1d1f !important; -webkit-text-fill-color: currentColor !important; background: none; }
+body.ipad-11-page .ipad-story :is(h1,h2,h3) { color: #1d1d1f !important; -webkit-text-fill-color: currentColor !important; background: none; }
 .ipad-story img { display: block; max-width: 100%; height: auto; }
 .ipad-story-section { width: min(1200px, 100%); padding: 100px 40px; margin: auto; }
 .ipad-kicker { font-size: 17px; font-weight: 600; color: #6e6e73; margin-bottom: 24px !important; }

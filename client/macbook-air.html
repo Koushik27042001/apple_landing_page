@@ -1572,6 +1572,97 @@
   <div id="site-header"></div>
 
   <main>
+    <!-- ================= 5TH SECTION: BUY & CONFIGURE ================= -->
+    <section class="air-buy-section" id="buy">
+      <div class="air-buy-container">
+        <div class="air-buy-head">
+          <h2>Configure your MacBook Air.</h2>
+          <p>Select your size, finish, and memory to make it yours.</p>
+        </div>
+
+        <div class="air-config-grid">
+          <!-- Left: Live Preview Stage -->
+          <div class="air-stage">
+            <div class="air-stage-img-wrap">
+              <img id="airStageImage" src="images/macbook-air/hero-img.png" alt="MacBook Air preview">
+            </div>
+            <div class="air-stage-title" id="airStageTitle">MacBook Air 13″ with M5</div>
+            <div class="air-stage-sub" id="airStageSub">Sky Blue · 16GB · 512GB SSD</div>
+          </div>
+
+          <!-- Right: Configuration Options -->
+          <div class="air-options">
+            <!-- 1. Size -->
+            <div class="air-opt-group">
+              <div class="air-opt-label">
+                <span>1. Select your display size</span>
+              </div>
+              <div class="air-size-selector" role="group" aria-label="Choose MacBook Air display size">
+                <button type="button" class="air-size-btn active" aria-pressed="true" data-size="13" data-base="149900" data-name="MacBook Air 13″">
+                  <span class="size-name">13.6-inch</span>
+                  <span class="size-detail">Liquid Retina display</span>
+                  <span class="size-price">From ₹1,49,900</span>
+                </button>
+                <button type="button" class="air-size-btn" aria-pressed="false" data-size="15" data-base="179900" data-name="MacBook Air 15″">
+                  <span class="size-name">15.3-inch</span>
+                  <span class="size-detail">Liquid Retina display</span>
+                  <span class="size-price">From ₹1,79,900</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Finish -->
+            <div class="air-opt-group">
+              <div class="air-opt-label">
+                <span>2. Choose your finish</span>
+                <small id="selectedColorLabel">Sky Blue</small>
+              </div>
+              <div class="air-swatches">
+                <button type="button" class="air-swatch-btn active" data-color="Sky Blue" style="--swatch-color: #b9d3e6;" aria-label="Sky Blue"></button>
+                <button type="button" class="air-swatch-btn" data-color="Midnight" style="--swatch-color: #1e2129;" aria-label="Midnight"></button>
+                <button type="button" class="air-swatch-btn" data-color="Starlight" style="--swatch-color: #f0ece1;" aria-label="Starlight"></button>
+                <button type="button" class="air-swatch-btn" data-color="Silver" style="--swatch-color: #e3e4e6;" aria-label="Silver"></button>
+              </div>
+            </div>
+
+            <!-- 3. Memory & Storage -->
+            <div class="air-opt-group">
+              <div class="air-opt-label">
+                <span>3. Memory &amp; Storage</span>
+              </div>
+              <div class="air-storage-list">
+                <button type="button" class="air-storage-btn active" data-extra="0" data-label="16GB / 512GB SSD">
+                  <span class="air-storage-main">16GB Unified Memory / 512GB SSD</span>
+                  <span class="air-storage-extra">Included</span>
+                </button>
+                <button type="button" class="air-storage-btn" data-extra="36000" data-label="16GB / 1TB SSD">
+                  <span class="air-storage-main">16GB Unified Memory / 1TB SSD</span>
+                  <span class="air-storage-extra">+₹36,000</span>
+                </button>
+                <button type="button" class="air-storage-btn" data-extra="60000" data-label="24GB / 1TB SSD">
+                  <span class="air-storage-main">24GB Unified Memory / 1TB SSD</span>
+                  <span class="air-storage-extra">+₹60,000</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Summary & Add to Bag -->
+            <div class="air-buy-summary">
+              <div class="air-total-row">
+                <span class="air-total-label">Total</span>
+                <span class="air-total-val" id="airTotalPrice">₹1,49,900</span>
+              </div>
+              <p class="air-emi-val" id="airTotalEmi">Or ₹11,658/mo. for 12 mo. with No-Cost EMI</p>
+              <button type="button" class="air-add-btn" id="airAddToBagBtn">Add to Bag</button>
+              <div class="air-delivery-info">
+                Free delivery · In stock · Genuine Apple India warranty included
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ================= 1ST SECTION: MACBOOK AIR HERO ================= -->
     <section class="hero air-hero" id="heroAir">
       <div class="hero__media" id="airHeroMedia">
@@ -1711,96 +1802,7 @@
       </div>
     </section>
 
-    <!-- ================= 5TH SECTION: BUY & CONFIGURE ================= -->
-    <section class="air-buy-section" id="buy">
-      <div class="air-buy-container">
-        <div class="air-buy-head">
-          <h2>Configure your MacBook Air.</h2>
-          <p>Select your size, finish, and memory to make it yours.</p>
-        </div>
 
-        <div class="air-config-grid">
-          <!-- Left: Live Preview Stage -->
-          <div class="air-stage">
-            <div class="air-stage-img-wrap">
-              <img id="airStageImage" src="images/macbook-air/hero-img.png" alt="MacBook Air preview">
-            </div>
-            <div class="air-stage-title" id="airStageTitle">MacBook Air 13″ with M5</div>
-            <div class="air-stage-sub" id="airStageSub">Sky Blue · 16GB · 512GB SSD</div>
-          </div>
-
-          <!-- Right: Configuration Options -->
-          <div class="air-options">
-            <!-- 1. Size -->
-            <div class="air-opt-group">
-              <div class="air-opt-label">
-                <span>1. Select your display size</span>
-              </div>
-              <div class="air-size-selector">
-                <button type="button" class="air-size-btn active" data-size="13" data-base="149900" data-name="MacBook Air 13″">
-                  <span class="size-name">13.6-inch</span>
-                  <span class="size-detail">Liquid Retina display</span>
-                  <span class="size-price">From ₹1,49,900</span>
-                </button>
-                <button type="button" class="air-size-btn" data-size="15" data-base="179900" data-name="MacBook Air 15″">
-                  <span class="size-name">15.3-inch</span>
-                  <span class="size-detail">Liquid Retina display</span>
-                  <span class="size-price">From ₹1,79,900</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- 2. Finish -->
-            <div class="air-opt-group">
-              <div class="air-opt-label">
-                <span>2. Choose your finish</span>
-                <small id="selectedColorLabel">Sky Blue</small>
-              </div>
-              <div class="air-swatches">
-                <button type="button" class="air-swatch-btn active" data-color="Sky Blue" style="--swatch-color: #b9d3e6;" aria-label="Sky Blue"></button>
-                <button type="button" class="air-swatch-btn" data-color="Midnight" style="--swatch-color: #1e2129;" aria-label="Midnight"></button>
-                <button type="button" class="air-swatch-btn" data-color="Starlight" style="--swatch-color: #f0ece1;" aria-label="Starlight"></button>
-                <button type="button" class="air-swatch-btn" data-color="Silver" style="--swatch-color: #e3e4e6;" aria-label="Silver"></button>
-              </div>
-            </div>
-
-            <!-- 3. Memory & Storage -->
-            <div class="air-opt-group">
-              <div class="air-opt-label">
-                <span>3. Memory &amp; Storage</span>
-              </div>
-              <div class="air-storage-list">
-                <button type="button" class="air-storage-btn active" data-extra="0" data-label="16GB / 512GB SSD">
-                  <span class="air-storage-main">16GB Unified Memory / 512GB SSD</span>
-                  <span class="air-storage-extra">Included</span>
-                </button>
-                <button type="button" class="air-storage-btn" data-extra="36000" data-label="16GB / 1TB SSD">
-                  <span class="air-storage-main">16GB Unified Memory / 1TB SSD</span>
-                  <span class="air-storage-extra">+₹36,000</span>
-                </button>
-                <button type="button" class="air-storage-btn" data-extra="60000" data-label="24GB / 1TB SSD">
-                  <span class="air-storage-main">24GB Unified Memory / 1TB SSD</span>
-                  <span class="air-storage-extra">+₹60,000</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Summary & Add to Bag -->
-            <div class="air-buy-summary">
-              <div class="air-total-row">
-                <span class="air-total-label">Total</span>
-                <span class="air-total-val" id="airTotalPrice">₹1,49,900</span>
-              </div>
-              <p class="air-emi-val" id="airTotalEmi">Or ₹11,658/mo. for 12 mo. with No-Cost EMI</p>
-              <button type="button" class="air-add-btn" id="airAddToBagBtn">Add to Bag</button>
-              <div class="air-delivery-info">
-                Free delivery · In stock · Genuine Apple India warranty included
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- Global Footer -->
@@ -1968,9 +1970,14 @@
       const sizeBtns = document.querySelectorAll(".air-size-btn");
       sizeBtns.forEach(function (btn) {
         btn.addEventListener("click", function () {
-          sizeBtns.forEach(function (b) { b.classList.remove("active"); });
+          sizeBtns.forEach(function (b) { b.classList.remove("active"); b.setAttribute("aria-pressed", "false"); });
           btn.classList.add("active");
+          btn.setAttribute("aria-pressed", "true");
           selectedSize = btn.getAttribute("data-size") || "13";
+          const sizeUrl = new URL(window.location.href);
+          if (selectedSize === "15") sizeUrl.searchParams.set("size", "15");
+          else sizeUrl.searchParams.delete("size");
+          window.history.replaceState(null, "", sizeUrl.pathname + sizeUrl.search + sizeUrl.hash);
           basePrice = Number(btn.getAttribute("data-base") || 149900);
           selectedModelName = btn.getAttribute("data-name") || "MacBook Air " + selectedSize + "″";
           updateSummary();
@@ -2032,7 +2039,10 @@
         });
       }
 
-      updateSummary();
+      const requestedSize = new URLSearchParams(window.location.search).get("size") === "15" ? "15" : "13";
+      const initialSize = [...sizeBtns].find(button => button.dataset.size === requestedSize);
+      if (initialSize) initialSize.click();
+      else updateSummary();
     });
   </script>
 </body>

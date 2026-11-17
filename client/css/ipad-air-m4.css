@@ -1,0 +1,9 @@
+﻿/* Air-specific text and product imagery within the iPad mini layout. */
+body.ipad-air-m4-page :is(.hero__title,.highlights__title,.design__title,.oled__title,.siri__title,.buy-title,.preview-title) { color:#1d1d1f !important;-webkit-text-fill-color:currentColor !important;background:none; }
+body.ipad-air-m4-page :is(.hero__product,.design__lead,.oled__copy,.siri__note,.price-pill__text) { color:#515158 !important;-webkit-text-fill-color:currentColor !important; }
+.ipad-air-m4-page .hero__media img,.ipad-air-m4-page .design__media img,.ipad-air-m4-page .oled__media img,.ipad-air-m4-page .siri__fan-img { width:100%;height:auto;max-height:600px;object-fit:contain; }
+.ipad-air-m4-page .card__bg { object-fit:contain;object-position:center 85%;background:#edf4fa; }
+body.ipad-air-m4-page .card__text,body.ipad-air-m4-page .card--dark .card__text { color:#1d1d1f !important;-webkit-text-fill-color:currentColor !important;position:relative;background:linear-gradient(#f5f5f7 80%,transparent);padding-bottom:35px; }
+.ipad-air-m4-page .storage-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+body.ipad-air-m4-page .config-controls :is(button,span,small) { -webkit-text-fill-color:currentColor !important; }
+.ipad-air-m4-page .film-link { display:inline-flex;align-items:center;text-decoration:none; }
