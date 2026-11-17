@@ -1,0 +1,126 @@
+﻿body.vision-pro-page { background: #fff !important; color: #1d1d1f; }
+.vision-pro-page > .orb { display: none; }
+.vision-pro-page main.container { width: 100%; max-width: none; padding-inline: 0; }
+.vision-pro-page .breadcrumb { width: min(1200px,calc(100% - 48px)); margin: 18px auto; }
+.vision-pro-page .breadcrumb :is(a,span) { color: #6e6e73; }
+body.vision-pro-page .pdp-showcase-wrapper { width: 100%; max-width: none !important; padding: 0 !important; }
+.vision-story { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; }
+.vision-story * { box-sizing: border-box; }
+.vision-story :is(h1,h2,h3,p) { margin: 0; }
+body.vision-pro-page .vision-story :is(h1,h2,h3) { color: #1d1d1f !important; background: none; -webkit-text-fill-color: currentColor !important; }
+body.vision-pro-page .vision-story p { color: #626267 !important; -webkit-text-fill-color: currentColor !important; }
+.vision-story img { display: block; width: 100%; height: auto; }
+.vision-wrap { width: min(1240px,100%); margin: auto; padding: 100px 48px; }
+.vision-story h2 { font-size: clamp(38px,5vw,70px); letter-spacing: -.05em; line-height: 1.07; font-weight: 650; }
+.vision-eyebrow { font-size: 18px; font-weight: 600; margin-bottom: 24px !important; }
+.vision-story .vision-lead { font-size: 22px; line-height: 1.5; margin-top: 30px; max-width: 790px; font-weight: 500; }
+.vision-hero { position: relative; background: #f5f5f7; overflow: hidden; min-height: 700px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
+.vision-hero-copy { position: relative; z-index: 1; padding: 65px 0 65px max(48px,calc((100vw - 1144px)/2)); }
+body.vision-pro-page .vision-story .vision-wordmark { display: flex; align-items: center; gap: 8px; font-size: 32px; font-weight: 600; color: #1d1d1f !important; letter-spacing: -.04em; margin-bottom: 35px; }
+body.vision-pro-page .vision-hero h1 { font-size: clamp(46px,4.8vw,70px); line-height: 1.04; font-weight: 650; letter-spacing: -.055em; }
+.vision-hero .vision-lead { font-size: 20px; }
+.vision-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 22px; margin-top: 32px; }
+.vision-story a { color: #0066cc; text-decoration: none; font-size: 16px; -webkit-text-fill-color: currentColor; }
+.vision-story .vision-cta { background: #0071e3; color: white; padding: 14px 24px; border-radius: 30px; }
+.vision-story a:focus-visible { outline: 3px solid #0071e3; outline-offset: 5px; }
+.vision-starting { font-size: 16px; margin-top: 24px !important; }
+.vision-hero-image { height: 700px !important; object-fit: cover; object-position: 50% 35%; }
+.vision-opening { text-align: center; }
+.vision-opening .vision-lead { margin-inline: auto; }
+.vision-pillars { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-top: 40px; }
+.vision-pillars span { padding: 12px 20px; background: #f5f5f7; border-radius: 25px; color: #515156; font-size: 14px; }
+.vision-section-copy { margin-bottom: 48px; }
+.vision-feature { padding-top: 35px; }
+.vision-feature>img,.vision-design>img { border-radius: 25px; }
+.vision-environment { position: relative; max-width: 1600px; margin: 15px auto 70px; background: #03181c; }
+.vision-environment img { min-height: 600px; max-height: 850px; object-fit: cover; }
+.vision-environment-copy { position: absolute; top: 10%; left: max(48px,8%); right: 8%; max-width: 850px; }
+body.vision-pro-page .vision-environment :is(h2,p) { color: #fff !important; -webkit-text-fill-color: currentColor !important; }
+.vision-environment-copy>p:last-child { max-width: 650px; font-size: 20px; line-height: 1.6; margin-top: 30px; }
+.vision-design { padding-top: 20px; }
+.vision-design>img { margin-top: 50px; }
+.vision-detail-row { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; margin-top: 40px; }
+.vision-detail-row h3 { font-size: 26px; letter-spacing: -.03em; margin-bottom: 18px; }
+.vision-detail-row p { font-size: 18px; line-height: 1.6; }
+.vision-connection { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 65px; padding-top: 20px; }
+.vision-connection>img { border-radius: 25px; }
+.vision-connection h2 { font-size: clamp(38px,4vw,57px); }
+.vision-connection .vision-lead { font-size: 20px; }
+.vision-config-heading { text-align: center; padding-top: 30px; padding-bottom: 40px; }
+.vision-config-heading .vision-lead { margin-inline: auto; font-size: 19px; }
+@media(max-width:700px) {
+  .vision-wrap { padding: 65px 24px; }
+  .vision-hero { grid-template-columns: 1fr; min-height: 0; }
+  .vision-hero-copy { padding: 40px 24px 20px; text-align: center; }
+  body.vision-pro-page .vision-story .vision-wordmark { justify-content: center; font-size: 29px; margin-bottom: 26px; }
+  body.vision-pro-page .vision-hero h1 { font-size: clamp(43px,10vw,58px); }
+  .vision-hero .vision-lead { font-size: 18px; }
+  .vision-hero-actions { justify-content: center; gap: 20px; }
+  .vision-hero-image { height: 420px !important; object-position: center 35%; }
+  .vision-story .vision-lead { font-size: 18px; margin-top: 25px; }
+  .vision-eyebrow { font-size: 16px; margin-bottom: 20px !important; }
+  .vision-pillars { gap: 10px; margin-top: 30px; }
+  .vision-pillars span { font-size: 13px; }
+  .vision-feature { padding-top: 15px; }
+  .vision-section-copy { margin-bottom: 30px; }
+  .vision-environment { margin-block: 10px 40px; }
+  .vision-environment img { min-height: 600px; }
+  .vision-environment-copy { left: 24px; right: 24px; top: 45px; }
+  .vision-environment-copy>p:last-child { font-size: 17px; }
+  .vision-detail-row { grid-template-columns: 1fr; gap: 30px; margin-top: 30px; }
+  .vision-detail-row h3 { font-size: 24px; }
+  .vision-detail-row p { font-size: 17px; }
+  .vision-connection { grid-template-columns: 1fr; gap: 35px; padding-top: 15px; }
+  .vision-connection .vision-lead { font-size: 18px; }
+  .vision-config-heading { padding-top: 10px; }
+}
+
+.vision-pro-page .product-gallery { width: min(600px,calc(100% - 40px)); margin-bottom: 25px; }
+body.vision-pro-page #pdpGalleryMain { aspect-ratio: auto; height: auto; max-height: none; }
+.vision-pro-page .pdp-3d-stage { height: auto; min-width: 0; }
+body.vision-pro-page #mainImage { max-height: 350px; }
+.vision-pro-page .gallery-counter { color: #6e6e73; }
+.vision-pro-page .gallery-label { color: #1d1d1f; }
+body.vision-pro-page .product-gallery :is(.gallery-controls button,.gallery-zoom) { background: #f5f5f7; color: #1d1d1f !important; -webkit-text-fill-color: currentColor !important; border-color: #b8b8bd; }
+body.vision-pro-page .pdp-purchase-container { width: min(1120px,calc(100% - 48px)) !important; margin: auto; padding: 36px; background: #f5f5f7 !important; border: 0 !important; border-radius: 25px; box-shadow: none !important; color: #1d1d1f; scroll-margin-top: 100px; }
+body.vision-pro-page .pdp-purchase-container :is(.pdp-price,.title,.pdp-emi-line,.pdp-emi-line strong,.pdp-variant-summary strong,.stock-info,.qty-selector span,.qty-selector button,.emi-plan,.emi-plan span,.trust-mini div) { color: #1d1d1f !important; }
+body.vision-pro-page .pdp-purchase-container :is(button,a,select,option,span,strong) { -webkit-text-fill-color: currentColor !important; }
+body.vision-pro-page .pdp-purchase-container :is(.pdp-variant-summary,.pdp-emi-line,.trust-mini div) { color: #5c5c61 !important; }
+.vision-pro-page .variant-select { background: white; color: #1d1d1f; border-color: #b8b8bd; }
+body.vision-pro-page .qty-selector { background: white !important; border-color: #d2d2d7 !important; }
+body.vision-pro-page .qty-selector button { background: #e8e8ed !important; }
+body.vision-pro-page .pdp-actions .btn-outline { color: #0066cc !important; background: white !important; border-color: #0071e3 !important; }
+body.vision-pro-page .pdp-actions .btn-primary { color: white !important; background: #0071e3 !important; }
+body.vision-pro-page .pdp-purchase-container .whatsapp-inline-btn { background: #e6f4eb !important; color: #146c35 !important; border: 1px solid #9dc9ac !important; }
+body.vision-pro-page .whatsapp-inline-btn .icon-svg { color: inherit !important; }
+.vision-pro-page .emi-plan { background: white; border: 1px solid #d2d2d7; gap: 16px; }
+.vision-product-notes { width: min(1120px,100%); padding: 35px 24px 0; margin: auto; font-size: 12px; line-height: 1.6; color: #6e6e73; }
+.vision-product-notes p+p { margin-top: 10px; }
+.vision-pro-page :is(.pdp-details,.related-section) { width: min(1120px,100%); margin: 60px auto; padding: 0 24px; }
+body.vision-pro-page .pdp-details, body.vision-pro-page .pdp-details-grid { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+body.vision-pro-page .pdp-details :is(h3,.pdp-desc,.pdp-highlights li,.pdp-highlights strong,td) { color: #1d1d1f !important; }
+.vision-pro-page .spec-table td { border-color: #d2d2d7; overflow-wrap: anywhere; }
+body.vision-pro-page .related-section :is(.section-head h2,.section-head p,.product-card) { opacity: 1; transform: none; }
+body.vision-pro-page .related-section .section-head h2 { color: #1d1d1f !important; background: none; -webkit-text-fill-color: currentColor !important; }
+body.vision-pro-page .related-section .product-card { background: #f5f5f7 !important; border-color: #d2d2d7 !important; min-width: 0; }
+body.vision-pro-page .related-section .product-card :is(h4,.pc-price) { color: #1d1d1f !important; -webkit-text-fill-color: currentColor !important; }
+body.vision-pro-page .related-section .product-card :is(.pc-short,.pc-cat,.pc-emi,.pc-emi strong,.pc-mrp) { color: #5c5c61 !important; -webkit-text-fill-color: currentColor !important; }
+body.vision-pro-page .related-section .product-card .btn { color: white !important; background: #0071e3 !important; -webkit-text-fill-color: currentColor !important; }
+.vision-pro-page #site-footer { background: #111; }
+.vision-pro-page .toast { background: #1d1d1f !important; color: white !important; }
+
+@media(max-width:700px){body.vision-pro-page .pdp-purchase-container{width:calc(100% - 28px) !important;padding:24px 20px}.vision-pro-page .related-section .product-grid{grid-template-columns:minmax(0,1fr)}}
+body.vision-pro-page .vision-product-notes p{color:#6e6e73 !important;-webkit-text-fill-color:currentColor !important}
+body.vision-pro-page .pdp-purchase-container .storage-opt {
+  background: #fff !important;
+  color: #1d1d1f !important;
+  border-color: #b8b8bd !important;
+}
+body.vision-pro-page .pdp-purchase-container .storage-opt.active {
+  background: #e8f2ff !important;
+  color: #0066cc !important;
+  border-color: #0071e3 !important;
+}
+body.vision-pro-page .pdp-purchase-container .option-group .sel-value {
+  color: #5c5c61 !important;
+}

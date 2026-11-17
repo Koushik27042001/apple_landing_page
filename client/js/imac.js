@@ -1,4 +1,19 @@
 ﻿(() => {
+  renderHeader('mac');
+  renderFooter();
+
+  // Keep the product navigation below the shared header at every breakpoint.
+  const header = document.getElementById('site-header');
+  const syncHeaderHeight = () => {
+    document.documentElement.style.setProperty('--imac-header-height', header.getBoundingClientRect().height + 'px');
+  };
+  syncHeaderHeight();
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(syncHeaderHeight).observe(header);
+  } else {
+    window.addEventListener('resize', syncHeaderHeight);
+  }
+
   const views = {
     blue: { src: 'images/imac/colors_pf_blue__dcjh5k0mdhea_large_2x.jpg', alt: 'Blue iMac, front view with Magic Keyboard and Magic Mouse', caption: 'iMac in Blue' },
     purple: { src: 'images/imac/highlights_design__e0tsklsnzwk2_large_2x.jpg', alt: 'Purple iMac viewed from the side, showing its thin design', caption: 'iMac in Purple' }
