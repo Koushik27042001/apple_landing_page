@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="css/watch-se-showcase.css">
 <link rel="stylesheet" href="css/ipad-showcase.css">
 <link rel="stylesheet" href="css/vision-showcase.css">
+<link rel="stylesheet" href="css/iphone-air-showcase.css">
   <style>
     :root {
       --orange: #f56b23;
@@ -485,6 +486,7 @@
 <script src="js/watch-se-showcase.js"></script>
 <script src="js/ipad-showcase.js"></script>
 <script src="js/vision-showcase.js"></script>
+<script src="js/iphone-air-showcase.js"></script>
 <script src="js/animations.js" defer></script>
 <script>
   const productId = getQueryParam("id") || getQueryParam("slug");
@@ -569,6 +571,7 @@
     document.body.classList.toggle('watch-se-page', product.id === 'watch-se-3');
     document.body.classList.toggle('ipad-11-page', product.id === 'ipad-11-gen');
     document.body.classList.toggle('vision-pro-page', product.id === 'apple-vision-pro');
+    document.body.classList.toggle('iphone-air-page', product.id === 'iphone-air');
     const discount = product.mrp > product.price ? Math.round((1 - product.price / product.mrp) * 100) : 0;
     const unitPrice = currentUnitPrice();
     const emi12 = getEmi(unitPrice, 12);
@@ -577,7 +580,7 @@
     document.getElementById("pdpContent").innerHTML =
       '<div class="pdp-showcase-wrapper">' +
 
-        (product.id === 'apple-vision-pro' ? VisionShowcase.intro(product) : product.id === 'ipad-11-gen' ? IPadShowcase.intro(product) : product.id === 'watch-se-3' ? WatchSEShowcase.intro(product) : (
+        (product.id === 'iphone-air' ? IPhoneAirShowcase.intro(product) : product.id === 'apple-vision-pro' ? VisionShowcase.intro(product) : product.id === 'ipad-11-gen' ? IPadShowcase.intro(product) : product.id === 'watch-se-3' ? WatchSEShowcase.intro(product) : (
 '<!-- 1. Header Section Above Product Image -->' +
         '<div class="pdp-top-header text-center">' +
           '<div class="pc-cat">' + product.category + ' &middot; ' + product.brand + '</div>' +
@@ -643,7 +646,7 @@
 
       '</div>' +
 
-      (product.id === 'apple-vision-pro' ? VisionShowcase.sections() : product.id === 'ipad-11-gen' ? IPadShowcase.sections() : product.id === 'watch-se-3' ? WatchSEShowcase.sections() : ProductGallery.section(product)) +
+      (product.id === 'iphone-air' ? IPhoneAirShowcase.sections() : product.id === 'apple-vision-pro' ? VisionShowcase.sections() : product.id === 'ipad-11-gen' ? IPadShowcase.sections() : product.id === 'watch-se-3' ? WatchSEShowcase.sections() : ProductGallery.section(product)) +
       ProductGallery.viewer() +
       '<!-- 4. Product Description & Specifications Section -->' +
       '<section class="pdp-details" id="pdpDetails">' +
