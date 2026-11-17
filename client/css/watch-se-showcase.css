@@ -90,3 +90,96 @@ body.watch-se-page .toast {
   background: #1d1d1f !important;
   color: #fff !important;
 }
+
+/* Keep controls readable when the shared dark product template is shown on white. */
+body.watch-se-page .pdp-purchase-container :is(button, a, select, option, .qty-selector span, .emi-plan, .emi-plan span) {
+  -webkit-text-fill-color: currentColor !important;
+}
+body.watch-se-page .pdp-purchase-container .pdp-actions .btn-outline {
+  color: #0066cc !important;
+  background: #fff !important;
+  border-color: #0071e3 !important;
+}
+body.watch-se-page .pdp-purchase-container .pdp-actions .btn-primary {
+  color: #fff !important;
+  background: #0071e3 !important;
+}
+body.watch-se-page .pdp-purchase-left .qty-selector button {
+  color: #1d1d1f !important;
+  background: #e8e8ed !important;
+}
+body.watch-se-page .pdp-purchase-left .qty-selector button:hover {
+  background: #d2d2d7 !important;
+}
+body.watch-se-page .pdp-purchase-left .qty-selector span {
+  color: #1d1d1f !important;
+}
+body.watch-se-page .pdp-purchase-container .emi-plan {
+  background: #fff;
+  color: #1d1d1f;
+  border: 1px solid #d2d2d7;
+  gap: 16px;
+}
+body.watch-se-page .pdp-purchase-container .whatsapp-inline-btn {
+  background: #e6f4eb !important;
+  color: #146c35 !important;
+  border: 1px solid #9dc9ac !important;
+}
+body.watch-se-page .product-gallery :is(.gallery-controls button, .gallery-zoom) {
+  background: #f5f5f7;
+  color: #1d1d1f;
+  border-color: #b8b8bd;
+  -webkit-text-fill-color: currentColor !important;
+}
+/* This page has no scroll-reveal controller; its recommendations must be visible. */
+body.watch-se-page .related-section :is(.section-head h2, .section-head p, .product-card) {
+  opacity: 1;
+  transform: none;
+}
+body.watch-se-page .related-section .section-head h2 {
+  background: none;
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+body.watch-se-page .related-section .product-card {
+  background: #f5f5f7 !important;
+  border-color: #d2d2d7 !important;
+  min-width: 0;
+}
+body.watch-se-page .related-section .product-card :is(h4, .pc-price) {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+body.watch-se-page .related-section .product-card :is(.pc-cat, .pc-short, .pc-mrp, .pc-emi, .pc-emi strong) {
+  color: #5c5c61 !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+body.watch-se-page .related-section .product-card .btn {
+  background: #0071e3 !important;
+  color: #fff !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+@media (max-width: 420px) {
+  .watch-se-page .related-section .product-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+body.watch-se-page .pdp-purchase-container :is(.emi-plan, .emi-plan span) {
+  color: #1d1d1f !important;
+}
+body.watch-se-page .product-gallery :is(.gallery-controls button, .gallery-zoom) {
+  color: #1d1d1f !important;
+}
+body.watch-se-page .pdp-purchase-container .whatsapp-inline-btn .icon-svg {
+  color: inherit !important;
+}
+/* Let portrait watch photography determine gallery height, including on tablets. */
+body.watch-se-page #pdpGalleryMain {
+  aspect-ratio: auto;
+  height: auto;
+  max-height: none;
+}
+body.watch-se-page .product-gallery .pdp-3d-stage {
+  height: auto;
+  min-width: 0;
+}

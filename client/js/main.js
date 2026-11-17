@@ -152,7 +152,7 @@ function renderHeader(active) {
                   '<a href="product.html?id=macbook-pro-16-m5" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Pro PROLED XDR Display</span><span class="badge-new-red">New</span></a>' +
                   '<a href="product.html?id=macbook-pro-14-m5" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Pro</span></a>' +
                   '<a href="macbook-air.html" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Air</span></a>' +
-                  '<a href="product.html?id=imac-24-m4" class="cascade-prod-item"><span class="cascade-prod-name">iMac</span></a>' +
+                  '<a href="imac.html" class="cascade-prod-item"><span class="cascade-prod-name">iMac</span></a>' +
                   '<a href="macbook-neo.html" class="cascade-prod-item"><span class="cascade-prod-name">MacBook Neo</span></a>' +
                   '<a href="mac-mini.html" class="cascade-prod-item"><span class="cascade-prod-name">Mac Mini</span><span class="badge-new-red">New</span></a>' +
                   '<a href="category.html?cat=mac" class="cascade-prod-item"><span class="cascade-prod-name">Mac Studio</span></a>' +
@@ -268,7 +268,7 @@ function renderHeader(active) {
               '<div class="mobile-subcat-content">' +
                 '<a href="macbook-air.html" class="mobile-leaf-link"><span class="mll-name">MacBook Air</span></a>' +
                 '<a href="product.html?id=mbp-14-m4-pro" class="mobile-leaf-link"><span class="mll-name">MacBook Pro 14&quot; &amp; 16&quot;</span></a>' +
-                '<a href="product.html?id=imac-24-m4" class="mobile-leaf-link"><span class="mll-name">iMac 24&quot;</span></a>' +
+                '<a href="imac.html" class="mobile-leaf-link"><span class="mll-name">iMac 24&quot;</span></a>' +
                 '<a href="mac-mini.html" class="mobile-leaf-link"><span class="mll-name">Mac mini</span></a>' +
                 '<a href="product.html?id=mac-studio-m2-max" class="mobile-leaf-link"><span class="mll-name">Mac Studio</span></a>' +
                 '<a href="product.html?id=studio-display" class="mobile-leaf-link"><span class="mll-name">Displays</span></a>' +
