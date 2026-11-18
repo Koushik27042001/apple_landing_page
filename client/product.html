@@ -5,6 +5,10 @@
   (() => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id') || params.get('slug');
+    if (id === 'mac-mini-m4' || id === 'mac-mini-m6') {
+      window.location.replace('/mac-mini' + (id === 'mac-mini-m4' ? '?family=m4' : '') + window.location.hash);
+      return;
+    }
     if (id === 'ipad-air-11-m4') {
       window.location.replace('/ipad-air-11-m4' + (params.has('configure') ? '?configure=1' : '') + window.location.hash);
       return;

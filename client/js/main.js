@@ -348,7 +348,7 @@ function renderCatalogueNavigation(header) {
   groups.replaceChildren();
   mobile.querySelectorAll('.mobile-subcat-group').forEach(node => node.remove());
   CATEGORIES.forEach(function (category) {
-    const products = getNavigationProducts(category.id);
+    const products = getNavigationProducts(category.id).filter(product => product.id !== 'mac-mini-m4');
     if (!products.length) return;
     const item = document.createElement('div');
     item.className = 'cascade-cat-item has-submenu';
@@ -371,7 +371,7 @@ function renderCatalogueNavigation(header) {
     const content = document.createElement('div'); content.className = 'mobile-subcat-content';
     products.forEach(function (product) {
       const productUrl = getProductPageUrl(product.id);
-      const href = (product.id === 'iphone-18-pro' || product.id === 'macbook-air-13-m5' || product.id === 'macbook-air-15-m5' || product.id === 'imac-24-m4') ? productUrl : productUrl + (productUrl.includes('?') ? '&' : '?') + 'configure=1';
+      const href = (product.id === 'iphone-18-pro' || product.id === 'macbook-air-13-m5' || product.id === 'macbook-air-15-m5' || product.id === 'imac-24-m4' || product.id === 'mac-mini-m6') ? productUrl : productUrl + (productUrl.includes('?') ? '&' : '?') + 'configure=1';
       const link = document.createElement('a'); link.href = href; link.className = 'cascade-prod-item';
       const name = document.createElement('span'); name.className = 'cascade-prod-name'; name.textContent = product.name; link.append(name); group.append(link);
       const leaf = document.createElement('a'); leaf.href = href; leaf.className = 'mobile-leaf-link';
@@ -388,6 +388,8 @@ function getProductPageUrl(id) {
   if (id === 'macbook-air-13-m5') return '/macbook-air';
   if (id === 'macbook-air-15-m5') return '/macbook-air?size=15';
   if (id === 'imac-24-m4') return '/imac';
+  if (id === 'mac-mini-m6') return '/mac-mini';
+  if (id === 'mac-mini-m4') return '/mac-mini?family=m4';
   return id === 'iphone-18-pro' ? '/iphone-18-pro' : 'product.html?id=' + encodeURIComponent(id);
 }
 

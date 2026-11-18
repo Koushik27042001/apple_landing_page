@@ -1221,6 +1221,7 @@
       }
     }
   </style>
+<link rel="stylesheet" href="css/mac-mini-variants.css">
 </head>
 <body>
 
@@ -1243,7 +1244,7 @@
 
       <div class="hero__actions reveal" style="--d:.32s">
         <a class="btn-buy" href="#buy">Buy</a>
-        <a class="btn-secondary" href="product.html?id=mac-mini-m4">
+        <a class="btn-secondary" href="#miniConfigurations">
           Learn more
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1255,6 +1256,12 @@
         <strong>From ₹99,900<sup>*</sup></strong><br>
         or ₹15,817/mo. for 6 mo.<sup>‡</sup>
       </p>
+    </section>
+
+    <section class="mini-config" id="buy" aria-labelledby="miniConfigTitle">
+      <div class="mini-config-heading"><p>Find your Mac mini.</p><h2 id="miniConfigTitle">Small size. Your choice of power.</h2><p>Choose a chip family, then explore its available configurations.</p></div>
+      <div class="mini-family" role="group" aria-label="Mac mini chip family"><button type="button" data-mini-family="m6" aria-pressed="true">M6 / M5 Pro</button><button type="button" data-mini-family="m4" aria-pressed="false">M4 / M4 Pro</button></div>
+      <div class="mini-config-grid" id="miniConfigurations"><div><img src="images/mac-mini/hero_endframe__d9kro8y76v42_large.jpg" alt="Silver Mac mini with front USB-C ports" loading="lazy"><h3 id="miniFamilyTitle">Mac mini M6 / M5 Pro</h3><p id="miniFamilyDescription">Choose the performance for your day.</p></div><div class="mini-config-options"><label for="miniVariant">Configuration</label><select id="miniVariant"></select><p id="miniVariantSpecs" aria-live="polite"></p><p id="miniVariantModel"></p><p id="miniVariantAvailability"></p><strong id="miniVariantPrice" aria-live="polite"></strong><button type="button" id="miniVariantAdd">Add to Bag</button><p id="miniVariantStatus" role="status"></p></div></div>
     </section>
 
     <!-- ================= 2ND SECTION: GET THE HIGHLIGHTS (USER SPECIFIED) ================= -->
@@ -1683,6 +1690,7 @@
       }
     });
   </script>
+<script src="js/mac-mini-variants.js"></script>
 </body>
 </html>
 
