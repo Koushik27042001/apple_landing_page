@@ -40,6 +40,7 @@
 <link rel="stylesheet" href="css/airpods-showcase.css">
 <link rel="stylesheet" href="css/apple-tv-showcase.css">
 <link rel="stylesheet" href="css/iphone-17e-showcase.css">
+<link rel="stylesheet" href="css/iphone-17-showcase.css">
 <link rel="stylesheet" href="css/product-breadcrumbs.css">
   <style>
     :root {
@@ -517,6 +518,7 @@
 <script src="js/airpods-showcase.js"></script>
 <script src="js/apple-tv-showcase.js"></script>
 <script src="js/iphone-17e-showcase.js"></script>
+<script src="js/iphone-17-showcase.js"></script>
 <script src="js/animations.js" defer></script>
 <script>
   const productId = getQueryParam("id") || getQueryParam("slug");
@@ -605,6 +607,7 @@
     document.body.classList.toggle('airpods-pro-page', product.id === 'airpods-pro-3');
     document.body.classList.toggle('apple-tv-page', product.id === 'apple-tv-4k');
     document.body.classList.toggle('iphone-17e-page', product.id === 'iphone-17e');
+    document.body.classList.toggle('iphone-17-page', product.id === 'iphone-17');
     const discount = product.mrp > product.price ? Math.round((1 - product.price / product.mrp) * 100) : 0;
     const unitPrice = currentUnitPrice();
     const emi12 = getEmi(unitPrice, 12);
@@ -613,7 +616,7 @@
     document.getElementById("pdpContent").innerHTML =
       '<div class="pdp-showcase-wrapper">' +
 
-        (product.id === 'iphone-17e' ? IPhone17eShowcase.intro(product) : product.id === 'apple-tv-4k' ? AppleTVShowcase.intro(product) : product.id === 'airpods-pro-3' ? AirPodsShowcase.intro(product) : product.id === 'iphone-air' ? IPhoneAirShowcase.intro(product) : product.id === 'apple-vision-pro' ? VisionShowcase.intro(product) : product.id === 'ipad-11-gen' ? IPadShowcase.intro(product) : product.id === 'watch-se-3' ? WatchSEShowcase.intro(product) : (
+        (product.id === 'iphone-17' ? IPhone17Showcase.intro(product) : product.id === 'iphone-17e' ? IPhone17eShowcase.intro(product) : product.id === 'apple-tv-4k' ? AppleTVShowcase.intro(product) : product.id === 'airpods-pro-3' ? AirPodsShowcase.intro(product) : product.id === 'iphone-air' ? IPhoneAirShowcase.intro(product) : product.id === 'apple-vision-pro' ? VisionShowcase.intro(product) : product.id === 'ipad-11-gen' ? IPadShowcase.intro(product) : product.id === 'watch-se-3' ? WatchSEShowcase.intro(product) : (
 '<!-- 1. Header Section Above Product Image -->' +
         '<div class="pdp-top-header text-center">' +
           '<div class="pc-cat">' + product.category + ' &middot; ' + product.brand + '</div>' +
@@ -679,7 +682,7 @@
 
       '</div>' +
 
-      (product.id === 'iphone-17e' ? IPhone17eShowcase.sections() : product.id === 'apple-tv-4k' ? AppleTVShowcase.sections() : product.id === 'airpods-pro-3' ? AirPodsShowcase.sections() : product.id === 'iphone-air' ? IPhoneAirShowcase.sections() : product.id === 'apple-vision-pro' ? VisionShowcase.sections() : product.id === 'ipad-11-gen' ? IPadShowcase.sections() : product.id === 'watch-se-3' ? WatchSEShowcase.sections() : ProductGallery.section(product)) +
+      (product.id === 'iphone-17' ? IPhone17Showcase.sections() : product.id === 'iphone-17e' ? IPhone17eShowcase.sections() : product.id === 'apple-tv-4k' ? AppleTVShowcase.sections() : product.id === 'airpods-pro-3' ? AirPodsShowcase.sections() : product.id === 'iphone-air' ? IPhoneAirShowcase.sections() : product.id === 'apple-vision-pro' ? VisionShowcase.sections() : product.id === 'ipad-11-gen' ? IPadShowcase.sections() : product.id === 'watch-se-3' ? WatchSEShowcase.sections() : ProductGallery.section(product)) +
       ProductGallery.viewer() +
       '<!-- 4. Product Description & Specifications Section -->' +
       '<section class="pdp-details" id="pdpDetails">' +
