@@ -2062,9 +2062,7 @@
           </div>
 
           <div style="display:flex;gap:12px;margin-top:24px;">
-            <button type="button" class="btn btn-primary btn-block" id="addToBagBtn"
-              style="padding:14px;font-size:16px;font-weight:600;width:100%;">Add to Bag — <span
-                id="finalPriceDisplay">₹79,900</span></button>
+            <a class="btn btn-primary btn-block" href="#neoVariants">Choose a configuration</a>
           </div>
         </div>
       </div>
@@ -2273,27 +2271,6 @@
         });
       }
 
-      // Add to bag logic
-      const addToBagBtn = document.getElementById("addToBagBtn");
-      if (addToBagBtn) {
-        addToBagBtn.addEventListener("click", function () {
-          if (typeof Cart !== "undefined" && typeof Cart.add === "function") {
-            const activeStorageBtn = document.querySelector(".storage-opt-btn.active");
-            const storageLabel = activeStorageBtn ? activeStorageBtn.getAttribute("data-label") : "128GB SSD";
-            const memoryLabel = activeStorageBtn ? activeStorageBtn.getAttribute("data-memory") : "8GB Memory";
-
-            Cart.add({
-              id: "macbook-neo",
-              name: "MacBook Neo (" + selectedColor + ", " + memoryLabel + ", " + storageLabel + ")",
-              price: basePrice + selectedStorageExtra,
-              image: "images/products/macbook-neo-citrus.png"
-            });
-            if (typeof Cart.open === "function") Cart.open();
-          } else {
-            alert("Added MacBook Neo to Bag!");
-          }
-        });
-      }
     });
   </script>
 <script src="js/neo-variants.js"></script>

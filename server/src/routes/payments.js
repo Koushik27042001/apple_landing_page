@@ -39,13 +39,14 @@ router.post("/verify", express.json(), async function (req, res, next) {
         payment.amount !== Math.round(order.total * 100) || payment.currency !== order.currency) {
       return res.status(409).json({ error: "Payment has not been captured for this order" });
     }
-    if (order.status === "refunded") return res.status(409).json({ error: "Order already refunded" });
+    if (["refunded", "cancelled"].includes(order.status)) return res.status(409).json({ error: "Order is closed" });
 
-    const updated = await store.updateOrder(orderId, {
+    const updated = order.status === "paid" ? order : await store.updateOrder(orderId, {
       status: "paid",
       razorpayPaymentId: razorpay_payment_id,
       paidAt: new Date().toISOString()
-    });
+    }, { status: order.status });
+    if (!updated) return res.status(409).json({ error: "Order changed. Check payment again." });
 
     res.json({ success: true, orderId: updated.id, total: updated.total });
   } catch (err) {
@@ -83,11 +84,11 @@ router.post("/webhook", async function (req, res) {
 
     if (order) {
       const payment = event.payload.payment.entity;
-      if (event.event === "payment.captured" && order.status !== "refunded" &&
+      if (event.event === "payment.captured" && ["created", "failed"].includes(order.status) &&
           payment.amount === Math.round(order.total * 100) && payment.currency === order.currency) {
-        await store.updateOrder(order.id, { status: "paid", webhookConfirmedAt: new Date().toISOString() });
-      } else if (event.event === "payment.failed" && !["paid", "refunded"].includes(order.status)) {
-        await store.updateOrder(order.id, { status: "failed" });
+        await store.updateOrder(order.id, { status: "paid", razorpayPaymentId: payment.id, paidAt: new Date().toISOString(), webhookConfirmedAt: new Date().toISOString() }, { status: order.status });
+      } else if (event.event === "payment.failed" && order.status === "created") {
+        await store.updateOrder(order.id, { status: "failed" }, { status: "created" });
       } else if (event.event === "refund.processed") {
         await store.updateOrder(order.id, { status: "refunded" });
       }

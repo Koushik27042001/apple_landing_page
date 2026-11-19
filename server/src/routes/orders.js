@@ -1,5 +1,5 @@
 const express = require("express");
-const { nanoid } = require("nanoid");
+const { randomBytes } = require("crypto");
 const { priceCart } = require("../lib/catalog");
 const { razorpay, keyId } = require("../lib/razorpay");
 const store = require("../lib/store");
@@ -7,173 +7,122 @@ const couponsStore = require("../lib/couponsStore");
 
 const router = express.Router();
 
-const PAYMENT_LINK =
-  process.env.RAZORPAY_PAYMENT_LINK ||
-  "https://razorpay.me/@iswiftgadgetsprivatelimit3022";
+const checkoutRequests = new Map();
 
-function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v || ""); }
-function isValidPhone(v) { return /^[6-9]\d{9}$/.test(v || ""); }
-function isValidPincode(v) { return /^\d{6}$/.test(v || ""); }
+router.post("/quote", async function (req, res) {
+  try {
+    const pricing = await priceCart(req.body?.items, req.body?.couponCode);
+    res.json({ pricing, onlinePaymentAvailable: Boolean(razorpay) });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
 
-function buildPaymentUrl(amountInr, orderId) {
-  return String(PAYMENT_LINK || "https://razorpay.me/@iswiftgadgetsprivatelimit3022").replace(/[?#].*$/, "");
+function field(value, max) {
+  return typeof value === "string" ? value.trim().slice(0, max) : "";
+}
+
+async function placeOrder(id, payload) {
+  const { items, couponCode, paymentMode, expectedTotal } = payload;
+  const customer = {
+    name: field(payload.customer?.name, 120),
+    email: field(payload.customer?.email, 254),
+    phone: field(payload.customer?.phone, 30)
+  };
+  const shippingAddress = {
+    address: field(payload.shipping?.address, 250),
+    city: field(payload.shipping?.city, 100),
+    state: field(payload.shipping?.state, 100),
+    pincode: field(payload.shipping?.pincode, 30),
+    landmark: field(payload.shipping?.landmark, 150),
+    country: "India"
+  };
+  if (customer.name.length < 3 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email) || !/^[6-9]\d{9}$/.test(customer.phone)) {
+    throw new Error("Enter your full name, email and a valid Indian mobile number.");
+  }
+  if (!shippingAddress.address || !shippingAddress.city || !shippingAddress.state || !/^[1-9]\d{5}$/.test(shippingAddress.pincode)) {
+    throw new Error("Enter a complete shipping address and a valid Indian PIN code.");
+  }
+
+  const existing = await store.getOrder(id);
+  if (existing) return existing;
+
+  const pricing = await priceCart(items, couponCode);
+  if (expectedTotal != null && expectedTotal !== pricing.total) {
+    throw Object.assign(new Error("Your total changed. Review the updated order summary and try again."), { status: 409 });
+  }
+
+  const currency = "INR";
+  const amount = Math.round(pricing.total * 100);
+  const gatewayOrder = paymentMode === "gateway" && await razorpay.orders.create({
+    amount,
+    currency,
+    receipt: id
+  });
+  const order = await store.createOrder({
+    id,
+    razorpayOrderId: gatewayOrder ? gatewayOrder.id : null,
+    status: "created",
+    paymentMode,
+    items: pricing.lines,
+    subtotal: pricing.subtotal,
+    discount: pricing.discount,
+    coupon: pricing.coupon,
+    shipping: pricing.shipping,
+    total: pricing.total,
+    currency,
+    customer,
+    shippingAddress,
+    fulfillmentStatus: "pending",
+    createdAt: new Date().toISOString()
+  });
+
+  if (pricing.coupon?.code) {
+    await couponsStore.incrementUsage(pricing.coupon.code).catch(err => {
+      console.error("[orders] could not record coupon use:", err.message);
+    });
+  }
+  return order;
 }
 
 router.post("/", async function (req, res) {
+  const payload = req.body || {};
+  const { requestId, paymentMode = "gateway" } = payload;
+  if (!["gateway", "cod"].includes(paymentMode)) {
+    return res.status(400).json({ error: "Select online payment or Cash on Delivery." });
+  }
+  if (paymentMode === "gateway" && !razorpay) {
+    return res.status(503).json({ error: "Online payment is currently unavailable. Choose Cash on Delivery." });
+  }
+  if (requestId != null && (typeof requestId !== "string" || !/^[a-f0-9]{32}$/.test(requestId))) {
+    return res.status(400).json({ error: "Invalid checkout reference." });
+  }
+
+  const id = requestId ? "ISW" + requestId : "ISW" + randomBytes(16).toString("hex");
+  let pending = checkoutRequests.get(id);
+  if (!pending) {
+    pending = placeOrder(id, { ...payload, paymentMode }).finally(() => checkoutRequests.delete(id));
+    checkoutRequests.set(id, pending);
+  }
   try {
-    const { items, customer, shipping, couponCode, paymentMode } = req.body || {};
-    const useLink = paymentMode === "link" || paymentMode === "upi";
-
-    if (!customer || !isValidEmail(customer.email) || !isValidPhone(customer.phone) || !customer.name || customer.name.trim().length < 3) {
-      return res.status(400).json({ error: "Please provide a valid name, 10-digit phone number and email address." });
-    }
-    if (!shipping || !shipping.address || !shipping.city || !shipping.state || !isValidPincode(shipping.pincode)) {
-      return res.status(400).json({ error: "Please provide a complete shipping address with a valid 6-digit pincode." });
-    }
-
-    const pricing = await priceCart(items, couponCode);
-    const internalId = "ISW" + nanoid(8).toUpperCase();
-    const amountPaise = Math.round(pricing.total * 100);
-    const currency = process.env.CURRENCY || "INR";
-
-    // UPI / Razorpay.me payment page — no API keys required
-    if (useLink) {
-      const order = {
-        id: internalId,
-        razorpayOrderId: null,
-        status: "awaiting_payment",
-        paymentMode: "link",
-        paymentLink: buildPaymentUrl(pricing.total, internalId),
-        items: pricing.lines,
-        subtotal: pricing.subtotal,
-        discount: pricing.discount || 0,
-        coupon: pricing.coupon || null,
-        shipping: pricing.shipping,
-        total: pricing.total,
-        currency: currency,
-        customer: { name: customer.name, email: customer.email, phone: customer.phone },
-        shippingAddress: shipping,
-        createdAt: new Date().toISOString()
-      };
-      await store.createOrder(order);
-
-      if (pricing.coupon && pricing.coupon.code) {
-        await couponsStore.incrementUsage(pricing.coupon.code);
-      }
-
-      return res.json({
-        orderId: internalId,
-        paymentMode: "link",
-        paymentLink: order.paymentLink,
-        amount: amountPaise,
-        currency: currency,
-        totals: {
-          subtotal: pricing.subtotal,
-          discount: pricing.discount || 0,
-          shipping: pricing.shipping,
-          total: pricing.total,
-          coupon: pricing.coupon
-        }
-      });
-    }
-
-    if (paymentMode === "cod") {
-      const order = {
-        id: internalId,
-        razorpayOrderId: null,
-        status: "created",
-        paymentMode: "cod",
-        paymentLink: null,
-        items: pricing.lines,
-        subtotal: pricing.subtotal,
-        discount: pricing.discount || 0,
-        coupon: pricing.coupon || null,
-        shipping: pricing.shipping,
-        total: pricing.total,
-        currency: currency,
-        customer: { name: customer.name, email: customer.email, phone: customer.phone },
-        shippingAddress: shipping,
-        createdAt: new Date().toISOString()
-      };
-      await store.createOrder(order);
-
-      if (pricing.coupon && pricing.coupon.code) {
-        await couponsStore.incrementUsage(pricing.coupon.code);
-      }
-
-      return res.json({
-        orderId: internalId,
-        paymentMode: "cod",
-        amount: amountPaise,
-        currency: currency,
-        totals: {
-          subtotal: pricing.subtotal,
-          discount: pricing.discount || 0,
-          shipping: pricing.shipping,
-          total: pricing.total,
-          coupon: pricing.coupon
-        }
-      });
-    }
-
-    if (!razorpay) {
-      return res.status(503).json({
-        error: "Payment gateway is not configured. Choose UPI / Scan & Pay, or add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET to server/.env."
-      });
-    }
-
-    const razorpayOrder = await razorpay.orders.create({
-      amount: amountPaise,
-      currency: currency,
-      receipt: internalId,
-      notes: { internalId: internalId, customerPhone: customer.phone }
-    });
-
-    const order = {
-      id: internalId,
-      razorpayOrderId: razorpayOrder.id,
-      status: "created",
-      paymentMode: "gateway",
-      items: pricing.lines,
-      subtotal: pricing.subtotal,
-      discount: pricing.discount || 0,
-      coupon: pricing.coupon || null,
-      shipping: pricing.shipping,
-      total: pricing.total,
-      currency: razorpayOrder.currency,
-      customer: { name: customer.name, email: customer.email, phone: customer.phone },
-      shippingAddress: shipping,
-      createdAt: new Date().toISOString()
-    };
-    await store.createOrder(order);
-
-    if (pricing.coupon && pricing.coupon.code) {
-      await couponsStore.incrementUsage(pricing.coupon.code);
-    }
-
+    const order = await pending;
     res.json({
-      orderId: internalId,
-      paymentMode: "gateway",
-      razorpayOrderId: razorpayOrder.id,
-      amount: amountPaise,
-      currency: razorpayOrder.currency,
-      keyId: keyId,
-      totals: {
-        subtotal: pricing.subtotal,
-        discount: pricing.discount || 0,
-        shipping: pricing.shipping,
-        total: pricing.total,
-        coupon: pricing.coupon
-      }
+      orderId: order.id,
+      paymentMode: order.paymentMode,
+      razorpayOrderId: order.razorpayOrderId,
+      amount: Math.round(order.total * 100),
+      currency: order.currency,
+      keyId: order.razorpayOrderId ? keyId : undefined,
+      totals: { subtotal: order.subtotal, discount: order.discount, shipping: order.shipping, total: order.total, coupon: order.coupon }
     });
   } catch (err) {
-    console.error("[orders] create failed:", err.message);
-    res.status(400).json({ error: err.message || "Could not create order." });
+    console.error("[orders] create failed:", err.message || err.error?.description);
+    res.status(err.status || (err.statusCode ? 502 : 400)).json({ error: err.message || "Could not create order. Please try again." });
   }
 });
 
 function buildInvoiceData(order) {
-  const invoiceNo = "INV-2026-" + (order.id || "0000");
+  const invoiceNo = "INV-" + new Date(order.createdAt || Date.now()).getFullYear() + "-" + order.id;
   const subtotal = order.subtotal || order.total || 0;
   const discount = order.discount || 0;
   const grandTotal = order.total || 0;
@@ -195,15 +144,15 @@ function buildInvoiceData(order) {
   };
 
   const items = (order.items || []).map(function(item) {
-    const itemTotal = item.total || (item.price * item.quantity);
+    const itemTotal = item.lineTotal ?? item.total ?? ((item.unitPrice ?? item.price) * (item.qty ?? item.quantity ?? 1));
     const itemTaxable = Math.round((itemTotal / 1.18) * 100) / 100;
     const itemGst = Math.round((itemTotal - itemTaxable) * 100) / 100;
-    const category = (item.product && item.product.category) || "mac";
+    const category = item.category || (item.product && item.product.category) || "mac";
     return {
       id: item.id || item.productId,
       name: item.name || (item.product ? item.product.name : "Apple Product"),
-      quantity: item.quantity || 1,
-      unitPrice: item.price,
+      quantity: item.qty ?? item.quantity ?? 1,
+      unitPrice: item.unitPrice ?? item.price,
       total: itemTotal,
       taxableAmount: itemTaxable,
       cgst: Math.round((itemGst / 2) * 100) / 100,
@@ -232,6 +181,9 @@ function buildInvoiceData(order) {
     },
     customer: order.customer,
     shippingAddress: order.shippingAddress,
+    fulfillmentStatus: order.fulfillmentStatus || (["shipped", "delivered"].includes(order.status) ? order.status : "pending"),
+    carrier: order.carrier,
+    trackingNumber: order.trackingNumber,
     items: items,
     pricing: {
       subtotal: subtotal,
@@ -247,12 +199,33 @@ function buildInvoiceData(order) {
   };
 }
 
+router.get("/:id/status", async function (req, res, next) {
+  try {
+    if (!/^ISW[a-f0-9]{32}$/.test(req.params.id)) return res.status(404).json({ error: "Order not found." });
+    const order = await store.getOrder(req.params.id);
+    if (!order) return res.status(404).json({ error: "Order not found." });
+    res.set("Cache-Control", "private, no-store");
+    res.json({
+      orderId: order.id,
+      paymentMode: order.paymentMode,
+      status: order.status,
+      fulfillmentStatus: order.fulfillmentStatus || "pending",
+      carrier: order.carrier,
+      trackingNumber: order.trackingNumber,
+      totals: { total: order.total }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get("/:id/public", async function (req, res, next) {
   try {
     const order = await store.getOrder(req.params.id);
     if (!order) return res.status(404).json({ error: "Order not found" });
     const invoice = buildInvoiceData(order);
-    res.json({ order: order, invoice: invoice });
+    res.set("Cache-Control", "private, no-store");
+    res.json({ invoice });
   } catch (err) {
     next(err);
   }
@@ -263,7 +236,8 @@ router.get("/:id/invoice", async function (req, res, next) {
     const order = await store.getOrder(req.params.id);
     if (!order) return res.status(404).json({ error: "Order not found" });
     const invoice = buildInvoiceData(order);
-    res.json({ invoice: invoice });
+    res.set("Cache-Control", "private, no-store");
+    res.json({ invoice });
   } catch (err) {
     next(err);
   }

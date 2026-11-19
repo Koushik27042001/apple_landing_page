@@ -22,6 +22,9 @@
   storageButtons.forEach(b=>b.addEventListener('click',()=>choose('storage',b.dataset.storage)));
   colorButtons.forEach(b=>b.addEventListener('click',()=>choose('color',b.dataset.color)));
   connectionButtons.forEach(b=>b.addEventListener('click',()=>choose('connectivity',b.dataset.conn==='cellular'?'Wi-Fi + Cellular':'Wi-Fi')));
-  document.getElementById('addToBagBtn').addEventListener('click',()=>{addToCart(product,{unitPrice:selected.price,storage:selected.storage,color:selected.color,modelNumber:selected.modelNumber,chip:'M4',qty:1});if(typeof showToast==='function')showToast('Added iPad Air '+selected.storage+' in '+selected.color+' to your bag.');});
+  bindPurchaseButtons(document.getElementById('addToBagBtn'), () => ({
+    product,
+    options: { unitPrice: selected.price, storage: selected.configuration, color: selected.color, modelNumber: selected.modelNumber }
+  }), () => showToast('Added iPad Air ' + selected.storage + ' in ' + selected.color + ' to your bag.'));
   update();
 })();

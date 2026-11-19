@@ -465,6 +465,9 @@ function renderError(msg) {
 }
 
 function renderInvoice(inv) {
+  const escape = value => String(value ?? "").replace(/[&<>"']/g, character =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
+  const shipment = { pending: "Pending dispatch", shipped: "Shipped", delivered: "Delivered" }[inv.fulfillmentStatus] || "Pending dispatch";
   const dt = new Date(inv.invoiceDate || Date.now()).toLocaleDateString("en-IN", {
     year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
   });
@@ -475,7 +478,7 @@ function renderInvoice(inv) {
     <tr>
       <td class="text-center">${i + 1}</td>
       <td>
-        <strong>${item.name}</strong>
+        <strong>${escape(item.name)}</strong>
         <div style="font-size:11px; color:var(--gray-text);">HSN/SAC: ${item.hsn}</div>
       </td>
       <td class="text-center">${item.quantity}</td>
@@ -513,16 +516,16 @@ function renderInvoice(inv) {
     <div class="inv-parties">
       <div class="party-box">
         <h3>Billed &amp; Shipped To</h3>
-        <p class="party-name">${inv.customer?.name || 'Customer'}</p>
-        <p>${inv.shippingAddress?.address || ''}</p>
-        <p>${inv.shippingAddress?.city || ''}, ${inv.shippingAddress?.state || ''} - ${inv.shippingAddress?.pincode || ''}</p>
-        <p><strong>Phone:</strong> ${inv.customer?.phone || ''} | <strong>Email:</strong> ${inv.customer?.email || ''}</p>
+        <p class="party-name">${escape(inv.customer?.name || "Customer")}</p>
+        <p>${escape(inv.shippingAddress?.address)}</p>
+        <p>${escape(inv.shippingAddress?.city)}, ${escape(inv.shippingAddress?.state)} - ${escape(inv.shippingAddress?.pincode)}</p>
+        <p><strong>Phone:</strong> ${escape(inv.customer?.phone)} | <strong>Email:</strong> ${escape(inv.customer?.email)}</p>
       </div>
       <div class="party-box">
         <h3>Place of Supply &amp; Dispatch</h3>
         <p class="party-name">Pune, Maharashtra (State Code: 27)</p>
-        <p>Dispatched via Express Courier / Store Pickup</p>
-        <p><strong>Shipping Status:</strong> Pre-paid / Fast Dispatch</p>
+        <p><strong>Shipping status:</strong> ${shipment}</p>
+        ${inv.trackingNumber ? `<p><strong>Tracking:</strong> ${escape(inv.carrier)} ? ${escape(inv.trackingNumber)}</p>` : ""}
         <p><strong>GST Type:</strong> Intrastate CGST (9%) + SGST (9%)</p>
       </div>
     </div>

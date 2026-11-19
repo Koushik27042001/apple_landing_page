@@ -76,13 +76,9 @@
         '<div class="order-summary">' +
           '<h3>Order Summary</h3>' +
           '<div class="summary-row"><span>Subtotal (' + cartCount() + ' items)</span><span class="val">' + formatINR(subtotal) + '</span></div>' +
-          '<div class="summary-row"><span>Shipping</span><span class="val">' + (shipping === 0 ? "FREE" : formatINR(shipping)) + '</span></div>' +
+          '<div class="summary-row"><span>Estimated shipping</span><span class="val">' + (shipping === 0 ? "FREE" : formatINR(shipping)) + '</span></div>' +
           (shipping > 0 ? '<div class="summary-row"><span colspan="2" style="color:#1d8a3e;">Add ' + formatINR(settings.threshold - subtotal) + ' more for free shipping</span></div>' : '') +
-          '<div class="summary-row total"><span>Total</span><span>' + formatINR(total) + '</span></div>' +
-          '<div class="promo-row">' +
-            '<input type="text" placeholder="Promo code">' +
-            '<button class="btn btn-outline" id="applyPromoBtn">Apply</button>' +
-          '</div>' +
+          '<div class="summary-row total"><span>Estimated total</span><span>' + formatINR(total) + '</span></div>' +
           '<a href="checkout.html" class="btn btn-primary btn-lg btn-block">Proceed to Checkout</a>' +
           '<a href="category.html" class="btn btn-outline btn-block" style="margin-top:10px;">Continue Shopping</a>' +
         '</div>' +
@@ -109,12 +105,6 @@
       });
     });
 
-    const promoBtn = document.getElementById("applyPromoBtn");
-    if (promoBtn) {
-      promoBtn.addEventListener("click", function () {
-        showToast("Promo code is invalid or expired");
-      });
-    }
   }
 
   function cartItemHtml(item) {

@@ -31,11 +31,12 @@
   }
   buttons.forEach(b => b.addEventListener('click',()=>selectFamily(b.dataset.miniFamily)));
   picker.addEventListener('change',updateVariant);
-  document.getElementById('miniVariantAdd').addEventListener('click',()=>{
+  bindPurchaseButtons(document.getElementById('miniVariantAdd'), () => {
     const product = getProductById(families[family]);
     const variant = product?.variants?.find(v => v.modelNumber === selected.modelNumber);
-    if (!product || !variant) return;
-    addToCart(product,{unitPrice:selected.price,modelNumber:selected.modelNumber,storage:variant.storage,color:variant.color,chip:variant.chip,ram:variant.ram,qty:1});
+    if (!variant) return null;
+    return { product, options: { unitPrice: variant.price, modelNumber: variant.modelNumber, storage: variant.configuration, color: variant.color } };
+  }, () => {
     document.getElementById('miniVariantStatus').textContent = 'Added '+model.name+' ('+selected.modelNumber+') to your bag.';
   });
   selectFamily(family,false);

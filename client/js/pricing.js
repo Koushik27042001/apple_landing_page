@@ -568,19 +568,30 @@
 
     const cartBtn = document.getElementById('modalAddToCartBtn');
     if (cartBtn) {
+      let buyBtn = document.getElementById('modalBuyNowBtn');
+      if (!buyBtn) {
+        buyBtn = cartBtn.cloneNode(false);
+        buyBtn.id = 'modalBuyNowBtn';
+        buyBtn.textContent = 'Buy Now';
+        cartBtn.after(buyBtn);
+      }
+      const product = PRODUCTS.find(item => item.variants?.some(variant => variant.modelNumber === matched.modelNumber));
+      const variant = product?.variants.find(item => item.modelNumber === matched.modelNumber);
+      const options = variant && {
+        color: variant.color,
+        storage: variant.configuration,
+        modelNumber: variant.modelNumber,
+        unitPrice: variant.price
+      };
+      cartBtn.hidden = buyBtn.hidden = !options;
       cartBtn.onclick = function () {
-        if (typeof window.addToCart === 'function' && matched.price) {
-          window.addToCart(activeProduct.id, {
-            name: `${activeProduct.name} (${matched.storage} ${matched.color})`,
-            price: matched.price,
-            image: activeProduct.image,
-            model: matched.modelNumber
-          });
-          showNotification(`Added ${matched.modelNumber} to cart!`);
-          closeConfigModal();
-        } else {
-          openEnquiryModal(activeProduct, matched);
-        }
+        if (!options) return;
+        addToCart(product, options);
+        showNotification('Added ' + variant.modelNumber + ' to your bag.');
+        closeConfigModal();
+      };
+      buyBtn.onclick = function () {
+        if (options) buyNow(product, options);
       };
     }
   }

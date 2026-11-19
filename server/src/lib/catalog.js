@@ -17,12 +17,13 @@ async function getUnitPrice(productId, storageLabel, modelNumber, color) {
   const variants = (current && current.variants) || product.variants || [];
   if (modelNumber) {
     const variant = variants.find(v => v.modelNumber === modelNumber);
-    if (!variant || (color && color !== variant.color) || (storageLabel && storageLabel !== variant.configuration)) return null;
+    if (!variant || (color && color !== variant.color) || (storageLabel && storageLabel !== variant.configuration && storageLabel !== variant.storage)) return null;
     return variant.price;
   }
   const configuration = variants.find(v => v.configuration === storageLabel && (!color || color === v.color));
   if (configuration) return configuration.price;
   const opt = (product.storageOptions || []).find(function (o) { return o.label === storageLabel; });
+  if (storageLabel && !opt) return null;
   return product.price + (opt ? opt.extra : 0);
 }
 
@@ -47,6 +48,7 @@ async function priceCart(items, couponCode) {
     subtotal += lineTotal;
     lines.push({
       id: product.id,
+      category: product.category,
       name: product.name,
       color: item.color || "",
       storage: item.storage || "",

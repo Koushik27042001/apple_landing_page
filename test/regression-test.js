@@ -64,56 +64,28 @@ async function ensureServerRunning() {
     const logoText = await page.locator(".logo").first().textContent();
     log("Logo shows Iswift and Business Partner", logoText.includes("Iswift") && logoText.includes("Business") && logoText.includes("Partner"), "text=" + logoText.trim());
 
-    // Go to product page, click Buy Now, proceed to checkout, verify demo-mode notice
-    await page.goto(base + "product.html?id=iphone-duo", { waitUntil: "domcontentloaded" });
-    await page.waitForSelector("#buyNowBtn", { timeout: 5000 });
-    await page.waitForTimeout(500);
+    await page.goto(base + "product.html?id=iphone-17", { waitUntil: "domcontentloaded" });
+    await page.locator("#addToCartBtn").click();
+    await page.goto(base + "product.html?id=iphone-17e", { waitUntil: "domcontentloaded" });
     await page.locator("#buyNowBtn").click();
-    await page.waitForURL("**/checkout.html", { timeout: 10000 });
-    await page.waitForSelector("#fullName", { timeout: 5000 });
-
-    await page.fill("#fullName", "Rohan Sharma");
-    await page.fill("#phone", "9876543210");
-    await page.fill("#email", "rohan@example.com");
-    await page.locator("#toStep2").click();
-    await page.fill("#address", "401, Sunshine Apartments, FC Road");
-    await page.fill("#pincode", "411001");
-    await page.locator("#toStep3").click();
-    await page.waitForTimeout(300);
-
-    const paymentIconCount = await page.locator("#step3 .po-icon svg.icon-svg").count();
-    log("Payment method icons render as SVG (not emoji)", paymentIconCount === 4, "count=" + paymentIconCount);
-
-    await page.waitForSelector("#paymentModeNotice", { state: "visible", timeout: 4000 });
-    const noticeText = await page.locator("#paymentModeNotice").textContent();
-    log("Payment notice displayed on checkout", noticeText.includes("Demo mode") || noticeText.includes("Orders sync to the store"), "text=" + noticeText.trim().slice(0, 80));
-
-    // Select COD -> should succeed immediately without needing backend
-    await page.locator('.payment-option[data-method="cod"]').click();
-    await page.locator("#placeOrderBtn").click();
-    await page.waitForSelector(".success-screen", { timeout: 4000 });
-    const successText = await page.locator(".success-screen h1").textContent();
-    log("COD order completes successfully in demo mode", successText.includes("Order Placed"));
-
-    const checkIconInSuccess = await page.locator(".success-screen .check-mark svg.icon-svg").count();
-    log("Success screen checkmark renders as SVG", checkIconInSuccess === 1);
-
-    // Now test again with UPI selected while backend is down -> should fall back to demo
-    await page.evaluate(() => localStorage.setItem("tasp_cart_v1", JSON.stringify([{ lineId: "x::y::z", id: "iphone-17", name: "iPhone 17", image: "images/products/iphone-17-lavender.png", price: 82900, color: "Lavender", storage: "256GB", qty: 1, category: "iphone" }])));
-    await page.goto(base + "checkout.html", { waitUntil: "domcontentloaded" });
-    await page.fill("#fullName", "Priya Mehta");
-    await page.fill("#phone", "9988776655");
-    await page.fill("#email", "priya@example.com");
-    await page.locator("#toStep2").click();
-    await page.fill("#address", "12, MG Road");
-    await page.fill("#pincode", "411001");
-    await page.locator("#toStep3").click();
-    await page.waitForTimeout(300);
-    await page.locator('.payment-option[data-method="cod"]').click();
-    await page.locator("#placeOrderBtn").click();
-    await page.waitForSelector(".success-screen", { timeout: 4000 });
-    const demoNoteVisible = await page.locator(".success-screen").textContent();
-    log("UPI/Checkout completes order successfully", demoNoteVisible.includes("Demo mode") || demoNoteVisible.includes("Order Placed"), "");
+    await page.waitForURL("**/checkout.html?buy=1");
+    await page.locator("#checkoutItems .checkout-line").waitFor();
+    log("Buy Now checks out the selected product", await page.locator("#checkoutItems .checkout-line").count() === 1 &&
+      (await page.locator("#checkoutItems").textContent()).includes("iPhone 17e"));
+    const contact = { name: "Rohan Sharma", phone: "9876543210", email: "rohan@example.com" };
+    const shipping = { address: "401, Sunshine Apartments, FC Road", city: "Pune", state: "Maharashtra", pincode: "411001" };
+    for (const [field, value] of Object.entries({ ...contact, ...shipping })) {
+      await page.locator('[name="' + field + '"]').fill(value);
+    }
+    await page.getByRole("radio", { name: /Cash on delivery/ }).check();
+    await page.locator("#placeOrder").click();
+    await page.getByRole("heading", { name: "Order placed" }).waitFor();
+    log("Cash on delivery saves the order", await page.getByText("Due on delivery").isVisible());
+    const orderLink = await page.getByRole("link", { name: "View order details" }).getAttribute("href");
+    await page.goto(new URL(orderLink, base).href);
+    await page.getByText("Pending dispatch").waitFor();
+    log("Shipment status is available after checkout", await page.getByText("Pending dispatch").isVisible());
+    log("Direct checkout keeps the bag intact", await page.evaluate(() => getCart().some(item => item.id === "iphone-17")));
 
   } catch (e) {
     log("FATAL", false, e.message);

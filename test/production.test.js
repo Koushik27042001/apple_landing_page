@@ -81,10 +81,31 @@ test('production HTTP service, authentication, checkout and persistence', { time
     assert.equal(uploaded.status, 200);
     const { url } = await uploaded.json();
     const payload = { items: [{ id: 'macbook-neo-13', qty: 1 }], customer: { name: 'Test Customer', email: 'test@example.com', phone: '9876543210' }, shipping: { address: 'Test address', city: 'Pune', state: 'Maharashtra', pincode: '411001' }, paymentMode: 'cod' };
-    const order = await post('/api/orders', payload);
+    const quote = await post('/api/orders/quote', { items: payload.items });
+    assert.equal(quote.status, 200);
+    const { pricing, onlinePaymentAvailable } = await quote.json();
+    assert.equal(onlinePaymentAvailable, false);
+    assert.equal((await post('/api/orders', { ...payload, paymentMode: 'gateway' })).status, 503);
+    assert.equal((await post('/api/orders', { ...payload, expectedTotal: pricing.total - 1 })).status, 409);
+    assert.equal((await post('/api/orders', { ...payload, shipping: { ...payload.shipping, pincode: '000000' } })).status, 400);
+    const requestId = '9'.repeat(32);
+    const order = await post('/api/orders', { ...payload, requestId, expectedTotal: pricing.total });
     assert.equal(order.status, 200, await order.clone().text());
     const { orderId } = await order.json();
     assert.ok(orderId);
+    const retry = await post('/api/orders', { ...payload, requestId, expectedTotal: pricing.total });
+    assert.equal((await retry.json()).orderId, orderId);
+    const tracking = await fetch(base + '/api/admin/orders/' + orderId, {
+      method: 'PATCH',
+      headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fulfillmentStatus: 'shipped', carrier: 'Test Courier', trackingNumber: 'TRACK123' })
+    });
+    assert.equal(tracking.status, 200, await tracking.clone().text());
+    const details = await (await fetch(base + '/api/orders/' + orderId + '/status')).json();
+    assert.equal(details.status, 'created');
+    assert.equal(details.fulfillmentStatus, 'shipped');
+    assert.equal(details.trackingNumber, 'TRACK123');
+    assert.equal(details.customer, undefined);
     payload.items[0].qty = 1.5;
     assert.equal((await post('/api/orders', payload)).status, 400);
     await stop();

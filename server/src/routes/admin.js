@@ -225,7 +225,28 @@ router.get("/orders/:id", requireAdmin, async function (req, res, next) {
 
 router.patch("/orders/:id", requireAdmin, async function (req, res, next) {
   try {
-    const allowed = ["created", "paid", "failed", "refunded", "shipped", "delivered", "cancelled"];
+    if (req.body?.fulfillmentStatus) {
+      const { fulfillmentStatus, carrier, trackingNumber } = req.body;
+      const existing = await store.getOrder(req.params.id);
+      if (!existing) return res.status(404).json({ error: "Order not found." });
+      const shipment = existing.fulfillmentStatus || (["shipped", "delivered"].includes(existing.status) ? existing.status : "pending");
+      if (fulfillmentStatus === "shipped" && ["pending", "shipped"].includes(shipment)) {
+        if (existing.status !== "paid" && !(existing.paymentMode === "cod" && existing.status === "created") && existing.status !== "shipped") {
+          return res.status(409).json({ error: "Confirm payment before shipping an online order." });
+        }
+        if (typeof carrier !== "string" || typeof trackingNumber !== "string" || !carrier.trim() || !trackingNumber.trim() || carrier.length > 100 || trackingNumber.length > 100) {
+          return res.status(400).json({ error: "Enter the carrier and tracking number." });
+        }
+      } else if (fulfillmentStatus !== "delivered" || shipment !== "shipped") {
+        return res.status(409).json({ error: "Invalid shipment status change." });
+      }
+      const patch = { fulfillmentStatus };
+      if (fulfillmentStatus === "shipped") Object.assign(patch, { carrier: carrier.trim(), trackingNumber: trackingNumber.trim() });
+      const order = await store.updateOrder(req.params.id, patch, { status: existing.status, fulfillmentStatus: existing.fulfillmentStatus ?? null });
+      if (!order) return res.status(409).json({ error: "Order changed. Refresh and try again." });
+      return res.json({ order });
+    }
+    const allowed = ["created", "paid", "failed", "refunded", "cancelled"];
     const status = req.body && req.body.status;
     if (!allowed.includes(status)) {
       return res.status(400).json({ error: "Invalid status. Allowed: " + allowed.join(", ") });

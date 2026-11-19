@@ -30,6 +30,10 @@ Then edit `.env`:
 | `MONGODB_URI` | [MongoDB Atlas](https://cloud.mongodb.com) → Connect → Drivers. Use a DB user with read/write on `apple_store_database`. Also allow your IP under Network Access. |
 | `RAZORPAY_KEY_ID` / `RAZORPAY_KEY_SECRET` | [Razorpay Dashboard → Settings → API Keys](https://dashboard.razorpay.com/app/keys). Use **Test Mode** keys (`rzp_test_...`) while developing. |
 | `RAZORPAY_WEBHOOK_SECRET` | Any string you choose. Enter the same string in the Razorpay Dashboard under **Settings → Webhooks**. |
+
+Checkout offers Cash on Delivery when Razorpay keys are absent. To accept online payments, configure the key pair and enable automatic capture in Razorpay. Set the webhook URL to `https://your-store.example/api/payments/webhook` and subscribe to `payment.captured` and `payment.failed`. Test the full flow with test-mode keys before switching to live credentials.
+
+In **Admin ? Orders**, enter the carrier and tracking number after booking the shipment, then select **Mark shipped**. Select **Mark delivered** once delivery is confirmed. Customers can follow these updates from the order details link shown after checkout.
 | `CORS_ORIGIN` | Frontend origin(s), comma-separated. Defaults include `http://localhost:8080` for a separately served client. |
 | `ADMIN_PASSWORD` | Password for http://localhost:4000/admin/ |
 
@@ -74,15 +78,7 @@ frontend as usual, e.g. from the project root:
 python -m http.server 8080
 ```
 
-Open `http://localhost:8080/checkout.html` — with both servers running
-and test keys configured, "Place Order" (for UPI/Card/EMI) will open a
-**real Razorpay Test Mode checkout window**. Use Razorpay's [test card/UPI
-credentials](https://razorpay.com/docs/payments/payments/test-card-upi-details/)
-to simulate a full payment with no real money involved.
-
-If the backend isn't running, checkout automatically falls back to the
-built-in simulated "demo mode" flow — the storefront always works
-standalone, even with zero setup.
+Open a product page and select **Buy Now**, or add products to the bag and continue to checkout. Select **Pay online** to open Razorpay Test Mode with the exact order amount. Use [Razorpay test payment details](https://razorpay.com/docs/payments/payments/test-card-upi-details/) to confirm the flow. A running backend is required to price and place orders.
 
 ## 5. Going live (production)
 
@@ -109,8 +105,10 @@ standalone, even with zero setup.
 | GET | `/api/products` | Full product + category catalog |
 | GET | `/api/products/:id` | Single product |
 | POST | `/api/coupons/validate` | Validate a coupon against a cart subtotal |
-| POST | `/api/orders` | Validates cart + customer + shipping info, recomputes price, creates a Razorpay order, stores a `created` order |
-| GET | `/api/orders/:id` | Order status lookup |
+| POST | `/api/orders/quote` | Prices products, shipping and discounts and reports online payment availability |
+| POST | `/api/orders` | Validates customer and shipping details, reprices the cart and creates a COD or Razorpay order |
+| GET | `/api/orders/:id/status` | Customer payment and shipment status |
+| GET | `/api/orders/:id` | Authenticated admin order lookup |
 | POST | `/api/payments/verify` | Verifies the Razorpay signature after checkout and marks the order `paid` |
 | POST | `/api/payments/webhook` | Razorpay server-to-server event notifications (source of truth for order status) |
 | * | `/api/admin/*` | Password-protected control panel APIs |

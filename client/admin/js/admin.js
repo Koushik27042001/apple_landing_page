@@ -1050,7 +1050,7 @@
     const data = await api("/admin/orders");
     state.orders = data.orders || [];
     const filter = state.orderFilter;
-    const list = filter === "all" ? state.orders : state.orders.filter(function (o) { return o.status === filter; });
+    const list = filter === "all" ? state.orders : state.orders.filter(function (o) { return o.status === filter || o.fulfillmentStatus === filter; });
 
     el.innerHTML =
       '<div class="panel">' +
@@ -1063,9 +1063,12 @@
           "</select></div>" +
         "</div>" +
         (list.length
-          ? '<table><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Update</th></tr></thead><tbody>' +
+          ? '<table><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Payment / order</th><th>Shipment</th></tr></thead><tbody>' +
             list.map(function (o) {
               const itemCount = (o.items || []).reduce(function (n, i) { return n + (i.qty || 0); }, 0);
+              const shipping = o.shippingAddress || {};
+              const fulfillment = o.fulfillmentStatus || (["shipped", "delivered"].includes(o.status) ? o.status : "pending");
+              const canShip = o.status === "paid" || (o.status === "created" && o.paymentMode === "cod");
               return "<tr>" +
                 "<td><strong>" + escapeHtml(o.id) + "</strong><div class='muted'>" + formatDate(o.createdAt) + "</div></td>" +
                 "<td>" + escapeHtml((o.customer && o.customer.name) || "—") +
@@ -1076,12 +1079,19 @@
                 "<td>" + formatINR(o.total) +
                   (o.discount ? '<div class="muted">−' + formatINR(o.discount) + "</div>" : "") +
                 "</td>" +
-                "<td>" + statusBadge(o.status) + "</td>" +
-                '<td><select data-status-order="' + escapeAttr(o.id) + '">' +
-                  ["created", "paid", "shipped", "delivered", "failed", "refunded", "cancelled"].map(function (s) {
+                "<td>" + statusBadge(o.status) +
+                '<select data-status-order="' + escapeAttr(o.id) + '">' +
+                  [...new Set(["created", "paid", "failed", "refunded", "cancelled", o.status])].map(function (s) {
                     return '<option value="' + s + '"' + (o.status === s ? " selected" : "") + ">" + s + "</option>";
                   }).join("") +
-                "</select></td></tr>";
+                "</select></td>" +
+                "<td>" + statusBadge(fulfillment) +
+                  '<div class="muted">' + escapeHtml([shipping.address, shipping.landmark, shipping.city, shipping.state, shipping.pincode].filter(Boolean).join(", ")) + "</div>" +
+                  (o.trackingNumber ? '<div class="muted">' + escapeHtml(o.carrier + " ? " + o.trackingNumber) + "</div>" : "") +
+                  (fulfillment === "pending" && canShip
+                    ? '<form data-ship-order="' + escapeAttr(o.id) + '"><input name="carrier" aria-label="Carrier" placeholder="Carrier" maxlength="100" required><input name="trackingNumber" aria-label="Tracking number" placeholder="Tracking number" maxlength="100" required><button class="btn btn-primary">Mark shipped</button></form>'
+                    : fulfillment === "shipped" ? '<form data-ship-order="' + escapeAttr(o.id) + '"><button class="btn btn-primary">Mark delivered</button></form>' : "") +
+                "</td></tr>";
             }).join("") +
             "</tbody></table>"
           : '<div class="empty">No orders in this filter.</div>') +
@@ -1091,7 +1101,25 @@
       state.orderFilter = $("#orderFilter").value;
       renderOrders(el);
     });
-    $$("[data-status-order]").forEach(function (sel) {
+    $$("[data-ship-order]").forEach(shippingForm => {
+      shippingForm.addEventListener("submit", async event => {
+        event.preventDefault();
+        const button = shippingForm.querySelector("button");
+        const fields = Object.fromEntries(new FormData(shippingForm));
+        button.disabled = true;
+        try {
+          await api("/admin/orders/" + encodeURIComponent(shippingForm.dataset.shipOrder), {
+            method: "PATCH",
+            body: JSON.stringify({ ...fields, fulfillmentStatus: fields.carrier === undefined ? "delivered" : "shipped" })
+          });
+          await renderOrders(el);
+        } catch (error) {
+          toast(error.message);
+          button.disabled = false;
+        }
+      });
+    });
+    $("[data-status-order]").forEach(function (sel) {
       sel.addEventListener("change", async function () {
         try {
           await api("/admin/orders/" + encodeURIComponent(sel.getAttribute("data-status-order")), {

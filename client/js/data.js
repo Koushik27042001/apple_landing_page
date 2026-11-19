@@ -146,6 +146,43 @@ const PRODUCTS = [
     }
   },
   {
+    id: "iphone-18-pro-max",
+    name: "iPhone 18 Pro Max",
+    category: "iphone",
+    brand: "Apple",
+    price: 184900,
+    mrp: 184900,
+    badge: "New",
+    rating: 4.9,
+    reviews: 42,
+    stock: 0,
+    images: [IPHONE_OFFICIAL_IMAGES.pro18],
+    colors: [
+      { name: "Burgundy", hex: "#4d2028", image: IPHONE_OFFICIAL_IMAGES.pro18 },
+      { name: "Glacier", hex: "#dce7ee", image: IPHONE_OFFICIAL_IMAGES.pro18 },
+      { name: "Silver", hex: "#e3e4e6", image: IPHONE_OFFICIAL_IMAGES.pro18 },
+      { name: "Black", hex: "#1c1c1e", image: IPHONE_OFFICIAL_IMAGES.pro18 }
+    ],
+    storageOptions: [
+      { label: "256GB", extra: 0 },
+      { label: "512GB", extra: 25000 },
+      { label: "1TB", extra: 75000 },
+      { label: "2TB", extra: 150000 }
+    ],
+    short: "A big leap in battery life, performance, and camera.",
+    description: "iPhone 18 Pro features A20 Pro, a vapour chamber, a 48MP Pro Fusion camera system with variable aperture, and up to 43 hours of video playback on Pro Max.",
+    specs: {
+      "Display": "6.3-inch or 6.9-inch Super Retina XDR, ProMotion 120Hz",
+      "Chip": "A20 Pro chip",
+      "Camera": "48MP Pro Fusion camera system with variable aperture",
+      "Battery": "Up to 43 hours video playback on iPhone 18 Pro Max",
+      "Storage": "256GB / 512GB / 1TB / 2TB",
+      "Body": "Aluminium unibody",
+      "Connectivity": "5G, Wi-Fi 7, Bluetooth 6",
+      "OS": "iOS 27"
+    }
+  },
+  {
     id: "iphone-17e",
     name: "iPhone 17e",
     category: "iphone",

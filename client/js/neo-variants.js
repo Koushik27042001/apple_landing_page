@@ -24,10 +24,12 @@
   }
   storage.addEventListener('change', update);
   color.addEventListener('change', update);
-  document.getElementById('neoVariantAdd').addEventListener('click', () => {
+  bindPurchaseButtons(document.getElementById('neoVariantAdd'), () => {
     const product = getProductById('macbook-neo');
-    if (!product || !selected) return;
-    addToCart(product, { color: selected.color, storage: selected.storage, unitPrice: selected.price, modelNumber: selected.modelNumber, chip: 'A18 Pro', ram: '8GB', image: document.getElementById('neoVariantImage').getAttribute('src'), qty: 1 });
+    const variant = product?.variants?.find(v => v.modelNumber === selected?.modelNumber);
+    if (!variant) return null;
+    return { product, options: { color: variant.color, storage: variant.configuration, unitPrice: variant.price, modelNumber: variant.modelNumber, image: document.getElementById('neoVariantImage').getAttribute('src') } };
+  }, () => {
     document.getElementById('neoVariantStatus').textContent = 'Added ' + selected.storage + ' in ' + selected.color + ' to your bag.';
   });
   update();

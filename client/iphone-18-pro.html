@@ -2146,44 +2146,11 @@
         });
       });
 
-      // Add to Cart handler
-      if (atcBtn) {
-        atcBtn.addEventListener("click", function () {
-          const total = basePrice + storageExtra;
-          const cartItem = {
-            id: selectedModel.toLowerCase().includes("max") ? "iphone-18-pro-max" : "iphone-18-pro",
-            name: selectedModel + " " + selectedStorage + " (" + selectedColorLabel + ")",
-            price: total,
-            image: "images/iphone 18pro/18pro-hero.png",
-            color: selectedColorLabel,
-            storage: selectedStorage,
-            quantity: 1
-          };
-
-          if (typeof Cart !== "undefined" && typeof Cart.add === "function") {
-            Cart.add(cartItem);
-          } else {
-            let cart = [];
-            try { cart = JSON.parse(localStorage.getItem("apple_cart") || "[]"); } catch(e){}
-            cart.push(cartItem);
-            localStorage.setItem("apple_cart", JSON.stringify(cart));
-          }
-
-          atcBtn.innerHTML = '✓ Added to Bag!';
-          atcBtn.style.background = '#34c759';
-          setTimeout(() => {
-            atcBtn.innerHTML = `
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
-              </svg>
-              <span>Add to Bag</span>
-            `;
-            atcBtn.style.background = '#0071e3';
-          }, 2000);
-        });
-      }
+      if (atcBtn) bindPurchaseButtons(atcBtn, () => {
+        const id = selectedModel.includes("Max") ? "iphone-18-pro-max" : "iphone-18-pro";
+        const product = getProductById(id);
+        return product && { product, options: { color: selectedColor, storage: selectedStorage, unitPrice: basePrice + storageExtra } };
+      }, ({ product }) => showToast(product.name + " added to your bag."));
 
       updatePricing();
     });

@@ -796,8 +796,8 @@
     document.getElementById("waInquiry").href = whatsappLink(waMsg);
   }
 
-  function handleAddToCart() {
-    addToCart(product, {
+  function purchaseOptions() {
+    return {
       color: selection.color,
       storage: selection.storage,
       qty: selection.qty,
@@ -806,22 +806,16 @@
       modelNumber: selectedVariant ? selectedVariant.modelNumber : '',
       chip: selectedVariant ? selectedVariant.chip : '',
       ram: selectedVariant ? selectedVariant.ram : ''
-    });
+    };
+  }
+
+  function handleAddToCart() {
+    addToCart(product, purchaseOptions());
     showToast(product.name + " added to your bag");
   }
 
   function handleBuyNow() {
-    addToCart(product, {
-      color: selection.color,
-      storage: selection.storage,
-      qty: selection.qty,
-      unitPrice: currentUnitPrice(),
-      image: currentImage(),
-      modelNumber: selectedVariant ? selectedVariant.modelNumber : '',
-      chip: selectedVariant ? selectedVariant.chip : '',
-      ram: selectedVariant ? selectedVariant.ram : ''
-    });
-    window.location.href = "checkout.html";
+    buyNow(product, purchaseOptions());
   }
 
   function updateStickyAtc() {
